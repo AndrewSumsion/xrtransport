@@ -24,6 +24,18 @@ class XrSpec:
     def find_struct(self, name):
         return self.structs_index[name] if name in self.structs_index else None
 
+    def group_structs(self):
+        # group structs by extension
+        grouped_structs = [[]]
+        last_extension = None
+        for struct in self.structs:
+            if struct.extension == last_extension:
+                grouped_structs[-1].append(struct)
+            else:
+                grouped_structs.append([struct])
+                last_extension = struct.extension
+        return grouped_structs
+
 class XrExtension:
     def __init__(self, structs=None, functions=None):
         if structs == None:

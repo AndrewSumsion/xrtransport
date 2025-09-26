@@ -21,7 +21,7 @@ The original goal and current focus is to enable applications built for the Meta
 Right now, the majority of the code to be compiled is automatically generated. To run the generator, run this command:
 
 ```bash
-python3 -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport/generated test
+python -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport test
 ```
 
 To run the fuzzer that tests the serialization/deserialization, compile and run the generated `fuzzer.cpp` file:

@@ -3,7 +3,9 @@ import argparse
 from . import (
     get_xml_root,
     parse_spec,
-    generate_reflection_struct,
+    generate_serializer,
+    generate_deserializer,
+    generate_struct_reflection,
     generate_struct_fuzzer,
     TEMPLATES_DIR
 )
@@ -23,10 +25,16 @@ fuzzer_seed = args.fuzzer_seed
 xml_root = get_xml_root(xr_xml_path)
 spec = parse_spec(xml_root)
 
+serializer_path = os.path.join(src_path, "serializer.h")
+deserializer_path = os.path.join(src_path, "deserializer.h")
 reflection_struct_path = os.path.join(src_path, "reflection_struct.h")
 fuzzer_path = os.path.join(test_path, "fuzzer.cpp")
 
+with open(serializer_path, "wb") as out:
+    generate_serializer(spec, TEMPLATES_DIR, out)
+with open(deserializer_path, "wb") as out:
+    generate_deserializer(spec, TEMPLATES_DIR, out)
 with open(reflection_struct_path, "wb") as out:
-    generate_reflection_struct(spec, TEMPLATES_DIR, out)
+    generate_struct_reflection(spec, TEMPLATES_DIR, out)
 with open(fuzzer_path, "wb") as out:
     generate_struct_fuzzer(spec, TEMPLATES_DIR, out, fuzzer_seed)

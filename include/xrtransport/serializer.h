@@ -1,38 +1,7889 @@
-#ifndef XRT_SERIALIZER_H
-#define XRT_SERIALIZER_H
+
+
+
+
+
+
+
+
+#ifndef XRTRANSPORT_SERIALIZER_GENERATED_H
+#define XRTRANSPORT_SERIALIZER_GENERATED_H
 
 #include "openxr/openxr.h"
-#include "generated/reflection_struct.h"
 
-#include <unordered_map>
 #include <iostream>
-#include <cassert>
 #include <cstdint>
+#include <unordered_map>
+#include <cassert>
+#include <cstring>
 
 namespace xrtransport {
 
 // Forward declarations
-#define XRT_STRUCT_SERIALIZER_FORWARD_DECLARATION(struct_name, ...) \
-    static void serialize(const struct_name* s, std::ostream& out);
 
-XRT_STRUCT_LIST_ALL(XRT_STRUCT_SERIALIZER_FORWARD_DECLARATION)
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+
+
+static void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
+
+
+static void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+
+
+static void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+
+
+static void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+
+
+static void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+
+
+static void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+
+
+static void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+
+
+static void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+
+
+static void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+
+
+static void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+
+
+static void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+
+
+static void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+
+
+static void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+
+
+static void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+
+
+static void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+
+
+static void serialize(const XrVisibilityMaskKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVisibilityMaskKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
+
+
+static void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXTX_overlay
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+
+
+static void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+
+
+static void serialize(const XrSpatialAnchorCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+
+
+static void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+
+
+static void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+#ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+
+
+static void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
+
+
+static void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+
+
+static void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+
+
+static void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointLocationEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointVelocityEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointLocationsEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointLocationsEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+
+
+static void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshIndexBufferMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshVertexBufferMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshVertexMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandMeshMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+
+
+static void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+
+
+static void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrControllerModelStateMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+
+
+static void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+#ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+
+
+static void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+
+
+static void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+
+
+static void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+
+
+static void serialize(const XrSwapchainStateBaseHeaderFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+
+
+static void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+
+
+static void serialize(const XrBodyJointLocationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonJointFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
+
+
+static void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
+#ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+
+
+static void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+
+
+static void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+
+
+static void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
+
+
+static void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+
+
+static void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+
+
+static void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+
+
+static void serialize(const XrUuidMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneSphereBoundMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneOrientedBoxBoundMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneFrustumBoundMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneBoundsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentLocationMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObjectMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObjectsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrScenePlaneMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrScenePlanesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObjectsMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrScenePlanesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+
+
+static void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDeserializeSceneFragmentMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+
+
+static void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+
+
+static void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+
+
+static void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionsHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionsHTC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+
+
+static void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+
+
+static void serialize(const XrVector4sFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingMeshFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingScaleFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingMeshFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingScaleFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+
+
+static void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+
+
+static void serialize(const XrHandCapsuleFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+
+
+static void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+
+
+static void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
+
+
+static void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+
+
+static void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrKeyboardTrackingDescriptionFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+
+
+static void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+
+
+static void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughStyleFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughStyleFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+
+
+static void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelBufferFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelBufferFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
+
+
+static void serialize(const XrBindingModificationsKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBindingModificationBaseHeaderKHR* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBindingModificationsKHR* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
+#ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+
+
+static void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+#ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+
+
+static void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+
+
+static void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
+#ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
+
+
+static void serialize(const XrFrameEndInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameEndInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
+#ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
+
+
+static void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+
+
+static void serialize(const XrCoordinateSpaceCreateInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_compat
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+
+
+static void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorStateML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerDetectorStateML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+
+
+static void serialize(const XrLocalizationMapML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationMapML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorStateML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorStateML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+
+
+static void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCompletionResultML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+
+
+static void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+
+
+static void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+
+
+static void serialize(const XrSceneMarkerMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkersMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodeMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkersMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+
+
+static void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceQueryResultFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+
+
+static void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+
+
+static void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+
+
+static void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+
+
+static void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+
+
+static void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+
+
+static void serialize(const XrSpaceShareInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceShareInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_space_warp
+
+
+static void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_space_warp
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+
+
+static void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+
+
+static void serialize(const XrOffset3DfFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRect3DfFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSemanticLabelsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRoomLayoutFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBoundary2DFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSemanticLabelsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRoomLayoutFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBoundary2DFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+
+
+static void serialize(const XrDigitalLensControlALMALENCE* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+
+
+static void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+
+
+static void serialize(const XrSpaceContainerFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceContainerFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+
+
+static void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+
+
+static void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionStatusFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+
+
+static void serialize(const XrEyeGazeFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazesInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazesInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEyeGazesFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+
+
+static void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+
+
+static void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+
+
+static void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+
+
+static void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+
+
+static void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_META_local_dimming
+
+
+static void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_local_dimming
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+
+
+static void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+
+
+static void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+
+
+static void serialize(const XrExternalCameraIntrinsicsOCULUS* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExternalCameraExtrinsicsOCULUS* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExternalCameraOCULUS* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExternalCameraOCULUS* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+
+
+static void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+
+
+static void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+
+
+static void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+
+
+static void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_META_headset_id
+
+
+static void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_headset_id
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+
+
+static void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+
+
+static void serialize(const XrPassthroughColorLutDataMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+
+
+static void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+
+
+static void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+
+
+static void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+
+
+static void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+
+
+static void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+
+
+static void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+
+
+static void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughColorHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+
+
+static void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationConfigurationHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+
+
+static void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorNameHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonHTC* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+
+
+static void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActiveActionSetPriorityEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+
+
+static void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodyJointLocationsBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+
+
+static void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrQueriedSenseDataBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityStateBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrQueriedSenseDataBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityStateBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
+
+
+static void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+
+
+static void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
+
+
+static void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
+
+
+static void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
+#ifdef XRTRANSPORT_EXT_XR_BD_future_progress
+
+
+static void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_future_progress
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+
+
+static void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+#ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+
+
+static void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+
+
+static void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFuturePollInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFutureCompletionBaseHeaderEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFutureCompletionEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFuturePollResultEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFuturePollInfoEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFutureCompletionEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFuturePollResultEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
+
+
+static void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_user_presence
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+
+
+static void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+
+
+static void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBufferML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshBlockML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
+
+
+static void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_facial_expression
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+
+
+static void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+
+
+static void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+
+static void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out);
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+
+static void serialize(const XrActionCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionSetCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionSpaceCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionStateBoolean* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionStateFloat* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionStateGetInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionStatePose* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionStateVector2f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionSuggestedBinding* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActionsSyncInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrActiveActionSet* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrApiLayerProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrApplicationInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBodySkeletonJointHTC* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBoundSourcesForActionEnumerateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrBoxf* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColor3f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrColor4f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerBaseHeader* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerProjection* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerProjectionView* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrCompositionLayerQuad* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataBaseHeader* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataBuffer* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataEventsLost* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataInstanceLossPending* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataInteractionProfileChanged* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataReferenceSpaceChangePending* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrEventDataSessionStateChanged* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExtensionProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExtent2Df* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExtent2Di* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrExtent3Df* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFovf* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameBeginInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameEndInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameState* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrameWaitInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrFrustumf* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHapticActionInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHapticBaseHeader* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrHapticVibration* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInputSourceLocalizedNameGetInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInstanceCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInstanceProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInteractionProfileState* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrInteractionProfileSuggestedBinding* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrOffset2Df* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrOffset2Di* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrPosef* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrQuaternionf* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRect2Df* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrRect2Di* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrReferenceSpaceCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSessionActionSetsAttachInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSessionBeginInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSessionCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceLocation* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceLocationData* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceLocations* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceVelocities* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceVelocity* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpaceVelocityData* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpacesLocateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSpheref* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainCreateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageAcquireInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageBaseHeader* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageReleaseInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainImageWaitInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSwapchainSubImage* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemGetInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemGraphicsProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrSystemTrackingProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrUuid* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVector2f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVector3f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrVector4f* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrView* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewConfigurationProperties* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewConfigurationView* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewLocateInfo* s, std::ostream& out);
+
+
+
+
+static void serialize(const XrViewState* s, std::ostream& out);
+
+
+
 
 // Only to be used with OpenXR pNext structs
 using StructSerializer = void(*)(const XrBaseInStructure*, std::ostream&);
-#define XRT_STRUCT_SERIALIZER_PTR(t) (reinterpret_cast<StructSerializer>(static_cast<void(*)(const t*, std::ostream&)>(&serialize)))
-
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_CUSTOM(...) // non-xr custom structs not in lookup table
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_PLAIN(...) // plain structs not in lookup table
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_XR_HEADER(...) // header structs not in lookup table
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_XR_CUSTOM(struct_type, CUSTOM, xr_type) \
-    {xr_type, XRT_STRUCT_SERIALIZER_PTR(struct_type)},
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_XR(struct_type, XR, xr_type) \
-    {xr_type, XRT_STRUCT_SERIALIZER_PTR(struct_type)},
-#define XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY(struct_type, type, ...) \
-    XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY_##type(struct_type, type, ##__VA_ARGS__)
+#define STRUCT_SERIALIZER_PTR(t) (reinterpret_cast<StructSerializer>(static_cast<void(*)(const t*, std::ostream&)>(&serialize)))
 
 static std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = {
-    XRT_STRUCT_LIST_ALL(XRT_STRUCT_SERIALIZER_LOOKUP_ENTRY)
+
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+
+    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerCubeKHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerCubeKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
+
+    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrInstanceCreateInfoAndroidKHR)},
+
+
+    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrInstanceCreateInfoAndroidKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthInfoKHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthInfoKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+
+    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanSwapchainFormatListCreateInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanSwapchainFormatListCreateInfoKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+
+    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, STRUCT_SERIALIZER_PTR(XrEventDataPerfSettingsEXT)},
+
+
+    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, STRUCT_SERIALIZER_PTR(XrEventDataPerfSettingsEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+
+    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerCylinderKHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerCylinderKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerEquirectKHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerEquirectKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+
+    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsObjectNameInfoEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsLabelEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsMessengerCallbackDataEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsMessengerCreateInfoEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsObjectNameInfoEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsMessengerCallbackDataEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsMessengerCreateInfoEXT)},
+
+
+    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, STRUCT_SERIALIZER_PTR(XrDebugUtilsLabelEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLWin32KHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLXlibKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLXcbKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLWaylandKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageOpenGLKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsOpenGLKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLWin32KHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLXlibKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLXcbKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLWaylandKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageOpenGLKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsOpenGLKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLESAndroidKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageOpenGLESKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsOpenGLESKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingOpenGLESAndroidKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageOpenGLESKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsOpenGLESKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingVulkanKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageVulkanKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsVulkanKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingVulkanKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageVulkanKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsVulkanKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingD3D11KHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageD3D11KHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsD3D11KHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingD3D11KHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageD3D11KHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsD3D11KHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingD3D12KHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageD3D12KHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsD3D12KHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingD3D12KHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageD3D12KHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsD3D12KHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingMetalKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageMetalKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsMetalKHR)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsBindingMetalKHR)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, STRUCT_SERIALIZER_PTR(XrSwapchainImageMetalKHR)},
+
+
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, STRUCT_SERIALIZER_PTR(XrGraphicsRequirementsMetalKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+
+    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemEyeGazeInteractionPropertiesEXT)},
+
+
+    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, STRUCT_SERIALIZER_PTR(XrEyeGazeSampleTimeEXT)},
+
+
+    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemEyeGazeInteractionPropertiesEXT)},
+
+
+    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, STRUCT_SERIALIZER_PTR(XrEyeGazeSampleTimeEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+
+    {XR_TYPE_VISIBILITY_MASK_KHR, STRUCT_SERIALIZER_PTR(XrVisibilityMaskKHR)},
+
+
+    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, STRUCT_SERIALIZER_PTR(XrEventDataVisibilityMaskChangedKHR)},
+
+
+    {XR_TYPE_VISIBILITY_MASK_KHR, STRUCT_SERIALIZER_PTR(XrVisibilityMaskKHR)},
+
+
+    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, STRUCT_SERIALIZER_PTR(XrEventDataVisibilityMaskChangedKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
+
+    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, STRUCT_SERIALIZER_PTR(XrSessionCreateInfoOverlayEXTX)},
+
+
+    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, STRUCT_SERIALIZER_PTR(XrEventDataMainSessionVisibilityChangedEXTX)},
+
+
+    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, STRUCT_SERIALIZER_PTR(XrSessionCreateInfoOverlayEXTX)},
+
+
+    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, STRUCT_SERIALIZER_PTR(XrEventDataMainSessionVisibilityChangedEXTX)},
+
+#endif // XRTRANSPORT_EXT_XR_EXTX_overlay
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+
+    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerColorScaleBiasKHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerColorScaleBiasKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorSpaceCreateInfoMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+
+    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerImageLayoutFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerImageLayoutFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+
+    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerAlphaBlendFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerAlphaBlendFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+#ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+
+    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, STRUCT_SERIALIZER_PTR(XrViewConfigurationDepthRangeEXT)},
+
+
+    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, STRUCT_SERIALIZER_PTR(XrViewConfigurationDepthRangeEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
+
+    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, STRUCT_SERIALIZER_PTR(XrGraphicsBindingEGLMNDX)},
+
+
+    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, STRUCT_SERIALIZER_PTR(XrGraphicsBindingEGLMNDX)},
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeBindingPropertiesMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialGraphNodeBindingPropertiesMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+
+    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemHandTrackingPropertiesEXT)},
+
+
+    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackerCreateInfoEXT)},
+
+
+    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandJointsLocateInfoEXT)},
+
+
+    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, STRUCT_SERIALIZER_PTR(XrHandJointLocationsEXT)},
+
+
+    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, STRUCT_SERIALIZER_PTR(XrHandJointVelocitiesEXT)},
+
+
+    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemHandTrackingPropertiesEXT)},
+
+
+    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackerCreateInfoEXT)},
+
+
+    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandJointsLocateInfoEXT)},
+
+
+    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, STRUCT_SERIALIZER_PTR(XrHandJointLocationsEXT)},
+
+
+    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, STRUCT_SERIALIZER_PTR(XrHandJointVelocitiesEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+
+    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrSystemHandTrackingMeshPropertiesMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshSpaceCreateInfoMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshUpdateInfoMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshMSFT)},
+
+
+    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandPoseTypeInfoMSFT)},
+
+
+    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrSystemHandTrackingMeshPropertiesMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshSpaceCreateInfoMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshUpdateInfoMSFT)},
+
+
+    {XR_TYPE_HAND_MESH_MSFT, STRUCT_SERIALIZER_PTR(XrHandMeshMSFT)},
+
+
+    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrHandPoseTypeInfoMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationStateMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationFrameStateMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationLayerInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationStateMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationFrameStateMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationLayerInfoMSFT)},
+
+
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+
+    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelKeyStateMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelNodePropertiesMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelPropertiesMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelNodeStateMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelStateMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelKeyStateMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelNodePropertiesMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelPropertiesMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelNodeStateMSFT)},
+
+
+    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, STRUCT_SERIALIZER_PTR(XrControllerModelStateMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+
+    {XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC, STRUCT_SERIALIZER_PTR(XrViewConfigurationViewFovEPIC)},
+
+
+    {XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC, STRUCT_SERIALIZER_PTR(XrViewConfigurationViewFovEPIC)},
+
+#endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+#ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+
+    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, STRUCT_SERIALIZER_PTR(XrHolographicWindowAttachmentMSFT)},
+
+
+    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, STRUCT_SERIALIZER_PTR(XrHolographicWindowAttachmentMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrCompositionLayerReprojectionInfoMSFT)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, STRUCT_SERIALIZER_PTR(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrCompositionLayerReprojectionInfoMSFT)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, STRUCT_SERIALIZER_PTR(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+
+    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrAndroidSurfaceSwapchainCreateInfoFB)},
+
+
+    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrAndroidSurfaceSwapchainCreateInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+
+    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSecureContentFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSecureContentFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesFB)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_BODY_SKELETON_FB, STRUCT_SERIALIZER_PTR(XrBodySkeletonFB)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoFB)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsFB)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesFB)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsFB)},
+
+
+    {XR_TYPE_BODY_SKELETON_FB, STRUCT_SERIALIZER_PTR(XrBodySkeletonFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
+
+    {XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT, STRUCT_SERIALIZER_PTR(XrInteractionProfileDpadBindingEXT)},
+
+
+    {XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT, STRUCT_SERIALIZER_PTR(XrInteractionProfileDpadBindingEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
+#ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+
+    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, STRUCT_SERIALIZER_PTR(XrInteractionProfileAnalogThresholdVALVE)},
+
+
+    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, STRUCT_SERIALIZER_PTR(XrInteractionProfileAnalogThresholdVALVE)},
+
+#endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+
+    {XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandJointsMotionRangeInfoEXT)},
+
+
+    {XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandJointsMotionRangeInfoEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
+
+    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrLoaderInitInfoAndroidKHR)},
+
+
+    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, STRUCT_SERIALIZER_PTR(XrLoaderInitInfoAndroidKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+
+    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanInstanceCreateInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanDeviceCreateInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanGraphicsDeviceGetInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanInstanceCreateInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanDeviceCreateInfoKHR)},
+
+
+    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, STRUCT_SERIALIZER_PTR(XrVulkanGraphicsDeviceGetInfoKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerEquirect2KHR)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, STRUCT_SERIALIZER_PTR(XrCompositionLayerEquirect2KHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+
+    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObserverCreateInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneCreateInfoMSFT)},
+
+
+    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrNewSceneComputeInfoMSFT)},
+
+
+    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrVisualMeshComputeLodInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentLocationsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsLocateInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_OBJECTS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObjectsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentParentFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObjectTypesFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_PLANES_MSFT, STRUCT_SERIALIZER_PTR(XrScenePlanesMSFT)},
+
+
+    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrScenePlaneAlignmentFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_MESHES_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshesMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshBuffersGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshBuffersMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshVertexBufferMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshIndicesUint32MSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshIndicesUint16MSFT)},
+
+
+    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObserverCreateInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneCreateInfoMSFT)},
+
+
+    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrNewSceneComputeInfoMSFT)},
+
+
+    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrVisualMeshComputeLodInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentLocationsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentsLocateInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_OBJECTS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObjectsMSFT)},
+
+
+    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneComponentParentFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneObjectTypesFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_PLANES_MSFT, STRUCT_SERIALIZER_PTR(XrScenePlanesMSFT)},
+
+
+    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrScenePlaneAlignmentFilterInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_MESHES_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshesMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshBuffersGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshBuffersMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshVertexBufferMSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshIndicesUint32MSFT)},
+
+
+    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMeshIndicesUint16MSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+
+    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSerializedSceneFragmentDataGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneDeserializeInfoMSFT)},
+
+
+    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSerializedSceneFragmentDataGetInfoMSFT)},
+
+
+    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSceneDeserializeInfoMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+
+    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, STRUCT_SERIALIZER_PTR(XrEventDataDisplayRefreshRateChangedFB)},
+
+
+    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, STRUCT_SERIALIZER_PTR(XrEventDataDisplayRefreshRateChangedFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+
+    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, STRUCT_SERIALIZER_PTR(XrViveTrackerPathsHTCX)},
+
+
+    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, STRUCT_SERIALIZER_PTR(XrEventDataViveTrackerConnectedHTCX)},
+
+
+    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, STRUCT_SERIALIZER_PTR(XrViveTrackerPathsHTCX)},
+
+
+    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, STRUCT_SERIALIZER_PTR(XrEventDataViveTrackerConnectedHTCX)},
+
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+
+    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemFacialTrackingPropertiesHTC)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, STRUCT_SERIALIZER_PTR(XrFacialExpressionsHTC)},
+
+
+    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFacialTrackerCreateInfoHTC)},
+
+
+    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemFacialTrackingPropertiesHTC)},
+
+
+    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFacialTrackerCreateInfoHTC)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, STRUCT_SERIALIZER_PTR(XrFacialExpressionsHTC)},
+
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+
+    {XR_TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemColorSpacePropertiesFB)},
+
+
+    {XR_TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemColorSpacePropertiesFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+
+    {XR_TYPE_HAND_TRACKING_MESH_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingMeshFB)},
+
+
+    {XR_TYPE_HAND_TRACKING_SCALE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingScaleFB)},
+
+
+    {XR_TYPE_HAND_TRACKING_MESH_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingMeshFB)},
+
+
+    {XR_TYPE_HAND_TRACKING_SCALE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingScaleFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+
+    {XR_TYPE_HAND_TRACKING_AIM_STATE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingAimStateFB)},
+
+
+    {XR_TYPE_HAND_TRACKING_AIM_STATE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingAimStateFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+
+    {XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingCapsulesStateFB)},
+
+
+    {XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB, STRUCT_SERIALIZER_PTR(XrHandTrackingCapsulesStateFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntityPropertiesFB)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentStatusSetInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentStatusFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpatialAnchorCreateCompleteFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceSetStatusCompleteFB)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntityPropertiesFB)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentStatusSetInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentStatusFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpatialAnchorCreateCompleteFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceSetStatusCompleteFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+
+    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFoveationProfileCreateInfoFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, STRUCT_SERIALIZER_PTR(XrSwapchainCreateInfoFoveationFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateFoveationFB)},
+
+
+    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFoveationProfileCreateInfoFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, STRUCT_SERIALIZER_PTR(XrSwapchainCreateInfoFoveationFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateFoveationFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
+
+    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFoveationLevelProfileCreateInfoFB)},
+
+
+    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFoveationLevelProfileCreateInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+
+    {XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemKeyboardTrackingPropertiesFB)},
+
+
+    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrKeyboardSpaceCreateInfoFB)},
+
+
+    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, STRUCT_SERIALIZER_PTR(XrKeyboardTrackingQueryFB)},
+
+
+    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrKeyboardSpaceCreateInfoFB)},
+
+
+    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, STRUCT_SERIALIZER_PTR(XrKeyboardTrackingQueryFB)},
+
+
+    {XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemKeyboardTrackingPropertiesFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+
+    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrTriangleMeshCreateInfoFB)},
+
+
+    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrTriangleMeshCreateInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemPassthroughPropertiesFB)},
+
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, STRUCT_SERIALIZER_PTR(XrSystemPassthroughProperties2FB)},
+
+
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughCreateInfoFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughLayerCreateInfoFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerPassthroughFB)},
+
+
+    {XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrGeometryInstanceCreateInfoFB)},
+
+
+    {XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB, STRUCT_SERIALIZER_PTR(XrGeometryInstanceTransformFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_STYLE_FB, STRUCT_SERIALIZER_PTR(XrPassthroughStyleFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapMonoToRgbaFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapMonoToMonoFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB, STRUCT_SERIALIZER_PTR(XrPassthroughBrightnessContrastSaturationFB)},
+
+
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, STRUCT_SERIALIZER_PTR(XrEventDataPassthroughStateChangedFB)},
+
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemPassthroughPropertiesFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughCreateInfoFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughLayerCreateInfoFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerPassthroughFB)},
+
+
+    {XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrGeometryInstanceCreateInfoFB)},
+
+
+    {XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB, STRUCT_SERIALIZER_PTR(XrGeometryInstanceTransformFB)},
+
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, STRUCT_SERIALIZER_PTR(XrSystemPassthroughProperties2FB)},
+
+
+    {XR_TYPE_PASSTHROUGH_STYLE_FB, STRUCT_SERIALIZER_PTR(XrPassthroughStyleFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapMonoToRgbaFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapMonoToMonoFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB, STRUCT_SERIALIZER_PTR(XrPassthroughBrightnessContrastSaturationFB)},
+
+
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, STRUCT_SERIALIZER_PTR(XrEventDataPassthroughStateChangedFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+
+    {XR_TYPE_RENDER_MODEL_PATH_INFO_FB, STRUCT_SERIALIZER_PTR(XrRenderModelPathInfoFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrRenderModelPropertiesFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_BUFFER_FB, STRUCT_SERIALIZER_PTR(XrRenderModelBufferFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, STRUCT_SERIALIZER_PTR(XrRenderModelLoadInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemRenderModelPropertiesFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, STRUCT_SERIALIZER_PTR(XrRenderModelCapabilitiesRequestFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_PATH_INFO_FB, STRUCT_SERIALIZER_PTR(XrRenderModelPathInfoFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrRenderModelPropertiesFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_BUFFER_FB, STRUCT_SERIALIZER_PTR(XrRenderModelBufferFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, STRUCT_SERIALIZER_PTR(XrRenderModelLoadInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemRenderModelPropertiesFB)},
+
+
+    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, STRUCT_SERIALIZER_PTR(XrRenderModelCapabilitiesRequestFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
+
+    {XR_TYPE_BINDING_MODIFICATIONS_KHR, STRUCT_SERIALIZER_PTR(XrBindingModificationsKHR)},
+
+
+    {XR_TYPE_BINDING_MODIFICATIONS_KHR, STRUCT_SERIALIZER_PTR(XrBindingModificationsKHR)},
+
+#endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
+#ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+
+    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, STRUCT_SERIALIZER_PTR(XrViewLocateFoveatedRenderingVARJO)},
+
+
+    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, STRUCT_SERIALIZER_PTR(XrFoveatedViewConfigurationViewVARJO)},
+
+
+    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, STRUCT_SERIALIZER_PTR(XrSystemFoveatedRenderingPropertiesVARJO)},
+
+
+    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, STRUCT_SERIALIZER_PTR(XrViewLocateFoveatedRenderingVARJO)},
+
+
+    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, STRUCT_SERIALIZER_PTR(XrFoveatedViewConfigurationViewVARJO)},
+
+
+    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, STRUCT_SERIALIZER_PTR(XrSystemFoveatedRenderingPropertiesVARJO)},
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+#ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthTestVARJO)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthTestVARJO)},
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+
+    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, STRUCT_SERIALIZER_PTR(XrSystemMarkerTrackingPropertiesVARJO)},
+
+
+    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, STRUCT_SERIALIZER_PTR(XrEventDataMarkerTrackingUpdateVARJO)},
+
+
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, STRUCT_SERIALIZER_PTR(XrMarkerSpaceCreateInfoVARJO)},
+
+
+    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, STRUCT_SERIALIZER_PTR(XrSystemMarkerTrackingPropertiesVARJO)},
+
+
+    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, STRUCT_SERIALIZER_PTR(XrEventDataMarkerTrackingUpdateVARJO)},
+
+
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, STRUCT_SERIALIZER_PTR(XrMarkerSpaceCreateInfoVARJO)},
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
+#ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
+
+    {XR_TYPE_FRAME_END_INFO_ML, STRUCT_SERIALIZER_PTR(XrFrameEndInfoML)},
+
+
+    {XR_TYPE_FRAME_END_INFO_ML, STRUCT_SERIALIZER_PTR(XrFrameEndInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
+#ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
+
+    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, STRUCT_SERIALIZER_PTR(XrGlobalDimmerFrameEndInfoML)},
+
+
+    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, STRUCT_SERIALIZER_PTR(XrGlobalDimmerFrameEndInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+
+    {XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrCoordinateSpaceCreateInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_compat
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+
+    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrSystemMarkerUnderstandingPropertiesML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorCreateInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorArucoInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorSizeInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorAprilTagInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorCustomProfileInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorSnapshotInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_STATE_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorStateML)},
+
+
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerSpaceCreateInfoML)},
+
+
+    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrSystemMarkerUnderstandingPropertiesML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorCreateInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorArucoInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorSizeInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorAprilTagInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorCustomProfileInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorSnapshotInfoML)},
+
+
+    {XR_TYPE_MARKER_DETECTOR_STATE_ML, STRUCT_SERIALIZER_PTR(XrMarkerDetectorStateML)},
+
+
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrMarkerSpaceCreateInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+
+    {XR_TYPE_LOCALIZATION_MAP_ML, STRUCT_SERIALIZER_PTR(XrLocalizationMapML)},
+
+
+    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataLocalizationChangedML)},
+
+
+    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, STRUCT_SERIALIZER_PTR(XrMapLocalizationRequestInfoML)},
+
+
+    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, STRUCT_SERIALIZER_PTR(XrLocalizationMapImportInfoML)},
+
+
+    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, STRUCT_SERIALIZER_PTR(XrLocalizationEnableEventsInfoML)},
+
+
+    {XR_TYPE_LOCALIZATION_MAP_ML, STRUCT_SERIALIZER_PTR(XrLocalizationMapML)},
+
+
+    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataLocalizationChangedML)},
+
+
+    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, STRUCT_SERIALIZER_PTR(XrMapLocalizationRequestInfoML)},
+
+
+    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, STRUCT_SERIALIZER_PTR(XrLocalizationMapImportInfoML)},
+
+
+    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, STRUCT_SERIALIZER_PTR(XrLocalizationEnableEventsInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateInfoFromPoseML)},
+
+
+    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrCreateSpatialAnchorsCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorStateML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateInfoFromPoseML)},
+
+
+    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrCreateSpatialAnchorsCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorStateML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateStorageInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsQueryInfoRadiusML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsQueryCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateInfoFromUuidsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishCompletionDetailsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteCompletionDetailsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateStorageInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsQueryInfoRadiusML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsQueryCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsCreateInfoFromUuidsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationInfoML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationCompletionML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsPublishCompletionDetailsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsDeleteCompletionDetailsML)},
+
+
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, STRUCT_SERIALIZER_PTR(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+
+    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataHeadsetFitChangedML)},
+
+
+    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataEyeCalibrationChangedML)},
+
+
+    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, STRUCT_SERIALIZER_PTR(XrUserCalibrationEnableEventsInfoML)},
+
+
+    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataHeadsetFitChangedML)},
+
+
+    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, STRUCT_SERIALIZER_PTR(XrEventDataEyeCalibrationChangedML)},
+
+
+    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, STRUCT_SERIALIZER_PTR(XrUserCalibrationEnableEventsInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+
+    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorPersistenceInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorPersistenceInfoMSFT)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, STRUCT_SERIALIZER_PTR(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+
+    {XR_TYPE_SCENE_MARKERS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkersMSFT)},
+
+
+    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkerTypeFilterMSFT)},
+
+
+    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkerQRCodesMSFT)},
+
+
+    {XR_TYPE_SCENE_MARKERS_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkersMSFT)},
+
+
+    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkerTypeFilterMSFT)},
+
+
+    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, STRUCT_SERIALIZER_PTR(XrSceneMarkerQRCodesMSFT)},
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+
+    {XR_TYPE_SPACE_QUERY_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceQueryInfoFB)},
+
+
+    {XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceStorageLocationFilterInfoFB)},
+
+
+    {XR_TYPE_SPACE_UUID_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceUuidFilterInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentFilterInfoFB)},
+
+
+    {XR_TYPE_SPACE_QUERY_RESULTS_FB, STRUCT_SERIALIZER_PTR(XrSpaceQueryResultsFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceQueryResultsAvailableFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceQueryCompleteFB)},
+
+
+    {XR_TYPE_SPACE_QUERY_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceQueryInfoFB)},
+
+
+    {XR_TYPE_SPACE_QUERY_RESULTS_FB, STRUCT_SERIALIZER_PTR(XrSpaceQueryResultsFB)},
+
+
+    {XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceStorageLocationFilterInfoFB)},
+
+
+    {XR_TYPE_SPACE_UUID_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceUuidFilterInfoFB)},
+
+
+    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceComponentFilterInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceQueryResultsAvailableFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceQueryCompleteFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+
+    {XR_TYPE_SPACE_SAVE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceSaveInfoFB)},
+
+
+    {XR_TYPE_SPACE_ERASE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceEraseInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceSaveCompleteFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceEraseCompleteFB)},
+
+
+    {XR_TYPE_SPACE_SAVE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceSaveInfoFB)},
+
+
+    {XR_TYPE_SPACE_ERASE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceEraseInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceSaveCompleteFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceEraseCompleteFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, STRUCT_SERIALIZER_PTR(XrSwapchainImageFoveationVulkanFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, STRUCT_SERIALIZER_PTR(XrSwapchainImageFoveationVulkanFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+
+    {XR_TYPE_SWAPCHAIN_STATE_ANDROID_SURFACE_DIMENSIONS_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateAndroidSurfaceDimensionsFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_STATE_ANDROID_SURFACE_DIMENSIONS_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateAndroidSurfaceDimensionsFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+
+    {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateSamplerOpenGLESFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_OPENGL_ES_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateSamplerOpenGLESFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+
+    {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateSamplerVulkanFB)},
+
+
+    {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB, STRUCT_SERIALIZER_PTR(XrSwapchainStateSamplerVulkanFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+
+    {XR_TYPE_SPACE_SHARE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceShareInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceShareCompleteFB)},
+
+
+    {XR_TYPE_SPACE_SHARE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceShareInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceShareCompleteFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_space_warp
+
+    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSpaceWarpInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemSpaceWarpPropertiesFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSpaceWarpInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemSpaceWarpPropertiesFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_space_warp
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+
+    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, STRUCT_SERIALIZER_PTR(XrHapticAmplitudeEnvelopeVibrationFB)},
+
+
+    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, STRUCT_SERIALIZER_PTR(XrHapticAmplitudeEnvelopeVibrationFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+
+    {XR_TYPE_SEMANTIC_LABELS_FB, STRUCT_SERIALIZER_PTR(XrSemanticLabelsFB)},
+
+
+    {XR_TYPE_ROOM_LAYOUT_FB, STRUCT_SERIALIZER_PTR(XrRoomLayoutFB)},
+
+
+    {XR_TYPE_BOUNDARY_2D_FB, STRUCT_SERIALIZER_PTR(XrBoundary2DFB)},
+
+
+    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, STRUCT_SERIALIZER_PTR(XrSemanticLabelsSupportInfoFB)},
+
+
+    {XR_TYPE_SEMANTIC_LABELS_FB, STRUCT_SERIALIZER_PTR(XrSemanticLabelsFB)},
+
+
+    {XR_TYPE_ROOM_LAYOUT_FB, STRUCT_SERIALIZER_PTR(XrRoomLayoutFB)},
+
+
+    {XR_TYPE_BOUNDARY_2D_FB, STRUCT_SERIALIZER_PTR(XrBoundary2DFB)},
+
+
+    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, STRUCT_SERIALIZER_PTR(XrSemanticLabelsSupportInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+
+    {XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE, STRUCT_SERIALIZER_PTR(XrDigitalLensControlALMALENCE)},
+
+#endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+
+    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSceneCaptureCompleteFB)},
+
+
+    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, STRUCT_SERIALIZER_PTR(XrSceneCaptureRequestInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSceneCaptureCompleteFB)},
+
+
+    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, STRUCT_SERIALIZER_PTR(XrSceneCaptureRequestInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+
+    {XR_TYPE_SPACE_CONTAINER_FB, STRUCT_SERIALIZER_PTR(XrSpaceContainerFB)},
+
+
+    {XR_TYPE_SPACE_CONTAINER_FB, STRUCT_SERIALIZER_PTR(XrSpaceContainerFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+
+    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrFoveationEyeTrackedProfileCreateInfoMETA)},
+
+
+    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, STRUCT_SERIALIZER_PTR(XrFoveationEyeTrackedStateMETA)},
+
+
+    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemFoveationEyeTrackedPropertiesMETA)},
+
+
+    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrFoveationEyeTrackedProfileCreateInfoMETA)},
+
+
+    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, STRUCT_SERIALIZER_PTR(XrFoveationEyeTrackedStateMETA)},
+
+
+    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemFoveationEyeTrackedPropertiesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemFaceTrackingPropertiesFB)},
+
+
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFaceTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_INFO_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionInfoFB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionWeightsFB)},
+
+
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemFaceTrackingPropertiesFB)},
+
+
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrFaceTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_INFO_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionInfoFB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionWeightsFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+
+    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrEyeTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_EYE_GAZES_INFO_FB, STRUCT_SERIALIZER_PTR(XrEyeGazesInfoFB)},
+
+
+    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemEyeTrackingPropertiesFB)},
+
+
+    {XR_TYPE_EYE_GAZES_FB, STRUCT_SERIALIZER_PTR(XrEyeGazesFB)},
+
+
+    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrEyeTrackerCreateInfoFB)},
+
+
+    {XR_TYPE_EYE_GAZES_INFO_FB, STRUCT_SERIALIZER_PTR(XrEyeGazesInfoFB)},
+
+
+    {XR_TYPE_EYE_GAZES_FB, STRUCT_SERIALIZER_PTR(XrEyeGazesFB)},
+
+
+    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, STRUCT_SERIALIZER_PTR(XrSystemEyeTrackingPropertiesFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+
+    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, STRUCT_SERIALIZER_PTR(XrPassthroughKeyboardHandsIntensityFB)},
+
+
+    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, STRUCT_SERIALIZER_PTR(XrPassthroughKeyboardHandsIntensityFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+
+    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSettingsFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerSettingsFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+
+    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, STRUCT_SERIALIZER_PTR(XrHapticPcmVibrationFB)},
+
+
+    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, STRUCT_SERIALIZER_PTR(XrDevicePcmSampleRateStateFB)},
+
+
+    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, STRUCT_SERIALIZER_PTR(XrHapticPcmVibrationFB)},
+
+
+    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, STRUCT_SERIALIZER_PTR(XrDevicePcmSampleRateStateFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+
+    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFrameSynthesisInfoEXT)},
+
+
+    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, STRUCT_SERIALIZER_PTR(XrFrameSynthesisConfigViewEXT)},
+
+
+    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFrameSynthesisInfoEXT)},
+
+
+    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, STRUCT_SERIALIZER_PTR(XrFrameSynthesisConfigViewEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthTestFB)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, STRUCT_SERIALIZER_PTR(XrCompositionLayerDepthTestFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_META_local_dimming
+
+    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, STRUCT_SERIALIZER_PTR(XrLocalDimmingFrameEndInfoMETA)},
+
+
+    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, STRUCT_SERIALIZER_PTR(XrLocalDimmingFrameEndInfoMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_local_dimming
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+
+    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, STRUCT_SERIALIZER_PTR(XrPassthroughPreferencesMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, STRUCT_SERIALIZER_PTR(XrPassthroughPreferencesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+
+    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemVirtualKeyboardPropertiesMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardCreateInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardSpaceCreateInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardLocationInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardAnimationStateMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardModelAnimationStatesMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardTextureDataMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardInputInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardTextContextChangeInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardCommitTextMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardBackspaceMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardEnterMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardShownMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardHiddenMETA)},
+
+
+    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemVirtualKeyboardPropertiesMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardCreateInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardSpaceCreateInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardLocationInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardAnimationStateMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardModelAnimationStatesMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardTextureDataMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardInputInfoMETA)},
+
+
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, STRUCT_SERIALIZER_PTR(XrVirtualKeyboardTextContextChangeInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardCommitTextMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardBackspaceMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardEnterMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardShownMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, STRUCT_SERIALIZER_PTR(XrEventDataVirtualKeyboardHiddenMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+
+    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, STRUCT_SERIALIZER_PTR(XrExternalCameraOCULUS)},
+
+
+    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, STRUCT_SERIALIZER_PTR(XrExternalCameraOCULUS)},
+
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+
+    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVulkanSwapchainCreateInfoMETA)},
+
+
+    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrVulkanSwapchainCreateInfoMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+
+    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, STRUCT_SERIALIZER_PTR(XrPerformanceMetricsStateMETA)},
+
+
+    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, STRUCT_SERIALIZER_PTR(XrPerformanceMetricsCounterMETA)},
+
+
+    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, STRUCT_SERIALIZER_PTR(XrPerformanceMetricsStateMETA)},
+
+
+    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, STRUCT_SERIALIZER_PTR(XrPerformanceMetricsCounterMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+
+    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceListSaveInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceListSaveCompleteFB)},
+
+
+    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceListSaveInfoFB)},
+
+
+    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, STRUCT_SERIALIZER_PTR(XrEventDataSpaceListSaveCompleteFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+
+    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceUserCreateInfoFB)},
+
+
+    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, STRUCT_SERIALIZER_PTR(XrSpaceUserCreateInfoFB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_META_headset_id
+
+    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemHeadsetIdPropertiesMETA)},
+
+
+    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemHeadsetIdPropertiesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_headset_id
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, STRUCT_SERIALIZER_PTR(XrRecommendedLayerResolutionMETA)},
+
+
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, STRUCT_SERIALIZER_PTR(XrRecommendedLayerResolutionGetInfoMETA)},
+
+
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, STRUCT_SERIALIZER_PTR(XrRecommendedLayerResolutionMETA)},
+
+
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, STRUCT_SERIALIZER_PTR(XrRecommendedLayerResolutionGetInfoMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorLutCreateInfoMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorLutUpdateInfoMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapLutMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapInterpolatedLutMETA)},
+
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemPassthroughColorLutPropertiesMETA)},
+
+
+    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemPassthroughColorLutPropertiesMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorLutCreateInfoMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorLutUpdateInfoMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapLutMETA)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, STRUCT_SERIALIZER_PTR(XrPassthroughColorMapInterpolatedLutMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+
+    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, STRUCT_SERIALIZER_PTR(XrSpaceTriangleMeshGetInfoMETA)},
+
+
+    {XR_TYPE_SPACE_TRIANGLE_MESH_META, STRUCT_SERIALIZER_PTR(XrSpaceTriangleMeshMETA)},
+
+
+    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, STRUCT_SERIALIZER_PTR(XrSpaceTriangleMeshGetInfoMETA)},
+
+
+    {XR_TYPE_SPACE_TRIANGLE_MESH_META, STRUCT_SERIALIZER_PTR(XrSpaceTriangleMeshMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+
+    {XR_TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FULL_BODY_META, STRUCT_SERIALIZER_PTR(XrSystemPropertiesBodyTrackingFullBodyMETA)},
+
+
+    {XR_TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FULL_BODY_META, STRUCT_SERIALIZER_PTR(XrSystemPropertiesBodyTrackingFullBodyMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META, STRUCT_SERIALIZER_PTR(XrEventDataPassthroughLayerResumedMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META, STRUCT_SERIALIZER_PTR(XrEventDataPassthroughLayerResumedMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, STRUCT_SERIALIZER_PTR(XrSystemFaceTrackingProperties2FB)},
+
+
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, STRUCT_SERIALIZER_PTR(XrFaceTrackerCreateInfo2FB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionInfo2FB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionWeights2FB)},
+
+
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, STRUCT_SERIALIZER_PTR(XrSystemFaceTrackingProperties2FB)},
+
+
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, STRUCT_SERIALIZER_PTR(XrFaceTrackerCreateInfo2FB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionInfo2FB)},
+
+
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, STRUCT_SERIALIZER_PTR(XrFaceExpressionWeights2FB)},
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntitySharingPropertiesMETA)},
+
+
+    {XR_TYPE_SHARE_SPACES_INFO_META, STRUCT_SERIALIZER_PTR(XrShareSpacesInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataShareSpacesCompleteMETA)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntitySharingPropertiesMETA)},
+
+
+    {XR_TYPE_SHARE_SPACES_INFO_META, STRUCT_SERIALIZER_PTR(XrShareSpacesInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataShareSpacesCompleteMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthProviderCreateInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthSwapchainCreateInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthSwapchainStateMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageAcquireInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageViewMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthHandRemovalSetInfoMETA)},
+
+
+    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemEnvironmentDepthPropertiesMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthProviderCreateInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthSwapchainCreateInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthSwapchainStateMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageAcquireInfoMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageViewMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthImageMETA)},
+
+
+    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, STRUCT_SERIALIZER_PTR(XrEnvironmentDepthHandRemovalSetInfoMETA)},
+
+
+    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemEnvironmentDepthPropertiesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughCreateInfoHTC)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughColorHTC)},
+
+
+    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughMeshTransformInfoHTC)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, STRUCT_SERIALIZER_PTR(XrCompositionLayerPassthroughHTC)},
+
+
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughCreateInfoHTC)},
+
+
+    {XR_TYPE_PASSTHROUGH_COLOR_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughColorHTC)},
+
+
+    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, STRUCT_SERIALIZER_PTR(XrPassthroughMeshTransformInfoHTC)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, STRUCT_SERIALIZER_PTR(XrCompositionLayerPassthroughHTC)},
+
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+
+    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationApplyInfoHTC)},
+
+
+    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationDynamicModeInfoHTC)},
+
+
+    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationCustomModeInfoHTC)},
+
+
+    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationApplyInfoHTC)},
+
+
+    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationDynamicModeInfoHTC)},
+
+
+    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrFoveationCustomModeInfoHTC)},
+
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+
+    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemAnchorPropertiesHTC)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoHTC)},
+
+
+    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemAnchorPropertiesHTC)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoHTC)},
+
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesHTC)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoHTC)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoHTC)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsHTC)},
+
+
+    {XR_TYPE_BODY_SKELETON_HTC, STRUCT_SERIALIZER_PTR(XrBodySkeletonHTC)},
+
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesHTC)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoHTC)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoHTC)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsHTC)},
+
+
+    {XR_TYPE_BODY_SKELETON_HTC, STRUCT_SERIALIZER_PTR(XrBodySkeletonHTC)},
+
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+
+    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, STRUCT_SERIALIZER_PTR(XrActiveActionSetPrioritiesEXT)},
+
+
+    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, STRUCT_SERIALIZER_PTR(XrActiveActionSetPrioritiesEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+
+    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, STRUCT_SERIALIZER_PTR(XrSystemForceFeedbackCurlPropertiesMNDX)},
+
+
+    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, STRUCT_SERIALIZER_PTR(XrForceFeedbackCurlApplyLocationsMNDX)},
+
+
+    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, STRUCT_SERIALIZER_PTR(XrSystemForceFeedbackCurlPropertiesMNDX)},
+
+
+    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, STRUCT_SERIALIZER_PTR(XrForceFeedbackCurlApplyLocationsMNDX)},
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesBD)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoBD)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoBD)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsBD)},
+
+
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrBodyTrackerCreateInfoBD)},
+
+
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrBodyJointsLocateInfoBD)},
+
+
+    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, STRUCT_SERIALIZER_PTR(XrBodyJointLocationsBD)},
+
+
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemBodyTrackingPropertiesBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+
+    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialSensingPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentGetInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityLocationGetInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataLocationBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataSemanticBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataBoundingBox2DBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataPolygonBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataBoundingBox3DBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataTriangleMeshBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderCreateInfoBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderStartInfoBD)},
+
+
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, STRUCT_SERIALIZER_PTR(XrEventDataSenseDataProviderStateChangedBD)},
+
+
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, STRUCT_SERIALIZER_PTR(XrEventDataSenseDataUpdatedBD)},
+
+
+    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataQueryInfoBD)},
+
+
+    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, STRUCT_SERIALIZER_PTR(XrSenseDataQueryCompletionBD)},
+
+
+    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrQueriedSenseDataGetInfoBD)},
+
+
+    {XR_TYPE_QUERIED_SENSE_DATA_BD, STRUCT_SERIALIZER_PTR(XrQueriedSenseDataBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityStateBD)},
+
+
+    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, STRUCT_SERIALIZER_PTR(XrSenseDataFilterUuidBD)},
+
+
+    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, STRUCT_SERIALIZER_PTR(XrSenseDataFilterSemanticBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityAnchorCreateInfoBD)},
+
+
+    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrAnchorSpaceCreateInfoBD)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialSensingPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentGetInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityLocationGetInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataLocationBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataSemanticBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataBoundingBox2DBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataPolygonBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataBoundingBox3DBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityComponentDataTriangleMeshBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderCreateInfoBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderStartInfoBD)},
+
+
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, STRUCT_SERIALIZER_PTR(XrEventDataSenseDataProviderStateChangedBD)},
+
+
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, STRUCT_SERIALIZER_PTR(XrEventDataSenseDataUpdatedBD)},
+
+
+    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, STRUCT_SERIALIZER_PTR(XrSenseDataQueryInfoBD)},
+
+
+    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, STRUCT_SERIALIZER_PTR(XrSenseDataQueryCompletionBD)},
+
+
+    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, STRUCT_SERIALIZER_PTR(XrSenseDataFilterUuidBD)},
+
+
+    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, STRUCT_SERIALIZER_PTR(XrSenseDataFilterSemanticBD)},
+
+
+    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, STRUCT_SERIALIZER_PTR(XrQueriedSenseDataGetInfoBD)},
+
+
+    {XR_TYPE_QUERIED_SENSE_DATA_BD, STRUCT_SERIALIZER_PTR(XrQueriedSenseDataBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityStateBD)},
+
+
+    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialEntityAnchorCreateInfoBD)},
+
+
+    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrAnchorSpaceCreateInfoBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
+
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialAnchorPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateCompletionBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorPersistInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorUnpersistInfoBD)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialAnchorPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorCreateCompletionBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorPersistInfoBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorUnpersistInfoBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialAnchorSharingPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorShareInfoBD)},
+
+
+    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, STRUCT_SERIALIZER_PTR(XrSharedSpatialAnchorDownloadInfoBD)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialAnchorSharingPropertiesBD)},
+
+
+    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSpatialAnchorShareInfoBD)},
+
+
+    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, STRUCT_SERIALIZER_PTR(XrSharedSpatialAnchorDownloadInfoBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
+
+    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialScenePropertiesBD)},
+
+
+    {XR_TYPE_SCENE_CAPTURE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSceneCaptureInfoBD)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialScenePropertiesBD)},
+
+
+    {XR_TYPE_SCENE_CAPTURE_INFO_BD, STRUCT_SERIALIZER_PTR(XrSceneCaptureInfoBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
+
+    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialMeshPropertiesBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderCreateInfoSpatialMeshBD)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, STRUCT_SERIALIZER_PTR(XrSystemSpatialMeshPropertiesBD)},
+
+
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, STRUCT_SERIALIZER_PTR(XrSenseDataProviderCreateInfoSpatialMeshBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
+#ifdef XRTRANSPORT_EXT_XR_BD_future_progress
+
+    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, STRUCT_SERIALIZER_PTR(XrFuturePollResultProgressBD)},
+
+
+    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, STRUCT_SERIALIZER_PTR(XrFuturePollResultProgressBD)},
+
+#endif // XRTRANSPORT_EXT_XR_BD_future_progress
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackingDataSourceInfoEXT)},
+
+
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackingDataSourceStateEXT)},
+
+
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackingDataSourceInfoEXT)},
+
+
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, STRUCT_SERIALIZER_PTR(XrHandTrackingDataSourceStateEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+#ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+
+    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemPlaneDetectionPropertiesEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorCreateInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorBeginInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorGetInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorLocationEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorLocationsEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorPolygonBufferEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorCreateInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorBeginInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorGetInfoEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorLocationsEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorLocationEXT)},
+
+
+    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, STRUCT_SERIALIZER_PTR(XrPlaneDetectorPolygonBufferEXT)},
+
+
+    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemPlaneDetectionPropertiesEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+
+    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFutureCancelInfoEXT)},
+
+
+    {XR_TYPE_FUTURE_POLL_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFuturePollInfoEXT)},
+
+
+    {XR_TYPE_FUTURE_COMPLETION_EXT, STRUCT_SERIALIZER_PTR(XrFutureCompletionEXT)},
+
+
+    {XR_TYPE_FUTURE_POLL_RESULT_EXT, STRUCT_SERIALIZER_PTR(XrFuturePollResultEXT)},
+
+
+    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFutureCancelInfoEXT)},
+
+
+    {XR_TYPE_FUTURE_POLL_INFO_EXT, STRUCT_SERIALIZER_PTR(XrFuturePollInfoEXT)},
+
+
+    {XR_TYPE_FUTURE_COMPLETION_EXT, STRUCT_SERIALIZER_PTR(XrFutureCompletionEXT)},
+
+
+    {XR_TYPE_FUTURE_POLL_RESULT_EXT, STRUCT_SERIALIZER_PTR(XrFuturePollResultEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
+
+    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, STRUCT_SERIALIZER_PTR(XrEventDataUserPresenceChangedEXT)},
+
+
+    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemUserPresencePropertiesEXT)},
+
+
+    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, STRUCT_SERIALIZER_PTR(XrEventDataUserPresenceChangedEXT)},
+
+
+    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, STRUCT_SERIALIZER_PTR(XrSystemUserPresencePropertiesEXT)},
+
+#endif // XRTRANSPORT_EXT_XR_EXT_user_presence
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+
+    {XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML, STRUCT_SERIALIZER_PTR(XrSystemNotificationsSetInfoML)},
+
+
+    {XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML, STRUCT_SERIALIZER_PTR(XrSystemNotificationsSetInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+
+    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshDetectorCreateInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_STATE_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockStateML)},
+
+
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshStateRequestInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshStateRequestCompletionML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferRecommendedSizeInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferSizeML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockRequestML)},
+
+
+    {XR_TYPE_WORLD_MESH_GET_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshGetInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockML)},
+
+
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshRequestCompletionInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshRequestCompletionML)},
+
+
+    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshDetectorCreateInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshStateRequestInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_STATE_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockStateML)},
+
+
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshStateRequestCompletionML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferRecommendedSizeInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferSizeML)},
+
+
+    {XR_TYPE_WORLD_MESH_BUFFER_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBufferML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockRequestML)},
+
+
+    {XR_TYPE_WORLD_MESH_GET_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshGetInfoML)},
+
+
+    {XR_TYPE_WORLD_MESH_BLOCK_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshBlockML)},
+
+
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshRequestCompletionML)},
+
+
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML, STRUCT_SERIALIZER_PTR(XrWorldMeshRequestCompletionInfoML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
+
+    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrSystemFacialExpressionPropertiesML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionClientCreateInfoML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionBlendShapeGetInfoML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionBlendShapePropertiesML)},
+
+
+    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrSystemFacialExpressionPropertiesML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionClientCreateInfoML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionBlendShapeGetInfoML)},
+
+
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, STRUCT_SERIALIZER_PTR(XrFacialExpressionBlendShapePropertiesML)},
+
+#endif // XRTRANSPORT_EXT_XR_ML_facial_expression
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+
+    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
+
+
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, STRUCT_SERIALIZER_PTR(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
+
+
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, STRUCT_SERIALIZER_PTR(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
+
+
+    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
+
+
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, STRUCT_SERIALIZER_PTR(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
+
+
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, STRUCT_SERIALIZER_PTR(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+
+    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationDiscoveryStartInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationDiscoveryStopInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationAdvertisementStartInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationAdvertisementStopInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStartColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStopColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStartColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationDiscoveryResultMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStopColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemColocationDiscoveryPropertiesMETA)},
+
+
+    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationDiscoveryStartInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationDiscoveryStopInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationAdvertisementStartInfoMETA)},
+
+
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, STRUCT_SERIALIZER_PTR(XrColocationAdvertisementStopInfoMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStartColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStopColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationAdvertisementCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStartColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationDiscoveryResultMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, STRUCT_SERIALIZER_PTR(XrEventDataStopColocationDiscoveryCompleteMETA)},
+
+
+    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemColocationDiscoveryPropertiesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
+
+
+    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, STRUCT_SERIALIZER_PTR(XrShareSpacesRecipientGroupsMETA)},
+
+
+    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, STRUCT_SERIALIZER_PTR(XrSpaceGroupUuidFilterInfoMETA)},
+
+
+    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, STRUCT_SERIALIZER_PTR(XrShareSpacesRecipientGroupsMETA)},
+
+
+    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, STRUCT_SERIALIZER_PTR(XrSpaceGroupUuidFilterInfoMETA)},
+
+
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, STRUCT_SERIALIZER_PTR(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+    {XR_TYPE_ACTION_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrActionCreateInfo)},
+
+
+    {XR_TYPE_ACTION_SET_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrActionSetCreateInfo)},
+
+
+    {XR_TYPE_ACTION_SPACE_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrActionSpaceCreateInfo)},
+
+
+    {XR_TYPE_ACTION_STATE_BOOLEAN, STRUCT_SERIALIZER_PTR(XrActionStateBoolean)},
+
+
+    {XR_TYPE_ACTION_STATE_FLOAT, STRUCT_SERIALIZER_PTR(XrActionStateFloat)},
+
+
+    {XR_TYPE_ACTION_STATE_GET_INFO, STRUCT_SERIALIZER_PTR(XrActionStateGetInfo)},
+
+
+    {XR_TYPE_ACTION_STATE_POSE, STRUCT_SERIALIZER_PTR(XrActionStatePose)},
+
+
+    {XR_TYPE_ACTION_STATE_VECTOR2F, STRUCT_SERIALIZER_PTR(XrActionStateVector2f)},
+
+
+    {XR_TYPE_ACTIONS_SYNC_INFO, STRUCT_SERIALIZER_PTR(XrActionsSyncInfo)},
+
+
+    {XR_TYPE_API_LAYER_PROPERTIES, STRUCT_SERIALIZER_PTR(XrApiLayerProperties)},
+
+
+    {XR_TYPE_BOUND_SOURCES_FOR_ACTION_ENUMERATE_INFO, STRUCT_SERIALIZER_PTR(XrBoundSourcesForActionEnumerateInfo)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PROJECTION, STRUCT_SERIALIZER_PTR(XrCompositionLayerProjection)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_PROJECTION_VIEW, STRUCT_SERIALIZER_PTR(XrCompositionLayerProjectionView)},
+
+
+    {XR_TYPE_COMPOSITION_LAYER_QUAD, STRUCT_SERIALIZER_PTR(XrCompositionLayerQuad)},
+
+
+    {XR_TYPE_EVENT_DATA_BUFFER, STRUCT_SERIALIZER_PTR(XrEventDataBuffer)},
+
+
+    {XR_TYPE_EVENT_DATA_EVENTS_LOST, STRUCT_SERIALIZER_PTR(XrEventDataEventsLost)},
+
+
+    {XR_TYPE_EVENT_DATA_INSTANCE_LOSS_PENDING, STRUCT_SERIALIZER_PTR(XrEventDataInstanceLossPending)},
+
+
+    {XR_TYPE_EVENT_DATA_INTERACTION_PROFILE_CHANGED, STRUCT_SERIALIZER_PTR(XrEventDataInteractionProfileChanged)},
+
+
+    {XR_TYPE_EVENT_DATA_REFERENCE_SPACE_CHANGE_PENDING, STRUCT_SERIALIZER_PTR(XrEventDataReferenceSpaceChangePending)},
+
+
+    {XR_TYPE_EVENT_DATA_SESSION_STATE_CHANGED, STRUCT_SERIALIZER_PTR(XrEventDataSessionStateChanged)},
+
+
+    {XR_TYPE_EXTENSION_PROPERTIES, STRUCT_SERIALIZER_PTR(XrExtensionProperties)},
+
+
+    {XR_TYPE_FRAME_BEGIN_INFO, STRUCT_SERIALIZER_PTR(XrFrameBeginInfo)},
+
+
+    {XR_TYPE_FRAME_END_INFO, STRUCT_SERIALIZER_PTR(XrFrameEndInfo)},
+
+
+    {XR_TYPE_FRAME_STATE, STRUCT_SERIALIZER_PTR(XrFrameState)},
+
+
+    {XR_TYPE_FRAME_WAIT_INFO, STRUCT_SERIALIZER_PTR(XrFrameWaitInfo)},
+
+
+    {XR_TYPE_HAPTIC_ACTION_INFO, STRUCT_SERIALIZER_PTR(XrHapticActionInfo)},
+
+
+    {XR_TYPE_HAPTIC_VIBRATION, STRUCT_SERIALIZER_PTR(XrHapticVibration)},
+
+
+    {XR_TYPE_INPUT_SOURCE_LOCALIZED_NAME_GET_INFO, STRUCT_SERIALIZER_PTR(XrInputSourceLocalizedNameGetInfo)},
+
+
+    {XR_TYPE_INSTANCE_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrInstanceCreateInfo)},
+
+
+    {XR_TYPE_INSTANCE_PROPERTIES, STRUCT_SERIALIZER_PTR(XrInstanceProperties)},
+
+
+    {XR_TYPE_INTERACTION_PROFILE_STATE, STRUCT_SERIALIZER_PTR(XrInteractionProfileState)},
+
+
+    {XR_TYPE_INTERACTION_PROFILE_SUGGESTED_BINDING, STRUCT_SERIALIZER_PTR(XrInteractionProfileSuggestedBinding)},
+
+
+    {XR_TYPE_REFERENCE_SPACE_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrReferenceSpaceCreateInfo)},
+
+
+    {XR_TYPE_SESSION_ACTION_SETS_ATTACH_INFO, STRUCT_SERIALIZER_PTR(XrSessionActionSetsAttachInfo)},
+
+
+    {XR_TYPE_SESSION_BEGIN_INFO, STRUCT_SERIALIZER_PTR(XrSessionBeginInfo)},
+
+
+    {XR_TYPE_SESSION_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrSessionCreateInfo)},
+
+
+    {XR_TYPE_SPACE_LOCATION, STRUCT_SERIALIZER_PTR(XrSpaceLocation)},
+
+
+    {XR_TYPE_SPACE_LOCATIONS, STRUCT_SERIALIZER_PTR(XrSpaceLocations)},
+
+
+    {XR_TYPE_SPACE_VELOCITIES, STRUCT_SERIALIZER_PTR(XrSpaceVelocities)},
+
+
+    {XR_TYPE_SPACE_VELOCITY, STRUCT_SERIALIZER_PTR(XrSpaceVelocity)},
+
+
+    {XR_TYPE_SPACES_LOCATE_INFO, STRUCT_SERIALIZER_PTR(XrSpacesLocateInfo)},
+
+
+    {XR_TYPE_SWAPCHAIN_CREATE_INFO, STRUCT_SERIALIZER_PTR(XrSwapchainCreateInfo)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_ACQUIRE_INFO, STRUCT_SERIALIZER_PTR(XrSwapchainImageAcquireInfo)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_RELEASE_INFO, STRUCT_SERIALIZER_PTR(XrSwapchainImageReleaseInfo)},
+
+
+    {XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO, STRUCT_SERIALIZER_PTR(XrSwapchainImageWaitInfo)},
+
+
+    {XR_TYPE_SYSTEM_GET_INFO, STRUCT_SERIALIZER_PTR(XrSystemGetInfo)},
+
+
+    {XR_TYPE_SYSTEM_PROPERTIES, STRUCT_SERIALIZER_PTR(XrSystemProperties)},
+
+
+    {XR_TYPE_VIEW, STRUCT_SERIALIZER_PTR(XrView)},
+
+
+    {XR_TYPE_VIEW_CONFIGURATION_PROPERTIES, STRUCT_SERIALIZER_PTR(XrViewConfigurationProperties)},
+
+
+    {XR_TYPE_VIEW_CONFIGURATION_VIEW, STRUCT_SERIALIZER_PTR(XrViewConfigurationView)},
+
+
+    {XR_TYPE_VIEW_LOCATE_INFO, STRUCT_SERIALIZER_PTR(XrViewLocateInfo)},
+
+
+    {XR_TYPE_VIEW_STATE, STRUCT_SERIALIZER_PTR(XrViewState)},
+
+
 };
 
 static StructSerializer serializer_lookup(XrStructureType struct_type) {
@@ -75,39 +7926,21939 @@ static void serialize_xr(const void* untyped, std::ostream& out) {
     }
 }
 
-#define XRT_STRUCT_SERIALIZE_MEMBER_XR(member_name, member_type, type, ...) \
-    serialize_xr(s->member_name, out);
-#define XRT_STRUCT_SERIALIZE_MEMBER_POINTER(member_name, member_type, type, is_const, member_len, ...) \
-    serialize_ptr(s->member_name, member_len, out); // somehow member_len is getting collapsed into is_const
-#define XRT_STRUCT_SERIALIZE_MEMBER_ARRAY(member_name, member_type, type, array_len, ...) \
-    serialize_array(s->member_name, array_len, out);
-#define XRT_STRUCT_SERIALIZE_MEMBER_PLAIN(member_name, member_type, type, ...) \
-    serialize(&s->member_name, out);
-#define XRT_STRUCT_SERIALIZE_MEMBER(member_name, member_type, type, ...) \
-    XRT_STRUCT_SERIALIZE_MEMBER_##type(member_name, member_type, type, ##__VA_ARGS__)
+// Serializers
 
-#define XRT_STRUCT_SERIALIZER_CUSTOM(...) // no implementation for custom structs
-#define XRT_STRUCT_SERIALIZER_XR_CUSTOM(...)
-#define XRT_STRUCT_SERIALIZER_XR_HEADER(struct_name, ...) \
-    static void serialize(const struct_name* s, std::ostream& out) {\
-        serialize_xr(s, out);\
-    }
-#define XRT_STRUCT_SERIALIZER_XR(struct_name, ...) \
-    static void serialize(const struct_name* s, std::ostream& out) {\
-        XRT_ENUMERATE_##struct_name(XRT_STRUCT_SERIALIZE_MEMBER) \
-    }
-#define XRT_STRUCT_SERIALIZER_PLAIN(struct_name, ...) \
-    static void serialize(const struct_name* s, std::ostream& out) {\
-        XRT_ENUMERATE_##struct_name(XRT_STRUCT_SERIALIZE_MEMBER) \
-    }
-#define XRT_STRUCT_SERIALIZER(struct_name, struct_type, ...) \
-    XRT_STRUCT_SERIALIZER_##struct_type(struct_name, struct_type, ##__VA_ARGS__)
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
-XRT_STRUCT_LIST_ALL(XRT_STRUCT_SERIALIZER)
 
-// paste in custom implementations
-#include "serializer_custom.h"
+static void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->swapchain, out);
+
+            
+
+    serialize(&s->imageArrayIndex, out);
+
+            
+
+    serialize(&s->orientation, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->swapchain, out);
+
+            
+
+    serialize(&s->imageArrayIndex, out);
+
+            
+
+    serialize(&s->orientation, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
+
+
+static void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->applicationVM, 1, out);
+
+            
+
+    
+    serialize_ptr(s->applicationActivity, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->applicationVM, 1, out);
+
+            
+
+    
+    serialize_ptr(s->applicationActivity, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+
+
+static void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+
+
+static void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewFormatCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewFormats, s->viewFormatCount, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewFormatCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewFormats, s->viewFormatCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+
+
+static void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->domain, out);
+
+            
+
+    serialize(&s->subDomain, out);
+
+            
+
+    serialize(&s->fromLevel, out);
+
+            
+
+    serialize(&s->toLevel, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->domain, out);
+
+            
+
+    serialize(&s->subDomain, out);
+
+            
+
+    serialize(&s->fromLevel, out);
+
+            
+
+    serialize(&s->toLevel, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+
+
+static void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->centralAngle, out);
+
+            
+
+    serialize(&s->aspectRatio, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->centralAngle, out);
+
+            
+
+    serialize(&s->aspectRatio, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+
+
+static void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->scale, out);
+
+            
+
+    serialize(&s->bias, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->scale, out);
+
+            
+
+    serialize(&s->bias, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+
+
+static void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->objectType, out);
+
+            
+
+    serialize(&s->objectHandle, out);
+
+            
+
+    
+    serialize_ptr(s->objectName, count_null_terminated(s->objectName), out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->labelName, count_null_terminated(s->labelName), out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->messageId, count_null_terminated(s->messageId), out);
+
+            
+
+    
+    serialize_ptr(s->functionName, count_null_terminated(s->functionName), out);
+
+            
+
+    
+    serialize_ptr(s->message, count_null_terminated(s->message), out);
+
+            
+
+    serialize(&s->objectCount, out);
+
+            
+
+    
+    serialize_ptr(s->objects, s->objectCount, out);
+
+            
+
+    serialize(&s->sessionLabelCount, out);
+
+            
+
+    
+    serialize_ptr(s->sessionLabels, s->sessionLabelCount, out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->messageSeverities, out);
+
+            
+
+    serialize(&s->messageTypes, out);
+
+            
+
+    serialize(&s->userCallback, out);
+
+            
+
+    
+    serialize_ptr(s->userData, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->objectType, out);
+
+            
+
+    serialize(&s->objectHandle, out);
+
+            
+
+    
+    serialize_ptr(s->objectName, count_null_terminated(s->objectName), out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->messageId, count_null_terminated(s->messageId), out);
+
+            
+
+    
+    serialize_ptr(s->functionName, count_null_terminated(s->functionName), out);
+
+            
+
+    
+    serialize_ptr(s->message, count_null_terminated(s->message), out);
+
+            
+
+    serialize(&s->objectCount, out);
+
+            
+
+    
+    serialize_ptr(s->objects, s->objectCount, out);
+
+            
+
+    serialize(&s->sessionLabelCount, out);
+
+            
+
+    
+    serialize_ptr(s->sessionLabels, s->sessionLabelCount, out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->messageSeverities, out);
+
+            
+
+    serialize(&s->messageTypes, out);
+
+            
+
+    serialize(&s->userCallback, out);
+
+            
+
+    
+    serialize_ptr(s->userData, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->labelName, count_null_terminated(s->labelName), out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+
+
+static void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->hDC, out);
+
+            
+
+    serialize(&s->hGLRC, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->xDisplay, 1, out);
+
+            
+
+    serialize(&s->visualid, out);
+
+            
+
+    serialize(&s->glxFBConfig, out);
+
+            
+
+    serialize(&s->glxDrawable, out);
+
+            
+
+    serialize(&s->glxContext, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->connection, 1, out);
+
+            
+
+    serialize(&s->screenNumber, out);
+
+            
+
+    serialize(&s->fbconfigid, out);
+
+            
+
+    serialize(&s->visualid, out);
+
+            
+
+    serialize(&s->glxDrawable, out);
+
+            
+
+    serialize(&s->glxContext, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->display, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->hDC, out);
+
+            
+
+    serialize(&s->hGLRC, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->xDisplay, 1, out);
+
+            
+
+    serialize(&s->visualid, out);
+
+            
+
+    serialize(&s->glxFBConfig, out);
+
+            
+
+    serialize(&s->glxDrawable, out);
+
+            
+
+    serialize(&s->glxContext, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->connection, 1, out);
+
+            
+
+    serialize(&s->screenNumber, out);
+
+            
+
+    serialize(&s->fbconfigid, out);
+
+            
+
+    serialize(&s->visualid, out);
+
+            
+
+    serialize(&s->glxDrawable, out);
+
+            
+
+    serialize(&s->glxContext, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->display, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+
+
+static void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->display, out);
+
+            
+
+    serialize(&s->config, out);
+
+            
+
+    serialize(&s->context, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->display, out);
+
+            
+
+    serialize(&s->config, out);
+
+            
+
+    serialize(&s->context, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+
+
+static void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->instance, out);
+
+            
+
+    serialize(&s->physicalDevice, out);
+
+            
+
+    serialize(&s->device, out);
+
+            
+
+    serialize(&s->queueFamilyIndex, out);
+
+            
+
+    serialize(&s->queueIndex, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->instance, out);
+
+            
+
+    serialize(&s->physicalDevice, out);
+
+            
+
+    serialize(&s->device, out);
+
+            
+
+    serialize(&s->queueFamilyIndex, out);
+
+            
+
+    serialize(&s->queueIndex, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minApiVersionSupported, out);
+
+            
+
+    serialize(&s->maxApiVersionSupported, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+
+
+static void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->device, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->adapterLuid, out);
+
+            
+
+    serialize(&s->minFeatureLevel, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->device, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->adapterLuid, out);
+
+            
+
+    serialize(&s->minFeatureLevel, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+
+
+static void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->device, 1, out);
+
+            
+
+    
+    serialize_ptr(s->queue, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->adapterLuid, out);
+
+            
+
+    serialize(&s->minFeatureLevel, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->device, 1, out);
+
+            
+
+    
+    serialize_ptr(s->queue, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->adapterLuid, out);
+
+            
+
+    serialize(&s->minFeatureLevel, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+
+
+static void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->commandQueue, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->metalDevice, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->commandQueue, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->texture, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->metalDevice, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+
+
+static void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEyeGazeInteraction, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEyeGazeInteraction, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+
+
+static void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->viewIndex, out);
+
+}
+
+
+
+
+static void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->viewIndex, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
+
+
+static void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->sessionLayersPlacement, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->visible, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->sessionLayersPlacement, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->visible, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXTX_overlay
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+
+
+static void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorScale, out);
+
+            
+
+    serialize(&s->colorBias, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorScale, out);
+
+            
+
+    serialize(&s->colorBias, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+
+
+static void serialize(const XrSpatialAnchorCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+            
+
+    serialize(&s->poseInAnchorSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+
+
+static void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+
+
+static void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->srcFactorColor, out);
+
+            
+
+    serialize(&s->dstFactorColor, out);
+
+            
+
+    serialize(&s->srcFactorAlpha, out);
+
+            
+
+    serialize(&s->dstFactorAlpha, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->srcFactorColor, out);
+
+            
+
+    serialize(&s->dstFactorColor, out);
+
+            
+
+    serialize(&s->srcFactorAlpha, out);
+
+            
+
+    serialize(&s->dstFactorAlpha, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+#ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+
+
+static void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedNearZ, out);
+
+            
+
+    serialize(&s->minNearZ, out);
+
+            
+
+    serialize(&s->recommendedFarZ, out);
+
+            
+
+    serialize(&s->maxFarZ, out);
+
+}
+
+
+
+
+static void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedNearZ, out);
+
+            
+
+    serialize(&s->minNearZ, out);
+
+            
+
+    serialize(&s->recommendedFarZ, out);
+
+            
+
+    serialize(&s->maxFarZ, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
+
+
+static void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->getProcAddress, out);
+
+            
+
+    serialize(&s->display, out);
+
+            
+
+    serialize(&s->config, out);
+
+            
+
+    serialize(&s->context, out);
+
+}
+
+
+
+
+static void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->getProcAddress, out);
+
+            
+
+    serialize(&s->display, out);
+
+            
+
+    serialize(&s->config, out);
+
+            
+
+    serialize(&s->context, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+
+
+static void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeType, out);
+
+            
+
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
+
+            
+
+    serialize(&s->poseInNodeSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeType, out);
+
+            
+
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
+
+            
+
+    serialize(&s->poseInNodeSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+
+
+static void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsHandTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->hand, out);
+
+            
+
+    serialize(&s->handJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointLocationEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointVelocityEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->velocityFlags, out);
+
+            
+
+    serialize(&s->linearVelocity, out);
+
+            
+
+    serialize(&s->angularVelocity, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointVelocities, s->jointCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsHandTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->hand, out);
+
+            
+
+    serialize(&s->handJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointVelocities, s->jointCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+
+
+static void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsHandTrackingMesh, out);
+
+            
+
+    serialize(&s->maxHandMeshIndexCount, out);
+
+            
+
+    serialize(&s->maxHandMeshVertexCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+            
+
+    serialize(&s->poseInHandMeshSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->indexBufferChanged, out);
+
+            
+
+    serialize(&s->vertexBufferChanged, out);
+
+            
+
+    serialize(&s->indexBuffer, out);
+
+            
+
+    serialize(&s->vertexBuffer, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshIndexBufferMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->indexBufferKey, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshVertexBufferMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->vertexUpdateTime, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshVertexMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->position, out);
+
+            
+
+    serialize(&s->normal, out);
+
+}
+
+
+
+
+static void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsHandTrackingMesh, out);
+
+            
+
+    serialize(&s->maxHandMeshIndexCount, out);
+
+            
+
+    serialize(&s->maxHandMeshVertexCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+            
+
+    serialize(&s->poseInHandMeshSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+}
+
+
+
+
+static void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->indexBufferChanged, out);
+
+            
+
+    serialize(&s->vertexBufferChanged, out);
+
+            
+
+    serialize(&s->indexBuffer, out);
+
+            
+
+    serialize(&s->vertexBuffer, out);
+
+}
+
+
+
+
+static void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handPoseType, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+
+
+static void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->active, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->environmentBlendMode, out);
+
+            
+
+    serialize(&s->layerCount, out);
+
+            
+
+    #error "auto-generator doesn't support double pointers (s->layers)"
+    None
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->active, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationCount, out);
+
+            
+
+    
+    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->environmentBlendMode, out);
+
+            
+
+    serialize(&s->layerCount, out);
+
+            
+
+    #error "auto-generator doesn't support double pointers (s->layers)"
+    None
+}
+
+
+
+
+static void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+
+
+static void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+
+            
+
+    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeCapacityInput, out);
+
+            
+
+    serialize(&s->nodeCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodePose, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeCapacityInput, out);
+
+            
+
+    serialize(&s->nodeCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->nodeStates, s->nodeCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+
+            
+
+    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeCapacityInput, out);
+
+            
+
+    serialize(&s->nodeCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodePose, out);
+
+}
+
+
+
+
+static void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->nodeCapacityInput, out);
+
+            
+
+    serialize(&s->nodeCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->nodeStates, s->nodeCapacityInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+
+
+static void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedFov, out);
+
+            
+
+    serialize(&s->maxMutableFov, out);
+
+}
+
+
+
+
+static void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedFov, out);
+
+            
+
+    serialize(&s->maxMutableFov, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
+#ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+
+
+static void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->holographicSpace, 1, out);
+
+            
+
+    
+    serialize_ptr(s->coreWindow, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->holographicSpace, 1, out);
+
+            
+
+    
+    serialize_ptr(s->coreWindow, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+
+
+static void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->reprojectionMode, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->position, out);
+
+            
+
+    serialize(&s->normal, out);
+
+            
+
+    serialize(&s->velocity, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->reprojectionMode, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->position, out);
+
+            
+
+    serialize(&s->normal, out);
+
+            
+
+    serialize(&s->velocity, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+
+
+static void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+
+
+static void serialize(const XrSwapchainStateBaseHeaderFB* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+
+
+static void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+
+
+static void serialize(const XrBodyJointLocationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bodyJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonJointFB* s, std::ostream& out) {
+            
+
+    serialize(&s->joint, out);
+
+            
+
+    serialize(&s->parentJoint, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->joints, s->jointCount, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointCount, out);
+
+            
+
+    serialize(&s->skeletonChangedCount, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bodyJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointCount, out);
+
+            
+
+    serialize(&s->skeletonChangedCount, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->joints, s->jointCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
+
+
+static void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->binding, out);
+
+            
+
+    serialize(&s->actionSet, out);
+
+            
+
+    serialize(&s->forceThreshold, out);
+
+            
+
+    serialize(&s->forceThresholdReleased, out);
+
+            
+
+    serialize(&s->centerRegion, out);
+
+            
+
+    serialize(&s->wedgeAngle, out);
+
+            
+
+    serialize(&s->isSticky, out);
+
+            
+
+    
+    serialize_ptr(s->onHaptic, 1, out);
+
+            
+
+    
+    serialize_ptr(s->offHaptic, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->binding, out);
+
+            
+
+    serialize(&s->actionSet, out);
+
+            
+
+    serialize(&s->forceThreshold, out);
+
+            
+
+    serialize(&s->forceThresholdReleased, out);
+
+            
+
+    serialize(&s->centerRegion, out);
+
+            
+
+    serialize(&s->wedgeAngle, out);
+
+            
+
+    serialize(&s->isSticky, out);
+
+            
+
+    
+    serialize_ptr(s->onHaptic, 1, out);
+
+            
+
+    
+    serialize_ptr(s->offHaptic, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
+#ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+
+
+static void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->binding, out);
+
+            
+
+    serialize(&s->onThreshold, out);
+
+            
+
+    serialize(&s->offThreshold, out);
+
+            
+
+    
+    serialize_ptr(s->onHaptic, 1, out);
+
+            
+
+    
+    serialize_ptr(s->offHaptic, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->binding, out);
+
+            
+
+    serialize(&s->onThreshold, out);
+
+            
+
+    serialize(&s->offThreshold, out);
+
+            
+
+    
+    serialize_ptr(s->onHaptic, 1, out);
+
+            
+
+    
+    serialize_ptr(s->offHaptic, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+
+
+static void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handJointsMotionRange, out);
+
+}
+
+
+
+
+static void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->handJointsMotionRange, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+
+
+static void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
+
+
+static void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->applicationVM, 1, out);
+
+            
+
+    
+    serialize_ptr(s->applicationContext, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->applicationVM, 1, out);
+
+            
+
+    
+    serialize_ptr(s->applicationContext, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+
+
+static void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->pfnGetInstanceProcAddr, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanCreateInfo, 1, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanAllocator, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->pfnGetInstanceProcAddr, out);
+
+            
+
+    serialize(&s->vulkanPhysicalDevice, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanCreateInfo, 1, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanAllocator, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->vulkanInstance, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->pfnGetInstanceProcAddr, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanCreateInfo, 1, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanAllocator, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->pfnGetInstanceProcAddr, out);
+
+            
+
+    serialize(&s->vulkanPhysicalDevice, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanCreateInfo, 1, out);
+
+            
+
+    
+    serialize_ptr(s->vulkanAllocator, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->vulkanInstance, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+
+
+static void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->centralHorizontalAngle, out);
+
+            
+
+    serialize(&s->upperVerticalAngle, out);
+
+            
+
+    serialize(&s->lowerVerticalAngle, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->centralHorizontalAngle, out);
+
+            
+
+    serialize(&s->upperVerticalAngle, out);
+
+            
+
+    serialize(&s->lowerVerticalAngle, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+
+
+static void serialize(const XrUuidMSFT* s, std::ostream& out) {
+            
+
+    serialize_array(s->bytes, 16, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedFeatureCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, out);
+
+            
+
+    serialize(&s->consistency, out);
+
+            
+
+    serialize(&s->bounds, out);
+
+}
+
+
+
+
+static void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneSphereBoundMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->radius, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneOrientedBoxBoundMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->extents, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneFrustumBoundMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->farDistance, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneBoundsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->sphereCount, out);
+
+            
+
+    
+    serialize_ptr(s->spheres, s->sphereCount, out);
+
+            
+
+    serialize(&s->boxCount, out);
+
+            
+
+    
+    serialize_ptr(s->boxes, s->boxCount, out);
+
+            
+
+    serialize(&s->frustumCount, out);
+
+            
+
+    
+    serialize_ptr(s->frustums, s->frustumCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->componentType, out);
+
+            
+
+    serialize(&s->id, out);
+
+            
+
+    serialize(&s->parentId, out);
+
+            
+
+    serialize(&s->updateTime, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentCapacityInput, out);
+
+            
+
+    serialize(&s->componentCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->components, s->componentCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentLocationMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationCount, out);
+
+            
+
+    
+    serialize_ptr(s->locations, s->locationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->componentIdCount, out);
+
+            
+
+    
+    serialize_ptr(s->componentIds, s->componentIdCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObjectMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->objectType, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneObjectCount, out);
+
+            
+
+    
+    serialize_ptr(s->sceneObjects, s->sceneObjectCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->parentId, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->objectTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->objectTypes, s->objectTypeCount, out);
+
+}
+
+
+
+
+static void serialize(const XrScenePlaneMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->alignment, out);
+
+            
+
+    serialize(&s->size, out);
+
+            
+
+    serialize(&s->meshBufferId, out);
+
+            
+
+    serialize(&s->supportsIndicesUint16, out);
+
+}
+
+
+
+
+static void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->scenePlaneCount, out);
+
+            
+
+    
+    serialize_ptr(s->scenePlanes, s->scenePlaneCount, out);
+
+}
+
+
+
+
+static void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->alignmentCount, out);
+
+            
+
+    
+    serialize_ptr(s->alignments, s->alignmentCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->meshBufferId, out);
+
+            
+
+    serialize(&s->supportsIndicesUint16, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneMeshCount, out);
+
+            
+
+    
+    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->meshBufferId, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedFeatureCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, out);
+
+            
+
+    serialize(&s->consistency, out);
+
+            
+
+    serialize(&s->bounds, out);
+
+}
+
+
+
+
+static void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentCapacityInput, out);
+
+            
+
+    serialize(&s->componentCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->components, s->componentCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationCount, out);
+
+            
+
+    
+    serialize_ptr(s->locations, s->locationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->componentIdCount, out);
+
+            
+
+    
+    serialize_ptr(s->componentIds, s->componentIdCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneObjectCount, out);
+
+            
+
+    
+    serialize_ptr(s->sceneObjects, s->sceneObjectCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->parentId, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->objectTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->objectTypes, s->objectTypeCount, out);
+
+}
+
+
+
+
+static void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->scenePlaneCount, out);
+
+            
+
+    
+    serialize_ptr(s->scenePlanes, s->scenePlaneCount, out);
+
+}
+
+
+
+
+static void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->alignmentCount, out);
+
+            
+
+    
+    serialize_ptr(s->alignments, s->alignmentCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneMeshCount, out);
+
+            
+
+    
+    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->meshBufferId, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+
+
+static void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneFragmentId, out);
+
+}
+
+
+
+
+static void serialize(const XrDeserializeSceneFragmentMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fragmentCount, out);
+
+            
+
+    
+    serialize_ptr(s->fragments, s->fragmentCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneFragmentId, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fragmentCount, out);
+
+            
+
+    
+    serialize_ptr(s->fragments, s->fragmentCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+
+
+static void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fromDisplayRefreshRate, out);
+
+            
+
+    serialize(&s->toDisplayRefreshRate, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fromDisplayRefreshRate, out);
+
+            
+
+    serialize(&s->toDisplayRefreshRate, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+
+
+static void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->persistentPath, out);
+
+            
+
+    serialize(&s->rolePath, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->paths, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->persistentPath, out);
+
+            
+
+    serialize(&s->rolePath, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->paths, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+
+
+static void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportEyeFacialTracking, out);
+
+            
+
+    serialize(&s->supportLipFacialTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->sampleTime, out);
+
+            
+
+    serialize(&s->expressionCount, out);
+
+            
+
+    
+    serialize_ptr(s->expressionWeightings, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->facialTrackingType, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportEyeFacialTracking, out);
+
+            
+
+    serialize(&s->supportLipFacialTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->facialTrackingType, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->sampleTime, out);
+
+            
+
+    serialize(&s->expressionCount, out);
+
+            
+
+    
+    serialize_ptr(s->expressionWeightings, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+
+
+static void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+
+
+static void serialize(const XrVector4sFB* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+            
+
+    serialize(&s->z, out);
+
+            
+
+    serialize(&s->w, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCapacityInput, out);
+
+            
+
+    serialize(&s->jointCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->jointRadii, s->jointCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->jointParents, s->jointCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sensorOutput, out);
+
+            
+
+    serialize(&s->currentOutput, out);
+
+            
+
+    serialize(&s->overrideHandScale, out);
+
+            
+
+    serialize(&s->overrideValueInput, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCapacityInput, out);
+
+            
+
+    serialize(&s->jointCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->jointRadii, s->jointCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->jointParents, s->jointCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sensorOutput, out);
+
+            
+
+    serialize(&s->currentOutput, out);
+
+            
+
+    serialize(&s->overrideHandScale, out);
+
+            
+
+    serialize(&s->overrideValueInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+
+
+static void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->aimPose, out);
+
+            
+
+    serialize(&s->pinchStrengthIndex, out);
+
+            
+
+    serialize(&s->pinchStrengthMiddle, out);
+
+            
+
+    serialize(&s->pinchStrengthRing, out);
+
+            
+
+    serialize(&s->pinchStrengthLittle, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->aimPose, out);
+
+            
+
+    serialize(&s->pinchStrengthIndex, out);
+
+            
+
+    serialize(&s->pinchStrengthMiddle, out);
+
+            
+
+    serialize(&s->pinchStrengthRing, out);
+
+            
+
+    serialize(&s->pinchStrengthLittle, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+
+
+static void serialize(const XrHandCapsuleFB* s, std::ostream& out) {
+            
+
+    serialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, out);
+
+            
+
+    serialize(&s->radius, out);
+
+            
+
+    serialize(&s->joint, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+
+
+static void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntity, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+            
+
+    serialize(&s->timeout, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+            
+
+    serialize(&s->changePending, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntity, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+            
+
+    serialize(&s->timeout, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+            
+
+    serialize(&s->changePending, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+
+
+static void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->profile, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->profile, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
+
+
+static void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->level, out);
+
+            
+
+    serialize(&s->verticalOffset, out);
+
+            
+
+    serialize(&s->dynamic, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->level, out);
+
+            
+
+    serialize(&s->verticalOffset, out);
+
+            
+
+    serialize(&s->dynamic, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+
+
+static void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsKeyboardTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrKeyboardTrackingDescriptionFB* s, std::ostream& out) {
+            
+
+    serialize(&s->trackedKeyboardId, out);
+
+            
+
+    serialize(&s->size, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize_array(s->name, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->trackedKeyboardId, out);
+
+}
+
+
+
+
+static void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->trackedKeyboardId, out);
+
+}
+
+
+
+
+static void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsKeyboardTracking, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+
+
+static void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->windingOrder, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBuffer, 1, out);
+
+            
+
+    serialize(&s->triangleCount, out);
+
+            
+
+    
+    serialize_ptr(s->indexBuffer, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->windingOrder, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBuffer, 1, out);
+
+            
+
+    serialize(&s->triangleCount, out);
+
+            
+
+    
+    serialize_ptr(s->indexBuffer, 1, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+
+
+static void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsPassthrough, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->capabilities, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->passthrough, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->purpose, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->layerHandle, out);
+
+}
+
+
+
+
+static void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layer, out);
+
+            
+
+    serialize(&s->mesh, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->textureOpacityFactor, out);
+
+            
+
+    serialize(&s->edgeColor, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->brightness, out);
+
+            
+
+    serialize(&s->contrast, out);
+
+            
+
+    serialize(&s->saturation, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsPassthrough, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->passthrough, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->purpose, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->layerHandle, out);
+
+}
+
+
+
+
+static void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layer, out);
+
+            
+
+    serialize(&s->mesh, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->capabilities, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->textureOpacityFactor, out);
+
+            
+
+    serialize(&s->edgeColor, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->brightness, out);
+
+            
+
+    serialize(&s->contrast, out);
+
+            
+
+    serialize(&s->saturation, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+
+
+static void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->path, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vendorId, out);
+
+            
+
+    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+            
+
+    serialize(&s->modelVersion, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsRenderModelLoading, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->path, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vendorId, out);
+
+            
+
+    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+            
+
+    serialize(&s->modelVersion, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->modelKey, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsRenderModelLoading, out);
+
+}
+
+
+
+
+static void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
+
+
+static void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bindingModificationCount, out);
+
+            
+
+    #error "auto-generator doesn't support double pointers (s->bindingModifications)"
+    None
+}
+
+
+
+
+static void serialize(const XrBindingModificationBaseHeaderKHR* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bindingModificationCount, out);
+
+            
+
+    #error "auto-generator doesn't support double pointers (s->bindingModifications)"
+    None
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
+#ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+
+
+static void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->foveatedRenderingActive, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->foveatedRenderingActive, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFoveatedRendering, out);
+
+}
+
+
+
+
+static void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->foveatedRenderingActive, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->foveatedRenderingActive, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFoveatedRendering, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+#ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+
+
+static void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->depthTestRangeNearZ, out);
+
+            
+
+    serialize(&s->depthTestRangeFarZ, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->depthTestRangeNearZ, out);
+
+            
+
+    serialize(&s->depthTestRangeFarZ, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+
+
+static void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsMarkerTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerId, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->isPredicted, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerId, out);
+
+            
+
+    serialize(&s->poseInMarkerSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsMarkerTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerId, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->isPredicted, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerId, out);
+
+            
+
+    serialize(&s->poseInMarkerSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
+#ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
+
+
+static void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->focusDistance, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->focusDistance, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
+#ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
+
+
+static void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->dimmerValue, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->dimmerValue, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+
+
+static void serialize(const XrCoordinateSpaceCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->cfuid, out);
+
+            
+
+    serialize(&s->poseInCoordinateSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_compat
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+
+
+static void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsMarkerUnderstanding, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->profile, out);
+
+            
+
+    serialize(&s->markerType, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->arucoDict, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerLength, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->aprilTagDict, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fpsHint, out);
+
+            
+
+    serialize(&s->resolutionHint, out);
+
+            
+
+    serialize(&s->cameraHint, out);
+
+            
+
+    serialize(&s->cornerRefineMethod, out);
+
+            
+
+    serialize(&s->useEdgeRefinement, out);
+
+            
+
+    serialize(&s->fullAnalysisIntervalHint, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->state, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerDetector, out);
+
+            
+
+    serialize(&s->marker, out);
+
+            
+
+    serialize(&s->poseInMarkerSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsMarkerUnderstanding, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->profile, out);
+
+            
+
+    serialize(&s->markerType, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->arucoDict, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerLength, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->aprilTagDict, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fpsHint, out);
+
+            
+
+    serialize(&s->resolutionHint, out);
+
+            
+
+    serialize(&s->cameraHint, out);
+
+            
+
+    serialize(&s->cornerRefineMethod, out);
+
+            
+
+    serialize(&s->useEdgeRefinement, out);
+
+            
+
+    serialize(&s->fullAnalysisIntervalHint, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->state, out);
+
+}
+
+
+
+
+static void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerDetector, out);
+
+            
+
+    serialize(&s->marker, out);
+
+            
+
+    serialize(&s->poseInMarkerSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+
+
+static void serialize(const XrLocalizationMapML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, out);
+
+            
+
+    serialize(&s->mapUuid, out);
+
+            
+
+    serialize(&s->mapType, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->state, out);
+
+            
+
+    serialize(&s->map, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+            
+
+    serialize(&s->errorFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->mapUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->size, out);
+
+            
+
+    
+    serialize_ptr(s->data, s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationMapML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, out);
+
+            
+
+    serialize(&s->mapUuid, out);
+
+            
+
+    serialize(&s->mapType, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->state, out);
+
+            
+
+    serialize(&s->map, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+            
+
+    serialize(&s->errorFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->mapUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->size, out);
+
+            
+
+    
+    serialize_ptr(s->data, s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->poseInBaseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->poseInBaseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->confidence, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+
+
+static void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->radius, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->uuidCapacityInput, out);
+
+            
+
+    serialize(&s->uuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->storage, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchorCount, out);
+
+            
+
+    
+    serialize_ptr(s->anchors, s->anchorCount, out);
+
+            
+
+    serialize(&s->expiration, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+            
+
+    serialize(&s->expiration, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCompletionResultML* s, std::ostream& out) {
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->radius, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->uuidCapacityInput, out);
+
+            
+
+    serialize(&s->uuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->storage, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchorCount, out);
+
+            
+
+    
+    serialize_ptr(s->anchors, s->anchorCount, out);
+
+            
+
+    serialize(&s->expiration, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+            
+
+    serialize(&s->expiration, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCount, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+
+
+static void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+}
+
+
+
+
+static void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->status, out);
+
+}
+
+
+
+
+static void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+
+
+static void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, std::ostream& out) {
+            
+
+    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spatialAnchorPersistenceName, out);
+
+            
+
+    serialize(&s->spatialAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spatialAnchorStore, out);
+
+            
+
+    serialize(&s->spatialAnchorPersistenceName, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spatialAnchorPersistenceName, out);
+
+            
+
+    serialize(&s->spatialAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spatialAnchorStore, out);
+
+            
+
+    serialize(&s->spatialAnchorPersistenceName, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+
+
+static void serialize(const XrSceneMarkerMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->markerType, out);
+
+            
+
+    serialize(&s->lastSeenTime, out);
+
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneMarkerCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->markerTypes, s->markerTypeCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodeMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->symbolType, out);
+
+            
+
+    serialize(&s->version, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->qrCodeCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sceneMarkerCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->markerTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->markerTypes, s->markerTypeCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->qrCodeCapacityInput, out);
+
+            
+
+    
+    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+
+
+static void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->queryAction, out);
+
+            
+
+    serialize(&s->maxResultCount, out);
+
+            
+
+    serialize(&s->timeout, out);
+
+            
+
+    
+    serialize_ptr(s->filter, 1, out);
+
+            
+
+    
+    serialize_ptr(s->excludeFilter, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceQueryResultFB* s, std::ostream& out) {
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCapacityInput, out);
+
+            
+
+    serialize(&s->resultCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->queryAction, out);
+
+            
+
+    serialize(&s->maxResultCount, out);
+
+            
+
+    serialize(&s->timeout, out);
+
+            
+
+    
+    serialize_ptr(s->filter, 1, out);
+
+            
+
+    
+    serialize_ptr(s->excludeFilter, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->resultCapacityInput, out);
+
+            
+
+    serialize(&s->resultCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->results, s->resultCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+
+
+static void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->persistenceMode, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->persistenceMode, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+
+
+static void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->image, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+
+
+static void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+
+
+static void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minFilter, out);
+
+            
+
+    serialize(&s->magFilter, out);
+
+            
+
+    serialize(&s->wrapModeS, out);
+
+            
+
+    serialize(&s->wrapModeT, out);
+
+            
+
+    serialize(&s->swizzleRed, out);
+
+            
+
+    serialize(&s->swizzleGreen, out);
+
+            
+
+    serialize(&s->swizzleBlue, out);
+
+            
+
+    serialize(&s->swizzleAlpha, out);
+
+            
+
+    serialize(&s->maxAnisotropy, out);
+
+            
+
+    serialize(&s->borderColor, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minFilter, out);
+
+            
+
+    serialize(&s->magFilter, out);
+
+            
+
+    serialize(&s->wrapModeS, out);
+
+            
+
+    serialize(&s->wrapModeT, out);
+
+            
+
+    serialize(&s->swizzleRed, out);
+
+            
+
+    serialize(&s->swizzleGreen, out);
+
+            
+
+    serialize(&s->swizzleBlue, out);
+
+            
+
+    serialize(&s->swizzleAlpha, out);
+
+            
+
+    serialize(&s->maxAnisotropy, out);
+
+            
+
+    serialize(&s->borderColor, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+
+
+static void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minFilter, out);
+
+            
+
+    serialize(&s->magFilter, out);
+
+            
+
+    serialize(&s->mipmapMode, out);
+
+            
+
+    serialize(&s->wrapModeS, out);
+
+            
+
+    serialize(&s->wrapModeT, out);
+
+            
+
+    serialize(&s->swizzleRed, out);
+
+            
+
+    serialize(&s->swizzleGreen, out);
+
+            
+
+    serialize(&s->swizzleBlue, out);
+
+            
+
+    serialize(&s->swizzleAlpha, out);
+
+            
+
+    serialize(&s->maxAnisotropy, out);
+
+            
+
+    serialize(&s->borderColor, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->minFilter, out);
+
+            
+
+    serialize(&s->magFilter, out);
+
+            
+
+    serialize(&s->mipmapMode, out);
+
+            
+
+    serialize(&s->wrapModeS, out);
+
+            
+
+    serialize(&s->wrapModeT, out);
+
+            
+
+    serialize(&s->swizzleRed, out);
+
+            
+
+    serialize(&s->swizzleGreen, out);
+
+            
+
+    serialize(&s->swizzleBlue, out);
+
+            
+
+    serialize(&s->swizzleAlpha, out);
+
+            
+
+    serialize(&s->maxAnisotropy, out);
+
+            
+
+    serialize(&s->borderColor, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+
+
+static void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    serialize(&s->userCount, out);
+
+            
+
+    
+    serialize_ptr(s->users, s->userCount, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    serialize(&s->userCount, out);
+
+            
+
+    
+    serialize_ptr(s->users, s->userCount, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_space_warp
+
+
+static void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->motionVectorSubImage, out);
+
+            
+
+    serialize(&s->appSpaceDeltaPose, out);
+
+            
+
+    serialize(&s->depthSubImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectWidth, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->motionVectorSubImage, out);
+
+            
+
+    serialize(&s->appSpaceDeltaPose, out);
+
+            
+
+    serialize(&s->depthSubImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectWidth, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_space_warp
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+
+
+static void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->duration, out);
+
+            
+
+    serialize(&s->amplitudeCount, out);
+
+            
+
+    
+    serialize_ptr(s->amplitudes, s->amplitudeCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->duration, out);
+
+            
+
+    serialize(&s->amplitudeCount, out);
+
+            
+
+    
+    serialize_ptr(s->amplitudes, s->amplitudeCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+
+
+static void serialize(const XrOffset3DfFB* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+            
+
+    serialize(&s->z, out);
+
+}
+
+
+
+
+static void serialize(const XrRect3DfFB* s, std::ostream& out) {
+            
+
+    serialize(&s->offset, out);
+
+            
+
+    serialize(&s->extent, out);
+
+}
+
+
+
+
+static void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->floorUuid, out);
+
+            
+
+    serialize(&s->ceilingUuid, out);
+
+            
+
+    serialize(&s->wallUuidCapacityInput, out);
+
+            
+
+    serialize(&s->wallUuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrBoundary2DFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    
+    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), out);
+
+}
+
+
+
+
+static void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->floorUuid, out);
+
+            
+
+    serialize(&s->ceilingUuid, out);
+
+            
+
+    serialize(&s->wallUuidCapacityInput, out);
+
+            
+
+    serialize(&s->wallUuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrBoundary2DFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    
+    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+
+
+static void serialize(const XrDigitalLensControlALMALENCE* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+
+
+static void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestByteCount, out);
+
+            
+
+    
+    serialize_ptr(s->request, s->requestByteCount, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestByteCount, out);
+
+            
+
+    
+    serialize_ptr(s->request, s->requestByteCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+
+
+static void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCapacityInput, out);
+
+            
+
+    serialize(&s->uuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCapacityInput, out);
+
+            
+
+    serialize(&s->uuidCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+
+
+static void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFoveationEyeTracked, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFoveationEyeTracked, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+
+
+static void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFaceTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->faceExpressionSet, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionStatusFB* s, std::ostream& out) {
+            
+
+    serialize(&s->isValid, out);
+
+            
+
+    serialize(&s->isEyeFollowingBlendshapesValid, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->weightCount, out);
+
+            
+
+    
+    serialize_ptr(s->weights, s->weightCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidences, s->confidenceCount, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFaceTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->faceExpressionSet, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->weightCount, out);
+
+            
+
+    
+    serialize_ptr(s->weights, s->weightCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidences, s->confidenceCount, out);
+
+            
+
+    serialize(&s->status, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+
+
+static void serialize(const XrEyeGazeFB* s, std::ostream& out) {
+            
+
+    serialize(&s->isValid, out);
+
+            
+
+    serialize(&s->gazePose, out);
+
+            
+
+    serialize(&s->gazeConfidence, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEyeTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrEyeGazesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEyeTracking, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+
+
+static void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->leftHandIntensity, out);
+
+            
+
+    serialize(&s->rightHandIntensity, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->leftHandIntensity, out);
+
+            
+
+    serialize(&s->rightHandIntensity, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+
+
+static void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+
+
+static void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+            
+
+    serialize(&s->sampleRate, out);
+
+            
+
+    serialize(&s->append, out);
+
+            
+
+    
+    serialize_ptr(s->samplesConsumed, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sampleRate, out);
+
+}
+
+
+
+
+static void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+            
+
+    serialize(&s->sampleRate, out);
+
+            
+
+    serialize(&s->append, out);
+
+            
+
+    
+    serialize_ptr(s->samplesConsumed, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sampleRate, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+
+
+static void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->motionVectorSubImage, out);
+
+            
+
+    serialize(&s->motionVectorScale, out);
+
+            
+
+    serialize(&s->motionVectorOffset, out);
+
+            
+
+    serialize(&s->appSpaceDeltaPose, out);
+
+            
+
+    serialize(&s->depthSubImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectWidth, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->motionVectorSubImage, out);
+
+            
+
+    serialize(&s->motionVectorScale, out);
+
+            
+
+    serialize(&s->motionVectorOffset, out);
+
+            
+
+    serialize(&s->appSpaceDeltaPose, out);
+
+            
+
+    serialize(&s->depthSubImage, out);
+
+            
+
+    serialize(&s->minDepth, out);
+
+            
+
+    serialize(&s->maxDepth, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectWidth, out);
+
+            
+
+    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+
+
+static void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->depthMask, out);
+
+            
+
+    serialize(&s->compareOp, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->depthMask, out);
+
+            
+
+    serialize(&s->compareOp, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_META_local_dimming
+
+
+static void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->localDimmingMode, out);
+
+}
+
+
+
+
+static void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->localDimmingMode, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_local_dimming
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+
+
+static void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+
+
+static void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsVirtualKeyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationType, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationType, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->visible, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->animationIndex, out);
+
+            
+
+    serialize(&s->fraction, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->stateCapacityInput, out);
+
+            
+
+    serialize(&s->stateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->states, s->stateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->textureWidth, out);
+
+            
+
+    serialize(&s->textureHeight, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->inputSource, out);
+
+            
+
+    serialize(&s->inputSpace, out);
+
+            
+
+    serialize(&s->inputPoseInSpace, out);
+
+            
+
+    serialize(&s->inputState, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->textContext, count_null_terminated(s->textContext), out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+            
+
+    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsVirtualKeyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationType, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationType, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->visible, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->animationIndex, out);
+
+            
+
+    serialize(&s->fraction, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->stateCapacityInput, out);
+
+            
+
+    serialize(&s->stateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->states, s->stateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->textureWidth, out);
+
+            
+
+    serialize(&s->textureHeight, out);
+
+            
+
+    serialize(&s->bufferCapacityInput, out);
+
+            
+
+    serialize(&s->bufferCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->inputSource, out);
+
+            
+
+    serialize(&s->inputSpace, out);
+
+            
+
+    serialize(&s->inputPoseInSpace, out);
+
+            
+
+    serialize(&s->inputState, out);
+
+}
+
+
+
+
+static void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->textContext, count_null_terminated(s->textContext), out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+            
+
+    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->keyboard, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+
+
+static void serialize(const XrExternalCameraIntrinsicsOCULUS* s, std::ostream& out) {
+            
+
+    serialize(&s->lastChangeTime, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->virtualNearPlaneDistance, out);
+
+            
+
+    serialize(&s->virtualFarPlaneDistance, out);
+
+            
+
+    serialize(&s->imageSensorPixelResolution, out);
+
+}
+
+
+
+
+static void serialize(const XrExternalCameraExtrinsicsOCULUS* s, std::ostream& out) {
+            
+
+    serialize(&s->lastChangeTime, out);
+
+            
+
+    serialize(&s->cameraStatusFlags, out);
+
+            
+
+    serialize(&s->attachedToDevice, out);
+
+            
+
+    serialize(&s->relativePose, out);
+
+}
+
+
+
+
+static void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, out);
+
+            
+
+    serialize(&s->intrinsics, out);
+
+            
+
+    serialize(&s->extrinsics, out);
+
+}
+
+
+
+
+static void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, out);
+
+            
+
+    serialize(&s->intrinsics, out);
+
+            
+
+    serialize(&s->extrinsics, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+
+
+static void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->additionalCreateFlags, out);
+
+            
+
+    serialize(&s->additionalUsageFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->additionalCreateFlags, out);
+
+            
+
+    serialize(&s->additionalUsageFlags, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+
+
+static void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->counterFlags, out);
+
+            
+
+    serialize(&s->counterUnit, out);
+
+            
+
+    serialize(&s->uintValue, out);
+
+            
+
+    serialize(&s->floatValue, out);
+
+}
+
+
+
+
+static void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->counterFlags, out);
+
+            
+
+    serialize(&s->counterUnit, out);
+
+            
+
+    serialize(&s->uintValue, out);
+
+            
+
+    serialize(&s->floatValue, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+
+
+static void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+
+
+static void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->userId, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->userId, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_META_headset_id
+
+
+static void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->id, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->id, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_headset_id
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+
+
+static void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedImageDimensions, out);
+
+            
+
+    serialize(&s->isValid, out);
+
+}
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->layer, 1, out);
+
+            
+
+    serialize(&s->predictedDisplayTime, out);
+
+}
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedImageDimensions, out);
+
+            
+
+    serialize(&s->isValid, out);
+
+}
+
+
+
+
+static void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    
+    serialize_ptr(s->layer, 1, out);
+
+            
+
+    serialize(&s->predictedDisplayTime, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+
+
+static void serialize(const XrPassthroughColorLutDataMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->channels, out);
+
+            
+
+    serialize(&s->resolution, out);
+
+            
+
+    serialize(&s->data, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->data, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorLut, out);
+
+            
+
+    serialize(&s->weight, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sourceColorLut, out);
+
+            
+
+    serialize(&s->targetColorLut, out);
+
+            
+
+    serialize(&s->weight, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->maxColorLutResolution, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->maxColorLutResolution, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->channels, out);
+
+            
+
+    serialize(&s->resolution, out);
+
+            
+
+    serialize(&s->data, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->data, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->colorLut, out);
+
+            
+
+    serialize(&s->weight, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sourceColorLut, out);
+
+            
+
+    serialize(&s->targetColorLut, out);
+
+            
+
+    serialize(&s->weight, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+
+
+static void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+
+
+static void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFullBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFullBodyTracking, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+
+
+static void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layer, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layer, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+
+
+static void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsVisualFaceTracking, out);
+
+            
+
+    serialize(&s->supportsAudioFaceTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->faceExpressionSet, out);
+
+            
+
+    serialize(&s->requestedDataSourceCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->weightCount, out);
+
+            
+
+    
+    serialize_ptr(s->weights, s->weightCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidences, s->confidenceCount, out);
+
+            
+
+    serialize(&s->isValid, out);
+
+            
+
+    serialize(&s->isEyeFollowingBlendshapesValid, out);
+
+            
+
+    serialize(&s->dataSource, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsVisualFaceTracking, out);
+
+            
+
+    serialize(&s->supportsAudioFaceTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->faceExpressionSet, out);
+
+            
+
+    serialize(&s->requestedDataSourceCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->weightCount, out);
+
+            
+
+    
+    serialize_ptr(s->weights, s->weightCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidences, s->confidenceCount, out);
+
+            
+
+    serialize(&s->isValid, out);
+
+            
+
+    serialize(&s->isEyeFollowingBlendshapesValid, out);
+
+            
+
+    serialize(&s->dataSource, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+
+
+static void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntitySharing, out);
+
+}
+
+
+
+
+static void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->recipientInfo, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntitySharing, out);
+
+}
+
+
+
+
+static void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->recipientInfo, 1, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+
+
+static void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->displayTime, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->swapchainIndex, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+            
+
+    serialize_array(s->views, 2, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEnvironmentDepth, out);
+
+            
+
+    serialize(&s->supportsHandRemoval, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->displayTime, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->swapchainIndex, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+            
+
+    serialize_array(s->views, 2, out);
+
+}
+
+
+
+
+static void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->enabled, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsEnvironmentDepth, out);
+
+            
+
+    serialize(&s->supportsHandRemoval, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+
+
+static void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->form, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->alpha, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCount, out);
+
+            
+
+    serialize(&s->indexCount, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCount, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->passthrough, out);
+
+            
+
+    serialize(&s->color, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->form, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->alpha, out);
+
+}
+
+
+
+
+static void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCount, out);
+
+            
+
+    serialize(&s->indexCount, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCount, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->scale, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->passthrough, out);
+
+            
+
+    serialize(&s->color, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+
+
+static void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->mode, out);
+
+            
+
+    serialize(&s->subImageCount, out);
+
+            
+
+    
+    serialize_ptr(s->subImages, s->subImageCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationConfigurationHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->level, out);
+
+            
+
+    serialize(&s->clearFovDegree, out);
+
+            
+
+    serialize(&s->focalCenterOffset, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->dynamicFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->configCount, out);
+
+            
+
+    
+    serialize_ptr(s->configs, s->configCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->mode, out);
+
+            
+
+    serialize(&s->subImageCount, out);
+
+            
+
+    
+    serialize_ptr(s->subImages, s->subImageCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->dynamicFlags, out);
+
+}
+
+
+
+
+static void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->configCount, out);
+
+            
+
+    
+    serialize_ptr(s->configs, s->configCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+
+
+static void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->name, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorNameHTC* s, std::ostream& out) {
+            
+
+    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->poseInSpace, out);
+
+            
+
+    serialize(&s->name, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bodyJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->combinedLocationFlags, out);
+
+            
+
+    serialize(&s->confidenceLevel, out);
+
+            
+
+    serialize(&s->jointLocationCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+
+            
+
+    serialize(&s->skeletonGenerationId, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->joints, s->jointCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bodyJointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->combinedLocationFlags, out);
+
+            
+
+    serialize(&s->confidenceLevel, out);
+
+            
+
+    serialize(&s->jointLocationCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+
+            
+
+    serialize(&s->skeletonGenerationId, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointCount, out);
+
+            
+
+    
+    serialize_ptr(s->joints, s->jointCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+
+
+static void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->actionSetPriorityCount, out);
+
+            
+
+    
+    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, out);
+
+}
+
+
+
+
+static void serialize(const XrActiveActionSetPriorityEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->actionSet, out);
+
+            
+
+    serialize(&s->priorityOverride, out);
+
+}
+
+
+
+
+static void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->actionSetPriorityCount, out);
+
+            
+
+    
+    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+
+
+static void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsForceFeedbackCurl, out);
+
+}
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationCount, out);
+
+            
+
+    
+    serialize_ptr(s->locations, s->locationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->value, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsForceFeedbackCurl, out);
+
+}
+
+
+
+
+static void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationCount, out);
+
+            
+
+    
+    serialize_ptr(s->locations, s->locationCount, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->allJointPosesTracked, out);
+
+            
+
+    serialize(&s->jointLocationCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationBD* s, std::ostream& out) {
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->jointSet, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->allJointPosesTracked, out);
+
+            
+
+    serialize(&s->jointLocationCount, out);
+
+            
+
+    
+    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsBodyTracking, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+
+
+static void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialSensing, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->labelCapacityInput, out);
+
+            
+
+    serialize(&s->labelCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->labels, s->labelCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->boundingBox2D, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->boundingBox3D, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->providerType, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->provider, out);
+
+            
+
+    serialize(&s->newState, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->provider, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->snapshot, out);
+
+}
+
+
+
+
+static void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->stateCapacityInput, out);
+
+            
+
+    serialize(&s->stateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->states, s->stateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+            
+
+    serialize(&s->lastUpdateTime, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->labelCount, out);
+
+            
+
+    
+    serialize_ptr(s->labels, s->labelCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->snapshot, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+}
+
+
+
+
+static void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+            
+
+    serialize(&s->poseInAnchorSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialSensing, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+            
+
+    serialize(&s->componentType, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->labelCapacityInput, out);
+
+            
+
+    serialize(&s->labelCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->labels, s->labelCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->boundingBox2D, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->boundingBox3D, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCapacityInput, out);
+
+            
+
+    serialize(&s->indexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->indices, s->indexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->providerType, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->provider, out);
+
+            
+
+    serialize(&s->newState, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->provider, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->snapshot, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuidCount, out);
+
+            
+
+    
+    serialize_ptr(s->uuids, s->uuidCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->labelCount, out);
+
+            
+
+    
+    serialize_ptr(s->labels, s->labelCount, out);
+
+}
+
+
+
+
+static void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->stateCapacityInput, out);
+
+            
+
+    serialize(&s->stateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->states, s->stateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+            
+
+    serialize(&s->lastUpdateTime, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->snapshot, out);
+
+            
+
+    serialize(&s->entityId, out);
+
+}
+
+
+
+
+static void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+            
+
+    serialize(&s->poseInAnchorSpace, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
+
+
+static void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialAnchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->location, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+
+
+static void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialAnchorSharing, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialAnchorSharing, out);
+
+}
+
+
+
+
+static void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->anchor, out);
+
+}
+
+
+
+
+static void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
+
+
+static void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialScene, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialScene, out);
+
+}
+
+
+
+
+static void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
+
+
+static void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialMesh, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->configFlags, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialMesh, out);
+
+}
+
+
+
+
+static void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->configFlags, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
+#ifdef XRTRANSPORT_EXT_XR_BD_future_progress
+
+
+static void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isSupported, out);
+
+            
+
+    serialize(&s->progressPercentage, out);
+
+}
+
+
+
+
+static void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isSupported, out);
+
+            
+
+    serialize(&s->progressPercentage, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_BD_future_progress
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+
+
+static void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedDataSourceCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->dataSource, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedDataSourceCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+            
+
+    serialize(&s->dataSource, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+#ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+
+
+static void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportedFeatures, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->orientationCount, out);
+
+            
+
+    
+    serialize_ptr(s->orientations, s->orientationCount, out);
+
+            
+
+    serialize(&s->semanticTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->semanticTypes, s->semanticTypeCount, out);
+
+            
+
+    serialize(&s->maxPlanes, out);
+
+            
+
+    serialize(&s->minArea, out);
+
+            
+
+    serialize(&s->boundingBoxPose, out);
+
+            
+
+    serialize(&s->boundingBoxExtent, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->planeId, out);
+
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->extents, out);
+
+            
+
+    serialize(&s->orientation, out);
+
+            
+
+    serialize(&s->semanticType, out);
+
+            
+
+    serialize(&s->polygonBufferCount, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->planeLocationCapacityInput, out);
+
+            
+
+    serialize(&s->planeLocationCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->orientationCount, out);
+
+            
+
+    
+    serialize_ptr(s->orientations, s->orientationCount, out);
+
+            
+
+    serialize(&s->semanticTypeCount, out);
+
+            
+
+    
+    serialize_ptr(s->semanticTypes, s->semanticTypeCount, out);
+
+            
+
+    serialize(&s->maxPlanes, out);
+
+            
+
+    serialize(&s->minArea, out);
+
+            
+
+    serialize(&s->boundingBoxPose, out);
+
+            
+
+    serialize(&s->boundingBoxExtent, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->planeLocationCapacityInput, out);
+
+            
+
+    serialize(&s->planeLocationCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->planeId, out);
+
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->extents, out);
+
+            
+
+    serialize(&s->orientation, out);
+
+            
+
+    serialize(&s->semanticType, out);
+
+            
+
+    serialize(&s->polygonBufferCount, out);
+
+}
+
+
+
+
+static void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->vertexCapacityInput, out);
+
+            
+
+    serialize(&s->vertexCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportedFeatures, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+
+
+static void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->future, out);
+
+}
+
+
+
+
+static void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->future, out);
+
+}
+
+
+
+
+static void serialize(const XrFutureCompletionBaseHeaderEXT* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->state, out);
+
+}
+
+
+
+
+static void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->future, out);
+
+}
+
+
+
+
+static void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->future, out);
+
+}
+
+
+
+
+static void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+}
+
+
+
+
+static void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->state, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
+
+
+static void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->isUserPresent, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsUserPresence, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->isUserPresent, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsUserPresence, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_EXT_user_presence
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+
+
+static void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->suppressNotifications, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->suppressNotifications, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+
+
+static void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->meshBoundingBoxCenter, out);
+
+            
+
+    serialize(&s->meshBoundingBoxExtents, out);
+
+            
+
+    serialize(&s->lastUpdateTime, out);
+
+            
+
+    serialize(&s->status, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->boundingBoxCenter, out);
+
+            
+
+    serialize(&s->boundingBoxExtents, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->timestamp, out);
+
+            
+
+    serialize(&s->meshBlockStateCapacityInput, out);
+
+            
+
+    serialize(&s->meshBlockStateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->maxBlockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->fillHoleLength, out);
+
+            
+
+    serialize(&s->disconnectedComponentArea, out);
+
+            
+
+    serialize(&s->blockCount, out);
+
+            
+
+    
+    serialize_ptr(s->blocks, s->blockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->blockResult, out);
+
+            
+
+    serialize(&s->lod, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->indexCount, out);
+
+            
+
+    
+    serialize_ptr(s->indexBuffer, s->indexCount, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBuffer, s->vertexCount, out);
+
+            
+
+    serialize(&s->normalCount, out);
+
+            
+
+    
+    serialize_ptr(s->normalBuffer, s->normalCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidenceBuffer, s->confidenceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->meshSpace, out);
+
+            
+
+    serialize(&s->meshSpaceLocateTime, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->blockCount, out);
+
+            
+
+    
+    serialize_ptr(s->blocks, s->blockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->boundingBoxCenter, out);
+
+            
+
+    serialize(&s->boundingBoxExtents, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->meshBoundingBoxCenter, out);
+
+            
+
+    serialize(&s->meshBoundingBoxExtents, out);
+
+            
+
+    serialize(&s->lastUpdateTime, out);
+
+            
+
+    serialize(&s->status, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->timestamp, out);
+
+            
+
+    serialize(&s->meshBlockStateCapacityInput, out);
+
+            
+
+    serialize(&s->meshBlockStateCountOutput, out);
+
+            
+
+    
+    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->maxBlockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->lod, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->fillHoleLength, out);
+
+            
+
+    serialize(&s->disconnectedComponentArea, out);
+
+            
+
+    serialize(&s->blockCount, out);
+
+            
+
+    
+    serialize_ptr(s->blocks, s->blockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->blockResult, out);
+
+            
+
+    serialize(&s->lod, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->indexCount, out);
+
+            
+
+    
+    serialize_ptr(s->indexBuffer, s->indexCount, out);
+
+            
+
+    serialize(&s->vertexCount, out);
+
+            
+
+    
+    serialize_ptr(s->vertexBuffer, s->vertexCount, out);
+
+            
+
+    serialize(&s->normalCount, out);
+
+            
+
+    
+    serialize_ptr(s->normalBuffer, s->normalCount, out);
+
+            
+
+    serialize(&s->confidenceCount, out);
+
+            
+
+    
+    serialize_ptr(s->confidenceBuffer, s->confidenceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->futureResult, out);
+
+            
+
+    serialize(&s->blockCount, out);
+
+            
+
+    
+    serialize_ptr(s->blocks, s->blockCount, out);
+
+}
+
+
+
+
+static void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->meshSpace, out);
+
+            
+
+    serialize(&s->meshSpaceLocateTime, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
+
+
+static void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFacialExpression, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedFacialBlendShape, out);
+
+            
+
+    serialize(&s->weight, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsFacialExpression, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedCount, out);
+
+            
+
+    
+    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestedFacialBlendShape, out);
+
+            
+
+    serialize(&s->weight, out);
+
+            
+
+    serialize(&s->flags, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_ML_facial_expression
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+
+
+static void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSimultaneousHandsAndControllers, out);
+
+}
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSimultaneousHandsAndControllers, out);
+
+}
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+
+
+static void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->advertisementRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->advertisementUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->advertisementRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->advertisementUuid, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsColocationDiscovery, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    
+    serialize_ptr(s->buffer, s->bufferSize, out);
+
+}
+
+
+
+
+static void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->advertisementRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->advertisementUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->advertisementRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->advertisementUuid, out);
+
+            
+
+    serialize(&s->bufferSize, out);
+
+            
+
+    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->discoveryRequestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsColocationDiscovery, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+
+static void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntityGroupSharing, out);
+
+}
+
+
+
+
+static void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->groupCount, out);
+
+            
+
+    
+    serialize_ptr(s->groups, s->groupCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->groupUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->groupCount, out);
+
+            
+
+    
+    serialize_ptr(s->groups, s->groupCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->groupUuid, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->supportsSpatialEntityGroupSharing, out);
+
+}
+
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+
+
+static void serialize(const XrActionCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->actionName, XR_MAX_ACTION_NAME_SIZE, out);
+
+            
+
+    serialize(&s->actionType, out);
+
+            
+
+    serialize(&s->countSubactionPaths, out);
+
+            
+
+    
+    serialize_ptr(s->subactionPaths, s->countSubactionPaths, out);
+
+            
+
+    serialize_array(s->localizedActionName, XR_MAX_LOCALIZED_ACTION_NAME_SIZE, out);
+
+}
+
+
+
+
+static void serialize(const XrActionSetCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->actionSetName, XR_MAX_ACTION_SET_NAME_SIZE, out);
+
+            
+
+    serialize_array(s->localizedActionSetName, XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE, out);
+
+            
+
+    serialize(&s->priority, out);
+
+}
+
+
+
+
+static void serialize(const XrActionSpaceCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->subactionPath, out);
+
+            
+
+    serialize(&s->poseInActionSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrActionStateBoolean* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->currentState, out);
+
+            
+
+    serialize(&s->changedSinceLastSync, out);
+
+            
+
+    serialize(&s->lastChangeTime, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+}
+
+
+
+
+static void serialize(const XrActionStateFloat* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->currentState, out);
+
+            
+
+    serialize(&s->changedSinceLastSync, out);
+
+            
+
+    serialize(&s->lastChangeTime, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+}
+
+
+
+
+static void serialize(const XrActionStateGetInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->subactionPath, out);
+
+}
+
+
+
+
+static void serialize(const XrActionStatePose* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+}
+
+
+
+
+static void serialize(const XrActionStateVector2f* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->currentState, out);
+
+            
+
+    serialize(&s->changedSinceLastSync, out);
+
+            
+
+    serialize(&s->lastChangeTime, out);
+
+            
+
+    serialize(&s->isActive, out);
+
+}
+
+
+
+
+static void serialize(const XrActionSuggestedBinding* s, std::ostream& out) {
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->binding, out);
+
+}
+
+
+
+
+static void serialize(const XrActionsSyncInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->countActiveActionSets, out);
+
+            
+
+    
+    serialize_ptr(s->activeActionSets, s->countActiveActionSets, out);
+
+}
+
+
+
+
+static void serialize(const XrActiveActionSet* s, std::ostream& out) {
+            
+
+    serialize(&s->actionSet, out);
+
+            
+
+    serialize(&s->subactionPath, out);
+
+}
+
+
+
+
+static void serialize(const XrApiLayerProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->layerName, XR_MAX_API_LAYER_NAME_SIZE, out);
+
+            
+
+    serialize(&s->specVersion, out);
+
+            
+
+    serialize(&s->layerVersion, out);
+
+            
+
+    serialize_array(s->description, XR_MAX_API_LAYER_DESCRIPTION_SIZE, out);
+
+}
+
+
+
+
+static void serialize(const XrApplicationInfo* s, std::ostream& out) {
+            
+
+    serialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, out);
+
+            
+
+    serialize(&s->applicationVersion, out);
+
+            
+
+    serialize_array(s->engineName, XR_MAX_ENGINE_NAME_SIZE, out);
+
+            
+
+    serialize(&s->engineVersion, out);
+
+            
+
+    serialize(&s->apiVersion, out);
+
+}
+
+
+
+
+static void serialize(const XrBodySkeletonJointHTC* s, std::ostream& out) {
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrBoundSourcesForActionEnumerateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+}
+
+
+
+
+static void serialize(const XrBoxf* s, std::ostream& out) {
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->extents, out);
+
+}
+
+
+
+
+static void serialize(const XrColor3f* s, std::ostream& out) {
+            
+
+    serialize(&s->r, out);
+
+            
+
+    serialize(&s->g, out);
+
+            
+
+    serialize(&s->b, out);
+
+}
+
+
+
+
+static void serialize(const XrColor4f* s, std::ostream& out) {
+            
+
+    serialize(&s->r, out);
+
+            
+
+    serialize(&s->g, out);
+
+            
+
+    serialize(&s->b, out);
+
+            
+
+    serialize(&s->a, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerBaseHeader* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrCompositionLayerProjection* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->viewCount, out);
+
+            
+
+    
+    serialize_ptr(s->views, s->viewCount, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerProjectionView* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+}
+
+
+
+
+static void serialize(const XrCompositionLayerQuad* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->layerFlags, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->eyeVisibility, out);
+
+            
+
+    serialize(&s->subImage, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->size, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataBaseHeader* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrEventDataBuffer* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->varying, 4000, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataEventsLost* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->lostEventCount, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataInstanceLossPending* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->lossTime, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataInteractionProfileChanged* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataReferenceSpaceChangePending* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->referenceSpaceType, out);
+
+            
+
+    serialize(&s->changeTime, out);
+
+            
+
+    serialize(&s->poseValid, out);
+
+            
+
+    serialize(&s->poseInPreviousSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrEventDataSessionStateChanged* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->session, out);
+
+            
+
+    serialize(&s->state, out);
+
+            
+
+    serialize(&s->time, out);
+
+}
+
+
+
+
+static void serialize(const XrExtensionProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize_array(s->extensionName, XR_MAX_EXTENSION_NAME_SIZE, out);
+
+            
+
+    serialize(&s->extensionVersion, out);
+
+}
+
+
+
+
+static void serialize(const XrExtent2Df* s, std::ostream& out) {
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrExtent2Di* s, std::ostream& out) {
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+}
+
+
+
+
+static void serialize(const XrExtent3Df* s, std::ostream& out) {
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+            
+
+    serialize(&s->depth, out);
+
+}
+
+
+
+
+static void serialize(const XrFovf* s, std::ostream& out) {
+            
+
+    serialize(&s->angleLeft, out);
+
+            
+
+    serialize(&s->angleRight, out);
+
+            
+
+    serialize(&s->angleUp, out);
+
+            
+
+    serialize(&s->angleDown, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameBeginInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+
+
+static void serialize(const XrFrameState* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->predictedDisplayTime, out);
+
+            
+
+    serialize(&s->predictedDisplayPeriod, out);
+
+            
+
+    serialize(&s->shouldRender, out);
+
+}
+
+
+
+
+static void serialize(const XrFrameWaitInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrFrustumf* s, std::ostream& out) {
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->fov, out);
+
+            
+
+    serialize(&s->nearZ, out);
+
+            
+
+    serialize(&s->farZ, out);
+
+}
+
+
+
+
+static void serialize(const XrHapticActionInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->action, out);
+
+            
+
+    serialize(&s->subactionPath, out);
+
+}
+
+
+
+
+static void serialize(const XrHapticBaseHeader* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrHapticVibration* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->duration, out);
+
+            
+
+    serialize(&s->frequency, out);
+
+            
+
+    serialize(&s->amplitude, out);
+
+}
+
+
+
+
+static void serialize(const XrInputSourceLocalizedNameGetInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->sourcePath, out);
+
+            
+
+    serialize(&s->whichComponents, out);
+
+}
+
+
+
+
+
+
+static void serialize(const XrInstanceProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->runtimeVersion, out);
+
+            
+
+    serialize_array(s->runtimeName, XR_MAX_RUNTIME_NAME_SIZE, out);
+
+}
+
+
+
+
+static void serialize(const XrInteractionProfileState* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->interactionProfile, out);
+
+}
+
+
+
+
+static void serialize(const XrInteractionProfileSuggestedBinding* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->interactionProfile, out);
+
+            
+
+    serialize(&s->countSuggestedBindings, out);
+
+            
+
+    
+    serialize_ptr(s->suggestedBindings, s->countSuggestedBindings, out);
+
+}
+
+
+
+
+static void serialize(const XrOffset2Df* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+}
+
+
+
+
+static void serialize(const XrOffset2Di* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+}
+
+
+
+
+static void serialize(const XrPosef* s, std::ostream& out) {
+            
+
+    serialize(&s->orientation, out);
+
+            
+
+    serialize(&s->position, out);
+
+}
+
+
+
+
+static void serialize(const XrQuaternionf* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+            
+
+    serialize(&s->z, out);
+
+            
+
+    serialize(&s->w, out);
+
+}
+
+
+
+
+static void serialize(const XrRect2Df* s, std::ostream& out) {
+            
+
+    serialize(&s->offset, out);
+
+            
+
+    serialize(&s->extent, out);
+
+}
+
+
+
+
+static void serialize(const XrRect2Di* s, std::ostream& out) {
+            
+
+    serialize(&s->offset, out);
+
+            
+
+    serialize(&s->extent, out);
+
+}
+
+
+
+
+static void serialize(const XrReferenceSpaceCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->referenceSpaceType, out);
+
+            
+
+    serialize(&s->poseInReferenceSpace, out);
+
+}
+
+
+
+
+static void serialize(const XrSessionActionSetsAttachInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->countActionSets, out);
+
+            
+
+    
+    serialize_ptr(s->actionSets, s->countActionSets, out);
+
+}
+
+
+
+
+static void serialize(const XrSessionBeginInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->primaryViewConfigurationType, out);
+
+}
+
+
+
+
+static void serialize(const XrSessionCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceLocation* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceLocationData* s, std::ostream& out) {
+            
+
+    serialize(&s->locationFlags, out);
+
+            
+
+    serialize(&s->pose, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceLocations* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->locationCount, out);
+
+            
+
+    
+    serialize_ptr(s->locations, s->locationCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceVelocities* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->velocityCount, out);
+
+            
+
+    
+    serialize_ptr(s->velocities, s->velocityCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceVelocity* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->velocityFlags, out);
+
+            
+
+    serialize(&s->linearVelocity, out);
+
+            
+
+    serialize(&s->angularVelocity, out);
+
+}
+
+
+
+
+static void serialize(const XrSpaceVelocityData* s, std::ostream& out) {
+            
+
+    serialize(&s->velocityFlags, out);
+
+            
+
+    serialize(&s->linearVelocity, out);
+
+            
+
+    serialize(&s->angularVelocity, out);
+
+}
+
+
+
+
+static void serialize(const XrSpacesLocateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->baseSpace, out);
+
+            
+
+    serialize(&s->time, out);
+
+            
+
+    serialize(&s->spaceCount, out);
+
+            
+
+    
+    serialize_ptr(s->spaces, s->spaceCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSpheref* s, std::ostream& out) {
+            
+
+    serialize(&s->center, out);
+
+            
+
+    serialize(&s->radius, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainCreateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->createFlags, out);
+
+            
+
+    serialize(&s->usageFlags, out);
+
+            
+
+    serialize(&s->format, out);
+
+            
+
+    serialize(&s->sampleCount, out);
+
+            
+
+    serialize(&s->width, out);
+
+            
+
+    serialize(&s->height, out);
+
+            
+
+    serialize(&s->faceCount, out);
+
+            
+
+    serialize(&s->arraySize, out);
+
+            
+
+    serialize(&s->mipCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageAcquireInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageBaseHeader* s, std::ostream& out) {
+        serialize_xr(s, out);
+}
+
+
+
+
+static void serialize(const XrSwapchainImageReleaseInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainImageWaitInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->timeout, out);
+
+}
+
+
+
+
+static void serialize(const XrSwapchainSubImage* s, std::ostream& out) {
+            
+
+    serialize(&s->swapchain, out);
+
+            
+
+    serialize(&s->imageRect, out);
+
+            
+
+    serialize(&s->imageArrayIndex, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemGetInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->formFactor, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemGraphicsProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->maxSwapchainImageHeight, out);
+
+            
+
+    serialize(&s->maxSwapchainImageWidth, out);
+
+            
+
+    serialize(&s->maxLayerCount, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->systemId, out);
+
+            
+
+    serialize(&s->vendorId, out);
+
+            
+
+    serialize_array(s->systemName, XR_MAX_SYSTEM_NAME_SIZE, out);
+
+            
+
+    serialize(&s->graphicsProperties, out);
+
+            
+
+    serialize(&s->trackingProperties, out);
+
+}
+
+
+
+
+static void serialize(const XrSystemTrackingProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->orientationTracking, out);
+
+            
+
+    serialize(&s->positionTracking, out);
+
+}
+
+
+
+
+static void serialize(const XrUuid* s, std::ostream& out) {
+            
+
+    serialize_array(s->data, XR_UUID_SIZE, out);
+
+}
+
+
+
+
+static void serialize(const XrVector2f* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+}
+
+
+
+
+static void serialize(const XrVector3f* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+            
+
+    serialize(&s->z, out);
+
+}
+
+
+
+
+static void serialize(const XrVector4f* s, std::ostream& out) {
+            
+
+    serialize(&s->x, out);
+
+            
+
+    serialize(&s->y, out);
+
+            
+
+    serialize(&s->z, out);
+
+            
+
+    serialize(&s->w, out);
+
+}
+
+
+
+
+static void serialize(const XrView* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->pose, out);
+
+            
+
+    serialize(&s->fov, out);
+
+}
+
+
+
+
+static void serialize(const XrViewConfigurationProperties* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->fovMutable, out);
+
+}
+
+
+
+
+static void serialize(const XrViewConfigurationView* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->recommendedImageRectWidth, out);
+
+            
+
+    serialize(&s->maxImageRectWidth, out);
+
+            
+
+    serialize(&s->recommendedImageRectHeight, out);
+
+            
+
+    serialize(&s->maxImageRectHeight, out);
+
+            
+
+    serialize(&s->recommendedSwapchainSampleCount, out);
+
+            
+
+    serialize(&s->maxSwapchainSampleCount, out);
+
+}
+
+
+
+
+static void serialize(const XrViewLocateInfo* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewConfigurationType, out);
+
+            
+
+    serialize(&s->displayTime, out);
+
+            
+
+    serialize(&s->space, out);
+
+}
+
+
+
+
+static void serialize(const XrViewState* s, std::ostream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->viewStateFlags, out);
+
+}
+
+
+
+
+// Custom implementations
+#include "custom/serializer.h"
 
 } // namespace xrtransport
 
-#endif // XRT_SERIALIZER_H
+#endif // XRTRANSPORT_SERIALIZER_GENERATED_H
