@@ -18,8 +18,12 @@
 #define XRTRANSPORT_DESERIALIZER_GENERATED_H
 
 #include "openxr/openxr.h"
+#include "xrtransport/asio_compat.h"
 
-#include <iostream>
+#define ASIO_STANDALONE
+#include "asio/read.hpp"
+#include "asio/write.hpp"
+
 #include <cstdint>
 #include <unordered_map>
 #include <cassert>
@@ -36,60 +40,60 @@ namespace xrtransport {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
 
-void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerCubeKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerCubeKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
 
 
-void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrInstanceCreateInfoAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrInstanceCreateInfoAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 
 
-void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 
 
-void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 
 
-void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPerfSettingsEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPerfSettingsEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
@@ -98,366 +102,366 @@ void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in, bool in_place 
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 
 
-void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerCylinderKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerCylinderKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 
 
-void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerEquirectKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerEquirectKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 
 
-void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsObjectNameInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsLabelEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsObjectNameInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDebugUtilsLabelEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 
 
-void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageOpenGLKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsOpenGLKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageOpenGLKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsOpenGLKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 
 
-void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageOpenGLESKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageOpenGLESKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 
 
-void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsVulkanKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 
 
-void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsD3D11KHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 
 
-void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsD3D12KHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 
 
-void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsRequirementsMetalKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 
 
-void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazeSampleTimeEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazeSampleTimeEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 
 
-void deserialize(XrVisibilityMaskKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVisibilityMaskKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVisibilityMaskChangedKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVisibilityMaskKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVisibilityMaskKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVisibilityMaskChangedKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
 
 
-void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in, bool in_place = false);
+void deserialize(XrSessionCreateInfoOverlayEXTX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in, bool in_place = false);
+void deserialize(XrSessionCreateInfoOverlayEXTX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXTX_overlay
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 
 
-void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerColorScaleBiasKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerColorScaleBiasKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
@@ -468,48 +472,48 @@ void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in, bool 
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 
 
-void deserialize(XrSpatialAnchorCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 
 
-void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerImageLayoutFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerImageLayoutFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 
 
-void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerAlphaBlendFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerAlphaBlendFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 
 
-void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationDepthRangeEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationDepthRangeEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
@@ -518,297 +522,297 @@ void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in, bool in_
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
 
 
-void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingEGLMNDX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrGraphicsBindingEGLMNDX* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 
 
-void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 
 
-void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHandTrackingPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackerCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointsLocateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointLocationEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointLocationEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointVelocityEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointVelocityEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointLocationsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointLocationsEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointVelocitiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHandTrackingPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackerCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointsLocateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointLocationsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointLocationsEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointVelocitiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 
 
-void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshUpdateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshIndexBufferMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshIndexBufferMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshVertexBufferMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshVertexBufferMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshVertexMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshVertexMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandPoseTypeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshUpdateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandMeshMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandMeshMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandPoseTypeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 
 
-void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 
 
-void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelKeyStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelNodePropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelNodeStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelKeyStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelNodePropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelPropertiesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelNodeStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrControllerModelStateMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrControllerModelStateMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
@@ -817,1041 +821,1041 @@ void deserialize(XrControllerModelStateMSFT* s, std::istream& in, bool in_place 
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 
 
-void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationViewFovEPIC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationViewFovEPIC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 
 
-void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHolographicWindowAttachmentMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHolographicWindowAttachmentMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 
 
-void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 
 
-void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 
 
-void deserialize(XrSwapchainStateBaseHeaderFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateBaseHeaderFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 
 
-void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSecureContentFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSecureContentFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 
 
-void deserialize(XrBodyJointLocationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonJointFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonJointFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
 
 
-void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileDpadBindingEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileDpadBindingEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 
 
-void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 
 
-void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointsMotionRangeInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandJointsMotionRangeInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 
 
-void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
 
 
-void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrLoaderInitInfoAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrLoaderInitInfoAndroidKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 
 
-void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanInstanceCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanDeviceCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanInstanceCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanDeviceCreateInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 
 
-void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerEquirect2KHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerEquirect2KHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 
 
-void deserialize(XrUuidMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrUuidMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObserverCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrNewSceneComputeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrVisualMeshComputeLodInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneSphereBoundMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneSphereBoundMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneOrientedBoxBoundMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneOrientedBoxBoundMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneFrustumBoundMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneFrustumBoundMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneBoundsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneBoundsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentLocationMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentLocationMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentLocationsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsLocateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObjectMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObjectMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObjectsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObjectsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentParentFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrScenePlaneMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrScenePlaneMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrScenePlanesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrScenePlanesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshBuffersMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshVertexBufferMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshIndicesUint32MSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshIndicesUint16MSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObserverCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrNewSceneComputeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrVisualMeshComputeLodInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentLocationsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentsLocateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObjectsMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObjectsMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneComponentParentFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrScenePlanesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrScenePlanesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshBuffersMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshVertexBufferMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshIndicesUint32MSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMeshIndicesUint16MSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 
 
-void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDeserializeSceneFragmentMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrDeserializeSceneFragmentMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneDeserializeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneDeserializeInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 
 
-void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 
 
-void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in, bool in_place = false);
+void deserialize(XrViveTrackerPathsHTCX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataViveTrackerConnectedHTCX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in, bool in_place = false);
+void deserialize(XrViveTrackerPathsHTCX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataViveTrackerConnectedHTCX* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 
 
-void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFacialTrackingPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionsHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionsHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialTrackerCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFacialTrackingPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialTrackerCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionsHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionsHTC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 
 
-void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemColorSpacePropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemColorSpacePropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 
 
-void deserialize(XrVector4sFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrVector4sFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingMeshFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingMeshFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingScaleFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingScaleFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingMeshFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingMeshFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingScaleFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingScaleFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 
 
-void deserialize(XrHandTrackingAimStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingAimStateFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingAimStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingAimStateFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 
 
-void deserialize(XrHandCapsuleFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandCapsuleFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingCapsulesStateFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingCapsulesStateFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 
 
-void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntityPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentStatusSetInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentStatusFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentStatusFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntityPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentStatusSetInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentStatusFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentStatusFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 
 
-void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationProfileCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainCreateInfoFoveationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateFoveationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationProfileCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainCreateInfoFoveationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateFoveationFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
 
 
-void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationLevelProfileCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationLevelProfileCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 
 
-void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrKeyboardTrackingDescriptionFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrKeyboardTrackingDescriptionFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrKeyboardSpaceCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrKeyboardTrackingQueryFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrKeyboardSpaceCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrKeyboardTrackingQueryFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 
 
-void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrTriangleMeshCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrTriangleMeshCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 
 
-void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughProperties2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughLayerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerPassthroughFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrGeometryInstanceCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrGeometryInstanceTransformFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughStyleFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughStyleFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapMonoToMonoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPassthroughStateChangedFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughLayerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerPassthroughFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrGeometryInstanceCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrGeometryInstanceTransformFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughProperties2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughStyleFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughStyleFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapMonoToMonoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPassthroughStateChangedFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 
 
-void deserialize(XrRenderModelPathInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelPathInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelBufferFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelBufferFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelLoadInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemRenderModelPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelCapabilitiesRequestFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelPathInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelPathInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelBufferFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelBufferFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelLoadInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemRenderModelPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRenderModelCapabilitiesRequestFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
 
 
-void deserialize(XrBindingModificationsKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrBindingModificationsKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBindingModificationBaseHeaderKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrBindingModificationBaseHeaderKHR* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBindingModificationsKHR* s, std::istream& in, bool in_place = false);
+void deserialize(XrBindingModificationsKHR* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 
 
-void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewLocateFoveatedRenderingVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveatedViewConfigurationViewVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewLocateFoveatedRenderingVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveatedViewConfigurationViewVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 
 
-void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthTestVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthTestVARJO* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
@@ -1860,32 +1864,32 @@ void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in, bool in_
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
 
-void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerSpaceCreateInfoVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerSpaceCreateInfoVARJO* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
@@ -1894,460 +1898,460 @@ void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in, bool in_plac
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
 
 
-void deserialize(XrFrameEndInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameEndInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameEndInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameEndInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
 
 
-void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrGlobalDimmerFrameEndInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrGlobalDimmerFrameEndInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 
 
-void deserialize(XrCoordinateSpaceCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrCoordinateSpaceCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 
 
-void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorArucoInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorSizeInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorAprilTagInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorCustomProfileInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorSnapshotInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorStateML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerSpaceCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorArucoInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorSizeInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorAprilTagInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorCustomProfileInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorSnapshotInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerDetectorStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerDetectorStateML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMarkerSpaceCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 
 
-void deserialize(XrLocalizationMapML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationMapML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataLocalizationChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationMapQueryInfoBaseHeaderML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationMapQueryInfoBaseHeaderML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMapLocalizationRequestInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationMapImportInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationEnableEventsInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationMapML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationMapML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataLocalizationChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrMapLocalizationRequestInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationMapImportInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalizationEnableEventsInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 
 
-void deserialize(XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateInfoBaseHeaderML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrCreateSpatialAnchorsCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorStateML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrCreateSpatialAnchorsCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorStateML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 
 
-void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsQueryInfoBaseHeaderML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsQueryCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCompletionResultML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCompletionResultML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsQueryCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 
 
-void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataHeadsetFitChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataEyeCalibrationChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrUserCalibrationEnableEventsInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataHeadsetFitChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataEyeCalibrationChangedML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrUserCalibrationEnableEventsInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 
 
-void deserialize(XrSpatialAnchorPersistenceNameMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorPersistenceNameMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 
 
-void deserialize(XrSceneMarkerMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkersMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkersMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerTypeFilterMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkerQRCodeMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerQRCodeMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerQRCodesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkersMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkersMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerTypeFilterMSFT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneMarkerQRCodesMSFT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
@@ -2356,129 +2360,129 @@ void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in, bool in_place = 
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 
 
-void deserialize(XrSpaceQueryInfoBaseHeaderFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryInfoBaseHeaderFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceFilterInfoBaseHeaderFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceFilterInfoBaseHeaderFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceQueryInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceStorageLocationFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceUuidFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceQueryResultFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryResultFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceQueryResultsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryResultsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceQueryCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceQueryInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceQueryResultsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceQueryResultsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceStorageLocationFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceUuidFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceComponentFilterInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceQueryCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 
 
-void deserialize(XrSpaceSaveInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceSaveInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceEraseInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceEraseInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceSaveCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceEraseCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceSaveInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceSaveInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceEraseInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceEraseInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceSaveCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceEraseCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
@@ -2487,967 +2491,967 @@ void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in, bool in_p
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 
 
-void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageFoveationVulkanFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageFoveationVulkanFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 
 
-void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 
 
-void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 
 
-void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateSamplerVulkanFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainStateSamplerVulkanFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 
 
-void deserialize(XrSpaceShareInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceShareInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceShareCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceShareInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceShareInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceShareCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
 
 
-void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpaceWarpPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpaceWarpPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_space_warp
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 
 
-void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 
 
-void deserialize(XrOffset3DfFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrOffset3DfFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRect3DfFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRect3DfFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSemanticLabelsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSemanticLabelsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRoomLayoutFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRoomLayoutFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBoundary2DFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBoundary2DFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSemanticLabelsSupportInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSemanticLabelsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSemanticLabelsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRoomLayoutFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrRoomLayoutFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBoundary2DFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrBoundary2DFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSemanticLabelsSupportInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 
 
-void deserialize(XrDigitalLensControlALMALENCE* s, std::istream& in, bool in_place = false);
+void deserialize(XrDigitalLensControlALMALENCE* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 
 
-void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSceneCaptureCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCaptureRequestInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSceneCaptureCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCaptureRequestInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 
 
-void deserialize(XrSpaceContainerFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceContainerFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceContainerFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceContainerFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 
 
-void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationEyeTrackedStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationEyeTrackedStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 
 
-void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFaceTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionStatusFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionStatusFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionWeightsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFaceTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionWeightsFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 
 
-void deserialize(XrEyeGazeFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazeFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazesInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazesInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEyeTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeTrackerCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazesInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazesInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEyeGazesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEyeGazesFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEyeTrackingPropertiesFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 
 
-void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 
 
-void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSettingsFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerSettingsFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 
 
-void deserialize(XrHapticPcmVibrationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticPcmVibrationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrDevicePcmSampleRateStateFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHapticPcmVibrationFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticPcmVibrationFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrDevicePcmSampleRateStateFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 
 
-void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameSynthesisInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameSynthesisConfigViewEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameSynthesisInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameSynthesisConfigViewEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 
 
-void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthTestFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerDepthTestFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
 
 
-void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalDimmingFrameEndInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrLocalDimmingFrameEndInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_local_dimming
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 
 
-void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughPreferencesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughPreferencesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 
 
-void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardLocationInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardAnimationStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardTextureDataMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardInputInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardShownMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardLocationInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardAnimationStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardTextureDataMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardInputInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardShownMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 
 
-void deserialize(XrExternalCameraIntrinsicsOCULUS* s, std::istream& in, bool in_place = false);
+void deserialize(XrExternalCameraIntrinsicsOCULUS* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExternalCameraExtrinsicsOCULUS* s, std::istream& in, bool in_place = false);
+void deserialize(XrExternalCameraExtrinsicsOCULUS* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExternalCameraOCULUS* s, std::istream& in, bool in_place = false);
+void deserialize(XrExternalCameraOCULUS* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExternalCameraOCULUS* s, std::istream& in, bool in_place = false);
+void deserialize(XrExternalCameraOCULUS* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 
 
-void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanSwapchainCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrVulkanSwapchainCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 
 
-void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPerformanceMetricsStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPerformanceMetricsCounterMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPerformanceMetricsStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPerformanceMetricsCounterMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 
 
-void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceListSaveInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceListSaveCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceListSaveInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSpaceListSaveCompleteFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 
 
-void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceUserCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceUserCreateInfoFB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
 
 
-void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHeadsetIdPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemHeadsetIdPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_headset_id
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 
 
-void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrRecommendedLayerResolutionMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrRecommendedLayerResolutionMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 
 
-void deserialize(XrPassthroughColorLutDataMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorLutDataMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorLutCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapLutMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorLutCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapLutMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 
 
-void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceTriangleMeshMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceTriangleMeshMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 
 
-void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 
 
-void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPassthroughLayerResumedMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataPassthroughLayerResumedMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 
 
-void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFaceTrackingProperties2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceTrackerCreateInfo2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionInfo2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionWeights2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFaceTrackingProperties2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceTrackerCreateInfo2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionInfo2FB* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in, bool in_place = false);
+void deserialize(XrFaceExpressionWeights2FB* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 
 
-void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrShareSpacesRecipientBaseHeaderMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrShareSpacesRecipientBaseHeaderMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrShareSpacesInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrShareSpacesInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataShareSpacesCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrShareSpacesInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrShareSpacesInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataShareSpacesCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 
 
-void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageViewMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageViewMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthImageMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
@@ -3456,1567 +3460,1567 @@ void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in, bo
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 
 
-void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughMeshTransformInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerPassthroughHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughColorHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughColorHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrPassthroughMeshTransformInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerPassthroughHTC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 
 
-void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationApplyInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationConfigurationHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationConfigurationHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationDynamicModeInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationCustomModeInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationApplyInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationDynamicModeInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrFoveationCustomModeInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 
 
-void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemAnchorPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorNameHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorNameHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemAnchorPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 
 
-void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonHTC* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 
 
-void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrActiveActionSetPrioritiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActiveActionSetPriorityEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrActiveActionSetPriorityEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrActiveActionSetPrioritiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 
 
-void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrForceFeedbackCurlApplyLocationMNDX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in, bool in_place = false);
+void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 
 
-void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyTrackerCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointsLocateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodyJointLocationsBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodyJointLocationsBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemBodyTrackingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 
 
-void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialSensingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBaseHeaderBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataBaseHeaderBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityLocationGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataLocationBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataSemanticBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataPolygonBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderStartInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSenseDataUpdatedBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataQueryInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataQueryCompletionBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrQueriedSenseDataGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrQueriedSenseDataBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrQueriedSenseDataBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityStateBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityStateBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataFilterUuidBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataFilterSemanticBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrAnchorSpaceCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialSensingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityLocationGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataLocationBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataSemanticBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataPolygonBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderStartInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSenseDataUpdatedBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataQueryInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataQueryCompletionBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataFilterUuidBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataFilterSemanticBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrQueriedSenseDataGetInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrQueriedSenseDataBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrQueriedSenseDataBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityStateBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityStateBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrAnchorSpaceCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 
 
-void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialAnchorPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateCompletionBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorPersistInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorUnpersistInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialAnchorPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorCreateCompletionBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorPersistInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorUnpersistInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 
 
-void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorShareInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpatialAnchorShareInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 
 
-void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialScenePropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCaptureInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCaptureInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialScenePropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSceneCaptureInfoBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSceneCaptureInfoBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
 
 
-void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialMeshPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialMeshPropertiesBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
 
 
-void deserialize(XrFuturePollResultProgressBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollResultProgressBD* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFuturePollResultProgressBD* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollResultProgressBD* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_future_progress
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 
 
-void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingDataSourceInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingDataSourceStateEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingDataSourceInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrHandTrackingDataSourceStateEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 
 
-void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorBeginInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorGetInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorLocationEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorLocationsEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorPolygonBufferEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorCreateInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorBeginInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorGetInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorLocationsEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorLocationEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrPlaneDetectorPolygonBufferEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 
 
-void deserialize(XrFutureCancelInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFutureCancelInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFuturePollInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFutureCompletionBaseHeaderEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFutureCompletionBaseHeaderEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFutureCompletionEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFutureCompletionEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFuturePollResultEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollResultEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFutureCancelInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFutureCancelInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFuturePollInfoEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollInfoEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFutureCompletionEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFutureCompletionEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFuturePollResultEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrFuturePollResultEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
 
 
-void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataUserPresenceChangedEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemUserPresencePropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataUserPresenceChangedEXT* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemUserPresencePropertiesEXT* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_user_presence
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 
 
-void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemNotificationsSetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemNotificationsSetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 
 
-void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshDetectorCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockStateML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshStateRequestInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshStateRequestCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferSizeML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockRequestML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshGetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshGetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshRequestCompletionInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshRequestCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshDetectorCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshStateRequestInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockStateML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockStateML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshStateRequestCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferSizeML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBufferML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBufferML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockRequestML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshGetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshGetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshBlockML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshBlockML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshRequestCompletionML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrWorldMeshRequestCompletionInfoML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 
 
-void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFacialExpressionPropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionClientCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionBlendShapePropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemFacialExpressionPropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionClientCreateInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in, bool in_place = false);
+void deserialize(XrFacialExpressionBlendShapePropertiesML* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 
 
-void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 
 
-void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationDiscoveryStartInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationDiscoveryStopInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationAdvertisementStartInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationAdvertisementStopInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationDiscoveryResultMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationDiscoveryStartInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationDiscoveryStopInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationAdvertisementStartInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrColocationAdvertisementStopInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationDiscoveryResultMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrShareSpacesRecipientGroupsMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrShareSpacesRecipientGroupsMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, ReadStream& in, bool in_place = false);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void deserialize(XrActionCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionSetCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionSetCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionSpaceCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionSpaceCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionStateBoolean* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionStateBoolean* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionStateFloat* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionStateFloat* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionStateGetInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionStateGetInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionStatePose* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionStatePose* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionStateVector2f* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionStateVector2f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionSuggestedBinding* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionSuggestedBinding* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActionsSyncInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrActionsSyncInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrActiveActionSet* s, std::istream& in, bool in_place = false);
+void deserialize(XrActiveActionSet* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrApiLayerProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrApiLayerProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrApplicationInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrApplicationInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBodySkeletonJointHTC* s, std::istream& in, bool in_place = false);
+void deserialize(XrBodySkeletonJointHTC* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBoundSourcesForActionEnumerateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrBoundSourcesForActionEnumerateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrBoxf* s, std::istream& in, bool in_place = false);
+void deserialize(XrBoxf* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColor3f* s, std::istream& in, bool in_place = false);
+void deserialize(XrColor3f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrColor4f* s, std::istream& in, bool in_place = false);
+void deserialize(XrColor4f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerBaseHeader* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerBaseHeader* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerProjection* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerProjection* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerProjectionView* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerProjectionView* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrCompositionLayerQuad* s, std::istream& in, bool in_place = false);
+void deserialize(XrCompositionLayerQuad* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataBaseHeader* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataBaseHeader* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataBuffer* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataBuffer* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataEventsLost* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataEventsLost* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataInstanceLossPending* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataInstanceLossPending* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataInteractionProfileChanged* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataInteractionProfileChanged* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataReferenceSpaceChangePending* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataReferenceSpaceChangePending* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrEventDataSessionStateChanged* s, std::istream& in, bool in_place = false);
+void deserialize(XrEventDataSessionStateChanged* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExtensionProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrExtensionProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExtent2Df* s, std::istream& in, bool in_place = false);
+void deserialize(XrExtent2Df* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExtent2Di* s, std::istream& in, bool in_place = false);
+void deserialize(XrExtent2Di* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrExtent3Df* s, std::istream& in, bool in_place = false);
+void deserialize(XrExtent3Df* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFovf* s, std::istream& in, bool in_place = false);
+void deserialize(XrFovf* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameBeginInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameBeginInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameEndInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameEndInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameState* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameState* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrameWaitInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrameWaitInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrFrustumf* s, std::istream& in, bool in_place = false);
+void deserialize(XrFrustumf* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHapticActionInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticActionInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHapticBaseHeader* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticBaseHeader* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrHapticVibration* s, std::istream& in, bool in_place = false);
+void deserialize(XrHapticVibration* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInputSourceLocalizedNameGetInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrInputSourceLocalizedNameGetInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInstanceCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrInstanceCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInstanceProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrInstanceProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInteractionProfileState* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileState* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrInteractionProfileSuggestedBinding* s, std::istream& in, bool in_place = false);
+void deserialize(XrInteractionProfileSuggestedBinding* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrOffset2Df* s, std::istream& in, bool in_place = false);
+void deserialize(XrOffset2Df* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrOffset2Di* s, std::istream& in, bool in_place = false);
+void deserialize(XrOffset2Di* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrPosef* s, std::istream& in, bool in_place = false);
+void deserialize(XrPosef* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrQuaternionf* s, std::istream& in, bool in_place = false);
+void deserialize(XrQuaternionf* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRect2Df* s, std::istream& in, bool in_place = false);
+void deserialize(XrRect2Df* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrRect2Di* s, std::istream& in, bool in_place = false);
+void deserialize(XrRect2Di* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrReferenceSpaceCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrReferenceSpaceCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSessionActionSetsAttachInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSessionActionSetsAttachInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSessionBeginInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSessionBeginInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSessionCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSessionCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceLocation* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceLocation* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceLocationData* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceLocationData* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceLocations* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceLocations* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceVelocities* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceVelocities* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceVelocity* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceVelocity* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpaceVelocityData* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpaceVelocityData* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpacesLocateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpacesLocateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSpheref* s, std::istream& in, bool in_place = false);
+void deserialize(XrSpheref* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainCreateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainCreateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageAcquireInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageAcquireInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageBaseHeader* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageBaseHeader* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageReleaseInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageReleaseInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainImageWaitInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainImageWaitInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSwapchainSubImage* s, std::istream& in, bool in_place = false);
+void deserialize(XrSwapchainSubImage* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemGetInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemGetInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemGraphicsProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemGraphicsProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrSystemTrackingProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrSystemTrackingProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrUuid* s, std::istream& in, bool in_place = false);
+void deserialize(XrUuid* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVector2f* s, std::istream& in, bool in_place = false);
+void deserialize(XrVector2f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVector3f* s, std::istream& in, bool in_place = false);
+void deserialize(XrVector3f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrVector4f* s, std::istream& in, bool in_place = false);
+void deserialize(XrVector4f* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrView* s, std::istream& in, bool in_place = false);
+void deserialize(XrView* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewConfigurationProperties* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationProperties* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewConfigurationView* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewConfigurationView* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewLocateInfo* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewLocateInfo* s, ReadStream& in, bool in_place = false);
 
 
 
 
-void deserialize(XrViewState* s, std::istream& in, bool in_place = false);
+void deserialize(XrViewState* s, ReadStream& in, bool in_place = false);
 
 
 
@@ -10017,8 +10021,8 @@ void cleanup(const XrViewState* s);
 
 // Struct deserializer lookup
 // Only to be used with OpenXR pNext structs
-using StructDeserializer = void(*)(XrBaseOutStructure*, std::istream&, bool);
-#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, std::istream&, bool)>(&deserialize)))
+using StructDeserializer = void(*)(XrBaseOutStructure*, ReadStream&, bool);
+#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, ReadStream&, bool)>(&deserialize)))
 
 StructDeserializer deserializer_lookup(XrStructureType struct_type);
 
@@ -10035,21 +10039,21 @@ std::size_t size_lookup(XrStructureType struct_type);
 
 // Generic deserializers
 template <typename T>
-void deserialize(T* x, std::istream& in, bool in_place = false) {
+void deserialize(T* x, ReadStream& in, bool in_place = false) {
     static_assert(
         !std::is_class<T>::value,
         "T must be a supported type"
     );
-    in.read(reinterpret_cast<char*>(x), sizeof(T));
+    asio::read(in, asio::mutable_buffer(x, sizeof(T)));
 }
 
 template <typename T>
-void deserialize(const T* x, std::istream& in, bool in_place = false) {
+void deserialize(const T* x, ReadStream& in, bool in_place = false) {
     deserialize(const_cast<typename std::remove_const<T>::type*>(x), in, in_place);
 }
 
 template <typename T>
-void deserialize_array(T* x, std::size_t len, std::istream& in, bool in_place = false) {
+void deserialize_array(T* x, std::size_t len, ReadStream& in, bool in_place = false) {
     for (std::size_t i = 0; i < len; i++) {
         deserialize(&x[i], in, in_place);
     }
@@ -10057,7 +10061,7 @@ void deserialize_array(T* x, std::size_t len, std::istream& in, bool in_place = 
 
 // For weird const-correctness reasons, we need a const and non-const version
 template <typename T>
-void deserialize_ptr(const T** x, std::istream& in, bool in_place = false) {
+void deserialize_ptr(const T** x, ReadStream& in, bool in_place = false) {
     std::uint32_t len{};
     deserialize(&len, in, in_place);
     if (len) {
@@ -10086,7 +10090,7 @@ void deserialize_ptr(const T** x, std::istream& in, bool in_place = false) {
 }
 
 template <typename T>
-void deserialize_ptr(T** x, std::istream& in, bool in_place = false) {
+void deserialize_ptr(T** x, ReadStream& in, bool in_place = false) {
     std::uint32_t len{};
     deserialize(&len, in, in_place);
     if (len) {
@@ -10114,8 +10118,8 @@ void deserialize_ptr(T** x, std::istream& in, bool in_place = false) {
     }
 }
 
-void deserialize_xr(const void** p_s, std::istream& in, bool in_place = false);
-void deserialize_xr(void** p_s, std::istream& in, bool in_place = false);
+void deserialize_xr(const void** p_s, ReadStream& in, bool in_place = false);
+void deserialize_xr(void** p_s, ReadStream& in, bool in_place = false);
 
 // Generic cleaners
 template <typename T>

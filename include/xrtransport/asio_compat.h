@@ -27,6 +27,17 @@ public:
     // Read some data from the stream
     virtual std::size_t read_some(const asio::mutable_buffer& buffers) = 0;
     virtual std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) = 0;
+
+    // Template convenience methods for ASIO compatibility
+    template<typename MutableBufferSequence>
+    std::size_t read_some(const MutableBufferSequence& buffers) {
+        return read_some(asio::mutable_buffer(buffers));
+    }
+
+    template<typename MutableBufferSequence>
+    std::size_t read_some(const MutableBufferSequence& buffers, asio::error_code& ec) {
+        return read_some(asio::mutable_buffer(buffers), ec);
+    }
 };
 
 // Abstract class for write operations
@@ -37,6 +48,17 @@ public:
     // Write some data to the stream
     virtual std::size_t write_some(const asio::const_buffer& buffers) = 0;
     virtual std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) = 0;
+
+    // Template convenience methods for ASIO compatibility
+    template<typename ConstBufferSequence>
+    std::size_t write_some(const ConstBufferSequence& buffers) {
+        return write_some(asio::const_buffer(buffers));
+    }
+
+    template<typename ConstBufferSequence>
+    std::size_t write_some(const ConstBufferSequence& buffers, asio::error_code& ec) {
+        return write_some(asio::const_buffer(buffers), ec);
+    }
 };
 
 // Abstract class for read/write operations

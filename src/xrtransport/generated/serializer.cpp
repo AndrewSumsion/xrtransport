@@ -2892,7 +2892,7 @@ StructSerializer serializer_lookup(XrStructureType struct_type) {
     return serializer_lookup_table[struct_type];
 }
 
-void serialize_xr(const void* untyped, std::ostream& out) {
+void serialize_xr(const void* untyped, WriteStream& out) {
     const XrBaseInStructure* x = static_cast<const XrBaseInStructure*>(untyped);
     XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
     serialize(&type, out);
@@ -2910,7 +2910,7 @@ void serialize_xr(const void* untyped, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
 
-void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerCubeKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -2948,7 +2948,7 @@ void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerCubeKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -2988,7 +2988,7 @@ void serialize(const XrCompositionLayerCubeKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
 
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3012,7 +3012,7 @@ void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3038,7 +3038,7 @@ void serialize(const XrInstanceCreateInfoAndroidKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3072,7 +3072,7 @@ void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3108,7 +3108,7 @@ void serialize(const XrCompositionLayerDepthInfoKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3131,7 +3131,7 @@ void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& 
 
 
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3156,7 +3156,7 @@ void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, std::ostream& 
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 
 
-void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
+void serialize(const XrEventDataPerfSettingsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3186,7 +3186,7 @@ void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
+void serialize(const XrEventDataPerfSettingsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3220,7 +3220,7 @@ void serialize(const XrEventDataPerfSettingsEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 
 
-void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerCylinderKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3266,7 +3266,7 @@ void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerCylinderKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3314,7 +3314,7 @@ void serialize(const XrCompositionLayerCylinderKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 
 
-void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerEquirectKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3360,7 +3360,7 @@ void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerEquirectKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3408,7 +3408,7 @@ void serialize(const XrCompositionLayerEquirectKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3435,7 +3435,7 @@ void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsLabelEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3454,7 +3454,7 @@ void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3501,7 +3501,7 @@ void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out)
 
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3532,7 +3532,7 @@ void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3559,7 +3559,7 @@ void serialize(const XrDebugUtilsObjectNameInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3606,7 +3606,7 @@ void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, std::ostream& out)
 
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3637,7 +3637,7 @@ void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
+void serialize(const XrDebugUtilsLabelEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3658,7 +3658,7 @@ void serialize(const XrDebugUtilsLabelEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3680,7 +3680,7 @@ void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3715,7 +3715,7 @@ void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3754,7 +3754,7 @@ void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3773,7 +3773,7 @@ void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageOpenGLKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3791,7 +3791,7 @@ void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3813,7 +3813,7 @@ void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3835,7 +3835,7 @@ void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3870,7 +3870,7 @@ void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3909,7 +3909,7 @@ void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3928,7 +3928,7 @@ void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageOpenGLKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3946,7 +3946,7 @@ void serialize(const XrSwapchainImageOpenGLKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3970,7 +3970,7 @@ void serialize(const XrGraphicsRequirementsOpenGLKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -3996,7 +3996,7 @@ void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) 
 
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageOpenGLESKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4014,7 +4014,7 @@ void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4036,7 +4036,7 @@ void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4062,7 +4062,7 @@ void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, std::ostream& out) 
 
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageOpenGLESKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4080,7 +4080,7 @@ void serialize(const XrSwapchainImageOpenGLESKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4104,7 +4104,7 @@ void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4138,7 +4138,7 @@ void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4156,7 +4156,7 @@ void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4178,7 +4178,7 @@ void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4212,7 +4212,7 @@ void serialize(const XrGraphicsBindingVulkanKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4230,7 +4230,7 @@ void serialize(const XrSwapchainImageVulkanKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4254,7 +4254,7 @@ void serialize(const XrGraphicsRequirementsVulkanKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4273,7 +4273,7 @@ void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4292,7 +4292,7 @@ void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4314,7 +4314,7 @@ void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4333,7 +4333,7 @@ void serialize(const XrGraphicsBindingD3D11KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4352,7 +4352,7 @@ void serialize(const XrSwapchainImageD3D11KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4376,7 +4376,7 @@ void serialize(const XrGraphicsRequirementsD3D11KHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4400,7 +4400,7 @@ void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4419,7 +4419,7 @@ void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4441,7 +4441,7 @@ void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4465,7 +4465,7 @@ void serialize(const XrGraphicsBindingD3D12KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4484,7 +4484,7 @@ void serialize(const XrSwapchainImageD3D12KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4508,7 +4508,7 @@ void serialize(const XrGraphicsRequirementsD3D12KHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 
 
-void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4527,7 +4527,7 @@ void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4546,7 +4546,7 @@ void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4565,7 +4565,7 @@ void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4584,7 +4584,7 @@ void serialize(const XrGraphicsBindingMetalKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
+void serialize(const XrSwapchainImageMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4603,7 +4603,7 @@ void serialize(const XrSwapchainImageMetalKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
+void serialize(const XrGraphicsRequirementsMetalKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4624,7 +4624,7 @@ void serialize(const XrGraphicsRequirementsMetalKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4642,7 +4642,7 @@ void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& o
 
 
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
+void serialize(const XrEyeGazeSampleTimeEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4660,7 +4660,7 @@ void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4678,7 +4678,7 @@ void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, std::ostream& o
 
 
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
+void serialize(const XrEyeGazeSampleTimeEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4698,7 +4698,7 @@ void serialize(const XrEyeGazeSampleTimeEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 
 
-void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
+void serialize(const XrVisibilityMaskKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4738,7 +4738,7 @@ void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) {
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4764,7 +4764,7 @@ void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) 
 
 
 
-void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
+void serialize(const XrVisibilityMaskKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4804,7 +4804,7 @@ void serialize(const XrVisibilityMaskKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) {
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4832,7 +4832,7 @@ void serialize(const XrEventDataVisibilityMaskChangedKHR* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4854,7 +4854,7 @@ void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out) {
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4876,7 +4876,7 @@ void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostrea
 
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4898,7 +4898,7 @@ void serialize(const XrSessionCreateInfoOverlayEXTX* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostream& out) {
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4922,7 +4922,7 @@ void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, std::ostrea
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4944,7 +4944,7 @@ void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) 
 
 
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4972,7 +4972,7 @@ void serialize(const XrCompositionLayerColorScaleBiasKHR* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 
 
-void serialize(const XrSpatialAnchorCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -4998,7 +4998,7 @@ void serialize(const XrSpatialAnchorCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5022,7 +5022,7 @@ void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerImageLayoutFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5040,7 +5040,7 @@ void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerImageLayoutFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5060,7 +5060,7 @@ void serialize(const XrCompositionLayerImageLayoutFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerAlphaBlendFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5090,7 +5090,7 @@ void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerAlphaBlendFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5122,7 +5122,7 @@ void serialize(const XrCompositionLayerAlphaBlendFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
+void serialize(const XrViewConfigurationDepthRangeEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5152,7 +5152,7 @@ void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
+void serialize(const XrViewConfigurationDepthRangeEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5186,7 +5186,7 @@ void serialize(const XrViewConfigurationDepthRangeEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
 
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingEGLMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5216,7 +5216,7 @@ void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
 
 
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
+void serialize(const XrGraphicsBindingEGLMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5248,7 +5248,7 @@ void serialize(const XrGraphicsBindingEGLMNDX* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5274,7 +5274,7 @@ void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5300,7 +5300,7 @@ void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostr
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5314,7 +5314,7 @@ void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ost
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5336,7 +5336,7 @@ void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& o
 
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5362,7 +5362,7 @@ void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5388,7 +5388,7 @@ void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::ostr
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5402,7 +5402,7 @@ void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::ost
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5426,7 +5426,7 @@ void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, std::ostream& o
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5444,7 +5444,7 @@ void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackerCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5466,7 +5466,7 @@ void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandJointsLocateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5488,7 +5488,7 @@ void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointLocationEXT* s, std::ostream& out) {
+void serialize(const XrHandJointLocationEXT* s, WriteStream& out) {
             
 
     serialize(&s->locationFlags, out);
@@ -5506,7 +5506,7 @@ void serialize(const XrHandJointLocationEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointVelocityEXT* s, std::ostream& out) {
+void serialize(const XrHandJointVelocityEXT* s, WriteStream& out) {
             
 
     serialize(&s->velocityFlags, out);
@@ -5524,7 +5524,7 @@ void serialize(const XrHandJointVelocityEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
+void serialize(const XrHandJointLocationsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5551,7 +5551,7 @@ void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
+void serialize(const XrHandJointVelocitiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5574,7 +5574,7 @@ void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5592,7 +5592,7 @@ void serialize(const XrSystemHandTrackingPropertiesEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackerCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5614,7 +5614,7 @@ void serialize(const XrHandTrackerCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandJointsLocateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5636,7 +5636,7 @@ void serialize(const XrHandJointsLocateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
+void serialize(const XrHandJointLocationsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5663,7 +5663,7 @@ void serialize(const XrHandJointLocationsEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
+void serialize(const XrHandJointVelocitiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5688,7 +5688,7 @@ void serialize(const XrHandJointVelocitiesEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5714,7 +5714,7 @@ void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& ou
 
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5736,7 +5736,7 @@ void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshUpdateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5758,7 +5758,7 @@ void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5792,7 +5792,7 @@ void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshIndexBufferMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshIndexBufferMSFT* s, WriteStream& out) {
             
 
     serialize(&s->indexBufferKey, out);
@@ -5815,7 +5815,7 @@ void serialize(const XrHandMeshIndexBufferMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshVertexBufferMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshVertexBufferMSFT* s, WriteStream& out) {
             
 
     serialize(&s->vertexUpdateTime, out);
@@ -5838,7 +5838,7 @@ void serialize(const XrHandMeshVertexBufferMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshVertexMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshVertexMSFT* s, WriteStream& out) {
             
 
     serialize(&s->position, out);
@@ -5852,7 +5852,7 @@ void serialize(const XrHandMeshVertexMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandPoseTypeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5870,7 +5870,7 @@ void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5896,7 +5896,7 @@ void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, std::ostream& ou
 
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5918,7 +5918,7 @@ void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshUpdateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5940,7 +5940,7 @@ void serialize(const XrHandMeshUpdateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
+void serialize(const XrHandMeshMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5974,7 +5974,7 @@ void serialize(const XrHandMeshMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrHandPoseTypeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -5994,7 +5994,7 @@ void serialize(const XrHandPoseTypeInfoMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6017,7 +6017,7 @@ void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::o
 
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6039,7 +6039,7 @@ void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6062,7 +6062,7 @@ void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6085,7 +6085,7 @@ void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostre
 
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6115,7 +6115,7 @@ void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream&
 
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6133,7 +6133,7 @@ void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std
 
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6156,7 +6156,7 @@ void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::o
 
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6178,7 +6178,7 @@ void serialize(const XrSecondaryViewConfigurationStateMSFT* s, std::ostream& out
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6201,7 +6201,7 @@ void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, std::ostream
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6224,7 +6224,7 @@ void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::ostre
 
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6254,7 +6254,7 @@ void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, std::ostream&
 
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6274,7 +6274,7 @@ void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 
 
-void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelKeyStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6292,7 +6292,7 @@ void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelNodePropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6314,7 +6314,7 @@ void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) 
 
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6341,7 +6341,7 @@ void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelNodeStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6359,7 +6359,7 @@ void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6386,7 +6386,7 @@ void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelKeyStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6404,7 +6404,7 @@ void serialize(const XrControllerModelKeyStateMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelNodePropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6426,7 +6426,7 @@ void serialize(const XrControllerModelNodePropertiesMSFT* s, std::ostream& out) 
 
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelPropertiesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6453,7 +6453,7 @@ void serialize(const XrControllerModelPropertiesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelNodeStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6471,7 +6471,7 @@ void serialize(const XrControllerModelNodeStateMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
+void serialize(const XrControllerModelStateMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6502,7 +6502,7 @@ void serialize(const XrControllerModelStateMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
+void serialize(const XrViewConfigurationViewFovEPIC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6524,7 +6524,7 @@ void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
+void serialize(const XrViewConfigurationViewFovEPIC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6548,7 +6548,7 @@ void serialize(const XrViewConfigurationViewFovEPIC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
+void serialize(const XrHolographicWindowAttachmentMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6572,7 +6572,7 @@ void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
+void serialize(const XrHolographicWindowAttachmentMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6598,7 +6598,7 @@ void serialize(const XrHolographicWindowAttachmentMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out) {
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6616,7 +6616,7 @@ void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& ou
 
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out) {
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6642,7 +6642,7 @@ void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::os
 
 
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& out) {
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6660,7 +6660,7 @@ void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, std::ostream& ou
 
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::ostream& out) {
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6688,7 +6688,7 @@ void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::os
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6706,7 +6706,7 @@ void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out
 
 
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6726,7 +6726,7 @@ void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, std::ostream& out
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 
 
-void serialize(const XrSwapchainStateBaseHeaderFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateBaseHeaderFB* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
@@ -6735,7 +6735,7 @@ void serialize(const XrSwapchainStateBaseHeaderFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 
 
-void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSecureContentFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6753,7 +6753,7 @@ void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSecureContentFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6773,7 +6773,7 @@ void serialize(const XrCompositionLayerSecureContentFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 
 
-void serialize(const XrBodyJointLocationFB* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationFB* s, WriteStream& out) {
             
 
     serialize(&s->locationFlags, out);
@@ -6787,7 +6787,7 @@ void serialize(const XrBodyJointLocationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6805,7 +6805,7 @@ void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6823,7 +6823,7 @@ void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonJointFB* s, std::ostream& out) {
+void serialize(const XrBodySkeletonJointFB* s, WriteStream& out) {
             
 
     serialize(&s->joint, out);
@@ -6841,7 +6841,7 @@ void serialize(const XrBodySkeletonJointFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
+void serialize(const XrBodySkeletonFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6864,7 +6864,7 @@ void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6886,7 +6886,7 @@ void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6925,7 +6925,7 @@ void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6943,7 +6943,7 @@ void serialize(const XrBodyTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6965,7 +6965,7 @@ void serialize(const XrBodyJointsLocateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -6983,7 +6983,7 @@ void serialize(const XrSystemBodyTrackingPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7022,7 +7022,7 @@ void serialize(const XrBodyJointLocationsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
+void serialize(const XrBodySkeletonFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7047,7 +7047,7 @@ void serialize(const XrBodySkeletonFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
 
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
+void serialize(const XrInteractionProfileDpadBindingEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7099,7 +7099,7 @@ void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
+void serialize(const XrInteractionProfileDpadBindingEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7153,7 +7153,7 @@ void serialize(const XrInteractionProfileDpadBindingEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out) {
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7193,7 +7193,7 @@ void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& 
 
 
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& out) {
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7235,7 +7235,7 @@ void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, std::ostream& 
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7253,7 +7253,7 @@ void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7273,7 +7273,7 @@ void serialize(const XrHandJointsMotionRangeInfoEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 
 
-void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, std::ostream& out) {
+void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
@@ -7282,7 +7282,7 @@ void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
 
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
+void serialize(const XrLoaderInitInfoAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7306,7 +7306,7 @@ void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
+void serialize(const XrLoaderInitInfoAndroidKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7332,7 +7332,7 @@ void serialize(const XrLoaderInitInfoAndroidKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7368,7 +7368,7 @@ void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7408,7 +7408,7 @@ void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7430,7 +7430,7 @@ void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7466,7 +7466,7 @@ void serialize(const XrVulkanInstanceCreateInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7506,7 +7506,7 @@ void serialize(const XrVulkanDeviceCreateInfoKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7530,7 +7530,7 @@ void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerEquirect2KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7580,7 +7580,7 @@ void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
+void serialize(const XrCompositionLayerEquirect2KHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7632,7 +7632,7 @@ void serialize(const XrCompositionLayerEquirect2KHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 
 
-void serialize(const XrUuidMSFT* s, std::ostream& out) {
+void serialize(const XrUuidMSFT* s, WriteStream& out) {
             
 
     serialize_array(s->bytes, 16, out);
@@ -7642,7 +7642,7 @@ void serialize(const XrUuidMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObserverCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7656,7 +7656,7 @@ void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7670,7 +7670,7 @@ void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrNewSceneComputeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7701,7 +7701,7 @@ void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7719,7 +7719,7 @@ void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneSphereBoundMSFT* s, std::ostream& out) {
+void serialize(const XrSceneSphereBoundMSFT* s, WriteStream& out) {
             
 
     serialize(&s->center, out);
@@ -7733,7 +7733,7 @@ void serialize(const XrSceneSphereBoundMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneOrientedBoxBoundMSFT* s, std::ostream& out) {
+void serialize(const XrSceneOrientedBoxBoundMSFT* s, WriteStream& out) {
             
 
     serialize(&s->pose, out);
@@ -7747,7 +7747,7 @@ void serialize(const XrSceneOrientedBoxBoundMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneFrustumBoundMSFT* s, std::ostream& out) {
+void serialize(const XrSceneFrustumBoundMSFT* s, WriteStream& out) {
             
 
     serialize(&s->pose, out);
@@ -7765,7 +7765,7 @@ void serialize(const XrSceneFrustumBoundMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneBoundsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneBoundsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->space, out);
@@ -7806,7 +7806,7 @@ void serialize(const XrSceneBoundsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentMSFT* s, WriteStream& out) {
             
 
     serialize(&s->componentType, out);
@@ -7828,7 +7828,7 @@ void serialize(const XrSceneComponentMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7855,7 +7855,7 @@ void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7873,7 +7873,7 @@ void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentLocationMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentLocationMSFT* s, WriteStream& out) {
             
 
     serialize(&s->flags, out);
@@ -7887,7 +7887,7 @@ void serialize(const XrSceneComponentLocationMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentLocationsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7910,7 +7910,7 @@ void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7941,7 +7941,7 @@ void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneObjectMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObjectMSFT* s, WriteStream& out) {
             
 
     serialize(&s->objectType, out);
@@ -7951,7 +7951,7 @@ void serialize(const XrSceneObjectMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObjectsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7974,7 +7974,7 @@ void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -7992,7 +7992,7 @@ void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out)
 
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8015,7 +8015,7 @@ void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrScenePlaneMSFT* s, std::ostream& out) {
+void serialize(const XrScenePlaneMSFT* s, WriteStream& out) {
             
 
     serialize(&s->alignment, out);
@@ -8037,7 +8037,7 @@ void serialize(const XrScenePlaneMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
+void serialize(const XrScenePlanesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8060,7 +8060,7 @@ void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8083,7 +8083,7 @@ void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) 
 
 
 
-void serialize(const XrSceneMeshMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshMSFT* s, WriteStream& out) {
             
 
     serialize(&s->meshBufferId, out);
@@ -8097,7 +8097,7 @@ void serialize(const XrSceneMeshMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8120,7 +8120,7 @@ void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8138,7 +8138,7 @@ void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshBuffersMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8152,7 +8152,7 @@ void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshVertexBufferMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8179,7 +8179,7 @@ void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8206,7 +8206,7 @@ void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8233,7 +8233,7 @@ void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObserverCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8247,7 +8247,7 @@ void serialize(const XrSceneObserverCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8261,7 +8261,7 @@ void serialize(const XrSceneCreateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrNewSceneComputeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8292,7 +8292,7 @@ void serialize(const XrNewSceneComputeInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8310,7 +8310,7 @@ void serialize(const XrVisualMeshComputeLodInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8337,7 +8337,7 @@ void serialize(const XrSceneComponentsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8355,7 +8355,7 @@ void serialize(const XrSceneComponentsGetInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentLocationsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8378,7 +8378,7 @@ void serialize(const XrSceneComponentLocationsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8409,7 +8409,7 @@ void serialize(const XrSceneComponentsLocateInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObjectsMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8432,7 +8432,7 @@ void serialize(const XrSceneObjectsMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8450,7 +8450,7 @@ void serialize(const XrSceneComponentParentFilterInfoMSFT* s, std::ostream& out)
 
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8473,7 +8473,7 @@ void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
+void serialize(const XrScenePlanesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8496,7 +8496,7 @@ void serialize(const XrScenePlanesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) {
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8519,7 +8519,7 @@ void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, std::ostream& out) 
 
 
 
-void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8542,7 +8542,7 @@ void serialize(const XrSceneMeshesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8560,7 +8560,7 @@ void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshBuffersMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8574,7 +8574,7 @@ void serialize(const XrSceneMeshBuffersMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshVertexBufferMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8601,7 +8601,7 @@ void serialize(const XrSceneMeshVertexBufferMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8628,7 +8628,7 @@ void serialize(const XrSceneMeshIndicesUint32MSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8657,7 +8657,7 @@ void serialize(const XrSceneMeshIndicesUint16MSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8675,7 +8675,7 @@ void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& 
 
 
 
-void serialize(const XrDeserializeSceneFragmentMSFT* s, std::ostream& out) {
+void serialize(const XrDeserializeSceneFragmentMSFT* s, WriteStream& out) {
             
 
     serialize(&s->bufferSize, out);
@@ -8690,7 +8690,7 @@ void serialize(const XrDeserializeSceneFragmentMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneDeserializeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8713,7 +8713,7 @@ void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8731,7 +8731,7 @@ void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, std::ostream& 
 
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSceneDeserializeInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8756,7 +8756,7 @@ void serialize(const XrSceneDeserializeInfoMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out) {
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8778,7 +8778,7 @@ void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& ou
 
 
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& out) {
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8802,7 +8802,7 @@ void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, std::ostream& ou
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
+void serialize(const XrViveTrackerPathsHTCX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8824,7 +8824,7 @@ void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) {
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8843,7 +8843,7 @@ void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) 
 
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
+void serialize(const XrViveTrackerPathsHTCX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8865,7 +8865,7 @@ void serialize(const XrViveTrackerPathsHTCX* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) {
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8886,7 +8886,7 @@ void serialize(const XrEventDataViveTrackerConnectedHTCX* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8908,7 +8908,7 @@ void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) 
 
 
 
-void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
+void serialize(const XrFacialExpressionsHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8939,7 +8939,7 @@ void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrFacialTrackerCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8957,7 +8957,7 @@ void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8979,7 +8979,7 @@ void serialize(const XrSystemFacialTrackingPropertiesHTC* s, std::ostream& out) 
 
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrFacialTrackerCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -8997,7 +8997,7 @@ void serialize(const XrFacialTrackerCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
+void serialize(const XrFacialExpressionsHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9030,7 +9030,7 @@ void serialize(const XrFacialExpressionsHTC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemColorSpacePropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9048,7 +9048,7 @@ void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemColorSpacePropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9068,7 +9068,7 @@ void serialize(const XrSystemColorSpacePropertiesFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 
 
-void serialize(const XrVector4sFB* s, std::ostream& out) {
+void serialize(const XrVector4sFB* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -9090,7 +9090,7 @@ void serialize(const XrVector4sFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingMeshFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9173,7 +9173,7 @@ void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingScaleFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9203,7 +9203,7 @@ void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingMeshFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9286,7 +9286,7 @@ void serialize(const XrHandTrackingMeshFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingScaleFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9318,7 +9318,7 @@ void serialize(const XrHandTrackingScaleFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 
 
-void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingAimStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9356,7 +9356,7 @@ void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingAimStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9396,7 +9396,7 @@ void serialize(const XrHandTrackingAimStateFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 
 
-void serialize(const XrHandCapsuleFB* s, std::ostream& out) {
+void serialize(const XrHandCapsuleFB* s, WriteStream& out) {
             
 
     serialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, out);
@@ -9414,7 +9414,7 @@ void serialize(const XrHandCapsuleFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingCapsulesStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9432,7 +9432,7 @@ void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
+void serialize(const XrHandTrackingCapsulesStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9452,7 +9452,7 @@ void serialize(const XrHandTrackingCapsulesStateFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9470,7 +9470,7 @@ void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9496,7 +9496,7 @@ void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9522,7 +9522,7 @@ void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentStatusFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9544,7 +9544,7 @@ void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9574,7 +9574,7 @@ void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9612,7 +9612,7 @@ void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) 
 
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9630,7 +9630,7 @@ void serialize(const XrSystemSpatialEntityPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9656,7 +9656,7 @@ void serialize(const XrSpatialAnchorCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9682,7 +9682,7 @@ void serialize(const XrSpaceComponentStatusSetInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentStatusFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9704,7 +9704,7 @@ void serialize(const XrSpaceComponentStatusFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9734,7 +9734,7 @@ void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9774,7 +9774,7 @@ void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFoveationProfileCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9788,7 +9788,7 @@ void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9806,7 +9806,7 @@ void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateFoveationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9828,7 +9828,7 @@ void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFoveationProfileCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9842,7 +9842,7 @@ void serialize(const XrFoveationProfileCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9860,7 +9860,7 @@ void serialize(const XrSwapchainCreateInfoFoveationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateFoveationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9884,7 +9884,7 @@ void serialize(const XrSwapchainStateFoveationFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
 
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9910,7 +9910,7 @@ void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) 
 
 
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9938,7 +9938,7 @@ void serialize(const XrFoveationLevelProfileCreateInfoFB* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9956,7 +9956,7 @@ void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out)
 
 
 
-void serialize(const XrKeyboardTrackingDescriptionFB* s, std::ostream& out) {
+void serialize(const XrKeyboardTrackingDescriptionFB* s, WriteStream& out) {
             
 
     serialize(&s->trackedKeyboardId, out);
@@ -9978,7 +9978,7 @@ void serialize(const XrKeyboardTrackingDescriptionFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -9996,7 +9996,7 @@ void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
+void serialize(const XrKeyboardTrackingQueryFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10014,7 +10014,7 @@ void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10032,7 +10032,7 @@ void serialize(const XrKeyboardSpaceCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
+void serialize(const XrKeyboardTrackingQueryFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10050,7 +10050,7 @@ void serialize(const XrKeyboardTrackingQueryFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10070,7 +10070,7 @@ void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, std::ostream& out)
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrTriangleMeshCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10110,7 +10110,7 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrTriangleMeshCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10152,7 +10152,7 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10170,7 +10170,7 @@ void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughProperties2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10188,7 +10188,7 @@ void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10206,7 +10206,7 @@ void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughLayerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10232,7 +10232,7 @@ void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerPassthroughFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10258,7 +10258,7 @@ void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrGeometryInstanceCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10292,7 +10292,7 @@ void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
+void serialize(const XrGeometryInstanceTransformFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10322,7 +10322,7 @@ void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
+void serialize(const XrPassthroughStyleFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10344,7 +10344,7 @@ void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10362,7 +10362,7 @@ void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10380,7 +10380,7 @@ void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out) {
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10406,7 +10406,7 @@ void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostrea
 
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out) {
+void serialize(const XrEventDataPassthroughStateChangedFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10424,7 +10424,7 @@ void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out)
 
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10442,7 +10442,7 @@ void serialize(const XrSystemPassthroughPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10460,7 +10460,7 @@ void serialize(const XrPassthroughCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughLayerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10486,7 +10486,7 @@ void serialize(const XrPassthroughLayerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerPassthroughFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10512,7 +10512,7 @@ void serialize(const XrCompositionLayerPassthroughFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrGeometryInstanceCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10546,7 +10546,7 @@ void serialize(const XrGeometryInstanceCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
+void serialize(const XrGeometryInstanceTransformFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10576,7 +10576,7 @@ void serialize(const XrGeometryInstanceTransformFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughProperties2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10594,7 +10594,7 @@ void serialize(const XrSystemPassthroughProperties2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
+void serialize(const XrPassthroughStyleFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10616,7 +10616,7 @@ void serialize(const XrPassthroughStyleFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10634,7 +10634,7 @@ void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10652,7 +10652,7 @@ void serialize(const XrPassthroughColorMapMonoToMonoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostream& out) {
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10678,7 +10678,7 @@ void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, std::ostrea
 
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out) {
+void serialize(const XrEventDataPassthroughStateChangedFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10698,7 +10698,7 @@ void serialize(const XrEventDataPassthroughStateChangedFB* s, std::ostream& out)
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 
 
-void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
+void serialize(const XrRenderModelPathInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10716,7 +10716,7 @@ void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
+void serialize(const XrRenderModelPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10750,7 +10750,7 @@ void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
+void serialize(const XrRenderModelBufferFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10777,7 +10777,7 @@ void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
+void serialize(const XrRenderModelLoadInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10795,7 +10795,7 @@ void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemRenderModelPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10813,7 +10813,7 @@ void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10831,7 +10831,7 @@ void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
+void serialize(const XrRenderModelPathInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10849,7 +10849,7 @@ void serialize(const XrRenderModelPathInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
+void serialize(const XrRenderModelPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10883,7 +10883,7 @@ void serialize(const XrRenderModelPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
+void serialize(const XrRenderModelBufferFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10910,7 +10910,7 @@ void serialize(const XrRenderModelBufferFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
+void serialize(const XrRenderModelLoadInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10928,7 +10928,7 @@ void serialize(const XrRenderModelLoadInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemRenderModelPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10946,7 +10946,7 @@ void serialize(const XrSystemRenderModelPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10966,7 +10966,7 @@ void serialize(const XrRenderModelCapabilitiesRequestFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
 
 
-void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
+void serialize(const XrBindingModificationsKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -10988,14 +10988,14 @@ void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
 
 
 
-void serialize(const XrBindingModificationBaseHeaderKHR* s, std::ostream& out) {
+void serialize(const XrBindingModificationBaseHeaderKHR* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
+void serialize(const XrBindingModificationsKHR* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11019,7 +11019,7 @@ void serialize(const XrBindingModificationsKHR* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11037,7 +11037,7 @@ void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out) {
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11055,7 +11055,7 @@ void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out)
 
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out) {
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11073,7 +11073,7 @@ void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& 
 
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11091,7 +11091,7 @@ void serialize(const XrViewLocateFoveatedRenderingVARJO* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out) {
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11109,7 +11109,7 @@ void serialize(const XrFoveatedViewConfigurationViewVARJO* s, std::ostream& out)
 
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& out) {
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11129,7 +11129,7 @@ void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, std::ostream& 
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthTestVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11151,7 +11151,7 @@ void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthTestVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11177,7 +11177,7 @@ void serialize(const XrCompositionLayerDepthTestVARJO* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out) {
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11195,7 +11195,7 @@ void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out
 
 
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out) {
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11225,7 +11225,7 @@ void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out)
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11247,7 +11247,7 @@ void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out) {
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11265,7 +11265,7 @@ void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, std::ostream& out
 
 
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out) {
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11295,7 +11295,7 @@ void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, std::ostream& out)
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11321,7 +11321,7 @@ void serialize(const XrMarkerSpaceCreateInfoVARJO* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
 
 
-void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
+void serialize(const XrFrameEndInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11343,7 +11343,7 @@ void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
+void serialize(const XrFrameEndInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11367,7 +11367,7 @@ void serialize(const XrFrameEndInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
 
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11389,7 +11389,7 @@ void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11413,7 +11413,7 @@ void serialize(const XrGlobalDimmerFrameEndInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 
 
-void serialize(const XrCoordinateSpaceCreateInfoML* s, std::ostream& out) {
+void serialize(const XrCoordinateSpaceCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11437,7 +11437,7 @@ void serialize(const XrCoordinateSpaceCreateInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out) {
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11455,7 +11455,7 @@ void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& o
 
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11477,7 +11477,7 @@ void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorArucoInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11495,7 +11495,7 @@ void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorSizeInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11513,7 +11513,7 @@ void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11531,7 +11531,7 @@ void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11569,7 +11569,7 @@ void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) 
 
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11583,7 +11583,7 @@ void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11601,7 +11601,7 @@ void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerSpaceCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11627,7 +11627,7 @@ void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& out) {
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11645,7 +11645,7 @@ void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, std::ostream& o
 
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11667,7 +11667,7 @@ void serialize(const XrMarkerDetectorCreateInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorArucoInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11685,7 +11685,7 @@ void serialize(const XrMarkerDetectorArucoInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorSizeInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11703,7 +11703,7 @@ void serialize(const XrMarkerDetectorSizeInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11721,7 +11721,7 @@ void serialize(const XrMarkerDetectorAprilTagInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11759,7 +11759,7 @@ void serialize(const XrMarkerDetectorCustomProfileInfoML* s, std::ostream& out) 
 
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11773,7 +11773,7 @@ void serialize(const XrMarkerDetectorSnapshotInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
+void serialize(const XrMarkerDetectorStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11791,7 +11791,7 @@ void serialize(const XrMarkerDetectorStateML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
+void serialize(const XrMarkerSpaceCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11819,7 +11819,7 @@ void serialize(const XrMarkerSpaceCreateInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 
 
-void serialize(const XrLocalizationMapML* s, std::ostream& out) {
+void serialize(const XrLocalizationMapML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11845,7 +11845,7 @@ void serialize(const XrLocalizationMapML* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataLocalizationChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11879,14 +11879,14 @@ void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, std::ostream& out) {
+void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
+void serialize(const XrMapLocalizationRequestInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11904,7 +11904,7 @@ void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
+void serialize(const XrLocalizationMapImportInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11927,7 +11927,7 @@ void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
+void serialize(const XrLocalizationEnableEventsInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11945,7 +11945,7 @@ void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationMapML* s, std::ostream& out) {
+void serialize(const XrLocalizationMapML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -11971,7 +11971,7 @@ void serialize(const XrLocalizationMapML* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataLocalizationChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12005,7 +12005,7 @@ void serialize(const XrEventDataLocalizationChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
+void serialize(const XrMapLocalizationRequestInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12023,7 +12023,7 @@ void serialize(const XrMapLocalizationRequestInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
+void serialize(const XrLocalizationMapImportInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12046,7 +12046,7 @@ void serialize(const XrLocalizationMapImportInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
+void serialize(const XrLocalizationEnableEventsInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12066,14 +12066,14 @@ void serialize(const XrLocalizationEnableEventsInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 
 
-void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12099,7 +12099,7 @@ void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out)
 
 
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12126,7 +12126,7 @@ void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12144,7 +12144,7 @@ void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12170,7 +12170,7 @@ void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, std::ostream& out)
 
 
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12197,7 +12197,7 @@ void serialize(const XrCreateSpatialAnchorsCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12217,7 +12217,7 @@ void serialize(const XrSpatialAnchorStateML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12231,14 +12231,14 @@ void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12268,7 +12268,7 @@ void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12299,7 +12299,7 @@ void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12326,7 +12326,7 @@ void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12353,7 +12353,7 @@ void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12380,7 +12380,7 @@ void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12403,7 +12403,7 @@ void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12421,7 +12421,7 @@ void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12448,7 +12448,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12466,7 +12466,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostre
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12489,7 +12489,7 @@ void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12512,7 +12512,7 @@ void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream&
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12535,7 +12535,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std
 
 
 
-void serialize(const XrSpatialAnchorCompletionResultML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCompletionResultML* s, WriteStream& out) {
             
 
     serialize(&s->uuid, out);
@@ -12549,7 +12549,7 @@ void serialize(const XrSpatialAnchorCompletionResultML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12563,7 +12563,7 @@ void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, std::ostream& out) 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12593,7 +12593,7 @@ void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12624,7 +12624,7 @@ void serialize(const XrSpatialAnchorsQueryCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12651,7 +12651,7 @@ void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12678,7 +12678,7 @@ void serialize(const XrSpatialAnchorsPublishInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12705,7 +12705,7 @@ void serialize(const XrSpatialAnchorsPublishCompletionML* s, std::ostream& out) 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12728,7 +12728,7 @@ void serialize(const XrSpatialAnchorsDeleteInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12746,7 +12746,7 @@ void serialize(const XrSpatialAnchorsDeleteCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12773,7 +12773,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12791,7 +12791,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, std::ostre
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12814,7 +12814,7 @@ void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, std::ostream
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12837,7 +12837,7 @@ void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, std::ostream&
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12862,7 +12862,7 @@ void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataHeadsetFitChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12884,7 +12884,7 @@ void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataEyeCalibrationChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12902,7 +12902,7 @@ void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) {
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12920,7 +12920,7 @@ void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) 
 
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataHeadsetFitChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12942,7 +12942,7 @@ void serialize(const XrEventDataHeadsetFitChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
+void serialize(const XrEventDataEyeCalibrationChangedML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12960,7 +12960,7 @@ void serialize(const XrEventDataEyeCalibrationChangedML* s, std::ostream& out) {
 
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) {
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -12980,7 +12980,7 @@ void serialize(const XrUserCalibrationEnableEventsInfoML* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 
 
-void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, WriteStream& out) {
             
 
     serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, out);
@@ -12990,7 +12990,7 @@ void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13012,7 +13012,7 @@ void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13034,7 +13034,7 @@ void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::o
 
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13056,7 +13056,7 @@ void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13080,7 +13080,7 @@ void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::o
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 
 
-void serialize(const XrSceneMarkerMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerMSFT* s, WriteStream& out) {
             
 
     serialize(&s->markerType, out);
@@ -13102,7 +13102,7 @@ void serialize(const XrSceneMarkerMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkersMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13125,7 +13125,7 @@ void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13148,7 +13148,7 @@ void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkerQRCodeMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerQRCodeMSFT* s, WriteStream& out) {
             
 
     serialize(&s->symbolType, out);
@@ -13162,7 +13162,7 @@ void serialize(const XrSceneMarkerQRCodeMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerQRCodesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13185,7 +13185,7 @@ void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkersMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13208,7 +13208,7 @@ void serialize(const XrSceneMarkersMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13231,7 +13231,7 @@ void serialize(const XrSceneMarkerTypeFilterMSFT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
+void serialize(const XrSceneMarkerQRCodesMSFT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13258,21 +13258,21 @@ void serialize(const XrSceneMarkerQRCodesMSFT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 
 
-void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, std::ostream& out) {
+void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13308,7 +13308,7 @@ void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13326,7 +13326,7 @@ void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceUuidFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13349,7 +13349,7 @@ void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13367,7 +13367,7 @@ void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceQueryResultFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryResultFB* s, WriteStream& out) {
             
 
     serialize(&s->space, out);
@@ -13381,7 +13381,7 @@ void serialize(const XrSpaceQueryResultFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryResultsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13408,7 +13408,7 @@ void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13426,7 +13426,7 @@ void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& o
 
 
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13448,7 +13448,7 @@ void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13484,7 +13484,7 @@ void serialize(const XrSpaceQueryInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
+void serialize(const XrSpaceQueryResultsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13511,7 +13511,7 @@ void serialize(const XrSpaceQueryResultsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13529,7 +13529,7 @@ void serialize(const XrSpaceStorageLocationFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceUuidFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13552,7 +13552,7 @@ void serialize(const XrSpaceUuidFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceComponentFilterInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13570,7 +13570,7 @@ void serialize(const XrSpaceComponentFilterInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13588,7 +13588,7 @@ void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, std::ostream& o
 
 
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13612,7 +13612,7 @@ void serialize(const XrEventDataSpaceQueryCompleteFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 
 
-void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceSaveInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13638,7 +13638,7 @@ void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceEraseInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13660,41 +13660,7 @@ void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out) {
-            
-
-    serialize(&s->type, out);
-
-            
-
-    serialize_xr(s->next, out);
-
-            
-
-    serialize(&s->requestId, out);
-
-            
-
-    serialize(&s->result, out);
-
-            
-
-    serialize(&s->space, out);
-
-            
-
-    serialize(&s->uuid, out);
-
-            
-
-    serialize(&s->location, out);
-
-}
-
-
-
-
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13728,7 +13694,41 @@ void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, WriteStream& out) {
+            
+
+    serialize(&s->type, out);
+
+            
+
+    serialize_xr(s->next, out);
+
+            
+
+    serialize(&s->requestId, out);
+
+            
+
+    serialize(&s->result, out);
+
+            
+
+    serialize(&s->space, out);
+
+            
+
+    serialize(&s->uuid, out);
+
+            
+
+    serialize(&s->location, out);
+
+}
+
+
+
+
+void serialize(const XrSpaceSaveInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13754,7 +13754,7 @@ void serialize(const XrSpaceSaveInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceEraseInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13776,7 +13776,7 @@ void serialize(const XrSpaceEraseInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13810,7 +13810,7 @@ void serialize(const XrEventDataSpaceSaveCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13848,7 +13848,7 @@ void serialize(const XrEventDataSpaceEraseCompleteFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13874,7 +13874,7 @@ void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13902,7 +13902,7 @@ void serialize(const XrSwapchainImageFoveationVulkanFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13924,7 +13924,7 @@ void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream
 
 
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -13948,7 +13948,7 @@ void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::ostream
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14002,7 +14002,7 @@ void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14058,7 +14058,7 @@ void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14116,7 +14116,7 @@ void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14176,7 +14176,7 @@ void serialize(const XrSwapchainStateSamplerVulkanFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 
 
-void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceShareInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14208,7 +14208,7 @@ void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceShareCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14230,7 +14230,7 @@ void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceShareInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14262,7 +14262,7 @@ void serialize(const XrSpaceShareInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceShareCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14286,7 +14286,7 @@ void serialize(const XrEventDataSpaceShareCompleteFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
 
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14332,7 +14332,7 @@ void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14354,7 +14354,7 @@ void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14400,7 +14400,7 @@ void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14424,7 +14424,7 @@ void serialize(const XrSystemSpaceWarpPropertiesFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out) {
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14451,7 +14451,7 @@ void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out)
 
 
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out) {
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14480,7 +14480,7 @@ void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, std::ostream& out)
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 
 
-void serialize(const XrOffset3DfFB* s, std::ostream& out) {
+void serialize(const XrOffset3DfFB* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -14498,7 +14498,7 @@ void serialize(const XrOffset3DfFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRect3DfFB* s, std::ostream& out) {
+void serialize(const XrRect3DfFB* s, WriteStream& out) {
             
 
     serialize(&s->offset, out);
@@ -14512,7 +14512,7 @@ void serialize(const XrRect3DfFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
+void serialize(const XrSemanticLabelsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14539,7 +14539,7 @@ void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
+void serialize(const XrRoomLayoutFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14574,7 +14574,7 @@ void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBoundary2DFB* s, std::ostream& out) {
+void serialize(const XrBoundary2DFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14601,7 +14601,7 @@ void serialize(const XrBoundary2DFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
+void serialize(const XrSemanticLabelsSupportInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14624,7 +14624,7 @@ void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
+void serialize(const XrSemanticLabelsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14651,7 +14651,7 @@ void serialize(const XrSemanticLabelsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
+void serialize(const XrRoomLayoutFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14686,7 +14686,7 @@ void serialize(const XrRoomLayoutFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrBoundary2DFB* s, std::ostream& out) {
+void serialize(const XrBoundary2DFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14713,7 +14713,7 @@ void serialize(const XrBoundary2DFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
+void serialize(const XrSemanticLabelsSupportInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14738,7 +14738,7 @@ void serialize(const XrSemanticLabelsSupportInfoFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 
 
-void serialize(const XrDigitalLensControlALMALENCE* s, std::ostream& out) {
+void serialize(const XrDigitalLensControlALMALENCE* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14758,7 +14758,7 @@ void serialize(const XrDigitalLensControlALMALENCE* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14780,7 +14780,7 @@ void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
+void serialize(const XrSceneCaptureRequestInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14803,7 +14803,7 @@ void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14825,7 +14825,7 @@ void serialize(const XrEventDataSceneCaptureCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
+void serialize(const XrSceneCaptureRequestInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14850,7 +14850,7 @@ void serialize(const XrSceneCaptureRequestInfoFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 
 
-void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
+void serialize(const XrSpaceContainerFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14877,7 +14877,7 @@ void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
+void serialize(const XrSpaceContainerFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14906,7 +14906,7 @@ void serialize(const XrSpaceContainerFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14924,7 +14924,7 @@ void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream
 
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
+void serialize(const XrFoveationEyeTrackedStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14946,7 +14946,7 @@ void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14964,7 +14964,7 @@ void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream&
 
 
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -14982,7 +14982,7 @@ void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::ostream
 
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
+void serialize(const XrFoveationEyeTrackedStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15004,7 +15004,7 @@ void serialize(const XrFoveationEyeTrackedStateMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15024,7 +15024,7 @@ void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, std::ostream&
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15042,7 +15042,7 @@ void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFaceTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15060,7 +15060,7 @@ void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15078,7 +15078,7 @@ void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionStatusFB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionStatusFB* s, WriteStream& out) {
             
 
     serialize(&s->isValid, out);
@@ -15092,7 +15092,7 @@ void serialize(const XrFaceExpressionStatusFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionWeightsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15132,7 +15132,7 @@ void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15150,7 +15150,7 @@ void serialize(const XrSystemFaceTrackingPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrFaceTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15168,7 +15168,7 @@ void serialize(const XrFaceTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15186,7 +15186,7 @@ void serialize(const XrFaceExpressionInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionWeightsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15228,7 +15228,7 @@ void serialize(const XrFaceExpressionWeightsFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 
 
-void serialize(const XrEyeGazeFB* s, std::ostream& out) {
+void serialize(const XrEyeGazeFB* s, WriteStream& out) {
             
 
     serialize(&s->isValid, out);
@@ -15246,7 +15246,7 @@ void serialize(const XrEyeGazeFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrEyeTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15260,7 +15260,7 @@ void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
+void serialize(const XrEyeGazesInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15282,7 +15282,7 @@ void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15300,7 +15300,7 @@ void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeGazesFB* s, std::ostream& out) {
+void serialize(const XrEyeGazesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15322,7 +15322,7 @@ void serialize(const XrEyeGazesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrEyeTrackerCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15336,7 +15336,7 @@ void serialize(const XrEyeTrackerCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
+void serialize(const XrEyeGazesInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15358,7 +15358,7 @@ void serialize(const XrEyeGazesInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEyeGazesFB* s, std::ostream& out) {
+void serialize(const XrEyeGazesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15380,7 +15380,7 @@ void serialize(const XrEyeGazesFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15400,7 +15400,7 @@ void serialize(const XrSystemEyeTrackingPropertiesFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out) {
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15422,7 +15422,7 @@ void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out
 
 
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out) {
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15446,7 +15446,7 @@ void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, std::ostream& out
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 
 
-void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSettingsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15464,7 +15464,7 @@ void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerSettingsFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15484,7 +15484,7 @@ void serialize(const XrCompositionLayerSettingsFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 
 
-void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
+void serialize(const XrHapticPcmVibrationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15520,7 +15520,7 @@ void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
+void serialize(const XrDevicePcmSampleRateStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15538,7 +15538,7 @@ void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
+void serialize(const XrHapticPcmVibrationFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15574,7 +15574,7 @@ void serialize(const XrHapticPcmVibrationFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
+void serialize(const XrDevicePcmSampleRateStateFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15594,7 +15594,7 @@ void serialize(const XrDevicePcmSampleRateStateFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
+void serialize(const XrFrameSynthesisInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15648,7 +15648,7 @@ void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
+void serialize(const XrFrameSynthesisConfigViewEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15670,7 +15670,7 @@ void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
+void serialize(const XrFrameSynthesisInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15724,7 +15724,7 @@ void serialize(const XrFrameSynthesisInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
+void serialize(const XrFrameSynthesisConfigViewEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15748,7 +15748,7 @@ void serialize(const XrFrameSynthesisConfigViewEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 
 
-void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthTestFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15770,7 +15770,7 @@ void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
+void serialize(const XrCompositionLayerDepthTestFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15794,7 +15794,7 @@ void serialize(const XrCompositionLayerDepthTestFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
 
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15812,7 +15812,7 @@ void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15832,7 +15832,7 @@ void serialize(const XrLocalDimmingFrameEndInfoMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 
 
-void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughPreferencesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15850,7 +15850,7 @@ void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughPreferencesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15870,7 +15870,7 @@ void serialize(const XrPassthroughPreferencesMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15888,7 +15888,7 @@ void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out
 
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15902,7 +15902,7 @@ void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15928,7 +15928,7 @@ void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out)
 
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15958,7 +15958,7 @@ void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15976,7 +15976,7 @@ void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostrea
 
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -15998,7 +15998,7 @@ void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16025,7 +16025,7 @@ void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream&
 
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16060,7 +16060,7 @@ void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16090,7 +16090,7 @@ void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16109,7 +16109,7 @@ void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream
 
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16131,7 +16131,7 @@ void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16149,7 +16149,7 @@ void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& o
 
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16167,7 +16167,7 @@ void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16185,7 +16185,7 @@ void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16203,7 +16203,7 @@ void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out)
 
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16221,7 +16221,7 @@ void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, std::ostream& out
 
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16235,7 +16235,7 @@ void serialize(const XrVirtualKeyboardCreateInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16261,7 +16261,7 @@ void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, std::ostream& out)
 
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16291,7 +16291,7 @@ void serialize(const XrVirtualKeyboardLocationInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16309,7 +16309,7 @@ void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::ostrea
 
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16331,7 +16331,7 @@ void serialize(const XrVirtualKeyboardAnimationStateMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16358,7 +16358,7 @@ void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, std::ostream&
 
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16393,7 +16393,7 @@ void serialize(const XrVirtualKeyboardTextureDataMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16423,7 +16423,7 @@ void serialize(const XrVirtualKeyboardInputInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream& out) {
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16442,7 +16442,7 @@ void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, std::ostream
 
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16464,7 +16464,7 @@ void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16482,7 +16482,7 @@ void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, std::ostream& o
 
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16500,7 +16500,7 @@ void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16518,7 +16518,7 @@ void serialize(const XrEventDataVirtualKeyboardShownMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out) {
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16538,7 +16538,7 @@ void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, std::ostream& out)
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 
 
-void serialize(const XrExternalCameraIntrinsicsOCULUS* s, std::ostream& out) {
+void serialize(const XrExternalCameraIntrinsicsOCULUS* s, WriteStream& out) {
             
 
     serialize(&s->lastChangeTime, out);
@@ -16564,7 +16564,7 @@ void serialize(const XrExternalCameraIntrinsicsOCULUS* s, std::ostream& out) {
 
 
 
-void serialize(const XrExternalCameraExtrinsicsOCULUS* s, std::ostream& out) {
+void serialize(const XrExternalCameraExtrinsicsOCULUS* s, WriteStream& out) {
             
 
     serialize(&s->lastChangeTime, out);
@@ -16586,7 +16586,7 @@ void serialize(const XrExternalCameraExtrinsicsOCULUS* s, std::ostream& out) {
 
 
 
-void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
+void serialize(const XrExternalCameraOCULUS* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16612,7 +16612,7 @@ void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
 
 
 
-void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
+void serialize(const XrExternalCameraOCULUS* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16640,7 +16640,7 @@ void serialize(const XrExternalCameraOCULUS* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16662,7 +16662,7 @@ void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16686,7 +16686,7 @@ void serialize(const XrVulkanSwapchainCreateInfoMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
+void serialize(const XrPerformanceMetricsStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16704,7 +16704,7 @@ void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
+void serialize(const XrPerformanceMetricsCounterMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16734,7 +16734,7 @@ void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
+void serialize(const XrPerformanceMetricsStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16752,7 +16752,7 @@ void serialize(const XrPerformanceMetricsStateMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
+void serialize(const XrPerformanceMetricsCounterMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16784,7 +16784,7 @@ void serialize(const XrPerformanceMetricsCounterMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceListSaveInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16811,7 +16811,7 @@ void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16833,7 +16833,7 @@ void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceListSaveInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16860,7 +16860,7 @@ void serialize(const XrSpaceListSaveInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16884,7 +16884,7 @@ void serialize(const XrEventDataSpaceListSaveCompleteFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 
 
-void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceUserCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16902,7 +16902,7 @@ void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
+void serialize(const XrSpaceUserCreateInfoFB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16922,7 +16922,7 @@ void serialize(const XrSpaceUserCreateInfoFB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
 
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16940,7 +16940,7 @@ void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16960,7 +16960,7 @@ void serialize(const XrSystemHeadsetIdPropertiesMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
+void serialize(const XrRecommendedLayerResolutionMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -16982,7 +16982,7 @@ void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out) {
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17005,7 +17005,7 @@ void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& o
 
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
+void serialize(const XrRecommendedLayerResolutionMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17027,7 +17027,7 @@ void serialize(const XrRecommendedLayerResolutionMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& out) {
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17052,7 +17052,7 @@ void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, std::ostream& o
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 
 
-void serialize(const XrPassthroughColorLutDataMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorLutDataMETA* s, WriteStream& out) {
             
 
     serialize(&s->bufferSize, out);
@@ -17067,7 +17067,7 @@ void serialize(const XrPassthroughColorLutDataMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17093,7 +17093,7 @@ void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17111,7 +17111,7 @@ void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapLutMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17133,7 +17133,7 @@ void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17159,7 +17159,7 @@ void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& 
 
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17177,7 +17177,7 @@ void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream&
 
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17195,7 +17195,7 @@ void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, std::ostream&
 
 
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17221,7 +17221,7 @@ void serialize(const XrPassthroughColorLutCreateInfoMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17239,7 +17239,7 @@ void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, std::ostream& out) 
 
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapLutMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17261,7 +17261,7 @@ void serialize(const XrPassthroughColorMapLutMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& out) {
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17289,7 +17289,7 @@ void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, std::ostream& 
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17303,7 +17303,7 @@ void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
+void serialize(const XrSpaceTriangleMeshMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17343,7 +17343,7 @@ void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17357,7 +17357,7 @@ void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
+void serialize(const XrSpaceTriangleMeshMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17399,7 +17399,7 @@ void serialize(const XrSpaceTriangleMeshMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out) {
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17417,7 +17417,7 @@ void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream
 
 
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream& out) {
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17437,7 +17437,7 @@ void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::ostream
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out) {
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17455,7 +17455,7 @@ void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& out) {
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17475,7 +17475,7 @@ void serialize(const XrEventDataPassthroughLayerResumedMETA* s, std::ostream& ou
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
+void serialize(const XrSystemFaceTrackingProperties2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17497,7 +17497,7 @@ void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
+void serialize(const XrFaceTrackerCreateInfo2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17524,7 +17524,7 @@ void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionInfo2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17542,7 +17542,7 @@ void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionWeights2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17590,7 +17590,7 @@ void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
+void serialize(const XrSystemFaceTrackingProperties2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17612,7 +17612,7 @@ void serialize(const XrSystemFaceTrackingProperties2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
+void serialize(const XrFaceTrackerCreateInfo2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17639,7 +17639,7 @@ void serialize(const XrFaceTrackerCreateInfo2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionInfo2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17657,7 +17657,7 @@ void serialize(const XrFaceExpressionInfo2FB* s, std::ostream& out) {
 
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
+void serialize(const XrFaceExpressionWeights2FB* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17707,7 +17707,7 @@ void serialize(const XrFaceExpressionWeights2FB* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17725,14 +17725,14 @@ void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream
 
 
 
-void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, std::ostream& out) {
+void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
+void serialize(const XrShareSpacesInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17760,7 +17760,7 @@ void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17782,7 +17782,7 @@ void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17800,7 +17800,7 @@ void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, std::ostream
 
 
 
-void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
+void serialize(const XrShareSpacesInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17828,7 +17828,7 @@ void serialize(const XrShareSpacesInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17852,7 +17852,7 @@ void serialize(const XrEventDataShareSpacesCompleteMETA* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17870,7 +17870,7 @@ void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17888,7 +17888,7 @@ void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream&
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17910,7 +17910,7 @@ void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out)
 
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17932,7 +17932,7 @@ void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageViewMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17954,7 +17954,7 @@ void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -17984,7 +17984,7 @@ void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18002,7 +18002,7 @@ void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& 
 
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18024,7 +18024,7 @@ void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18042,7 +18042,7 @@ void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18060,7 +18060,7 @@ void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::ostream&
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18082,7 +18082,7 @@ void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, std::ostream& out)
 
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18104,7 +18104,7 @@ void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageViewMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18126,7 +18126,7 @@ void serialize(const XrEnvironmentDepthImageViewMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthImageMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18156,7 +18156,7 @@ void serialize(const XrEnvironmentDepthImageMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& out) {
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18174,7 +18174,7 @@ void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::ostream& 
 
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18200,7 +18200,7 @@ void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, std::ostream& ou
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18218,7 +18218,7 @@ void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughColorHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18236,7 +18236,7 @@ void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18284,7 +18284,7 @@ void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
+void serialize(const XrCompositionLayerPassthroughHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18314,7 +18314,7 @@ void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18332,7 +18332,7 @@ void serialize(const XrPassthroughCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughColorHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18350,7 +18350,7 @@ void serialize(const XrPassthroughColorHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18398,7 +18398,7 @@ void serialize(const XrPassthroughMeshTransformInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
+void serialize(const XrCompositionLayerPassthroughHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18430,7 +18430,7 @@ void serialize(const XrCompositionLayerPassthroughHTC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 
 
-void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationApplyInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18457,7 +18457,7 @@ void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationConfigurationHTC* s, std::ostream& out) {
+void serialize(const XrFoveationConfigurationHTC* s, WriteStream& out) {
             
 
     serialize(&s->level, out);
@@ -18475,7 +18475,7 @@ void serialize(const XrFoveationConfigurationHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationDynamicModeInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18493,7 +18493,7 @@ void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationCustomModeInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18516,7 +18516,7 @@ void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationApplyInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18543,7 +18543,7 @@ void serialize(const XrFoveationApplyInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationDynamicModeInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18561,7 +18561,7 @@ void serialize(const XrFoveationDynamicModeInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
+void serialize(const XrFoveationCustomModeInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18586,7 +18586,7 @@ void serialize(const XrFoveationCustomModeInfoHTC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemAnchorPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18604,7 +18604,7 @@ void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18630,7 +18630,7 @@ void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorNameHTC* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorNameHTC* s, WriteStream& out) {
             
 
     serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, out);
@@ -18640,7 +18640,7 @@ void serialize(const XrSpatialAnchorNameHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemAnchorPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18658,7 +18658,7 @@ void serialize(const XrSystemAnchorPropertiesHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18686,7 +18686,7 @@ void serialize(const XrSpatialAnchorCreateInfoHTC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18704,7 +18704,7 @@ void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18722,7 +18722,7 @@ void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18744,7 +18744,7 @@ void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18779,7 +18779,7 @@ void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationHTC* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationHTC* s, WriteStream& out) {
             
 
     serialize(&s->locationFlags, out);
@@ -18793,7 +18793,7 @@ void serialize(const XrBodyJointLocationHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
+void serialize(const XrBodySkeletonHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18816,7 +18816,7 @@ void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18834,7 +18834,7 @@ void serialize(const XrSystemBodyTrackingPropertiesHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18852,7 +18852,7 @@ void serialize(const XrBodyTrackerCreateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18874,7 +18874,7 @@ void serialize(const XrBodyJointsLocateInfoHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18909,7 +18909,7 @@ void serialize(const XrBodyJointLocationsHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
+void serialize(const XrBodySkeletonHTC* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18934,7 +18934,7 @@ void serialize(const XrBodySkeletonHTC* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
+void serialize(const XrActiveActionSetPrioritiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18957,7 +18957,7 @@ void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrActiveActionSetPriorityEXT* s, std::ostream& out) {
+void serialize(const XrActiveActionSetPriorityEXT* s, WriteStream& out) {
             
 
     serialize(&s->actionSet, out);
@@ -18971,7 +18971,7 @@ void serialize(const XrActiveActionSetPriorityEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
+void serialize(const XrActiveActionSetPrioritiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -18996,7 +18996,7 @@ void serialize(const XrActiveActionSetPrioritiesEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out) {
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19014,7 +19014,7 @@ void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& o
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out) {
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19037,7 +19037,7 @@ void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, std::ostream& out) {
+void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, WriteStream& out) {
             
 
     serialize(&s->location, out);
@@ -19051,7 +19051,7 @@ void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, std::ostream& out)
 
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& out) {
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19069,7 +19069,7 @@ void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, std::ostream& o
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out) {
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19094,7 +19094,7 @@ void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, std::ostream& out
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19112,7 +19112,7 @@ void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19130,7 +19130,7 @@ void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19152,7 +19152,7 @@ void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19179,7 +19179,7 @@ void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationBD* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationBD* s, WriteStream& out) {
             
 
     serialize(&s->locationFlags, out);
@@ -19193,7 +19193,7 @@ void serialize(const XrBodyJointLocationBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrBodyTrackerCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19211,7 +19211,7 @@ void serialize(const XrBodyTrackerCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
+void serialize(const XrBodyJointsLocateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19233,7 +19233,7 @@ void serialize(const XrBodyJointsLocateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
+void serialize(const XrBodyJointLocationsBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19260,7 +19260,7 @@ void serialize(const XrBodyJointLocationsBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19280,7 +19280,7 @@ void serialize(const XrSystemBodyTrackingPropertiesBD* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19298,7 +19298,7 @@ void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19320,14 +19320,14 @@ void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19345,7 +19345,7 @@ void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19363,7 +19363,7 @@ void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19390,7 +19390,7 @@ void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19408,7 +19408,7 @@ void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostrea
 
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19435,7 +19435,7 @@ void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19453,7 +19453,7 @@ void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostrea
 
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19493,7 +19493,7 @@ void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19511,7 +19511,7 @@ void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderStartInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19525,7 +19525,7 @@ void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out) {
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19547,7 +19547,7 @@ void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream
 
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
+void serialize(const XrEventDataSenseDataUpdatedBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19565,7 +19565,7 @@ void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataQueryInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19579,7 +19579,7 @@ void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
+void serialize(const XrSenseDataQueryCompletionBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19601,7 +19601,7 @@ void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
+void serialize(const XrQueriedSenseDataGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19615,7 +19615,7 @@ void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
+void serialize(const XrQueriedSenseDataBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19642,7 +19642,7 @@ void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityStateBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19668,7 +19668,7 @@ void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
+void serialize(const XrSenseDataFilterUuidBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19691,7 +19691,7 @@ void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
+void serialize(const XrSenseDataFilterSemanticBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19714,7 +19714,7 @@ void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19736,7 +19736,7 @@ void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrAnchorSpaceCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19758,7 +19758,7 @@ void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19776,7 +19776,7 @@ void serialize(const XrSystemSpatialSensingPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19798,7 +19798,7 @@ void serialize(const XrSpatialEntityComponentGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19816,7 +19816,7 @@ void serialize(const XrSpatialEntityLocationGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19834,7 +19834,7 @@ void serialize(const XrSpatialEntityComponentDataLocationBD* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19861,7 +19861,7 @@ void serialize(const XrSpatialEntityComponentDataSemanticBD* s, std::ostream& ou
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19879,7 +19879,7 @@ void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, std::ostrea
 
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19906,7 +19906,7 @@ void serialize(const XrSpatialEntityComponentDataPolygonBD* s, std::ostream& out
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19924,7 +19924,7 @@ void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, std::ostrea
 
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19964,7 +19964,7 @@ void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, std::ostream
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19982,7 +19982,7 @@ void serialize(const XrSenseDataProviderCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderStartInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -19996,7 +19996,7 @@ void serialize(const XrSenseDataProviderStartInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream& out) {
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20018,7 +20018,7 @@ void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, std::ostream
 
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
+void serialize(const XrEventDataSenseDataUpdatedBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20036,7 +20036,7 @@ void serialize(const XrEventDataSenseDataUpdatedBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
+void serialize(const XrSenseDataQueryInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20050,7 +20050,7 @@ void serialize(const XrSenseDataQueryInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
+void serialize(const XrSenseDataQueryCompletionBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20072,7 +20072,7 @@ void serialize(const XrSenseDataQueryCompletionBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
+void serialize(const XrSenseDataFilterUuidBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20095,7 +20095,7 @@ void serialize(const XrSenseDataFilterUuidBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
+void serialize(const XrSenseDataFilterSemanticBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20118,7 +20118,7 @@ void serialize(const XrSenseDataFilterSemanticBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
+void serialize(const XrQueriedSenseDataGetInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20132,7 +20132,7 @@ void serialize(const XrQueriedSenseDataGetInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
+void serialize(const XrQueriedSenseDataBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20159,7 +20159,7 @@ void serialize(const XrQueriedSenseDataBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityStateBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20185,7 +20185,7 @@ void serialize(const XrSpatialEntityStateBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20207,7 +20207,7 @@ void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrAnchorSpaceCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20231,7 +20231,7 @@ void serialize(const XrAnchorSpaceCreateInfoBD* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20249,7 +20249,7 @@ void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20275,7 +20275,7 @@ void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20301,7 +20301,7 @@ void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorPersistInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20323,7 +20323,7 @@ void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20345,7 +20345,7 @@ void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20363,7 +20363,7 @@ void serialize(const XrSystemSpatialAnchorPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20389,7 +20389,7 @@ void serialize(const XrSpatialAnchorCreateInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20415,7 +20415,7 @@ void serialize(const XrSpatialAnchorCreateCompletionBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorPersistInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20437,7 +20437,7 @@ void serialize(const XrSpatialAnchorPersistInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20461,7 +20461,7 @@ void serialize(const XrSpatialAnchorUnpersistInfoBD* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20479,7 +20479,7 @@ void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& 
 
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorShareInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20497,7 +20497,7 @@ void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) {
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20515,7 +20515,7 @@ void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) 
 
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20533,7 +20533,7 @@ void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, std::ostream& 
 
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
+void serialize(const XrSpatialAnchorShareInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20551,7 +20551,7 @@ void serialize(const XrSpatialAnchorShareInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) {
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20571,7 +20571,7 @@ void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialScenePropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20589,7 +20589,7 @@ void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
+void serialize(const XrSceneCaptureInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20603,7 +20603,7 @@ void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialScenePropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20621,7 +20621,7 @@ void serialize(const XrSystemSpatialScenePropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
+void serialize(const XrSceneCaptureInfoBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20637,7 +20637,7 @@ void serialize(const XrSceneCaptureInfoBD* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20655,7 +20655,7 @@ void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20677,7 +20677,7 @@ void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream
 
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20695,7 +20695,7 @@ void serialize(const XrSystemSpatialMeshPropertiesBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream& out) {
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20719,7 +20719,7 @@ void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::ostream
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
 
 
-void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
+void serialize(const XrFuturePollResultProgressBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20741,7 +20741,7 @@ void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
 
 
 
-void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
+void serialize(const XrFuturePollResultProgressBD* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20765,7 +20765,7 @@ void serialize(const XrFuturePollResultProgressBD* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20788,7 +20788,7 @@ void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackingDataSourceStateEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20810,7 +20810,7 @@ void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20833,7 +20833,7 @@ void serialize(const XrHandTrackingDataSourceInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
+void serialize(const XrHandTrackingDataSourceStateEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20857,7 +20857,7 @@ void serialize(const XrHandTrackingDataSourceStateEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20875,7 +20875,7 @@ void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) 
 
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20893,7 +20893,7 @@ void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20949,7 +20949,7 @@ void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorGetInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -20971,7 +20971,7 @@ void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorLocationEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21013,7 +21013,7 @@ void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorLocationsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21040,7 +21040,7 @@ void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21067,7 +21067,7 @@ void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21085,7 +21085,7 @@ void serialize(const XrPlaneDetectorCreateInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21141,7 +21141,7 @@ void serialize(const XrPlaneDetectorBeginInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorGetInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21163,7 +21163,7 @@ void serialize(const XrPlaneDetectorGetInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorLocationsEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21190,7 +21190,7 @@ void serialize(const XrPlaneDetectorLocationsEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorLocationEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21232,7 +21232,7 @@ void serialize(const XrPlaneDetectorLocationEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21259,7 +21259,7 @@ void serialize(const XrPlaneDetectorPolygonBufferEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21279,7 +21279,7 @@ void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, std::ostream& out) 
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 
 
-void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
+void serialize(const XrFutureCancelInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21297,7 +21297,7 @@ void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
+void serialize(const XrFuturePollInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21315,14 +21315,14 @@ void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFutureCompletionBaseHeaderEXT* s, std::ostream& out) {
+void serialize(const XrFutureCompletionBaseHeaderEXT* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
+void serialize(const XrFutureCompletionEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21340,7 +21340,7 @@ void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
+void serialize(const XrFuturePollResultEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21358,7 +21358,7 @@ void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
+void serialize(const XrFutureCancelInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21376,7 +21376,7 @@ void serialize(const XrFutureCancelInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
+void serialize(const XrFuturePollInfoEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21394,7 +21394,7 @@ void serialize(const XrFuturePollInfoEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
+void serialize(const XrFutureCompletionEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21412,7 +21412,7 @@ void serialize(const XrFutureCompletionEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
+void serialize(const XrFuturePollResultEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21432,7 +21432,7 @@ void serialize(const XrFuturePollResultEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
 
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
+void serialize(const XrEventDataUserPresenceChangedEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21454,7 +21454,7 @@ void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemUserPresencePropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21472,7 +21472,7 @@ void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
+void serialize(const XrEventDataUserPresenceChangedEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21494,7 +21494,7 @@ void serialize(const XrEventDataUserPresenceChangedEXT* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
+void serialize(const XrSystemUserPresencePropertiesEXT* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21514,7 +21514,7 @@ void serialize(const XrSystemUserPresencePropertiesEXT* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 
 
-void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
+void serialize(const XrSystemNotificationsSetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21532,7 +21532,7 @@ void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
+void serialize(const XrSystemNotificationsSetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21552,7 +21552,7 @@ void serialize(const XrSystemNotificationsSetInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21566,7 +21566,7 @@ void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21600,7 +21600,7 @@ void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshStateRequestInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21630,7 +21630,7 @@ void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) {
+void serialize(const XrWorldMeshStateRequestCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21665,7 +21665,7 @@ void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) 
 
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21683,7 +21683,7 @@ void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& ou
 
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferSizeML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21701,7 +21701,7 @@ void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21724,7 +21724,7 @@ void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockRequestML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21746,7 +21746,7 @@ void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshGetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21781,7 +21781,7 @@ void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21847,7 +21847,7 @@ void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21869,7 +21869,7 @@ void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
+void serialize(const XrWorldMeshRequestCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21896,7 +21896,7 @@ void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21910,7 +21910,7 @@ void serialize(const XrWorldMeshDetectorCreateInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshStateRequestInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21940,7 +21940,7 @@ void serialize(const XrWorldMeshStateRequestInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockStateML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -21974,7 +21974,7 @@ void serialize(const XrWorldMeshBlockStateML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) {
+void serialize(const XrWorldMeshStateRequestCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22009,7 +22009,7 @@ void serialize(const XrWorldMeshStateRequestCompletionML* s, std::ostream& out) 
 
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22027,7 +22027,7 @@ void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, std::ostream& ou
 
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferSizeML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22045,7 +22045,7 @@ void serialize(const XrWorldMeshBufferSizeML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBufferML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22068,7 +22068,7 @@ void serialize(const XrWorldMeshBufferML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockRequestML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22090,7 +22090,7 @@ void serialize(const XrWorldMeshBlockRequestML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshGetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22125,7 +22125,7 @@ void serialize(const XrWorldMeshGetInfoML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
+void serialize(const XrWorldMeshBlockML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22191,7 +22191,7 @@ void serialize(const XrWorldMeshBlockML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
+void serialize(const XrWorldMeshRequestCompletionML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22218,7 +22218,7 @@ void serialize(const XrWorldMeshRequestCompletionML* s, std::ostream& out) {
 
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22242,7 +22242,7 @@ void serialize(const XrWorldMeshRequestCompletionInfoML* s, std::ostream& out) {
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out) {
+void serialize(const XrSystemFacialExpressionPropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22260,7 +22260,7 @@ void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out)
 
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionClientCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22283,7 +22283,7 @@ void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out)
 
 
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22297,7 +22297,7 @@ void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out
 
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22327,7 +22327,7 @@ void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& 
 
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out) {
+void serialize(const XrSystemFacialExpressionPropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22345,7 +22345,7 @@ void serialize(const XrSystemFacialExpressionPropertiesML* s, std::ostream& out)
 
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionClientCreateInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22368,7 +22368,7 @@ void serialize(const XrFacialExpressionClientCreateInfoML* s, std::ostream& out)
 
 
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22382,7 +22382,7 @@ void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, std::ostream& out
 
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& out) {
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22414,7 +22414,7 @@ void serialize(const XrFacialExpressionBlendShapePropertiesML* s, std::ostream& 
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22432,7 +22432,7 @@ void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, s
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out) {
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22446,7 +22446,7 @@ void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s,
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out) {
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22460,7 +22460,7 @@ void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, 
 
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22478,7 +22478,7 @@ void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, s
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::ostream& out) {
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22492,7 +22492,7 @@ void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s,
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::ostream& out) {
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22508,7 +22508,7 @@ void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, 
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22522,7 +22522,7 @@ void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22536,7 +22536,7 @@ void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22559,7 +22559,7 @@ void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22573,7 +22573,7 @@ void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out
 
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22599,7 +22599,7 @@ void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std
 
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22621,7 +22621,7 @@ void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std:
 
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22643,7 +22643,7 @@ void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ost
 
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22665,7 +22665,7 @@ void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::os
 
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22695,7 +22695,7 @@ void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22717,7 +22717,7 @@ void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream
 
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22739,7 +22739,7 @@ void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ost
 
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22757,7 +22757,7 @@ void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream&
 
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22771,7 +22771,7 @@ void serialize(const XrColocationDiscoveryStartInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22785,7 +22785,7 @@ void serialize(const XrColocationDiscoveryStopInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22808,7 +22808,7 @@ void serialize(const XrColocationAdvertisementStartInfoMETA* s, std::ostream& ou
 
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out) {
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22822,7 +22822,7 @@ void serialize(const XrColocationAdvertisementStopInfoMETA* s, std::ostream& out
 
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22848,7 +22848,7 @@ void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, std
 
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22870,7 +22870,7 @@ void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, std:
 
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22892,7 +22892,7 @@ void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, std::ost
 
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22914,7 +22914,7 @@ void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, std::os
 
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22944,7 +22944,7 @@ void serialize(const XrEventDataColocationDiscoveryResultMETA* s, std::ostream& 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22966,7 +22966,7 @@ void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, std::ostream
 
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ostream& out) {
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -22988,7 +22988,7 @@ void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, std::ost
 
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23008,7 +23008,7 @@ void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, std::ostream&
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23026,7 +23026,7 @@ void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::os
 
 
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23049,7 +23049,7 @@ void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23067,7 +23067,7 @@ void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23090,7 +23090,7 @@ void serialize(const XrShareSpacesRecipientGroupsMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23108,7 +23108,7 @@ void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::ostream& out) {
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23127,7 +23127,7 @@ void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::os
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void serialize(const XrActionCreateInfo* s, std::ostream& out) {
+void serialize(const XrActionCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23162,7 +23162,7 @@ void serialize(const XrActionCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionSetCreateInfo* s, std::ostream& out) {
+void serialize(const XrActionSetCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23188,7 +23188,7 @@ void serialize(const XrActionSetCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionSpaceCreateInfo* s, std::ostream& out) {
+void serialize(const XrActionSpaceCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23214,7 +23214,7 @@ void serialize(const XrActionSpaceCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionStateBoolean* s, std::ostream& out) {
+void serialize(const XrActionStateBoolean* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23244,7 +23244,7 @@ void serialize(const XrActionStateBoolean* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionStateFloat* s, std::ostream& out) {
+void serialize(const XrActionStateFloat* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23274,7 +23274,7 @@ void serialize(const XrActionStateFloat* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionStateGetInfo* s, std::ostream& out) {
+void serialize(const XrActionStateGetInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23296,7 +23296,7 @@ void serialize(const XrActionStateGetInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionStatePose* s, std::ostream& out) {
+void serialize(const XrActionStatePose* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23314,7 +23314,7 @@ void serialize(const XrActionStatePose* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionStateVector2f* s, std::ostream& out) {
+void serialize(const XrActionStateVector2f* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23344,7 +23344,7 @@ void serialize(const XrActionStateVector2f* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionSuggestedBinding* s, std::ostream& out) {
+void serialize(const XrActionSuggestedBinding* s, WriteStream& out) {
             
 
     serialize(&s->action, out);
@@ -23358,7 +23358,7 @@ void serialize(const XrActionSuggestedBinding* s, std::ostream& out) {
 
 
 
-void serialize(const XrActionsSyncInfo* s, std::ostream& out) {
+void serialize(const XrActionsSyncInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23381,7 +23381,7 @@ void serialize(const XrActionsSyncInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrActiveActionSet* s, std::ostream& out) {
+void serialize(const XrActiveActionSet* s, WriteStream& out) {
             
 
     serialize(&s->actionSet, out);
@@ -23395,7 +23395,7 @@ void serialize(const XrActiveActionSet* s, std::ostream& out) {
 
 
 
-void serialize(const XrApiLayerProperties* s, std::ostream& out) {
+void serialize(const XrApiLayerProperties* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23425,7 +23425,7 @@ void serialize(const XrApiLayerProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrApplicationInfo* s, std::ostream& out) {
+void serialize(const XrApplicationInfo* s, WriteStream& out) {
             
 
     serialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, out);
@@ -23451,7 +23451,7 @@ void serialize(const XrApplicationInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrBodySkeletonJointHTC* s, std::ostream& out) {
+void serialize(const XrBodySkeletonJointHTC* s, WriteStream& out) {
             
 
     serialize(&s->pose, out);
@@ -23461,7 +23461,7 @@ void serialize(const XrBodySkeletonJointHTC* s, std::ostream& out) {
 
 
 
-void serialize(const XrBoundSourcesForActionEnumerateInfo* s, std::ostream& out) {
+void serialize(const XrBoundSourcesForActionEnumerateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23479,7 +23479,7 @@ void serialize(const XrBoundSourcesForActionEnumerateInfo* s, std::ostream& out)
 
 
 
-void serialize(const XrBoxf* s, std::ostream& out) {
+void serialize(const XrBoxf* s, WriteStream& out) {
             
 
     serialize(&s->center, out);
@@ -23493,7 +23493,7 @@ void serialize(const XrBoxf* s, std::ostream& out) {
 
 
 
-void serialize(const XrColor3f* s, std::ostream& out) {
+void serialize(const XrColor3f* s, WriteStream& out) {
             
 
     serialize(&s->r, out);
@@ -23511,7 +23511,7 @@ void serialize(const XrColor3f* s, std::ostream& out) {
 
 
 
-void serialize(const XrColor4f* s, std::ostream& out) {
+void serialize(const XrColor4f* s, WriteStream& out) {
             
 
     serialize(&s->r, out);
@@ -23533,14 +23533,14 @@ void serialize(const XrColor4f* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerBaseHeader* s, std::ostream& out) {
+void serialize(const XrCompositionLayerBaseHeader* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrCompositionLayerProjection* s, std::ostream& out) {
+void serialize(const XrCompositionLayerProjection* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23571,7 +23571,7 @@ void serialize(const XrCompositionLayerProjection* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerProjectionView* s, std::ostream& out) {
+void serialize(const XrCompositionLayerProjectionView* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23597,7 +23597,7 @@ void serialize(const XrCompositionLayerProjectionView* s, std::ostream& out) {
 
 
 
-void serialize(const XrCompositionLayerQuad* s, std::ostream& out) {
+void serialize(const XrCompositionLayerQuad* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23635,14 +23635,14 @@ void serialize(const XrCompositionLayerQuad* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataBaseHeader* s, std::ostream& out) {
+void serialize(const XrEventDataBaseHeader* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrEventDataBuffer* s, std::ostream& out) {
+void serialize(const XrEventDataBuffer* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23660,7 +23660,7 @@ void serialize(const XrEventDataBuffer* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataEventsLost* s, std::ostream& out) {
+void serialize(const XrEventDataEventsLost* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23678,7 +23678,7 @@ void serialize(const XrEventDataEventsLost* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataInstanceLossPending* s, std::ostream& out) {
+void serialize(const XrEventDataInstanceLossPending* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23696,7 +23696,7 @@ void serialize(const XrEventDataInstanceLossPending* s, std::ostream& out) {
 
 
 
-void serialize(const XrEventDataInteractionProfileChanged* s, std::ostream& out) {
+void serialize(const XrEventDataInteractionProfileChanged* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23714,7 +23714,7 @@ void serialize(const XrEventDataInteractionProfileChanged* s, std::ostream& out)
 
 
 
-void serialize(const XrEventDataReferenceSpaceChangePending* s, std::ostream& out) {
+void serialize(const XrEventDataReferenceSpaceChangePending* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23748,7 +23748,7 @@ void serialize(const XrEventDataReferenceSpaceChangePending* s, std::ostream& ou
 
 
 
-void serialize(const XrEventDataSessionStateChanged* s, std::ostream& out) {
+void serialize(const XrEventDataSessionStateChanged* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23774,7 +23774,7 @@ void serialize(const XrEventDataSessionStateChanged* s, std::ostream& out) {
 
 
 
-void serialize(const XrExtensionProperties* s, std::ostream& out) {
+void serialize(const XrExtensionProperties* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23796,7 +23796,7 @@ void serialize(const XrExtensionProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrExtent2Df* s, std::ostream& out) {
+void serialize(const XrExtent2Df* s, WriteStream& out) {
             
 
     serialize(&s->width, out);
@@ -23810,7 +23810,7 @@ void serialize(const XrExtent2Df* s, std::ostream& out) {
 
 
 
-void serialize(const XrExtent2Di* s, std::ostream& out) {
+void serialize(const XrExtent2Di* s, WriteStream& out) {
             
 
     serialize(&s->width, out);
@@ -23824,7 +23824,7 @@ void serialize(const XrExtent2Di* s, std::ostream& out) {
 
 
 
-void serialize(const XrExtent3Df* s, std::ostream& out) {
+void serialize(const XrExtent3Df* s, WriteStream& out) {
             
 
     serialize(&s->width, out);
@@ -23842,7 +23842,7 @@ void serialize(const XrExtent3Df* s, std::ostream& out) {
 
 
 
-void serialize(const XrFovf* s, std::ostream& out) {
+void serialize(const XrFovf* s, WriteStream& out) {
             
 
     serialize(&s->angleLeft, out);
@@ -23864,7 +23864,7 @@ void serialize(const XrFovf* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameBeginInfo* s, std::ostream& out) {
+void serialize(const XrFrameBeginInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23880,7 +23880,7 @@ void serialize(const XrFrameBeginInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameState* s, std::ostream& out) {
+void serialize(const XrFrameState* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23906,7 +23906,7 @@ void serialize(const XrFrameState* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrameWaitInfo* s, std::ostream& out) {
+void serialize(const XrFrameWaitInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23920,7 +23920,7 @@ void serialize(const XrFrameWaitInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrFrustumf* s, std::ostream& out) {
+void serialize(const XrFrustumf* s, WriteStream& out) {
             
 
     serialize(&s->pose, out);
@@ -23942,7 +23942,7 @@ void serialize(const XrFrustumf* s, std::ostream& out) {
 
 
 
-void serialize(const XrHapticActionInfo* s, std::ostream& out) {
+void serialize(const XrHapticActionInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23964,14 +23964,14 @@ void serialize(const XrHapticActionInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrHapticBaseHeader* s, std::ostream& out) {
+void serialize(const XrHapticBaseHeader* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrHapticVibration* s, std::ostream& out) {
+void serialize(const XrHapticVibration* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -23997,7 +23997,7 @@ void serialize(const XrHapticVibration* s, std::ostream& out) {
 
 
 
-void serialize(const XrInputSourceLocalizedNameGetInfo* s, std::ostream& out) {
+void serialize(const XrInputSourceLocalizedNameGetInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24021,7 +24021,7 @@ void serialize(const XrInputSourceLocalizedNameGetInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrInstanceProperties* s, std::ostream& out) {
+void serialize(const XrInstanceProperties* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24043,7 +24043,7 @@ void serialize(const XrInstanceProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrInteractionProfileState* s, std::ostream& out) {
+void serialize(const XrInteractionProfileState* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24061,7 +24061,7 @@ void serialize(const XrInteractionProfileState* s, std::ostream& out) {
 
 
 
-void serialize(const XrInteractionProfileSuggestedBinding* s, std::ostream& out) {
+void serialize(const XrInteractionProfileSuggestedBinding* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24088,7 +24088,7 @@ void serialize(const XrInteractionProfileSuggestedBinding* s, std::ostream& out)
 
 
 
-void serialize(const XrOffset2Df* s, std::ostream& out) {
+void serialize(const XrOffset2Df* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24102,7 +24102,7 @@ void serialize(const XrOffset2Df* s, std::ostream& out) {
 
 
 
-void serialize(const XrOffset2Di* s, std::ostream& out) {
+void serialize(const XrOffset2Di* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24116,7 +24116,7 @@ void serialize(const XrOffset2Di* s, std::ostream& out) {
 
 
 
-void serialize(const XrPosef* s, std::ostream& out) {
+void serialize(const XrPosef* s, WriteStream& out) {
             
 
     serialize(&s->orientation, out);
@@ -24130,7 +24130,7 @@ void serialize(const XrPosef* s, std::ostream& out) {
 
 
 
-void serialize(const XrQuaternionf* s, std::ostream& out) {
+void serialize(const XrQuaternionf* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24152,7 +24152,7 @@ void serialize(const XrQuaternionf* s, std::ostream& out) {
 
 
 
-void serialize(const XrRect2Df* s, std::ostream& out) {
+void serialize(const XrRect2Df* s, WriteStream& out) {
             
 
     serialize(&s->offset, out);
@@ -24166,7 +24166,7 @@ void serialize(const XrRect2Df* s, std::ostream& out) {
 
 
 
-void serialize(const XrRect2Di* s, std::ostream& out) {
+void serialize(const XrRect2Di* s, WriteStream& out) {
             
 
     serialize(&s->offset, out);
@@ -24180,7 +24180,7 @@ void serialize(const XrRect2Di* s, std::ostream& out) {
 
 
 
-void serialize(const XrReferenceSpaceCreateInfo* s, std::ostream& out) {
+void serialize(const XrReferenceSpaceCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24202,7 +24202,7 @@ void serialize(const XrReferenceSpaceCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSessionActionSetsAttachInfo* s, std::ostream& out) {
+void serialize(const XrSessionActionSetsAttachInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24225,7 +24225,7 @@ void serialize(const XrSessionActionSetsAttachInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSessionBeginInfo* s, std::ostream& out) {
+void serialize(const XrSessionBeginInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24243,7 +24243,7 @@ void serialize(const XrSessionBeginInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSessionCreateInfo* s, std::ostream& out) {
+void serialize(const XrSessionCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24265,7 +24265,7 @@ void serialize(const XrSessionCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceLocation* s, std::ostream& out) {
+void serialize(const XrSpaceLocation* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24287,7 +24287,7 @@ void serialize(const XrSpaceLocation* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceLocationData* s, std::ostream& out) {
+void serialize(const XrSpaceLocationData* s, WriteStream& out) {
             
 
     serialize(&s->locationFlags, out);
@@ -24301,7 +24301,7 @@ void serialize(const XrSpaceLocationData* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceLocations* s, std::ostream& out) {
+void serialize(const XrSpaceLocations* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24324,7 +24324,7 @@ void serialize(const XrSpaceLocations* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceVelocities* s, std::ostream& out) {
+void serialize(const XrSpaceVelocities* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24347,7 +24347,7 @@ void serialize(const XrSpaceVelocities* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceVelocity* s, std::ostream& out) {
+void serialize(const XrSpaceVelocity* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24373,7 +24373,7 @@ void serialize(const XrSpaceVelocity* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpaceVelocityData* s, std::ostream& out) {
+void serialize(const XrSpaceVelocityData* s, WriteStream& out) {
             
 
     serialize(&s->velocityFlags, out);
@@ -24391,7 +24391,7 @@ void serialize(const XrSpaceVelocityData* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpacesLocateInfo* s, std::ostream& out) {
+void serialize(const XrSpacesLocateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24422,7 +24422,7 @@ void serialize(const XrSpacesLocateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSpheref* s, std::ostream& out) {
+void serialize(const XrSpheref* s, WriteStream& out) {
             
 
     serialize(&s->center, out);
@@ -24436,7 +24436,7 @@ void serialize(const XrSpheref* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainCreateInfo* s, std::ostream& out) {
+void serialize(const XrSwapchainCreateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24486,7 +24486,7 @@ void serialize(const XrSwapchainCreateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageAcquireInfo* s, std::ostream& out) {
+void serialize(const XrSwapchainImageAcquireInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24500,14 +24500,14 @@ void serialize(const XrSwapchainImageAcquireInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageBaseHeader* s, std::ostream& out) {
+void serialize(const XrSwapchainImageBaseHeader* s, WriteStream& out) {
         serialize_xr(s, out);
 }
 
 
 
 
-void serialize(const XrSwapchainImageReleaseInfo* s, std::ostream& out) {
+void serialize(const XrSwapchainImageReleaseInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24521,7 +24521,7 @@ void serialize(const XrSwapchainImageReleaseInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainImageWaitInfo* s, std::ostream& out) {
+void serialize(const XrSwapchainImageWaitInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24539,7 +24539,7 @@ void serialize(const XrSwapchainImageWaitInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSwapchainSubImage* s, std::ostream& out) {
+void serialize(const XrSwapchainSubImage* s, WriteStream& out) {
             
 
     serialize(&s->swapchain, out);
@@ -24557,7 +24557,7 @@ void serialize(const XrSwapchainSubImage* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemGetInfo* s, std::ostream& out) {
+void serialize(const XrSystemGetInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24575,7 +24575,7 @@ void serialize(const XrSystemGetInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemGraphicsProperties* s, std::ostream& out) {
+void serialize(const XrSystemGraphicsProperties* s, WriteStream& out) {
             
 
     serialize(&s->maxSwapchainImageHeight, out);
@@ -24593,7 +24593,7 @@ void serialize(const XrSystemGraphicsProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemProperties* s, std::ostream& out) {
+void serialize(const XrSystemProperties* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24627,7 +24627,7 @@ void serialize(const XrSystemProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrSystemTrackingProperties* s, std::ostream& out) {
+void serialize(const XrSystemTrackingProperties* s, WriteStream& out) {
             
 
     serialize(&s->orientationTracking, out);
@@ -24641,7 +24641,7 @@ void serialize(const XrSystemTrackingProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrUuid* s, std::ostream& out) {
+void serialize(const XrUuid* s, WriteStream& out) {
             
 
     serialize_array(s->data, XR_UUID_SIZE, out);
@@ -24651,7 +24651,7 @@ void serialize(const XrUuid* s, std::ostream& out) {
 
 
 
-void serialize(const XrVector2f* s, std::ostream& out) {
+void serialize(const XrVector2f* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24665,7 +24665,7 @@ void serialize(const XrVector2f* s, std::ostream& out) {
 
 
 
-void serialize(const XrVector3f* s, std::ostream& out) {
+void serialize(const XrVector3f* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24683,7 +24683,7 @@ void serialize(const XrVector3f* s, std::ostream& out) {
 
 
 
-void serialize(const XrVector4f* s, std::ostream& out) {
+void serialize(const XrVector4f* s, WriteStream& out) {
             
 
     serialize(&s->x, out);
@@ -24705,7 +24705,7 @@ void serialize(const XrVector4f* s, std::ostream& out) {
 
 
 
-void serialize(const XrView* s, std::ostream& out) {
+void serialize(const XrView* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24727,7 +24727,7 @@ void serialize(const XrView* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewConfigurationProperties* s, std::ostream& out) {
+void serialize(const XrViewConfigurationProperties* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24749,7 +24749,7 @@ void serialize(const XrViewConfigurationProperties* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewConfigurationView* s, std::ostream& out) {
+void serialize(const XrViewConfigurationView* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24787,7 +24787,7 @@ void serialize(const XrViewConfigurationView* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewLocateInfo* s, std::ostream& out) {
+void serialize(const XrViewLocateInfo* s, WriteStream& out) {
             
 
     serialize(&s->type, out);
@@ -24813,7 +24813,7 @@ void serialize(const XrViewLocateInfo* s, std::ostream& out) {
 
 
 
-void serialize(const XrViewState* s, std::ostream& out) {
+void serialize(const XrViewState* s, WriteStream& out) {
             
 
     serialize(&s->type, out);

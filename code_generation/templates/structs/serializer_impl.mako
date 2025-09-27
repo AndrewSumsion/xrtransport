@@ -51,7 +51,7 @@
 </%def>
 
 <%def name="serializer(struct)">
-void serialize(const ${struct.name}* s, std::ostream& out) {
+void serialize(const ${struct.name}* s, WriteStream& out) {
     % if struct.header:
         serialize_xr(s, out);
     % else:
@@ -77,7 +77,7 @@ StructSerializer serializer_lookup(XrStructureType struct_type) {
     return serializer_lookup_table[struct_type];
 }
 
-void serialize_xr(const void* untyped, std::ostream& out) {
+void serialize_xr(const void* untyped, WriteStream& out) {
     const XrBaseInStructure* x = static_cast<const XrBaseInStructure*>(untyped);
     XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
     serialize(&type, out);

@@ -10,6 +10,7 @@
 
 #include "xrtransport/generated/serializer.h"
 #include "xrtransport/generated/deserializer.h"
+#include "xrtransport/asio_compat.h"
 
 #include <cassert>
 #include <cstring>
@@ -18,68 +19,80 @@
 
 using namespace xrtransport;
 
-// Used to buffer serializer outputs then read them to deserialize
+// ASIO-compatible stream buffer for testing
 // Effectively a simple dynamic-size FIFO queue
-class ByteStreamBuffer : public std::streambuf {
+class TestStreamBuffer : public ReadWriteStream {
+private:
+    std::vector<char> buffer_;
+    std::size_t read_pos_ = 0;
+    bool blocking_mode_ = true;
+
 public:
-    ByteStreamBuffer() {
-        setp(nullptr, nullptr); // Disable the write buffer initially
+    TestStreamBuffer() = default;
+
+    // NonBlockingStream interface
+    void blocking_mode(bool mode) override {
+        blocking_mode_ = mode;
     }
 
-    // Write single byte
-    int_type overflow(int_type ch) override {
-        if (ch != EOF) {
-            buffer.push_back(static_cast<char>(ch));
+    bool blocking_mode() const override {
+        return blocking_mode_;
+    }
+
+    // ReadStream interface
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        asio::error_code ec;
+        return read_some(buffers, ec);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
+        ec.clear();
+
+        char* data = static_cast<char*>(buffers.data());
+        std::size_t size = buffers.size();
+
+        std::size_t available = buffer_.size() - read_pos_;
+        std::size_t to_read = std::min(size, available);
+
+        if (to_read > 0) {
+            std::copy(buffer_.begin() + read_pos_,
+                     buffer_.begin() + read_pos_ + to_read,
+                     data);
+            read_pos_ += to_read;
         }
-        return ch;
+
+        return to_read;
     }
 
-    // Write a block of bytes
-    std::streamsize xsputn(const char* s, std::streamsize count) override {
-        buffer.insert(buffer.end(), s, s + count);
-        return count;
+    // WriteStream interface
+    std::size_t write_some(const asio::const_buffer& buffers) override {
+        asio::error_code ec;
+        return write_some(buffers, ec);
     }
 
-    // Read single byte
-    int_type underflow() override {
-        if (read_pos >= buffer.size()) {
-            return traits_type::eof();
-        }
-        return traits_type::to_int_type(buffer[read_pos]);
+    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
+        ec.clear();
+
+        const char* data = static_cast<const char*>(buffers.data());
+        std::size_t size = buffers.size();
+
+        buffer_.insert(buffer_.end(), data, data + size);
+        return size;
     }
 
-    int_type uflow() override {
-        if (read_pos >= buffer.size()) {
-            return traits_type::eof();
-        }
-        return traits_type::to_int_type(buffer[read_pos++]);
-    }
-
-    std::streamsize xsgetn(char* s, std::streamsize count) override {
-        std::streamsize n = std::min(count, static_cast<std::streamsize>(buffer.size() - read_pos));
-        std::copy(buffer.begin() + read_pos, buffer.begin() + read_pos + n, s);
-        read_pos += n;
-        return n;
-    }
-
-    // Reset reading pointer to beginning
+    // Helper methods for testing
     void reset_read() {
-        read_pos = 0;
+        read_pos_ = 0;
     }
 
-    // Clear everything
     void clear() {
-        buffer.clear();
-        read_pos = 0;
+        buffer_.clear();
+        read_pos_ = 0;
     }
 
     std::size_t size() const {
-        return buffer.size();
+        return buffer_.size();
     }
-
-private:
-    std::vector<char> buffer;
-    std::size_t read_pos = 0;
 };
 
 int main() {
@@ -94,11 +107,10 @@ ${struct_generator.init_struct(plan, f"item{i}", "    ")}
     //
     // Serialize all structs
     //
-    ByteStreamBuffer buffer;
-    std::ostream out(&buffer);
+    TestStreamBuffer buffer;
 
 % for i, plan in enumerate(plans):
-    serialize(&item${i}, out);
+    serialize(&item${i}, buffer);
 % endfor
 
     //
@@ -112,10 +124,9 @@ ${struct_generator.zero_struct(plan, f"item{i}", "    ")}
     // Deserialize all structs in-place
     //
     buffer.reset_read();
-    std::istream in(&buffer);
 
 % for i, plan in enumerate(plans):
-    deserialize(&item${i}, in, true);
+    deserialize(&item${i}, buffer, true);
 % endfor
 
     //

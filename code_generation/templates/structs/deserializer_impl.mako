@@ -42,7 +42,7 @@
 </%def>
 
 <%def name="deserializer(struct)">
-void deserialize(${struct.name}* s, std::istream& in, bool in_place) {
+void deserialize(${struct.name}* s, ReadStream& in, bool in_place) {
     % for member in struct.members:
         ${deserialize_member(member)}
     % endfor
@@ -134,7 +134,7 @@ std::size_t size_lookup(XrStructureType struct_type) {
     return size_lookup_table.at(struct_type);
 }
 
-void deserialize_xr(const void** p_s, std::istream& in, bool in_place) {
+void deserialize_xr(const void** p_s, ReadStream& in, bool in_place) {
     XrStructureType type{};
     deserialize(&type, in, in_place);
     if (type) {
@@ -158,7 +158,7 @@ void deserialize_xr(const void** p_s, std::istream& in, bool in_place) {
     }
 }
 
-void deserialize_xr(void** p_s, std::istream& in, bool in_place) {
+void deserialize_xr(void** p_s, ReadStream& in, bool in_place) {
     XrStructureType type{};
     deserialize(&type, in, in_place);
     if (type) {
