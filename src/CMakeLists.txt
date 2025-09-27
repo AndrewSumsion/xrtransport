@@ -12,6 +12,7 @@ add_library(xrtransport_serialization STATIC
 target_include_directories(xrtransport_serialization PUBLIC
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/OpenXR-SDK/include
+    ${CMAKE_SOURCE_DIR}/asio/asio/include
 )
 
 # Set C++ standard
