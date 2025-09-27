@@ -17,15 +17,28 @@ class StructPlan:
         for member_name, child in self.children.items():
             child.init(out, f"{binding}.{member_name}", f"{name}_{member_name}", indent)
     
+    def _child_binding(self, binding, member_name, child):
+        if member_name == "next" and isinstance(child, PointerPlan):
+            # cast binding when comparing void* next
+            # we may want a more specific check as this might catch e.g. int* next
+            child_binding = f"(({child.type_name}*){binding}.next)"
+        else:
+            child_binding = f"{binding}.{member_name}"
+        return child_binding
+
     def compare(self, out, binding, indent=""):
         for member_name, child in self.children.items():
-            if member_name == "next" and isinstance(child, PointerPlan):
-                # cast binding when comparing void* next
-                # we may want a more specific check as this might catch e.g. int* next
-                child_binding = f"(({child.type_name}*){binding}.next)"
-            else:
-                child_binding = f"{binding}.{member_name}"
+            child_binding = self._child_binding(binding, member_name, child)
             child.compare(out, child_binding, indent)
+    
+    def zero(self, out, binding, indent=""):
+        for member_name, child in self.children.items():
+            if member_name == "type" and isinstance(child, ValuePlan) and child.type_name == "XrStructureType":
+                # don't zero out type header
+                continue
+            child_binding = self._child_binding(binding, member_name, child)
+            child.zero(out, child_binding, indent)
+
 
 class PointerPlan:
     def __init__(self, type_name, children=None):
@@ -45,6 +58,10 @@ class PointerPlan:
     def compare(self, out, binding, indent=""):
         for index, child in enumerate(self.children):
             child.compare(out, f"{binding}[{index}]", indent)
+    
+    def zero(self, out, binding, indent=""):
+        for index, child in enumerate(self.children):
+            child.zero(out, f"{binding}[{index}]", indent)
 
 # Arrays use the same value for every slot because length is
 # known at compile time, not generate time.
@@ -63,6 +80,11 @@ class ArrayPlan:
         out.append(f"{indent}for (int i = 0; i < {self.array_length}; i++) {{")
         self.child.compare(out, f"{binding}[i]", indent + "    ")
         out.append(f"{indent}}}")
+    
+    def zero(self, out, binding, indent=""):
+        out.append(f"{indent}for (int i = 0; i < {self.array_length}; i++) {{")
+        self.child.zero(out, f"{binding}[i]", indent + "    ")
+        out.append(f"{indent}}}")
 
 class ValuePlan:
     def __init__(self, type_name, value=None):
@@ -74,6 +96,9 @@ class ValuePlan:
     
     def compare(self, out, binding, indent=""):
         out.append(f"{indent}{ASSERT_COMMAND}({binding} == {self.value});")
+    
+    def zero(self, out, binding, indent=""):
+        out.append(f"{indent}std::memset((void*)&{binding}, 0, sizeof({binding}));")
 
 # This stuff is very unwieldy to do in a Mako template, so it's defined here
 class RandomStructGenerator:
@@ -172,6 +197,11 @@ class RandomStructGenerator:
         out = []
         struct_plan.compare(out, struct_name, indent)
         return "\n".join(out)
+    
+    def zero_struct(self, struct_plan, struct_name, indent=""):
+        out = []
+        struct_plan.zero(out, struct_name, indent)
+        return "\n".join(out)
 
 def generate_struct_fuzzer(spec, templates_dir, out, fuzzer_seed):
     # Make fuzzer output deterministic (not thread safe)
@@ -183,5 +213,18 @@ def generate_struct_fuzzer(spec, templates_dir, out, fuzzer_seed):
     try:
         out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
     except:
-        print("Warning! An exception occurred running serializer template.")
+        print("Warning! An exception occurred running fuzzer template.")
+        print(exceptions.text_error_template().render())
+
+def generate_struct_fuzzer_in_place(spec, templates_dir, out, fuzzer_seed):
+    # Make fuzzer output deterministic (not thread safe)
+    random.seed(fuzzer_seed)
+
+    template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
+    template = template_lookup.get_template("struct_fuzzer_in_place.mako")
+    struct_generator = RandomStructGenerator(spec)
+    try:
+        out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
+    except:
+        print("Warning! An exception occurred running in-place fuzzer template.")
         print(exceptions.text_error_template().render())
