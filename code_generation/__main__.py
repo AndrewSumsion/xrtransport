@@ -7,6 +7,8 @@ from . import (
     generate_serializer_impl,
     generate_deserializer_header,
     generate_deserializer_impl,
+    generate_deserializer_in_place_header,
+    generate_deserializer_in_place_impl,
     generate_struct_reflection,
     generate_struct_fuzzer,
     generate_struct_fuzzer_in_place,
@@ -34,6 +36,8 @@ serializer_header_path = os.path.join(include_path, "serializer.h")
 serializer_impl_path = os.path.join(src_path, "serializer.cpp")
 deserializer_header_path = os.path.join(include_path, "deserializer.h")
 deserializer_impl_path = os.path.join(src_path, "deserializer.cpp")
+deserializer_in_place_header_path = os.path.join(include_path, "deserializer_in_place.h")
+deserializer_in_place_impl_path = os.path.join(src_path, "deserializer_in_place.cpp")
 reflection_struct_path = os.path.join(include_path, "reflection_struct.h")
 fuzzer_path = os.path.join(test_path, "fuzzer.cpp")
 fuzzer_in_place_path = os.path.join(test_path, "fuzzer_in_place.cpp")
@@ -46,6 +50,10 @@ with open(deserializer_header_path, "wb") as out:
     generate_deserializer_header(spec, TEMPLATES_DIR, out)
 with open(deserializer_impl_path, "wb") as out:
     generate_deserializer_impl(spec, TEMPLATES_DIR, out)
+with open(deserializer_in_place_header_path, "wb") as out:
+    generate_deserializer_in_place_header(spec, TEMPLATES_DIR, out)
+with open(deserializer_in_place_impl_path, "wb") as out:
+    generate_deserializer_in_place_impl(spec, TEMPLATES_DIR, out)
 with open(reflection_struct_path, "wb") as out:
     generate_struct_reflection(spec, TEMPLATES_DIR, out)
 with open(fuzzer_path, "wb") as out:

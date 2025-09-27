@@ -4,8 +4,10 @@ cmake_minimum_required(VERSION 3.10)
 add_library(xrtransport_serialization STATIC
     xrtransport/generated/serializer.cpp
     xrtransport/generated/deserializer.cpp
+    xrtransport/generated/deserializer_in_place.cpp
     xrtransport/custom_serializer.cpp
     xrtransport/custom_deserializer.cpp
+    xrtransport/custom_deserializer_in_place.cpp
 )
 
 # Set target properties

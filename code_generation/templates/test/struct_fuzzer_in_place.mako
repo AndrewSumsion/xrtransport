@@ -105,7 +105,7 @@ ${struct_generator.init_struct(plan, f"item{i}", "    ")}
     // Zero out existing structs
     //
 % for i, plan in enumerate(plans):
-${struct_generator.zero_struct(plan, f"new_item{i}", "    ")}
+${struct_generator.zero_struct(plan, f"item{i}", "    ")}
 % endfor
 
     //
@@ -122,7 +122,7 @@ ${struct_generator.zero_struct(plan, f"new_item{i}", "    ")}
     // Struct comparison
     //
 % for i, plan in enumerate(plans):
-${struct_generator.compare_struct(plan, f"new_item{i}", "    ")}
+${struct_generator.compare_struct(plan, f"item{i}", "    ")}
 % endfor
 
     std::cout << "Fuzzer passed" << std::endl;
