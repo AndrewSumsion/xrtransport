@@ -4,96 +4,16 @@
 xrtransport is a transparent remote OpenXR runtime system that enables OpenXR applications to run remotely through client-server architecture with automatic serialization/deserialization. Current focus is on implementing the client-side components.
 
 ## Current State Analysis
-- **Existing serialization**: Auto-generated `serialize(const T*, std::ostream&)` and `deserialize(T*, std::istream&)` functions for all OpenXR structs
+- **✅ Header/Implementation Split**: Successfully completed - serialization code now properly separated into headers and implementations with static library linking
+- **✅ In-Place Deserialization**: Successfully integrated as `bool in_place` parameter in existing `deserialize()` functions, eliminating need for separate function set
+- **Existing serialization**: Auto-generated `serialize(const T*, std::ostream&)` and `deserialize(T*, std::istream&, bool in_place = false)` functions for all OpenXR structs
 - **Protocol**: Binary protocol with function calls as `[uint32_t function_index][serialized_args...]`
-- **Memory allocation**: Current deserializers use `std::malloc()` for dynamic allocation
 - **Code generation**: Modular architecture with `structs/`, `reflection/`, `test/` modules using Mako templates
-- **Header-only library**: Current serializer/deserializer code is entirely header-only
-- **Missing**: Client runtime, in-place deserialization, enhanced protocol, function call generation
-- **✅ COMPLETED**: Header/implementation split
+- **File structure**: Proper header/implementation separation with generated files in `include/xrtransport/generated/` and `src/xrtransport/generated/`
+- **Build system**: Static library `libxrtransport_serialization.a` with CMake integration
+- **Missing**: Client runtime, enhanced protocol, function call generation
 
-## 1. Serializer/Deserializer Header/Implementation Split ✅ COMPLETED
-
-### Purpose
-Refactor the generated serialization code from header-only library to proper header/implementation separation for better compilation times and linking.
-
-### ✅ Implementation Completed
-**Status**: Successfully implemented with the following changes from original plan:
-
-#### **Command Line Interface Changes**
-- **Updated arguments**: Changed from `<openxr_spec> <src_out> <test_out>` to `<openxr_spec> <include_out> <src_out> <test_out>`
-- **New usage**: `python3 -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport/generated src/xrtransport/generated test`
-
-#### **Template Architecture**
-- **Created split templates**:
-  - `serializer_header.mako` / `serializer_impl.mako`
-  - `deserializer_header.mako` / `deserializer_impl.mako`
-- **Removed old templates**: Deleted monolithic `serializer.mako` and `deserializer.mako`
-- **Updated code generation functions**: Added `generate_*_header()` and `generate_*_impl()` functions
-
-#### **Custom Implementation Handling**
-- **Moved custom functions**: Extracted inline custom implementations from headers to separate `.cpp` files:
-  - `src/xrtransport/custom_serializer.cpp`
-  - `src/xrtransport/custom_deserializer.cpp`
-- **Removed custom include folder**: Eliminated `include/xrtransport/custom/` since headers no longer filter custom declarations
-- **Fixed linking conflicts**: Resolved multiple definition errors during static library linking
-
-#### **Build System**
-- **Static library**: `libxrtransport_serialization.a` (791KB)
-- **CMake structure**:
-  - Root `CMakeLists.txt` builds both `src` and `test`
-  - `src/CMakeLists.txt` creates static library with all implementation files
-  - `test/CMakeLists.txt` links fuzzer with static library
-- **C++ standard**: Enforced C++17 throughout project
-
-#### **Generated Files Structure**
-```
-include/xrtransport/generated/
-├── serializer.h              # Generated function declarations
-├── deserializer.h            # Generated function declarations
-└── reflection_struct.h       # Type metadata
-
-src/xrtransport/
-├── generated/
-│   ├── serializer.cpp        # Generated implementations
-│   └── deserializer.cpp      # Generated implementations
-├── custom_serializer.cpp     # Custom implementations
-└── custom_deserializer.cpp   # Custom implementations
-```
-
-#### **Verification Results**
-- ✅ Code generation works with new split templates and generated folder structure
-- ✅ Static library builds successfully (791KB)
-- ✅ Test fuzzer links and passes ("Fuzzer passed")
-- ✅ No compilation errors or linking conflicts
-- ✅ Proper header/implementation separation achieved
-- ✅ Clean file organization with all generated code in `generated/` folders
-- ✅ Removed unnecessary custom include folder and references
-
-## 2. In-Place Deserialization Implementation
-
-### Purpose
-Support deserialization into pre-allocated memory for OpenXR function arguments where application handles all allocation.
-
-### Location & Files
-- **Module**: `code_generation/structs/`
-- **New files**:
-  - `code_generation/structs/deserializer_in_place.py`
-  - `code_generation/templates/structs/deserializer_in_place.mako`
-- **Output**: `include/xrtransport/deserializer_in_place.h`, `src/xrtransport/deserializer_in_place.cpp`
-
-### Implementation Details
-- **Function signature**: `void deserialize_in_place(StructType* s, std::istream& in)`
-- **Key difference**: No `malloc()`/`new` calls, assume memory pre-allocated by caller
-- **Pointer handling**: Deserialize directly into existing pointer targets
-- **Array handling**: Deserialize into pre-allocated array memory
-- **Struct chain handling**: Follow existing `pNext` patterns but use existing allocations
-
-### Integration
-- Update `code_generation/__main__.py` to generate both regular and in-place deserializers
-- Generate separate header/implementation files following new split pattern
-
-## 3. Enhanced Protocol with Custom Messages
+## 1. Enhanced Protocol with Custom Messages
 
 ### Purpose
 Extend binary protocol to support custom message types beyond function calls, enabling full-duplex communication for both client and server custom functionality.
@@ -115,13 +35,12 @@ Extend binary protocol to support custom message types beyond function calls, en
 class Transport {
     std::iostream& stream;
     std::thread worker_thread;
-    std::mutex stream_mutex;
-    std::map<uint16_t, std::function<void(std::istream&)>> handlers;
-    std::map<uint16_t, std::condition_variable> awaiting_messages;
+    std::recursive_mutex stream_mutex;
+    std::map<uint16_t, std::function<void(MessageLockIn)>> handlers;
 
 public:
     MessageLockOut start_message(uint16_t header);
-    void register_handler(uint16_t header, std::function<void(std::istream&)> handler);
+    void register_handler(uint16_t header, std::function<void(MessageLockIn)> handler);
     MessageLockIn await_message(uint16_t header);
     void start_worker_thread();
     void stop_worker_thread();
@@ -129,48 +48,42 @@ public:
 ```
 
 #### RAII Stream Lock Classes
-**Design Decision**: Return references to underlying streams for simplicity and compatibility with existing serialize/deserialize functions.
+**Design Decision**: Simple structs with public const members for direct stream access. Stream references are const (immutable binding), lock is const to prevent reassignment. Constructors take moved unique_lock for flexible lock management.
 
 ```cpp
-class MessageLockOut {
-    std::unique_lock<std::mutex> lock;
+struct MessageLockOut {
+    const std::unique_lock<std::recursive_mutex> lock;
     std::ostream& stream;
-    uint16_t header;
 
-public:
-    MessageLockOut(std::mutex& m, std::ostream& s, uint16_t h);
+    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, std::ostream& stream);
     ~MessageLockOut(); // Flush stream, release lock
     MessageLockOut(const MessageLockOut&) = delete;
     MessageLockOut& operator=(const MessageLockOut&) = delete;
     MessageLockOut(MessageLockOut&&) = default;
     MessageLockOut& operator=(MessageLockOut&&) = default;
-
-    std::ostream& get_stream() { return stream; }
 };
 
-class MessageLockIn {
-    std::unique_lock<std::mutex> lock;
+struct MessageLockIn {
+    const std::unique_lock<std::recursive_mutex> lock;
     std::istream& stream;
 
-public:
-    MessageLockIn(std::mutex& m, std::istream& s);
+    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, std::istream& stream);
     ~MessageLockIn(); // Release lock
     MessageLockIn(const MessageLockIn&) = delete;
     MessageLockIn& operator=(const MessageLockIn&) = delete;
     MessageLockIn(MessageLockIn&&) = default;
     MessageLockIn& operator=(MessageLockIn&&) = default;
-
-    std::istream& get_stream() { return stream; }
 };
 ```
 
 ### Thread Safety Architecture
-- **Worker thread**: Continuously reads message headers and dispatches to handlers
-- **await_message()**: Blocks until specific header received, prevents handler execution for that message
-- **Mutex protection**: All stream access protected by single mutex
-- **Handler dispatch**: Wrong headers dispatched to registered handlers, await_message() continues waiting
+- **Recursive mutex**: Allows same thread to acquire lock multiple times (e.g., send message → await response → send another message)
+- **await_message()**: Acquires stream lock, reads headers until finding requested type, dispatches others to handlers
+- **Worker thread**: Handles messages when await_message() is not active; await_message() takes over this functionality when called
+- **Handler functions**: Receive MessageLockIn objects instead of raw stream references
+- **Lock management**: MessageLock constructors accept moved unique_lock for flexible lock acquisition patterns
 
-## 4. OpenXR Function Call Generation
+## 2. OpenXR Function Call Generation
 
 ### Purpose
 Auto-generate client-side implementations for all OpenXR functions (except loader negotiation) that serialize arguments, send to server, and deserialize results.
@@ -188,23 +101,21 @@ XrResult xrFunctionName(param1, param2*, param3*) {
     // Send function call with direct streaming
     {
         auto msg_out = transport.start_message(FUNCTION_CALL);
-        auto& stream = msg_out.get_stream();
-        stream << FUNCTION_INDEX_XR_FUNCTION_NAME;
-        serialize(&param1, stream);
-        serialize(param2, stream);
-        serialize(param3, stream);
+        msg_out.stream << FUNCTION_INDEX_XR_FUNCTION_NAME;
+        serialize(&param1, msg_out.stream);
+        serialize(param2, msg_out.stream);
+        serialize(param3, msg_out.stream);
     } // MessageLockOut destructor releases lock
 
     // Receive response
     XrResult result;
     {
         auto msg_in = transport.await_message(FUNCTION_RETURN);
-        auto& stream = msg_in.get_stream();
-        stream >> result;
+        msg_in.stream >> result;
 
         // Deserialize modified arguments in-place
-        deserialize_in_place(param2, stream);
-        deserialize_in_place(param3, stream);
+        deserialize(param2, msg_in.stream, true);
+        deserialize(param3, msg_in.stream, true);
     } // MessageLockIn destructor releases lock
 
     return result;
@@ -222,7 +133,7 @@ XrResult xrFunctionName(param1, param2*, param3*) {
 - Use same Mako template system
 - Generate only implementation file: `src/client/generated/function_implementations.cpp`
 
-## 5. Client Runtime Infrastructure
+## 3. Client Runtime Infrastructure
 
 ### Purpose
 Provide OpenXR loader-compatible runtime that establishes automatic connection and exposes generated function implementations.
@@ -260,7 +171,7 @@ include/client/
 - **Thread management**: Start/stop worker thread lifecycle
 - **Error handling**: Simple crash-on-failure for initial implementation
 
-## 6. Code Generation Integration
+## 4. Code Generation Integration
 
 ### Updates to Main Generation Script
 **File**: `code_generation/__main__.py`
@@ -277,10 +188,9 @@ Where:
 - `client_src_out`: Optional output directory for client implementation files
 
 #### Additional Outputs
-1. **Header/Implementation split**: Generate both .h and .cpp files for serializers/deserializers
-2. **In-place deserializers**: Generate alongside regular deserializers
-3. **Client function implementations**: New output to `<client_src_out>/generated/`
-4. **Function indices**: Enum of function indices for client-server matching
+1. **Header/Implementation split**: Generate both .h and .cpp files for serializers/deserializers (with in-place support integrated)
+2. **Client function implementations**: New output to `<client_src_out>/generated/`
+3. **Function indices**: Enum of function indices for client-server matching
 
 #### Integration Points
 - **Module imports**: Add functions module to `code_generation/__init__.py`
@@ -289,13 +199,11 @@ Where:
 
 ### Updated File Generation
 ```python
-# Header/implementation outputs
+# Header/implementation outputs (in-place deserialization integrated via bool flag)
 generate_serializer_header(spec, templates_dir, os.path.join(include_out, "serializer.h"))
 generate_serializer_impl(spec, templates_dir, os.path.join(src_out, "serializer.cpp"))
 generate_deserializer_header(spec, templates_dir, os.path.join(include_out, "deserializer.h"))
 generate_deserializer_impl(spec, templates_dir, os.path.join(src_out, "deserializer.cpp"))
-generate_deserializer_in_place_header(spec, templates_dir, os.path.join(include_out, "deserializer_in_place.h"))
-generate_deserializer_in_place_impl(spec, templates_dir, os.path.join(src_out, "deserializer_in_place.cpp"))
 
 # Existing outputs (updated for header/impl split)
 generate_struct_reflection(spec, templates_dir, os.path.join(include_out, "reflection_struct.h"))
@@ -307,50 +215,45 @@ if client_src_out:
     generate_function_indices(spec, templates_dir, os.path.join(client_src_out, "generated/function_indices.h"))
 ```
 
-## 7. Implementation Phases
+## 5. Implementation Phases
 
-### Phase 1: Header/Implementation Split
-1. Refactor existing Mako templates to generate separate headers and implementations
-2. Update build system to compile new source files
-3. Test existing serialization functionality with new structure
-4. Ensure no performance regression from split
-
-### Phase 2: Enhanced Protocol & Transport
+### Phase 1: Enhanced Protocol & Transport
 1. Implement MessageLockOut/MessageLockIn RAII classes with stream reference access
 2. Implement Transport class with worker thread
 3. Update protocol to use 2-byte message headers with FUNCTION_CALL/FUNCTION_RETURN distinction
 4. Test basic custom message functionality
 
-### Phase 3: In-Place Deserialization
-1. Create in-place deserializer template for header/implementation split
-2. Generate in-place functions alongside existing deserializers
-3. Update code generation entry point
-4. Test with existing fuzzer framework
-
-### Phase 4: Function Generation Infrastructure
+### Phase 2: Function Generation Infrastructure
 1. Create functions module in code generation
 2. Implement client runtime template with proper scoped block usage
 3. Generate function indices and implementations (implementation only, no headers)
 4. Test with subset of core OpenXR functions
 
-### Phase 5: Client Runtime Assembly
+### Phase 3: Client Runtime Assembly
 1. Implement loader negotiation manually
 2. Create connection management with hardcoded parameters
 3. Integrate generated functions with Transport using scoped MessageLock blocks
 4. Build as .so compatible with OpenXR loader
 
-## 8. Key Design Decisions Made
+## 6. Key Design Decisions Made
 
 ### Stream Access Pattern
-- **Reference-based access**: MessageLockOut/MessageLockIn provide `get_stream()` returning references to underlying streams
+- **Direct member access**: MessageLockOut/MessageLockIn provide direct access to stream via const reference members
 - **RAII scoping**: Proper scoped blocks ensure MessageLock objects are destroyed to release locks
 - **Move-only semantics**: Lock classes are move-only to prevent accidental lock duplication
+- **Flexible lock management**: Constructors accept moved unique_lock for custom lock acquisition patterns
 - **Direct streaming**: Serialize calls write directly to Transport's stream without intermediate buffering
+
+### Thread Safety Design
+- **Recursive mutex**: Enables nested message operations within same thread (send → await → send)
+- **await_message() takes control**: When called, takes over message reading from worker thread until target message found
+- **Handler integration**: Non-target messages automatically dispatched to registered handlers during await_message()
+- **No lock contention**: Worker thread and await_message() coordinate through lock acquisition rather than complex synchronization
 
 ### Protocol Message Types
 - **FUNCTION_CALL vs FUNCTION_RETURN**: Separate message types for calls and responses
 - **Scoped messaging**: Each function call uses separate scoped blocks for sending and receiving
-- **Thread safety**: Full mutex protection with worker thread for message dispatch
+- **Handler-based dispatch**: Unexpected messages automatically routed to appropriate handlers
 
 ### Header/Implementation Organization
 - **Compilation efficiency**: Split reduces compilation times and enables proper linking
@@ -362,22 +265,28 @@ if client_src_out:
 - **Implementation-only**: Generate only .cpp files for function implementations
 - **Direct implementation**: Implement OpenXR functions directly rather than creating wrappers
 
-## 9. Standards Library Analysis
+## 7. Standards Library Analysis
 
 ### RAII Stream Access Assessment
-The reference-based approach for MessageLockOut/MessageLockIn:
-- **Simplicity**: Avoids complex stream inheritance or abstract interface creation
+The struct-based approach with const member access for MessageLockOut/MessageLockIn:
+- **Simplicity**: Direct member access eliminates getter functions and complexity
 - **Compatibility**: Works directly with existing serialize/deserialize functions
-- **Safety**: RAII scoping ensures locks are properly released
-- **Performance**: No overhead from stream wrapping or virtual calls
+- **Safety**: RAII scoping ensures locks are properly released, const members prevent accidental reassignment
+- **Performance**: No overhead from function calls, stream wrapping, or virtual calls
+- **Flexibility**: Moved unique_lock constructor enables custom lock management patterns
+
+### Recursive Mutex Benefits
+- **Nested operations**: Same thread can send message, await response, send another message without deadlock
+- **Handler isolation**: await_message() can safely dispatch to handlers that may need to send messages
+- **Simplified design**: Eliminates complex worker thread coordination mechanisms
 
 ### Design Validation
 - **RAII compliance**: Automatic resource management via destructors
 - **Exception safety**: Locks released even on exceptions
-- **Thread safety**: Proper mutex protection for all stream operations
-- **Modern C++ patterns**: Move-only semantics, clear lifetime management
+- **Thread safety**: Recursive mutex protection for all stream operations with flexible acquisition patterns
+- **Modern C++ patterns**: Move-only semantics, const correctness, clear lifetime management
 
-## 10. Future Considerations (Not In Scope)
+## 8. Future Considerations (Not In Scope)
 - Server-side implementation
 - Graphics API integration (Vulkan/OpenGL ES)
 - Connection redundancy and failure recovery
