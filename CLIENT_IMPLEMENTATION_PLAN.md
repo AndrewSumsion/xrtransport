@@ -9,35 +9,66 @@ xrtransport is a transparent remote OpenXR runtime system that enables OpenXR ap
 - **Memory allocation**: Current deserializers use `std::malloc()` for dynamic allocation
 - **Code generation**: Modular architecture with `structs/`, `reflection/`, `test/` modules using Mako templates
 - **Header-only library**: Current serializer/deserializer code is entirely header-only
-- **Missing**: Client runtime, in-place deserialization, enhanced protocol, function call generation, header/implementation split
+- **Missing**: Client runtime, in-place deserialization, enhanced protocol, function call generation
+- **✅ COMPLETED**: Header/implementation split
 
-## 1. Serializer/Deserializer Header/Implementation Split
+## 1. Serializer/Deserializer Header/Implementation Split ✅ COMPLETED
 
 ### Purpose
 Refactor the generated serialization code from header-only library to proper header/implementation separation for better compilation times and linking.
 
-### Location & Files
-- **Headers**: `include/xrtransport/serializer.h`, `include/xrtransport/deserializer.h`
-- **Implementations**: `src/xrtransport/serializer.cpp`, `src/xrtransport/deserializer.cpp`
+### ✅ Implementation Completed
+**Status**: Successfully implemented with the following changes from original plan:
 
-### Changes Required
-- **Template updates**: Modify Mako templates to generate function declarations in headers and definitions in source files
-- **Static keyword removal**: Remove `static` from function declarations since they'll be in separate compilation units
-- **Include management**: Ensure proper header includes in implementation files
-- **Build system**: Update CMakeLists.txt to compile the new source files
+#### **Command Line Interface Changes**
+- **Updated arguments**: Changed from `<openxr_spec> <src_out> <test_out>` to `<openxr_spec> <include_out> <src_out> <test_out>`
+- **New usage**: `python3 -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport src/xrtransport test`
 
-### Template Structure
-```cpp
-// In header (.h):
-void serialize(const XrStructType* s, std::ostream& out);
-void deserialize(XrStructType* s, std::istream& in);
+#### **Template Architecture**
+- **Created split templates**:
+  - `serializer_header.mako` / `serializer_impl.mako`
+  - `deserializer_header.mako` / `deserializer_impl.mako`
+- **Removed old templates**: Deleted monolithic `serializer.mako` and `deserializer.mako`
+- **Updated code generation functions**: Added `generate_*_header()` and `generate_*_impl()` functions
 
-// In implementation (.cpp):
-#include "serializer.h"
-void serialize(const XrStructType* s, std::ostream& out) {
-    // Implementation here
-}
+#### **Custom Implementation Handling**
+- **Moved custom functions**: Extracted inline custom implementations from headers to separate `.cpp` files:
+  - `src/xrtransport/custom_serializer.cpp`
+  - `src/xrtransport/custom_deserializer.cpp`
+- **Updated custom headers**: Changed from inline definitions to declarations only
+- **Fixed linking conflicts**: Resolved multiple definition errors during static library linking
+
+#### **Build System**
+- **Static library**: `libxrtransport_serialization.a` (791KB)
+- **CMake structure**:
+  - Root `CMakeLists.txt` builds both `src` and `test`
+  - `src/CMakeLists.txt` creates static library with all implementation files
+  - `test/CMakeLists.txt` links fuzzer with static library
+- **C++ standard**: Enforced C++17 throughout project
+
+#### **Generated Files Structure**
 ```
+include/xrtransport/
+├── serializer.h              # Function declarations
+├── deserializer.h             # Function declarations
+├── reflection_struct.h        # Type metadata
+└── custom/
+    ├── serializer.h           # Custom function declarations
+    └── deserializer.h         # Custom function declarations
+
+src/xrtransport/
+├── serializer.cpp             # Generated implementations
+├── deserializer.cpp           # Generated implementations
+├── custom_serializer.cpp      # Custom implementations
+└── custom_deserializer.cpp    # Custom implementations
+```
+
+#### **Verification Results**
+- ✅ Code generation works with new split templates
+- ✅ Static library builds successfully (791KB)
+- ✅ Test fuzzer links and passes ("Fuzzer passed")
+- ✅ No compilation errors or linking conflicts
+- ✅ Proper header/implementation separation achieved
 
 ## 2. In-Place Deserialization Implementation
 
