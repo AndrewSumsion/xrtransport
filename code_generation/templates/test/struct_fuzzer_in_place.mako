@@ -9,7 +9,7 @@
  */
 
 #include "xrtransport/generated/serializer.h"
-#include "xrtransport/generated/deserializer_in_place.h"
+#include "xrtransport/generated/deserializer.h"
 
 #include <cassert>
 #include <cstring>
@@ -115,7 +115,7 @@ ${struct_generator.zero_struct(plan, f"item{i}", "    ")}
     std::istream in(&buffer);
 
 % for i, plan in enumerate(plans):
-    deserialize_in_place(&item${i}, in);
+    deserialize(&item${i}, in, true);
 % endfor
 
     //

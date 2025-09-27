@@ -8644,29 +8644,51 @@ std::size_t size_lookup(XrStructureType struct_type) {
     return size_lookup_table.at(struct_type);
 }
 
-void deserialize_xr(const void** p_s, std::istream& in) {
+void deserialize_xr(const void** p_s, std::istream& in, bool in_place) {
     XrStructureType type{};
-    deserialize(&type, in);
+    deserialize(&type, in, in_place);
     if (type) {
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(std::malloc(size_lookup(type)));
-        deserializer_lookup(type)(s, in);
-        *p_s = s;
+        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
     }
     else {
-        *p_s = nullptr;
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
     }
 }
 
-void deserialize_xr(void** p_s, std::istream& in) {
+void deserialize_xr(void** p_s, std::istream& in, bool in_place) {
     XrStructureType type{};
-    deserialize(&type, in);
+    deserialize(&type, in, in_place);
     if (type) {
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(std::malloc(size_lookup(type)));
-        deserializer_lookup(type)(s, in);
-        *p_s = s;
+        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
     }
     else {
-        *p_s = nullptr;
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
     }
 }
 
@@ -8688,76 +8710,76 @@ void cleanup_xr(const void* untyped) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
 
-void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->swapchain, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->imageArrayIndex, in);
+    deserialize(&s->swapchain, in, in_place);
 
         
 
-    deserialize(&s->orientation, in);
+    deserialize(&s->imageArrayIndex, in, in_place);
+
+        
+
+    deserialize(&s->orientation, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->swapchain, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->imageArrayIndex, in);
+    deserialize(&s->swapchain, in, in_place);
 
         
 
-    deserialize(&s->orientation, in);
+    deserialize(&s->imageArrayIndex, in, in_place);
+
+        
+
+    deserialize(&s->orientation, in, in_place);
 
 }
 
@@ -8766,44 +8788,44 @@ void deserialize(XrCompositionLayerCubeKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
 
 
-void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in) {
+void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationVM, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationActivity, in);
+    deserialize_ptr(&s->applicationVM, in, in_place);
+
+        
+
+    deserialize_ptr(&s->applicationActivity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in) {
+void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationVM, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationActivity, in);
+    deserialize_ptr(&s->applicationVM, in, in_place);
+
+        
+
+    deserialize_ptr(&s->applicationActivity, in, in_place);
 
 }
 
@@ -8812,68 +8834,68 @@ void deserialize(XrInstanceCreateInfoAndroidKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 
 
-void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
@@ -8882,44 +8904,44 @@ void deserialize(XrCompositionLayerDepthInfoKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 
 
-void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewFormatCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewFormats, in);
+    deserialize(&s->viewFormatCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewFormats, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewFormatCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewFormats, in);
+    deserialize(&s->viewFormatCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewFormats, in, in_place);
 
 }
 
@@ -8928,60 +8950,60 @@ void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, std::istream& in) 
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 
 
-void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in) {
+void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->domain, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->subDomain, in);
+    deserialize(&s->domain, in, in_place);
 
         
 
-    deserialize(&s->fromLevel, in);
+    deserialize(&s->subDomain, in, in_place);
 
         
 
-    deserialize(&s->toLevel, in);
+    deserialize(&s->fromLevel, in, in_place);
+
+        
+
+    deserialize(&s->toLevel, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in) {
+void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->domain, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->subDomain, in);
+    deserialize(&s->domain, in, in_place);
 
         
 
-    deserialize(&s->fromLevel, in);
+    deserialize(&s->subDomain, in, in_place);
 
         
 
-    deserialize(&s->toLevel, in);
+    deserialize(&s->fromLevel, in, in_place);
+
+        
+
+    deserialize(&s->toLevel, in, in_place);
 
 }
 
@@ -8992,92 +9014,92 @@ void deserialize(XrEventDataPerfSettingsEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 
 
-void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->centralAngle, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->aspectRatio, in);
+    deserialize(&s->centralAngle, in, in_place);
+
+        
+
+    deserialize(&s->aspectRatio, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->centralAngle, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->aspectRatio, in);
+    deserialize(&s->centralAngle, in, in_place);
+
+        
+
+    deserialize(&s->aspectRatio, in, in_place);
 
 }
 
@@ -9086,92 +9108,92 @@ void deserialize(XrCompositionLayerCylinderKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 
 
-void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->bias, in);
+    deserialize(&s->scale, in, in_place);
+
+        
+
+    deserialize(&s->bias, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->bias, in);
+    deserialize(&s->scale, in, in_place);
+
+        
+
+    deserialize(&s->bias, in, in_place);
 
 }
 
@@ -9180,232 +9202,232 @@ void deserialize(XrCompositionLayerEquirectKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 
 
-void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->objectType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->objectHandle, in);
+    deserialize(&s->objectType, in, in_place);
 
         
 
-    deserialize_ptr(&s->objectName, in);
+    deserialize(&s->objectHandle, in, in_place);
+
+        
+
+    deserialize_ptr(&s->objectName, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->labelName, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->labelName, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->messageId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->functionName, in);
+    deserialize_ptr(&s->messageId, in, in_place);
 
         
 
-    deserialize_ptr(&s->message, in);
+    deserialize_ptr(&s->functionName, in, in_place);
 
         
 
-    deserialize(&s->objectCount, in);
+    deserialize_ptr(&s->message, in, in_place);
 
         
 
-    deserialize_ptr(&s->objects, in);
+    deserialize(&s->objectCount, in, in_place);
 
         
 
-    deserialize(&s->sessionLabelCount, in);
+    deserialize_ptr(&s->objects, in, in_place);
 
         
 
-    deserialize_ptr(&s->sessionLabels, in);
+    deserialize(&s->sessionLabelCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sessionLabels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->messageSeverities, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->messageTypes, in);
+    deserialize(&s->messageSeverities, in, in_place);
 
         
 
-    deserialize(&s->userCallback, in);
+    deserialize(&s->messageTypes, in, in_place);
 
         
 
-    deserialize_ptr(&s->userData, in);
+    deserialize(&s->userCallback, in, in_place);
+
+        
+
+    deserialize_ptr(&s->userData, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsObjectNameInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->objectType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->objectHandle, in);
+    deserialize(&s->objectType, in, in_place);
 
         
 
-    deserialize_ptr(&s->objectName, in);
+    deserialize(&s->objectHandle, in, in_place);
+
+        
+
+    deserialize_ptr(&s->objectName, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->messageId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->functionName, in);
+    deserialize_ptr(&s->messageId, in, in_place);
 
         
 
-    deserialize_ptr(&s->message, in);
+    deserialize_ptr(&s->functionName, in, in_place);
 
         
 
-    deserialize(&s->objectCount, in);
+    deserialize_ptr(&s->message, in, in_place);
 
         
 
-    deserialize_ptr(&s->objects, in);
+    deserialize(&s->objectCount, in, in_place);
 
         
 
-    deserialize(&s->sessionLabelCount, in);
+    deserialize_ptr(&s->objects, in, in_place);
 
         
 
-    deserialize_ptr(&s->sessionLabels, in);
+    deserialize(&s->sessionLabelCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sessionLabels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->messageSeverities, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->messageTypes, in);
+    deserialize(&s->messageSeverities, in, in_place);
 
         
 
-    deserialize(&s->userCallback, in);
+    deserialize(&s->messageTypes, in, in_place);
 
         
 
-    deserialize_ptr(&s->userData, in);
+    deserialize(&s->userCallback, in, in_place);
+
+        
+
+    deserialize_ptr(&s->userData, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in) {
+void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->labelName, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->labelName, in, in_place);
 
 }
 
@@ -9414,304 +9436,304 @@ void deserialize(XrDebugUtilsLabelEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 
 
-void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->hDC, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->hGLRC, in);
+    deserialize(&s->hDC, in, in_place);
+
+        
+
+    deserialize(&s->hGLRC, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->xDisplay, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->visualid, in);
+    deserialize_ptr(&s->xDisplay, in, in_place);
 
         
 
-    deserialize(&s->glxFBConfig, in);
+    deserialize(&s->visualid, in, in_place);
 
         
 
-    deserialize(&s->glxDrawable, in);
+    deserialize(&s->glxFBConfig, in, in_place);
 
         
 
-    deserialize(&s->glxContext, in);
+    deserialize(&s->glxDrawable, in, in_place);
+
+        
+
+    deserialize(&s->glxContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->connection, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->screenNumber, in);
+    deserialize_ptr(&s->connection, in, in_place);
 
         
 
-    deserialize(&s->fbconfigid, in);
+    deserialize(&s->screenNumber, in, in_place);
 
         
 
-    deserialize(&s->visualid, in);
+    deserialize(&s->fbconfigid, in, in_place);
 
         
 
-    deserialize(&s->glxDrawable, in);
+    deserialize(&s->visualid, in, in_place);
 
         
 
-    deserialize(&s->glxContext, in);
+    deserialize(&s->glxDrawable, in, in_place);
+
+        
+
+    deserialize(&s->glxContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->display, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->display, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->hDC, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->hGLRC, in);
+    deserialize(&s->hDC, in, in_place);
+
+        
+
+    deserialize(&s->hGLRC, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->xDisplay, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->visualid, in);
+    deserialize_ptr(&s->xDisplay, in, in_place);
 
         
 
-    deserialize(&s->glxFBConfig, in);
+    deserialize(&s->visualid, in, in_place);
 
         
 
-    deserialize(&s->glxDrawable, in);
+    deserialize(&s->glxFBConfig, in, in_place);
 
         
 
-    deserialize(&s->glxContext, in);
+    deserialize(&s->glxDrawable, in, in_place);
+
+        
+
+    deserialize(&s->glxContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->connection, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->screenNumber, in);
+    deserialize_ptr(&s->connection, in, in_place);
 
         
 
-    deserialize(&s->fbconfigid, in);
+    deserialize(&s->screenNumber, in, in_place);
 
         
 
-    deserialize(&s->visualid, in);
+    deserialize(&s->fbconfigid, in, in_place);
 
         
 
-    deserialize(&s->glxDrawable, in);
+    deserialize(&s->visualid, in, in_place);
 
         
 
-    deserialize(&s->glxContext, in);
+    deserialize(&s->glxDrawable, in, in_place);
+
+        
+
+    deserialize(&s->glxContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->display, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->display, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageOpenGLKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
@@ -9720,132 +9742,132 @@ void deserialize(XrGraphicsRequirementsOpenGLKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 
 
-void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->display, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->config, in);
+    deserialize(&s->display, in, in_place);
 
         
 
-    deserialize(&s->context, in);
+    deserialize(&s->config, in, in_place);
+
+        
+
+    deserialize(&s->context, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->display, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->config, in);
+    deserialize(&s->display, in, in_place);
 
         
 
-    deserialize(&s->context, in);
+    deserialize(&s->config, in, in_place);
+
+        
+
+    deserialize(&s->context, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageOpenGLESKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
@@ -9854,148 +9876,148 @@ void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 
 
-void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->instance, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->physicalDevice, in);
+    deserialize(&s->instance, in, in_place);
 
         
 
-    deserialize(&s->device, in);
+    deserialize(&s->physicalDevice, in, in_place);
 
         
 
-    deserialize(&s->queueFamilyIndex, in);
+    deserialize(&s->device, in, in_place);
 
         
 
-    deserialize(&s->queueIndex, in);
+    deserialize(&s->queueFamilyIndex, in, in_place);
+
+        
+
+    deserialize(&s->queueIndex, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->instance, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->physicalDevice, in);
+    deserialize(&s->instance, in, in_place);
 
         
 
-    deserialize(&s->device, in);
+    deserialize(&s->physicalDevice, in, in_place);
 
         
 
-    deserialize(&s->queueFamilyIndex, in);
+    deserialize(&s->device, in, in_place);
 
         
 
-    deserialize(&s->queueIndex, in);
+    deserialize(&s->queueFamilyIndex, in, in_place);
+
+        
+
+    deserialize(&s->queueIndex, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->image, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minApiVersionSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxApiVersionSupported, in);
+    deserialize(&s->minApiVersionSupported, in, in_place);
+
+        
+
+    deserialize(&s->maxApiVersionSupported, in, in_place);
 
 }
 
@@ -10004,116 +10026,116 @@ void deserialize(XrGraphicsRequirementsVulkanKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 
 
-void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->device, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->device, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->adapterLuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minFeatureLevel, in);
+    deserialize(&s->adapterLuid, in, in_place);
+
+        
+
+    deserialize(&s->minFeatureLevel, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->device, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->device, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->adapterLuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minFeatureLevel, in);
+    deserialize(&s->adapterLuid, in, in_place);
+
+        
+
+    deserialize(&s->minFeatureLevel, in, in_place);
 
 }
 
@@ -10122,124 +10144,124 @@ void deserialize(XrGraphicsRequirementsD3D11KHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 
 
-void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->device, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->queue, in);
+    deserialize_ptr(&s->device, in, in_place);
+
+        
+
+    deserialize_ptr(&s->queue, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->adapterLuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minFeatureLevel, in);
+    deserialize(&s->adapterLuid, in, in_place);
+
+        
+
+    deserialize(&s->minFeatureLevel, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->device, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->queue, in);
+    deserialize_ptr(&s->device, in, in_place);
+
+        
+
+    deserialize_ptr(&s->queue, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->adapterLuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minFeatureLevel, in);
+    deserialize(&s->adapterLuid, in, in_place);
+
+        
+
+    deserialize(&s->minFeatureLevel, in, in_place);
 
 }
 
@@ -10248,108 +10270,108 @@ void deserialize(XrGraphicsRequirementsD3D12KHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 
 
-void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->commandQueue, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->commandQueue, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->metalDevice, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->metalDevice, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in) {
+void deserialize(XrGraphicsBindingMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->commandQueue, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->commandQueue, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in) {
+void deserialize(XrSwapchainImageMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->texture, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->texture, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in) {
+void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->metalDevice, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->metalDevice, in, in_place);
 
 }
 
@@ -10358,72 +10380,72 @@ void deserialize(XrGraphicsRequirementsMetalKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 
 
-void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEyeGazeInteraction, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsEyeGazeInteraction, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in) {
+void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEyeGazeInteraction, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsEyeGazeInteraction, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in) {
+void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
@@ -10432,128 +10454,128 @@ void deserialize(XrEyeGazeSampleTimeEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 
 
-void deserialize(XrVisibilityMaskKHR* s, std::istream& in) {
+void deserialize(XrVisibilityMaskKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in) {
+void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->viewIndex, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
+
+        
+
+    deserialize(&s->viewIndex, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVisibilityMaskKHR* s, std::istream& in) {
+void deserialize(XrVisibilityMaskKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in) {
+void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->viewIndex, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
+
+        
+
+    deserialize(&s->viewIndex, in, in_place);
 
 }
 
@@ -10562,88 +10584,88 @@ void deserialize(XrEventDataVisibilityMaskChangedKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
 
 
-void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in) {
+void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->sessionLayersPlacement, in);
+    deserialize(&s->createFlags, in, in_place);
+
+        
+
+    deserialize(&s->sessionLayersPlacement, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in) {
+void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->visible, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->visible, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in) {
+void deserialize(XrSessionCreateInfoOverlayEXTX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->sessionLayersPlacement, in);
+    deserialize(&s->createFlags, in, in_place);
+
+        
+
+    deserialize(&s->sessionLayersPlacement, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in) {
+void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->visible, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->visible, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -10652,44 +10674,44 @@ void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, std::istream& i
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 
 
-void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorScale, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->colorBias, in);
+    deserialize(&s->colorScale, in, in_place);
+
+        
+
+    deserialize(&s->colorBias, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorScale, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->colorBias, in);
+    deserialize(&s->colorScale, in, in_place);
+
+        
+
+    deserialize(&s->colorBias, in, in_place);
 
 }
 
@@ -10702,48 +10724,48 @@ void deserialize(XrCompositionLayerColorScaleBiasKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 
 
-void deserialize(XrSpatialAnchorCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInAnchorSpace, in);
+    deserialize(&s->anchor, in, in_place);
+
+        
+
+    deserialize(&s->poseInAnchorSpace, in, in_place);
 
 }
 
@@ -10752,36 +10774,36 @@ void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 
 
-void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -10790,60 +10812,60 @@ void deserialize(XrCompositionLayerImageLayoutFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 
 
-void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->srcFactorColor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->dstFactorColor, in);
+    deserialize(&s->srcFactorColor, in, in_place);
 
         
 
-    deserialize(&s->srcFactorAlpha, in);
+    deserialize(&s->dstFactorColor, in, in_place);
 
         
 
-    deserialize(&s->dstFactorAlpha, in);
+    deserialize(&s->srcFactorAlpha, in, in_place);
+
+        
+
+    deserialize(&s->dstFactorAlpha, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->srcFactorColor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->dstFactorColor, in);
+    deserialize(&s->srcFactorColor, in, in_place);
 
         
 
-    deserialize(&s->srcFactorAlpha, in);
+    deserialize(&s->dstFactorColor, in, in_place);
 
         
 
-    deserialize(&s->dstFactorAlpha, in);
+    deserialize(&s->srcFactorAlpha, in, in_place);
+
+        
+
+    deserialize(&s->dstFactorAlpha, in, in_place);
 
 }
 
@@ -10852,60 +10874,60 @@ void deserialize(XrCompositionLayerAlphaBlendFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 
 
-void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in) {
+void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedNearZ, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minNearZ, in);
+    deserialize(&s->recommendedNearZ, in, in_place);
 
         
 
-    deserialize(&s->recommendedFarZ, in);
+    deserialize(&s->minNearZ, in, in_place);
 
         
 
-    deserialize(&s->maxFarZ, in);
+    deserialize(&s->recommendedFarZ, in, in_place);
+
+        
+
+    deserialize(&s->maxFarZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in) {
+void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedNearZ, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->minNearZ, in);
+    deserialize(&s->recommendedNearZ, in, in_place);
 
         
 
-    deserialize(&s->recommendedFarZ, in);
+    deserialize(&s->minNearZ, in, in_place);
 
         
 
-    deserialize(&s->maxFarZ, in);
+    deserialize(&s->recommendedFarZ, in, in_place);
+
+        
+
+    deserialize(&s->maxFarZ, in, in_place);
 
 }
 
@@ -10916,60 +10938,60 @@ void deserialize(XrViewConfigurationDepthRangeEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
 
 
-void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in) {
+void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->getProcAddress, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->display, in);
+    deserialize(&s->getProcAddress, in, in_place);
 
         
 
-    deserialize(&s->config, in);
+    deserialize(&s->display, in, in_place);
 
         
 
-    deserialize(&s->context, in);
+    deserialize(&s->config, in, in_place);
+
+        
+
+    deserialize(&s->context, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in) {
+void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->getProcAddress, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->display, in);
+    deserialize(&s->getProcAddress, in, in_place);
 
         
 
-    deserialize(&s->config, in);
+    deserialize(&s->display, in, in_place);
 
         
 
-    deserialize(&s->context, in);
+    deserialize(&s->config, in, in_place);
+
+        
+
+    deserialize(&s->context, in, in_place);
 
 }
 
@@ -10978,176 +11000,176 @@ void deserialize(XrGraphicsBindingEGLMNDX* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 
 
-void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in);
+    deserialize(&s->nodeType, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInNodeSpace, in);
+    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize(&s->poseInNodeSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in);
+    deserialize(&s->nodeType, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInNodeSpace, in);
+    deserialize_array(s->nodeId, XR_GUID_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize(&s->poseInNodeSpace, in, in_place);
 
 }
 
@@ -11156,256 +11178,256 @@ void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 
 
-void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsHandTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsHandTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in) {
+void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->hand, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->handJointSet, in);
+    deserialize(&s->hand, in, in_place);
+
+        
+
+    deserialize(&s->handJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in) {
+void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointLocationEXT* s, std::istream& in) {
+void deserialize(XrHandJointLocationEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->locationFlags, in);
-
-        
-
-    deserialize(&s->pose, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->radius, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointVelocityEXT* s, std::istream& in) {
+void deserialize(XrHandJointVelocityEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->velocityFlags, in);
-
-        
-
-    deserialize(&s->linearVelocity, in);
+    deserialize(&s->velocityFlags, in, in_place);
 
         
 
-    deserialize(&s->angularVelocity, in);
+    deserialize(&s->linearVelocity, in, in_place);
+
+        
+
+    deserialize(&s->angularVelocity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointLocationsEXT* s, std::istream& in) {
+void deserialize(XrHandJointLocationsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in) {
+void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointVelocities, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointVelocities, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemHandTrackingPropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsHandTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsHandTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in) {
+void deserialize(XrHandTrackerCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->hand, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->handJointSet, in);
+    deserialize(&s->hand, in, in_place);
+
+        
+
+    deserialize(&s->handJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in) {
+void deserialize(XrHandJointsLocateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointLocationsEXT* s, std::istream& in) {
+void deserialize(XrHandJointLocationsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in) {
+void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointVelocities, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointVelocities, in, in_place);
 
 }
 
@@ -11414,302 +11436,302 @@ void deserialize(XrHandJointVelocitiesEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 
 
-void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsHandTrackingMesh, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxHandMeshIndexCount, in);
+    deserialize(&s->supportsHandTrackingMesh, in, in_place);
 
         
 
-    deserialize(&s->maxHandMeshVertexCount, in);
+    deserialize(&s->maxHandMeshIndexCount, in, in_place);
+
+        
+
+    deserialize(&s->maxHandMeshVertexCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInHandMeshSpace, in);
+    deserialize(&s->handPoseType, in, in_place);
+
+        
+
+    deserialize(&s->poseInHandMeshSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->handPoseType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexBufferChanged, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->vertexBufferChanged, in);
+    deserialize(&s->indexBufferChanged, in, in_place);
 
         
 
-    deserialize(&s->indexBuffer, in);
+    deserialize(&s->vertexBufferChanged, in, in_place);
 
         
 
-    deserialize(&s->vertexBuffer, in);
+    deserialize(&s->indexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->vertexBuffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshIndexBufferMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshIndexBufferMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->indexBufferKey, in);
-
-        
-
-    deserialize(&s->indexCapacityInput, in);
+    deserialize(&s->indexBufferKey, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshVertexBufferMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshVertexBufferMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->vertexUpdateTime, in);
-
-        
-
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize(&s->vertexUpdateTime, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshVertexMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshVertexMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->position, in);
+    deserialize(&s->position, in, in_place);
 
         
 
-    deserialize(&s->normal, in);
+    deserialize(&s->normal, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->handPoseType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsHandTrackingMesh, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxHandMeshIndexCount, in);
+    deserialize(&s->supportsHandTrackingMesh, in, in_place);
 
         
 
-    deserialize(&s->maxHandMeshVertexCount, in);
+    deserialize(&s->maxHandMeshIndexCount, in, in_place);
+
+        
+
+    deserialize(&s->maxHandMeshVertexCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInHandMeshSpace, in);
+    deserialize(&s->handPoseType, in, in_place);
+
+        
+
+    deserialize(&s->poseInHandMeshSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshUpdateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->handPoseType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandMeshMSFT* s, std::istream& in) {
+void deserialize(XrHandMeshMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexBufferChanged, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->vertexBufferChanged, in);
+    deserialize(&s->indexBufferChanged, in, in_place);
 
         
 
-    deserialize(&s->indexBuffer, in);
+    deserialize(&s->vertexBufferChanged, in, in_place);
 
         
 
-    deserialize(&s->vertexBuffer, in);
+    deserialize(&s->indexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->vertexBuffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in) {
+void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handPoseType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->handPoseType, in, in_place);
 
 }
 
@@ -11718,114 +11740,114 @@ void deserialize(XrHandPoseTypeInfoMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 
 
-void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->enabledViewConfigurationTypes, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->enabledViewConfigurationTypes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->active, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
+
+        
+
+    deserialize(&s->active, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewConfigurationStates, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewConfigurationStates, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewConfigurationLayersInfo, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewConfigurationLayersInfo, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->environmentBlendMode, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
 
         
 
-    deserialize(&s->layerCount, in);
+    deserialize(&s->environmentBlendMode, in, in_place);
+
+        
+
+    deserialize(&s->layerCount, in, in_place);
 
         
 
@@ -11836,132 +11858,132 @@ void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in)
 
 
 
-void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->viewConfigurationType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->enabledViewConfigurationTypes, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->enabledViewConfigurationTypes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->active, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
+
+        
+
+    deserialize(&s->active, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewConfigurationStates, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewConfigurationStates, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->viewConfigurationLayersInfo, in);
+    deserialize(&s->viewConfigurationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->viewConfigurationLayersInfo, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->environmentBlendMode, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
 
         
 
-    deserialize(&s->layerCount, in);
+    deserialize(&s->environmentBlendMode, in, in_place);
+
+        
+
+    deserialize(&s->layerCount, in, in_place);
 
         
 
@@ -11972,18 +11994,18 @@ void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, std::istream& in)
 
 
 
-void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->viewConfigurationType, in, in_place);
 
 }
 
@@ -11992,220 +12014,220 @@ void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, std::is
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 
 
-void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->modelKey, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in);
+    deserialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nodeCountOutput, in);
+    deserialize(&s->nodeCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->nodeProperties, in);
+    deserialize(&s->nodeCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->nodeProperties, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodePose, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->nodePose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nodeCountOutput, in);
+    deserialize(&s->nodeCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->nodeStates, in);
+    deserialize(&s->nodeCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->nodeStates, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelKeyStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->modelKey, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelNodePropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in);
+    deserialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in, in_place);
+
+        
+
+    deserialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelPropertiesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nodeCountOutput, in);
+    deserialize(&s->nodeCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->nodeProperties, in);
+    deserialize(&s->nodeCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->nodeProperties, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelNodeStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodePose, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->nodePose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrControllerModelStateMSFT* s, std::istream& in) {
+void deserialize(XrControllerModelStateMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->nodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nodeCountOutput, in);
+    deserialize(&s->nodeCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->nodeStates, in);
+    deserialize(&s->nodeCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->nodeStates, in, in_place);
 
 }
 
@@ -12216,44 +12238,44 @@ void deserialize(XrControllerModelStateMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 
 
-void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in) {
+void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedFov, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxMutableFov, in);
+    deserialize(&s->recommendedFov, in, in_place);
+
+        
+
+    deserialize(&s->maxMutableFov, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in) {
+void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedFov, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxMutableFov, in);
+    deserialize(&s->recommendedFov, in, in_place);
+
+        
+
+    deserialize(&s->maxMutableFov, in, in_place);
 
 }
 
@@ -12262,44 +12284,44 @@ void deserialize(XrViewConfigurationViewFovEPIC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 
 
-void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in) {
+void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->holographicSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->coreWindow, in);
+    deserialize_ptr(&s->holographicSpace, in, in_place);
+
+        
+
+    deserialize_ptr(&s->coreWindow, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in) {
+void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->holographicSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->coreWindow, in);
+    deserialize_ptr(&s->holographicSpace, in, in_place);
+
+        
+
+    deserialize_ptr(&s->coreWindow, in, in_place);
 
 }
 
@@ -12308,88 +12330,88 @@ void deserialize(XrHolographicWindowAttachmentMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 
 
-void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in) {
+void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->reprojectionMode, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->reprojectionMode, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in) {
+void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->position, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->normal, in);
+    deserialize(&s->position, in, in_place);
 
         
 
-    deserialize(&s->velocity, in);
+    deserialize(&s->normal, in, in_place);
+
+        
+
+    deserialize(&s->velocity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in) {
+void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->reprojectionMode, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->reprojectionMode, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in) {
+void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->position, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->normal, in);
+    deserialize(&s->position, in, in_place);
 
         
 
-    deserialize(&s->velocity, in);
+    deserialize(&s->normal, in, in_place);
+
+        
+
+    deserialize(&s->velocity, in, in_place);
 
 }
 
@@ -12398,36 +12420,36 @@ void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, std::istrea
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 
 
-void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in) {
+void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in) {
+void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
@@ -12436,14 +12458,14 @@ void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 
 
-void deserialize(XrSwapchainStateBaseHeaderFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateBaseHeaderFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -12452,36 +12474,36 @@ void deserialize(XrSwapchainStateBaseHeaderFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 
 
-void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -12490,268 +12512,268 @@ void deserialize(XrCompositionLayerSecureContentFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 
 
-void deserialize(XrBodyJointLocationFB* s, std::istream& in) {
+void deserialize(XrBodyJointLocationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bodyJointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bodyJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonJointFB* s, std::istream& in) {
+void deserialize(XrBodySkeletonJointFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->joint, in);
-
-        
-
-    deserialize(&s->parentJoint, in);
+    deserialize(&s->joint, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->parentJoint, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonFB* s, std::istream& in) {
+void deserialize(XrBodySkeletonFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->joints, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->joints, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsFB* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize(&s->confidence, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointCount, in, in_place);
 
         
 
-    deserialize(&s->skeletonChangedCount, in);
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->skeletonChangedCount, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bodyJointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bodyJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsFB* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize(&s->confidence, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointCount, in, in_place);
 
         
 
-    deserialize(&s->skeletonChangedCount, in);
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->skeletonChangedCount, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonFB* s, std::istream& in) {
+void deserialize(XrBodySkeletonFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->joints, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->joints, in, in_place);
 
 }
 
@@ -12760,100 +12782,100 @@ void deserialize(XrBodySkeletonFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
 
 
-void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in) {
+void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->binding, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->actionSet, in);
+    deserialize(&s->binding, in, in_place);
 
         
 
-    deserialize(&s->forceThreshold, in);
+    deserialize(&s->actionSet, in, in_place);
 
         
 
-    deserialize(&s->forceThresholdReleased, in);
+    deserialize(&s->forceThreshold, in, in_place);
 
         
 
-    deserialize(&s->centerRegion, in);
+    deserialize(&s->forceThresholdReleased, in, in_place);
 
         
 
-    deserialize(&s->wedgeAngle, in);
+    deserialize(&s->centerRegion, in, in_place);
 
         
 
-    deserialize(&s->isSticky, in);
+    deserialize(&s->wedgeAngle, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->isSticky, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in) {
+void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->binding, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->actionSet, in);
+    deserialize(&s->binding, in, in_place);
 
         
 
-    deserialize(&s->forceThreshold, in);
+    deserialize(&s->actionSet, in, in_place);
 
         
 
-    deserialize(&s->forceThresholdReleased, in);
+    deserialize(&s->forceThreshold, in, in_place);
 
         
 
-    deserialize(&s->centerRegion, in);
+    deserialize(&s->forceThresholdReleased, in, in_place);
 
         
 
-    deserialize(&s->wedgeAngle, in);
+    deserialize(&s->centerRegion, in, in_place);
 
         
 
-    deserialize(&s->isSticky, in);
+    deserialize(&s->wedgeAngle, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->isSticky, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -12862,76 +12884,76 @@ void deserialize(XrInteractionProfileDpadBindingEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 
 
-void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in) {
+void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->binding, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->onThreshold, in);
+    deserialize(&s->binding, in, in_place);
 
         
 
-    deserialize(&s->offThreshold, in);
+    deserialize(&s->onThreshold, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->offThreshold, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in) {
+void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->binding, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->onThreshold, in);
+    deserialize(&s->binding, in, in_place);
 
         
 
-    deserialize(&s->offThreshold, in);
+    deserialize(&s->onThreshold, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->offThreshold, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -12940,36 +12962,36 @@ void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, std::istream& in) 
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 
 
-void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in) {
+void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handJointsMotionRange, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->handJointsMotionRange, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in) {
+void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->handJointsMotionRange, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->handJointsMotionRange, in, in_place);
 
 }
 
@@ -12978,14 +13000,14 @@ void deserialize(XrHandJointsMotionRangeInfoEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 
 
-void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, std::istream& in) {
+void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -12994,44 +13016,44 @@ void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
 
 
-void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in) {
+void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationVM, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationContext, in);
+    deserialize_ptr(&s->applicationVM, in, in_place);
+
+        
+
+    deserialize_ptr(&s->applicationContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in) {
+void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationVM, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->applicationContext, in);
+    deserialize_ptr(&s->applicationVM, in, in_place);
+
+        
+
+    deserialize_ptr(&s->applicationContext, in, in_place);
 
 }
 
@@ -13040,188 +13062,188 @@ void deserialize(XrLoaderInitInfoAndroidKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 
 
-void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->systemId, in, in_place);
 
         
 
-    deserialize(&s->pfnGetInstanceProcAddr, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanCreateInfo, in);
+    deserialize(&s->pfnGetInstanceProcAddr, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanAllocator, in);
+    deserialize_ptr(&s->vulkanCreateInfo, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vulkanAllocator, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->systemId, in, in_place);
 
         
 
-    deserialize(&s->pfnGetInstanceProcAddr, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize(&s->vulkanPhysicalDevice, in);
+    deserialize(&s->pfnGetInstanceProcAddr, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanCreateInfo, in);
+    deserialize(&s->vulkanPhysicalDevice, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanAllocator, in);
+    deserialize_ptr(&s->vulkanCreateInfo, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vulkanAllocator, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vulkanInstance, in);
+    deserialize(&s->systemId, in, in_place);
+
+        
+
+    deserialize(&s->vulkanInstance, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanInstanceCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->systemId, in, in_place);
 
         
 
-    deserialize(&s->pfnGetInstanceProcAddr, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanCreateInfo, in);
+    deserialize(&s->pfnGetInstanceProcAddr, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanAllocator, in);
+    deserialize_ptr(&s->vulkanCreateInfo, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vulkanAllocator, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanDeviceCreateInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->systemId, in, in_place);
 
         
 
-    deserialize(&s->pfnGetInstanceProcAddr, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize(&s->vulkanPhysicalDevice, in);
+    deserialize(&s->pfnGetInstanceProcAddr, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanCreateInfo, in);
+    deserialize(&s->vulkanPhysicalDevice, in, in_place);
 
         
 
-    deserialize_ptr(&s->vulkanAllocator, in);
+    deserialize_ptr(&s->vulkanCreateInfo, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vulkanAllocator, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in) {
+void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vulkanInstance, in);
+    deserialize(&s->systemId, in, in_place);
+
+        
+
+    deserialize(&s->vulkanInstance, in, in_place);
 
 }
 
@@ -13230,100 +13252,100 @@ void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 
 
-void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->centralHorizontalAngle, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->upperVerticalAngle, in);
+    deserialize(&s->centralHorizontalAngle, in, in_place);
 
         
 
-    deserialize(&s->lowerVerticalAngle, in);
+    deserialize(&s->upperVerticalAngle, in, in_place);
+
+        
+
+    deserialize(&s->lowerVerticalAngle, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in) {
+void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->centralHorizontalAngle, in);
+    deserialize(&s->radius, in, in_place);
 
         
 
-    deserialize(&s->upperVerticalAngle, in);
+    deserialize(&s->centralHorizontalAngle, in, in_place);
 
         
 
-    deserialize(&s->lowerVerticalAngle, in);
+    deserialize(&s->upperVerticalAngle, in, in_place);
+
+        
+
+    deserialize(&s->lowerVerticalAngle, in, in_place);
 
 }
 
@@ -13332,996 +13354,996 @@ void deserialize(XrCompositionLayerEquirect2KHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 
 
-void deserialize(XrUuidMSFT* s, std::istream& in) {
+void deserialize(XrUuidMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->bytes, 16, in);
-
-}
-
-
-
-
-void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize_array(s->bytes, 16, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->requestedFeatureCount, in);
-
-        
-
-    deserialize_ptr(&s->requestedFeatures, in);
-
-        
-
-    deserialize(&s->consistency, in);
-
-        
-
-    deserialize(&s->bounds, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneSphereBoundMSFT* s, std::istream& in) {
+void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->center, in);
-
-        
-
-    deserialize(&s->radius, in);
-
-}
-
-
-
-
-void deserialize(XrSceneOrientedBoxBoundMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->pose, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->extents, in);
-
-}
-
-
-
-
-void deserialize(XrSceneFrustumBoundMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->pose, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize(&s->requestedFeatureCount, in, in_place);
 
         
 
-    deserialize(&s->farDistance, in);
+    deserialize_ptr(&s->requestedFeatures, in, in_place);
+
+        
+
+    deserialize(&s->consistency, in, in_place);
+
+        
+
+    deserialize(&s->bounds, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneBoundsMSFT* s, std::istream& in) {
+void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->time, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sphereCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spheres, in);
-
-        
-
-    deserialize(&s->boxCount, in);
-
-        
-
-    deserialize_ptr(&s->boxes, in);
-
-        
-
-    deserialize(&s->frustumCount, in);
-
-        
-
-    deserialize_ptr(&s->frustums, in);
+    deserialize(&s->lod, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentMSFT* s, std::istream& in) {
+void deserialize(XrSceneSphereBoundMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->componentType, in);
-
-        
-
-    deserialize(&s->id, in);
+    deserialize(&s->center, in, in_place);
 
         
 
-    deserialize(&s->parentId, in);
-
-        
-
-    deserialize(&s->updateTime, in);
+    deserialize(&s->radius, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentsMSFT* s, std::istream& in) {
+void deserialize(XrSceneOrientedBoxBoundMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->componentCapacityInput, in);
-
-        
-
-    deserialize(&s->componentCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->components, in);
+    deserialize(&s->extents, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneFrustumBoundMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
-
-}
-
-
-
-
-void deserialize(XrSceneComponentLocationMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->flags, in);
+    deserialize(&s->fov, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->farDistance, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in) {
+void deserialize(XrSceneBoundsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->locationCount, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize_ptr(&s->locations, in);
-
-}
-
-
-
-
-void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->sphereCount, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_ptr(&s->spheres, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->boxCount, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_ptr(&s->boxes, in, in_place);
 
         
 
-    deserialize(&s->componentIdCount, in);
+    deserialize(&s->frustumCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->componentIds, in);
+    deserialize_ptr(&s->frustums, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneObjectMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->objectType, in);
-
-}
-
-
-
-
-void deserialize(XrSceneObjectsMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->componentType, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->id, in, in_place);
 
         
 
-    deserialize(&s->sceneObjectCount, in);
+    deserialize(&s->parentId, in, in_place);
 
         
 
-    deserialize_ptr(&s->sceneObjects, in);
+    deserialize(&s->updateTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->parentId, in);
-
-}
-
-
-
-
-void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->componentCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->objectTypeCount, in);
+    deserialize(&s->componentCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->objectTypes, in);
+    deserialize_ptr(&s->components, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrScenePlaneMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->alignment, in);
-
-        
-
-    deserialize(&s->size, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->meshBufferId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportsIndicesUint16, in);
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrScenePlanesMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentLocationMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->scenePlaneCount, in);
-
-        
-
-    deserialize_ptr(&s->scenePlanes, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->alignmentCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->alignments, in);
-
-}
-
-
-
-
-void deserialize(XrSceneMeshMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->meshBufferId, in);
+    deserialize(&s->locationCount, in, in_place);
 
         
 
-    deserialize(&s->supportsIndicesUint16, in);
+    deserialize_ptr(&s->locations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshesMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneMeshCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->sceneMeshes, in);
-
-}
-
-
-
-
-void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize(&s->meshBufferId, in);
+    deserialize(&s->componentIdCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->componentIds, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in) {
+void deserialize(XrSceneObjectMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->objectType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in) {
+void deserialize(XrSceneObjectsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->sceneObjectCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize_ptr(&s->sceneObjects, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->parentId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in) {
+void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->objectTypeCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize_ptr(&s->objectTypes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrScenePlaneMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->alignment, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->size, in, in_place);
+
+        
+
+    deserialize(&s->meshBufferId, in, in_place);
+
+        
+
+    deserialize(&s->supportsIndicesUint16, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in) {
+void deserialize(XrScenePlanesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedFeatureCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedFeatures, in);
+    deserialize(&s->scenePlaneCount, in, in_place);
 
         
 
-    deserialize(&s->consistency, in);
-
-        
-
-    deserialize(&s->bounds, in);
+    deserialize_ptr(&s->scenePlanes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in) {
+void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
-
-}
-
-
-
-
-void deserialize(XrSceneComponentsMSFT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->alignmentCount, in, in_place);
 
         
 
-    deserialize(&s->componentCapacityInput, in);
-
-        
-
-    deserialize(&s->componentCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->components, in);
+    deserialize_ptr(&s->alignments, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->meshBufferId, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize(&s->supportsIndicesUint16, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->locations, in);
+    deserialize(&s->sceneMeshCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sceneMeshes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
-
-        
-
-    deserialize(&s->componentIdCount, in);
-
-        
-
-    deserialize_ptr(&s->componentIds, in);
+    deserialize(&s->meshBufferId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneObjectsMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneObjectCount, in);
-
-        
-
-    deserialize_ptr(&s->sceneObjects, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->parentId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->vertexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->objectTypeCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->objectTypes, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrScenePlanesMSFT* s, std::istream& in) {
+void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->scenePlaneCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->scenePlanes, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneObserverCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->alignmentCount, in);
-
-        
-
-    deserialize_ptr(&s->alignments, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshesMSFT* s, std::istream& in) {
+void deserialize(XrSceneCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneMeshCount, in);
-
-        
-
-    deserialize_ptr(&s->sceneMeshes, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrNewSceneComputeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->meshBufferId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->requestedFeatureCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedFeatures, in, in_place);
+
+        
+
+    deserialize(&s->consistency, in, in_place);
+
+        
+
+    deserialize(&s->bounds, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in) {
+void deserialize(XrVisualMeshComputeLodInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->lod, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->componentCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->componentCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->components, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentsGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in) {
+void deserialize(XrSceneComponentLocationsMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->locationCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize_ptr(&s->locations, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneComponentsLocateInfoMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->componentIdCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->componentIds, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneObjectsMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sceneObjectCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sceneObjects, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneComponentParentFilterInfoMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->parentId, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->objectTypeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->objectTypes, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrScenePlanesMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->scenePlaneCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->scenePlanes, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->alignmentCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->alignments, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshesMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sceneMeshCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sceneMeshes, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->meshBufferId, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshBuffersMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshVertexBufferMSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->vertexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshIndicesUint32MSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
@@ -14330,94 +14352,94 @@ void deserialize(XrSceneMeshIndicesUint16MSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 
 
-void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneFragmentId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sceneFragmentId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDeserializeSceneFragmentMSFT* s, std::istream& in) {
+void deserialize(XrDeserializeSceneFragmentMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fragmentCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->fragments, in);
+    deserialize(&s->fragmentCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->fragments, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in) {
+void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneFragmentId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sceneFragmentId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in) {
+void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fragmentCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->fragments, in);
+    deserialize(&s->fragmentCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->fragments, in, in_place);
 
 }
 
@@ -14426,44 +14448,44 @@ void deserialize(XrSceneDeserializeInfoMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 
 
-void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in) {
+void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fromDisplayRefreshRate, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->toDisplayRefreshRate, in);
+    deserialize(&s->fromDisplayRefreshRate, in, in_place);
+
+        
+
+    deserialize(&s->toDisplayRefreshRate, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in) {
+void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fromDisplayRefreshRate, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->toDisplayRefreshRate, in);
+    deserialize(&s->fromDisplayRefreshRate, in, in_place);
+
+        
+
+    deserialize(&s->toDisplayRefreshRate, in, in_place);
 
 }
 
@@ -14472,80 +14494,80 @@ void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 
 
-void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in) {
+void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->persistentPath, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->rolePath, in);
+    deserialize(&s->persistentPath, in, in_place);
+
+        
+
+    deserialize(&s->rolePath, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in) {
+void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->paths, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->paths, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in) {
+void deserialize(XrViveTrackerPathsHTCX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->persistentPath, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->rolePath, in);
+    deserialize(&s->persistentPath, in, in_place);
+
+        
+
+    deserialize(&s->rolePath, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in) {
+void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->paths, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->paths, in, in_place);
 
 }
 
@@ -14554,140 +14576,140 @@ void deserialize(XrEventDataViveTrackerConnectedHTCX* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 
 
-void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportEyeFacialTracking, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportLipFacialTracking, in);
+    deserialize(&s->supportEyeFacialTracking, in, in_place);
+
+        
+
+    deserialize(&s->supportLipFacialTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionsHTC* s, std::istream& in) {
+void deserialize(XrFacialExpressionsHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->sampleTime, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->expressionCount, in);
+    deserialize(&s->sampleTime, in, in_place);
 
         
 
-    deserialize_ptr(&s->expressionWeightings, in);
+    deserialize(&s->expressionCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->expressionWeightings, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->facialTrackingType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->facialTrackingType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemFacialTrackingPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportEyeFacialTracking, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportLipFacialTracking, in);
+    deserialize(&s->supportEyeFacialTracking, in, in_place);
+
+        
+
+    deserialize(&s->supportLipFacialTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrFacialTrackerCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->facialTrackingType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->facialTrackingType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionsHTC* s, std::istream& in) {
+void deserialize(XrFacialExpressionsHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->sampleTime, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->expressionCount, in);
+    deserialize(&s->sampleTime, in, in_place);
 
         
 
-    deserialize_ptr(&s->expressionWeightings, in);
+    deserialize(&s->expressionCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->expressionWeightings, in, in_place);
 
 }
 
@@ -14696,36 +14718,36 @@ void deserialize(XrFacialExpressionsHTC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 
 
-void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorSpace, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->colorSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorSpace, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->colorSpace, in, in_place);
 
 }
 
@@ -14734,230 +14756,230 @@ void deserialize(XrSystemColorSpacePropertiesFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 
 
-void deserialize(XrVector4sFB* s, std::istream& in) {
+void deserialize(XrVector4sFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
-
-        
-
-    deserialize(&s->y, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->z, in);
+    deserialize(&s->y, in, in_place);
 
         
 
-    deserialize(&s->w, in);
+    deserialize(&s->z, in, in_place);
+
+        
+
+    deserialize(&s->w, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingMeshFB* s, std::istream& in) {
+void deserialize(XrHandTrackingMeshFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointCountOutput, in);
+    deserialize(&s->jointCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointBindPoses, in);
+    deserialize(&s->jointCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointRadii, in);
+    deserialize_ptr(&s->jointBindPoses, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointParents, in);
+    deserialize_ptr(&s->jointRadii, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_ptr(&s->jointParents, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexPositions, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexNormals, in);
+    deserialize_ptr(&s->vertexPositions, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexUVs, in);
+    deserialize_ptr(&s->vertexNormals, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBlendIndices, in);
+    deserialize_ptr(&s->vertexUVs, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBlendWeights, in);
+    deserialize_ptr(&s->vertexBlendIndices, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertexBlendWeights, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingScaleFB* s, std::istream& in) {
+void deserialize(XrHandTrackingScaleFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sensorOutput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->currentOutput, in);
+    deserialize(&s->sensorOutput, in, in_place);
 
         
 
-    deserialize(&s->overrideHandScale, in);
+    deserialize(&s->currentOutput, in, in_place);
 
         
 
-    deserialize(&s->overrideValueInput, in);
+    deserialize(&s->overrideHandScale, in, in_place);
+
+        
+
+    deserialize(&s->overrideValueInput, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingMeshFB* s, std::istream& in) {
+void deserialize(XrHandTrackingMeshFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointCountOutput, in);
+    deserialize(&s->jointCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointBindPoses, in);
+    deserialize(&s->jointCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointRadii, in);
+    deserialize_ptr(&s->jointBindPoses, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointParents, in);
+    deserialize_ptr(&s->jointRadii, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_ptr(&s->jointParents, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexPositions, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexNormals, in);
+    deserialize_ptr(&s->vertexPositions, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexUVs, in);
+    deserialize_ptr(&s->vertexNormals, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBlendIndices, in);
+    deserialize_ptr(&s->vertexUVs, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBlendWeights, in);
+    deserialize_ptr(&s->vertexBlendIndices, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertexBlendWeights, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingScaleFB* s, std::istream& in) {
+void deserialize(XrHandTrackingScaleFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sensorOutput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->currentOutput, in);
+    deserialize(&s->sensorOutput, in, in_place);
 
         
 
-    deserialize(&s->overrideHandScale, in);
+    deserialize(&s->currentOutput, in, in_place);
 
         
 
-    deserialize(&s->overrideValueInput, in);
+    deserialize(&s->overrideHandScale, in, in_place);
+
+        
+
+    deserialize(&s->overrideValueInput, in, in_place);
 
 }
 
@@ -14966,76 +14988,76 @@ void deserialize(XrHandTrackingScaleFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 
 
-void deserialize(XrHandTrackingAimStateFB* s, std::istream& in) {
+void deserialize(XrHandTrackingAimStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->aimPose, in);
+    deserialize(&s->status, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthIndex, in);
+    deserialize(&s->aimPose, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthMiddle, in);
+    deserialize(&s->pinchStrengthIndex, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthRing, in);
+    deserialize(&s->pinchStrengthMiddle, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthLittle, in);
+    deserialize(&s->pinchStrengthRing, in, in_place);
+
+        
+
+    deserialize(&s->pinchStrengthLittle, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingAimStateFB* s, std::istream& in) {
+void deserialize(XrHandTrackingAimStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->aimPose, in);
+    deserialize(&s->status, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthIndex, in);
+    deserialize(&s->aimPose, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthMiddle, in);
+    deserialize(&s->pinchStrengthIndex, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthRing, in);
+    deserialize(&s->pinchStrengthMiddle, in, in_place);
 
         
 
-    deserialize(&s->pinchStrengthLittle, in);
+    deserialize(&s->pinchStrengthRing, in, in_place);
+
+        
+
+    deserialize(&s->pinchStrengthLittle, in, in_place);
 
 }
 
@@ -15044,54 +15066,54 @@ void deserialize(XrHandTrackingAimStateFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 
 
-void deserialize(XrHandCapsuleFB* s, std::istream& in) {
+void deserialize(XrHandCapsuleFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, in);
-
-        
-
-    deserialize(&s->radius, in);
+    deserialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, in, in_place);
 
         
 
-    deserialize(&s->joint, in);
+    deserialize(&s->radius, in, in_place);
+
+        
+
+    deserialize(&s->joint, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in) {
+void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in) {
+void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, in, in_place);
 
 }
 
@@ -15100,320 +15122,320 @@ void deserialize(XrHandTrackingCapsulesStateFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 
 
-void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntity, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize(&s->componentType, in, in_place);
 
         
 
-    deserialize(&s->timeout, in);
+    deserialize(&s->enabled, in, in_place);
+
+        
+
+    deserialize(&s->timeout, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentStatusFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentStatusFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->changePending, in);
+    deserialize(&s->enabled, in, in_place);
+
+        
+
+    deserialize(&s->changePending, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize(&s->componentType, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntityPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntity, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentStatusSetInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize(&s->componentType, in, in_place);
 
         
 
-    deserialize(&s->timeout, in);
+    deserialize(&s->enabled, in, in_place);
+
+        
+
+    deserialize(&s->timeout, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentStatusFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentStatusFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->changePending, in);
+    deserialize(&s->enabled, in, in_place);
+
+        
+
+    deserialize(&s->changePending, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize(&s->componentType, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
@@ -15422,108 +15444,108 @@ void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 
 
-void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in) {
+void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->profile, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->profile, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFoveationProfileCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in) {
+void deserialize(XrSwapchainCreateInfoFoveationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->profile, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->profile, in, in_place);
 
 }
 
@@ -15532,52 +15554,52 @@ void deserialize(XrSwapchainStateFoveationFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
 
 
-void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->level, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->verticalOffset, in);
+    deserialize(&s->level, in, in_place);
 
         
 
-    deserialize(&s->dynamic, in);
+    deserialize(&s->verticalOffset, in, in_place);
+
+        
+
+    deserialize(&s->dynamic, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->level, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->verticalOffset, in);
+    deserialize(&s->level, in, in_place);
 
         
 
-    deserialize(&s->dynamic, in);
+    deserialize(&s->verticalOffset, in, in_place);
+
+        
+
+    deserialize(&s->dynamic, in, in_place);
 
 }
 
@@ -15586,130 +15608,130 @@ void deserialize(XrFoveationLevelProfileCreateInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 
 
-void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsKeyboardTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsKeyboardTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrKeyboardTrackingDescriptionFB* s, std::istream& in) {
+void deserialize(XrKeyboardTrackingDescriptionFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->trackedKeyboardId, in);
-
-        
-
-    deserialize(&s->size, in);
+    deserialize(&s->trackedKeyboardId, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->size, in, in_place);
 
         
 
-    deserialize_array(s->name, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize_array(s->name, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in) {
+void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->trackedKeyboardId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->trackedKeyboardId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in) {
+void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in) {
+void deserialize(XrKeyboardSpaceCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->trackedKeyboardId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->trackedKeyboardId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in) {
+void deserialize(XrKeyboardTrackingQueryFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsKeyboardTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsKeyboardTracking, in, in_place);
 
 }
 
@@ -15718,76 +15740,76 @@ void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 
 
-void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in) {
+void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->windingOrder, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->vertexCount, in);
+    deserialize(&s->windingOrder, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBuffer, in);
+    deserialize(&s->vertexCount, in, in_place);
 
         
 
-    deserialize(&s->triangleCount, in);
+    deserialize_ptr(&s->vertexBuffer, in, in_place);
 
         
 
-    deserialize_ptr(&s->indexBuffer, in);
+    deserialize(&s->triangleCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indexBuffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in) {
+void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->windingOrder, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->vertexCount, in);
+    deserialize(&s->windingOrder, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertexBuffer, in);
+    deserialize(&s->vertexCount, in, in_place);
 
         
 
-    deserialize(&s->triangleCount, in);
+    deserialize_ptr(&s->vertexBuffer, in, in_place);
 
         
 
-    deserialize_ptr(&s->indexBuffer, in);
+    deserialize(&s->triangleCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indexBuffer, in, in_place);
 
 }
 
@@ -15796,544 +15818,544 @@ void deserialize(XrTriangleMeshCreateInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 
 
-void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsPassthrough, in);
-
-}
-
-
-
-
-void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->capabilities, in);
+    deserialize(&s->supportsPassthrough, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in) {
+void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
-
-}
-
-
-
-
-void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->passthrough, in);
-
-        
-
-    deserialize(&s->flags, in);
-
-        
-
-    deserialize(&s->purpose, in);
+    deserialize(&s->capabilities, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in) {
+void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->layerHandle, in);
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in) {
+void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layer, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->mesh, in);
+    deserialize(&s->passthrough, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
-
-        
-
-    deserialize(&s->scale, in);
+    deserialize(&s->purpose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->layerHandle, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughStyleFB* s, std::istream& in) {
+void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->textureOpacityFactor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->edgeColor, in);
-
-}
-
-
-
-
-void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->layer, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->mesh, in, in_place);
 
         
 
-    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in) {
+void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in) {
+void deserialize(XrPassthroughStyleFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->brightness, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->contrast, in);
+    deserialize(&s->textureOpacityFactor, in, in_place);
 
         
 
-    deserialize(&s->saturation, in);
+    deserialize(&s->edgeColor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsPassthrough, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in) {
+void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->brightness, in, in_place);
+
+        
+
+    deserialize(&s->contrast, in, in_place);
+
+        
+
+    deserialize(&s->saturation, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->passthrough, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
-
-        
-
-    deserialize(&s->purpose, in);
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in) {
+void deserialize(XrSystemPassthroughPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->layerHandle, in);
+    deserialize(&s->supportsPassthrough, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in) {
+void deserialize(XrPassthroughCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layer, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->mesh, in);
-
-        
-
-    deserialize(&s->baseSpace, in);
-
-        
-
-    deserialize(&s->pose, in);
-
-        
-
-    deserialize(&s->scale, in);
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in) {
+void deserialize(XrPassthroughLayerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->passthrough, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->purpose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in) {
+void deserialize(XrCompositionLayerPassthroughFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->capabilities, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->layerHandle, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughStyleFB* s, std::istream& in) {
+void deserialize(XrGeometryInstanceCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->textureOpacityFactor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->edgeColor, in);
+    deserialize(&s->layer, in, in_place);
+
+        
+
+    deserialize(&s->mesh, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in) {
+void deserialize(XrGeometryInstanceTransformFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in) {
+void deserialize(XrSystemPassthroughProperties2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->capabilities, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in) {
+void deserialize(XrPassthroughStyleFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->brightness, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->contrast, in);
+    deserialize(&s->textureOpacityFactor, in, in_place);
 
         
 
-    deserialize(&s->saturation, in);
+    deserialize(&s->edgeColor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrPassthroughColorMapMonoToMonoFB* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->brightness, in, in_place);
+
+        
+
+    deserialize(&s->contrast, in, in_place);
+
+        
+
+    deserialize(&s->saturation, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -16342,264 +16364,264 @@ void deserialize(XrEventDataPassthroughStateChangedFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 
 
-void deserialize(XrRenderModelPathInfoFB* s, std::istream& in) {
+void deserialize(XrRenderModelPathInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->path, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->path, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelPropertiesFB* s, std::istream& in) {
+void deserialize(XrRenderModelPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vendorId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, in);
+    deserialize(&s->vendorId, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, in, in_place);
 
         
 
-    deserialize(&s->modelVersion, in);
+    deserialize(&s->modelKey, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->modelVersion, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelBufferFB* s, std::istream& in) {
+void deserialize(XrRenderModelBufferFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->bufferCountOutput, in);
+    deserialize(&s->bufferCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in) {
+void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->modelKey, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsRenderModelLoading, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsRenderModelLoading, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in) {
+void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelPathInfoFB* s, std::istream& in) {
+void deserialize(XrRenderModelPathInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->path, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->path, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelPropertiesFB* s, std::istream& in) {
+void deserialize(XrRenderModelPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vendorId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, in);
+    deserialize(&s->vendorId, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, in, in_place);
 
         
 
-    deserialize(&s->modelVersion, in);
+    deserialize(&s->modelKey, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->modelVersion, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelBufferFB* s, std::istream& in) {
+void deserialize(XrRenderModelBufferFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->bufferCountOutput, in);
+    deserialize(&s->bufferCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in) {
+void deserialize(XrRenderModelLoadInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->modelKey, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->modelKey, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemRenderModelPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsRenderModelLoading, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsRenderModelLoading, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in) {
+void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -16608,18 +16630,18 @@ void deserialize(XrRenderModelCapabilitiesRequestFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
 
 
-void deserialize(XrBindingModificationsKHR* s, std::istream& in) {
+void deserialize(XrBindingModificationsKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bindingModificationCount, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bindingModificationCount, in, in_place);
 
         
 
@@ -16630,32 +16652,32 @@ void deserialize(XrBindingModificationsKHR* s, std::istream& in) {
 
 
 
-void deserialize(XrBindingModificationBaseHeaderKHR* s, std::istream& in) {
+void deserialize(XrBindingModificationBaseHeaderKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBindingModificationsKHR* s, std::istream& in) {
+void deserialize(XrBindingModificationsKHR* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bindingModificationCount, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bindingModificationCount, in, in_place);
 
         
 
@@ -16668,108 +16690,108 @@ void deserialize(XrBindingModificationsKHR* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 
 
-void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in) {
+void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->foveatedRenderingActive, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->foveatedRenderingActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in) {
+void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->foveatedRenderingActive, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->foveatedRenderingActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in) {
+void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFoveatedRendering, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFoveatedRendering, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in) {
+void deserialize(XrViewLocateFoveatedRenderingVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->foveatedRenderingActive, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->foveatedRenderingActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in) {
+void deserialize(XrFoveatedViewConfigurationViewVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->foveatedRenderingActive, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->foveatedRenderingActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in) {
+void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFoveatedRendering, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFoveatedRendering, in, in_place);
 
 }
 
@@ -16778,44 +16800,44 @@ void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, std::istream& in) 
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 
 
-void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->depthTestRangeNearZ, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->depthTestRangeFarZ, in);
+    deserialize(&s->depthTestRangeNearZ, in, in_place);
+
+        
+
+    deserialize(&s->depthTestRangeFarZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->depthTestRangeNearZ, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->depthTestRangeFarZ, in);
+    deserialize(&s->depthTestRangeNearZ, in, in_place);
+
+        
+
+    deserialize(&s->depthTestRangeFarZ, in, in_place);
 
 }
 
@@ -16826,140 +16848,140 @@ void deserialize(XrCompositionLayerDepthTestVARJO* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
 
-void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in) {
+void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsMarkerTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsMarkerTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in) {
+void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->markerId, in, in_place);
 
         
 
-    deserialize(&s->isPredicted, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->isPredicted, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in) {
+void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInMarkerSpace, in);
+    deserialize(&s->markerId, in, in_place);
+
+        
+
+    deserialize(&s->poseInMarkerSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in) {
+void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsMarkerTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsMarkerTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in) {
+void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->markerId, in, in_place);
 
         
 
-    deserialize(&s->isPredicted, in);
+    deserialize(&s->isActive, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->isPredicted, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in) {
+void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInMarkerSpace, in);
+    deserialize(&s->markerId, in, in_place);
+
+        
+
+    deserialize(&s->poseInMarkerSpace, in, in_place);
 
 }
 
@@ -16970,44 +16992,44 @@ void deserialize(XrMarkerSpaceCreateInfoVARJO* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
 
 
-void deserialize(XrFrameEndInfoML* s, std::istream& in) {
+void deserialize(XrFrameEndInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->focusDistance, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->focusDistance, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameEndInfoML* s, std::istream& in) {
+void deserialize(XrFrameEndInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->focusDistance, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->focusDistance, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -17016,44 +17038,44 @@ void deserialize(XrFrameEndInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
 
 
-void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in) {
+void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->dimmerValue, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->dimmerValue, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in) {
+void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->dimmerValue, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->dimmerValue, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -17062,22 +17084,22 @@ void deserialize(XrGlobalDimmerFrameEndInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 
 
-void deserialize(XrCoordinateSpaceCreateInfoML* s, std::istream& in) {
+void deserialize(XrCoordinateSpaceCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->cfuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInCoordinateSpace, in);
+    deserialize(&s->cfuid, in, in_place);
+
+        
+
+    deserialize(&s->poseInCoordinateSpace, in, in_place);
 
 }
 
@@ -17086,380 +17108,380 @@ void deserialize(XrCoordinateSpaceCreateInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 
 
-void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in) {
+void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsMarkerUnderstanding, in);
-
-}
-
-
-
-
-void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->profile, in);
-
-        
-
-    deserialize(&s->markerType, in);
+    deserialize(&s->supportsMarkerUnderstanding, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->arucoDict, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->profile, in, in_place);
+
+        
+
+    deserialize(&s->markerType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerLength, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->arucoDict, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->aprilTagDict, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->markerLength, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fpsHint, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->resolutionHint, in);
-
-        
-
-    deserialize(&s->cameraHint, in);
-
-        
-
-    deserialize(&s->cornerRefineMethod, in);
-
-        
-
-    deserialize(&s->useEdgeRefinement, in);
-
-        
-
-    deserialize(&s->fullAnalysisIntervalHint, in);
+    deserialize(&s->aprilTagDict, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->fpsHint, in, in_place);
+
+        
+
+    deserialize(&s->resolutionHint, in, in_place);
+
+        
+
+    deserialize(&s->cameraHint, in, in_place);
+
+        
+
+    deserialize(&s->cornerRefineMethod, in, in_place);
+
+        
+
+    deserialize(&s->useEdgeRefinement, in, in_place);
+
+        
+
+    deserialize(&s->fullAnalysisIntervalHint, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorStateML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerDetector, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->marker, in);
-
-        
-
-    deserialize(&s->poseInMarkerSpace, in);
+    deserialize(&s->state, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in) {
+void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsMarkerUnderstanding, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->markerDetector, in, in_place);
+
+        
+
+    deserialize(&s->marker, in, in_place);
+
+        
+
+    deserialize(&s->poseInMarkerSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in) {
+void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->profile, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->markerType, in);
+    deserialize(&s->supportsMarkerUnderstanding, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->arucoDict, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->profile, in, in_place);
+
+        
+
+    deserialize(&s->markerType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorArucoInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerLength, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->arucoDict, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorSizeInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->aprilTagDict, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->markerLength, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorAprilTagInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fpsHint, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->resolutionHint, in);
-
-        
-
-    deserialize(&s->cameraHint, in);
-
-        
-
-    deserialize(&s->cornerRefineMethod, in);
-
-        
-
-    deserialize(&s->useEdgeRefinement, in);
-
-        
-
-    deserialize(&s->fullAnalysisIntervalHint, in);
+    deserialize(&s->aprilTagDict, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorCustomProfileInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->fpsHint, in, in_place);
+
+        
+
+    deserialize(&s->resolutionHint, in, in_place);
+
+        
+
+    deserialize(&s->cameraHint, in, in_place);
+
+        
+
+    deserialize(&s->cornerRefineMethod, in, in_place);
+
+        
+
+    deserialize(&s->useEdgeRefinement, in, in_place);
+
+        
+
+    deserialize(&s->fullAnalysisIntervalHint, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerDetectorStateML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorSnapshotInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in) {
+void deserialize(XrMarkerDetectorStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerDetector, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->marker, in);
+    deserialize(&s->state, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->poseInMarkerSpace, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->markerDetector, in, in_place);
+
+        
+
+    deserialize(&s->marker, in, in_place);
+
+        
+
+    deserialize(&s->poseInMarkerSpace, in, in_place);
 
 }
 
@@ -17468,250 +17490,250 @@ void deserialize(XrMarkerSpaceCreateInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 
 
-void deserialize(XrLocalizationMapML* s, std::istream& in) {
+void deserialize(XrLocalizationMapML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->mapUuid, in);
+    deserialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, in, in_place);
 
         
 
-    deserialize(&s->mapType, in);
+    deserialize(&s->mapUuid, in, in_place);
+
+        
+
+    deserialize(&s->mapType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in) {
+void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->map, in);
+    deserialize(&s->state, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize(&s->map, in, in_place);
 
         
 
-    deserialize(&s->errorFlags, in);
+    deserialize(&s->confidence, in, in_place);
+
+        
+
+    deserialize(&s->errorFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationMapQueryInfoBaseHeaderML* s, std::istream& in) {
+void deserialize(XrLocalizationMapQueryInfoBaseHeaderML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in) {
+void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->mapUuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->mapUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in) {
+void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->data, in);
+    deserialize(&s->size, in, in_place);
+
+        
+
+    deserialize_ptr(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in) {
+void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationMapML* s, std::istream& in) {
+void deserialize(XrLocalizationMapML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->mapUuid, in);
+    deserialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, in, in_place);
 
         
 
-    deserialize(&s->mapType, in);
+    deserialize(&s->mapUuid, in, in_place);
+
+        
+
+    deserialize(&s->mapType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in) {
+void deserialize(XrEventDataLocalizationChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->map, in);
+    deserialize(&s->state, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize(&s->map, in, in_place);
 
         
 
-    deserialize(&s->errorFlags, in);
+    deserialize(&s->confidence, in, in_place);
+
+        
+
+    deserialize(&s->errorFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in) {
+void deserialize(XrMapLocalizationRequestInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->mapUuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->mapUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in) {
+void deserialize(XrLocalizationMapImportInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->data, in);
+    deserialize(&s->size, in, in_place);
+
+        
+
+    deserialize_ptr(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in) {
+void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
@@ -17720,154 +17742,154 @@ void deserialize(XrLocalizationEnableEventsInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 
 
-void deserialize(XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateInfoBaseHeaderML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInBaseSpace, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInBaseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in) {
+void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->spaces, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorStateML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->confidence, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInBaseSpace, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->poseInBaseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in) {
+void deserialize(XrCreateSpatialAnchorsCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->spaces, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorStateML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->confidence, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->confidence, in, in_place);
 
 }
 
@@ -17876,632 +17898,632 @@ void deserialize(XrSpatialAnchorStateML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 
 
-void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsQueryInfoBaseHeaderML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
-
-        
-
-    deserialize(&s->center, in);
-
-        
-
-    deserialize(&s->time, in);
-
-        
-
-    deserialize(&s->radius, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->uuidCapacityInput, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->uuidCountOutput, in);
+    deserialize(&s->center, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->storage, in);
-
-        
-
-    deserialize(&s->uuidCount, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->radius, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchorCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->anchors, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize(&s->expiration, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->uuidCapacityInput, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->uuidCountOutput, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
-
-        
-
-    deserialize(&s->uuidCount, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->storage, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->uuidCount, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->anchorCount, in, in_place);
 
         
 
-    deserialize(&s->expiration, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_ptr(&s->anchors, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->futureResult, in);
+    deserialize(&s->expiration, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->uuidCount, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
-
-        
-
-    deserialize_ptr(&s->results, in);
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCompletionResultML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
+
+        
+
+    deserialize(&s->expiration, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->center, in);
-
-        
-
-    deserialize(&s->time, in);
-
-        
-
-    deserialize(&s->radius, in);
+    deserialize(&s->futureResult, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->uuidCapacityInput, in);
+    deserialize(&s->resultCount, in, in_place);
 
         
 
-    deserialize(&s->uuidCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->storage, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize(&s->resultCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchorCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->anchors, in);
+    deserialize(&s->resultCount, in, in_place);
 
         
 
-    deserialize(&s->expiration, in);
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCompletionResultML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
-
-        
-
-    deserialize(&s->uuidCount, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->center, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->radius, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsQueryCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize(&s->expiration, in);
+    deserialize(&s->uuidCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->uuidCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->storage, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsPublishInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->anchorCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->anchors, in, in_place);
+
+        
+
+    deserialize(&s->expiration, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsPublishCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->futureResult, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in) {
+void deserialize(XrSpatialAnchorsDeleteInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsDeleteCompletionML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
+
+        
+
+    deserialize(&s->expiration, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->resultCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->results, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->resultCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->results, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->resultCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
@@ -18510,116 +18532,116 @@ void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, std::is
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 
 
-void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in) {
+void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->status, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in) {
+void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->status, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in) {
+void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in) {
+void deserialize(XrEventDataHeadsetFitChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->status, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in) {
+void deserialize(XrEventDataEyeCalibrationChangedML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->status, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in) {
+void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
@@ -18628,98 +18650,98 @@ void deserialize(XrUserCalibrationEnableEventsInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 
 
-void deserialize(XrSpatialAnchorPersistenceNameMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorPersistenceNameMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, in);
+    deserialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorPersistenceName, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchor, in);
+    deserialize(&s->spatialAnchorPersistenceName, in, in_place);
+
+        
+
+    deserialize(&s->spatialAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorStore, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorPersistenceName, in);
+    deserialize(&s->spatialAnchorStore, in, in_place);
+
+        
+
+    deserialize(&s->spatialAnchorPersistenceName, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorPersistenceName, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchor, in);
+    deserialize(&s->spatialAnchorPersistenceName, in, in_place);
+
+        
+
+    deserialize(&s->spatialAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in) {
+void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorStore, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->spatialAnchorPersistenceName, in);
+    deserialize(&s->spatialAnchorStore, in, in_place);
+
+        
+
+    deserialize(&s->spatialAnchorPersistenceName, in, in_place);
 
 }
 
@@ -18728,168 +18750,168 @@ void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, std::istre
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 
 
-void deserialize(XrSceneMarkerMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->markerType, in);
-
-        
-
-    deserialize(&s->lastSeenTime, in);
+    deserialize(&s->markerType, in, in_place);
 
         
 
-    deserialize(&s->center, in);
+    deserialize(&s->lastSeenTime, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize(&s->center, in, in_place);
+
+        
+
+    deserialize(&s->size, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkersMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkersMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneMarkerCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->sceneMarkers, in);
+    deserialize(&s->sceneMarkerCapacityInput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sceneMarkers, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerTypeCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->markerTypes, in);
+    deserialize(&s->markerTypeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->markerTypes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkerQRCodeMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerQRCodeMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->symbolType, in);
+    deserialize(&s->symbolType, in, in_place);
 
         
 
-    deserialize(&s->version, in);
+    deserialize(&s->version, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->qrCodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->qrCodes, in);
+    deserialize(&s->qrCodeCapacityInput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->qrCodes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkersMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkersMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sceneMarkerCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->sceneMarkers, in);
+    deserialize(&s->sceneMarkerCapacityInput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->sceneMarkers, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerTypeFilterMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->markerTypeCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->markerTypes, in);
+    deserialize(&s->markerTypeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->markerTypes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in) {
+void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->qrCodeCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->qrCodes, in);
+    deserialize(&s->qrCodeCapacityInput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->qrCodes, in, in_place);
 
 }
 
@@ -18900,358 +18922,358 @@ void deserialize(XrSceneMarkerQRCodesMSFT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 
 
-void deserialize(XrSpaceQueryInfoBaseHeaderFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryInfoBaseHeaderFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrSpaceFilterInfoBaseHeaderFB* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceQueryInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceFilterInfoBaseHeaderFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->queryAction, in);
-
-        
-
-    deserialize(&s->maxResultCount, in);
-
-        
-
-    deserialize(&s->timeout, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->queryAction, in, in_place);
+
+        
+
+    deserialize(&s->maxResultCount, in, in_place);
+
+        
+
+    deserialize(&s->timeout, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceQueryResultFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceQueryResultsFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryResultFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->resultCapacityInput, in);
-
-        
-
-    deserialize(&s->resultCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryResultsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->resultCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->resultCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceQueryInfoFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->queryAction, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->maxResultCount, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->timeout, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceQueryResultsFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->resultCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->resultCountOutput, in);
+    deserialize(&s->queryAction, in, in_place);
 
         
 
-    deserialize_ptr(&s->results, in);
+    deserialize(&s->maxResultCount, in, in_place);
+
+        
+
+    deserialize(&s->timeout, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceQueryResultsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->resultCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->resultCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->results, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceStorageLocationFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceUuidFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in) {
+void deserialize(XrSpaceComponentFilterInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
@@ -19260,232 +19282,232 @@ void deserialize(XrEventDataSpaceQueryCompleteFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 
 
-void deserialize(XrSpaceSaveInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceSaveInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->persistenceMode, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->persistenceMode, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceEraseInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceEraseInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceSaveInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceSaveInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->persistenceMode, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->persistenceMode, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceEraseInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceEraseInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceSaveCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
@@ -19496,52 +19518,52 @@ void deserialize(XrEventDataSpaceEraseCompleteFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 
 
-void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in) {
+void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->image, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in) {
+void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->image, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->image, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
@@ -19550,44 +19572,44 @@ void deserialize(XrSwapchainImageFoveationVulkanFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 
 
-void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
@@ -19596,108 +19618,108 @@ void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, std::istream& in
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 
 
-void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minFilter, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->magFilter, in);
+    deserialize(&s->minFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeS, in);
+    deserialize(&s->magFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeT, in);
+    deserialize(&s->wrapModeS, in, in_place);
 
         
 
-    deserialize(&s->swizzleRed, in);
+    deserialize(&s->wrapModeT, in, in_place);
 
         
 
-    deserialize(&s->swizzleGreen, in);
+    deserialize(&s->swizzleRed, in, in_place);
 
         
 
-    deserialize(&s->swizzleBlue, in);
+    deserialize(&s->swizzleGreen, in, in_place);
 
         
 
-    deserialize(&s->swizzleAlpha, in);
+    deserialize(&s->swizzleBlue, in, in_place);
 
         
 
-    deserialize(&s->maxAnisotropy, in);
+    deserialize(&s->swizzleAlpha, in, in_place);
 
         
 
-    deserialize(&s->borderColor, in);
+    deserialize(&s->maxAnisotropy, in, in_place);
+
+        
+
+    deserialize(&s->borderColor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minFilter, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->magFilter, in);
+    deserialize(&s->minFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeS, in);
+    deserialize(&s->magFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeT, in);
+    deserialize(&s->wrapModeS, in, in_place);
 
         
 
-    deserialize(&s->swizzleRed, in);
+    deserialize(&s->wrapModeT, in, in_place);
 
         
 
-    deserialize(&s->swizzleGreen, in);
+    deserialize(&s->swizzleRed, in, in_place);
 
         
 
-    deserialize(&s->swizzleBlue, in);
+    deserialize(&s->swizzleGreen, in, in_place);
 
         
 
-    deserialize(&s->swizzleAlpha, in);
+    deserialize(&s->swizzleBlue, in, in_place);
 
         
 
-    deserialize(&s->maxAnisotropy, in);
+    deserialize(&s->swizzleAlpha, in, in_place);
 
         
 
-    deserialize(&s->borderColor, in);
+    deserialize(&s->maxAnisotropy, in, in_place);
+
+        
+
+    deserialize(&s->borderColor, in, in_place);
 
 }
 
@@ -19706,116 +19728,116 @@ void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 
 
-void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minFilter, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->magFilter, in);
+    deserialize(&s->minFilter, in, in_place);
 
         
 
-    deserialize(&s->mipmapMode, in);
+    deserialize(&s->magFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeS, in);
+    deserialize(&s->mipmapMode, in, in_place);
 
         
 
-    deserialize(&s->wrapModeT, in);
+    deserialize(&s->wrapModeS, in, in_place);
 
         
 
-    deserialize(&s->swizzleRed, in);
+    deserialize(&s->wrapModeT, in, in_place);
 
         
 
-    deserialize(&s->swizzleGreen, in);
+    deserialize(&s->swizzleRed, in, in_place);
 
         
 
-    deserialize(&s->swizzleBlue, in);
+    deserialize(&s->swizzleGreen, in, in_place);
 
         
 
-    deserialize(&s->swizzleAlpha, in);
+    deserialize(&s->swizzleBlue, in, in_place);
 
         
 
-    deserialize(&s->maxAnisotropy, in);
+    deserialize(&s->swizzleAlpha, in, in_place);
 
         
 
-    deserialize(&s->borderColor, in);
+    deserialize(&s->maxAnisotropy, in, in_place);
+
+        
+
+    deserialize(&s->borderColor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in) {
+void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->minFilter, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->magFilter, in);
+    deserialize(&s->minFilter, in, in_place);
 
         
 
-    deserialize(&s->mipmapMode, in);
+    deserialize(&s->magFilter, in, in_place);
 
         
 
-    deserialize(&s->wrapModeS, in);
+    deserialize(&s->mipmapMode, in, in_place);
 
         
 
-    deserialize(&s->wrapModeT, in);
+    deserialize(&s->wrapModeS, in, in_place);
 
         
 
-    deserialize(&s->swizzleRed, in);
+    deserialize(&s->wrapModeT, in, in_place);
 
         
 
-    deserialize(&s->swizzleGreen, in);
+    deserialize(&s->swizzleRed, in, in_place);
 
         
 
-    deserialize(&s->swizzleBlue, in);
+    deserialize(&s->swizzleGreen, in, in_place);
 
         
 
-    deserialize(&s->swizzleAlpha, in);
+    deserialize(&s->swizzleBlue, in, in_place);
 
         
 
-    deserialize(&s->maxAnisotropy, in);
+    deserialize(&s->swizzleAlpha, in, in_place);
 
         
 
-    deserialize(&s->borderColor, in);
+    deserialize(&s->maxAnisotropy, in, in_place);
+
+        
+
+    deserialize(&s->borderColor, in, in_place);
 
 }
 
@@ -19824,104 +19846,104 @@ void deserialize(XrSwapchainStateSamplerVulkanFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 
 
-void deserialize(XrSpaceShareInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceShareInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize(&s->userCount, in);
+    deserialize_ptr(&s->spaces, in, in_place);
 
         
 
-    deserialize_ptr(&s->users, in);
+    deserialize(&s->userCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->users, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceShareInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceShareInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize(&s->userCount, in);
+    deserialize_ptr(&s->spaces, in, in_place);
 
         
 
-    deserialize_ptr(&s->users, in);
+    deserialize(&s->userCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->users, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
@@ -19930,136 +19952,136 @@ void deserialize(XrEventDataSpaceShareCompleteFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
 
 
-void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->motionVectorSubImage, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->appSpaceDeltaPose, in);
+    deserialize(&s->motionVectorSubImage, in, in_place);
 
         
 
-    deserialize(&s->depthSubImage, in);
+    deserialize(&s->appSpaceDeltaPose, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->depthSubImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectHeight, in);
+    deserialize(&s->recommendedMotionVectorImageRectWidth, in, in_place);
+
+        
+
+    deserialize(&s->recommendedMotionVectorImageRectHeight, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->motionVectorSubImage, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->appSpaceDeltaPose, in);
+    deserialize(&s->motionVectorSubImage, in, in_place);
 
         
 
-    deserialize(&s->depthSubImage, in);
+    deserialize(&s->appSpaceDeltaPose, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->depthSubImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectHeight, in);
+    deserialize(&s->recommendedMotionVectorImageRectWidth, in, in_place);
+
+        
+
+    deserialize(&s->recommendedMotionVectorImageRectHeight, in, in_place);
 
 }
 
@@ -20068,52 +20090,52 @@ void deserialize(XrSystemSpaceWarpPropertiesFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 
 
-void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in) {
+void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->duration, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->amplitudeCount, in);
+    deserialize(&s->duration, in, in_place);
 
         
 
-    deserialize_ptr(&s->amplitudes, in);
+    deserialize(&s->amplitudeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->amplitudes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in) {
+void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->duration, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->amplitudeCount, in);
+    deserialize(&s->duration, in, in_place);
 
         
 
-    deserialize_ptr(&s->amplitudes, in);
+    deserialize(&s->amplitudeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->amplitudes, in, in_place);
 
 }
 
@@ -20122,248 +20144,248 @@ void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 
 
-void deserialize(XrOffset3DfFB* s, std::istream& in) {
+void deserialize(XrOffset3DfFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
-
-        
-
-    deserialize(&s->y, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->z, in);
+    deserialize(&s->y, in, in_place);
+
+        
+
+    deserialize(&s->z, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRect3DfFB* s, std::istream& in) {
+void deserialize(XrRect3DfFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->offset, in);
+    deserialize(&s->offset, in, in_place);
 
         
 
-    deserialize(&s->extent, in);
+    deserialize(&s->extent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSemanticLabelsFB* s, std::istream& in) {
+void deserialize(XrSemanticLabelsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->bufferCountOutput, in);
+    deserialize(&s->bufferCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRoomLayoutFB* s, std::istream& in) {
+void deserialize(XrRoomLayoutFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->floorUuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->ceilingUuid, in);
+    deserialize(&s->floorUuid, in, in_place);
 
         
 
-    deserialize(&s->wallUuidCapacityInput, in);
+    deserialize(&s->ceilingUuid, in, in_place);
 
         
 
-    deserialize(&s->wallUuidCountOutput, in);
+    deserialize(&s->wallUuidCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->wallUuids, in);
+    deserialize(&s->wallUuidCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->wallUuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBoundary2DFB* s, std::istream& in) {
+void deserialize(XrBoundary2DFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in) {
+void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->recognizedLabels, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize_ptr(&s->recognizedLabels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSemanticLabelsFB* s, std::istream& in) {
+void deserialize(XrSemanticLabelsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->bufferCountOutput, in);
+    deserialize(&s->bufferCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRoomLayoutFB* s, std::istream& in) {
+void deserialize(XrRoomLayoutFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->floorUuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->ceilingUuid, in);
+    deserialize(&s->floorUuid, in, in_place);
 
         
 
-    deserialize(&s->wallUuidCapacityInput, in);
+    deserialize(&s->ceilingUuid, in, in_place);
 
         
 
-    deserialize(&s->wallUuidCountOutput, in);
+    deserialize(&s->wallUuidCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->wallUuids, in);
+    deserialize(&s->wallUuidCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->wallUuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBoundary2DFB* s, std::istream& in) {
+void deserialize(XrBoundary2DFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in) {
+void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->recognizedLabels, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize_ptr(&s->recognizedLabels, in, in_place);
 
 }
 
@@ -20372,18 +20394,18 @@ void deserialize(XrSemanticLabelsSupportInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 
 
-void deserialize(XrDigitalLensControlALMALENCE* s, std::istream& in) {
+void deserialize(XrDigitalLensControlALMALENCE* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -20392,88 +20414,88 @@ void deserialize(XrDigitalLensControlALMALENCE* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 
 
-void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in) {
+void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestByteCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->request, in);
+    deserialize(&s->requestByteCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->request, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSceneCaptureCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in) {
+void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestByteCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->request, in);
+    deserialize(&s->requestByteCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->request, in, in_place);
 
 }
 
@@ -20482,52 +20504,52 @@ void deserialize(XrSceneCaptureRequestInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 
 
-void deserialize(XrSpaceContainerFB* s, std::istream& in) {
+void deserialize(XrSpaceContainerFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->uuidCountOutput, in);
+    deserialize(&s->uuidCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->uuidCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceContainerFB* s, std::istream& in) {
+void deserialize(XrSpaceContainerFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->uuidCountOutput, in);
+    deserialize(&s->uuidCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->uuidCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
@@ -20536,116 +20558,116 @@ void deserialize(XrSpaceContainerFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 
 
-void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in) {
+void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFoveationEyeTracked, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFoveationEyeTracked, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in) {
+void deserialize(XrFoveationEyeTrackedStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFoveationEyeTracked, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFoveationEyeTracked, in, in_place);
 
 }
 
@@ -20654,198 +20676,198 @@ void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, std::istream& in)
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 
 
-void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFaceTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFaceTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->faceExpressionSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->faceExpressionSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionInfoFB* s, std::istream& in) {
+void deserialize(XrFaceExpressionInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionStatusFB* s, std::istream& in) {
+void deserialize(XrFaceExpressionStatusFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->isValid, in);
+    deserialize(&s->isValid, in, in_place);
 
         
 
-    deserialize(&s->isEyeFollowingBlendshapesValid, in);
+    deserialize(&s->isEyeFollowingBlendshapesValid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in) {
+void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->weightCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->weights, in);
+    deserialize(&s->weightCount, in, in_place);
 
         
 
-    deserialize(&s->confidenceCount, in);
+    deserialize_ptr(&s->weights, in, in_place);
 
         
 
-    deserialize_ptr(&s->confidences, in);
+    deserialize(&s->confidenceCount, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_ptr(&s->confidences, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->status, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemFaceTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFaceTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFaceTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrFaceTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->faceExpressionSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->faceExpressionSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionInfoFB* s, std::istream& in) {
+void deserialize(XrFaceExpressionInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in) {
+void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->weightCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->weights, in);
+    deserialize(&s->weightCount, in, in_place);
 
         
 
-    deserialize(&s->confidenceCount, in);
+    deserialize_ptr(&s->weights, in, in_place);
 
         
 
-    deserialize_ptr(&s->confidences, in);
+    deserialize(&s->confidenceCount, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize_ptr(&s->confidences, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->status, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
@@ -20854,170 +20876,170 @@ void deserialize(XrFaceExpressionWeightsFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 
 
-void deserialize(XrEyeGazeFB* s, std::istream& in) {
+void deserialize(XrEyeGazeFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->isValid, in);
-
-        
-
-    deserialize(&s->gazePose, in);
+    deserialize(&s->isValid, in, in_place);
 
         
 
-    deserialize(&s->gazeConfidence, in);
+    deserialize(&s->gazePose, in, in_place);
+
+        
+
+    deserialize(&s->gazeConfidence, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazesInfoFB* s, std::istream& in) {
+void deserialize(XrEyeGazesInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEyeTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsEyeTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazesFB* s, std::istream& in) {
+void deserialize(XrEyeGazesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in) {
+void deserialize(XrEyeTrackerCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazesInfoFB* s, std::istream& in) {
+void deserialize(XrEyeGazesInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEyeGazesFB* s, std::istream& in) {
+void deserialize(XrEyeGazesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in) {
+void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEyeTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsEyeTracking, in, in_place);
 
 }
 
@@ -21026,44 +21048,44 @@ void deserialize(XrSystemEyeTrackingPropertiesFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 
 
-void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in) {
+void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->leftHandIntensity, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->rightHandIntensity, in);
+    deserialize(&s->leftHandIntensity, in, in_place);
+
+        
+
+    deserialize(&s->rightHandIntensity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in) {
+void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->leftHandIntensity, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->rightHandIntensity, in);
+    deserialize(&s->leftHandIntensity, in, in_place);
+
+        
+
+    deserialize(&s->rightHandIntensity, in, in_place);
 
 }
 
@@ -21072,36 +21094,36 @@ void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 
 
-void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->layerFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->layerFlags, in, in_place);
 
 }
 
@@ -21110,104 +21132,104 @@ void deserialize(XrCompositionLayerSettingsFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 
 
-void deserialize(XrHapticPcmVibrationFB* s, std::istream& in) {
+void deserialize(XrHapticPcmVibrationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize(&s->sampleRate, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
         
 
-    deserialize(&s->append, in);
+    deserialize(&s->sampleRate, in, in_place);
 
         
 
-    deserialize_ptr(&s->samplesConsumed, in);
+    deserialize(&s->append, in, in_place);
+
+        
+
+    deserialize_ptr(&s->samplesConsumed, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in) {
+void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sampleRate, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sampleRate, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHapticPcmVibrationFB* s, std::istream& in) {
+void deserialize(XrHapticPcmVibrationFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize(&s->sampleRate, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
         
 
-    deserialize(&s->append, in);
+    deserialize(&s->sampleRate, in, in_place);
 
         
 
-    deserialize_ptr(&s->samplesConsumed, in);
+    deserialize(&s->append, in, in_place);
+
+        
+
+    deserialize_ptr(&s->samplesConsumed, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in) {
+void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sampleRate, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->sampleRate, in, in_place);
 
 }
 
@@ -21216,152 +21238,152 @@ void deserialize(XrDevicePcmSampleRateStateFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 
 
-void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in) {
+void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->motionVectorSubImage, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->motionVectorScale, in);
+    deserialize(&s->motionVectorSubImage, in, in_place);
 
         
 
-    deserialize(&s->motionVectorOffset, in);
+    deserialize(&s->motionVectorScale, in, in_place);
 
         
 
-    deserialize(&s->appSpaceDeltaPose, in);
+    deserialize(&s->motionVectorOffset, in, in_place);
 
         
 
-    deserialize(&s->depthSubImage, in);
+    deserialize(&s->appSpaceDeltaPose, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->depthSubImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in) {
+void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectHeight, in);
+    deserialize(&s->recommendedMotionVectorImageRectWidth, in, in_place);
+
+        
+
+    deserialize(&s->recommendedMotionVectorImageRectHeight, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in) {
+void deserialize(XrFrameSynthesisInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->motionVectorSubImage, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->motionVectorScale, in);
+    deserialize(&s->motionVectorSubImage, in, in_place);
 
         
 
-    deserialize(&s->motionVectorOffset, in);
+    deserialize(&s->motionVectorScale, in, in_place);
 
         
 
-    deserialize(&s->appSpaceDeltaPose, in);
+    deserialize(&s->motionVectorOffset, in, in_place);
 
         
 
-    deserialize(&s->depthSubImage, in);
+    deserialize(&s->appSpaceDeltaPose, in, in_place);
 
         
 
-    deserialize(&s->minDepth, in);
+    deserialize(&s->depthSubImage, in, in_place);
 
         
 
-    deserialize(&s->maxDepth, in);
+    deserialize(&s->minDepth, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->maxDepth, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
+
+        
+
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in) {
+void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->recommendedMotionVectorImageRectHeight, in);
+    deserialize(&s->recommendedMotionVectorImageRectWidth, in, in_place);
+
+        
+
+    deserialize(&s->recommendedMotionVectorImageRectHeight, in, in_place);
 
 }
 
@@ -21370,44 +21392,44 @@ void deserialize(XrFrameSynthesisConfigViewEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 
 
-void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->depthMask, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->compareOp, in);
+    deserialize(&s->depthMask, in, in_place);
+
+        
+
+    deserialize(&s->compareOp, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in) {
+void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->depthMask, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->compareOp, in);
+    deserialize(&s->depthMask, in, in_place);
+
+        
+
+    deserialize(&s->compareOp, in, in_place);
 
 }
 
@@ -21416,36 +21438,36 @@ void deserialize(XrCompositionLayerDepthTestFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
 
 
-void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in) {
+void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->localDimmingMode, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->localDimmingMode, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in) {
+void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->localDimmingMode, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->localDimmingMode, in, in_place);
 
 }
 
@@ -21454,36 +21476,36 @@ void deserialize(XrLocalDimmingFrameEndInfoMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 
 
-void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in) {
+void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in) {
+void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
 
 }
 
@@ -21492,660 +21514,660 @@ void deserialize(XrPassthroughPreferencesMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 
 
-void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsVirtualKeyboard, in);
-
-}
-
-
-
-
-void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->supportsVirtualKeyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationType, in);
-
-        
-
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->poseInSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->locationType, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->poseInSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->visible, in);
-
-}
-
-
-
-
-void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->locationType, in, in_place);
 
         
 
-    deserialize(&s->animationIndex, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->fraction, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->stateCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->stateCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->states, in);
+    deserialize(&s->visible, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->textureWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->textureHeight, in);
+    deserialize(&s->animationIndex, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
-
-        
-
-    deserialize(&s->bufferCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->fraction, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->inputSource, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->inputSpace, in);
+    deserialize(&s->stateCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->inputPoseInSpace, in);
+    deserialize(&s->stateCountOutput, in, in_place);
 
         
 
-    deserialize(&s->inputState, in);
+    deserialize_ptr(&s->states, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->textContext, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->textureWidth, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize(&s->textureHeight, in, in_place);
 
         
 
-    deserialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, in);
+    deserialize(&s->bufferCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->inputSource, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize(&s->inputSpace, in, in_place);
+
+        
+
+    deserialize(&s->inputPoseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->inputState, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->keyboard, in);
+    deserialize_ptr(&s->textContext, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in) {
+void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsVirtualKeyboard, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
+
+        
+
+    deserialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->keyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationType, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
-
-        
-
-    deserialize(&s->poseInSpace, in);
-
-        
-
-    deserialize(&s->scale, in);
+    deserialize(&s->keyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->visible, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in) {
+void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->animationIndex, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->fraction, in);
+    deserialize(&s->supportsVirtualKeyboard, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->stateCapacityInput, in);
-
-        
-
-    deserialize(&s->stateCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->states, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->textureWidth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->textureHeight, in);
+    deserialize(&s->locationType, in, in_place);
 
         
 
-    deserialize(&s->bufferCapacityInput, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->bufferCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->poseInSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardLocationInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->inputSource, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->inputSpace, in);
+    deserialize(&s->locationType, in, in_place);
 
         
 
-    deserialize(&s->inputPoseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->inputState, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_ptr(&s->textContext, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->visible, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardAnimationStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, in);
+    deserialize(&s->animationIndex, in, in_place);
+
+        
+
+    deserialize(&s->fraction, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->stateCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->stateCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->states, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardTextureDataMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->textureWidth, in, in_place);
+
+        
+
+    deserialize(&s->textureHeight, in, in_place);
+
+        
+
+    deserialize(&s->bufferCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->bufferCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardInputInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->inputSource, in, in_place);
+
+        
+
+    deserialize(&s->inputSpace, in, in_place);
+
+        
+
+    deserialize(&s->inputPoseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->inputState, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in) {
+void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->keyboard, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize_ptr(&s->textContext, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
+
+        
+
+    deserialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataVirtualKeyboardShownMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->keyboard, in, in_place);
 
 }
 
@@ -22154,100 +22176,100 @@ void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 
 
-void deserialize(XrExternalCameraIntrinsicsOCULUS* s, std::istream& in) {
+void deserialize(XrExternalCameraIntrinsicsOCULUS* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->lastChangeTime, in);
-
-        
-
-    deserialize(&s->fov, in);
+    deserialize(&s->lastChangeTime, in, in_place);
 
         
 
-    deserialize(&s->virtualNearPlaneDistance, in);
+    deserialize(&s->fov, in, in_place);
 
         
 
-    deserialize(&s->virtualFarPlaneDistance, in);
+    deserialize(&s->virtualNearPlaneDistance, in, in_place);
 
         
 
-    deserialize(&s->imageSensorPixelResolution, in);
+    deserialize(&s->virtualFarPlaneDistance, in, in_place);
+
+        
+
+    deserialize(&s->imageSensorPixelResolution, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExternalCameraExtrinsicsOCULUS* s, std::istream& in) {
+void deserialize(XrExternalCameraExtrinsicsOCULUS* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->lastChangeTime, in);
-
-        
-
-    deserialize(&s->cameraStatusFlags, in);
+    deserialize(&s->lastChangeTime, in, in_place);
 
         
 
-    deserialize(&s->attachedToDevice, in);
+    deserialize(&s->cameraStatusFlags, in, in_place);
 
         
 
-    deserialize(&s->relativePose, in);
+    deserialize(&s->attachedToDevice, in, in_place);
+
+        
+
+    deserialize(&s->relativePose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExternalCameraOCULUS* s, std::istream& in) {
+void deserialize(XrExternalCameraOCULUS* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->intrinsics, in);
+    deserialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, in, in_place);
 
         
 
-    deserialize(&s->extrinsics, in);
+    deserialize(&s->intrinsics, in, in_place);
+
+        
+
+    deserialize(&s->extrinsics, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExternalCameraOCULUS* s, std::istream& in) {
+void deserialize(XrExternalCameraOCULUS* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->intrinsics, in);
+    deserialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, in, in_place);
 
         
 
-    deserialize(&s->extrinsics, in);
+    deserialize(&s->intrinsics, in, in_place);
+
+        
+
+    deserialize(&s->extrinsics, in, in_place);
 
 }
 
@@ -22256,44 +22278,44 @@ void deserialize(XrExternalCameraOCULUS* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 
 
-void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->additionalCreateFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->additionalUsageFlags, in);
+    deserialize(&s->additionalCreateFlags, in, in_place);
+
+        
+
+    deserialize(&s->additionalUsageFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->additionalCreateFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->additionalUsageFlags, in);
+    deserialize(&s->additionalCreateFlags, in, in_place);
+
+        
+
+    deserialize(&s->additionalUsageFlags, in, in_place);
 
 }
 
@@ -22302,96 +22324,96 @@ void deserialize(XrVulkanSwapchainCreateInfoMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 
 
-void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in) {
+void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in) {
+void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->counterFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->counterUnit, in);
+    deserialize(&s->counterFlags, in, in_place);
 
         
 
-    deserialize(&s->uintValue, in);
+    deserialize(&s->counterUnit, in, in_place);
 
         
 
-    deserialize(&s->floatValue, in);
+    deserialize(&s->uintValue, in, in_place);
+
+        
+
+    deserialize(&s->floatValue, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in) {
+void deserialize(XrPerformanceMetricsStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in) {
+void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->counterFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->counterUnit, in);
+    deserialize(&s->counterFlags, in, in_place);
 
         
 
-    deserialize(&s->uintValue, in);
+    deserialize(&s->counterUnit, in, in_place);
 
         
 
-    deserialize(&s->floatValue, in);
+    deserialize(&s->uintValue, in, in_place);
+
+        
+
+    deserialize(&s->floatValue, in, in_place);
 
 }
 
@@ -22400,96 +22422,96 @@ void deserialize(XrPerformanceMetricsCounterMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 
 
-void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_ptr(&s->spaces, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceListSaveInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_ptr(&s->spaces, in, in_place);
+
+        
+
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in) {
+void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
@@ -22498,36 +22520,36 @@ void deserialize(XrEventDataSpaceListSaveCompleteFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 
 
-void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->userId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->userId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in) {
+void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->userId, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->userId, in, in_place);
 
 }
 
@@ -22536,36 +22558,36 @@ void deserialize(XrSpaceUserCreateInfoFB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
 
 
-void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->id, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->id, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->id, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->id, in, in_place);
 
 }
 
@@ -22574,88 +22596,88 @@ void deserialize(XrSystemHeadsetIdPropertiesMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 
 
-void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in) {
+void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedImageDimensions, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isValid, in);
+    deserialize(&s->recommendedImageDimensions, in, in_place);
+
+        
+
+    deserialize(&s->isValid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in) {
+void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->predictedDisplayTime, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->predictedDisplayTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in) {
+void deserialize(XrRecommendedLayerResolutionMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->recommendedImageDimensions, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isValid, in);
+    deserialize(&s->recommendedImageDimensions, in, in_place);
+
+        
+
+    deserialize(&s->isValid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in) {
+void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->predictedDisplayTime, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->predictedDisplayTime, in, in_place);
 
 }
 
@@ -22664,234 +22686,234 @@ void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 
 
-void deserialize(XrPassthroughColorLutDataMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorLutDataMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->channels, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->resolution, in);
+    deserialize(&s->channels, in, in_place);
 
         
 
-    deserialize(&s->data, in);
+    deserialize(&s->resolution, in, in_place);
+
+        
+
+    deserialize(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->data, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorLut, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->colorLut, in, in_place);
+
+        
+
+    deserialize(&s->weight, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sourceColorLut, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->targetColorLut, in);
+    deserialize(&s->sourceColorLut, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->targetColorLut, in, in_place);
+
+        
+
+    deserialize(&s->weight, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->maxColorLutResolution, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->maxColorLutResolution, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->maxColorLutResolution, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->maxColorLutResolution, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorLutCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->channels, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->resolution, in);
+    deserialize(&s->channels, in, in_place);
 
         
 
-    deserialize(&s->data, in);
+    deserialize(&s->resolution, in, in_place);
+
+        
+
+    deserialize(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->data, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->data, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapLutMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->colorLut, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->colorLut, in, in_place);
+
+        
+
+    deserialize(&s->weight, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in) {
+void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->sourceColorLut, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->targetColorLut, in);
+    deserialize(&s->sourceColorLut, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->targetColorLut, in, in_place);
+
+        
+
+    deserialize(&s->weight, in, in_place);
 
 }
 
@@ -22900,104 +22922,104 @@ void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, std::istream& in) 
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 
 
-void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in) {
+void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in) {
+void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in) {
+void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in) {
+void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize(&s->indexCapacityInput, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize(&s->indexCountOutput, in);
+    deserialize(&s->indexCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
@@ -23006,36 +23028,36 @@ void deserialize(XrSpaceTriangleMeshMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 
 
-void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in) {
+void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFullBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFullBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in) {
+void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFullBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFullBodyTracking, in, in_place);
 
 }
 
@@ -23044,36 +23066,36 @@ void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, std::istream& in
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 
 
-void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in) {
+void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layer, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->layer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in) {
+void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layer, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->layer, in, in_place);
 
 }
 
@@ -23082,224 +23104,224 @@ void deserialize(XrEventDataPassthroughLayerResumedMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 
 
-void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in) {
+void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsVisualFaceTracking, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportsAudioFaceTracking, in);
+    deserialize(&s->supportsVisualFaceTracking, in, in_place);
+
+        
+
+    deserialize(&s->supportsAudioFaceTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in) {
+void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->faceExpressionSet, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->requestedDataSourceCount, in);
+    deserialize(&s->faceExpressionSet, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedDataSources, in);
+    deserialize(&s->requestedDataSourceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedDataSources, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in) {
+void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in) {
+void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->weightCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->weights, in);
+    deserialize(&s->weightCount, in, in_place);
 
         
 
-    deserialize(&s->confidenceCount, in);
+    deserialize_ptr(&s->weights, in, in_place);
 
         
 
-    deserialize_ptr(&s->confidences, in);
+    deserialize(&s->confidenceCount, in, in_place);
 
         
 
-    deserialize(&s->isValid, in);
+    deserialize_ptr(&s->confidences, in, in_place);
 
         
 
-    deserialize(&s->isEyeFollowingBlendshapesValid, in);
+    deserialize(&s->isValid, in, in_place);
 
         
 
-    deserialize(&s->dataSource, in);
+    deserialize(&s->isEyeFollowingBlendshapesValid, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->dataSource, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in) {
+void deserialize(XrSystemFaceTrackingProperties2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsVisualFaceTracking, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportsAudioFaceTracking, in);
+    deserialize(&s->supportsVisualFaceTracking, in, in_place);
+
+        
+
+    deserialize(&s->supportsAudioFaceTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in) {
+void deserialize(XrFaceTrackerCreateInfo2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->faceExpressionSet, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->requestedDataSourceCount, in);
+    deserialize(&s->faceExpressionSet, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedDataSources, in);
+    deserialize(&s->requestedDataSourceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedDataSources, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in) {
+void deserialize(XrFaceExpressionInfo2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in) {
+void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->weightCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->weights, in);
+    deserialize(&s->weightCount, in, in_place);
 
         
 
-    deserialize(&s->confidenceCount, in);
+    deserialize_ptr(&s->weights, in, in_place);
 
         
 
-    deserialize_ptr(&s->confidences, in);
+    deserialize(&s->confidenceCount, in, in_place);
 
         
 
-    deserialize(&s->isValid, in);
+    deserialize_ptr(&s->confidences, in, in_place);
 
         
 
-    deserialize(&s->isEyeFollowingBlendshapesValid, in);
+    deserialize(&s->isValid, in, in_place);
 
         
 
-    deserialize(&s->dataSource, in);
+    deserialize(&s->isEyeFollowingBlendshapesValid, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->dataSource, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
@@ -23308,146 +23330,146 @@ void deserialize(XrFaceExpressionWeights2FB* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 
 
-void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntitySharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntitySharing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrShareSpacesRecipientBaseHeaderMETA* s, std::istream& in) {
+void deserialize(XrShareSpacesRecipientBaseHeaderMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrShareSpacesInfoMETA* s, std::istream& in) {
+void deserialize(XrShareSpacesInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_ptr(&s->spaces, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntitySharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntitySharing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrShareSpacesInfoMETA* s, std::istream& in) {
+void deserialize(XrShareSpacesInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_ptr(&s->spaces, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
@@ -23456,344 +23478,344 @@ void deserialize(XrEventDataShareSpacesCompleteMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 
 
-void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->displayTime, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->displayTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->fov, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->swapchainIndex, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->swapchainIndex, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
 
         
 
-    deserialize_array(s->views, 2, in);
+    deserialize(&s->farZ, in, in_place);
+
+        
+
+    deserialize_array(s->views, 2, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEnvironmentDepth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportsHandRemoval, in);
+    deserialize(&s->supportsEnvironmentDepth, in, in_place);
+
+        
+
+    deserialize(&s->supportsHandRemoval, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->createFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->width, in, in_place);
+
+        
+
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->displayTime, in);
+    deserialize(&s->space, in, in_place);
+
+        
+
+    deserialize(&s->displayTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageViewMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->fov, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthImageMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->swapchainIndex, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->swapchainIndex, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->nearZ, in, in_place);
 
         
 
-    deserialize_array(s->views, 2, in);
+    deserialize(&s->farZ, in, in_place);
+
+        
+
+    deserialize_array(s->views, 2, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in) {
+void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->enabled, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->enabled, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsEnvironmentDepth, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->supportsHandRemoval, in);
+    deserialize(&s->supportsEnvironmentDepth, in, in_place);
+
+        
+
+    deserialize(&s->supportsHandRemoval, in, in_place);
 
 }
 
@@ -23804,224 +23826,224 @@ void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 
 
-void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->form, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->form, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorHTC* s, std::istream& in) {
+void deserialize(XrPassthroughColorHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->alpha, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->alpha, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in) {
+void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCount, in, in_place);
 
         
 
-    deserialize(&s->indexCount, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCount, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_ptr(&s->indices, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in) {
+void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->passthrough, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->color, in);
+    deserialize(&s->passthrough, in, in_place);
+
+        
+
+    deserialize(&s->color, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrPassthroughCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->form, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->form, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughColorHTC* s, std::istream& in) {
+void deserialize(XrPassthroughColorHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->alpha, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->alpha, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in) {
+void deserialize(XrPassthroughMeshTransformInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->vertexCount, in, in_place);
 
         
 
-    deserialize(&s->indexCount, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
         
 
-    deserialize_ptr(&s->indices, in);
+    deserialize(&s->indexCount, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_ptr(&s->indices, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize(&s->scale, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->scale, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in) {
+void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->passthrough, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->color, in);
+    deserialize(&s->passthrough, in, in_place);
+
+        
+
+    deserialize(&s->color, in, in_place);
 
 }
 
@@ -24030,150 +24052,150 @@ void deserialize(XrCompositionLayerPassthroughHTC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 
 
-void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->mode, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->subImageCount, in);
+    deserialize(&s->mode, in, in_place);
 
         
 
-    deserialize_ptr(&s->subImages, in);
+    deserialize(&s->subImageCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->subImages, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationConfigurationHTC* s, std::istream& in) {
+void deserialize(XrFoveationConfigurationHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->level, in);
-
-        
-
-    deserialize(&s->clearFovDegree, in);
+    deserialize(&s->level, in, in_place);
 
         
 
-    deserialize(&s->focalCenterOffset, in);
+    deserialize(&s->clearFovDegree, in, in_place);
+
+        
+
+    deserialize(&s->focalCenterOffset, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->dynamicFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->dynamicFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->configCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->configs, in);
+    deserialize(&s->configCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->configs, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationApplyInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->mode, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->subImageCount, in);
+    deserialize(&s->mode, in, in_place);
 
         
 
-    deserialize_ptr(&s->subImages, in);
+    deserialize(&s->subImageCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->subImages, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationDynamicModeInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->dynamicFlags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->dynamicFlags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in) {
+void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->configCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->configs, in);
+    deserialize(&s->configCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->configs, in, in_place);
 
 }
 
@@ -24182,98 +24204,98 @@ void deserialize(XrFoveationCustomModeInfoHTC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 
 
-void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsAnchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->name, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->name, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorNameHTC* s, std::istream& in) {
+void deserialize(XrSpatialAnchorNameHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, in);
+    deserialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemAnchorPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsAnchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInSpace, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->name, in);
+    deserialize(&s->poseInSpace, in, in_place);
+
+        
+
+    deserialize(&s->name, in, in_place);
 
 }
 
@@ -24282,242 +24304,242 @@ void deserialize(XrSpatialAnchorCreateInfoHTC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 
 
-void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bodyJointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bodyJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsHTC* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->combinedLocationFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->confidenceLevel, in);
+    deserialize(&s->combinedLocationFlags, in, in_place);
 
         
 
-    deserialize(&s->jointLocationCount, in);
+    deserialize(&s->confidenceLevel, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointLocationCount, in, in_place);
 
         
 
-    deserialize(&s->skeletonGenerationId, in);
+    deserialize_ptr(&s->jointLocations, in, in_place);
+
+        
+
+    deserialize(&s->skeletonGenerationId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationHTC* s, std::istream& in) {
+void deserialize(XrBodyJointLocationHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonHTC* s, std::istream& in) {
+void deserialize(XrBodySkeletonHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->joints, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->joints, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bodyJointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bodyJointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsHTC* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->combinedLocationFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->confidenceLevel, in);
+    deserialize(&s->combinedLocationFlags, in, in_place);
 
         
 
-    deserialize(&s->jointLocationCount, in);
+    deserialize(&s->confidenceLevel, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointLocationCount, in, in_place);
 
         
 
-    deserialize(&s->skeletonGenerationId, in);
+    deserialize_ptr(&s->jointLocations, in, in_place);
+
+        
+
+    deserialize(&s->skeletonGenerationId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonHTC* s, std::istream& in) {
+void deserialize(XrBodySkeletonHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->joints, in);
+    deserialize(&s->jointCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->joints, in, in_place);
 
 }
 
@@ -24526,58 +24548,58 @@ void deserialize(XrBodySkeletonHTC* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 
 
-void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in) {
+void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->actionSetPriorityCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->actionSetPriorities, in);
+    deserialize(&s->actionSetPriorityCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->actionSetPriorities, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActiveActionSetPriorityEXT* s, std::istream& in) {
+void deserialize(XrActiveActionSetPriorityEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->actionSet, in);
+    deserialize(&s->actionSet, in, in_place);
 
         
 
-    deserialize(&s->priorityOverride, in);
+    deserialize(&s->priorityOverride, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in) {
+void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->actionSetPriorityCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->actionSetPriorities, in);
+    deserialize(&s->actionSetPriorityCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->actionSetPriorities, in, in_place);
 
 }
 
@@ -24586,94 +24608,94 @@ void deserialize(XrActiveActionSetPrioritiesEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 
 
-void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in) {
+void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsForceFeedbackCurl, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsForceFeedbackCurl, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in) {
+void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->locations, in);
+    deserialize(&s->locationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->locations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationMNDX* s, std::istream& in) {
+void deserialize(XrForceFeedbackCurlApplyLocationMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->location, in);
+    deserialize(&s->location, in, in_place);
 
         
 
-    deserialize(&s->value, in);
+    deserialize(&s->value, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in) {
+void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsForceFeedbackCurl, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsForceFeedbackCurl, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in) {
+void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->locationCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->locations, in);
+    deserialize(&s->locationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->locations, in, in_place);
 
 }
 
@@ -24682,182 +24704,182 @@ void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 
 
-void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->jointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsBD* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->allJointPosesTracked, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointLocationCount, in);
+    deserialize(&s->allJointPosesTracked, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointLocationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationBD* s, std::istream& in) {
+void deserialize(XrBodyJointLocationBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in) {
+void deserialize(XrBodyTrackerCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->jointSet, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->jointSet, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in) {
+void deserialize(XrBodyJointsLocateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodyJointLocationsBD* s, std::istream& in) {
+void deserialize(XrBodyJointLocationsBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->allJointPosesTracked, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->jointLocationCount, in);
+    deserialize(&s->allJointPosesTracked, in, in_place);
 
         
 
-    deserialize_ptr(&s->jointLocations, in);
+    deserialize(&s->jointLocationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->jointLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsBodyTracking, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsBodyTracking, in, in_place);
 
 }
 
@@ -24866,942 +24888,942 @@ void deserialize(XrSystemBodyTrackingPropertiesBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 
 
-void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialSensing, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->entityId, in);
-
-        
-
-    deserialize(&s->componentType, in);
+    deserialize(&s->supportsSpatialSensing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBaseHeaderBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->entityId, in, in_place);
+
+        
+
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataBaseHeaderBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->labelCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->labelCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->labels, in);
+    deserialize(&s->baseSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->boundingBox2D, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->vertexCapacityInput, in);
-
-        
-
-    deserialize(&s->vertexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->boundingBox3D, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->labelCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize(&s->labelCountOutput, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->vertices, in);
-
-        
-
-    deserialize(&s->indexCapacityInput, in);
-
-        
-
-    deserialize(&s->indexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->indices, in);
+    deserialize_ptr(&s->labels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->providerType, in);
-
-}
-
-
-
-
-void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->boundingBox2D, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->provider, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->newState, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize(&s->provider, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
-
-        
-
-    deserialize(&s->snapshot, in);
+    deserialize(&s->boundingBox3D, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrQueriedSenseDataBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->stateCapacityInput, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->stateCountOutput, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->states, in);
+    deserialize_ptr(&s->vertices, in, in_place);
+
+        
+
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityStateBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->entityId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lastUpdateTime, in);
-
-        
-
-    deserialize(&s->uuid, in);
+    deserialize(&s->providerType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
-
-        
-
-    deserialize_ptr(&s->uuids, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in) {
+void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->labelCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->labels, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->provider, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->snapshot, in);
-
-        
-
-    deserialize(&s->entityId, in);
+    deserialize(&s->newState, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in) {
+void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->poseInAnchorSpace, in);
+    deserialize(&s->provider, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialSensing, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in) {
+void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->entityId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->componentType, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->snapshot, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in) {
+void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in) {
+void deserialize(XrQueriedSenseDataBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->labelCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->labelCountOutput, in);
+    deserialize(&s->stateCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->labels, in);
-
-}
-
-
-
-
-void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->stateCountOutput, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->boundingBox2D, in);
+    deserialize_ptr(&s->states, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityStateBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->entityId, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->lastUpdateTime, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in) {
+void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->boundingBox3D, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in) {
+void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->labelCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
-
-        
-
-    deserialize(&s->indexCapacityInput, in);
-
-        
-
-    deserialize(&s->indexCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->indices, in);
+    deserialize_ptr(&s->labels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->providerType, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->snapshot, in, in_place);
+
+        
+
+    deserialize(&s->entityId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in) {
+void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
+
+        
+
+    deserialize(&s->poseInAnchorSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialSensingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->provider, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->newState, in);
+    deserialize(&s->supportsSpatialSensing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentGetInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->provider, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->entityId, in, in_place);
+
+        
+
+    deserialize(&s->componentType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityLocationGetInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->baseSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataLocationBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->snapshot, in);
+    deserialize(&s->location, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataSemanticBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuidCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->uuids, in);
+    deserialize(&s->labelCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->labelCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->labels, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->labelCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->labels, in);
+    deserialize(&s->boundingBox2D, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataPolygonBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->vertexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrQueriedSenseDataBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->stateCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->stateCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->states, in);
+    deserialize(&s->boundingBox3D, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityStateBD* s, std::istream& in) {
+void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->entityId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lastUpdateTime, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
+
+        
+
+    deserialize(&s->indexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->indexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->snapshot, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->entityId, in);
+    deserialize(&s->providerType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderStartInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->poseInAnchorSpace, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->provider, in, in_place);
+
+        
+
+    deserialize(&s->newState, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataSenseDataUpdatedBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->provider, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSenseDataQueryInfoBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSenseDataQueryCompletionBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
+
+        
+
+    deserialize(&s->snapshot, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSenseDataFilterUuidBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuidCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->uuids, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSenseDataFilterSemanticBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->labelCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->labels, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrQueriedSenseDataGetInfoBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrQueriedSenseDataBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->stateCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->stateCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->states, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialEntityStateBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->entityId, in, in_place);
+
+        
+
+    deserialize(&s->lastUpdateTime, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->snapshot, in, in_place);
+
+        
+
+    deserialize(&s->entityId, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
+
+        
+
+    deserialize(&s->poseInAnchorSpace, in, in_place);
 
 }
 
@@ -25810,228 +25832,228 @@ void deserialize(XrAnchorSpaceCreateInfoBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 
 
-void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialAnchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->anchor, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialAnchorPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialAnchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialAnchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorCreateCompletionBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->anchor, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorPersistInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->location, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize(&s->location, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
@@ -26040,108 +26062,108 @@ void deserialize(XrSpatialAnchorUnpersistInfoBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 
 
-void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialAnchorSharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialAnchorSharing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in) {
+void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialAnchorSharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialAnchorSharing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in) {
+void deserialize(XrSpatialAnchorShareInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->anchor, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->anchor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in) {
+void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
 
 }
 
@@ -26150,64 +26172,64 @@ void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 
 
-void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialScene, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialScene, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneCaptureInfoBD* s, std::istream& in) {
+void deserialize(XrSceneCaptureInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialScenePropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialScene, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialScene, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSceneCaptureInfoBD* s, std::istream& in) {
+void deserialize(XrSceneCaptureInfoBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -26216,80 +26238,80 @@ void deserialize(XrSceneCaptureInfoBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
 
 
-void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialMesh, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialMesh, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->configFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize(&s->configFlags, in, in_place);
+
+        
+
+    deserialize(&s->lod, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in) {
+void deserialize(XrSystemSpatialMeshPropertiesBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialMesh, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialMesh, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in) {
+void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->configFlags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize(&s->configFlags, in, in_place);
+
+        
+
+    deserialize(&s->lod, in, in_place);
 
 }
 
@@ -26298,44 +26320,44 @@ void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, std::istream& in
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
 
 
-void deserialize(XrFuturePollResultProgressBD* s, std::istream& in) {
+void deserialize(XrFuturePollResultProgressBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->progressPercentage, in);
+    deserialize(&s->isSupported, in, in_place);
+
+        
+
+    deserialize(&s->progressPercentage, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFuturePollResultProgressBD* s, std::istream& in) {
+void deserialize(XrFuturePollResultProgressBD* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isSupported, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->progressPercentage, in);
+    deserialize(&s->isSupported, in, in_place);
+
+        
+
+    deserialize(&s->progressPercentage, in, in_place);
 
 }
 
@@ -26344,88 +26366,88 @@ void deserialize(XrFuturePollResultProgressBD* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 
 
-void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in) {
+void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedDataSourceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedDataSources, in);
+    deserialize(&s->requestedDataSourceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedDataSources, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in) {
+void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->dataSource, in);
+    deserialize(&s->isActive, in, in_place);
+
+        
+
+    deserialize(&s->dataSource, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in) {
+void deserialize(XrHandTrackingDataSourceInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedDataSourceCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedDataSources, in);
+    deserialize(&s->requestedDataSourceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedDataSources, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in) {
+void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->dataSource, in);
+    deserialize(&s->isActive, in, in_place);
+
+        
+
+    deserialize(&s->dataSource, in, in_place);
 
 }
 
@@ -26434,412 +26456,412 @@ void deserialize(XrHandTrackingDataSourceStateEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 
 
-void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportedFeatures, in);
-
-}
-
-
-
-
-void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->flags, in);
+    deserialize(&s->supportedFeatures, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
-
-        
-
-    deserialize(&s->orientationCount, in);
-
-        
-
-    deserialize_ptr(&s->orientations, in);
-
-        
-
-    deserialize(&s->semanticTypeCount, in);
-
-        
-
-    deserialize_ptr(&s->semanticTypes, in);
-
-        
-
-    deserialize(&s->maxPlanes, in);
-
-        
-
-    deserialize(&s->minArea, in);
-
-        
-
-    deserialize(&s->boundingBoxPose, in);
-
-        
-
-    deserialize(&s->boundingBoxExtent, in);
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
-
-}
-
-
-
-
-void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize(&s->planeId, in);
+    deserialize(&s->orientationCount, in, in_place);
 
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize_ptr(&s->orientations, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->semanticTypeCount, in, in_place);
 
         
 
-    deserialize(&s->extents, in);
+    deserialize_ptr(&s->semanticTypes, in, in_place);
 
         
 
-    deserialize(&s->orientation, in);
+    deserialize(&s->maxPlanes, in, in_place);
 
         
 
-    deserialize(&s->semanticType, in);
+    deserialize(&s->minArea, in, in_place);
 
         
 
-    deserialize(&s->polygonBufferCount, in);
+    deserialize(&s->boundingBoxPose, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxExtent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->planeLocationCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->planeLocationCountOutput, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize_ptr(&s->planeLocations, in);
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->planeId, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->locationFlags, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->extents, in, in_place);
+
+        
+
+    deserialize(&s->orientation, in, in_place);
+
+        
+
+    deserialize(&s->semanticType, in, in_place);
+
+        
+
+    deserialize(&s->polygonBufferCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->planeLocationCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->planeLocationCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->planeLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->vertexCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->orientationCount, in);
+    deserialize(&s->vertexCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->orientations, in);
-
-        
-
-    deserialize(&s->semanticTypeCount, in);
-
-        
-
-    deserialize_ptr(&s->semanticTypes, in);
-
-        
-
-    deserialize(&s->maxPlanes, in);
-
-        
-
-    deserialize(&s->minArea, in);
-
-        
-
-    deserialize(&s->boundingBoxPose, in);
-
-        
-
-    deserialize(&s->boundingBoxExtent, in);
+    deserialize_ptr(&s->vertices, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorCreateInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->flags, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorBeginInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->planeLocationCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->planeLocationCountOutput, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize_ptr(&s->planeLocations, in);
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->orientationCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->orientations, in, in_place);
+
+        
+
+    deserialize(&s->semanticTypeCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->semanticTypes, in, in_place);
+
+        
+
+    deserialize(&s->maxPlanes, in, in_place);
+
+        
+
+    deserialize(&s->minArea, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxPose, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxExtent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorGetInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->planeId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
-
-        
-
-    deserialize(&s->extents, in);
-
-        
-
-    deserialize(&s->orientation, in);
-
-        
-
-    deserialize(&s->semanticType, in);
-
-        
-
-    deserialize(&s->polygonBufferCount, in);
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorLocationsEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->vertexCapacityInput, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->vertexCountOutput, in);
+    deserialize(&s->planeLocationCapacityInput, in, in_place);
 
         
 
-    deserialize_ptr(&s->vertices, in);
+    deserialize(&s->planeLocationCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->planeLocations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in) {
+void deserialize(XrPlaneDetectorLocationEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportedFeatures, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->planeId, in, in_place);
+
+        
+
+    deserialize(&s->locationFlags, in, in_place);
+
+        
+
+    deserialize(&s->pose, in, in_place);
+
+        
+
+    deserialize(&s->extents, in, in_place);
+
+        
+
+    deserialize(&s->orientation, in, in_place);
+
+        
+
+    deserialize(&s->semanticType, in, in_place);
+
+        
+
+    deserialize(&s->polygonBufferCount, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrPlaneDetectorPolygonBufferEXT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->vertexCapacityInput, in, in_place);
+
+        
+
+    deserialize(&s->vertexCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertices, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportedFeatures, in, in_place);
 
 }
 
@@ -26848,162 +26870,162 @@ void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 
 
-void deserialize(XrFutureCancelInfoEXT* s, std::istream& in) {
+void deserialize(XrFutureCancelInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->future, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->future, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFuturePollInfoEXT* s, std::istream& in) {
+void deserialize(XrFuturePollInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->future, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->future, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFutureCompletionBaseHeaderEXT* s, std::istream& in) {
+void deserialize(XrFutureCompletionBaseHeaderEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFutureCompletionEXT* s, std::istream& in) {
+void deserialize(XrFutureCompletionEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFuturePollResultEXT* s, std::istream& in) {
+void deserialize(XrFuturePollResultEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->state, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFutureCancelInfoEXT* s, std::istream& in) {
+void deserialize(XrFutureCancelInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->future, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->future, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFuturePollInfoEXT* s, std::istream& in) {
+void deserialize(XrFuturePollInfoEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->future, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->future, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFutureCompletionEXT* s, std::istream& in) {
+void deserialize(XrFutureCompletionEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFuturePollResultEXT* s, std::istream& in) {
+void deserialize(XrFuturePollResultEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->state, in, in_place);
 
 }
 
@@ -27012,80 +27034,80 @@ void deserialize(XrFuturePollResultEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
 
 
-void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in) {
+void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isUserPresent, in);
+    deserialize(&s->session, in, in_place);
+
+        
+
+    deserialize(&s->isUserPresent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsUserPresence, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsUserPresence, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in) {
+void deserialize(XrEventDataUserPresenceChangedEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isUserPresent, in);
+    deserialize(&s->session, in, in_place);
+
+        
+
+    deserialize(&s->isUserPresent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in) {
+void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsUserPresence, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsUserPresence, in, in_place);
 
 }
 
@@ -27094,36 +27116,36 @@ void deserialize(XrSystemUserPresencePropertiesEXT* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 
 
-void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in) {
+void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->suppressNotifications, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->suppressNotifications, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in) {
+void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->suppressNotifications, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->suppressNotifications, in, in_place);
 
 }
 
@@ -27132,672 +27154,672 @@ void deserialize(XrSystemNotificationsSetInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 
 
-void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshBlockStateML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->uuid, in);
-
-        
-
-    deserialize(&s->meshBoundingBoxCenter, in);
-
-        
-
-    deserialize(&s->meshBoundingBoxExtents, in);
-
-        
-
-    deserialize(&s->lastUpdateTime, in);
-
-        
-
-    deserialize(&s->status, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBlockStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->boundingBoxCenter, in);
+    deserialize(&s->meshBoundingBoxCenter, in, in_place);
 
         
 
-    deserialize(&s->boundingBoxExtents, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->meshBoundingBoxExtents, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->lastUpdateTime, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
-
-        
-
-    deserialize(&s->timestamp, in);
-
-        
-
-    deserialize(&s->meshBlockStateCapacityInput, in);
-
-        
-
-    deserialize(&s->meshBlockStateCountOutput, in);
-
-        
-
-    deserialize_ptr(&s->meshBlockStates, in);
+    deserialize(&s->status, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->maxBlockCount, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxCenter, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxExtents, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBufferML* s, std::istream& in) {
+void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->timestamp, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize(&s->meshBlockStateCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize(&s->meshBlockStateCountOutput, in, in_place);
+
+        
+
+    deserialize_ptr(&s->meshBlockStates, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshGetInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->fillHoleLength, in);
-
-        
-
-    deserialize(&s->disconnectedComponentArea, in);
-
-        
-
-    deserialize(&s->blockCount, in);
-
-        
-
-    deserialize_ptr(&s->blocks, in);
+    deserialize(&s->maxBlockCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBlockML* s, std::istream& in) {
+void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->blockResult, in);
-
-        
-
-    deserialize(&s->lod, in);
-
-        
-
-    deserialize(&s->flags, in);
-
-        
-
-    deserialize(&s->indexCount, in);
-
-        
-
-    deserialize_ptr(&s->indexBuffer, in);
-
-        
-
-    deserialize(&s->vertexCount, in);
-
-        
-
-    deserialize_ptr(&s->vertexBuffer, in);
-
-        
-
-    deserialize(&s->normalCount, in);
-
-        
-
-    deserialize_ptr(&s->normalBuffer, in);
-
-        
-
-    deserialize(&s->confidenceCount, in);
-
-        
-
-    deserialize_ptr(&s->confidenceBuffer, in);
+    deserialize(&s->size, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBufferML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->meshSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->meshSpaceLocateTime, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
-
-        
-
-    deserialize(&s->futureResult, in);
-
-        
-
-    deserialize(&s->blockCount, in);
-
-        
-
-    deserialize_ptr(&s->blocks, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->time, in);
-
-        
-
-    deserialize(&s->boundingBoxCenter, in);
-
-        
-
-    deserialize(&s->boundingBoxExtents, in);
+    deserialize(&s->lod, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBlockStateML* s, std::istream& in) {
+void deserialize(XrWorldMeshGetInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->meshBoundingBoxCenter, in);
+    deserialize(&s->flags, in, in_place);
 
         
 
-    deserialize(&s->meshBoundingBoxExtents, in);
+    deserialize(&s->fillHoleLength, in, in_place);
 
         
 
-    deserialize(&s->lastUpdateTime, in);
+    deserialize(&s->disconnectedComponentArea, in, in_place);
 
         
 
-    deserialize(&s->status, in);
+    deserialize(&s->blockCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->blocks, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in) {
+void deserialize(XrWorldMeshBlockML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->timestamp, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->meshBlockStateCapacityInput, in);
+    deserialize(&s->blockResult, in, in_place);
 
         
 
-    deserialize(&s->meshBlockStateCountOutput, in);
+    deserialize(&s->lod, in, in_place);
 
         
 
-    deserialize_ptr(&s->meshBlockStates, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->indexCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->vertexCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->normalCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->normalBuffer, in, in_place);
+
+        
+
+    deserialize(&s->confidenceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->confidenceBuffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->maxBlockCount, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->meshSpace, in, in_place);
+
+        
+
+    deserialize(&s->meshSpaceLocateTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in) {
+void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
+
+        
+
+    deserialize(&s->blockCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->blocks, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBufferML* s, std::istream& in) {
+void deserialize(XrWorldMeshDetectorCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
-
-        
-
-    deserialize_ptr(&s->buffer, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in) {
+void deserialize(XrWorldMeshStateRequestInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize(&s->baseSpace, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxCenter, in, in_place);
+
+        
+
+    deserialize(&s->boundingBoxExtents, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshGetInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBlockStateML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->fillHoleLength, in);
+    deserialize(&s->uuid, in, in_place);
 
         
 
-    deserialize(&s->disconnectedComponentArea, in);
+    deserialize(&s->meshBoundingBoxCenter, in, in_place);
 
         
 
-    deserialize(&s->blockCount, in);
+    deserialize(&s->meshBoundingBoxExtents, in, in_place);
 
         
 
-    deserialize_ptr(&s->blocks, in);
+    deserialize(&s->lastUpdateTime, in, in_place);
+
+        
+
+    deserialize(&s->status, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshBlockML* s, std::istream& in) {
+void deserialize(XrWorldMeshStateRequestCompletionML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->uuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->blockResult, in);
+    deserialize(&s->futureResult, in, in_place);
 
         
 
-    deserialize(&s->lod, in);
+    deserialize(&s->timestamp, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->meshBlockStateCapacityInput, in, in_place);
 
         
 
-    deserialize(&s->indexCount, in);
+    deserialize(&s->meshBlockStateCountOutput, in, in_place);
 
         
 
-    deserialize_ptr(&s->indexBuffer, in);
-
-        
-
-    deserialize(&s->vertexCount, in);
-
-        
-
-    deserialize_ptr(&s->vertexBuffer, in);
-
-        
-
-    deserialize(&s->normalCount, in);
-
-        
-
-    deserialize_ptr(&s->normalBuffer, in);
-
-        
-
-    deserialize(&s->confidenceCount, in);
-
-        
-
-    deserialize_ptr(&s->confidenceBuffer, in);
+    deserialize_ptr(&s->meshBlockStates, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in) {
+void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->futureResult, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->blockCount, in);
-
-        
-
-    deserialize_ptr(&s->blocks, in);
+    deserialize(&s->maxBlockCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in) {
+void deserialize(XrWorldMeshBufferSizeML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->meshSpace, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->meshSpaceLocateTime, in);
+    deserialize(&s->size, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshBufferML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->bufferSize, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshBlockRequestML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->lod, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshGetInfoML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->fillHoleLength, in, in_place);
+
+        
+
+    deserialize(&s->disconnectedComponentArea, in, in_place);
+
+        
+
+    deserialize(&s->blockCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->blocks, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshBlockML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->uuid, in, in_place);
+
+        
+
+    deserialize(&s->blockResult, in, in_place);
+
+        
+
+    deserialize(&s->lod, in, in_place);
+
+        
+
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->indexCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->indexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->vertexCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->vertexBuffer, in, in_place);
+
+        
+
+    deserialize(&s->normalCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->normalBuffer, in, in_place);
+
+        
+
+    deserialize(&s->confidenceCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->confidenceBuffer, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshRequestCompletionML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->futureResult, in, in_place);
+
+        
+
+    deserialize(&s->blockCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->blocks, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->meshSpace, in, in_place);
+
+        
+
+    deserialize(&s->meshSpaceLocateTime, in, in_place);
 
 }
 
@@ -27806,168 +27828,168 @@ void deserialize(XrWorldMeshRequestCompletionInfoML* s, std::istream& in) {
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 
 
-void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in) {
+void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFacialExpression, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFacialExpression, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in) {
+void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedFacialBlendShapes, in);
+    deserialize(&s->requestedCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedFacialBlendShapes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in) {
+void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in) {
+void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedFacialBlendShape, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->requestedFacialBlendShape, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->weight, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in) {
+void deserialize(XrSystemFacialExpressionPropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsFacialExpression, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsFacialExpression, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in) {
+void deserialize(XrFacialExpressionClientCreateInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->requestedFacialBlendShapes, in);
+    deserialize(&s->requestedCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->requestedFacialBlendShapes, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in) {
+void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in) {
+void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestedFacialBlendShape, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->weight, in);
+    deserialize(&s->requestedFacialBlendShape, in, in_place);
 
         
 
-    deserialize(&s->flags, in);
+    deserialize(&s->weight, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->flags, in, in_place);
+
+        
+
+    deserialize(&s->time, in, in_place);
 
 }
 
@@ -27976,92 +27998,92 @@ void deserialize(XrFacialExpressionBlendShapePropertiesML* s, std::istream& in) 
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 
 
-void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSimultaneousHandsAndControllers, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSimultaneousHandsAndControllers, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in) {
+void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in) {
+void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSimultaneousHandsAndControllers, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSimultaneousHandsAndControllers, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in) {
+void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in) {
+void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -28070,496 +28092,496 @@ void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, std:
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 
 
-void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in) {
+void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in) {
+void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
-
-        
-
-    deserialize_ptr(&s->buffer, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in) {
+void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->advertisementRequestId, in);
+    deserialize(&s->bufferSize, in, in_place);
 
         
 
-    deserialize(&s->result, in);
-
-        
-
-    deserialize(&s->advertisementUuid, in);
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in) {
+void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
-
-        
-
-    deserialize(&s->result, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->advertisementRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
-
-}
-
-
-
-
-void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in) {
-        
-
-    deserialize(&s->type, in);
+    deserialize(&s->advertisementRequestId, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize(&s->result, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
-
-        
-
-    deserialize(&s->result, in);
+    deserialize(&s->advertisementUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in) {
+void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->advertisementUuid, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
-
-        
-
-    deserialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, in);
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->advertisementRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in) {
+void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsColocationDiscovery, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->advertisementUuid, in, in_place);
+
+        
+
+    deserialize(&s->bufferSize, in, in_place);
+
+        
+
+    deserialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in) {
+void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in) {
+void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->buffer, in);
+    deserialize(&s->supportsColocationDiscovery, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in) {
+void deserialize(XrColocationDiscoveryStartInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in) {
+void deserialize(XrColocationDiscoveryStopInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->advertisementRequestId, in);
-
-        
-
-    deserialize(&s->result, in);
-
-        
-
-    deserialize(&s->advertisementUuid, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in) {
+void deserialize(XrColocationAdvertisementStartInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->bufferSize, in, in_place);
+
+        
+
+    deserialize_ptr(&s->buffer, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in) {
+void deserialize(XrColocationAdvertisementStopInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->advertisementRequestId, in);
-
-        
-
-    deserialize(&s->result, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->advertisementRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
+
+        
+
+    deserialize(&s->advertisementUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in) {
+void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->advertisementUuid, in);
+    deserialize(&s->requestId, in, in_place);
 
         
 
-    deserialize(&s->bufferSize, in);
-
-        
-
-    deserialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, in);
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->discoveryRequestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->advertisementRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in) {
+void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->requestId, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->result, in);
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in) {
+void deserialize(XrEventDataColocationDiscoveryResultMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsColocationDiscovery, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->advertisementUuid, in, in_place);
+
+        
+
+    deserialize(&s->bufferSize, in, in_place);
+
+        
+
+    deserialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->discoveryRequestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->requestId, in, in_place);
+
+        
+
+    deserialize(&s->result, in, in_place);
+
+}
+
+
+
+
+void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in, bool in_place) {
+        
+
+    deserialize(&s->type, in, in_place);
+
+        
+
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsColocationDiscovery, in, in_place);
 
 }
 
@@ -28568,116 +28590,116 @@ void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, std::istream& in)
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntityGroupSharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntityGroupSharing, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in) {
+void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->groupCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->groups, in);
+    deserialize(&s->groupCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->groups, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in) {
+void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->groupUuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->groupUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in) {
+void deserialize(XrShareSpacesRecipientGroupsMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->groupCount, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_ptr(&s->groups, in);
+    deserialize(&s->groupCount, in, in_place);
+
+        
+
+    deserialize_ptr(&s->groups, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in) {
+void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->groupUuid, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->groupUuid, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in) {
+void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
-
-        
-
-    deserialize_xr(&s->next, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize(&s->supportsSpatialEntityGroupSharing, in);
+    deserialize_xr(&s->next, in, in_place);
+
+        
+
+    deserialize(&s->supportsSpatialEntityGroupSharing, in, in_place);
 
 }
 
@@ -28685,770 +28707,770 @@ void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, std::istrea
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void deserialize(XrActionCreateInfo* s, std::istream& in) {
+void deserialize(XrActionCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->actionName, XR_MAX_ACTION_NAME_SIZE, in);
+    deserialize_array(s->actionName, XR_MAX_ACTION_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->actionType, in);
+    deserialize(&s->actionType, in, in_place);
 
         
 
-    deserialize(&s->countSubactionPaths, in);
+    deserialize(&s->countSubactionPaths, in, in_place);
 
         
 
-    deserialize_ptr(&s->subactionPaths, in);
+    deserialize_ptr(&s->subactionPaths, in, in_place);
 
         
 
-    deserialize_array(s->localizedActionName, XR_MAX_LOCALIZED_ACTION_NAME_SIZE, in);
+    deserialize_array(s->localizedActionName, XR_MAX_LOCALIZED_ACTION_NAME_SIZE, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionSetCreateInfo* s, std::istream& in) {
+void deserialize(XrActionSetCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->actionSetName, XR_MAX_ACTION_SET_NAME_SIZE, in);
+    deserialize_array(s->actionSetName, XR_MAX_ACTION_SET_NAME_SIZE, in, in_place);
 
         
 
-    deserialize_array(s->localizedActionSetName, XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE, in);
+    deserialize_array(s->localizedActionSetName, XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->priority, in);
+    deserialize(&s->priority, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionSpaceCreateInfo* s, std::istream& in) {
+void deserialize(XrActionSpaceCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->subactionPath, in);
+    deserialize(&s->subactionPath, in, in_place);
 
         
 
-    deserialize(&s->poseInActionSpace, in);
+    deserialize(&s->poseInActionSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionStateBoolean* s, std::istream& in) {
+void deserialize(XrActionStateBoolean* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->currentState, in);
+    deserialize(&s->currentState, in, in_place);
 
         
 
-    deserialize(&s->changedSinceLastSync, in);
+    deserialize(&s->changedSinceLastSync, in, in_place);
 
         
 
-    deserialize(&s->lastChangeTime, in);
+    deserialize(&s->lastChangeTime, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->isActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionStateFloat* s, std::istream& in) {
+void deserialize(XrActionStateFloat* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->currentState, in);
+    deserialize(&s->currentState, in, in_place);
 
         
 
-    deserialize(&s->changedSinceLastSync, in);
+    deserialize(&s->changedSinceLastSync, in, in_place);
 
         
 
-    deserialize(&s->lastChangeTime, in);
+    deserialize(&s->lastChangeTime, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->isActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionStateGetInfo* s, std::istream& in) {
+void deserialize(XrActionStateGetInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->subactionPath, in);
+    deserialize(&s->subactionPath, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionStatePose* s, std::istream& in) {
+void deserialize(XrActionStatePose* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->isActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionStateVector2f* s, std::istream& in) {
+void deserialize(XrActionStateVector2f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->currentState, in);
+    deserialize(&s->currentState, in, in_place);
 
         
 
-    deserialize(&s->changedSinceLastSync, in);
+    deserialize(&s->changedSinceLastSync, in, in_place);
 
         
 
-    deserialize(&s->lastChangeTime, in);
+    deserialize(&s->lastChangeTime, in, in_place);
 
         
 
-    deserialize(&s->isActive, in);
+    deserialize(&s->isActive, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionSuggestedBinding* s, std::istream& in) {
+void deserialize(XrActionSuggestedBinding* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->action, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->binding, in);
+    deserialize(&s->binding, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActionsSyncInfo* s, std::istream& in) {
+void deserialize(XrActionsSyncInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->countActiveActionSets, in);
+    deserialize(&s->countActiveActionSets, in, in_place);
 
         
 
-    deserialize_ptr(&s->activeActionSets, in);
+    deserialize_ptr(&s->activeActionSets, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrActiveActionSet* s, std::istream& in) {
+void deserialize(XrActiveActionSet* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->actionSet, in);
+    deserialize(&s->actionSet, in, in_place);
 
         
 
-    deserialize(&s->subactionPath, in);
+    deserialize(&s->subactionPath, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrApiLayerProperties* s, std::istream& in) {
+void deserialize(XrApiLayerProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->layerName, XR_MAX_API_LAYER_NAME_SIZE, in);
+    deserialize_array(s->layerName, XR_MAX_API_LAYER_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->specVersion, in);
+    deserialize(&s->specVersion, in, in_place);
 
         
 
-    deserialize(&s->layerVersion, in);
+    deserialize(&s->layerVersion, in, in_place);
 
         
 
-    deserialize_array(s->description, XR_MAX_API_LAYER_DESCRIPTION_SIZE, in);
+    deserialize_array(s->description, XR_MAX_API_LAYER_DESCRIPTION_SIZE, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrApplicationInfo* s, std::istream& in) {
+void deserialize(XrApplicationInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, in);
+    deserialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->applicationVersion, in);
+    deserialize(&s->applicationVersion, in, in_place);
 
         
 
-    deserialize_array(s->engineName, XR_MAX_ENGINE_NAME_SIZE, in);
+    deserialize_array(s->engineName, XR_MAX_ENGINE_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->engineVersion, in);
+    deserialize(&s->engineVersion, in, in_place);
 
         
 
-    deserialize(&s->apiVersion, in);
+    deserialize(&s->apiVersion, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBodySkeletonJointHTC* s, std::istream& in) {
+void deserialize(XrBodySkeletonJointHTC* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBoundSourcesForActionEnumerateInfo* s, std::istream& in) {
+void deserialize(XrBoundSourcesForActionEnumerateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize(&s->action, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrBoxf* s, std::istream& in) {
+void deserialize(XrBoxf* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->center, in);
+    deserialize(&s->center, in, in_place);
 
         
 
-    deserialize(&s->extents, in);
+    deserialize(&s->extents, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColor3f* s, std::istream& in) {
+void deserialize(XrColor3f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->r, in);
+    deserialize(&s->r, in, in_place);
 
         
 
-    deserialize(&s->g, in);
+    deserialize(&s->g, in, in_place);
 
         
 
-    deserialize(&s->b, in);
+    deserialize(&s->b, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrColor4f* s, std::istream& in) {
+void deserialize(XrColor4f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->r, in);
+    deserialize(&s->r, in, in_place);
 
         
 
-    deserialize(&s->g, in);
+    deserialize(&s->g, in, in_place);
 
         
 
-    deserialize(&s->b, in);
+    deserialize(&s->b, in, in_place);
 
         
 
-    deserialize(&s->a, in);
+    deserialize(&s->a, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerBaseHeader* s, std::istream& in) {
+void deserialize(XrCompositionLayerBaseHeader* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->space, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerProjection* s, std::istream& in) {
+void deserialize(XrCompositionLayerProjection* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->viewCount, in);
+    deserialize(&s->viewCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->views, in);
+    deserialize_ptr(&s->views, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerProjectionView* s, std::istream& in) {
+void deserialize(XrCompositionLayerProjectionView* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize(&s->fov, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->subImage, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrCompositionLayerQuad* s, std::istream& in) {
+void deserialize(XrCompositionLayerQuad* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->layerFlags, in);
+    deserialize(&s->layerFlags, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->space, in, in_place);
 
         
 
-    deserialize(&s->eyeVisibility, in);
+    deserialize(&s->eyeVisibility, in, in_place);
 
         
 
-    deserialize(&s->subImage, in);
+    deserialize(&s->subImage, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->size, in);
+    deserialize(&s->size, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataBaseHeader* s, std::istream& in) {
+void deserialize(XrEventDataBaseHeader* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataBuffer* s, std::istream& in) {
+void deserialize(XrEventDataBuffer* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->varying, 4000, in);
+    deserialize_array(s->varying, 4000, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataEventsLost* s, std::istream& in) {
+void deserialize(XrEventDataEventsLost* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lostEventCount, in);
+    deserialize(&s->lostEventCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataInstanceLossPending* s, std::istream& in) {
+void deserialize(XrEventDataInstanceLossPending* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->lossTime, in);
+    deserialize(&s->lossTime, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataInteractionProfileChanged* s, std::istream& in) {
+void deserialize(XrEventDataInteractionProfileChanged* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize(&s->session, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataReferenceSpaceChangePending* s, std::istream& in) {
+void deserialize(XrEventDataReferenceSpaceChangePending* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->referenceSpaceType, in);
+    deserialize(&s->referenceSpaceType, in, in_place);
 
         
 
-    deserialize(&s->changeTime, in);
+    deserialize(&s->changeTime, in, in_place);
 
         
 
-    deserialize(&s->poseValid, in);
+    deserialize(&s->poseValid, in, in_place);
 
         
 
-    deserialize(&s->poseInPreviousSpace, in);
+    deserialize(&s->poseInPreviousSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrEventDataSessionStateChanged* s, std::istream& in) {
+void deserialize(XrEventDataSessionStateChanged* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->session, in);
+    deserialize(&s->session, in, in_place);
 
         
 
-    deserialize(&s->state, in);
+    deserialize(&s->state, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->time, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExtensionProperties* s, std::istream& in) {
+void deserialize(XrExtensionProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize_array(s->extensionName, XR_MAX_EXTENSION_NAME_SIZE, in);
+    deserialize_array(s->extensionName, XR_MAX_EXTENSION_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->extensionVersion, in);
+    deserialize(&s->extensionVersion, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExtent2Df* s, std::istream& in) {
+void deserialize(XrExtent2Df* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->width, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExtent2Di* s, std::istream& in) {
+void deserialize(XrExtent2Di* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->width, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->height, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrExtent3Df* s, std::istream& in) {
+void deserialize(XrExtent3Df* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->width, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->height, in, in_place);
 
         
 
-    deserialize(&s->depth, in);
+    deserialize(&s->depth, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFovf* s, std::istream& in) {
+void deserialize(XrFovf* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->angleLeft, in);
+    deserialize(&s->angleLeft, in, in_place);
 
         
 
-    deserialize(&s->angleRight, in);
+    deserialize(&s->angleRight, in, in_place);
 
         
 
-    deserialize(&s->angleUp, in);
+    deserialize(&s->angleUp, in, in_place);
 
         
 
-    deserialize(&s->angleDown, in);
+    deserialize(&s->angleDown, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameBeginInfo* s, std::istream& in) {
+void deserialize(XrFrameBeginInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
@@ -29457,146 +29479,146 @@ void deserialize(XrFrameBeginInfo* s, std::istream& in) {
 
 
 
-void deserialize(XrFrameState* s, std::istream& in) {
+void deserialize(XrFrameState* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->predictedDisplayTime, in);
+    deserialize(&s->predictedDisplayTime, in, in_place);
 
         
 
-    deserialize(&s->predictedDisplayPeriod, in);
+    deserialize(&s->predictedDisplayPeriod, in, in_place);
 
         
 
-    deserialize(&s->shouldRender, in);
+    deserialize(&s->shouldRender, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrameWaitInfo* s, std::istream& in) {
+void deserialize(XrFrameWaitInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrFrustumf* s, std::istream& in) {
+void deserialize(XrFrustumf* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize(&s->fov, in, in_place);
 
         
 
-    deserialize(&s->nearZ, in);
+    deserialize(&s->nearZ, in, in_place);
 
         
 
-    deserialize(&s->farZ, in);
+    deserialize(&s->farZ, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHapticActionInfo* s, std::istream& in) {
+void deserialize(XrHapticActionInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->action, in);
+    deserialize(&s->action, in, in_place);
 
         
 
-    deserialize(&s->subactionPath, in);
+    deserialize(&s->subactionPath, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHapticBaseHeader* s, std::istream& in) {
+void deserialize(XrHapticBaseHeader* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrHapticVibration* s, std::istream& in) {
+void deserialize(XrHapticVibration* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->duration, in);
+    deserialize(&s->duration, in, in_place);
 
         
 
-    deserialize(&s->frequency, in);
+    deserialize(&s->frequency, in, in_place);
 
         
 
-    deserialize(&s->amplitude, in);
+    deserialize(&s->amplitude, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInputSourceLocalizedNameGetInfo* s, std::istream& in) {
+void deserialize(XrInputSourceLocalizedNameGetInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->sourcePath, in);
+    deserialize(&s->sourcePath, in, in_place);
 
         
 
-    deserialize(&s->whichComponents, in);
+    deserialize(&s->whichComponents, in, in_place);
 
 }
 
@@ -29605,812 +29627,812 @@ void deserialize(XrInputSourceLocalizedNameGetInfo* s, std::istream& in) {
 
 
 
-void deserialize(XrInstanceProperties* s, std::istream& in) {
+void deserialize(XrInstanceProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->runtimeVersion, in);
+    deserialize(&s->runtimeVersion, in, in_place);
 
         
 
-    deserialize_array(s->runtimeName, XR_MAX_RUNTIME_NAME_SIZE, in);
+    deserialize_array(s->runtimeName, XR_MAX_RUNTIME_NAME_SIZE, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInteractionProfileState* s, std::istream& in) {
+void deserialize(XrInteractionProfileState* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->interactionProfile, in);
+    deserialize(&s->interactionProfile, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrInteractionProfileSuggestedBinding* s, std::istream& in) {
+void deserialize(XrInteractionProfileSuggestedBinding* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->interactionProfile, in);
+    deserialize(&s->interactionProfile, in, in_place);
 
         
 
-    deserialize(&s->countSuggestedBindings, in);
+    deserialize(&s->countSuggestedBindings, in, in_place);
 
         
 
-    deserialize_ptr(&s->suggestedBindings, in);
+    deserialize_ptr(&s->suggestedBindings, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrOffset2Df* s, std::istream& in) {
+void deserialize(XrOffset2Df* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrOffset2Di* s, std::istream& in) {
+void deserialize(XrOffset2Di* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrPosef* s, std::istream& in) {
+void deserialize(XrPosef* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->orientation, in);
+    deserialize(&s->orientation, in, in_place);
 
         
 
-    deserialize(&s->position, in);
+    deserialize(&s->position, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrQuaternionf* s, std::istream& in) {
+void deserialize(XrQuaternionf* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
         
 
-    deserialize(&s->z, in);
+    deserialize(&s->z, in, in_place);
 
         
 
-    deserialize(&s->w, in);
+    deserialize(&s->w, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRect2Df* s, std::istream& in) {
+void deserialize(XrRect2Df* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->offset, in);
+    deserialize(&s->offset, in, in_place);
 
         
 
-    deserialize(&s->extent, in);
+    deserialize(&s->extent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrRect2Di* s, std::istream& in) {
+void deserialize(XrRect2Di* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->offset, in);
+    deserialize(&s->offset, in, in_place);
 
         
 
-    deserialize(&s->extent, in);
+    deserialize(&s->extent, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrReferenceSpaceCreateInfo* s, std::istream& in) {
+void deserialize(XrReferenceSpaceCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->referenceSpaceType, in);
+    deserialize(&s->referenceSpaceType, in, in_place);
 
         
 
-    deserialize(&s->poseInReferenceSpace, in);
+    deserialize(&s->poseInReferenceSpace, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSessionActionSetsAttachInfo* s, std::istream& in) {
+void deserialize(XrSessionActionSetsAttachInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->countActionSets, in);
+    deserialize(&s->countActionSets, in, in_place);
 
         
 
-    deserialize_ptr(&s->actionSets, in);
+    deserialize_ptr(&s->actionSets, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSessionBeginInfo* s, std::istream& in) {
+void deserialize(XrSessionBeginInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->primaryViewConfigurationType, in);
+    deserialize(&s->primaryViewConfigurationType, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSessionCreateInfo* s, std::istream& in) {
+void deserialize(XrSessionCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize(&s->systemId, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceLocation* s, std::istream& in) {
+void deserialize(XrSpaceLocation* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceLocationData* s, std::istream& in) {
+void deserialize(XrSpaceLocationData* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->locationFlags, in);
+    deserialize(&s->locationFlags, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceLocations* s, std::istream& in) {
+void deserialize(XrSpaceLocations* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->locationCount, in);
+    deserialize(&s->locationCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->locations, in);
+    deserialize_ptr(&s->locations, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceVelocities* s, std::istream& in) {
+void deserialize(XrSpaceVelocities* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->velocityCount, in);
+    deserialize(&s->velocityCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->velocities, in);
+    deserialize_ptr(&s->velocities, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceVelocity* s, std::istream& in) {
+void deserialize(XrSpaceVelocity* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->velocityFlags, in);
+    deserialize(&s->velocityFlags, in, in_place);
 
         
 
-    deserialize(&s->linearVelocity, in);
+    deserialize(&s->linearVelocity, in, in_place);
 
         
 
-    deserialize(&s->angularVelocity, in);
+    deserialize(&s->angularVelocity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpaceVelocityData* s, std::istream& in) {
+void deserialize(XrSpaceVelocityData* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->velocityFlags, in);
+    deserialize(&s->velocityFlags, in, in_place);
 
         
 
-    deserialize(&s->linearVelocity, in);
+    deserialize(&s->linearVelocity, in, in_place);
 
         
 
-    deserialize(&s->angularVelocity, in);
+    deserialize(&s->angularVelocity, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpacesLocateInfo* s, std::istream& in) {
+void deserialize(XrSpacesLocateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->baseSpace, in);
+    deserialize(&s->baseSpace, in, in_place);
 
         
 
-    deserialize(&s->time, in);
+    deserialize(&s->time, in, in_place);
 
         
 
-    deserialize(&s->spaceCount, in);
+    deserialize(&s->spaceCount, in, in_place);
 
         
 
-    deserialize_ptr(&s->spaces, in);
+    deserialize_ptr(&s->spaces, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSpheref* s, std::istream& in) {
+void deserialize(XrSpheref* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->center, in);
+    deserialize(&s->center, in, in_place);
 
         
 
-    deserialize(&s->radius, in);
+    deserialize(&s->radius, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainCreateInfo* s, std::istream& in) {
+void deserialize(XrSwapchainCreateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->createFlags, in);
+    deserialize(&s->createFlags, in, in_place);
 
         
 
-    deserialize(&s->usageFlags, in);
+    deserialize(&s->usageFlags, in, in_place);
 
         
 
-    deserialize(&s->format, in);
+    deserialize(&s->format, in, in_place);
 
         
 
-    deserialize(&s->sampleCount, in);
+    deserialize(&s->sampleCount, in, in_place);
 
         
 
-    deserialize(&s->width, in);
+    deserialize(&s->width, in, in_place);
 
         
 
-    deserialize(&s->height, in);
+    deserialize(&s->height, in, in_place);
 
         
 
-    deserialize(&s->faceCount, in);
+    deserialize(&s->faceCount, in, in_place);
 
         
 
-    deserialize(&s->arraySize, in);
+    deserialize(&s->arraySize, in, in_place);
 
         
 
-    deserialize(&s->mipCount, in);
+    deserialize(&s->mipCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageAcquireInfo* s, std::istream& in) {
+void deserialize(XrSwapchainImageAcquireInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageBaseHeader* s, std::istream& in) {
+void deserialize(XrSwapchainImageBaseHeader* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageReleaseInfo* s, std::istream& in) {
+void deserialize(XrSwapchainImageReleaseInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainImageWaitInfo* s, std::istream& in) {
+void deserialize(XrSwapchainImageWaitInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->timeout, in);
+    deserialize(&s->timeout, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSwapchainSubImage* s, std::istream& in) {
+void deserialize(XrSwapchainSubImage* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->swapchain, in);
+    deserialize(&s->swapchain, in, in_place);
 
         
 
-    deserialize(&s->imageRect, in);
+    deserialize(&s->imageRect, in, in_place);
 
         
 
-    deserialize(&s->imageArrayIndex, in);
+    deserialize(&s->imageArrayIndex, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemGetInfo* s, std::istream& in) {
+void deserialize(XrSystemGetInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->formFactor, in);
+    deserialize(&s->formFactor, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemGraphicsProperties* s, std::istream& in) {
+void deserialize(XrSystemGraphicsProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->maxSwapchainImageHeight, in);
+    deserialize(&s->maxSwapchainImageHeight, in, in_place);
 
         
 
-    deserialize(&s->maxSwapchainImageWidth, in);
+    deserialize(&s->maxSwapchainImageWidth, in, in_place);
 
         
 
-    deserialize(&s->maxLayerCount, in);
+    deserialize(&s->maxLayerCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemProperties* s, std::istream& in) {
+void deserialize(XrSystemProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->systemId, in);
+    deserialize(&s->systemId, in, in_place);
 
         
 
-    deserialize(&s->vendorId, in);
+    deserialize(&s->vendorId, in, in_place);
 
         
 
-    deserialize_array(s->systemName, XR_MAX_SYSTEM_NAME_SIZE, in);
+    deserialize_array(s->systemName, XR_MAX_SYSTEM_NAME_SIZE, in, in_place);
 
         
 
-    deserialize(&s->graphicsProperties, in);
+    deserialize(&s->graphicsProperties, in, in_place);
 
         
 
-    deserialize(&s->trackingProperties, in);
+    deserialize(&s->trackingProperties, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrSystemTrackingProperties* s, std::istream& in) {
+void deserialize(XrSystemTrackingProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->orientationTracking, in);
+    deserialize(&s->orientationTracking, in, in_place);
 
         
 
-    deserialize(&s->positionTracking, in);
+    deserialize(&s->positionTracking, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrUuid* s, std::istream& in) {
+void deserialize(XrUuid* s, std::istream& in, bool in_place) {
         
 
-    deserialize_array(s->data, XR_UUID_SIZE, in);
+    deserialize_array(s->data, XR_UUID_SIZE, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVector2f* s, std::istream& in) {
+void deserialize(XrVector2f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVector3f* s, std::istream& in) {
+void deserialize(XrVector3f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
         
 
-    deserialize(&s->z, in);
+    deserialize(&s->z, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrVector4f* s, std::istream& in) {
+void deserialize(XrVector4f* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->x, in);
+    deserialize(&s->x, in, in_place);
 
         
 
-    deserialize(&s->y, in);
+    deserialize(&s->y, in, in_place);
 
         
 
-    deserialize(&s->z, in);
+    deserialize(&s->z, in, in_place);
 
         
 
-    deserialize(&s->w, in);
+    deserialize(&s->w, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrView* s, std::istream& in) {
+void deserialize(XrView* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->pose, in);
+    deserialize(&s->pose, in, in_place);
 
         
 
-    deserialize(&s->fov, in);
+    deserialize(&s->fov, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewConfigurationProperties* s, std::istream& in) {
+void deserialize(XrViewConfigurationProperties* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
 
         
 
-    deserialize(&s->fovMutable, in);
+    deserialize(&s->fovMutable, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewConfigurationView* s, std::istream& in) {
+void deserialize(XrViewConfigurationView* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->recommendedImageRectWidth, in);
+    deserialize(&s->recommendedImageRectWidth, in, in_place);
 
         
 
-    deserialize(&s->maxImageRectWidth, in);
+    deserialize(&s->maxImageRectWidth, in, in_place);
 
         
 
-    deserialize(&s->recommendedImageRectHeight, in);
+    deserialize(&s->recommendedImageRectHeight, in, in_place);
 
         
 
-    deserialize(&s->maxImageRectHeight, in);
+    deserialize(&s->maxImageRectHeight, in, in_place);
 
         
 
-    deserialize(&s->recommendedSwapchainSampleCount, in);
+    deserialize(&s->recommendedSwapchainSampleCount, in, in_place);
 
         
 
-    deserialize(&s->maxSwapchainSampleCount, in);
+    deserialize(&s->maxSwapchainSampleCount, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewLocateInfo* s, std::istream& in) {
+void deserialize(XrViewLocateInfo* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->viewConfigurationType, in);
+    deserialize(&s->viewConfigurationType, in, in_place);
 
         
 
-    deserialize(&s->displayTime, in);
+    deserialize(&s->displayTime, in, in_place);
 
         
 
-    deserialize(&s->space, in);
+    deserialize(&s->space, in, in_place);
 
 }
 
 
 
 
-void deserialize(XrViewState* s, std::istream& in) {
+void deserialize(XrViewState* s, std::istream& in, bool in_place) {
         
 
-    deserialize(&s->type, in);
+    deserialize(&s->type, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in);
+    deserialize_xr(&s->next, in, in_place);
 
         
 
-    deserialize(&s->viewStateFlags, in);
+    deserialize(&s->viewStateFlags, in, in_place);
 
 }
 

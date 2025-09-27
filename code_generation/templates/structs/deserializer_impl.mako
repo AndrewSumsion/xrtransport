@@ -31,18 +31,18 @@
 % endif
 ## Now handle valid members
 % if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
-    deserialize_xr(&${binding_prefix}next, in);
+    deserialize_xr(&${binding_prefix}next, in, in_place);
 % elif member.pointer:
-    deserialize_ptr(&${binding_prefix}${member.name}, in);
+    deserialize_ptr(&${binding_prefix}${member.name}, in, in_place);
 % elif member.array:
-    deserialize_array(${binding_prefix}${member.name}, ${member.array}, in);
+    deserialize_array(${binding_prefix}${member.name}, ${member.array}, in, in_place);
 % else:
-    deserialize(&${binding_prefix}${member.name}, in);
+    deserialize(&${binding_prefix}${member.name}, in, in_place);
 % endif
 </%def>
 
 <%def name="deserializer(struct)">
-void deserialize(${struct.name}* s, std::istream& in) {
+void deserialize(${struct.name}* s, std::istream& in, bool in_place) {
     % for member in struct.members:
         ${deserialize_member(member)}
     % endfor
@@ -134,29 +134,51 @@ std::size_t size_lookup(XrStructureType struct_type) {
     return size_lookup_table.at(struct_type);
 }
 
-void deserialize_xr(const void** p_s, std::istream& in) {
+void deserialize_xr(const void** p_s, std::istream& in, bool in_place) {
     XrStructureType type{};
-    deserialize(&type, in);
+    deserialize(&type, in, in_place);
     if (type) {
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(std::malloc(size_lookup(type)));
-        deserializer_lookup(type)(s, in);
-        *p_s = s;
+        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
     }
     else {
-        *p_s = nullptr;
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
     }
 }
 
-void deserialize_xr(void** p_s, std::istream& in) {
+void deserialize_xr(void** p_s, std::istream& in, bool in_place) {
     XrStructureType type{};
-    deserialize(&type, in);
+    deserialize(&type, in, in_place);
     if (type) {
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(std::malloc(size_lookup(type)));
-        deserializer_lookup(type)(s, in);
-        *p_s = s;
+        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
     }
     else {
-        *p_s = nullptr;
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
     }
 }
 

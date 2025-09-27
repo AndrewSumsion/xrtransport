@@ -11,7 +11,7 @@
 <%namespace name="utils" file="utils.mako"/>
 
 <%def name="forward_deserializer(struct)">
-void deserialize(${struct.name}* s, std::istream& in);
+void deserialize(${struct.name}* s, std::istream& in, bool in_place = false);
 </%def>
 
 <%def name="forward_cleaner(struct)">
@@ -43,10 +43,8 @@ ${forward_cleaner(struct)}
 
 // Struct deserializer lookup
 // Only to be used with OpenXR pNext structs
-using StructDeserializer = void(*)(XrBaseOutStructure*, std::istream&);
-#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, std::istream&)>(&deserialize)))
-
-extern std::unordered_map<XrStructureType, StructDeserializer> deserializer_lookup_table;
+using StructDeserializer = void(*)(XrBaseOutStructure*, std::istream&, bool);
+#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, std::istream&, bool)>(&deserialize)))
 
 StructDeserializer deserializer_lookup(XrStructureType struct_type);
 
@@ -55,19 +53,15 @@ StructDeserializer deserializer_lookup(XrStructureType struct_type);
 using StructCleaner = void(*)(const XrBaseOutStructure*);
 #define STRUCT_CLEANER_PTR(t) (reinterpret_cast<StructCleaner>(static_cast<void(*)(const t*)>(&cleanup)))
 
-extern std::unordered_map<XrStructureType, StructCleaner> cleaner_lookup_table;
-
 StructCleaner cleaner_lookup(XrStructureType struct_type);
 
 // Struct size lookup
 // Only to be used with OpenXR pNext structs
-extern std::unordered_map<XrStructureType, std::size_t> size_lookup_table;
-
 std::size_t size_lookup(XrStructureType struct_type);
 
 // Generic deserializers
 template <typename T>
-void deserialize(T* x, std::istream& in) {
+void deserialize(T* x, std::istream& in, bool in_place = false) {
     static_assert(
         !std::is_class<T>::value,
         "T must be a supported type"
@@ -76,43 +70,78 @@ void deserialize(T* x, std::istream& in) {
 }
 
 template <typename T>
-void deserialize_array(T* x, std::size_t len, std::istream& in) {
+void deserialize(const T* x, std::istream& in, bool in_place = false) {
+    deserialize(const_cast<typename std::remove_const<T>::type*>(x), in, in_place);
+}
+
+template <typename T>
+void deserialize_array(T* x, std::size_t len, std::istream& in, bool in_place = false) {
     for (std::size_t i = 0; i < len; i++) {
-        deserialize(&x[i], in);
+        deserialize(&x[i], in, in_place);
     }
 }
 
 // For weird const-correctness reasons, we need a const and non-const version
 template <typename T>
-void deserialize_ptr(const T** x, std::istream& in) {
+void deserialize_ptr(const T** x, std::istream& in, bool in_place = false) {
     std::uint32_t len{};
-    deserialize(&len, in);
+    deserialize(&len, in, in_place);
     if (len) {
-        T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
-        deserialize_array(data, len, in);
-        *x = data;
+        if (in_place) {
+            if (!*x) {
+                assert(false && "Attempted to deserialize in-place into nullptr");
+            }
+            deserialize_array(*x, len, in, in_place);
+        }
+        else {
+            T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
+            deserialize_array(data, len, in, in_place);
+            *x = data;
+        }
     }
     else {
-        *x = nullptr;
+        if (in_place) {
+            if (*x) {
+                assert(false && "Attempted to deserialize in-place nullptr but pointer is allocated");
+            }
+        }
+        else {
+            *x = nullptr;
+        }
     }
 }
 
 template <typename T>
-void deserialize_ptr(T** x, std::istream& in) {
+void deserialize_ptr(T** x, std::istream& in, bool in_place = false) {
     std::uint32_t len{};
-    deserialize(&len, in);
+    deserialize(&len, in, in_place);
     if (len) {
-        T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
-        deserialize_array(data, len, in);
-        *x = data;
+        if (in_place) {
+            if (!*x) {
+                assert(false && "Attempted to deserialize in-place into nullptr");
+            }
+            deserialize_array(*x, len, in, in_place);
+        }
+        else {
+            T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
+            deserialize_array(data, len, in, in_place);
+            *x = data;
+        }
     }
     else {
-        *x = nullptr;
+        if (in_place) {
+            if (*x) {
+                assert(false && "Attempted to deserialize in-place nullptr but pointer is allocated");
+            }
+        }
+        else {
+            *x = nullptr;
+        }
     }
 }
 
-void deserialize_xr(const void** p_s, std::istream& in);
-void deserialize_xr(void** p_s, std::istream& in);
+void deserialize_xr(const void** p_s, std::istream& in, bool in_place = false);
+void deserialize_xr(void** p_s, std::istream& in, bool in_place = false);
 
 // Generic cleaners
 template <typename T>
