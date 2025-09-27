@@ -133,9 +133,6 @@ void cleanup_ptr(const T* x, std::size_t len) {
 
 void cleanup_xr(const void* untyped);
 
-// Custom implementations
-#include "custom/deserializer.h"
-
 } // namespace xrtransport
 
 #endif // XRTRANSPORT_DESERIALIZER_GENERATED_H

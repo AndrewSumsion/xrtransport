@@ -1,5 +1,5 @@
-#include "xrtransport/serializer.h"
-#include "xrtransport/deserializer.h"
+#include "xrtransport/generated/serializer.h"
+#include "xrtransport/generated/deserializer.h"
 
 #include <cassert>
 #include <cstring>

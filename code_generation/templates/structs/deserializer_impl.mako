@@ -87,7 +87,7 @@ void cleanup(const ${struct.name}* s) {
 }
 </%def>
 
-#include "xrtransport/deserializer.h"
+#include "xrtransport/generated/deserializer.h"
 
 namespace xrtransport {
 

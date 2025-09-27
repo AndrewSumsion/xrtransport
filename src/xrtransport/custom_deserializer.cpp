@@ -1,4 +1,4 @@
-#include "xrtransport/deserializer.h"
+#include "xrtransport/generated/deserializer.h"
 
 namespace xrtransport {
 

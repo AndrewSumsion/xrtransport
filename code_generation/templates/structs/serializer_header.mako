@@ -58,9 +58,6 @@ void serialize_ptr(const T* x, std::size_t len, std::ostream& out) {
 
 void serialize_xr(const void* untyped, std::ostream& out);
 
-// Custom implementations
-#include "custom/serializer.h"
-
 } // namespace xrtransport
 
 #endif // XRTRANSPORT_SERIALIZER_GENERATED_H

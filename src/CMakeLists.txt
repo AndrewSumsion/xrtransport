@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 # Create static library for xrtransport serialization
 add_library(xrtransport_serialization STATIC
-    xrtransport/serializer.cpp
-    xrtransport/deserializer.cpp
+    xrtransport/generated/serializer.cpp
+    xrtransport/generated/deserializer.cpp
     xrtransport/custom_serializer.cpp
     xrtransport/custom_deserializer.cpp
 )

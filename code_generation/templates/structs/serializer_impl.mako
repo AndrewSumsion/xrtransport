@@ -52,7 +52,7 @@ void serialize(const ${struct.name}* s, std::ostream& out) {
 }
 </%def>
 
-#include "xrtransport/serializer.h"
+#include "xrtransport/generated/serializer.h"
 
 namespace xrtransport {
 

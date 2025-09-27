@@ -22,7 +22,7 @@ Refactor the generated serialization code from header-only library to proper hea
 
 #### **Command Line Interface Changes**
 - **Updated arguments**: Changed from `<openxr_spec> <src_out> <test_out>` to `<openxr_spec> <include_out> <src_out> <test_out>`
-- **New usage**: `python3 -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport src/xrtransport test`
+- **New usage**: `python3 -m code_generation OpenXR-SDK/specification/registry/xr.xml include/xrtransport/generated src/xrtransport/generated test`
 
 #### **Template Architecture**
 - **Created split templates**:
@@ -35,7 +35,7 @@ Refactor the generated serialization code from header-only library to proper hea
 - **Moved custom functions**: Extracted inline custom implementations from headers to separate `.cpp` files:
   - `src/xrtransport/custom_serializer.cpp`
   - `src/xrtransport/custom_deserializer.cpp`
-- **Updated custom headers**: Changed from inline definitions to declarations only
+- **Removed custom include folder**: Eliminated `include/xrtransport/custom/` since headers no longer filter custom declarations
 - **Fixed linking conflicts**: Resolved multiple definition errors during static library linking
 
 #### **Build System**
@@ -48,27 +48,27 @@ Refactor the generated serialization code from header-only library to proper hea
 
 #### **Generated Files Structure**
 ```
-include/xrtransport/
-├── serializer.h              # Function declarations
-├── deserializer.h             # Function declarations
-├── reflection_struct.h        # Type metadata
-└── custom/
-    ├── serializer.h           # Custom function declarations
-    └── deserializer.h         # Custom function declarations
+include/xrtransport/generated/
+├── serializer.h              # Generated function declarations
+├── deserializer.h            # Generated function declarations
+└── reflection_struct.h       # Type metadata
 
 src/xrtransport/
-├── serializer.cpp             # Generated implementations
-├── deserializer.cpp           # Generated implementations
-├── custom_serializer.cpp      # Custom implementations
-└── custom_deserializer.cpp    # Custom implementations
+├── generated/
+│   ├── serializer.cpp        # Generated implementations
+│   └── deserializer.cpp      # Generated implementations
+├── custom_serializer.cpp     # Custom implementations
+└── custom_deserializer.cpp   # Custom implementations
 ```
 
 #### **Verification Results**
-- ✅ Code generation works with new split templates
+- ✅ Code generation works with new split templates and generated folder structure
 - ✅ Static library builds successfully (791KB)
 - ✅ Test fuzzer links and passes ("Fuzzer passed")
 - ✅ No compilation errors or linking conflicts
 - ✅ Proper header/implementation separation achieved
+- ✅ Clean file organization with all generated code in `generated/` folders
+- ✅ Removed unnecessary custom include folder and references
 
 ## 2. In-Place Deserialization Implementation
 
