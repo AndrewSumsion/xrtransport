@@ -1,6 +1,6 @@
 import os
 from .spec_parser import get_xml_root, parse_spec
-from .structs import generate_serializer, generate_deserializer
+from .structs import generate_serializer_header, generate_serializer_impl, generate_deserializer_header, generate_deserializer_impl
 from .reflection import generate_struct_reflection
 from .test import generate_struct_fuzzer
 

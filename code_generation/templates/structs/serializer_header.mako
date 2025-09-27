@@ -1,0 +1,66 @@
+<%namespace name="utils" file="utils.mako"/>
+
+<%def name="forward_serializer(struct)">
+void serialize(const ${struct.name}* s, std::ostream& out);
+</%def>
+
+#ifndef XRTRANSPORT_SERIALIZER_GENERATED_H
+#define XRTRANSPORT_SERIALIZER_GENERATED_H
+
+#include "openxr/openxr.h"
+
+#include <iostream>
+#include <cstdint>
+#include <unordered_map>
+#include <cassert>
+#include <cstring>
+
+namespace xrtransport {
+
+// Forward declarations
+<%utils:for_grouped_structs args="struct">
+${forward_serializer(struct)}
+</%utils:for_grouped_structs>
+
+// Only to be used with OpenXR pNext structs
+using StructSerializer = void(*)(const XrBaseInStructure*, std::ostream&);
+#define STRUCT_SERIALIZER_PTR(t) (reinterpret_cast<StructSerializer>(static_cast<void(*)(const t*, std::ostream&)>(&serialize)))
+
+extern std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table;
+
+StructSerializer serializer_lookup(XrStructureType struct_type);
+
+// Generic serializers
+template <typename T>
+void serialize(const T* x, std::ostream& out) {
+    static_assert(
+        !std::is_class<T>::value,
+        "T must be a supported type"
+    );
+    out.write(reinterpret_cast<const char*>(x), sizeof(T));
+}
+
+template <typename T>
+void serialize_array(const T* x, std::size_t len, std::ostream& out) {
+    for (std::size_t i = 0; i < len; i++) {
+        serialize(&x[i], out);
+    }
+}
+
+template <typename T>
+void serialize_ptr(const T* x, std::size_t len, std::ostream& out) {
+    std::uint32_t marker = x != nullptr ? len : 0;
+    serialize(&marker, out);
+    if (marker) {
+        serialize_array(x, len, out);
+    }
+}
+
+void serialize_xr(const void* untyped, std::ostream& out);
+
+// Custom implementations
+#include "custom/serializer.h"
+
+} // namespace xrtransport
+
+#endif // XRTRANSPORT_SERIALIZER_GENERATED_H
