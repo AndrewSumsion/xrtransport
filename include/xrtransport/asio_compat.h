@@ -147,6 +147,275 @@ using ReadStream = SyncReadStream;
 using WriteStream = SyncWriteStream;
 using ReadWriteStream = SyncDuplexStream;
 
+// Concrete templated implementations
+
+// Concrete implementation of SyncStream
+template<typename Stream>
+class SyncStreamImpl : public SyncStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit SyncStreamImpl(Stream& stream) : stream_(stream) {}
+
+    void blocking_mode(bool mode) override {
+        stream_.blocking_mode(mode);
+    }
+
+    bool blocking_mode() const override {
+        return stream_.blocking_mode();
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
+};
+
+// Concrete implementation of SyncReadStream
+template<typename Stream>
+class SyncReadStreamImpl : public SyncReadStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit SyncReadStreamImpl(Stream& stream) : stream_(stream) {}
+
+    void blocking_mode(bool mode) override {
+        stream_.blocking_mode(mode);
+    }
+
+    bool blocking_mode() const override {
+        return stream_.blocking_mode();
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        return stream_.read_some(buffers);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
+        return stream_.read_some(buffers, ec);
+    }
+};
+
+// Concrete implementation of SyncWriteStream
+template<typename Stream>
+class SyncWriteStreamImpl : public SyncWriteStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit SyncWriteStreamImpl(Stream& stream) : stream_(stream) {}
+
+    void blocking_mode(bool mode) override {
+        stream_.blocking_mode(mode);
+    }
+
+    bool blocking_mode() const override {
+        return stream_.blocking_mode();
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers) override {
+        return stream_.write_some(buffers);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
+        return stream_.write_some(buffers, ec);
+    }
+};
+
+// Concrete implementation of SyncDuplexStream
+template<typename Stream>
+class SyncDuplexStreamImpl : public SyncDuplexStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit SyncDuplexStreamImpl(Stream& stream) : stream_(stream) {}
+
+    void blocking_mode(bool mode) override {
+        stream_.blocking_mode(mode);
+    }
+
+    bool blocking_mode() const override {
+        return stream_.blocking_mode();
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        return stream_.read_some(buffers);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
+        return stream_.read_some(buffers, ec);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers) override {
+        return stream_.write_some(buffers);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
+        return stream_.write_some(buffers, ec);
+    }
+};
+
+// Concrete implementation of AsyncStream
+template<typename Stream>
+class AsyncStreamImpl : public AsyncStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit AsyncStreamImpl(Stream& stream) : stream_(stream) {}
+
+protected:
+    void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
+        stream_.async_wait(wait_type, std::move(handler));
+    }
+};
+
+// Concrete implementation of AsyncReadStream
+template<typename Stream>
+class AsyncReadStreamImpl : public AsyncReadStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit AsyncReadStreamImpl(Stream& stream) : stream_(stream) {}
+
+protected:
+    void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
+        stream_.async_wait(wait_type, std::move(handler));
+    }
+
+    void async_read_some_impl(const asio::mutable_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_read_some(buffers, std::move(handler));
+    }
+};
+
+// Concrete implementation of AsyncWriteStream
+template<typename Stream>
+class AsyncWriteStreamImpl : public AsyncWriteStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit AsyncWriteStreamImpl(Stream& stream) : stream_(stream) {}
+
+protected:
+    void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
+        stream_.async_wait(wait_type, std::move(handler));
+    }
+
+    void async_write_some_impl(const asio::const_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_write_some(buffers, std::move(handler));
+    }
+};
+
+// Concrete implementation of AsyncDuplexStream
+template<typename Stream>
+class AsyncDuplexStreamImpl : public AsyncDuplexStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit AsyncDuplexStreamImpl(Stream& stream) : stream_(stream) {}
+
+protected:
+    void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
+        stream_.async_wait(wait_type, std::move(handler));
+    }
+
+    void async_read_some_impl(const asio::mutable_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_read_some(buffers, std::move(handler));
+    }
+
+    void async_write_some_impl(const asio::const_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_write_some(buffers, std::move(handler));
+    }
+};
+
+// Concrete implementation of DuplexStream
+template<typename Stream>
+class DuplexStreamImpl : public DuplexStream {
+private:
+    Stream& stream_;
+
+public:
+    explicit DuplexStreamImpl(Stream& stream) : stream_(stream) {}
+
+    void blocking_mode(bool mode) override {
+        stream_.blocking_mode(mode);
+    }
+
+    bool blocking_mode() const override {
+        return stream_.blocking_mode();
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        return stream_.read_some(buffers);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
+        return stream_.read_some(buffers, ec);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers) override {
+        return stream_.write_some(buffers);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
+        return stream_.write_some(buffers, ec);
+    }
+
+protected:
+    void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
+        stream_.async_wait(wait_type, std::move(handler));
+    }
+
+    void async_read_some_impl(const asio::mutable_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_read_some(buffers, std::move(handler));
+    }
+
+    void async_write_some_impl(const asio::const_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
+        stream_.async_write_some(buffers, std::move(handler));
+    }
+};
+
 } // namespace xrtransport
 
 #endif // XRTRANSPORT_ASIO_COMPAT_H
