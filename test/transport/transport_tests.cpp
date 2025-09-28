@@ -20,16 +20,16 @@ TEST_CASE("Transport basic functionality", "[transport][basic]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
 
     SECTION("Construction and destruction") {
-        REQUIRE_NOTHROW(Transport(*stream_a));
+        REQUIRE_NOTHROW(Transport(stream_a));
 
         // Test that Transport can be destroyed without issues
         {
-            Transport transport(*stream_a);
+            Transport transport(stream_a);
         } // Should destroy cleanly
     }
 
     SECTION("MessageLock RAII behavior") {
-        Transport transport(*stream_a);
+        Transport transport(stream_a);
 
         // Test that start_message returns a valid MessageLockOut
         auto lock = transport.start_message(FUNCTION_CALL);
@@ -45,8 +45,8 @@ TEST_CASE("Transport basic functionality", "[transport][basic]") {
 TEST_CASE("Transport message flow", "[transport][message-flow]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(*stream_a);
-    Transport transport_b(*stream_b);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
 
     SECTION("Basic message sending and receiving") {
         // Send a message from A to B
@@ -103,8 +103,8 @@ TEST_CASE("Transport message flow", "[transport][message-flow]") {
 TEST_CASE("Transport handler registration and dispatch", "[transport][handlers]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(*stream_a);
-    Transport transport_b(*stream_b);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
 
     SECTION("Handler registration and execution") {
         std::atomic<bool> handler_called{false};
@@ -134,8 +134,8 @@ TEST_CASE("Transport handler registration and dispatch", "[transport][handlers]"
 TEST_CASE("Transport error conditions", "[transport][errors]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(*stream_a);
-    Transport transport_b(*stream_b);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
 
     SECTION("Missing handler throws exception") {
         const uint16_t UNREGISTERED_MESSAGE = CUSTOM_BASE + 99;
@@ -163,8 +163,8 @@ TEST_CASE("Transport with async operations", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
 
-    Transport transport_a(*stream_a);
-    Transport transport_b(*stream_b);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
 
     SECTION("Async worker lifecycle") {
         // Start worker
@@ -227,8 +227,8 @@ TEST_CASE("Transport with async operations", "[transport][async]") {
 TEST_CASE("Transport concurrency", "[transport][concurrency]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(*stream_a);
-    Transport transport_b(*stream_b);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
 
     SECTION("Multiple threads sending messages") {
         const int num_threads = 4;

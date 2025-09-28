@@ -132,14 +132,15 @@ void TestDuplexStream::apply_delays() {
     }
 }
 
-std::pair<std::unique_ptr<TestDuplexStream>, std::unique_ptr<TestDuplexStream>>
+std::pair<TestDuplexStream, TestDuplexStream>
 create_connected_streams(asio::io_context& io_context) {
     auto buffer = std::make_shared<SharedBuffer>();
 
-    auto stream_a = std::make_unique<TestDuplexStream>(buffer, SharedBuffer::SIDE_A, io_context);
-    auto stream_b = std::make_unique<TestDuplexStream>(buffer, SharedBuffer::SIDE_B, io_context);
-
-    return std::make_pair(std::move(stream_a), std::move(stream_b));
+    return std::pair<TestDuplexStream, TestDuplexStream>(
+        std::piecewise_construct,
+        std::forward_as_tuple(buffer, SharedBuffer::SIDE_A, io_context),
+        std::forward_as_tuple(buffer, SharedBuffer::SIDE_B, io_context)
+    );
 }
 
 } // namespace test
