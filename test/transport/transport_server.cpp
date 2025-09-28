@@ -18,14 +18,30 @@ using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
 class TransportServer {
 private:
     asio::io_context io_context_;
+    asio::executor_work_guard<asio::io_context::executor_type> work_guard_;
     tcp::acceptor acceptor_;
     std::mt19937 rng_;
+    std::thread io_thread_;
 
 public:
     TransportServer(uint16_t port)
-        : acceptor_(io_context_, tcp::endpoint(tcp::v4(), port))
+        : work_guard_(asio::make_work_guard(io_context_))
+        , acceptor_(io_context_, tcp::endpoint(tcp::v4(), port))
         , rng_(std::random_device{}()) {
         std::cout << "Transport server listening on port " << port << std::endl;
+
+        // Start io_context on background thread
+        io_thread_ = std::thread([this]() {
+            io_context_.run();
+        });
+    }
+
+    ~TransportServer() {
+        work_guard_.reset();
+        io_context_.stop();
+        if (io_thread_.joinable()) {
+            io_thread_.join();
+        }
     }
 
     void run() {
@@ -61,9 +77,10 @@ private:
             // Start async worker
             transport.start_worker();
 
-            // Keep connection alive by running io_context
-            asio::io_context client_context;
-            client_context.run();
+            // Keep connection alive until socket closes
+            while (socket->is_open()) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            }
 
         } catch (const std::exception& e) {
             std::cerr << "Client handler error: " << e.what() << std::endl;
