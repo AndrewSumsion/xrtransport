@@ -8,13 +8,14 @@
  * code_generation/templates/test/struct_fuzzer.mako
  */
 
+#include <catch2/catch_test_macros.hpp>
+
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/asio_compat.h"
 
 #include <cassert>
 #include <cstring>
-#include <iostream>
 #include <vector>
 
 using namespace xrtransport;
@@ -104,13 +105,13 @@ public:
     }
 };
 
-int main() {
+TEST_CASE("Serialization round-trip test", "[serialization]") {
     //
     // Struct initialization
     //
 <% plans = [struct_generator.generate_plan() for _ in range(1000)] %>
 % for i, plan in enumerate(plans):
-${struct_generator.init_struct(plan, f"item{i}", "    ")}
+    ${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % endfor
 
     //
@@ -138,8 +139,4 @@ ${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % for i, plan in enumerate(plans):
 ${struct_generator.compare_struct(plan, f"new_item{i}", "    ")}
 % endfor
-
-    std::cout << "Fuzzer passed" << std::endl;
-
-    return 0;
 }

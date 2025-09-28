@@ -228,3 +228,16 @@ def generate_struct_fuzzer_in_place(spec, templates_dir, out, fuzzer_seed):
     except:
         print("Warning! An exception occurred running in-place fuzzer template.")
         print(exceptions.text_error_template().render())
+
+def generate_unit_tests(spec, templates_dir, out, fuzzer_seed):
+    # Make unit test output deterministic (not thread safe)
+    random.seed(fuzzer_seed)
+
+    template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
+    template = template_lookup.get_template("unit_tests.mako")
+    struct_generator = RandomStructGenerator(spec)
+    try:
+        out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
+    except:
+        print("Warning! An exception occurred running unit tests template.")
+        print(exceptions.text_error_template().render())

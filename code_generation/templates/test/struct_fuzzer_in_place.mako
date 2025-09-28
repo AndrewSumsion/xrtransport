@@ -5,8 +5,10 @@
  * Any changes made to this file will be lost when regenerated.
  *
  * To modify this file, edit the corresponding template in:
- * code_generation/templates/test/struct_fuzzer.mako
+ * code_generation/templates/test/struct_fuzzer_in_place.mako
  */
+
+#include <catch2/catch_test_macros.hpp>
 
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
@@ -14,7 +16,6 @@
 
 #include <cassert>
 #include <cstring>
-#include <iostream>
 #include <vector>
 
 using namespace xrtransport;
@@ -104,13 +105,13 @@ public:
     }
 };
 
-int main() {
+TEST_CASE("In-place deserialization round-trip test", "[serialization][in-place]") {
     //
     // Struct initialization
     //
 <% plans = [struct_generator.generate_plan() for _ in range(1000)] %>
 % for i, plan in enumerate(plans):
-${struct_generator.init_struct(plan, f"item{i}", "    ")}
+    ${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % endfor
 
     //
@@ -144,8 +145,4 @@ ${struct_generator.zero_struct(plan, f"item{i}", "    ")}
 % for i, plan in enumerate(plans):
 ${struct_generator.compare_struct(plan, f"item{i}", "    ")}
 % endfor
-
-    std::cout << "Fuzzer passed" << std::endl;
-
-    return 0;
 }

@@ -6,24 +6,26 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(fuzzer fuzzer.cpp)
-add_executable(fuzzer_in_place fuzzer_in_place.cpp)
+# Add Catch2
+add_subdirectory(${CMAKE_SOURCE_DIR}/Catch2 ${CMAKE_BINARY_DIR}/Catch2)
 
-target_include_directories(fuzzer PRIVATE
+# Create single test executable
+add_executable(unit_tests fuzzer.cpp)
+
+target_include_directories(unit_tests PRIVATE
     ${CMAKE_SOURCE_DIR}/OpenXR-SDK/include
     ${CMAKE_SOURCE_DIR}/include
 )
 
-target_include_directories(fuzzer_in_place PRIVATE
-    ${CMAKE_SOURCE_DIR}/OpenXR-SDK/include
-    ${CMAKE_SOURCE_DIR}/include
+# Link with Catch2 and xrtransport_serialization
+target_link_libraries(unit_tests PRIVATE
+    Catch2::Catch2WithMain
+    xrtransport_serialization
 )
-
-# Link with the xrtransport_serialization static library
-target_link_libraries(fuzzer PRIVATE xrtransport_serialization)
-target_link_libraries(fuzzer_in_place PRIVATE xrtransport_serialization)
 
 if(MSVC)
-    target_compile_options(fuzzer PRIVATE /Zc:preprocessor)
-    target_compile_options(fuzzer_in_place PRIVATE /Zc:preprocessor)
+    target_compile_options(unit_tests PRIVATE /Zc:preprocessor)
 endif()
+
+# Enable CTest integration
+include(CTest)
