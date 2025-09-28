@@ -141,12 +141,6 @@ public:
     virtual ~DuplexStream() = default;
 };
 
-// Legacy type aliases for backward compatibility
-using NonBlockingStream = SyncStream;
-using ReadStream = SyncReadStream;
-using WriteStream = SyncWriteStream;
-using ReadWriteStream = SyncDuplexStream;
-
 // Concrete templated implementations
 
 // Concrete implementation of SyncStream

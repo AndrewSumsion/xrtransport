@@ -21,7 +21,7 @@ using namespace xrtransport;
 
 // ASIO-compatible stream buffer for testing
 // Effectively a simple dynamic-size FIFO queue
-class TestStreamBuffer : public ReadWriteStream {
+class TestStreamBuffer : public SyncDuplexStream {
 private:
     std::vector<char> buffer_;
     std::size_t read_pos_ = 0;
@@ -48,7 +48,7 @@ public:
         return buffer_.size() - read_pos_;
     }
 
-    // ReadStream interface
+    // SyncReadStream interface
     std::size_t read_some(const asio::mutable_buffer& buffers) override {
         asio::error_code ec;
         return read_some(buffers, ec);
@@ -73,7 +73,7 @@ public:
         return to_read;
     }
 
-    // WriteStream interface
+    // SyncWriteStream interface
     std::size_t write_some(const asio::const_buffer& buffers) override {
         asio::error_code ec;
         return write_some(buffers, ec);

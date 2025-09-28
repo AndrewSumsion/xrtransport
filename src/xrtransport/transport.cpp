@@ -7,7 +7,7 @@
 namespace xrtransport {
 
 // MessageLockOut implementation
-MessageLockOut::MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, WriteStream& stream)
+MessageLockOut::MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
     : lock(std::move(lock)), stream(stream) {
 }
 
@@ -16,7 +16,7 @@ MessageLockOut::~MessageLockOut() {
 }
 
 // MessageLockIn implementation
-MessageLockIn::MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, ReadStream& stream)
+MessageLockIn::MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
     : lock(std::move(lock)), stream(stream) {
 }
 
@@ -25,7 +25,7 @@ MessageLockIn::~MessageLockIn() {
 }
 
 // Transport implementation
-Transport::Transport(ReadWriteStream& stream)
+Transport::Transport(SyncDuplexStream& stream)
     : stream(stream), should_stop(false) {
 }
 

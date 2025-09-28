@@ -29,9 +29,9 @@ constexpr uint16_t CUSTOM_BASE = 100;
 // RAII stream lock classes
 struct MessageLockOut {
     const std::unique_lock<std::recursive_mutex> lock;
-    WriteStream& stream;
+    SyncWriteStream& stream;
 
-    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, WriteStream& stream);
+    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream);
     ~MessageLockOut(); // Release lock
     MessageLockOut(const MessageLockOut&) = delete;
     MessageLockOut& operator=(const MessageLockOut&) = delete;
@@ -41,9 +41,9 @@ struct MessageLockOut {
 
 struct MessageLockIn {
     const std::unique_lock<std::recursive_mutex> lock;
-    ReadStream& stream;
+    SyncReadStream& stream;
 
-    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, ReadStream& stream);
+    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream);
     ~MessageLockIn(); // Release lock
     MessageLockIn(const MessageLockIn&) = delete;
     MessageLockIn& operator=(const MessageLockIn&) = delete;
@@ -54,7 +54,7 @@ struct MessageLockIn {
 // Transport class for message-based communication
 class Transport {
 private:
-    ReadWriteStream& stream;
+    SyncDuplexStream& stream;
     mutable std::recursive_mutex stream_mutex;
     std::thread worker_thread;
     std::atomic<bool> should_stop;
@@ -67,7 +67,7 @@ private:
     void worker_loop();
 
 public:
-    explicit Transport(ReadWriteStream& stream);
+    explicit Transport(SyncDuplexStream& stream);
     ~Transport();
 
     // Disable copy/assignment

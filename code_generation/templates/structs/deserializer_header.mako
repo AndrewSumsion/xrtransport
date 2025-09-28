@@ -11,7 +11,7 @@
 <%namespace name="utils" file="utils.mako"/>
 
 <%def name="forward_deserializer(struct)">
-void deserialize(${struct.name}* s, ReadStream& in, bool in_place = false);
+void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place = false);
 </%def>
 
 <%def name="forward_cleaner(struct)">
@@ -47,8 +47,8 @@ ${forward_cleaner(struct)}
 
 // Struct deserializer lookup
 // Only to be used with OpenXR pNext structs
-using StructDeserializer = void(*)(XrBaseOutStructure*, ReadStream&, bool);
-#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, ReadStream&, bool)>(&deserialize)))
+using StructDeserializer = void(*)(XrBaseOutStructure*, SyncReadStream&, bool);
+#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, SyncReadStream&, bool)>(&deserialize)))
 
 StructDeserializer deserializer_lookup(XrStructureType struct_type);
 
@@ -65,7 +65,7 @@ std::size_t size_lookup(XrStructureType struct_type);
 
 // Generic deserializers
 template <typename T>
-void deserialize(T* x, ReadStream& in, bool in_place = false) {
+void deserialize(T* x, SyncReadStream& in, bool in_place = false) {
     static_assert(
         !std::is_class<T>::value,
         "T must be a supported type"
@@ -74,12 +74,12 @@ void deserialize(T* x, ReadStream& in, bool in_place = false) {
 }
 
 template <typename T>
-void deserialize(const T* x, ReadStream& in, bool in_place = false) {
+void deserialize(const T* x, SyncReadStream& in, bool in_place = false) {
     deserialize(const_cast<typename std::remove_const<T>::type*>(x), in, in_place);
 }
 
 template <typename T>
-void deserialize_array(T* x, std::size_t len, ReadStream& in, bool in_place = false) {
+void deserialize_array(T* x, std::size_t len, SyncReadStream& in, bool in_place = false) {
     for (std::size_t i = 0; i < len; i++) {
         deserialize(&x[i], in, in_place);
     }
@@ -87,7 +87,7 @@ void deserialize_array(T* x, std::size_t len, ReadStream& in, bool in_place = fa
 
 // For weird const-correctness reasons, we need a const and non-const version
 template <typename T>
-void deserialize_ptr(const T** x, ReadStream& in, bool in_place = false) {
+void deserialize_ptr(const T** x, SyncReadStream& in, bool in_place = false) {
     std::uint32_t len{};
     deserialize(&len, in, in_place);
     if (len) {
@@ -116,7 +116,7 @@ void deserialize_ptr(const T** x, ReadStream& in, bool in_place = false) {
 }
 
 template <typename T>
-void deserialize_ptr(T** x, ReadStream& in, bool in_place = false) {
+void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
     std::uint32_t len{};
     deserialize(&len, in, in_place);
     if (len) {
@@ -144,8 +144,8 @@ void deserialize_ptr(T** x, ReadStream& in, bool in_place = false) {
     }
 }
 
-void deserialize_xr(const void** p_s, ReadStream& in, bool in_place = false);
-void deserialize_xr(void** p_s, ReadStream& in, bool in_place = false);
+void deserialize_xr(const void** p_s, SyncReadStream& in, bool in_place = false);
+void deserialize_xr(void** p_s, SyncReadStream& in, bool in_place = false);
 
 // Generic cleaners
 template <typename T>

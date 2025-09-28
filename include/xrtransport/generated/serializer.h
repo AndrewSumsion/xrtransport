@@ -37,60 +37,60 @@ namespace xrtransport {
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
 
-void serialize(const XrCompositionLayerCubeKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerCubeKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerCubeKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerCubeKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
 
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, WriteStream& out);
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, WriteStream& out);
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthInfoKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 
 
-void serialize(const XrEventDataPerfSettingsEXT* s, WriteStream& out);
+void serialize(const XrEventDataPerfSettingsEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataPerfSettingsEXT* s, WriteStream& out);
+void serialize(const XrEventDataPerfSettingsEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
@@ -99,366 +99,366 @@ void serialize(const XrEventDataPerfSettingsEXT* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 
 
-void serialize(const XrCompositionLayerCylinderKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerCylinderKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerCylinderKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerCylinderKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 
 
-void serialize(const XrCompositionLayerEquirectKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerEquirectKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerEquirectKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerEquirectKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsLabelEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsLabelEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDebugUtilsLabelEXT* s, WriteStream& out);
+void serialize(const XrDebugUtilsLabelEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageOpenGLKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageOpenGLKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageOpenGLESKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageOpenGLESKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingVulkanKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageVulkanKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingVulkanKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageVulkanKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 
 
-void serialize(const XrGraphicsBindingMetalKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingMetalKHR* s, WriteStream& out);
+void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, WriteStream& out);
+void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, WriteStream& out);
+void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, WriteStream& out);
+void serialize(const XrEyeGazeSampleTimeEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, WriteStream& out);
+void serialize(const XrEyeGazeSampleTimeEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 
 
-void serialize(const XrVisibilityMaskKHR* s, WriteStream& out);
+void serialize(const XrVisibilityMaskKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, WriteStream& out);
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVisibilityMaskKHR* s, WriteStream& out);
+void serialize(const XrVisibilityMaskKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, WriteStream& out);
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, WriteStream& out);
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, WriteStream& out);
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, WriteStream& out);
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, WriteStream& out);
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXTX_overlay
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
@@ -469,48 +469,48 @@ void serialize(const XrCompositionLayerColorScaleBiasKHR* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 
 
-void serialize(const XrSpatialAnchorCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerImageLayoutFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerImageLayoutFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerAlphaBlendFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerAlphaBlendFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, WriteStream& out);
+void serialize(const XrViewConfigurationDepthRangeEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, WriteStream& out);
+void serialize(const XrViewConfigurationDepthRangeEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
@@ -519,297 +519,297 @@ void serialize(const XrViewConfigurationDepthRangeEXT* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
 
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, WriteStream& out);
+void serialize(const XrGraphicsBindingEGLMNDX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, WriteStream& out);
+void serialize(const XrGraphicsBindingEGLMNDX* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrHandTrackerCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, WriteStream& out);
+void serialize(const XrHandJointsLocateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointLocationEXT* s, WriteStream& out);
+void serialize(const XrHandJointLocationEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointVelocityEXT* s, WriteStream& out);
+void serialize(const XrHandJointVelocityEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointLocationsEXT* s, WriteStream& out);
+void serialize(const XrHandJointLocationsEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, WriteStream& out);
+void serialize(const XrHandJointVelocitiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrHandTrackerCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, WriteStream& out);
+void serialize(const XrHandJointsLocateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointLocationsEXT* s, WriteStream& out);
+void serialize(const XrHandJointLocationsEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, WriteStream& out);
+void serialize(const XrHandJointVelocitiesEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshUpdateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshIndexBufferMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshIndexBufferMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshVertexBufferMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshVertexBufferMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshVertexMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshVertexMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandPoseTypeInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshUpdateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandMeshMSFT* s, WriteStream& out);
+void serialize(const XrHandMeshMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, WriteStream& out);
+void serialize(const XrHandPoseTypeInfoMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 
 
-void serialize(const XrControllerModelKeyStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelKeyStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelNodePropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelPropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelNodeStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelKeyStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelKeyStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelNodePropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelPropertiesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelNodeStateMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrControllerModelStateMSFT* s, WriteStream& out);
+void serialize(const XrControllerModelStateMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
@@ -818,1041 +818,1041 @@ void serialize(const XrControllerModelStateMSFT* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, WriteStream& out);
+void serialize(const XrViewConfigurationViewFovEPIC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, WriteStream& out);
+void serialize(const XrViewConfigurationViewFovEPIC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, WriteStream& out);
+void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, WriteStream& out);
+void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, WriteStream& out);
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, WriteStream& out);
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, WriteStream& out);
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, WriteStream& out);
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, WriteStream& out);
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, WriteStream& out);
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 
 
-void serialize(const XrSwapchainStateBaseHeaderFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateBaseHeaderFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 
 
-void serialize(const XrCompositionLayerSecureContentFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSecureContentFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerSecureContentFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSecureContentFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 
 
-void serialize(const XrBodyJointLocationFB* s, WriteStream& out);
+void serialize(const XrBodyJointLocationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonJointFB* s, WriteStream& out);
+void serialize(const XrBodySkeletonJointFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonFB* s, WriteStream& out);
+void serialize(const XrBodySkeletonFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsFB* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsFB* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonFB* s, WriteStream& out);
+void serialize(const XrBodySkeletonFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
 
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, WriteStream& out);
+void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, WriteStream& out);
+void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, WriteStream& out);
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, WriteStream& out);
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, WriteStream& out);
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, WriteStream& out);
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 
 
-void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, WriteStream& out);
+void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
 
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, WriteStream& out);
+void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, WriteStream& out);
+void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, WriteStream& out);
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerEquirect2KHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, WriteStream& out);
+void serialize(const XrCompositionLayerEquirect2KHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 
 
-void serialize(const XrUuidMSFT* s, WriteStream& out);
+void serialize(const XrUuidMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneObserverCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, WriteStream& out);
+void serialize(const XrNewSceneComputeInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, WriteStream& out);
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneSphereBoundMSFT* s, WriteStream& out);
+void serialize(const XrSceneSphereBoundMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneOrientedBoxBoundMSFT* s, WriteStream& out);
+void serialize(const XrSceneOrientedBoxBoundMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneFrustumBoundMSFT* s, WriteStream& out);
+void serialize(const XrSceneFrustumBoundMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneBoundsMSFT* s, WriteStream& out);
+void serialize(const XrSceneBoundsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentLocationMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentLocationMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentLocationsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObjectMSFT* s, WriteStream& out);
+void serialize(const XrSceneObjectMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObjectsMSFT* s, WriteStream& out);
+void serialize(const XrSceneObjectsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrScenePlaneMSFT* s, WriteStream& out);
+void serialize(const XrScenePlaneMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrScenePlanesMSFT* s, WriteStream& out);
+void serialize(const XrScenePlanesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshesMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshBuffersMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshVertexBufferMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneObserverCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, WriteStream& out);
+void serialize(const XrNewSceneComputeInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, WriteStream& out);
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentLocationsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObjectsMSFT* s, WriteStream& out);
+void serialize(const XrSceneObjectsMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrScenePlanesMSFT* s, WriteStream& out);
+void serialize(const XrScenePlanesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, WriteStream& out);
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshesMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshBuffersMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshVertexBufferMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, WriteStream& out);
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDeserializeSceneFragmentMSFT* s, WriteStream& out);
+void serialize(const XrDeserializeSceneFragmentMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneDeserializeInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, WriteStream& out);
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, WriteStream& out);
+void serialize(const XrSceneDeserializeInfoMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, WriteStream& out);
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, WriteStream& out);
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, WriteStream& out);
+void serialize(const XrViveTrackerPathsHTCX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, WriteStream& out);
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, WriteStream& out);
+void serialize(const XrViveTrackerPathsHTCX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, WriteStream& out);
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionsHTC* s, WriteStream& out);
+void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrFacialTrackerCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrFacialTrackerCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionsHTC* s, WriteStream& out);
+void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemColorSpacePropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemColorSpacePropertiesFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 
 
-void serialize(const XrVector4sFB* s, WriteStream& out);
+void serialize(const XrVector4sFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingMeshFB* s, WriteStream& out);
+void serialize(const XrHandTrackingMeshFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingScaleFB* s, WriteStream& out);
+void serialize(const XrHandTrackingScaleFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingMeshFB* s, WriteStream& out);
+void serialize(const XrHandTrackingMeshFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingScaleFB* s, WriteStream& out);
+void serialize(const XrHandTrackingScaleFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 
 
-void serialize(const XrHandTrackingAimStateFB* s, WriteStream& out);
+void serialize(const XrHandTrackingAimStateFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingAimStateFB* s, WriteStream& out);
+void serialize(const XrHandTrackingAimStateFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 
 
-void serialize(const XrHandCapsuleFB* s, WriteStream& out);
+void serialize(const XrHandCapsuleFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, WriteStream& out);
+void serialize(const XrHandTrackingCapsulesStateFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, WriteStream& out);
+void serialize(const XrHandTrackingCapsulesStateFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentStatusFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentStatusFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentStatusFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentStatusFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFoveationProfileCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, WriteStream& out);
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateFoveationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFoveationProfileCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, WriteStream& out);
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateFoveationFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
 
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrKeyboardTrackingDescriptionFB* s, WriteStream& out);
+void serialize(const XrKeyboardTrackingDescriptionFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, WriteStream& out);
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, WriteStream& out);
+void serialize(const XrKeyboardTrackingQueryFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, WriteStream& out);
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, WriteStream& out);
+void serialize(const XrKeyboardTrackingQueryFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, WriteStream& out);
+void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, WriteStream& out);
+void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemPassthroughPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, WriteStream& out);
+void serialize(const XrSystemPassthroughProperties2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, WriteStream& out);
+void serialize(const XrPassthroughCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrPassthroughLayerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerPassthroughFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerPassthroughFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, WriteStream& out);
+void serialize(const XrGeometryInstanceCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, WriteStream& out);
+void serialize(const XrGeometryInstanceTransformFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughStyleFB* s, WriteStream& out);
+void serialize(const XrPassthroughStyleFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, WriteStream& out);
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, WriteStream& out);
+void serialize(const XrEventDataPassthroughStateChangedFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemPassthroughPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, WriteStream& out);
+void serialize(const XrPassthroughCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrPassthroughLayerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerPassthroughFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerPassthroughFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, WriteStream& out);
+void serialize(const XrGeometryInstanceCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, WriteStream& out);
+void serialize(const XrGeometryInstanceTransformFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, WriteStream& out);
+void serialize(const XrSystemPassthroughProperties2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughStyleFB* s, WriteStream& out);
+void serialize(const XrPassthroughStyleFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, WriteStream& out);
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, WriteStream& out);
+void serialize(const XrEventDataPassthroughStateChangedFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 
 
-void serialize(const XrRenderModelPathInfoFB* s, WriteStream& out);
+void serialize(const XrRenderModelPathInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelPropertiesFB* s, WriteStream& out);
+void serialize(const XrRenderModelPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelBufferFB* s, WriteStream& out);
+void serialize(const XrRenderModelBufferFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, WriteStream& out);
+void serialize(const XrRenderModelLoadInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemRenderModelPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, WriteStream& out);
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelPathInfoFB* s, WriteStream& out);
+void serialize(const XrRenderModelPathInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelPropertiesFB* s, WriteStream& out);
+void serialize(const XrRenderModelPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelBufferFB* s, WriteStream& out);
+void serialize(const XrRenderModelBufferFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, WriteStream& out);
+void serialize(const XrRenderModelLoadInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemRenderModelPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, WriteStream& out);
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
 
 
-void serialize(const XrBindingModificationsKHR* s, WriteStream& out);
+void serialize(const XrBindingModificationsKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBindingModificationBaseHeaderKHR* s, WriteStream& out);
+void serialize(const XrBindingModificationBaseHeaderKHR* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBindingModificationsKHR* s, WriteStream& out);
+void serialize(const XrBindingModificationsKHR* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, WriteStream& out);
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, WriteStream& out);
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, WriteStream& out);
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, WriteStream& out);
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, WriteStream& out);
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, WriteStream& out);
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthTestVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthTestVARJO* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
@@ -1861,32 +1861,32 @@ void serialize(const XrCompositionLayerDepthTestVARJO* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, WriteStream& out);
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, WriteStream& out);
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, WriteStream& out);
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, WriteStream& out);
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, WriteStream& out);
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, WriteStream& out);
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
@@ -1895,460 +1895,460 @@ void serialize(const XrMarkerSpaceCreateInfoVARJO* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
 
 
-void serialize(const XrFrameEndInfoML* s, WriteStream& out);
+void serialize(const XrFrameEndInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameEndInfoML* s, WriteStream& out);
+void serialize(const XrFrameEndInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
 
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, WriteStream& out);
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, WriteStream& out);
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 
 
-void serialize(const XrCoordinateSpaceCreateInfoML* s, WriteStream& out);
+void serialize(const XrCoordinateSpaceCreateInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, WriteStream& out);
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorArucoInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorSizeInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorStateML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorStateML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, WriteStream& out);
+void serialize(const XrMarkerSpaceCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, WriteStream& out);
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorArucoInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorSizeInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerDetectorStateML* s, WriteStream& out);
+void serialize(const XrMarkerDetectorStateML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, WriteStream& out);
+void serialize(const XrMarkerSpaceCreateInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 
 
-void serialize(const XrLocalizationMapML* s, WriteStream& out);
+void serialize(const XrLocalizationMapML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataLocalizationChangedML* s, WriteStream& out);
+void serialize(const XrEventDataLocalizationChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, WriteStream& out);
+void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, WriteStream& out);
+void serialize(const XrMapLocalizationRequestInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, WriteStream& out);
+void serialize(const XrLocalizationMapImportInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, WriteStream& out);
+void serialize(const XrLocalizationEnableEventsInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationMapML* s, WriteStream& out);
+void serialize(const XrLocalizationMapML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataLocalizationChangedML* s, WriteStream& out);
+void serialize(const XrEventDataLocalizationChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, WriteStream& out);
+void serialize(const XrMapLocalizationRequestInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, WriteStream& out);
+void serialize(const XrLocalizationMapImportInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, WriteStream& out);
+void serialize(const XrLocalizationEnableEventsInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 
 
-void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, WriteStream& out);
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorStateML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorStateML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, WriteStream& out);
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorStateML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorStateML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCompletionResultML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCompletionResultML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, WriteStream& out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, WriteStream& out);
+void serialize(const XrEventDataHeadsetFitChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, WriteStream& out);
+void serialize(const XrEventDataEyeCalibrationChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, WriteStream& out);
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, WriteStream& out);
+void serialize(const XrEventDataHeadsetFitChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, WriteStream& out);
+void serialize(const XrEventDataEyeCalibrationChangedML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, WriteStream& out);
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 
 
-void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, WriteStream& out);
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 
 
-void serialize(const XrSceneMarkerMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkersMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkersMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkerQRCodeMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerQRCodeMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerQRCodesMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkersMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkersMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, WriteStream& out);
+void serialize(const XrSceneMarkerQRCodesMSFT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
@@ -2357,129 +2357,129 @@ void serialize(const XrSceneMarkerQRCodesMSFT* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 
 
-void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, WriteStream& out);
+void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceQueryInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceUuidFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceQueryResultFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryResultFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceQueryResultsFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryResultsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceQueryInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceQueryResultsFB* s, WriteStream& out);
+void serialize(const XrSpaceQueryResultsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceUuidFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceComponentFilterInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 
 
-void serialize(const XrSpaceSaveInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceSaveInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceEraseInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceEraseInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceSaveInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceSaveInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceEraseInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceEraseInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
@@ -2488,967 +2488,967 @@ void serialize(const XrEventDataSpaceEraseCompleteFB* s, WriteStream& out);
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, WriteStream& out);
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, WriteStream& out);
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, WriteStream& out);
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 
 
-void serialize(const XrSpaceShareInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceShareInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceShareCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceShareInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceShareInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceShareCompleteFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
 
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_space_warp
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, WriteStream& out);
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, WriteStream& out);
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 
 
-void serialize(const XrOffset3DfFB* s, WriteStream& out);
+void serialize(const XrOffset3DfFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRect3DfFB* s, WriteStream& out);
+void serialize(const XrRect3DfFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSemanticLabelsFB* s, WriteStream& out);
+void serialize(const XrSemanticLabelsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRoomLayoutFB* s, WriteStream& out);
+void serialize(const XrRoomLayoutFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBoundary2DFB* s, WriteStream& out);
+void serialize(const XrBoundary2DFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, WriteStream& out);
+void serialize(const XrSemanticLabelsSupportInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSemanticLabelsFB* s, WriteStream& out);
+void serialize(const XrSemanticLabelsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRoomLayoutFB* s, WriteStream& out);
+void serialize(const XrRoomLayoutFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBoundary2DFB* s, WriteStream& out);
+void serialize(const XrBoundary2DFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, WriteStream& out);
+void serialize(const XrSemanticLabelsSupportInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 
 
-void serialize(const XrDigitalLensControlALMALENCE* s, WriteStream& out);
+void serialize(const XrDigitalLensControlALMALENCE* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, WriteStream& out);
+void serialize(const XrSceneCaptureRequestInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, WriteStream& out);
+void serialize(const XrSceneCaptureRequestInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 
 
-void serialize(const XrSpaceContainerFB* s, WriteStream& out);
+void serialize(const XrSpaceContainerFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceContainerFB* s, WriteStream& out);
+void serialize(const XrSpaceContainerFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, WriteStream& out);
+void serialize(const XrFoveationEyeTrackedStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, WriteStream& out);
+void serialize(const XrFoveationEyeTrackedStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFaceTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionInfoFB* s, WriteStream& out);
+void serialize(const XrFaceExpressionInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionStatusFB* s, WriteStream& out);
+void serialize(const XrFaceExpressionStatusFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, WriteStream& out);
+void serialize(const XrFaceExpressionWeightsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrFaceTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionInfoFB* s, WriteStream& out);
+void serialize(const XrFaceExpressionInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, WriteStream& out);
+void serialize(const XrFaceExpressionWeightsFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 
 
-void serialize(const XrEyeGazeFB* s, WriteStream& out);
+void serialize(const XrEyeGazeFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrEyeTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazesInfoFB* s, WriteStream& out);
+void serialize(const XrEyeGazesInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazesFB* s, WriteStream& out);
+void serialize(const XrEyeGazesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, WriteStream& out);
+void serialize(const XrEyeTrackerCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazesInfoFB* s, WriteStream& out);
+void serialize(const XrEyeGazesInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEyeGazesFB* s, WriteStream& out);
+void serialize(const XrEyeGazesFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, WriteStream& out);
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, WriteStream& out);
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, WriteStream& out);
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 
 
-void serialize(const XrCompositionLayerSettingsFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSettingsFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerSettingsFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerSettingsFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 
 
-void serialize(const XrHapticPcmVibrationFB* s, WriteStream& out);
+void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, WriteStream& out);
+void serialize(const XrDevicePcmSampleRateStateFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHapticPcmVibrationFB* s, WriteStream& out);
+void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, WriteStream& out);
+void serialize(const XrDevicePcmSampleRateStateFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, WriteStream& out);
+void serialize(const XrFrameSynthesisInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, WriteStream& out);
+void serialize(const XrFrameSynthesisConfigViewEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, WriteStream& out);
+void serialize(const XrFrameSynthesisInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, WriteStream& out);
+void serialize(const XrFrameSynthesisConfigViewEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 
 
-void serialize(const XrCompositionLayerDepthTestFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthTestFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerDepthTestFB* s, WriteStream& out);
+void serialize(const XrCompositionLayerDepthTestFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
 
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, WriteStream& out);
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, WriteStream& out);
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_local_dimming
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 
 
-void serialize(const XrPassthroughPreferencesMETA* s, WriteStream& out);
+void serialize(const XrPassthroughPreferencesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughPreferencesMETA* s, WriteStream& out);
+void serialize(const XrPassthroughPreferencesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, WriteStream& out);
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, WriteStream& out);
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 
 
-void serialize(const XrExternalCameraIntrinsicsOCULUS* s, WriteStream& out);
+void serialize(const XrExternalCameraIntrinsicsOCULUS* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExternalCameraExtrinsicsOCULUS* s, WriteStream& out);
+void serialize(const XrExternalCameraExtrinsicsOCULUS* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExternalCameraOCULUS* s, WriteStream& out);
+void serialize(const XrExternalCameraOCULUS* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExternalCameraOCULUS* s, WriteStream& out);
+void serialize(const XrExternalCameraOCULUS* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, WriteStream& out);
+void serialize(const XrPerformanceMetricsStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, WriteStream& out);
+void serialize(const XrPerformanceMetricsCounterMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, WriteStream& out);
+void serialize(const XrPerformanceMetricsStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, WriteStream& out);
+void serialize(const XrPerformanceMetricsCounterMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceListSaveInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceListSaveInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, WriteStream& out);
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 
 
-void serialize(const XrSpaceUserCreateInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceUserCreateInfoFB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceUserCreateInfoFB* s, WriteStream& out);
+void serialize(const XrSpaceUserCreateInfoFB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
 
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_headset_id
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, WriteStream& out);
+void serialize(const XrRecommendedLayerResolutionMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, WriteStream& out);
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, WriteStream& out);
+void serialize(const XrRecommendedLayerResolutionMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, WriteStream& out);
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 
 
-void serialize(const XrPassthroughColorLutDataMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorLutDataMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapLutMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapLutMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, WriteStream& out);
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, WriteStream& out);
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, WriteStream& out);
+void serialize(const XrSpaceTriangleMeshMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, WriteStream& out);
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, WriteStream& out);
+void serialize(const XrSpaceTriangleMeshMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, WriteStream& out);
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, WriteStream& out);
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, WriteStream& out);
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, WriteStream& out);
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, WriteStream& out);
+void serialize(const XrSystemFaceTrackingProperties2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, WriteStream& out);
+void serialize(const XrFaceTrackerCreateInfo2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionInfo2FB* s, WriteStream& out);
+void serialize(const XrFaceExpressionInfo2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, WriteStream& out);
+void serialize(const XrFaceExpressionWeights2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, WriteStream& out);
+void serialize(const XrSystemFaceTrackingProperties2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, WriteStream& out);
+void serialize(const XrFaceTrackerCreateInfo2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionInfo2FB* s, WriteStream& out);
+void serialize(const XrFaceExpressionInfo2FB* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, WriteStream& out);
+void serialize(const XrFaceExpressionWeights2FB* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, WriteStream& out);
+void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrShareSpacesInfoMETA* s, WriteStream& out);
+void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrShareSpacesInfoMETA* s, WriteStream& out);
+void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageViewMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageViewMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthImageMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, WriteStream& out);
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
@@ -3457,1574 +3457,1574 @@ void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, WriteStream& out
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrPassthroughCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorHTC* s, WriteStream& out);
+void serialize(const XrPassthroughColorHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, WriteStream& out);
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, WriteStream& out);
+void serialize(const XrCompositionLayerPassthroughHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrPassthroughCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughColorHTC* s, WriteStream& out);
+void serialize(const XrPassthroughColorHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, WriteStream& out);
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, WriteStream& out);
+void serialize(const XrCompositionLayerPassthroughHTC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 
 
-void serialize(const XrFoveationApplyInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationApplyInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationConfigurationHTC* s, WriteStream& out);
+void serialize(const XrFoveationConfigurationHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationDynamicModeInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationCustomModeInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationApplyInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationApplyInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationDynamicModeInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, WriteStream& out);
+void serialize(const XrFoveationCustomModeInfoHTC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemAnchorPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorNameHTC* s, WriteStream& out);
+void serialize(const XrSpatialAnchorNameHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemAnchorPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsHTC* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationHTC* s, WriteStream& out);
+void serialize(const XrBodyJointLocationHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonHTC* s, WriteStream& out);
+void serialize(const XrBodySkeletonHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsHTC* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonHTC* s, WriteStream& out);
+void serialize(const XrBodySkeletonHTC* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, WriteStream& out);
+void serialize(const XrActiveActionSetPrioritiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActiveActionSetPriorityEXT* s, WriteStream& out);
+void serialize(const XrActiveActionSetPriorityEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, WriteStream& out);
+void serialize(const XrActiveActionSetPrioritiesEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, WriteStream& out);
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, WriteStream& out);
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, WriteStream& out);
+void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, WriteStream& out);
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, WriteStream& out);
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsBD* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationBD* s, WriteStream& out);
+void serialize(const XrBodyJointLocationBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, WriteStream& out);
+void serialize(const XrBodyTrackerCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, WriteStream& out);
+void serialize(const XrBodyJointsLocateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodyJointLocationsBD* s, WriteStream& out);
+void serialize(const XrBodyJointLocationsBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderStartInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, WriteStream& out);
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, WriteStream& out);
+void serialize(const XrEventDataSenseDataUpdatedBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataQueryInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, WriteStream& out);
+void serialize(const XrSenseDataQueryCompletionBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, WriteStream& out);
+void serialize(const XrQueriedSenseDataGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrQueriedSenseDataBD* s, WriteStream& out);
+void serialize(const XrQueriedSenseDataBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityStateBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityStateBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, WriteStream& out);
+void serialize(const XrSenseDataFilterUuidBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, WriteStream& out);
+void serialize(const XrSenseDataFilterSemanticBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, WriteStream& out);
+void serialize(const XrAnchorSpaceCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderStartInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, WriteStream& out);
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, WriteStream& out);
+void serialize(const XrEventDataSenseDataUpdatedBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, WriteStream& out);
+void serialize(const XrSenseDataQueryInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, WriteStream& out);
+void serialize(const XrSenseDataQueryCompletionBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, WriteStream& out);
+void serialize(const XrSenseDataFilterUuidBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, WriteStream& out);
+void serialize(const XrSenseDataFilterSemanticBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, WriteStream& out);
+void serialize(const XrQueriedSenseDataGetInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrQueriedSenseDataBD* s, WriteStream& out);
+void serialize(const XrQueriedSenseDataBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityStateBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityStateBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, WriteStream& out);
+void serialize(const XrAnchorSpaceCreateInfoBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorPersistInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorPersistInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorShareInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, WriteStream& out);
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, WriteStream& out);
+void serialize(const XrSpatialAnchorShareInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, WriteStream& out);
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialScenePropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCaptureInfoBD* s, WriteStream& out);
+void serialize(const XrSceneCaptureInfoBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialScenePropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSceneCaptureInfoBD* s, WriteStream& out);
+void serialize(const XrSceneCaptureInfoBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, WriteStream& out);
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, WriteStream& out);
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
 
 
-void serialize(const XrFuturePollResultProgressBD* s, WriteStream& out);
+void serialize(const XrFuturePollResultProgressBD* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFuturePollResultProgressBD* s, WriteStream& out);
+void serialize(const XrFuturePollResultProgressBD* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_BD_future_progress
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, WriteStream& out);
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, WriteStream& out);
+void serialize(const XrHandTrackingDataSourceStateEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, WriteStream& out);
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, WriteStream& out);
+void serialize(const XrHandTrackingDataSourceStateEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorGetInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorLocationEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorLocationsEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorGetInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorLocationsEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorLocationEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, WriteStream& out);
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 
 
-void serialize(const XrFutureCancelInfoEXT* s, WriteStream& out);
+void serialize(const XrFutureCancelInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFuturePollInfoEXT* s, WriteStream& out);
+void serialize(const XrFuturePollInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFutureCompletionBaseHeaderEXT* s, WriteStream& out);
+void serialize(const XrFutureCompletionBaseHeaderEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFutureCompletionEXT* s, WriteStream& out);
+void serialize(const XrFutureCompletionEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFuturePollResultEXT* s, WriteStream& out);
+void serialize(const XrFuturePollResultEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFutureCancelInfoEXT* s, WriteStream& out);
+void serialize(const XrFutureCancelInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFuturePollInfoEXT* s, WriteStream& out);
+void serialize(const XrFuturePollInfoEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFutureCompletionEXT* s, WriteStream& out);
+void serialize(const XrFutureCompletionEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFuturePollResultEXT* s, WriteStream& out);
+void serialize(const XrFuturePollResultEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
 
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, WriteStream& out);
+void serialize(const XrEventDataUserPresenceChangedEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemUserPresencePropertiesEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, WriteStream& out);
+void serialize(const XrEventDataUserPresenceChangedEXT* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, WriteStream& out);
+void serialize(const XrSystemUserPresencePropertiesEXT* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_EXT_user_presence
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 
 
-void serialize(const XrSystemNotificationsSetInfoML* s, WriteStream& out);
+void serialize(const XrSystemNotificationsSetInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemNotificationsSetInfoML* s, WriteStream& out);
+void serialize(const XrSystemNotificationsSetInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockStateML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockStateML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshStateRequestInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, WriteStream& out);
+void serialize(const XrWorldMeshStateRequestCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferSizeML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockRequestML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshGetInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshGetInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, WriteStream& out);
+void serialize(const XrWorldMeshRequestCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshStateRequestInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockStateML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockStateML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, WriteStream& out);
+void serialize(const XrWorldMeshStateRequestCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferSizeML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBufferML* s, WriteStream& out);
+void serialize(const XrWorldMeshBufferML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockRequestML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshGetInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshGetInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshBlockML* s, WriteStream& out);
+void serialize(const XrWorldMeshBlockML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, WriteStream& out);
+void serialize(const XrWorldMeshRequestCompletionML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, WriteStream& out);
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, WriteStream& out);
+void serialize(const XrSystemFacialExpressionPropertiesML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, WriteStream& out);
+void serialize(const XrFacialExpressionClientCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, WriteStream& out);
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, WriteStream& out);
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, WriteStream& out);
+void serialize(const XrSystemFacialExpressionPropertiesML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, WriteStream& out);
+void serialize(const XrFacialExpressionClientCreateInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, WriteStream& out);
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, WriteStream& out);
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, WriteStream& out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, WriteStream& out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, WriteStream& out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, WriteStream& out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, WriteStream& out);
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, WriteStream& out);
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, WriteStream& out);
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, WriteStream& out);
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, WriteStream& out);
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, WriteStream& out);
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, WriteStream& out);
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncWriteStream& out);
 
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
 
-void serialize(const XrActionCreateInfo* s, WriteStream& out);
+void serialize(const XrActionCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionSetCreateInfo* s, WriteStream& out);
+void serialize(const XrActionSetCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionSpaceCreateInfo* s, WriteStream& out);
+void serialize(const XrActionSpaceCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionStateBoolean* s, WriteStream& out);
+void serialize(const XrActionStateBoolean* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionStateFloat* s, WriteStream& out);
+void serialize(const XrActionStateFloat* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionStateGetInfo* s, WriteStream& out);
+void serialize(const XrActionStateGetInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionStatePose* s, WriteStream& out);
+void serialize(const XrActionStatePose* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionStateVector2f* s, WriteStream& out);
+void serialize(const XrActionStateVector2f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionSuggestedBinding* s, WriteStream& out);
+void serialize(const XrActionSuggestedBinding* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActionsSyncInfo* s, WriteStream& out);
+void serialize(const XrActionsSyncInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrActiveActionSet* s, WriteStream& out);
+void serialize(const XrActiveActionSet* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrApiLayerProperties* s, WriteStream& out);
+void serialize(const XrApiLayerProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrApplicationInfo* s, WriteStream& out);
+void serialize(const XrApplicationInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBodySkeletonJointHTC* s, WriteStream& out);
+void serialize(const XrBodySkeletonJointHTC* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBoundSourcesForActionEnumerateInfo* s, WriteStream& out);
+void serialize(const XrBoundSourcesForActionEnumerateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrBoxf* s, WriteStream& out);
+void serialize(const XrBoxf* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColor3f* s, WriteStream& out);
+void serialize(const XrColor3f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrColor4f* s, WriteStream& out);
+void serialize(const XrColor4f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerBaseHeader* s, WriteStream& out);
+void serialize(const XrCompositionLayerBaseHeader* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerProjection* s, WriteStream& out);
+void serialize(const XrCompositionLayerProjection* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerProjectionView* s, WriteStream& out);
+void serialize(const XrCompositionLayerProjectionView* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrCompositionLayerQuad* s, WriteStream& out);
+void serialize(const XrCompositionLayerQuad* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataBaseHeader* s, WriteStream& out);
+void serialize(const XrEventDataBaseHeader* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataBuffer* s, WriteStream& out);
+void serialize(const XrEventDataBuffer* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataEventsLost* s, WriteStream& out);
+void serialize(const XrEventDataEventsLost* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataInstanceLossPending* s, WriteStream& out);
+void serialize(const XrEventDataInstanceLossPending* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataInteractionProfileChanged* s, WriteStream& out);
+void serialize(const XrEventDataInteractionProfileChanged* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataReferenceSpaceChangePending* s, WriteStream& out);
+void serialize(const XrEventDataReferenceSpaceChangePending* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrEventDataSessionStateChanged* s, WriteStream& out);
+void serialize(const XrEventDataSessionStateChanged* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExtensionProperties* s, WriteStream& out);
+void serialize(const XrExtensionProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExtent2Df* s, WriteStream& out);
+void serialize(const XrExtent2Df* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExtent2Di* s, WriteStream& out);
+void serialize(const XrExtent2Di* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrExtent3Df* s, WriteStream& out);
+void serialize(const XrExtent3Df* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFovf* s, WriteStream& out);
+void serialize(const XrFovf* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameBeginInfo* s, WriteStream& out);
+void serialize(const XrFrameBeginInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameEndInfo* s, WriteStream& out);
+void serialize(const XrFrameEndInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameState* s, WriteStream& out);
+void serialize(const XrFrameState* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrameWaitInfo* s, WriteStream& out);
+void serialize(const XrFrameWaitInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrFrustumf* s, WriteStream& out);
+void serialize(const XrFrustumf* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHapticActionInfo* s, WriteStream& out);
+void serialize(const XrHapticActionInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHapticBaseHeader* s, WriteStream& out);
+void serialize(const XrHapticBaseHeader* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrHapticVibration* s, WriteStream& out);
+void serialize(const XrHapticVibration* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInputSourceLocalizedNameGetInfo* s, WriteStream& out);
+void serialize(const XrInputSourceLocalizedNameGetInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInstanceCreateInfo* s, WriteStream& out);
+void serialize(const XrInstanceCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInstanceProperties* s, WriteStream& out);
+void serialize(const XrInstanceProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInteractionProfileState* s, WriteStream& out);
+void serialize(const XrInteractionProfileState* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrInteractionProfileSuggestedBinding* s, WriteStream& out);
+void serialize(const XrInteractionProfileSuggestedBinding* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrOffset2Df* s, WriteStream& out);
+void serialize(const XrOffset2Df* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrOffset2Di* s, WriteStream& out);
+void serialize(const XrOffset2Di* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrPosef* s, WriteStream& out);
+void serialize(const XrPosef* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrQuaternionf* s, WriteStream& out);
+void serialize(const XrQuaternionf* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRect2Df* s, WriteStream& out);
+void serialize(const XrRect2Df* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrRect2Di* s, WriteStream& out);
+void serialize(const XrRect2Di* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrReferenceSpaceCreateInfo* s, WriteStream& out);
+void serialize(const XrReferenceSpaceCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSessionActionSetsAttachInfo* s, WriteStream& out);
+void serialize(const XrSessionActionSetsAttachInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSessionBeginInfo* s, WriteStream& out);
+void serialize(const XrSessionBeginInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSessionCreateInfo* s, WriteStream& out);
+void serialize(const XrSessionCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceLocation* s, WriteStream& out);
+void serialize(const XrSpaceLocation* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceLocationData* s, WriteStream& out);
+void serialize(const XrSpaceLocationData* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceLocations* s, WriteStream& out);
+void serialize(const XrSpaceLocations* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceVelocities* s, WriteStream& out);
+void serialize(const XrSpaceVelocities* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceVelocity* s, WriteStream& out);
+void serialize(const XrSpaceVelocity* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpaceVelocityData* s, WriteStream& out);
+void serialize(const XrSpaceVelocityData* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpacesLocateInfo* s, WriteStream& out);
+void serialize(const XrSpacesLocateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSpheref* s, WriteStream& out);
+void serialize(const XrSpheref* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainCreateInfo* s, WriteStream& out);
+void serialize(const XrSwapchainCreateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageAcquireInfo* s, WriteStream& out);
+void serialize(const XrSwapchainImageAcquireInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageBaseHeader* s, WriteStream& out);
+void serialize(const XrSwapchainImageBaseHeader* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageReleaseInfo* s, WriteStream& out);
+void serialize(const XrSwapchainImageReleaseInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainImageWaitInfo* s, WriteStream& out);
+void serialize(const XrSwapchainImageWaitInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSwapchainSubImage* s, WriteStream& out);
+void serialize(const XrSwapchainSubImage* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemGetInfo* s, WriteStream& out);
+void serialize(const XrSystemGetInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemGraphicsProperties* s, WriteStream& out);
+void serialize(const XrSystemGraphicsProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemProperties* s, WriteStream& out);
+void serialize(const XrSystemProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrSystemTrackingProperties* s, WriteStream& out);
+void serialize(const XrSystemTrackingProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrUuid* s, WriteStream& out);
+void serialize(const XrUuid* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVector2f* s, WriteStream& out);
+void serialize(const XrVector2f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVector3f* s, WriteStream& out);
+void serialize(const XrVector3f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrVector4f* s, WriteStream& out);
+void serialize(const XrVector4f* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrView* s, WriteStream& out);
+void serialize(const XrView* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewConfigurationProperties* s, WriteStream& out);
+void serialize(const XrViewConfigurationProperties* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewConfigurationView* s, WriteStream& out);
+void serialize(const XrViewConfigurationView* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewLocateInfo* s, WriteStream& out);
+void serialize(const XrViewLocateInfo* s, SyncWriteStream& out);
 
 
 
 
-void serialize(const XrViewState* s, WriteStream& out);
+void serialize(const XrViewState* s, SyncWriteStream& out);
 
 
 
 
 // Only to be used with OpenXR pNext structs
-using StructSerializer = void(*)(const XrBaseInStructure*, WriteStream&);
-#define STRUCT_SERIALIZER_PTR(t) (reinterpret_cast<StructSerializer>(static_cast<void(*)(const t*, WriteStream&)>(&serialize)))
+using StructSerializer = void(*)(const XrBaseInStructure*, SyncWriteStream&);
+#define STRUCT_SERIALIZER_PTR(t) (reinterpret_cast<StructSerializer>(static_cast<void(*)(const t*, SyncWriteStream&)>(&serialize)))
 
 extern std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table;
 
@@ -5032,7 +5032,7 @@ StructSerializer serializer_lookup(XrStructureType struct_type);
 
 // Generic serializers
 template <typename T>
-void serialize(const T* x, WriteStream& out) {
+void serialize(const T* x, SyncWriteStream& out) {
     static_assert(
         !std::is_class<T>::value,
         "T must be a supported type"
@@ -5041,14 +5041,14 @@ void serialize(const T* x, WriteStream& out) {
 }
 
 template <typename T>
-void serialize_array(const T* x, std::size_t len, WriteStream& out) {
+void serialize_array(const T* x, std::size_t len, SyncWriteStream& out) {
     for (std::size_t i = 0; i < len; i++) {
         serialize(&x[i], out);
     }
 }
 
 template <typename T>
-void serialize_ptr(const T* x, std::size_t len, WriteStream& out) {
+void serialize_ptr(const T* x, std::size_t len, SyncWriteStream& out) {
     std::uint32_t marker = x != nullptr ? len : 0;
     serialize(&marker, out);
     if (marker) {
@@ -5056,7 +5056,7 @@ void serialize_ptr(const T* x, std::size_t len, WriteStream& out) {
     }
 }
 
-void serialize_xr(const void* untyped, WriteStream& out);
+void serialize_xr(const void* untyped, SyncWriteStream& out);
 
 } // namespace xrtransport
 
