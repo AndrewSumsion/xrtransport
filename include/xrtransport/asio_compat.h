@@ -28,9 +28,9 @@ class SyncStream {
 public:
     virtual ~SyncStream() = default;
 
-    // Set or get blocking mode
-    virtual void blocking_mode(bool mode) = 0;
-    virtual bool blocking_mode() const = 0;
+    // Set or get non-blocking mode
+    virtual void non_blocking(bool mode) = 0;
+    virtual bool non_blocking() const = 0;
 
     virtual std::size_t available() = 0;
     virtual std::size_t available(asio::error_code& ec) = 0;
@@ -152,12 +152,12 @@ private:
 public:
     explicit SyncStreamImpl(Stream& stream) : stream_(stream) {}
 
-    void blocking_mode(bool mode) override {
-        stream_.blocking_mode(mode);
+    void non_blocking(bool mode) override {
+        stream_.non_blocking(mode);
     }
 
-    bool blocking_mode() const override {
-        return stream_.blocking_mode();
+    bool non_blocking() const override {
+        return stream_.non_blocking();
     }
 
     std::size_t available() override {
@@ -178,12 +178,12 @@ private:
 public:
     explicit SyncReadStreamImpl(Stream& stream) : stream_(stream) {}
 
-    void blocking_mode(bool mode) override {
-        stream_.blocking_mode(mode);
+    void non_blocking(bool mode) override {
+        stream_.non_blocking(mode);
     }
 
-    bool blocking_mode() const override {
-        return stream_.blocking_mode();
+    bool non_blocking() const override {
+        return stream_.non_blocking();
     }
 
     std::size_t available() override {
@@ -212,12 +212,12 @@ private:
 public:
     explicit SyncWriteStreamImpl(Stream& stream) : stream_(stream) {}
 
-    void blocking_mode(bool mode) override {
-        stream_.blocking_mode(mode);
+    void non_blocking(bool mode) override {
+        stream_.non_blocking(mode);
     }
 
-    bool blocking_mode() const override {
-        return stream_.blocking_mode();
+    bool non_blocking() const override {
+        return stream_.non_blocking();
     }
 
     std::size_t available() override {
@@ -246,12 +246,12 @@ private:
 public:
     explicit SyncDuplexStreamImpl(Stream& stream) : stream_(stream) {}
 
-    void blocking_mode(bool mode) override {
-        stream_.blocking_mode(mode);
+    void non_blocking(bool mode) override {
+        stream_.non_blocking(mode);
     }
 
-    bool blocking_mode() const override {
-        return stream_.blocking_mode();
+    bool non_blocking() const override {
+        return stream_.non_blocking();
     }
 
     std::size_t available() override {
@@ -364,12 +364,12 @@ private:
 public:
     explicit DuplexStreamImpl(Stream& stream) : stream_(stream) {}
 
-    void blocking_mode(bool mode) override {
-        stream_.blocking_mode(mode);
+    void non_blocking(bool mode) override {
+        stream_.non_blocking(mode);
     }
 
-    bool blocking_mode() const override {
-        return stream_.blocking_mode();
+    bool non_blocking() const override {
+        return stream_.non_blocking();
     }
 
     std::size_t available() override {

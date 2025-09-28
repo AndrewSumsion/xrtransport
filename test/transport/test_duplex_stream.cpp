@@ -10,12 +10,12 @@ TestDuplexStream::TestDuplexStream(std::shared_ptr<SharedBuffer> buffer,
     : buffer_(std::move(buffer)), side_(side), io_context_(io_context) {
 }
 
-void TestDuplexStream::blocking_mode(bool mode) {
-    blocking_mode_ = mode;
+void TestDuplexStream::non_blocking(bool mode) {
+    non_blocking_ = mode;
 }
 
-bool TestDuplexStream::blocking_mode() const {
-    return blocking_mode_;
+bool TestDuplexStream::non_blocking() const {
+    return non_blocking_;
 }
 
 std::size_t TestDuplexStream::available() {
@@ -44,7 +44,7 @@ std::size_t TestDuplexStream::read_some(const asio::mutable_buffer& buffers, asi
     // Simulate partial reads by limiting read size
     size_t request_size = std::min(buffers.size(), max_read_size_);
 
-    if (blocking_mode_) {
+    if (!non_blocking_) {
         // In blocking mode, wait for data if none available
         while (buffer_->available(side_) == 0) {
             buffer_->wait_for_data(side_);

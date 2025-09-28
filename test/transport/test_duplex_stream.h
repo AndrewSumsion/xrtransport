@@ -29,7 +29,7 @@ private:
     std::chrono::milliseconds write_delay_{0};
     size_t max_read_size_{SIZE_MAX};  // For simulating partial reads
 
-    std::atomic<bool> blocking_mode_{true};
+    std::atomic<bool> non_blocking_{false};
 
 public:
     /**
@@ -50,8 +50,8 @@ public:
     void set_max_read_size(size_t max_size) { max_read_size_ = max_size; }
 
     // SyncStream interface
-    void blocking_mode(bool mode) override;
-    bool blocking_mode() const override;
+    void non_blocking(bool mode) override;
+    bool non_blocking() const override;
     std::size_t available() override;
     std::size_t available(asio::error_code& ec) override;
 

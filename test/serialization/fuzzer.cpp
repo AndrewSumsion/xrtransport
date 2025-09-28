@@ -26,18 +26,18 @@ class TestStreamBuffer : public SyncDuplexStream {
 private:
     std::vector<char> buffer_;
     std::size_t read_pos_ = 0;
-    bool blocking_mode_ = true;
+    bool non_blocking_ = false;
 
 public:
     TestStreamBuffer() = default;
 
     // SyncStream interface
-    void blocking_mode(bool mode) override {
-        blocking_mode_ = mode;
+    void non_blocking(bool mode) override {
+        non_blocking_ = mode;
     }
 
-    bool blocking_mode() const override {
-        return blocking_mode_;
+    bool non_blocking() const override {
+        return non_blocking_;
     }
 
     std::size_t available() override {
