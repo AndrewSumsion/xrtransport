@@ -1,4 +1,0 @@
-{
-    "xrGetVulkanGraphicsRequirements2KHR": "xrGetVulkanGraphicsRequirementsKHR",
-    "xrLocateSpacesKHR": "xrLocateSpaces"
-}
