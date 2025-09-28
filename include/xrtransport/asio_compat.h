@@ -17,6 +17,9 @@ public:
     // Set or get blocking mode
     virtual void blocking_mode(bool mode) = 0;
     virtual bool blocking_mode() const = 0;
+
+    virtual std::size_t available() = 0;
+    virtual std::size_t available(asio::error_code& ec) = 0;
 };
 
 // Abstract class for read operations

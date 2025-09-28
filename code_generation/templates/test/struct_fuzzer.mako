@@ -39,6 +39,15 @@ public:
         return blocking_mode_;
     }
 
+    std::size_t available() override {
+        return buffer_.size() - read_pos_;
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        ec.clear();
+        return buffer_.size() - read_pos_;
+    }
+
     // ReadStream interface
     std::size_t read_some(const asio::mutable_buffer& buffers) override {
         asio::error_code ec;
