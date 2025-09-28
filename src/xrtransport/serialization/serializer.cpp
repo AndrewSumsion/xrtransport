@@ -14,7 +14,7 @@
 
 
 
-#include "xrtransport/generated/serializer.h"
+#include "xrtransport/serialization/serializer.h"
 
 namespace xrtransport {
 

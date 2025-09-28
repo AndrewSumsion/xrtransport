@@ -8,8 +8,8 @@
  * code_generation/templates/test/struct_fuzzer.mako
  */
 
-#include "xrtransport/generated/serializer.h"
-#include "xrtransport/generated/deserializer.h"
+#include "xrtransport/serialization/serializer.h"
+#include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/asio_compat.h"
 
 #include <cassert>

@@ -62,7 +62,7 @@ void serialize(const ${struct.name}* s, SyncWriteStream& out) {
 }
 </%def>
 
-#include "xrtransport/generated/serializer.h"
+#include "xrtransport/serialization/serializer.h"
 
 namespace xrtransport {
 

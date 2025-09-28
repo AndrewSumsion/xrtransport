@@ -30,11 +30,17 @@ fuzzer_seed = args.fuzzer_seed
 xml_root = get_xml_root(xr_xml_path)
 spec = parse_spec(xml_root)
 
-serializer_header_path = os.path.join(include_path, "serializer.h")
-serializer_impl_path = os.path.join(src_path, "serializer.cpp")
-deserializer_header_path = os.path.join(include_path, "deserializer.h")
-deserializer_impl_path = os.path.join(src_path, "deserializer.cpp")
-reflection_struct_path = os.path.join(include_path, "reflection_struct.h")
+# Create output directories if they don't exist
+os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
+os.makedirs(os.path.join(include_path, "reflection"), exist_ok=True)
+os.makedirs(os.path.join(src_path, "serialization"), exist_ok=True)
+os.makedirs(test_path, exist_ok=True)
+
+serializer_header_path = os.path.join(include_path, "serialization", "serializer.h")
+serializer_impl_path = os.path.join(src_path, "serialization", "serializer.cpp")
+deserializer_header_path = os.path.join(include_path, "serialization", "deserializer.h")
+deserializer_impl_path = os.path.join(src_path, "serialization", "deserializer.cpp")
+reflection_struct_path = os.path.join(include_path, "reflection", "reflection_struct.h")
 fuzzer_path = os.path.join(test_path, "fuzzer.cpp")
 fuzzer_in_place_path = os.path.join(test_path, "fuzzer_in_place.cpp")
 

@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.10)
 
 # Create static library for xrtransport serialization
 add_library(xrtransport_serialization STATIC
-    xrtransport/generated/serializer.cpp
-    xrtransport/generated/deserializer.cpp
-    xrtransport/custom_serializer.cpp
-    xrtransport/custom_deserializer.cpp
+    xrtransport/serialization/serializer.cpp
+    xrtransport/serialization/deserializer.cpp
+    xrtransport/serialization/custom_serializer.cpp
+    xrtransport/serialization/custom_deserializer.cpp
 )
 
 # Set target properties
@@ -26,7 +26,7 @@ target_compile_features(xrtransport_serialization PUBLIC cxx_std_17)
 
 # Create static library for xrtransport transport
 add_library(xrtransport_transport STATIC
-    xrtransport/transport.cpp
+    xrtransport/transport/transport.cpp
 )
 
 # Set target properties for transport
