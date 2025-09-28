@@ -34,7 +34,7 @@ constexpr uint16_t FUNCTION_RETURN = 2;
 constexpr uint16_t CUSTOM_BASE = 100;
 
 // RAII stream lock classes
-struct MessageLockOut {
+struct [[nodiscard]] MessageLockOut {
     std::unique_lock<std::recursive_mutex> lock;
     SyncWriteStream& stream;
 
@@ -46,7 +46,7 @@ struct MessageLockOut {
     MessageLockOut& operator=(MessageLockOut&&) = default;
 };
 
-struct MessageLockIn {
+struct [[nodiscard]] MessageLockIn {
     std::unique_lock<std::recursive_mutex> lock;
     SyncReadStream& stream;
 
