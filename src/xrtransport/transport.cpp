@@ -25,12 +25,12 @@ MessageLockIn::~MessageLockIn() {
 }
 
 // Transport implementation
-Transport::Transport(SyncDuplexStream& stream)
+Transport::Transport(DuplexStream& stream)
     : stream(stream), should_stop(false) {
 }
 
 Transport::~Transport() {
-    stop_worker_thread();
+    stop_worker();
 }
 
 MessageLockOut Transport::start_message(uint16_t header) {
@@ -51,31 +51,26 @@ MessageLockIn Transport::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-        // Set to non-blocking mode to check for available data
-        bool original_blocking = stream.blocking_mode();
-        stream.blocking_mode(false);
+        if (stream.available() >= sizeof(header)) {
+            uint16_t received_header;
+            // TODO: proper error handling
+            asio::read(stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
 
-        uint16_t received_header;
-        asio::error_code ec;
-        std::size_t bytes_read = asio::read(stream, asio::mutable_buffer(&received_header, sizeof(received_header)), ec);
-
-        // Restore original blocking mode
-        stream.blocking_mode(original_blocking);
-
-        if (bytes_read == sizeof(received_header)) {
             if (received_header == header) {
                 // This is our message
                 return MessageLockIn(std::move(lock), stream);
             } else {
                 // Dispatch to handler for this message type
                 dispatch_to_handler(received_header, std::move(lock));
-                // lock is now invalid, continue loop to try again
             }
+            // lock is now invalid, continue loop to try again
         } else {
-            // No data available or incomplete read, release lock and yield
+            // No data available or incomplete read, release lock and try again
             lock.unlock();
-            std::this_thread::yield();
         }
+
+        // Yield at each iteration
+        std::this_thread::yield();
     }
 }
 
@@ -86,42 +81,51 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
         MessageLockIn message_lock(std::move(lock), stream);
         it->second(std::move(message_lock));
     } else {
-        // No handler registered, just consume the message by reading until end
-        // This is a simple approach - in practice you might want more sophisticated handling
-        lock.unlock();
+        assert(false && "No handler registered for received packet");
     }
 }
 
-void Transport::start_worker_thread() {
+void Transport::start_worker() {
     should_stop = false;
-    worker_thread = std::thread(&Transport::worker_loop, this);
+    worker_cycle();
 }
 
-void Transport::stop_worker_thread() {
+void Transport::stop_worker() {
     should_stop = true;
-    if (worker_thread.joinable()) {
-        worker_thread.join();
-    }
 }
 
-void Transport::worker_loop() {
-    while (!should_stop) {
+void Transport::worker_cycle() {
+    // Guard clause to stop the async cycle
+    if (should_stop) {
+        return;
+    }
+
+    // Async wait for read availability
+    stream.async_wait(asio::socket_base::wait_read, [this](asio::error_code ec) {
+        if (ec || should_stop) {
+            return; // Stop on error or when requested
+        }
+
+        // Acquire lock for synchronous operations
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
         // Check if enough bytes are available for the header
         if (stream.available() >= sizeof(uint16_t)) {
-            // Enough data available, read the header
+            // Enough data available, read the header synchronously
             uint16_t header;
             asio::read(stream, asio::mutable_buffer(&header, sizeof(header)));
 
             // Dispatch to handler
             dispatch_to_handler(header, std::move(lock));
         } else {
-            // Not enough data available, release lock and yield
+            // Release lock since we're not reading
+            // Note: lock is released in other branch at the end of the handler
             lock.unlock();
-            std::this_thread::yield();
         }
-    }
+
+        // Continue the async cycle
+        worker_cycle();
+    });
 }
 
 } // namespace xrtransport

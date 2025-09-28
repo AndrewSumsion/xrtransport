@@ -54,20 +54,19 @@ struct MessageLockIn {
 // Transport class for message-based communication
 class Transport {
 private:
-    SyncDuplexStream& stream;
+    DuplexStream& stream;
     mutable std::recursive_mutex stream_mutex;
-    std::thread worker_thread;
     std::atomic<bool> should_stop;
     std::unordered_map<uint16_t, std::function<void(MessageLockIn)>> handlers;
 
     // Internal helper to dispatch messages to handlers
     void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
 
-    // Worker thread function
-    void worker_loop();
+    // Async worker cycle function
+    void worker_cycle();
 
 public:
-    explicit Transport(SyncDuplexStream& stream);
+    explicit Transport(DuplexStream& stream);
     ~Transport();
 
     // Disable copy/assignment
@@ -79,9 +78,9 @@ public:
     void register_handler(uint16_t header, std::function<void(MessageLockIn)> handler);
     MessageLockIn await_message(uint16_t header);
 
-    // Thread management
-    void start_worker_thread();
-    void stop_worker_thread();
+    // Worker management
+    void start_worker();
+    void stop_worker();
 };
 
 } // namespace xrtransport
