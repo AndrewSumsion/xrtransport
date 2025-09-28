@@ -12,3 +12,4 @@ include(CTest)
 
 # Add test subdirectories
 add_subdirectory(serialization)
+add_subdirectory(transport)

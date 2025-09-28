@@ -14,8 +14,15 @@
 #include <cstdint>
 #include <memory>
 #include <atomic>
+#include <stdexcept>
 
 namespace xrtransport {
+
+// Exception for Transport-specific errors
+class TransportException : public std::runtime_error {
+public:
+    explicit TransportException(const std::string& message) : std::runtime_error(message) {}
+};
 
 // Forward declarations
 struct MessageLockOut;

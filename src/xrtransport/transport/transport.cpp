@@ -1,6 +1,5 @@
 #include "xrtransport/transport/transport.h"
 
-#include <cassert>
 #include <chrono>
 #include <thread>
 
@@ -81,7 +80,7 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
         MessageLockIn message_lock(std::move(lock), stream);
         it->second(std::move(message_lock));
     } else {
-        assert(false && "No handler registered for received packet");
+        throw TransportException("No handler registered for message type: " + std::to_string(header));
     }
 }
 
