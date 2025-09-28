@@ -28,7 +28,7 @@ constexpr uint16_t CUSTOM_BASE = 100;
 
 // RAII stream lock classes
 struct MessageLockOut {
-    const std::unique_lock<std::recursive_mutex> lock;
+    std::unique_lock<std::recursive_mutex> lock;
     SyncWriteStream& stream;
 
     MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream);
@@ -40,7 +40,7 @@ struct MessageLockOut {
 };
 
 struct MessageLockIn {
-    const std::unique_lock<std::recursive_mutex> lock;
+    std::unique_lock<std::recursive_mutex> lock;
     SyncReadStream& stream;
 
     MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream);
