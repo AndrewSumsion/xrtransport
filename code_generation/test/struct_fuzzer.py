@@ -1,12 +1,9 @@
 import random
 import string
-import os
-from collections import deque
-from mako.template import Template
 from mako.lookup import TemplateLookup
 from mako import exceptions
 
-ASSERT_COMMAND = "assert"
+ASSERT_COMMAND = "REQUIRE"
 
 class StructPlan:
     def __init__(self, type_name, children=None):
@@ -90,8 +87,8 @@ class ValuePlan:
     def __init__(self, type_name, value=None):
         self.type_name = type_name
         self.value = value
-    
-    def init(self, out, binding, name, indent=""):
+
+    def init(self, out, binding, _name, indent=""):
         out.append(f"{indent}{binding} = {self.value};")
     
     def compare(self, out, binding, indent=""):
@@ -203,38 +200,13 @@ class RandomStructGenerator:
         struct_plan.zero(out, struct_name, indent)
         return "\n".join(out)
 
+
 def generate_struct_fuzzer(spec, templates_dir, out, fuzzer_seed):
-    # Make fuzzer output deterministic (not thread safe)
-    random.seed(fuzzer_seed)
-
-    template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
-    template = template_lookup.get_template("struct_fuzzer.mako")
-    struct_generator = RandomStructGenerator(spec)
-    try:
-        out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
-    except:
-        print("Warning! An exception occurred running fuzzer template.")
-        print(exceptions.text_error_template().render())
-
-def generate_struct_fuzzer_in_place(spec, templates_dir, out, fuzzer_seed):
-    # Make fuzzer output deterministic (not thread safe)
-    random.seed(fuzzer_seed)
-
-    template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
-    template = template_lookup.get_template("struct_fuzzer_in_place.mako")
-    struct_generator = RandomStructGenerator(spec)
-    try:
-        out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
-    except:
-        print("Warning! An exception occurred running in-place fuzzer template.")
-        print(exceptions.text_error_template().render())
-
-def generate_unit_tests(spec, templates_dir, out, fuzzer_seed):
     # Make unit test output deterministic (not thread safe)
     random.seed(fuzzer_seed)
 
     template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
-    template = template_lookup.get_template("unit_tests.mako")
+    template = template_lookup.get_template("serialization_tests.mako")
     struct_generator = RandomStructGenerator(spec)
     try:
         out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
