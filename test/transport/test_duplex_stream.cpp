@@ -82,26 +82,19 @@ void TestDuplexStream::async_wait_impl(asio::socket_base::wait_type wait_type,
                 handler(asio::error_code{});
             });
         } else {
-            // No data available, schedule a deferred check
-            // In a real implementation this would be more sophisticated,
-            // but for testing we'll just post a delayed callback
+            // No data available, schedule a deferred check on next io_context iteration
             asio::post(io_context_, [this, handler]() {
-                // Check again after posting
-                if (buffer_->available(side_) > 0) {
-                    handler(asio::error_code{});
-                } else {
-                    // Still no data, try again later
-                    // This is a simple implementation - in practice you'd want
-                    // a more efficient notification mechanism
-                    async_wait_impl(asio::socket_base::wait_read, handler);
-                }
+                async_wait_impl(asio::socket_base::wait_read, handler);
             });
         }
-    } else {
+    } else if (wait_type == asio::socket_base::wait_write) {
         // Write operations are always ready in our test implementation
         asio::post(io_context_, [handler]() {
             handler(asio::error_code{});
         });
+    } else if (wait_type == asio::socket_base::wait_error) {
+        // This test stream has no error conditions, so never call the handler
+        // The wait will effectively hang forever, which is correct behavior
     }
 }
 
