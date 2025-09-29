@@ -63,6 +63,10 @@ class XrFunction:
         self.flag = None
         self.extension = None
         self.id = None
+    
+    def declaration(self):
+        param_list = ", ".join(f"{p.full_type()} {p.name}" for p in self.params)
+        return f"XRAPI_ATTR XrResult XRAPI_CALL {self.name}({param_list})"
 
 class XrParam:
     def __init__(self, type_, name):
