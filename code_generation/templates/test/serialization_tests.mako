@@ -31,6 +31,20 @@ private:
 public:
     TestStreamBuffer() = default;
 
+    // Stream interface
+    bool is_open() const override {
+        return true;
+    }
+
+    void close() override {
+        // No-op for test buffer
+    }
+
+    void close(asio::error_code& ec) override {
+        ec.clear();
+        // No-op for test buffer
+    }
+
     // SyncStream interface
     void non_blocking(bool mode) override {
         non_blocking_ = mode;

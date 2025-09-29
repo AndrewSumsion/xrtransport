@@ -23,21 +23,39 @@
 
 namespace xrtransport {
 
+// Base abstract class for all stream operations
+class Stream {
+public:
+    virtual ~Stream() = default;
+
+    // Stream state and control
+    virtual bool is_open() const = 0;
+    virtual void close() = 0;
+    virtual void close(asio::error_code& ec) = 0;
+};
+
 // Base abstract class for synchronous stream operations
-class SyncStream {
+class SyncStream : virtual public Stream {
 public:
     virtual ~SyncStream() = default;
 
     // Set or get non-blocking mode
     virtual void non_blocking(bool mode) = 0;
     virtual bool non_blocking() const = 0;
+};
 
+// Base abstract class for read operations with available() method
+class ReadStream : virtual public Stream {
+public:
+    virtual ~ReadStream() = default;
+
+    // Available data for reading
     virtual std::size_t available() = 0;
     virtual std::size_t available(asio::error_code& ec) = 0;
 };
 
 // Abstract class for synchronous read operations
-class SyncReadStream : virtual public SyncStream {
+class SyncReadStream : virtual public SyncStream, virtual public ReadStream {
 public:
     virtual ~SyncReadStream() = default;
 
@@ -85,7 +103,7 @@ public:
 };
 
 // Base abstract class for asynchronous stream operations
-class AsyncStream {
+class AsyncStream : virtual public Stream {
 public:
     virtual ~AsyncStream() = default;
 
@@ -100,7 +118,7 @@ protected:
 };
 
 // Abstract class for asynchronous read operations
-class AsyncReadStream : virtual public AsyncStream {
+class AsyncReadStream : virtual public AsyncStream, virtual public ReadStream {
 public:
     virtual ~AsyncReadStream() = default;
 
@@ -144,13 +162,25 @@ public:
 // Concrete templated implementations
 
 // Concrete implementation of SyncStream
-template<typename Stream>
+template<typename StreamType>
 class SyncStreamImpl : public SyncStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit SyncStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit SyncStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
     void non_blocking(bool mode) override {
         stream_.non_blocking(mode);
@@ -159,24 +189,28 @@ public:
     bool non_blocking() const override {
         return stream_.non_blocking();
     }
-
-    std::size_t available() override {
-        return stream_.available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return stream_.available(ec);
-    }
 };
 
 // Concrete implementation of SyncReadStream
-template<typename Stream>
+template<typename StreamType>
 class SyncReadStreamImpl : public SyncReadStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit SyncReadStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit SyncReadStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
     void non_blocking(bool mode) override {
         stream_.non_blocking(mode);
@@ -204,13 +238,25 @@ public:
 };
 
 // Concrete implementation of SyncWriteStream
-template<typename Stream>
+template<typename StreamType>
 class SyncWriteStreamImpl : public SyncWriteStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit SyncWriteStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit SyncWriteStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
     void non_blocking(bool mode) override {
         stream_.non_blocking(mode);
@@ -218,14 +264,6 @@ public:
 
     bool non_blocking() const override {
         return stream_.non_blocking();
-    }
-
-    std::size_t available() override {
-        return stream_.available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return stream_.available(ec);
     }
 
     std::size_t write_some(const asio::const_buffer& buffers) override {
@@ -238,13 +276,25 @@ public:
 };
 
 // Concrete implementation of SyncDuplexStream
-template<typename Stream>
+template<typename StreamType>
 class SyncDuplexStreamImpl : public SyncDuplexStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit SyncDuplexStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit SyncDuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
     void non_blocking(bool mode) override {
         stream_.non_blocking(mode);
@@ -280,13 +330,25 @@ public:
 };
 
 // Concrete implementation of AsyncStream
-template<typename Stream>
+template<typename StreamType>
 class AsyncStreamImpl : public AsyncStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit AsyncStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit AsyncStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
 protected:
     void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
@@ -295,13 +357,33 @@ protected:
 };
 
 // Concrete implementation of AsyncReadStream
-template<typename Stream>
+template<typename StreamType>
 class AsyncReadStreamImpl : public AsyncReadStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit AsyncReadStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit AsyncReadStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
 
 protected:
     void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
@@ -314,13 +396,25 @@ protected:
 };
 
 // Concrete implementation of AsyncWriteStream
-template<typename Stream>
+template<typename StreamType>
 class AsyncWriteStreamImpl : public AsyncWriteStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit AsyncWriteStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit AsyncWriteStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
 protected:
     void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
@@ -333,13 +427,33 @@ protected:
 };
 
 // Concrete implementation of AsyncDuplexStream
-template<typename Stream>
+template<typename StreamType>
 class AsyncDuplexStreamImpl : public AsyncDuplexStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit AsyncDuplexStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit AsyncDuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
+
+    std::size_t available() override {
+        return stream_.available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return stream_.available(ec);
+    }
 
 protected:
     void async_wait_impl(asio::socket_base::wait_type wait_type, std::function<void(asio::error_code)> handler) override {
@@ -356,13 +470,25 @@ protected:
 };
 
 // Concrete implementation of DuplexStream
-template<typename Stream>
+template<typename StreamType>
 class DuplexStreamImpl : public DuplexStream {
 private:
-    Stream& stream_;
+    StreamType& stream_;
 
 public:
-    explicit DuplexStreamImpl(Stream& stream) : stream_(stream) {}
+    explicit DuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+
+    bool is_open() const override {
+        return stream_.is_open();
+    }
+
+    void close() override {
+        stream_.close();
+    }
+
+    void close(asio::error_code& ec) override {
+        stream_.close(ec);
+    }
 
     void non_blocking(bool mode) override {
         stream_.non_blocking(mode);

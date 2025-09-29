@@ -10,6 +10,19 @@ TestDuplexStream::TestDuplexStream(std::shared_ptr<SharedBuffer> buffer,
     : buffer_(std::move(buffer)), side_(side), io_context_(io_context) {
 }
 
+bool TestDuplexStream::is_open() const {
+    return true;  // Test streams are always considered open
+}
+
+void TestDuplexStream::close() {
+    // No-op for test streams
+}
+
+void TestDuplexStream::close(asio::error_code& ec) {
+    ec.clear();
+    // No-op for test streams
+}
+
 void TestDuplexStream::non_blocking(bool mode) {
     non_blocking_ = mode;
 }

@@ -49,6 +49,11 @@ public:
     void set_write_delay(std::chrono::milliseconds delay) { write_delay_ = delay; }
     void set_max_read_size(size_t max_size) { max_read_size_ = max_size; }
 
+    // Stream interface
+    bool is_open() const override;
+    void close() override;
+    void close(asio::error_code& ec) override;
+
     // SyncStream interface
     void non_blocking(bool mode) override;
     bool non_blocking() const override;
