@@ -83,6 +83,8 @@ public:
     // Message operations
     MessageLockOut start_message(uint16_t header);
     void register_handler(uint16_t header, std::function<void(MessageLockIn)> handler);
+    void unregister_handler(uint16_t header);
+    void clear_handlers();
     MessageLockIn await_message(uint16_t header);
 
     // Worker management

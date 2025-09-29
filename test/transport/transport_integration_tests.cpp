@@ -75,6 +75,7 @@ public:
 
         // Stop transport
         if (transport_) {
+            transport_->clear_handlers();  // Clear all handlers before stopping
             transport_->stop_worker();
             transport_.reset();
         }
@@ -174,17 +175,20 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
     uint32_t doubled_result = 0;
     uint32_t echoed_result = 0;
 
+    transport.register_handler(105, [&](MessageLockIn msg_in){
+        asio::read(msg_in.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
+    });
+
     // Send message 104 with test input
     auto msg_out = transport.start_message(104);
     asio::write(msg_out.stream, asio::buffer(&test_input, sizeof(test_input)));
 
-    // Receive message 105 (doubled value)
-    auto msg_in_105 = transport.await_message(105);
-    asio::read(msg_in_105.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
-
     // Receive message 106 (echoed value)
-    auto msg_in_106 = transport.await_message(106);
-    asio::read(msg_in_106.stream, asio::buffer(&echoed_result, sizeof(echoed_result)));
+    // 105 packet should be received and handled while waiting
+    auto msg_in = transport.await_message(106);
+    asio::read(msg_in.stream, asio::buffer(&echoed_result, sizeof(echoed_result)));
+
+    transport.unregister_handler(105);
 
     REQUIRE(doubled_result == test_input * 2);
     REQUIRE(echoed_result == test_input);

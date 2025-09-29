@@ -199,6 +199,80 @@ TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
     REQUIRE(message_received.load() == message_sent);
 }
 
+TEST_CASE("Handler registration and removal", "[transport][handlers]") {
+    asio::io_context io_context;
+    auto [stream_a, stream_b] = create_connected_streams(io_context);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
+
+    std::atomic<bool> handler_called = false;
+
+    // Register a handler
+    transport_b.register_handler(200, [&](MessageLockIn msg_in){
+        handler_called = true;
+    });
+    transport_b.start_worker();
+
+    // Send message - handler should be called
+    {
+        auto msg_out = transport_a.start_message(200);
+    }
+
+    // Wait for handler to be called
+    std::thread io_thread([&](){
+        while (!handler_called.load()) {
+            io_context.run_one();
+        }
+    });
+    io_thread.join();
+
+    REQUIRE(handler_called.load() == true);
+
+    // Reset flag and unregister handler
+    handler_called = false;
+    transport_b.unregister_handler(200);
+
+    // Send message again - handler should NOT be called
+    // This should throw since no handler is registered
+    REQUIRE_THROWS_AS([&](){
+        auto msg_out = transport_a.start_message(200);
+        // Run io_context briefly to process the message
+        for (int i = 0; i < 10; ++i) {
+            io_context.run_one();
+        }
+    }(), TransportException);
+
+    REQUIRE(handler_called.load() == false);
+}
+
+TEST_CASE("Clear all handlers", "[transport][handlers]") {
+    asio::io_context io_context;
+    auto [stream_a, stream_b] = create_connected_streams(io_context);
+    Transport transport_a(stream_a);
+    Transport transport_b(stream_b);
+
+    std::atomic<int> handler_calls = 0;
+
+    // Register multiple handlers
+    transport_b.register_handler(300, [&](MessageLockIn msg_in){ handler_calls++; });
+    transport_b.register_handler(301, [&](MessageLockIn msg_in){ handler_calls++; });
+    transport_b.register_handler(302, [&](MessageLockIn msg_in){ handler_calls++; });
+    transport_b.start_worker();
+
+    // Clear all handlers
+    transport_b.clear_handlers();
+
+    // Try sending to any of the registered handlers - should all throw
+    REQUIRE_THROWS_AS([&](){
+        auto msg_out = transport_a.start_message(300);
+        for (int i = 0; i < 10; ++i) {
+            io_context.run_one();
+        }
+    }(), TransportException);
+
+    REQUIRE(handler_calls.load() == 0);
+}
+
 TEST_CASE("await_message handler takeover", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);

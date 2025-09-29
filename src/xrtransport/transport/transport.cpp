@@ -46,6 +46,16 @@ void Transport::register_handler(uint16_t header, std::function<void(MessageLock
     handlers[header] = std::move(handler);
 }
 
+void Transport::unregister_handler(uint16_t header) {
+    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    handlers.erase(header);
+}
+
+void Transport::clear_handlers() {
+    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    handlers.clear();
+}
+
 MessageLockIn Transport::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
