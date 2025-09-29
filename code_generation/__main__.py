@@ -1,5 +1,7 @@
 import os
+import sys
 import argparse
+import json
 from . import (
     get_xml_root,
     parse_spec,
@@ -9,25 +11,48 @@ from . import (
     generate_deserializer_impl,
     generate_struct_reflection,
     generate_struct_fuzzer,
+    generate_function_ids,
+    update_function_ids,
+    get_flat_function_ids,
     TEMPLATES_DIR
 )
 
 parser = argparse.ArgumentParser(description="Generate serialization, deserialization, and test code based on OpenXR spec")
 parser.add_argument("openxr_spec_path", help="Path to the xr.xml file for the OpenXR spec")
+parser.add_argument("function_ids", help="Path to function_ids.json")
 parser.add_argument("include_out", help="Path to the folder to place generated header files in")
 parser.add_argument("src_out", help="Path to the folder to place generated C++ implementation files in")
 parser.add_argument("test_out", help="Path to the folder to place generated test code in")
 parser.add_argument("--fuzzer-seed", default=1337, type=int, help="Numerical seed to use for the fuzzer")
+parser.add_argument("--regenerate-function-ids", action="store_true", help="Regenerate function ids from spec from scratch. Only use this for a full regenerate. Default behavior already accounts for changes in the spec.")
 args = parser.parse_args()
 
 xr_xml_path = args.openxr_spec_path
+function_ids_path = args.function_ids
 include_path = args.include_out
 src_path = args.src_out
 test_path = args.test_out
 fuzzer_seed = args.fuzzer_seed
+should_regenerate_function_ids = args.regenerate_function_ids
 
 xml_root = get_xml_root(xr_xml_path)
 spec = parse_spec(xml_root)
+
+# Update/regenerate function ids and save
+if should_regenerate_function_ids:
+    function_ids = generate_function_ids(spec)
+else:
+    if not os.path.exists(function_ids_path):
+        print("Function ids json file does not exist yet. Try again with --regenerate-function-ids")
+        sys.exit(1)
+    with open(function_ids_path, "r") as function_ids_file:
+        function_ids = json.load(function_ids_file)
+    function_ids = update_function_ids(spec, function_ids)
+
+with open(function_ids_path, "w") as function_ids_file:
+    json.dump(function_ids, function_ids_file, indent=4)
+
+flat_function_ids = get_flat_function_ids(function_ids)
 
 # Create output directories if they don't exist
 os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
