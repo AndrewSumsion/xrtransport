@@ -52,13 +52,11 @@ def update_function_ids(spec, function_ids):
             function_ids.append(ext_entry)
     return function_ids
 
-def get_flat_function_ids(function_ids):
-    result = {}
+def apply_function_ids(spec, function_ids):
     for ext_entry in function_ids:
         # assumes a single extension will not have more than 1000 functions
         ext_part = ext_entry["id"] * 1000
         for function_entry in ext_entry["functions"]:
             func_name = function_entry["name"]
             func_part = function_entry["id"]
-            result[func_name] = ext_part + func_part
-    return result
+            spec.functions_index[func_name].id = ext_part + func_part

@@ -62,6 +62,7 @@ class XrFunction:
         self.params = params
         self.flag = None
         self.extension = None
+        self.id = None
 
 class XrParam:
     def __init__(self, type_, name):

@@ -13,7 +13,7 @@ from . import (
     generate_struct_fuzzer,
     generate_function_ids,
     update_function_ids,
-    get_flat_function_ids,
+    apply_function_ids,
     TEMPLATES_DIR
 )
 
@@ -52,7 +52,7 @@ else:
 with open(function_ids_path, "w") as function_ids_file:
     json.dump(function_ids, function_ids_file, indent=4)
 
-flat_function_ids = get_flat_function_ids(function_ids)
+apply_function_ids(spec, function_ids)
 
 # Create output directories if they don't exist
 os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
