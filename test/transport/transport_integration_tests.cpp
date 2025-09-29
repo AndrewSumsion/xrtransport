@@ -73,39 +73,17 @@ public:
     static void TearDownTestSuite() {
         std::cout << "Cleaning up integration test..." << std::endl;
 
-        // Stop transport
-        if (transport_) {
-            transport_->clear_handlers();  // Clear all handlers before stopping
-            transport_->stop_worker();
-            transport_.reset();
-        }
-
-        // Reset stream
-        client_stream_.reset();
-
-        // Close socket after stream is reset
-        if (client_socket_ && client_socket_->is_open()) {
+        transport_->clear_handlers();
+        transport_->stop_worker();
+        if (client_socket_->is_open()) {
             client_socket_->close();
         }
-        client_socket_.reset();
-
-        // Stop io_context
-        if (io_context_) {
-            io_context_->stop();
-        }
+        io_context_->stop();
 
         // Join io thread
         if (io_thread_.joinable()) {
-            // TODO: There is a bug that causes this join to stall.
-            // This is a result of the io_context getting stuck in the callback
-            // to async_wait in Transport::worker_cycle. The stall is caused by
-            // the attempt to lock. I don't know why this is happening. Every
-            // time this happens, the last place the lock was locked is in
-            // Transport::await_message
             io_thread_.join();
         }
-
-        io_context_.reset();
     }
 
     static Transport& GetTransport() {
