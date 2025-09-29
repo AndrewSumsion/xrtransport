@@ -59,4 +59,4 @@ def apply_function_ids(spec, function_ids):
         for function_entry in ext_entry["functions"]:
             func_name = function_entry["name"]
             func_part = function_entry["id"]
-            spec.functions_index[func_name].id = ext_part + func_part
+            spec.find_function(func_name).id = ext_part + func_part
