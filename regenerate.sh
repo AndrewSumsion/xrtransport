@@ -11,6 +11,6 @@ python3 -m code_generation \
     OpenXR-SDK/specification/registry/xr.xml \
     function_ids.json \
     include/xrtransport \
-    src/xrtransport \
+    src \
     test \
     "$@"
