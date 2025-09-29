@@ -153,7 +153,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
     uint32_t doubled_result = 0;
     uint32_t echoed_result = 0;
 
-    transport.register_handler(105, [&](MessageLockIn msg_in){
+    transport.register_handler(105, [&](Transport&, MessageLockIn msg_in){
         asio::read(msg_in.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
     });
 

@@ -91,7 +91,7 @@ private:
 
     void register_handlers(Transport& transport) {
         // Protocol 1: Simple Echo (100 -> 101)
-        transport.register_handler(100, [&transport](MessageLockIn msg_in) {
+        transport.register_handler(100, [](Transport& transport, MessageLockIn msg_in) {
             std::cout << "Protocol 1: Simple echo" << std::endl;
 
             // Read 4 bytes
@@ -104,7 +104,7 @@ private:
         });
 
         // Protocol 2: Variable Length Data (102 -> 103)
-        transport.register_handler(102, [this, &transport](MessageLockIn msg_in) {
+        transport.register_handler(102, [this](Transport& transport, MessageLockIn msg_in) {
             std::cout << "Protocol 2: Variable length data" << std::endl;
 
             // Generate random N between 1 and 20
@@ -125,7 +125,7 @@ private:
         });
 
         // Protocol 3: Intermediate Packets (104 -> 105 + 106)
-        transport.register_handler(104, [&transport](MessageLockIn msg_in) {
+        transport.register_handler(104, [](Transport& transport, MessageLockIn msg_in) {
             std::cout << "Protocol 3: Intermediate packets" << std::endl;
 
             // Read input integer

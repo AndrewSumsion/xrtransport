@@ -53,7 +53,7 @@ private:
     DuplexStream& stream;
     mutable std::recursive_mutex stream_mutex;
     std::atomic<bool> should_stop;
-    std::unordered_map<uint16_t, std::function<void(MessageLockIn)>> handlers;
+    std::unordered_map<uint16_t, std::function<void(Transport&, MessageLockIn)>> handlers;
 
     // Internal helper to dispatch messages to handlers
     void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
@@ -71,7 +71,7 @@ public:
 
     // Message operations
     MessageLockOut start_message(uint16_t header);
-    void register_handler(uint16_t header, std::function<void(MessageLockIn)> handler);
+    void register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler);
     void unregister_handler(uint16_t header);
     void clear_handlers();
     MessageLockIn await_message(uint16_t header);

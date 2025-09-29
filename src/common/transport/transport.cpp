@@ -23,7 +23,7 @@ MessageLockOut Transport::start_message(uint16_t header) {
     return MessageLockOut(std::move(lock), stream);
 }
 
-void Transport::register_handler(uint16_t header, std::function<void(MessageLockIn)> handler) {
+void Transport::register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
     handlers[header] = std::move(handler);
 }
@@ -68,9 +68,9 @@ MessageLockIn Transport::await_message(uint16_t header) {
 void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
     auto it = handlers.find(header);
     if (it != handlers.end()) {
-        // Create MessageLockIn and call handler
+        // Create MessageLockIn and call handler with Transport reference
         MessageLockIn message_lock(std::move(lock), stream);
-        it->second(std::move(message_lock));
+        it->second(*this, std::move(message_lock));
     } else {
         throw TransportException("No handler registered for message type: " + std::to_string(header));
     }
