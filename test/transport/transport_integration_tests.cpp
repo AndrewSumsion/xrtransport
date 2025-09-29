@@ -79,11 +79,13 @@ public:
             transport_.reset();
         }
 
-        // Close client connection
+        // Reset stream
+        client_stream_.reset();
+
+        // Close socket after stream is reset
         if (client_socket_ && client_socket_->is_open()) {
             client_socket_->close();
         }
-        client_stream_.reset();
         client_socket_.reset();
 
         // Stop io_context
@@ -93,6 +95,12 @@ public:
 
         // Join io thread
         if (io_thread_.joinable()) {
+            // TODO: There is a bug that causes this join to stall.
+            // This is a result of the io_context getting stuck in the callback
+            // to async_wait in Transport::worker_cycle. The stall is caused by
+            // the attempt to lock. I don't know why this is happening. Every
+            // time this happens, the last place the lock was locked is in
+            // Transport::await_message
             io_thread_.join();
         }
 
@@ -122,10 +130,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 1: Simple Echo", "[integratio
     uint32_t received_data = 0;
 
     // Send message 100 with test data
-    {
-        auto msg_out = transport.start_message(100);
-        asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
-    }
+    auto msg_out = transport.start_message(100);
+    asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
 
     // Receive response message 101
     auto msg_in = transport.await_message(101);
@@ -138,10 +144,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 2: Variable Length Data", "[i
     auto& transport = GetTransport();
 
     // Send message 102 (no payload)
-    {
-        auto msg_out = transport.start_message(102);
-        // No data to write
-    }
+    auto msg_out = transport.start_message(102);
+    // No data to write
 
     // Receive response message 103
     auto msg_in = transport.await_message(103);
@@ -171,22 +175,16 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
     uint32_t echoed_result = 0;
 
     // Send message 104 with test input
-    {
-        auto msg_out = transport.start_message(104);
-        asio::write(msg_out.stream, asio::buffer(&test_input, sizeof(test_input)));
-    }
+    auto msg_out = transport.start_message(104);
+    asio::write(msg_out.stream, asio::buffer(&test_input, sizeof(test_input)));
 
     // Receive message 105 (doubled value)
-    {
-        auto msg_in = transport.await_message(105);
-        asio::read(msg_in.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
-    }
+    auto msg_in_105 = transport.await_message(105);
+    asio::read(msg_in_105.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
 
     // Receive message 106 (echoed value)
-    {
-        auto msg_in = transport.await_message(106);
-        asio::read(msg_in.stream, asio::buffer(&echoed_result, sizeof(echoed_result)));
-    }
+    auto msg_in_106 = transport.await_message(106);
+    asio::read(msg_in_106.stream, asio::buffer(&echoed_result, sizeof(echoed_result)));
 
     REQUIRE(doubled_result == test_input * 2);
     REQUIRE(echoed_result == test_input);
@@ -200,10 +198,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Multiple Sequential Requests", "[integ
         uint32_t test_data = static_cast<uint32_t>(i * 1000);
         uint32_t received_data = 0;
 
-        {
-            auto msg_out = transport.start_message(100);
-            asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
-        }
+        auto msg_out = transport.start_message(100);
+        asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
 
         auto msg_in = transport.await_message(101);
         asio::read(msg_in.stream, asio::buffer(&received_data, sizeof(received_data)));
