@@ -24,39 +24,28 @@ public:
     explicit TransportException(const std::string& message) : std::runtime_error(message) {}
 };
 
-// Forward declarations
-struct MessageLockOut;
-struct MessageLockIn;
-
 // Message type constants
 constexpr uint16_t FUNCTION_CALL = 1;
 constexpr uint16_t FUNCTION_RETURN = 2;
 constexpr uint16_t CUSTOM_BASE = 100;
 
 // RAII stream lock classes
-struct [[nodiscard]] MessageLockOut {
+template <typename Stream>
+struct [[nodiscard]] MessageLock {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncWriteStream& stream;
+    Stream& stream;
 
-    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream);
-    ~MessageLockOut(); // Release lock
-    MessageLockOut(const MessageLockOut&) = delete;
-    MessageLockOut& operator=(const MessageLockOut&) = delete;
-    MessageLockOut(MessageLockOut&&) = default;
-    MessageLockOut& operator=(MessageLockOut&&) = default;
+    MessageLock(std::unique_lock<std::recursive_mutex>&& lock, Stream& stream)
+        : lock(std::move(lock)), stream(stream) {}
+
+    MessageLock(const MessageLock&) = delete;
+    MessageLock& operator=(const MessageLock&) = delete;
+    MessageLock(MessageLock&&) = default;
+    MessageLock& operator=(MessageLock&&) = default;
 };
 
-struct [[nodiscard]] MessageLockIn {
-    std::unique_lock<std::recursive_mutex> lock;
-    SyncReadStream& stream;
-
-    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream);
-    ~MessageLockIn(); // Release lock
-    MessageLockIn(const MessageLockIn&) = delete;
-    MessageLockIn& operator=(const MessageLockIn&) = delete;
-    MessageLockIn(MessageLockIn&&) = default;
-    MessageLockIn& operator=(MessageLockIn&&) = default;
-};
+using MessageLockOut = MessageLock<SyncWriteStream>;
+using MessageLockIn = MessageLock<SyncReadStream>;
 
 // Transport class for message-based communication
 class Transport {
