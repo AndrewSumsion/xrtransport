@@ -79,6 +79,24 @@ void serialize_xr(const T* untyped, SyncWriteStream& out) {
     }
 }
 
+template <typename T>
+void serialize_xr_array(const T* untyped, std::size_t len, SyncWriteStream& out) {
+    const XrBaseInStructure* first = reinterpret_cast<const XrBaseInStructure*>(untyped);
+    std::uint32_t marker = first != nullptr ? len : 0;
+    serialize(&marker, out);
+    if (marker) {
+        std::size_t struct_size = size_lookup(first->type);
+        std::uint32_t struct_size_marker = struct_size;
+        serialize(&struct_size_marker, out);
+        StructSerializer serializer = serializer_lookup(first->type);
+        const char* array = reinterpret_cast<const char*>(first);
+        for(std::size_t i = 0; i < len; i++) {
+            serializer(reinterpret_cast<const XrBaseInStructure*>(array), out);
+            array += struct_size;
+        }
+    }
+}
+
 } // namespace xrtransport
 
 #endif // XRTRANSPORT_SERIALIZER_GENERATED_H

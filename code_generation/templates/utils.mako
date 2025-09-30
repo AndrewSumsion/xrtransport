@@ -13,24 +13,21 @@
     #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
     <% return %>
 % endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
 ## Now handle valid members
-% if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
+% if member.pointer and member.len and member_struct and member_struct.header:
+    serialize_xr_array(${binding_prefix}${member.name}, ${binding_prefix}${member.len}, ${stream_var})
+% elif (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
     serialize_xr(${binding_prefix}${member.name}, ${stream_var});
-% elif member.pointer:
+% elif member.pointer and member.len:
     <%
-        if member.len:
-            if member.len == "null-terminated":
-                count = f"count_null_terminated({binding_prefix}{member.name})"
-            else:
-                count = f"{binding_prefix}{member.len}"
+        if member.len == "null-terminated":
+            count = f"count_null_terminated({binding_prefix}{member.name})"
         else:
-            count = "1"
+            count = f"{binding_prefix}{member.len}"
     %>
     serialize_ptr(${binding_prefix}${member.name}, ${count}, ${stream_var});
+% elif member.pointer:
+    serialize_ptr(${binding_prefix}${member.name}, 1, ${stream_var});
 % elif member.array:
     serialize_array(${binding_prefix}${member.name}, ${member.array}, ${stream_var});
 % else:
@@ -53,12 +50,10 @@
     #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
     <% return %>
 % endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
 ## Now handle valid members
-% if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
+% if member.pointer and member.len and member_struct and member_struct.header:
+    deserialize_xr_array(&${binding_prefix}${member.name}, ${stream_var}, ${in_place_var});
+% elif (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
     deserialize_xr(&${binding_prefix}${member.name}, ${stream_var}, ${in_place_var});
 % elif member.pointer:
     deserialize_ptr(&${binding_prefix}${member.name}, ${stream_var}, ${in_place_var});
@@ -84,24 +79,21 @@
     #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
     <% return %>
 % endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
 ## Now handle valid members
-% if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
-    cleanup_xr(${binding_prefix}next);
-% elif member.pointer:
+% if member.pointer and member.len and member_struct and member_struct.header:
+    cleanup_xr_array(${binding_prefix}${member.name}, ${binding_prefix}${member.len});
+% elif (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
+    cleanup_xr(${binding_prefix}${member.name});
+% elif member.pointer and member.len:
     <%
-        if member.len:
-            if member.len == "null-terminated":
-                count = f"count_null_terminated({binding_prefix}{member.name})"
-            else:
-                count = f"{binding_prefix}{member.len}"
+        if member.len == "null-terminated":
+            count = f"count_null_terminated({binding_prefix}{member.name})"
         else:
-            count = "1"
+            count = f"{binding_prefix}{member.len}"
     %>
     cleanup_ptr(${binding_prefix}${member.name}, ${count});
+% elif member.pointer:
+    cleanup_ptr(${binding_prefix}${member.name}, 1);
 % elif member.array:
     cleanup_array(${binding_prefix}${member.name}, ${member.array});
 % else:

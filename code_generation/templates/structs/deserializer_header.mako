@@ -191,6 +191,23 @@ void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
     }
 }
 
+// TODO: finish this function based on serialize_xr_array
+// Also implement cleanup_xr_array to clean this one up
+// Also, I'm noticing a likely issue in the deserialize_xr functions.
+// *p_s = s is likely to need a cast.
+template <typename T>
+void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
+    std::uint32_t count{};
+    deserialize(&count, in);
+    if (count) {
+        std::uint32_t struct_size{};
+        deserialize(&struct_size, in);
+        if (!in_place) {
+            *p_s = std
+        }
+    }
+}
+
 // Generic cleaners
 template <typename T>
 void cleanup(const T* x) {
