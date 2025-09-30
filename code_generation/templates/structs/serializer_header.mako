@@ -82,17 +82,17 @@ void serialize_xr(const T* untyped, SyncWriteStream& out) {
 template <typename T>
 void serialize_xr_array(const T* untyped, std::size_t len, SyncWriteStream& out) {
     const XrBaseInStructure* first = reinterpret_cast<const XrBaseInStructure*>(untyped);
-    std::uint32_t marker = first != nullptr ? len : 0;
-    serialize(&marker, out);
-    if (marker) {
-        std::size_t struct_size = size_lookup(first->type);
-        std::uint32_t struct_size_marker = struct_size;
-        serialize(&struct_size_marker, out);
-        StructSerializer serializer = serializer_lookup(first->type);
-        const char* array = reinterpret_cast<const char*>(first);
-        for(std::size_t i = 0; i < len; i++) {
-            serializer(reinterpret_cast<const XrBaseInStructure*>(array), out);
-            array += struct_size;
+    std::uint32_t count = first != nullptr ? len : 0;
+    serialize(&count, out);
+    if (count) {
+        XrStructureType type = first->type;
+        serialize(&type, out);
+        std::size_t struct_size = size_lookup(type);
+        StructSerializer serializer = serializer_lookup(type);
+        const char* buffer = reinterpret_cast<const char*>(first);
+        for(std::uint32_t i = 0; i < count; i++) {
+            serializer(reinterpret_cast<const XrBaseInStructure*>(buffer), out);
+            buffer += struct_size;
         }
     }
 }

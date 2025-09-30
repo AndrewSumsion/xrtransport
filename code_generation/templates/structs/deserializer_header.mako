@@ -191,19 +191,28 @@ void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
     }
 }
 
-// TODO: finish this function based on serialize_xr_array
+// TODO: implement const version of this
 // Also implement cleanup_xr_array to clean this one up
 // Also, I'm noticing a likely issue in the deserialize_xr functions.
-// *p_s = s is likely to need a cast.
+// *p_s = s is likely to need a cast, not sure why this hasn't been a problem yet
 template <typename T>
 void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
     std::uint32_t count{};
     deserialize(&count, in);
     if (count) {
-        std::uint32_t struct_size{};
-        deserialize(&struct_size, in);
+        XrStructureType type{};
+        deserialize(&type, in);
+        std::size_t struct_size = size_lookup(type);
+        StructDeserializer deserializer = deserializer_lookup(type);
         if (!in_place) {
-            *p_s = std
+            *p_s = reinterpret_cast<T*>(std::malloc(struct_size * count));
+        }
+        char* buffer = reinterpret_cast<char*>(*p_s);
+        XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(*p_s);
+        for(std::uint32_t i = 0; i < count; i++) {
+            XrBaseOutStructure* s = reinterpret_cast<XrBaseOutStructure*>(buffer);
+            deserializer(s, in, in_place);
+            buffer += struct_size;
         }
     }
 }
