@@ -5056,7 +5056,15 @@ void serialize_ptr(const T* x, std::size_t len, SyncWriteStream& out) {
     }
 }
 
-void serialize_xr(const void* untyped, SyncWriteStream& out);
+template <typename T>
+void serialize_xr(const T* untyped, SyncWriteStream& out) {
+    const XrBaseInStructure* x = reinterpret_cast<const XrBaseInStructure*>(untyped);
+    XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
+    serialize(&type, out);
+    if (type != XR_TYPE_UNKNOWN) {
+        serializer_lookup(type)(x, out);
+    }
+}
 
 } // namespace xrtransport
 

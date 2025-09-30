@@ -10,89 +10,18 @@
 
 <%namespace name="utils" file="utils.mako"/>
 
-<%def name="deserialize_member(member, binding_prefix='s->')">
-<% member_struct = spec.find_struct(member.type) %>
-## First, check for cases that must be manually implemented
-% if member.pointer and member.array:
-    #error "auto-generator doesn't support array of pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.pointer != "*":
-    #error "auto-generator doesn't support double pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.len and "," in member.len:
-    #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-## Now handle valid members
-% if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
-    deserialize_xr(&${binding_prefix}next, in, in_place);
-% elif member.pointer:
-    deserialize_ptr(&${binding_prefix}${member.name}, in, in_place);
-% elif member.array:
-    deserialize_array(${binding_prefix}${member.name}, ${member.array}, in, in_place);
-% else:
-    deserialize(&${binding_prefix}${member.name}, in, in_place);
-% endif
-</%def>
-
 <%def name="deserializer(struct)">
 void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place) {
     % for member in struct.members:
-        ${deserialize_member(member)}
+        ${utils.deserialize_member(member)}
     % endfor
 }
-</%def>
-
-<%def name="cleanup_member(member, binding_prefix='s->')">
-<% member_struct = spec.find_struct(member.type) %>
-## First, check for cases that must be manually implemented
-% if member.pointer and member.array:
-    #error "auto-generator doesn't support array of pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.pointer != "*":
-    #error "auto-generator doesn't support double pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.len and "," in member.len:
-    #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-## Now handle valid members
-% if (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
-    cleanup_xr(${binding_prefix}next);
-% elif member.pointer:
-    <%
-        if member.len:
-            if member.len == "null-terminated":
-                count = f"count_null_terminated({binding_prefix}{member.name})"
-            else:
-                count = f"{binding_prefix}{member.len}"
-        else:
-            count = "1"
-    %>
-    cleanup_ptr(${binding_prefix}${member.name}, ${count});
-% elif member.array:
-    cleanup_array(${binding_prefix}${member.name}, ${member.array});
-% else:
-    cleanup(&${binding_prefix}${member.name});
-% endif
 </%def>
 
 <%def name="cleaner(struct)">
 void cleanup(const ${struct.name}* s) {
     % for member in struct.members:
-        ${cleanup_member(member)}
+        ${utils.cleanup_member(member)}
     % endfor
 }
 </%def>
@@ -133,63 +62,6 @@ std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
 std::size_t size_lookup(XrStructureType struct_type) {
     assert(size_lookup_table.find(struct_type) != size_lookup_table.end());
     return size_lookup_table.at(struct_type);
-}
-
-void deserialize_xr(const void** p_s, SyncReadStream& in, bool in_place) {
-    XrStructureType type{};
-    deserialize(&type, in, in_place);
-    if (type) {
-        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
-            assert(false && "Attempted to deserialize in-place to nullptr");
-        }
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
-            *p_s = s;
-        }
-    }
-    else {
-        if (in_place && *p_s) {
-            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
-        }
-        if (!in_place) {
-            *p_s = nullptr;
-        }
-    }
-}
-
-void deserialize_xr(void** p_s, SyncReadStream& in, bool in_place) {
-    XrStructureType type{};
-    deserialize(&type, in, in_place);
-    if (type) {
-        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
-            assert(false && "Attempted to deserialize in-place to nullptr");
-        }
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
-            *p_s = s;
-        }
-    }
-    else {
-        if (in_place && *p_s) {
-            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
-        }
-        if (!in_place) {
-            *p_s = nullptr;
-        }
-    }
-}
-
-void cleanup_xr(const void* untyped) {
-    if (!untyped) {
-        return; // do not clean up null pointer
-    }
-    const XrBaseOutStructure* x = static_cast<const XrBaseOutStructure*>(untyped);
-    cleaner_lookup(x->type)(x);
-    std::free(const_cast<void*>(untyped));
 }
 
 // Deserializers

@@ -14,10 +14,6 @@
 
 
 
-
-
-
-
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
 
@@ -8645,63 +8641,6 @@ std::size_t size_lookup(XrStructureType struct_type) {
     return size_lookup_table.at(struct_type);
 }
 
-void deserialize_xr(const void** p_s, SyncReadStream& in, bool in_place) {
-    XrStructureType type{};
-    deserialize(&type, in, in_place);
-    if (type) {
-        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
-            assert(false && "Attempted to deserialize in-place to nullptr");
-        }
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
-            *p_s = s;
-        }
-    }
-    else {
-        if (in_place && *p_s) {
-            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
-        }
-        if (!in_place) {
-            *p_s = nullptr;
-        }
-    }
-}
-
-void deserialize_xr(void** p_s, SyncReadStream& in, bool in_place) {
-    XrStructureType type{};
-    deserialize(&type, in, in_place);
-    if (type) {
-        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
-            assert(false && "Attempted to deserialize in-place to nullptr");
-        }
-        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
-            *p_s = s;
-        }
-    }
-    else {
-        if (in_place && *p_s) {
-            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
-        }
-        if (!in_place) {
-            *p_s = nullptr;
-        }
-    }
-}
-
-void cleanup_xr(const void* untyped) {
-    if (!untyped) {
-        return; // do not clean up null pointer
-    }
-    const XrBaseOutStructure* x = static_cast<const XrBaseOutStructure*>(untyped);
-    cleaner_lookup(x->type)(x);
-    std::free(const_cast<void*>(untyped));
-}
-
 // Deserializers
 
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
@@ -12822,11 +12761,11 @@ void deserialize(XrInteractionProfileDpadBindingEXT* s, SyncReadStream& in, bool
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->onHaptic, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->offHaptic, in, in_place);
 
 }
 
@@ -12872,11 +12811,11 @@ void deserialize(XrInteractionProfileDpadBindingEXT* s, SyncReadStream& in, bool
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->onHaptic, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->offHaptic, in, in_place);
 
 }
 
@@ -12912,11 +12851,11 @@ void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, SyncReadStream& in
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->onHaptic, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->offHaptic, in, in_place);
 
 }
 
@@ -12950,11 +12889,11 @@ void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, SyncReadStream& in
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->onHaptic, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->offHaptic, in, in_place);
 
 }
 
@@ -18974,11 +18913,11 @@ void deserialize(XrSpaceQueryInfoFB* s, SyncReadStream& in, bool in_place) {
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->filter, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->excludeFilter, in, in_place);
 
 }
 
@@ -19146,11 +19085,11 @@ void deserialize(XrSpaceQueryInfoFB* s, SyncReadStream& in, bool in_place) {
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->filter, in, in_place);
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->excludeFilter, in, in_place);
 
 }
 
@@ -22630,7 +22569,7 @@ void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, SyncReadStream& in,
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->layer, in, in_place);
 
         
 
@@ -22674,7 +22613,7 @@ void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, SyncReadStream& in,
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->layer, in, in_place);
 
         
 
@@ -23382,7 +23321,7 @@ void deserialize(XrShareSpacesInfoMETA* s, SyncReadStream& in, bool in_place) {
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->recipientInfo, in, in_place);
 
 }
 
@@ -23448,7 +23387,7 @@ void deserialize(XrShareSpacesInfoMETA* s, SyncReadStream& in, bool in_place) {
 
         
 
-    deserialize_xr(&s->next, in, in_place);
+    deserialize_xr(&s->recipientInfo, in, in_place);
 
 }
 

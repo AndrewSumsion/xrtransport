@@ -144,8 +144,55 @@ void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
     }
 }
 
-void deserialize_xr(const void** p_s, SyncReadStream& in, bool in_place = false);
-void deserialize_xr(void** p_s, SyncReadStream& in, bool in_place = false);
+template <typename T>
+void deserialize_xr(const T** p_s, SyncReadStream& in, bool in_place = false) {
+    XrStructureType type{};
+    deserialize(&type, in, in_place);
+    if (type) {
+        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
+    }
+    else {
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
+    }
+}
+
+template <typename T>
+void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
+    XrStructureType type{};
+    deserialize(&type, in, in_place);
+    if (type) {
+        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
+        if (in_place && !dest) {
+            assert(false && "Attempted to deserialize in-place to nullptr");
+        }
+        XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
+        deserializer_lookup(type)(s, in, in_place);
+        if (!in_place) {
+            *p_s = s;
+        }
+    }
+    else {
+        if (in_place && *p_s) {
+            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+        }
+        if (!in_place) {
+            *p_s = nullptr;
+        }
+    }
+}
 
 // Generic cleaners
 template <typename T>
@@ -174,7 +221,15 @@ void cleanup_ptr(const T* x, std::size_t len) {
     std::free(const_cast<T*>(x));
 }
 
-void cleanup_xr(const void* untyped);
+template <typename T>
+void cleanup_xr(const T* untyped) {
+    if (!untyped) {
+        return; // do not clean up null pointer
+    }
+    const XrBaseOutStructure* x = reinterpret_cast<const XrBaseOutStructure*>(untyped);
+    cleaner_lookup(x->type)(x);
+    std::free(const_cast<XrBaseOutStructure*>(x));
+}
 
 } // namespace xrtransport
 

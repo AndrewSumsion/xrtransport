@@ -65,7 +65,7 @@ class XrFunction:
         self.id = None
     
     def declaration(self):
-        param_list = ", ".join(f"{p.full_type()} {p.name}" for p in self.params)
+        param_list = ", ".join(p.declaration() for p in self.params)
         return f"XRAPI_ATTR XrResult XRAPI_CALL {self.name}({param_list})"
 
 class XrParam:
@@ -91,6 +91,14 @@ class XrParam:
         
         return full_type
 
+    def declaration(self):
+        qualifier = self.qualifier + " " if self.qualifier else ""
+        type = self.type
+        pointer = self.pointer if self.pointer else ""
+        name = self.name
+        array = f"[{self.array}]" if self.array else ""
+        return f"{qualifier}{type}{pointer} {name}{array}"
+
 struct_blacklist = {
     # ignore structs and functions associated with loader negotiation
     # all API layer logic will remain on the client, not transported
@@ -104,7 +112,9 @@ struct_blacklist = {
     "XrBaseOutStructure",
 }
 function_blacklist = {
-    
+    "xrNegotiateLoaderRuntimeInterface",
+    "xrNegotiateLoaderApiLayerInterface",
+    "xrCreateApiLayerInstance"
 }
 
 def get_xml_root(xml_path):

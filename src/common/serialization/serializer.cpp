@@ -12,8 +12,6 @@
 
 
 
-
-
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/util.h"
 
@@ -2891,15 +2889,6 @@ std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = 
 StructSerializer serializer_lookup(XrStructureType struct_type) {
     assert(serializer_lookup_table.find(struct_type) != serializer_lookup_table.end());
     return serializer_lookup_table[struct_type];
-}
-
-void serialize_xr(const void* untyped, SyncWriteStream& out) {
-    const XrBaseInStructure* x = static_cast<const XrBaseInStructure*>(untyped);
-    XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
-    serialize(&type, out);
-    if (type != XR_TYPE_UNKNOWN) {
-        serializer_lookup(type)(x, out);
-    }
 }
 
 // Serializers
@@ -7087,13 +7076,11 @@ void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out
 
             
 
-    
-    serialize_ptr(s->onHaptic, 1, out);
+    serialize_xr(s->onHaptic, out);
 
             
 
-    
-    serialize_ptr(s->offHaptic, 1, out);
+    serialize_xr(s->offHaptic, out);
 
 }
 
@@ -7139,13 +7126,11 @@ void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out
 
             
 
-    
-    serialize_ptr(s->onHaptic, 1, out);
+    serialize_xr(s->onHaptic, out);
 
             
 
-    
-    serialize_ptr(s->offHaptic, 1, out);
+    serialize_xr(s->offHaptic, out);
 
 }
 
@@ -7181,13 +7166,11 @@ void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStrea
 
             
 
-    
-    serialize_ptr(s->onHaptic, 1, out);
+    serialize_xr(s->onHaptic, out);
 
             
 
-    
-    serialize_ptr(s->offHaptic, 1, out);
+    serialize_xr(s->offHaptic, out);
 
 }
 
@@ -7221,13 +7204,11 @@ void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStrea
 
             
 
-    
-    serialize_ptr(s->onHaptic, 1, out);
+    serialize_xr(s->onHaptic, out);
 
             
 
-    
-    serialize_ptr(s->offHaptic, 1, out);
+    serialize_xr(s->offHaptic, out);
 
 }
 
@@ -13296,13 +13277,11 @@ void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
-    serialize_ptr(s->filter, 1, out);
+    serialize_xr(s->filter, out);
 
             
 
-    
-    serialize_ptr(s->excludeFilter, 1, out);
+    serialize_xr(s->excludeFilter, out);
 
 }
 
@@ -13472,13 +13451,11 @@ void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
-    serialize_ptr(s->filter, 1, out);
+    serialize_xr(s->filter, out);
 
             
 
-    
-    serialize_ptr(s->excludeFilter, 1, out);
+    serialize_xr(s->excludeFilter, out);
 
 }
 
@@ -16994,8 +16971,7 @@ void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream
 
             
 
-    
-    serialize_ptr(s->layer, 1, out);
+    serialize_xr(s->layer, out);
 
             
 
@@ -17039,8 +17015,7 @@ void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream
 
             
 
-    
-    serialize_ptr(s->layer, 1, out);
+    serialize_xr(s->layer, out);
 
             
 
@@ -17753,8 +17728,7 @@ void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out) {
 
             
 
-    
-    serialize_ptr(s->recipientInfo, 1, out);
+    serialize_xr(s->recipientInfo, out);
 
 }
 
@@ -17821,8 +17795,7 @@ void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out) {
 
             
 
-    
-    serialize_ptr(s->recipientInfo, 1, out);
+    serialize_xr(s->recipientInfo, out);
 
 }
 

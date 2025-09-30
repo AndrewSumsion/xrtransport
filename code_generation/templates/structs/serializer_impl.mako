@@ -10,53 +10,13 @@
 
 <%namespace name="utils" file="utils.mako"/>
 
-<%def name="serialize_member(member, binding_prefix='s->')">
-<% member_struct = spec.find_struct(member.type) %>
-## First, check for cases that must be manually implemented
-% if member.pointer and member.array:
-    #error "auto-generator doesn't support array of pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.pointer != "*":
-    #error "auto-generator doesn't support double pointers (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.len and "," in member.len:
-    #error "auto-generator doesn't support multi-variable lengths (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-% if member.pointer and member.len and member_struct and member_struct.header:
-    #error "auto-generator doesn't support arrays of header structs (${binding_prefix}${member.name})"
-    <% return %>
-% endif
-## Now handle valid members
-% if member.type == "void" and member.pointer == "*" and member.name == "next":
-    serialize_xr(${binding_prefix}next, out);
-% elif member.pointer:
-    <%
-        if member.len:
-            if member.len == "null-terminated":
-                count = f"count_null_terminated({binding_prefix}{member.name})"
-            else:
-                count = f"{binding_prefix}{member.len}"
-        else:
-            count = "1"
-    %>
-    serialize_ptr(${binding_prefix}${member.name}, ${count}, out);
-% elif member.array:
-    serialize_array(${binding_prefix}${member.name}, ${member.array}, out);
-% else:
-    serialize(&${binding_prefix}${member.name}, out);
-% endif
-</%def>
-
 <%def name="serializer(struct)">
 void serialize(const ${struct.name}* s, SyncWriteStream& out) {
     % if struct.header:
         serialize_xr(s, out);
     % else:
         % for member in struct.members:
-            ${serialize_member(member)}
+            ${utils.serialize_member(member)}
         % endfor
     % endif
 }
@@ -76,15 +36,6 @@ std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = 
 StructSerializer serializer_lookup(XrStructureType struct_type) {
     assert(serializer_lookup_table.find(struct_type) != serializer_lookup_table.end());
     return serializer_lookup_table[struct_type];
-}
-
-void serialize_xr(const void* untyped, SyncWriteStream& out) {
-    const XrBaseInStructure* x = static_cast<const XrBaseInStructure*>(untyped);
-    XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
-    serialize(&type, out);
-    if (type != XR_TYPE_UNKNOWN) {
-        serializer_lookup(type)(x, out);
-    }
 }
 
 // Serializers

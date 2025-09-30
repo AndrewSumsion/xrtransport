@@ -9,6 +9,7 @@ from . import (
     generate_serializer_impl,
     generate_deserializer_header,
     generate_deserializer_impl,
+    generate_function_entry_points,
     generate_struct_reflection,
     generate_struct_fuzzer,
     generate_function_ids,
@@ -58,6 +59,7 @@ apply_function_ids(spec, function_ids)
 os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
 os.makedirs(os.path.join(include_path, "reflection"), exist_ok=True)
 os.makedirs(os.path.join(src_path, "serialization"), exist_ok=True)
+os.makedirs(os.path.join(src_path, "client"), exist_ok=True)
 os.makedirs(os.path.join(test_path, "serialization"), exist_ok=True)
 
 serializer_header_path = os.path.join(include_path, "serialization", "serializer.h")
@@ -65,6 +67,7 @@ serializer_impl_path = os.path.join(src_path, "common", "serialization", "serial
 deserializer_header_path = os.path.join(include_path, "serialization", "deserializer.h")
 deserializer_impl_path = os.path.join(src_path, "common", "serialization", "deserializer.cpp")
 reflection_struct_path = os.path.join(include_path, "reflection", "reflection_struct.h")
+entry_points_path = os.path.join(src_path, "client", "entry_points.cpp")
 serialization_tests_path = os.path.join(test_path, "serialization", "fuzzer.cpp")
 
 with open(serializer_header_path, "wb") as out:
@@ -77,5 +80,7 @@ with open(deserializer_impl_path, "wb") as out:
     generate_deserializer_impl(spec, TEMPLATES_DIR, out)
 with open(reflection_struct_path, "wb") as out:
     generate_struct_reflection(spec, TEMPLATES_DIR, out)
+with open(entry_points_path, "wb") as out:
+    generate_function_entry_points(spec, TEMPLATES_DIR, out)
 with open(serialization_tests_path, "wb") as out:
     generate_struct_fuzzer(spec, TEMPLATES_DIR, out, fuzzer_seed)

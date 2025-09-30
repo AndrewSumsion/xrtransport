@@ -1,0 +1,1 @@
+from .entry_points import generate_function_entry_points
