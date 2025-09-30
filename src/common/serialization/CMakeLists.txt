@@ -6,6 +6,7 @@ add_library(xrtransport_serialization STATIC
     deserializer.cpp
     custom_serializer.cpp
     custom_deserializer.cpp
+    struct_size.cpp
 )
 
 # Set target properties

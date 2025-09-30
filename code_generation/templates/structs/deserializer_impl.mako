@@ -53,17 +53,6 @@ StructCleaner cleaner_lookup(XrStructureType struct_type) {
     return cleaner_lookup_table.at(struct_type);
 }
 
-std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
-<%utils:for_grouped_structs xr_structs_only="True" args="struct">
-    {${struct.xr_type}, sizeof(${struct.name})},
-</%utils:for_grouped_structs>
-};
-
-std::size_t size_lookup(XrStructureType struct_type) {
-    assert(size_lookup_table.find(struct_type) != size_lookup_table.end());
-    return size_lookup_table.at(struct_type);
-}
-
 // Deserializers
 <%utils:for_grouped_structs args="struct">
 % if not struct.custom:

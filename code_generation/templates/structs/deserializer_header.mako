@@ -23,6 +23,7 @@ void cleanup(const ${struct.name}* s);
 
 #include "openxr/openxr.h"
 #include "xrtransport/asio_compat.h"
+#include "struct_size.h"
 
 #define ASIO_STANDALONE
 #include "asio/read.hpp"
@@ -58,10 +59,6 @@ using StructCleaner = void(*)(const XrBaseOutStructure*);
 #define STRUCT_CLEANER_PTR(t) (reinterpret_cast<StructCleaner>(static_cast<void(*)(const t*)>(&cleanup)))
 
 StructCleaner cleaner_lookup(XrStructureType struct_type);
-
-// Struct size lookup
-// Only to be used with OpenXR pNext structs
-std::size_t size_lookup(XrStructureType struct_type);
 
 // Generic deserializers
 template <typename T>
