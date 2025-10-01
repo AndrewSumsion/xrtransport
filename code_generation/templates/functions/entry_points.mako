@@ -16,13 +16,15 @@
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
 
-#define XR_USE_PLATFORM_WIN32
-#define XR_USE_GRAPHICS_API_OPENGL_ES
-#define XR_USE_GRAPHICS_API_VULKAN
+#ifdef _MSC_VER
+#define XRAPI_ATTR __declspec(dllexport)
+#endif
+#define XR_EXTENSION_PROTOTYPES
 #include <openxr/openxr.h>
-#include <openxr/openxr_platform.h>
 
-namespace xrtransport {
+using namespace xrtransport;
+
+extern "C" {
 
 <%utils:for_grouped_functions args="function">
 ${function.declaration()} {
@@ -45,4 +47,4 @@ ${function.declaration()} {
 }
 </%utils:for_grouped_functions>
 
-} // namespace xrtransport
+} // extern "C"

@@ -17,6 +17,7 @@
 
 #include "openxr/openxr.h"
 #include "xrtransport/asio_compat.h"
+#include "struct_size.h"
 
 #define ASIO_STANDALONE
 #include "asio/write.hpp"
@@ -5063,6 +5064,24 @@ void serialize_xr(const T* untyped, SyncWriteStream& out) {
     serialize(&type, out);
     if (type != XR_TYPE_UNKNOWN) {
         serializer_lookup(type)(x, out);
+    }
+}
+
+template <typename T>
+void serialize_xr_array(const T* untyped, std::size_t len, SyncWriteStream& out) {
+    const XrBaseInStructure* first = reinterpret_cast<const XrBaseInStructure*>(untyped);
+    std::uint32_t count = first != nullptr ? len : 0;
+    serialize(&count, out);
+    if (count) {
+        XrStructureType type = first->type;
+        serialize(&type, out);
+        std::size_t struct_size = size_lookup(type);
+        StructSerializer serializer = serializer_lookup(type);
+        const char* buffer = reinterpret_cast<const char*>(first);
+        for(std::uint32_t i = 0; i < count; i++) {
+            serializer(reinterpret_cast<const XrBaseInStructure*>(buffer), out);
+            buffer += struct_size;
+        }
     }
 }
 

@@ -27603,12 +27603,10 @@ void cleanup(const XrInstanceCreateInfoAndroidKHR* s) {
 
         
 
-    
     cleanup_ptr(s->applicationVM, 1);
 
         
 
-    
     cleanup_ptr(s->applicationActivity, 1);
 
 }
@@ -27627,12 +27625,10 @@ void cleanup(const XrInstanceCreateInfoAndroidKHR* s) {
 
         
 
-    
     cleanup_ptr(s->applicationVM, 1);
 
         
 
-    
     cleanup_ptr(s->applicationActivity, 1);
 
 }
@@ -28128,7 +28124,6 @@ void cleanup(const XrDebugUtilsMessengerCreateInfoEXT* s) {
 
         
 
-    
     cleanup_ptr(s->userData, 1);
 
 }
@@ -28233,7 +28228,6 @@ void cleanup(const XrDebugUtilsMessengerCreateInfoEXT* s) {
 
         
 
-    
     cleanup_ptr(s->userData, 1);
 
 }
@@ -28295,7 +28289,6 @@ void cleanup(const XrGraphicsBindingOpenGLXlibKHR* s) {
 
         
 
-    
     cleanup_ptr(s->xDisplay, 1);
 
         
@@ -28330,7 +28323,6 @@ void cleanup(const XrGraphicsBindingOpenGLXcbKHR* s) {
 
         
 
-    
     cleanup_ptr(s->connection, 1);
 
         
@@ -28369,7 +28361,6 @@ void cleanup(const XrGraphicsBindingOpenGLWaylandKHR* s) {
 
         
 
-    
     cleanup_ptr(s->display, 1);
 
 }
@@ -28450,7 +28441,6 @@ void cleanup(const XrGraphicsBindingOpenGLXlibKHR* s) {
 
         
 
-    
     cleanup_ptr(s->xDisplay, 1);
 
         
@@ -28485,7 +28475,6 @@ void cleanup(const XrGraphicsBindingOpenGLXcbKHR* s) {
 
         
 
-    
     cleanup_ptr(s->connection, 1);
 
         
@@ -28524,7 +28513,6 @@ void cleanup(const XrGraphicsBindingOpenGLWaylandKHR* s) {
 
         
 
-    
     cleanup_ptr(s->display, 1);
 
 }
@@ -28869,7 +28857,6 @@ void cleanup(const XrGraphicsBindingD3D11KHR* s) {
 
         
 
-    
     cleanup_ptr(s->device, 1);
 
 }
@@ -28888,7 +28875,6 @@ void cleanup(const XrSwapchainImageD3D11KHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -28929,7 +28915,6 @@ void cleanup(const XrGraphicsBindingD3D11KHR* s) {
 
         
 
-    
     cleanup_ptr(s->device, 1);
 
 }
@@ -28948,7 +28933,6 @@ void cleanup(const XrSwapchainImageD3D11KHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -28991,12 +28975,10 @@ void cleanup(const XrGraphicsBindingD3D12KHR* s) {
 
         
 
-    
     cleanup_ptr(s->device, 1);
 
         
 
-    
     cleanup_ptr(s->queue, 1);
 
 }
@@ -29015,7 +28997,6 @@ void cleanup(const XrSwapchainImageD3D12KHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -29056,12 +29037,10 @@ void cleanup(const XrGraphicsBindingD3D12KHR* s) {
 
         
 
-    
     cleanup_ptr(s->device, 1);
 
         
 
-    
     cleanup_ptr(s->queue, 1);
 
 }
@@ -29080,7 +29059,6 @@ void cleanup(const XrSwapchainImageD3D12KHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -29123,7 +29101,6 @@ void cleanup(const XrGraphicsBindingMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->commandQueue, 1);
 
 }
@@ -29142,7 +29119,6 @@ void cleanup(const XrSwapchainImageMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -29161,7 +29137,6 @@ void cleanup(const XrGraphicsRequirementsMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->metalDevice, 1);
 
 }
@@ -29180,7 +29155,6 @@ void cleanup(const XrGraphicsBindingMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->commandQueue, 1);
 
 }
@@ -29199,7 +29173,6 @@ void cleanup(const XrSwapchainImageMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->texture, 1);
 
 }
@@ -29218,7 +29191,6 @@ void cleanup(const XrGraphicsRequirementsMetalKHR* s) {
 
         
 
-    
     cleanup_ptr(s->metalDevice, 1);
 
 }
@@ -31163,12 +31135,10 @@ void cleanup(const XrHolographicWindowAttachmentMSFT* s) {
 
         
 
-    
     cleanup_ptr(s->holographicSpace, 1);
 
         
 
-    
     cleanup_ptr(s->coreWindow, 1);
 
 }
@@ -31187,12 +31157,10 @@ void cleanup(const XrHolographicWindowAttachmentMSFT* s) {
 
         
 
-    
     cleanup_ptr(s->holographicSpace, 1);
 
         
 
-    
     cleanup_ptr(s->coreWindow, 1);
 
 }
@@ -31697,11 +31665,11 @@ void cleanup(const XrInteractionProfileDpadBindingEXT* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->onHaptic);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->offHaptic);
 
 }
 
@@ -31747,11 +31715,11 @@ void cleanup(const XrInteractionProfileDpadBindingEXT* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->onHaptic);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->offHaptic);
 
 }
 
@@ -31787,11 +31755,11 @@ void cleanup(const XrInteractionProfileAnalogThresholdVALVE* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->onHaptic);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->offHaptic);
 
 }
 
@@ -31825,11 +31793,11 @@ void cleanup(const XrInteractionProfileAnalogThresholdVALVE* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->onHaptic);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->offHaptic);
 
 }
 
@@ -31903,12 +31871,10 @@ void cleanup(const XrLoaderInitInfoAndroidKHR* s) {
 
         
 
-    
     cleanup_ptr(s->applicationVM, 1);
 
         
 
-    
     cleanup_ptr(s->applicationContext, 1);
 
 }
@@ -31927,12 +31893,10 @@ void cleanup(const XrLoaderInitInfoAndroidKHR* s) {
 
         
 
-    
     cleanup_ptr(s->applicationVM, 1);
 
         
 
-    
     cleanup_ptr(s->applicationContext, 1);
 
 }
@@ -31965,12 +31929,10 @@ void cleanup(const XrVulkanInstanceCreateInfoKHR* s) {
 
         
 
-    
     cleanup_ptr(s->vulkanCreateInfo, 1);
 
         
 
-    
     cleanup_ptr(s->vulkanAllocator, 1);
 
 }
@@ -32005,12 +31967,10 @@ void cleanup(const XrVulkanDeviceCreateInfoKHR* s) {
 
         
 
-    
     cleanup_ptr(s->vulkanCreateInfo, 1);
 
         
 
-    
     cleanup_ptr(s->vulkanAllocator, 1);
 
 }
@@ -32063,12 +32023,10 @@ void cleanup(const XrVulkanInstanceCreateInfoKHR* s) {
 
         
 
-    
     cleanup_ptr(s->vulkanCreateInfo, 1);
 
         
 
-    
     cleanup_ptr(s->vulkanAllocator, 1);
 
 }
@@ -32103,12 +32061,10 @@ void cleanup(const XrVulkanDeviceCreateInfoKHR* s) {
 
         
 
-    
     cleanup_ptr(s->vulkanCreateInfo, 1);
 
         
 
-    
     cleanup_ptr(s->vulkanAllocator, 1);
 
 }
@@ -33445,7 +33401,6 @@ void cleanup(const XrEventDataViveTrackerConnectedHTCX* s) {
 
         
 
-    
     cleanup_ptr(s->paths, 1);
 
 }
@@ -33486,7 +33441,6 @@ void cleanup(const XrEventDataViveTrackerConnectedHTCX* s) {
 
         
 
-    
     cleanup_ptr(s->paths, 1);
 
 }
@@ -33541,7 +33495,6 @@ void cleanup(const XrFacialExpressionsHTC* s) {
 
         
 
-    
     cleanup_ptr(s->expressionWeightings, 1);
 
 }
@@ -33630,7 +33583,6 @@ void cleanup(const XrFacialExpressionsHTC* s) {
 
         
 
-    
     cleanup_ptr(s->expressionWeightings, 1);
 
 }
@@ -34703,7 +34655,6 @@ void cleanup(const XrTriangleMeshCreateInfoFB* s) {
 
         
 
-    
     cleanup_ptr(s->vertexBuffer, 1);
 
         
@@ -34712,7 +34663,6 @@ void cleanup(const XrTriangleMeshCreateInfoFB* s) {
 
         
 
-    
     cleanup_ptr(s->indexBuffer, 1);
 
 }
@@ -34743,7 +34693,6 @@ void cleanup(const XrTriangleMeshCreateInfoFB* s) {
 
         
 
-    
     cleanup_ptr(s->vertexBuffer, 1);
 
         
@@ -34752,7 +34701,6 @@ void cleanup(const XrTriangleMeshCreateInfoFB* s) {
 
         
 
-    
     cleanup_ptr(s->indexBuffer, 1);
 
 }
@@ -37947,11 +37895,11 @@ void cleanup(const XrSpaceQueryInfoFB* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->filter);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->excludeFilter);
 
 }
 
@@ -38121,11 +38069,11 @@ void cleanup(const XrSpaceQueryInfoFB* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->filter);
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->excludeFilter);
 
 }
 
@@ -40160,7 +40108,6 @@ void cleanup(const XrHapticPcmVibrationFB* s) {
 
         
 
-    
     cleanup_ptr(s->samplesConsumed, 1);
 
 }
@@ -40214,7 +40161,6 @@ void cleanup(const XrHapticPcmVibrationFB* s) {
 
         
 
-    
     cleanup_ptr(s->samplesConsumed, 1);
 
 }
@@ -41641,7 +41587,7 @@ void cleanup(const XrRecommendedLayerResolutionGetInfoMETA* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->layer);
 
         
 
@@ -41685,7 +41631,7 @@ void cleanup(const XrRecommendedLayerResolutionGetInfoMETA* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->layer);
 
         
 
@@ -42405,7 +42351,7 @@ void cleanup(const XrShareSpacesInfoMETA* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->recipientInfo);
 
 }
 
@@ -42472,7 +42418,7 @@ void cleanup(const XrShareSpacesInfoMETA* s) {
 
         
 
-    cleanup_xr(s->next);
+    cleanup_xr(s->recipientInfo);
 
 }
 

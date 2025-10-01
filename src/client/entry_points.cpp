@@ -16,13 +16,15 @@
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
 
-#define XR_USE_PLATFORM_WIN32
-#define XR_USE_GRAPHICS_API_OPENGL_ES
-#define XR_USE_GRAPHICS_API_VULKAN
+#ifdef _MSC_VER
+#define XRAPI_ATTR __declspec(dllexport)
+#endif
+#define XR_EXTENSION_PROTOTYPES
 #include <openxr/openxr.h>
-#include <openxr/openxr_platform.h>
 
-namespace xrtransport {
+using namespace xrtransport;
+
+extern "C" {
 
 
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
@@ -78,17 +80,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(swapchain, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(surface, 1, msg_out.stream);
 
 
@@ -181,17 +180,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
 
     
 
-    
     serialize_ptr(notificationLevel, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(tempHeadroom, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(tempSlope, 1, msg_out.stream);
 
 
@@ -240,7 +236,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
 
     
 
-    
     serialize_ptr(nameInfo, 1, msg_out.stream);
 
 
@@ -271,12 +266,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(messenger, 1, msg_out.stream);
 
 
@@ -341,7 +334,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
 
     
 
-    
     serialize_ptr(callbackData, 1, msg_out.stream);
 
 
@@ -380,7 +372,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
 
     
 
-    
     serialize_ptr(labelInfo, 1, msg_out.stream);
 
 
@@ -433,7 +424,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
 
     
 
-    
     serialize_ptr(labelInfo, 1, msg_out.stream);
 
 
@@ -470,7 +460,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -511,7 +500,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -556,7 +544,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -612,7 +599,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -668,7 +654,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
 
     
 
-    
     serialize_ptr(vkPhysicalDevice, 1, msg_out.stream);
 
 
@@ -711,7 +696,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -752,7 +736,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -793,7 +776,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -834,7 +816,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
 
     
 
-    
     serialize_ptr(graphicsRequirements, 1, msg_out.stream);
 
 
@@ -885,7 +866,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
 
     
 
-    
     serialize_ptr(visibilityMask, 1, msg_out.stream);
 
 
@@ -934,12 +914,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
 
     
 
-    
     serialize_ptr(performanceCounter, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(time, 1, msg_out.stream);
 
 
@@ -978,7 +956,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
 
     
 
-    
     serialize_ptr(performanceCounter, 1, msg_out.stream);
 
 
@@ -1015,12 +992,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
 
     
 
-    
     serialize_ptr(timespecTime, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(time, 1, msg_out.stream);
 
 
@@ -1059,7 +1034,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
 
     
 
-    
     serialize_ptr(timespecTime, 1, msg_out.stream);
 
 
@@ -1096,12 +1070,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(anchor, 1, msg_out.stream);
 
 
@@ -1136,12 +1108,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -1448,12 +1418,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -1488,12 +1456,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(nodeBinding, 1, msg_out.stream);
 
 
@@ -1550,12 +1516,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(properties, 1, msg_out.stream);
 
 
@@ -1592,12 +1556,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(handTracker, 1, msg_out.stream);
 
 
@@ -1654,12 +1616,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -1696,12 +1656,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -1736,12 +1694,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
 
     
 
-    
     serialize_ptr(updateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(handMesh, 1, msg_out.stream);
 
 
@@ -1784,7 +1740,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
 
     
 
-    
     serialize_ptr(controllerModelKeyState, 1, msg_out.stream);
 
 
@@ -1827,7 +1782,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -1879,7 +1833,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
 
     
 
-    
     serialize_ptr(properties, 1, msg_out.stream);
 
 
@@ -1918,7 +1871,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -1955,12 +1907,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
 
     
 
-    
     serialize_ptr(perceptionAnchor, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(anchor, 1, msg_out.stream);
 
 
@@ -2051,7 +2001,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
 
     
 
-    
     serialize_ptr(modeCountOutput, 1, msg_out.stream);
 
     
@@ -2171,12 +2120,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(bodyTracker, 1, msg_out.stream);
 
 
@@ -2233,12 +2180,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -2273,7 +2218,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
 
     
 
-    
     serialize_ptr(skeleton, 1, msg_out.stream);
 
 
@@ -2338,17 +2282,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(vulkanInstance, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(vulkanResult, 1, msg_out.stream);
 
 
@@ -2387,17 +2328,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(vulkanDevice, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(vulkanResult, 1, msg_out.stream);
 
 
@@ -2436,12 +2374,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(vulkanPhysicalDevice, 1, msg_out.stream);
 
 
@@ -2488,7 +2424,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
 
     
 
-    
     serialize_ptr(featureCountOutput, 1, msg_out.stream);
 
     
@@ -2536,12 +2471,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(sceneObserver, 1, msg_out.stream);
 
 
@@ -2598,12 +2531,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(scene, 1, msg_out.stream);
 
 
@@ -2660,7 +2591,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
 
     
 
-    
     serialize_ptr(computeInfo, 1, msg_out.stream);
 
 
@@ -2691,7 +2621,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -2722,12 +2651,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(components, 1, msg_out.stream);
 
 
@@ -2762,12 +2689,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -2802,12 +2727,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(buffers, 1, msg_out.stream);
 
 
@@ -2844,7 +2767,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
 
     
 
-    
     serialize_ptr(deserializeInfo, 1, msg_out.stream);
 
 
@@ -2875,7 +2797,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
@@ -2884,7 +2805,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 
     
 
-    
     serialize_ptr(readOutput, 1, msg_out.stream);
 
     
@@ -2938,7 +2858,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
 
     
 
-    
     serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.stream);
 
     
@@ -2982,7 +2901,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
 
     
 
-    
     serialize_ptr(displayRefreshRate, 1, msg_out.stream);
 
 
@@ -3049,7 +2967,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
 
     
 
-    
     serialize_ptr(pathCountOutput, 1, msg_out.stream);
 
     
@@ -3095,12 +3012,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(facialTracker, 1, msg_out.stream);
 
 
@@ -3157,7 +3072,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
 
     
 
-    
     serialize_ptr(facialExpressions, 1, msg_out.stream);
 
 
@@ -3194,7 +3108,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
 
     
 
-    
     serialize_ptr(colorSpaceCountOutput, 1, msg_out.stream);
 
     
@@ -3270,7 +3183,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
 
     
 
-    
     serialize_ptr(mesh, 1, msg_out.stream);
 
 
@@ -3307,12 +3219,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -3347,7 +3257,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
 
     
 
-    
     serialize_ptr(uuid, 1, msg_out.stream);
 
 
@@ -3382,7 +3291,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
 
     
 
-    
     serialize_ptr(componentTypeCountOutput, 1, msg_out.stream);
 
     
@@ -3426,12 +3334,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -3470,7 +3376,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
 
     
 
-    
     serialize_ptr(status, 1, msg_out.stream);
 
 
@@ -3507,12 +3412,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(profile, 1, msg_out.stream);
 
 
@@ -3573,12 +3476,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
 
     
 
-    
     serialize_ptr(queryInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(keyboard, 1, msg_out.stream);
 
 
@@ -3613,12 +3514,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(keyboardSpace, 1, msg_out.stream);
 
 
@@ -3655,12 +3554,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(outTriangleMesh, 1, msg_out.stream);
 
 
@@ -3837,7 +3734,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
 
     
 
-    
     serialize_ptr(outVertexCount, 1, msg_out.stream);
 
 
@@ -3892,12 +3788,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(outPassthrough, 1, msg_out.stream);
 
 
@@ -3998,12 +3892,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(outLayer, 1, msg_out.stream);
 
 
@@ -4104,7 +3996,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
 
     
 
-    
     serialize_ptr(style, 1, msg_out.stream);
 
 
@@ -4135,12 +4026,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(outGeometryInstance, 1, msg_out.stream);
 
 
@@ -4197,7 +4086,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
 
     
 
-    
     serialize_ptr(transformation, 1, msg_out.stream);
 
 
@@ -4234,7 +4122,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
 
     
 
-    
     serialize_ptr(pathCountOutput, 1, msg_out.stream);
 
     
@@ -4282,7 +4169,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
 
     
 
-    
     serialize_ptr(properties, 1, msg_out.stream);
 
 
@@ -4317,12 +4203,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(buffer, 1, msg_out.stream);
 
 
@@ -4507,7 +4391,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
 
     
 
-    
     serialize_ptr(size, 1, msg_out.stream);
 
 
@@ -4542,12 +4425,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -4620,12 +4501,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -4662,12 +4541,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(markerDetector, 1, msg_out.stream);
 
 
@@ -4724,7 +4601,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
 
     
 
-    
     serialize_ptr(snapshotInfo, 1, msg_out.stream);
 
 
@@ -4755,7 +4631,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -4790,7 +4665,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
 
     
 
-    
     serialize_ptr(markerCountOutput, 1, msg_out.stream);
 
     
@@ -4838,7 +4712,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
 
     
 
-    
     serialize_ptr(reprojectionErrorMeters, 1, msg_out.stream);
 
 
@@ -4877,7 +4750,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
 
     
 
-    
     serialize_ptr(meters, 1, msg_out.stream);
 
 
@@ -4916,7 +4788,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
 
     
 
-    
     serialize_ptr(number, 1, msg_out.stream);
 
 
@@ -4959,7 +4830,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -5007,12 +4877,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -5049,7 +4917,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
 
@@ -5088,7 +4955,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
 
     
 
-    
     serialize_ptr(mapCountOutput, 1, msg_out.stream);
 
     
@@ -5136,7 +5002,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
 
     
 
-    
     serialize_ptr(requestInfo, 1, msg_out.stream);
 
 
@@ -5167,12 +5032,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
 
     
 
-    
     serialize_ptr(importInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(mapUuid, 1, msg_out.stream);
 
 
@@ -5207,12 +5070,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
 
     
 
-    
     serialize_ptr(mapUuid, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(map, 1, msg_out.stream);
 
 
@@ -5273,7 +5134,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -5323,7 +5183,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -5362,7 +5221,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -5397,7 +5255,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -5430,12 +5287,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(storage, 1, msg_out.stream);
 
 
@@ -5496,7 +5351,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -5535,7 +5389,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -5570,12 +5423,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
 
     
 
-    
     serialize_ptr(publishInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -5614,7 +5465,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -5649,12 +5499,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
 
     
 
-    
     serialize_ptr(deleteInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -5693,7 +5541,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -5728,12 +5575,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
 
     
 
-    
     serialize_ptr(updateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -5772,7 +5617,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -5809,7 +5653,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
 
     
 
-    
     serialize_ptr(enableInfo, 1, msg_out.stream);
 
 
@@ -5842,7 +5685,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
 
     
 
-    
     serialize_ptr(spatialAnchorStore, 1, msg_out.stream);
 
 
@@ -5895,7 +5737,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
 
     
 
-    
     serialize_ptr(spatialAnchorPersistenceInfo, 1, msg_out.stream);
 
 
@@ -5930,7 +5771,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
 
     
 
-    
     serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.stream);
 
     
@@ -5974,12 +5814,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
 
     
 
-    
     serialize_ptr(spatialAnchorCreateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(spatialAnchor, 1, msg_out.stream);
 
 
@@ -6014,7 +5852,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
 
     
 
-    
     serialize_ptr(spatialAnchorPersistenceName, 1, msg_out.stream);
 
 
@@ -6069,7 +5906,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 
     
 
-    
     serialize_ptr(markerId, 1, msg_out.stream);
 
     
@@ -6078,7 +5914,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -6126,7 +5961,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
 
     
 
-    
     serialize_ptr(markerId, 1, msg_out.stream);
 
     
@@ -6135,7 +5969,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -6229,7 +6062,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -6268,7 +6100,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
 
     
 
-    
     serialize_ptr(results, 1, msg_out.stream);
 
 
@@ -6305,12 +6136,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -6345,12 +6174,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -6457,12 +6284,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -6507,7 +6332,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
 
     
 
-    
     serialize_ptr(boundingBox2DOutput, 1, msg_out.stream);
 
 
@@ -6546,7 +6370,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
 
     
 
-    
     serialize_ptr(boundingBox3DOutput, 1, msg_out.stream);
 
 
@@ -6585,7 +6408,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
 
     
 
-    
     serialize_ptr(semanticLabelsOutput, 1, msg_out.stream);
 
 
@@ -6624,7 +6446,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
 
     
 
-    
     serialize_ptr(boundary2DOutput, 1, msg_out.stream);
 
 
@@ -6663,7 +6484,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
 
     
 
-    
     serialize_ptr(roomLayoutOutput, 1, msg_out.stream);
 
 
@@ -6700,7 +6520,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
 
     
 
-    
     serialize_ptr(digitalLensControl, 1, msg_out.stream);
 
 
@@ -6733,12 +6552,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -6779,7 +6596,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
 
     
 
-    
     serialize_ptr(spaceContainerOutput, 1, msg_out.stream);
 
 
@@ -6816,7 +6632,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
 
     
 
-    
     serialize_ptr(foveationState, 1, msg_out.stream);
 
 
@@ -6849,12 +6664,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(faceTracker, 1, msg_out.stream);
 
 
@@ -6911,12 +6724,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
 
     
 
-    
     serialize_ptr(expressionInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(expressionWeights, 1, msg_out.stream);
 
 
@@ -6953,12 +6764,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(eyeTracker, 1, msg_out.stream);
 
 
@@ -7015,12 +6824,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
 
     
 
-    
     serialize_ptr(gazeInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(eyeGazes, 1, msg_out.stream);
 
 
@@ -7057,7 +6864,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
 
     
 
-    
     serialize_ptr(intensity, 1, msg_out.stream);
 
 
@@ -7092,12 +6898,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
 
     
 
-    
     serialize_ptr(hapticActionInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(deviceSampleRate, 1, msg_out.stream);
 
 
@@ -7140,7 +6944,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
 
     
 
-    
     serialize_ptr(preferences, 1, msg_out.stream);
 
 
@@ -7173,12 +6976,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(keyboard, 1, msg_out.stream);
 
 
@@ -7239,12 +7040,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(keyboardSpace, 1, msg_out.stream);
 
 
@@ -7283,7 +7082,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
 
     
 
-    
     serialize_ptr(locationInfo, 1, msg_out.stream);
 
 
@@ -7314,7 +7112,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
 
     
 
-    
     serialize_ptr(scale, 1, msg_out.stream);
 
 
@@ -7345,7 +7142,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
 
     
 
-    
     serialize_ptr(modelVisibility, 1, msg_out.stream);
 
 
@@ -7376,7 +7172,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
 
     
 
-    
     serialize_ptr(animationStates, 1, msg_out.stream);
 
 
@@ -7411,7 +7206,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
 
     
 
-    
     serialize_ptr(textureIdCountOutput, 1, msg_out.stream);
 
     
@@ -7459,7 +7253,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
 
     
 
-    
     serialize_ptr(textureData, 1, msg_out.stream);
 
 
@@ -7494,12 +7287,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(interactorRootPose, 1, msg_out.stream);
 
 
@@ -7534,7 +7325,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
 
     
 
-    
     serialize_ptr(changeInfo, 1, msg_out.stream);
 
 
@@ -7571,7 +7361,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
 
     
 
-    
     serialize_ptr(cameraCountOutput, 1, msg_out.stream);
 
     
@@ -7623,7 +7412,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
 
     
 
-    
     serialize_ptr(counterPathCountOutput, 1, msg_out.stream);
 
     
@@ -7667,7 +7455,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -7698,7 +7485,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -7733,7 +7519,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
 
     
 
-    
     serialize_ptr(counter, 1, msg_out.stream);
 
 
@@ -7770,12 +7555,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -7812,12 +7595,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(user, 1, msg_out.stream);
 
 
@@ -7852,7 +7633,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
 
     
 
-    
     serialize_ptr(userId, 1, msg_out.stream);
 
 
@@ -7909,12 +7689,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(resolution, 1, msg_out.stream);
 
 
@@ -7951,12 +7729,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(colorLut, 1, msg_out.stream);
 
 
@@ -8013,7 +7789,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
 
     
 
-    
     serialize_ptr(updateInfo, 1, msg_out.stream);
 
 
@@ -8046,12 +7821,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(triangleMeshOutput, 1, msg_out.stream);
 
 
@@ -8092,12 +7865,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(faceTracker, 1, msg_out.stream);
 
 
@@ -8154,12 +7925,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
 
     
 
-    
     serialize_ptr(expressionInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(expressionWeights, 1, msg_out.stream);
 
 
@@ -8196,12 +7965,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -8238,12 +8005,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(environmentDepthProvider, 1, msg_out.stream);
 
 
@@ -8344,12 +8109,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(swapchain, 1, msg_out.stream);
 
 
@@ -8410,13 +8173,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
 
     
 
-    
     serialize_ptr(imageCountOutput, 1, msg_out.stream);
 
     
 
-    #error "auto-generator doesn't support arrays of header structs (images)"
-    None
+    serialize_xr_array(images, imageCapacityInput, msg_out.stream);
+
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8435,8 +8197,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
 
     
 
-    #error "auto-generator doesn't support arrays of header structs (images)"
-    None
+    deserialize_xr_array(&images, msg_in.stream, true);
+
 
     return result;
 }
@@ -8453,7 +8215,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -8484,12 +8245,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
 
     
 
-    
     serialize_ptr(acquireInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(environmentDepthImage, 1, msg_out.stream);
 
 
@@ -8524,7 +8283,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
 
     
 
-    
     serialize_ptr(setInfo, 1, msg_out.stream);
 
 
@@ -8597,12 +8355,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(passthrough, 1, msg_out.stream);
 
 
@@ -8661,7 +8417,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
 
     
 
-    
     serialize_ptr(applyInfo, 1, msg_out.stream);
 
 
@@ -8694,12 +8449,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(anchor, 1, msg_out.stream);
 
 
@@ -8734,7 +8487,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
 
     
 
-    
     serialize_ptr(name, 1, msg_out.stream);
 
 
@@ -8767,12 +8519,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(bodyTracker, 1, msg_out.stream);
 
 
@@ -8829,12 +8579,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -8877,7 +8625,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
 
     
 
-    
     serialize_ptr(skeleton, 1, msg_out.stream);
 
 
@@ -8920,7 +8667,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -8953,12 +8699,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(bodyTracker, 1, msg_out.stream);
 
 
@@ -9015,12 +8759,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -9065,7 +8807,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
 
     
 
-    
     serialize_ptr(componentTypeCountOutput, 1, msg_out.stream);
 
     
@@ -9117,7 +8858,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
 
     
 
-    
     serialize_ptr(uuid, 1, msg_out.stream);
 
 
@@ -9152,7 +8892,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
@@ -9191,12 +8930,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(provider, 1, msg_out.stream);
 
 
@@ -9231,12 +8968,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
 
     
 
-    
     serialize_ptr(startInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9275,7 +9010,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9310,7 +9044,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -9341,12 +9074,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
 
     
 
-    
     serialize_ptr(queryInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9385,7 +9116,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9442,12 +9172,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(queriedSenseData, 1, msg_out.stream);
 
 
@@ -9526,12 +9254,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(anchor, 1, msg_out.stream);
 
 
@@ -9588,7 +9314,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
 
     
 
-    
     serialize_ptr(uuid, 1, msg_out.stream);
 
 
@@ -9619,12 +9344,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -9661,12 +9384,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9705,7 +9426,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9740,12 +9460,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9784,7 +9502,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9819,12 +9536,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9863,7 +9578,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9900,12 +9614,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -9944,7 +9656,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -9979,12 +9690,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -10023,7 +9732,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -10060,12 +9768,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -10104,7 +9810,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -10147,12 +9852,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(planeDetector, 1, msg_out.stream);
 
 
@@ -10209,7 +9912,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
 
     
 
-    
     serialize_ptr(beginInfo, 1, msg_out.stream);
 
 
@@ -10240,7 +9942,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -10271,12 +9972,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(locations, 1, msg_out.stream);
 
 
@@ -10319,7 +10018,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
 
     
 
-    
     serialize_ptr(polygonBuffer, 1, msg_out.stream);
 
 
@@ -10360,12 +10058,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
 
     
 
-    
     serialize_ptr(pollInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(pollResult, 1, msg_out.stream);
 
 
@@ -10400,7 +10096,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
 
     
 
-    
     serialize_ptr(cancelInfo, 1, msg_out.stream);
 
 
@@ -10435,7 +10130,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
 
@@ -10468,12 +10162,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(detector, 1, msg_out.stream);
 
 
@@ -10530,12 +10222,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
 
     
 
-    
     serialize_ptr(stateRequest, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -10574,7 +10264,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -10609,12 +10298,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
 
     
 
-    
     serialize_ptr(sizeInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(size, 1, msg_out.stream);
 
 
@@ -10649,12 +10336,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
 
     
 
-    
     serialize_ptr(size, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(buffer, 1, msg_out.stream);
 
 
@@ -10689,7 +10374,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
 
     
 
-    
     serialize_ptr(buffer, 1, msg_out.stream);
 
 
@@ -10720,17 +10404,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(buffer, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(future, 1, msg_out.stream);
 
 
@@ -10769,7 +10450,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
 
     
 
-    
     serialize_ptr(completionInfo, 1, msg_out.stream);
 
     
@@ -10778,7 +10458,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
 
     
 
-    
     serialize_ptr(completion, 1, msg_out.stream);
 
 
@@ -10819,12 +10498,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(facialExpressionClient, 1, msg_out.stream);
 
 
@@ -10881,7 +10558,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
 
     
 
-    
     serialize_ptr(blendShapeGetInfo, 1, msg_out.stream);
 
     
@@ -10931,7 +10607,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
 
     
 
-    
     serialize_ptr(resumeInfo, 1, msg_out.stream);
 
 
@@ -10962,7 +10637,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
 
     
 
-    
     serialize_ptr(pauseInfo, 1, msg_out.stream);
 
 
@@ -10995,12 +10669,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(discoveryRequestId, 1, msg_out.stream);
 
 
@@ -11035,12 +10707,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -11075,12 +10745,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(advertisementRequestId, 1, msg_out.stream);
 
 
@@ -11115,12 +10783,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
 
     
 
-    
     serialize_ptr(info, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(requestId, 1, msg_out.stream);
 
 
@@ -11158,12 +10824,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
 
     
 
-    
     serialize_ptr(acquireInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(index, 1, msg_out.stream);
 
 
@@ -11198,7 +10862,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(hapticActionInfo, 1, msg_out.stream);
 
     
@@ -11237,7 +10900,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
 
     
 
-    
     serialize_ptr(attachInfo, 1, msg_out.stream);
 
 
@@ -11268,7 +10930,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
 
     
 
-    
     serialize_ptr(frameBeginInfo, 1, msg_out.stream);
 
 
@@ -11299,7 +10960,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
 
     
 
-    
     serialize_ptr(beginInfo, 1, msg_out.stream);
 
 
@@ -11330,12 +10990,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(action, 1, msg_out.stream);
 
 
@@ -11370,12 +11028,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(actionSet, 1, msg_out.stream);
 
 
@@ -11410,12 +11066,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -11446,12 +11100,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     serialize(&function_id, msg_out.stream);
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(instance, 1, msg_out.stream);
 
 
@@ -11482,12 +11134,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(space, 1, msg_out.stream);
 
 
@@ -11522,12 +11172,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(session, 1, msg_out.stream);
 
 
@@ -11562,12 +11210,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
 
     
 
-    
     serialize_ptr(createInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(swapchain, 1, msg_out.stream);
 
 
@@ -11734,7 +11380,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
 
     
 
-    
     serialize_ptr(frameEndInfo, 1, msg_out.stream);
 
 
@@ -11787,7 +11432,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
 
     
 
-    
     serialize_ptr(propertyCountOutput, 1, msg_out.stream);
 
     
@@ -11827,7 +11471,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
 
     
 
-    
     serialize_ptr(enumerateInfo, 1, msg_out.stream);
 
     
@@ -11836,7 +11479,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
 
     
 
-    
     serialize_ptr(sourceCountOutput, 1, msg_out.stream);
 
     
@@ -11896,7 +11538,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
 
     
 
-    
     serialize_ptr(environmentBlendModeCountOutput, 1, msg_out.stream);
 
     
@@ -11953,7 +11594,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
 
     
 
-    
     serialize_ptr(propertyCountOutput, 1, msg_out.stream);
 
     
@@ -12001,7 +11641,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
 
     
 
-    
     serialize_ptr(spaceCountOutput, 1, msg_out.stream);
 
     
@@ -12049,7 +11688,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
 
     
 
-    
     serialize_ptr(formatCountOutput, 1, msg_out.stream);
 
     
@@ -12097,13 +11735,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
 
     
 
-    
     serialize_ptr(imageCountOutput, 1, msg_out.stream);
 
     
 
-    #error "auto-generator doesn't support arrays of header structs (images)"
-    None
+    serialize_xr_array(images, imageCapacityInput, msg_out.stream);
+
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -12122,8 +11759,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
 
     
 
-    #error "auto-generator doesn't support arrays of header structs (images)"
-    None
+    deserialize_xr_array(&images, msg_in.stream, true);
+
 
     return result;
 }
@@ -12152,7 +11789,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
 
     
 
-    
     serialize_ptr(viewCountOutput, 1, msg_out.stream);
 
     
@@ -12212,7 +11848,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
 
     
 
-    
     serialize_ptr(viewConfigurationTypeCountOutput, 1, msg_out.stream);
 
     
@@ -12260,12 +11895,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -12300,12 +11933,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -12340,12 +11971,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -12380,12 +12009,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(state, 1, msg_out.stream);
 
 
@@ -12424,7 +12051,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
 
     
 
-    
     serialize_ptr(interactionProfile, 1, msg_out.stream);
 
 
@@ -12459,7 +12085,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
@@ -12468,7 +12093,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -12521,7 +12145,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddr(XrInstance instance, const 
 
     
 
-    
     serialize_ptr(function, 1, msg_out.stream);
 
 
@@ -12556,7 +12179,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
 
     
 
-    
     serialize_ptr(instanceProperties, 1, msg_out.stream);
 
 
@@ -12591,7 +12213,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
 
     
 
-    
     serialize_ptr(bounds, 1, msg_out.stream);
 
 
@@ -12626,12 +12247,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
 
     
 
-    
     serialize_ptr(getInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(systemId, 1, msg_out.stream);
 
 
@@ -12670,7 +12289,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
 
     
 
-    
     serialize_ptr(properties, 1, msg_out.stream);
 
 
@@ -12713,7 +12331,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
 
     
 
-    
     serialize_ptr(configurationProperties, 1, msg_out.stream);
 
 
@@ -12760,7 +12377,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
 
     
 
-    
     serialize_ptr(location, 1, msg_out.stream);
 
 
@@ -12799,12 +12415,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
 
     
 
-    
     serialize_ptr(locateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(spaceLocations, 1, msg_out.stream);
 
 
@@ -12839,12 +12453,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
 
     
 
-    
     serialize_ptr(viewLocateInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(viewState, 1, msg_out.stream);
 
     
@@ -12853,7 +12465,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
 
     
 
-    
     serialize_ptr(viewCountOutput, 1, msg_out.stream);
 
     
@@ -12913,7 +12524,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
 
     
 
-    
     serialize_ptr(bufferCountOutput, 1, msg_out.stream);
 
     
@@ -12961,7 +12571,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
 
     
 
-    
     serialize_ptr(eventData, 1, msg_out.stream);
 
 
@@ -12992,7 +12601,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
 
     
 
-    
     serialize_ptr(releaseInfo, 1, msg_out.stream);
 
 
@@ -13083,7 +12691,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
 
     
 
-    
     serialize_ptr(hapticActionInfo, 1, msg_out.stream);
 
 
@@ -13119,7 +12726,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
 
     
 
-    
     serialize_ptr(path, 1, msg_out.stream);
 
 
@@ -13192,7 +12798,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
 
     
 
-    
     serialize_ptr(suggestedBindings, 1, msg_out.stream);
 
 
@@ -13223,7 +12828,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
 
     
 
-    
     serialize_ptr(syncInfo, 1, msg_out.stream);
 
 
@@ -13254,12 +12858,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
 
     
 
-    
     serialize_ptr(frameWaitInfo, 1, msg_out.stream);
 
     
 
-    
     serialize_ptr(frameState, 1, msg_out.stream);
 
 
@@ -13294,7 +12896,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
 
     
 
-    
     serialize_ptr(waitInfo, 1, msg_out.stream);
 
 
@@ -13315,4 +12916,4 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
 
 
 
-} // namespace xrtransport
+} // extern "C"

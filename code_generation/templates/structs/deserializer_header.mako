@@ -153,7 +153,7 @@ void deserialize_xr(const T** p_s, SyncReadStream& in, bool in_place = false) {
         XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
         deserializer_lookup(type)(s, in, in_place);
         if (!in_place) {
-            *p_s = s;
+            *p_s = reinterpret_cast<T*>(s);
         }
     }
     else {
@@ -178,7 +178,7 @@ void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
         XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
         deserializer_lookup(type)(s, in, in_place);
         if (!in_place) {
-            *p_s = s;
+            *p_s = reinterpret_cast<T*>(s);
         }
     }
     else {
@@ -191,10 +191,6 @@ void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
     }
 }
 
-// TODO: implement const version of this
-// Also implement cleanup_xr_array to clean this one up
-// Also, I'm noticing a likely issue in the deserialize_xr functions.
-// *p_s = s is likely to need a cast, not sure why this hasn't been a problem yet
 template <typename T>
 void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
     std::uint32_t count{};
@@ -204,11 +200,43 @@ void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
         deserialize(&type, in);
         std::size_t struct_size = size_lookup(type);
         StructDeserializer deserializer = deserializer_lookup(type);
-        if (!in_place) {
-            *p_s = reinterpret_cast<T*>(std::malloc(struct_size * count));
+        T* dest;
+        if (in_place) {
+            dest = *p_s;
         }
-        char* buffer = reinterpret_cast<char*>(*p_s);
-        XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(*p_s);
+        else {
+            dest = reinterpret_cast<T*>(std::malloc(struct_size * count));
+            *p_s = dest;
+        }
+        char* buffer = reinterpret_cast<char*>(dest);
+        XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(dest);
+        for(std::uint32_t i = 0; i < count; i++) {
+            XrBaseOutStructure* s = reinterpret_cast<XrBaseOutStructure*>(buffer);
+            deserializer(s, in, in_place);
+            buffer += struct_size;
+        }
+    }
+}
+
+template <typename T>
+void deserialize_xr_array(const T** p_s, SyncReadStream& in, bool in_place = false) {
+    std::uint32_t count{};
+    deserialize(&count, in);
+    if (count) {
+        XrStructureType type{};
+        deserialize(&type, in);
+        std::size_t struct_size = size_lookup(type);
+        StructDeserializer deserializer = deserializer_lookup(type);
+        T* dest;
+        if (in_place) {
+            dest = *p_s;
+        }
+        else {
+            dest = reinterpret_cast<T*>(std::malloc(struct_size * count));
+            *p_s = dest;
+        }
+        char* buffer = reinterpret_cast<char*>(dest);
+        XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(dest);
         for(std::uint32_t i = 0; i < count; i++) {
             XrBaseOutStructure* s = reinterpret_cast<XrBaseOutStructure*>(buffer);
             deserializer(s, in, in_place);
@@ -252,6 +280,23 @@ void cleanup_xr(const T* untyped) {
     const XrBaseOutStructure* x = reinterpret_cast<const XrBaseOutStructure*>(untyped);
     cleaner_lookup(x->type)(x);
     std::free(const_cast<XrBaseOutStructure*>(x));
+}
+
+template <typename T>
+void cleanup_xr_array(const T* untyped, std::size_t count) {
+    if (!untyped) {
+        return; // do not clean up null pointer
+    }
+    const XrBaseOutStructure* first = reinterpret_cast<const XrBaseOutStructure*>(untyped);
+    XrStructureType type = first->type;
+    std::size_t struct_size = size_lookup(type);
+    StructCleaner cleaner = cleaner_lookup(type);
+    const char* buffer = reinterpret_cast<const char*>(untyped);
+    for(std::size_t i = 0; i < count; i++) {
+        cleaner(reinterpret_cast<const XrBaseOutStructure*>(buffer));
+        buffer += struct_size;
+    }
+    std::free(const_cast<XrBaseOutStructure*>(first));
 }
 
 } // namespace xrtransport

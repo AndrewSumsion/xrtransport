@@ -15,7 +15,7 @@
 % endif
 ## Now handle valid members
 % if member.pointer and member.len and member_struct and member_struct.header:
-    serialize_xr_array(${binding_prefix}${member.name}, ${binding_prefix}${member.len}, ${stream_var})
+    serialize_xr_array(${binding_prefix}${member.name}, ${binding_prefix}${member.len}, ${stream_var});
 % elif (member.type == "void" and member.pointer == "*" and member.name == "next") or (member_struct and member_struct.header):
     serialize_xr(${binding_prefix}${member.name}, ${stream_var});
 % elif member.pointer and member.len:

@@ -2989,12 +2989,10 @@ void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->applicationVM, 1, out);
 
             
 
-    
     serialize_ptr(s->applicationActivity, 1, out);
 
 }
@@ -3013,12 +3011,10 @@ void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->applicationVM, 1, out);
 
             
 
-    
     serialize_ptr(s->applicationActivity, 1, out);
 
 }
@@ -3514,7 +3510,6 @@ void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out
 
             
 
-    
     serialize_ptr(s->userData, 1, out);
 
 }
@@ -3619,7 +3614,6 @@ void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out
 
             
 
-    
     serialize_ptr(s->userData, 1, out);
 
 }
@@ -3681,7 +3675,6 @@ void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->xDisplay, 1, out);
 
             
@@ -3716,7 +3709,6 @@ void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->connection, 1, out);
 
             
@@ -3755,7 +3747,6 @@ void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out)
 
             
 
-    
     serialize_ptr(s->display, 1, out);
 
 }
@@ -3836,7 +3827,6 @@ void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->xDisplay, 1, out);
 
             
@@ -3871,7 +3861,6 @@ void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->connection, 1, out);
 
             
@@ -3910,7 +3899,6 @@ void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out)
 
             
 
-    
     serialize_ptr(s->display, 1, out);
 
 }
@@ -4255,7 +4243,6 @@ void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->device, 1, out);
 
 }
@@ -4274,7 +4261,6 @@ void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4315,7 +4301,6 @@ void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->device, 1, out);
 
 }
@@ -4334,7 +4319,6 @@ void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4377,12 +4361,10 @@ void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->device, 1, out);
 
             
 
-    
     serialize_ptr(s->queue, 1, out);
 
 }
@@ -4401,7 +4383,6 @@ void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4442,12 +4423,10 @@ void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->device, 1, out);
 
             
 
-    
     serialize_ptr(s->queue, 1, out);
 
 }
@@ -4466,7 +4445,6 @@ void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4509,7 +4487,6 @@ void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->commandQueue, 1, out);
 
 }
@@ -4528,7 +4505,6 @@ void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4547,7 +4523,6 @@ void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->metalDevice, 1, out);
 
 }
@@ -4566,7 +4541,6 @@ void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->commandQueue, 1, out);
 
 }
@@ -4585,7 +4559,6 @@ void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->texture, 1, out);
 
 }
@@ -4604,7 +4577,6 @@ void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->metalDevice, 1, out);
 
 }
@@ -6549,12 +6521,10 @@ void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out)
 
             
 
-    
     serialize_ptr(s->holographicSpace, 1, out);
 
             
 
-    
     serialize_ptr(s->coreWindow, 1, out);
 
 }
@@ -6573,12 +6543,10 @@ void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out)
 
             
 
-    
     serialize_ptr(s->holographicSpace, 1, out);
 
             
 
-    
     serialize_ptr(s->coreWindow, 1, out);
 
 }
@@ -7275,12 +7243,10 @@ void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->applicationVM, 1, out);
 
             
 
-    
     serialize_ptr(s->applicationContext, 1, out);
 
 }
@@ -7299,12 +7265,10 @@ void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->applicationVM, 1, out);
 
             
 
-    
     serialize_ptr(s->applicationContext, 1, out);
 
 }
@@ -7337,12 +7301,10 @@ void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vulkanCreateInfo, 1, out);
 
             
 
-    
     serialize_ptr(s->vulkanAllocator, 1, out);
 
 }
@@ -7377,12 +7339,10 @@ void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vulkanCreateInfo, 1, out);
 
             
 
-    
     serialize_ptr(s->vulkanAllocator, 1, out);
 
 }
@@ -7435,12 +7395,10 @@ void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vulkanCreateInfo, 1, out);
 
             
 
-    
     serialize_ptr(s->vulkanAllocator, 1, out);
 
 }
@@ -7475,12 +7433,10 @@ void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vulkanCreateInfo, 1, out);
 
             
 
-    
     serialize_ptr(s->vulkanAllocator, 1, out);
 
 }
@@ -8817,7 +8773,6 @@ void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& ou
 
             
 
-    
     serialize_ptr(s->paths, 1, out);
 
 }
@@ -8858,7 +8813,6 @@ void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& ou
 
             
 
-    
     serialize_ptr(s->paths, 1, out);
 
 }
@@ -8913,7 +8867,6 @@ void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->expressionWeightings, 1, out);
 
 }
@@ -9002,7 +8955,6 @@ void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->expressionWeightings, 1, out);
 
 }
@@ -10075,7 +10027,6 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vertexBuffer, 1, out);
 
             
@@ -10084,7 +10035,6 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->indexBuffer, 1, out);
 
 }
@@ -10115,7 +10065,6 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->vertexBuffer, 1, out);
 
             
@@ -10124,7 +10073,6 @@ void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->indexBuffer, 1, out);
 
 }
@@ -15490,7 +15438,6 @@ void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->samplesConsumed, 1, out);
 
 }
@@ -15544,7 +15491,6 @@ void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out) {
 
             
 
-    
     serialize_ptr(s->samplesConsumed, 1, out);
 
 }
