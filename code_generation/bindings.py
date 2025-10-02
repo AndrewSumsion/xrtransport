@@ -1,3 +1,11 @@
+class Binding:
+    def __init__(self, type, binding_str, param, loops=(), len=None):
+        self.type = type
+        self.binding_str = binding_str
+        self.param = param
+        self.loops = loops
+        self.len = len
+
 class BindingLoop:
     def __init__(self, base, end, var):
         self.base = base
@@ -42,41 +50,45 @@ def _collect_modifiable_bindings(binding, binding_prefix, param, loops, find_str
     # and its chain will not be modified.
     if param.pointer and param.len and struct and struct.header:
         if param.qualifier != "const":
-            results.append({
-                "type": "xr_array",
-                "binding": binding,
-                "loops": loops,
-                "len": binding_prefix + param.len
-            })
+            results.append(Binding(
+                type = "xr_array",
+                binding_str = binding,
+                param = param,
+                loops = loops,
+                len = binding_prefix + param.len
+            ))
         return
     if (param.type == "void" and param.pointer == "*" and param.name == "next") or (struct and struct.header):
         if param.qualifier != "const":
-            results.append({
-                "type": "xr",
-                "binding": binding,
-                "loops": loops,
-            })
+            results.append(Binding(
+                type = "xr",
+                binding_str = binding,
+                param = param,
+                loops = loops
+            ))
         return
     
     if param.pointer and param.len:
         if param.qualifier != "const":
-            results.append({
-                "type": "sized_ptr",
-                "binding": binding,
-                "loops": loops,
-                "len": binding_prefix + param.len
-            })
+            results.append(Binding(
+                type = "sized_ptr",
+                binding_str = binding,
+                param = param,
+                loops = loops,
+                len = binding_prefix + param.len
+            ))
             return
         var = f"i{len(loops)}"
         binding_prefix = f"{binding}[{var}]."
         loops += (BindingLoop(0, param.len, var),)
     elif param.pointer:
         if param.qualifier != "const":
-            results.append({
-                "type": "ptr",
-                "binding": binding,
-                "loops": loops
-            })
+            results.append(Binding(
+                type = "ptr",
+                binding_str = binding,
+                param = param,
+                loops = loops
+            ))
             return
         binding_prefix = f"{binding}->"
     elif param.array:
@@ -85,12 +97,13 @@ def _collect_modifiable_bindings(binding, binding_prefix, param, loops, find_str
         # That is, unless this binding is a function parameter in which arrays decay to pointers.
         # decay_array is a flag to indicate this, and is always False after the first iteration.
         if decay_array and param.qualifier != "const":
-            results.append({
-                "type": "array",
-                "binding": binding,
-                "loops": loops,
-                "len": param.array
-            })
+            results.append(Binding(
+                type = "array",
+                binding_str = binding,
+                param = param,
+                loops = loops,
+                len = param.array
+            ))
             return
         var = f"i{len(loops)}"
         binding_prefix = f"{binding}[{var}]."
