@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import json
+from .bindings import collect_modifiable_bindings
 
 # structs whose serializers and deserializers are manually specified
 CUSTOM_STRUCTS = [
@@ -63,6 +64,7 @@ class XrFunction:
         self.flag = None
         self.extension = None
         self.id = None
+        self.modifiable_bindings = []
     
     def declaration(self):
         param_list = ", ".join(p.declaration() for p in self.params)
