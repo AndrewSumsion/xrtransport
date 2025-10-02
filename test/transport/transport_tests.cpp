@@ -4,7 +4,6 @@
 #include "xrtransport/transport/transport.h"
 #include "test_duplex_stream.h"
 
-#define ASIO_STANDALONE
 #include "asio/io_context.hpp"
 #include "asio/read.hpp"
 #include "asio/write.hpp"

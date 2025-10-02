@@ -66,9 +66,9 @@ class XrFunction:
         self.id = None
         self.modifiable_bindings = []
     
-    def declaration(self):
+    def signature(self):
         param_list = ", ".join(p.declaration() for p in self.params)
-        return f"XRAPI_ATTR XrResult XRAPI_CALL {self.name}({param_list})"
+        return f"{self.name}({param_list})"
 
 class XrParam:
     def __init__(self, type_, name):

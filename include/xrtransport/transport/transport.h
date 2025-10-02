@@ -3,7 +3,6 @@
 
 #include "xrtransport/asio_compat.h"
 
-#define ASIO_STANDALONE
 #include "asio/write.hpp"
 #include "asio/read.hpp"
 

@@ -21,7 +21,6 @@
 #include "xrtransport/asio_compat.h"
 #include "struct_size.h"
 
-#define ASIO_STANDALONE
 #include "asio/read.hpp"
 #include "asio/write.hpp"
 

@@ -1,6 +1,5 @@
 #include "transport_manager.h"
 
-#define ASIO_STANDALONE
 #include "asio.hpp"
 
 #include <stdexcept>

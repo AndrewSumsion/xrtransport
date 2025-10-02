@@ -21,7 +21,6 @@ void serialize(const ${struct.name}* s, SyncWriteStream& out);
 #include "xrtransport/asio_compat.h"
 #include "struct_size.h"
 
-#define ASIO_STANDALONE
 #include "asio/write.hpp"
 
 #include <cstdint>

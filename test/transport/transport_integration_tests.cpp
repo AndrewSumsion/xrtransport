@@ -4,7 +4,6 @@
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/asio_compat.h"
 
-#define ASIO_STANDALONE
 #include "asio.hpp"
 #include "asio/read.hpp"
 #include "asio/write.hpp"

@@ -13,7 +13,6 @@
  * files, etc.) without requiring template instantiation at every call site.
  */
 
-#define ASIO_STANDALONE
 #include "asio/buffer.hpp"
 #include "asio/error_code.hpp"
 #include "asio/socket_base.hpp"

@@ -27,7 +27,7 @@ using namespace xrtransport;
 extern "C" {
 
 <%utils:for_grouped_functions args="function">
-${function.declaration()} {
+XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = ${function.id};
