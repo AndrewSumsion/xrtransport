@@ -39,8 +39,8 @@ ${function.declaration()} {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    % for param in function.params:
-    ${utils.deserialize_member(param, binding_prefix='', stream_var='msg_in.stream', in_place_var='true')}
+    % for binding in function.modifiable_bindings:
+    ${utils.deserialize_binding(binding, stream_var='msg_in.stream', in_place_var='true')}
     % endfor
 
     return result;

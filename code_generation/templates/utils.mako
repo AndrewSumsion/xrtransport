@@ -101,6 +101,44 @@
 % endif
 </%def>
 
+<%def name="serialize_binding(binding, stream_var='out')">
+% for _loop in binding.loops:
+    for (int ${_loop.var} = ${_loop.base}; ${_loop.var} < ${_loop.end}; ${_loop.var}++) {
+% endfor
+% if binding.type == "xr_array":
+    serialize_xr_array(${binding.binding_str}, ${binding.len}, ${stream_var});
+% elif binding.type == "xr":
+    serialize_xr(${binding.binding_str}, ${stream_var});
+% elif binding.type == "sized_ptr" or binding.type == "array":
+    serialize_ptr(${binding.binding_str}, ${binding.len}, ${stream_var});
+% elif binding.type == "ptr":
+    serialize_ptr(${binding.binding_str}, 1, ${stream_var});
+% else:
+    serialize(&${binding.binding_str}, ${stream_var});
+% endif
+% for _loop in binding.loops:
+    }
+% endfor
+</%def>
+
+<%def name="deserialize_binding(binding, stream_var='in', in_place_var='in_place')">
+% for _loop in binding.loops:
+    for (int ${_loop.var} = ${_loop.base}; ${_loop.var} < ${_loop.end}; ${_loop.var}++) {
+% endfor
+% if binding.type == "xr_array":
+    deserialize_xr_array(&${binding.binding_str}, ${stream_var}, ${in_place_var});
+% elif binding.type == "xr":
+    deserialize_xr(&${binding.binding_str}, ${stream_var}, ${in_place_var});
+% elif binding.type == "sized_ptr" or binding.type == "ptr" or binding.type == "array":
+    deserialize_ptr(&${binding.binding_str}, ${stream_var}, ${in_place_var});
+% else:
+    deserialize(&${binding.binding_str}, ${stream_var}, ${in_place_var});
+% endif
+% for _loop in binding.loops:
+    }
+% endfor
+</%def>
+
 <%def name="for_grouped_structs(xr_structs_only=False)">
 % for ext_name, extension in spec.extensions.items():
 % if ext_name:

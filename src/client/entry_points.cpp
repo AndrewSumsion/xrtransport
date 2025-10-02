@@ -50,18 +50,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&threadType, msg_in.stream, true);
-
-    
-
-    deserialize(&threadId, msg_in.stream, true);
-
 
     return result;
 }
@@ -95,19 +83,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&swapchain, msg_in.stream, true);
 
     
-
     deserialize_ptr(&surface, msg_in.stream, true);
 
 
@@ -146,18 +124,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&domain, msg_in.stream, true);
-
-    
-
-    deserialize(&level, msg_in.stream, true);
-
 
     return result;
 }
@@ -195,23 +161,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&domain, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&notificationLevel, msg_in.stream, true);
 
     
-
     deserialize_ptr(&tempHeadroom, msg_in.stream, true);
 
     
-
     deserialize_ptr(&tempSlope, msg_in.stream, true);
 
 
@@ -242,14 +197,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&nameInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -277,15 +224,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
+    deserialize_ptr(&createInfo->userData, msg_in.stream, true);
 
     
-
     deserialize_ptr(&messenger, msg_in.stream, true);
 
 
@@ -306,10 +247,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&messenger, msg_in.stream, true);
-
 
     return result;
 }
@@ -341,20 +278,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&messageSeverity, msg_in.stream, true);
+    deserialize_ptr(&callbackData->objects, msg_in.stream, true);
 
     
-
-    deserialize(&messageTypes, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&callbackData, msg_in.stream, true);
+    deserialize_ptr(&callbackData->sessionLabels, msg_in.stream, true);
 
 
     return result;
@@ -378,14 +305,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&labelInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -404,10 +323,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
 
     return result;
 }
@@ -430,14 +345,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&labelInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -467,15 +374,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -507,15 +405,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -556,23 +445,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -611,23 +486,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -661,19 +522,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&vkInstance, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&vkPhysicalDevice, msg_in.stream, true);
 
 
@@ -703,15 +551,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -743,15 +582,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -783,15 +613,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -823,15 +644,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
 
 
@@ -873,23 +685,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationType, msg_in.stream, true);
-
-    
-
-    deserialize(&viewIndex, msg_in.stream, true);
-
-    
-
-    deserialize(&visibilityMaskType, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&visibilityMask, msg_in.stream, true);
 
 
@@ -925,15 +720,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&performanceCounter, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&time, msg_in.stream, true);
 
 
@@ -963,15 +749,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&time, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&performanceCounter, msg_in.stream, true);
 
 
@@ -1003,15 +780,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&timespecTime, msg_in.stream, true);
 
     
-
     deserialize_ptr(&time, msg_in.stream, true);
 
 
@@ -1041,15 +812,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&time, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&timespecTime, msg_in.stream, true);
 
 
@@ -1081,15 +843,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&anchor, msg_in.stream, true);
 
 
@@ -1119,15 +872,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -1148,10 +892,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&anchor, msg_in.stream, true);
-
 
     return result;
 }
@@ -1190,22 +930,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&interactionProfile, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelPath, msg_in.stream, true);
-
-    
-
-    deserialize(&isActive, msg_in.stream, true);
-
 
     return result;
 }
@@ -1236,22 +960,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelPath, msg_in.stream, true);
-
-    
-
-    deserialize(&inputSourcePath, msg_in.stream, true);
-
-    
-
-    deserialize(&state, msg_in.stream, true);
-
 
     return result;
 }
@@ -1282,22 +990,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelPath, msg_in.stream, true);
-
-    
-
-    deserialize(&inputSourcePath, msg_in.stream, true);
-
-    
-
-    deserialize(&state, msg_in.stream, true);
-
 
     return result;
 }
@@ -1328,22 +1020,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelPath, msg_in.stream, true);
-
-    
-
-    deserialize(&inputSourcePath, msg_in.stream, true);
-
-    
-
-    deserialize(&state, msg_in.stream, true);
-
 
     return result;
 }
@@ -1378,26 +1054,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelPath, msg_in.stream, true);
-
-    
-
-    deserialize(&inputSourcePath, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize(&pose, msg_in.stream, true);
-
 
     return result;
 }
@@ -1429,15 +1085,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -1467,15 +1114,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&nodeBinding, msg_in.stream, true);
 
 
@@ -1496,10 +1134,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&nodeBinding, msg_in.stream, true);
-
 
     return result;
 }
@@ -1527,15 +1161,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&nodeBinding, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -1567,15 +1192,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&handTracker, msg_in.stream, true);
 
 
@@ -1596,10 +1212,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&handTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -1627,15 +1239,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&handTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -1667,15 +1270,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&handTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -1705,15 +1299,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&handTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&updateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&handMesh, msg_in.stream, true);
 
 
@@ -1747,15 +1332,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelUserPath, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&controllerModelKeyState, msg_in.stream, true);
 
 
@@ -1794,23 +1370,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&modelKey, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -1840,15 +1402,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&modelKey, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -1878,15 +1431,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&modelKey, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -1918,15 +1462,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&perceptionAnchor, msg_in.stream, true);
 
     
-
     deserialize_ptr(&anchor, msg_in.stream, true);
 
 
@@ -1956,17 +1494,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
     XrResult result;
     deserialize(&result, msg_in.stream);
     
+    deserialize_ptr(&perceptionAnchor, msg_in.stream, true);
 
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&anchor, msg_in.stream, true);
-
-    
-
-    #error "auto-generator doesn't support double pointers (perceptionAnchor)"
-    None
 
     return result;
 }
@@ -2013,27 +1542,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationType, msg_in.stream, true);
-
-    
-
-    deserialize(&modeCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&modeCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&modes, msg_in.stream, true);
 
 
@@ -2062,14 +1573,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&state, msg_in.stream, true);
-
 
     return result;
 }
@@ -2093,11 +1596,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
     deserialize_xr(&state, msg_in.stream, true);
 
 
@@ -2131,15 +1629,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bodyTracker, msg_in.stream, true);
 
 
@@ -2160,10 +1649,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -2191,15 +1676,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -2225,11 +1701,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&skeleton, msg_in.stream, true);
 
 
@@ -2258,10 +1729,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize_xr(&loaderInitInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -2297,19 +1764,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&vulkanInstance, msg_in.stream, true);
 
     
-
     deserialize_ptr(&vulkanResult, msg_in.stream, true);
 
 
@@ -2343,19 +1800,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&vulkanDevice, msg_in.stream, true);
 
     
-
     deserialize_ptr(&vulkanResult, msg_in.stream, true);
 
 
@@ -2385,15 +1832,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&vulkanPhysicalDevice, msg_in.stream, true);
 
 
@@ -2436,23 +1874,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&featureCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&featureCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&features, msg_in.stream, true);
 
 
@@ -2482,15 +1906,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&sceneObserver, msg_in.stream, true);
 
 
@@ -2511,10 +1926,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&sceneObserver, msg_in.stream, true);
-
 
     return result;
 }
@@ -2542,15 +1953,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&sceneObserver, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&scene, msg_in.stream, true);
 
 
@@ -2571,10 +1973,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&scene, msg_in.stream, true);
-
 
     return result;
 }
@@ -2597,14 +1995,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&sceneObserver, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&computeInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -2628,11 +2018,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&sceneObserver, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -2662,15 +2047,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&components, msg_in.stream, true);
 
 
@@ -2700,15 +2076,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -2738,15 +2105,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&buffers, msg_in.stream, true);
 
 
@@ -2773,14 +2131,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&sceneObserver, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&deserializeInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -2817,23 +2167,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&countInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&readOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -2870,19 +2206,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&displayRefreshRateCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&displayRefreshRateCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&displayRefreshRates, msg_in.stream, true);
 
 
@@ -2908,11 +2234,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&displayRefreshRate, msg_in.stream, true);
 
 
@@ -2937,14 +2258,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&displayRefreshRate, msg_in.stream, true);
-
 
     return result;
 }
@@ -2979,19 +2292,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&pathCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&pathCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&paths, msg_in.stream, true);
 
 
@@ -3023,15 +2326,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&facialTracker, msg_in.stream, true);
 
 
@@ -3052,10 +2346,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&facialTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -3079,11 +2369,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&facialTracker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&facialExpressions, msg_in.stream, true);
 
 
@@ -3120,19 +2405,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&colorSpaceCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&colorSpaceCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&colorSpaces, msg_in.stream, true);
 
 
@@ -3157,14 +2432,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&colorSpace, msg_in.stream, true);
-
 
     return result;
 }
@@ -3190,11 +2457,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&handTracker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&mesh, msg_in.stream, true);
 
 
@@ -3230,15 +2492,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -3264,11 +2517,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&uuid, msg_in.stream, true);
 
 
@@ -3303,19 +2551,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize(&componentTypeCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&componentTypeCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&componentTypes, msg_in.stream, true);
 
 
@@ -3345,15 +2583,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -3383,15 +2612,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize(&componentType, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&status, msg_in.stream, true);
 
 
@@ -3423,15 +2643,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
+    deserialize_xr(&createInfo->next, msg_in.stream, true);
 
     
-
     deserialize_ptr(&profile, msg_in.stream, true);
 
 
@@ -3452,10 +2666,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&profile, msg_in.stream, true);
-
 
     return result;
 }
@@ -3487,15 +2697,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&queryInfo, msg_in.stream, true);
+    deserialize_xr(&queryInfo->next, msg_in.stream, true);
 
     
-
     deserialize_ptr(&keyboard, msg_in.stream, true);
 
 
@@ -3525,15 +2729,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
+    deserialize_xr(&createInfo->next, msg_in.stream, true);
 
     
-
     deserialize_ptr(&keyboardSpace, msg_in.stream, true);
 
 
@@ -3565,15 +2763,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&outTriangleMesh, msg_in.stream, true);
 
 
@@ -3594,10 +2783,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&mesh, msg_in.stream, true);
-
 
     return result;
 }
@@ -3621,13 +2806,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
+    deserialize_ptr(&outVertexBuffer, msg_in.stream, true);
 
-    deserialize(&mesh, msg_in.stream, true);
-
-    
-
-    #error "auto-generator doesn't support double pointers (outVertexBuffer)"
-    None
 
     return result;
 }
@@ -3651,13 +2831,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
     XrResult result;
     deserialize(&result, msg_in.stream);
     
+    deserialize_ptr(&outIndexBuffer, msg_in.stream, true);
 
-    deserialize(&mesh, msg_in.stream, true);
-
-    
-
-    #error "auto-generator doesn't support double pointers (outIndexBuffer)"
-    None
 
     return result;
 }
@@ -3676,10 +2851,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&mesh, msg_in.stream, true);
-
 
     return result;
 }
@@ -3706,18 +2877,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&mesh, msg_in.stream, true);
-
-    
-
-    deserialize(&vertexCount, msg_in.stream, true);
-
-    
-
-    deserialize(&triangleCount, msg_in.stream, true);
-
 
     return result;
 }
@@ -3741,11 +2900,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&mesh, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&outVertexCount, msg_in.stream, true);
 
 
@@ -3766,10 +2920,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&mesh, msg_in.stream, true);
-
 
     return result;
 }
@@ -3799,15 +2949,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&outPassthrough, msg_in.stream, true);
 
 
@@ -3828,10 +2969,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&passthrough, msg_in.stream, true);
-
 
     return result;
 }
@@ -3850,10 +2987,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&passthrough, msg_in.stream, true);
-
 
     return result;
 }
@@ -3872,10 +3005,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&passthrough, msg_in.stream, true);
-
 
     return result;
 }
@@ -3903,15 +3032,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&outLayer, msg_in.stream, true);
 
 
@@ -3932,10 +3052,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&layer, msg_in.stream, true);
-
 
     return result;
 }
@@ -3954,10 +3070,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&layer, msg_in.stream, true);
-
 
     return result;
 }
@@ -3976,10 +3088,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&layer, msg_in.stream, true);
-
 
     return result;
 }
@@ -4002,14 +3110,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&layer, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&style, msg_in.stream, true);
-
 
     return result;
 }
@@ -4037,15 +3137,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&outGeometryInstance, msg_in.stream, true);
 
 
@@ -4066,10 +3157,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
 
     return result;
 }
@@ -4092,14 +3179,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&transformation, msg_in.stream, true);
-
 
     return result;
 }
@@ -4134,19 +3213,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&pathCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&pathCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&paths, msg_in.stream, true);
 
 
@@ -4176,15 +3245,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&path, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -4214,15 +3274,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
+    deserialize_xr(&info->next, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -4255,14 +3309,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&enabled, msg_in.stream, true);
-
 
     return result;
 }
@@ -4287,14 +3333,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&enabled, msg_in.stream, true);
-
 
     return result;
 }
@@ -4321,18 +3359,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&markerId, msg_in.stream, true);
-
-    
-
-    deserialize(&timeout, msg_in.stream, true);
-
 
     return result;
 }
@@ -4359,18 +3385,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&markerId, msg_in.stream, true);
-
-    
-
-    deserialize(&enable, msg_in.stream, true);
-
 
     return result;
 }
@@ -4398,15 +3412,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&markerId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&size, msg_in.stream, true);
 
 
@@ -4436,15 +3441,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -4471,14 +3467,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&offset, msg_in.stream, true);
-
 
     return result;
 }
@@ -4512,15 +3500,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -4552,15 +3531,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&markerDetector, msg_in.stream, true);
 
 
@@ -4581,10 +3551,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
 
     return result;
 }
@@ -4608,11 +3574,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&snapshotInfo, msg_in.stream, true);
 
 
@@ -4638,11 +3599,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -4677,19 +3633,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&markerCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&markerCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&markers, msg_in.stream, true);
 
 
@@ -4719,15 +3665,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&marker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&reprojectionErrorMeters, msg_in.stream, true);
 
 
@@ -4757,15 +3694,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&marker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&meters, msg_in.stream, true);
 
 
@@ -4795,15 +3723,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&marker, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&number, msg_in.stream, true);
 
 
@@ -4842,23 +3761,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&markerDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&marker, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -4888,15 +3793,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -4923,14 +3819,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
 
     return result;
 }
@@ -4967,23 +3855,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&queryInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&mapCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&mapCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&maps, msg_in.stream, true);
 
 
@@ -5008,14 +3882,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&requestInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -5043,15 +3909,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&importInfo, msg_in.stream, true);
+    deserialize_ptr(&importInfo->data, msg_in.stream, true);
 
     
-
     deserialize_ptr(&mapUuid, msg_in.stream, true);
 
 
@@ -5081,15 +3941,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&mapUuid, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&map, msg_in.stream, true);
 
 
@@ -5110,10 +3961,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&map, msg_in.stream, true);
-
 
     return result;
 }
@@ -5146,19 +3993,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&map, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -5190,15 +4027,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -5228,15 +4056,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -5262,11 +4081,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&anchor, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -5298,15 +4112,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&storage, msg_in.stream, true);
 
 
@@ -5327,10 +4132,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&storage, msg_in.stream, true);
-
 
     return result;
 }
@@ -5358,15 +4159,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&queryInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -5396,15 +4188,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -5434,15 +4217,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&publishInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -5472,15 +4246,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -5510,15 +4275,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&deleteInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -5548,15 +4304,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -5586,15 +4333,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&updateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -5624,15 +4362,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&storage, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -5659,14 +4388,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&enableInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -5692,11 +4413,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spatialAnchorStore, msg_in.stream, true);
 
 
@@ -5717,10 +4433,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&spatialAnchorStore, msg_in.stream, true);
-
 
     return result;
 }
@@ -5743,14 +4455,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&spatialAnchorStore, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&spatialAnchorPersistenceInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -5783,19 +4487,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&spatialAnchorStore, msg_in.stream, true);
-
-    
-
-    deserialize(&spatialAnchorNameCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spatialAnchorNameCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&spatialAnchorNames, msg_in.stream, true);
 
 
@@ -5825,15 +4519,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&spatialAnchorCreateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spatialAnchor, msg_in.stream, true);
 
 
@@ -5858,14 +4543,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&spatialAnchorStore, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&spatialAnchorPersistenceName, msg_in.stream, true);
-
 
     return result;
 }
@@ -5884,10 +4561,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&spatialAnchorStore, msg_in.stream, true);
-
 
     return result;
 }
@@ -5926,23 +4599,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&markerId, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -5981,23 +4640,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&scene, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&markerId, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -6029,16 +4674,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&value, msg_in.stream, true);
-
-    
-
-    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_in.stream, true);
+    deserialize_ptr(&buffer, msg_in.stream, true);
 
 
     return result;
@@ -6069,15 +4705,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -6107,15 +4734,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&requestId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&results, msg_in.stream, true);
 
 
@@ -6147,15 +4765,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -6185,15 +4794,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -6221,12 +4821,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, true);
+    deserialize_ptr(&buffer, msg_in.stream, true);
 
 
     return result;
@@ -6251,12 +4846,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, true);
+    deserialize_ptr(&buffer, msg_in.stream, true);
 
 
     return result;
@@ -6295,15 +4885,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
+    deserialize_ptr(&info->spaces, msg_in.stream, true);
 
     
+    deserialize_ptr(&info->users, msg_in.stream, true);
 
+    
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -6339,15 +4926,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&boundingBox2DOutput, msg_in.stream, true);
 
 
@@ -6377,15 +4955,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&boundingBox3DOutput, msg_in.stream, true);
 
 
@@ -6415,15 +4984,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&semanticLabelsOutput, msg_in.stream, true);
 
 
@@ -6453,15 +5013,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&boundary2DOutput, msg_in.stream, true);
 
 
@@ -6491,15 +5042,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&roomLayoutOutput, msg_in.stream, true);
 
 
@@ -6526,14 +5068,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&digitalLensControl, msg_in.stream, true);
-
 
     return result;
 }
@@ -6563,15 +5097,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -6603,15 +5128,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spaceContainerOutput, msg_in.stream, true);
 
 
@@ -6639,11 +5155,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&foveationState, msg_in.stream, true);
 
 
@@ -6675,15 +5186,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&faceTracker, msg_in.stream, true);
 
 
@@ -6704,10 +5206,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&faceTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -6735,15 +5233,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&faceTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&expressionInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&expressionWeights, msg_in.stream, true);
 
 
@@ -6775,15 +5264,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&eyeTracker, msg_in.stream, true);
 
 
@@ -6804,10 +5284,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&eyeTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -6835,15 +5311,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&eyeTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&gazeInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&eyeGazes, msg_in.stream, true);
 
 
@@ -6870,14 +5337,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&layer, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&intensity, msg_in.stream, true);
-
 
     return result;
 }
@@ -6909,15 +5368,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&deviceSampleRate, msg_in.stream, true);
 
 
@@ -6951,11 +5401,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&preferences, msg_in.stream, true);
 
 
@@ -6987,15 +5432,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&keyboard, msg_in.stream, true);
 
 
@@ -7016,10 +5452,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&keyboard, msg_in.stream, true);
-
 
     return result;
 }
@@ -7051,19 +5483,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&keyboardSpace, msg_in.stream, true);
 
 
@@ -7088,14 +5507,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locationInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -7119,11 +5530,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&scale, msg_in.stream, true);
 
 
@@ -7148,14 +5554,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&modelVisibility, msg_in.stream, true);
-
 
     return result;
 }
@@ -7179,11 +5577,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&animationStates, msg_in.stream, true);
 
 
@@ -7218,19 +5611,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize(&textureIdCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&textureIdCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&textureIds, msg_in.stream, true);
 
 
@@ -7260,15 +5643,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize(&textureId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&textureData, msg_in.stream, true);
 
 
@@ -7298,15 +5672,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&interactorRootPose, msg_in.stream, true);
 
 
@@ -7331,14 +5696,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&keyboard, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&changeInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -7373,19 +5730,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&cameraCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&cameraCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&cameras, msg_in.stream, true);
 
 
@@ -7424,19 +5771,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&counterPathCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&counterPathCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&counterPaths, msg_in.stream, true);
 
 
@@ -7461,14 +5798,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&state, msg_in.stream, true);
-
 
     return result;
 }
@@ -7492,11 +5821,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -7526,15 +5850,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&counterPath, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&counter, msg_in.stream, true);
 
 
@@ -7566,15 +5881,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
+    deserialize_ptr(&info->spaces, msg_in.stream, true);
 
     
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -7606,15 +5915,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&user, msg_in.stream, true);
 
 
@@ -7640,11 +5940,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&user, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&userId, msg_in.stream, true);
 
 
@@ -7665,10 +5960,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&user, msg_in.stream, true);
-
 
     return result;
 }
@@ -7700,15 +5991,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&resolution, msg_in.stream, true);
 
 
@@ -7740,15 +6022,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&passthrough, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&colorLut, msg_in.stream, true);
 
 
@@ -7769,10 +6042,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&colorLut, msg_in.stream, true);
-
 
     return result;
 }
@@ -7795,14 +6064,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&colorLut, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&updateInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -7832,15 +6093,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&triangleMeshOutput, msg_in.stream, true);
 
 
@@ -7876,15 +6128,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
+    deserialize_ptr(&createInfo->requestedDataSources, msg_in.stream, true);
 
     
-
     deserialize_ptr(&faceTracker, msg_in.stream, true);
 
 
@@ -7905,10 +6151,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&faceTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -7936,15 +6178,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&faceTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&expressionInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&expressionWeights, msg_in.stream, true);
 
 
@@ -7976,15 +6209,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
+    deserialize_ptr(&info->spaces, msg_in.stream, true);
 
     
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -8016,15 +6243,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&environmentDepthProvider, msg_in.stream, true);
 
 
@@ -8045,10 +6263,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
 
     return result;
 }
@@ -8067,10 +6281,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
 
     return result;
 }
@@ -8089,10 +6299,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
 
     return result;
 }
@@ -8120,15 +6326,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&swapchain, msg_in.stream, true);
 
 
@@ -8149,10 +6346,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&swapchain, msg_in.stream, true);
-
 
     return result;
 }
@@ -8184,19 +6377,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize(&imageCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&imageCountOutput, msg_in.stream, true);
 
     
-
     deserialize_xr_array(&images, msg_in.stream, true);
 
 
@@ -8222,11 +6405,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -8256,15 +6434,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&acquireInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&environmentDepthImage, msg_in.stream, true);
 
 
@@ -8289,14 +6458,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&environmentDepthProvider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&setInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -8325,18 +6486,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&domain, msg_in.stream, true);
-
-    
-
-    deserialize(&hint, msg_in.stream, true);
-
 
     return result;
 }
@@ -8366,15 +6515,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&passthrough, msg_in.stream, true);
 
 
@@ -8395,10 +6535,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&passthrough, msg_in.stream, true);
-
 
     return result;
 }
@@ -8424,12 +6560,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&applyInfo, msg_in.stream, true);
+    deserialize_ptr(&applyInfo->subImages, msg_in.stream, true);
 
 
     return result;
@@ -8460,15 +6591,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&anchor, msg_in.stream, true);
 
 
@@ -8494,11 +6616,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&anchor, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&name, msg_in.stream, true);
 
 
@@ -8530,15 +6647,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bodyTracker, msg_in.stream, true);
 
 
@@ -8559,10 +6667,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -8590,15 +6694,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -8632,19 +6727,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
-    
-
-    deserialize(&baseSpace, msg_in.stream, true);
-
-    
-
-    deserialize(&skeletonGenerationId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&skeleton, msg_in.stream, true);
 
 
@@ -8674,12 +6756,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&handTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locations, msg_in.stream, true);
+    deserialize_ptr(&locations->locations, msg_in.stream, true);
 
 
     return result;
@@ -8710,15 +6787,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bodyTracker, msg_in.stream, true);
 
 
@@ -8739,10 +6807,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
 
     return result;
 }
@@ -8770,15 +6834,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&bodyTracker, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -8819,23 +6874,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&snapshot, msg_in.stream, true);
-
-    
-
-    deserialize(&entityId, msg_in.stream, true);
-
-    
-
-    deserialize(&componentTypeCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&componentTypeCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&componentTypes, msg_in.stream, true);
 
 
@@ -8865,15 +6906,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&snapshot, msg_in.stream, true);
-
-    
-
-    deserialize(&entityId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&uuid, msg_in.stream, true);
 
 
@@ -8903,15 +6935,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&snapshot, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_xr(&componentData, msg_in.stream, true);
 
 
@@ -8941,15 +6964,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&provider, msg_in.stream, true);
 
 
@@ -8979,15 +6993,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&startInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9017,15 +7022,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9051,11 +7047,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -9085,15 +7076,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&queryInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9123,15 +7105,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9152,10 +7125,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&snapshot, msg_in.stream, true);
-
 
     return result;
 }
@@ -9183,15 +7152,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&snapshot, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&getInfo, msg_in.stream, true);
 
     
-
     deserialize_ptr(&queriedSenseData, msg_in.stream, true);
 
 
@@ -9212,10 +7175,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&provider, msg_in.stream, true);
-
 
     return result;
 }
@@ -9234,10 +7193,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&provider, msg_in.stream, true);
-
 
     return result;
 }
@@ -9265,15 +7220,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&anchor, msg_in.stream, true);
 
 
@@ -9294,10 +7240,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&anchor, msg_in.stream, true);
-
 
     return result;
 }
@@ -9321,11 +7263,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&anchor, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&uuid, msg_in.stream, true);
 
 
@@ -9355,15 +7292,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -9395,15 +7323,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9433,15 +7352,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9471,15 +7381,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9509,15 +7410,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9547,15 +7439,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9585,15 +7468,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9625,15 +7499,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9663,15 +7528,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9701,15 +7557,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9739,15 +7586,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9779,15 +7617,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -9817,15 +7646,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&provider, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -9863,15 +7683,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&planeDetector, msg_in.stream, true);
 
 
@@ -9892,10 +7703,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&planeDetector, msg_in.stream, true);
-
 
     return result;
 }
@@ -9918,14 +7725,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&planeDetector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&beginInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -9949,11 +7748,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&planeDetector, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -9983,15 +7777,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&planeDetector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&locations, msg_in.stream, true);
 
 
@@ -10025,19 +7810,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&planeDetector, msg_in.stream, true);
-
-    
-
-    deserialize(&planeId, msg_in.stream, true);
-
-    
-
-    deserialize(&polygonBufferIndex, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&polygonBuffer, msg_in.stream, true);
 
 
@@ -10069,15 +7841,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&pollInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&pollResult, msg_in.stream, true);
 
 
@@ -10102,14 +7865,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&cancelInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -10136,14 +7891,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
 
     return result;
 }
@@ -10173,15 +7920,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&detector, msg_in.stream, true);
 
 
@@ -10202,10 +7940,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&detector, msg_in.stream, true);
-
 
     return result;
 }
@@ -10233,15 +7967,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&stateRequest, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -10271,15 +7996,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -10309,15 +8025,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&sizeInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&size, msg_in.stream, true);
 
 
@@ -10347,15 +8054,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&size, msg_in.stream, true);
+    deserialize_xr(&size->next, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -10381,12 +8082,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
+    deserialize_xr(&buffer->next, msg_in.stream, true);
 
     
-
-    deserialize_ptr(&buffer, msg_in.stream, true);
+    deserialize_ptr(&buffer->buffer, msg_in.stream, true);
 
 
     return result;
@@ -10419,19 +8118,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
+    deserialize_ptr(&getInfo->blocks, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
     
-
     deserialize_ptr(&future, msg_in.stream, true);
 
 
@@ -10465,19 +8157,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&detector, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&completionInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&future, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&completion, msg_in.stream, true);
 
 
@@ -10509,15 +8188,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&facialExpressionClient, msg_in.stream, true);
 
 
@@ -10538,10 +8208,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&facialExpressionClient, msg_in.stream, true);
-
 
     return result;
 }
@@ -10574,19 +8240,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&facialExpressionClient, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&blendShapeGetInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&blendShapeCount, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&blendShapes, msg_in.stream, true);
 
 
@@ -10613,14 +8266,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&resumeInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -10643,14 +8288,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&pauseInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -10680,15 +8317,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&discoveryRequestId, msg_in.stream, true);
 
 
@@ -10718,15 +8346,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -10756,15 +8375,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
+    deserialize_ptr(&info->buffer, msg_in.stream, true);
 
     
-
     deserialize_ptr(&advertisementRequestId, msg_in.stream, true);
 
 
@@ -10794,15 +8407,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&info, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&requestId, msg_in.stream, true);
 
 
@@ -10835,15 +8439,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&acquireInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&index, msg_in.stream, true);
 
 
@@ -10872,18 +8467,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, true);
-
-    
-
-    deserialize_xr(&hapticFeedback, msg_in.stream, true);
-
 
     return result;
 }
@@ -10906,14 +8489,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&attachInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -10936,14 +8511,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&frameBeginInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -10966,14 +8533,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&beginInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -11001,15 +8560,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&actionSet, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&action, msg_in.stream, true);
 
 
@@ -11039,15 +8589,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&actionSet, msg_in.stream, true);
 
 
@@ -11077,15 +8618,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -11111,11 +8643,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&instance, msg_in.stream, true);
 
 
@@ -11145,15 +8672,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&space, msg_in.stream, true);
 
 
@@ -11183,15 +8701,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&session, msg_in.stream, true);
 
 
@@ -11221,15 +8730,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&swapchain, msg_in.stream, true);
 
 
@@ -11250,10 +8750,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&action, msg_in.stream, true);
-
 
     return result;
 }
@@ -11272,10 +8768,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&actionSet, msg_in.stream, true);
-
 
     return result;
 }
@@ -11294,10 +8786,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
 
     return result;
 }
@@ -11316,10 +8804,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
 
     return result;
 }
@@ -11338,10 +8822,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&space, msg_in.stream, true);
-
 
     return result;
 }
@@ -11360,10 +8840,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&swapchain, msg_in.stream, true);
-
 
     return result;
 }
@@ -11386,14 +8862,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&frameEndInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -11412,10 +8880,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
 
     return result;
 }
@@ -11444,15 +8908,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&propertyCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&propertyCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -11491,23 +8949,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&enumerateInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&sourceCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&sourceCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&sources, msg_in.stream, true);
 
 
@@ -11550,27 +8994,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationType, msg_in.stream, true);
-
-    
-
-    deserialize(&environmentBlendModeCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&environmentBlendModeCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&environmentBlendModes, msg_in.stream, true);
 
 
@@ -11606,19 +9032,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize_ptr(&layerName, msg_in.stream, true);
-
-    
-
-    deserialize(&propertyCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&propertyCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -11653,19 +9069,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&spaceCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spaceCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&spaces, msg_in.stream, true);
 
 
@@ -11700,19 +9106,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&formatCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&formatCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&formats, msg_in.stream, true);
 
 
@@ -11746,19 +9142,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize(&imageCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&imageCountOutput, msg_in.stream, true);
 
     
-
     deserialize_xr_array(&images, msg_in.stream, true);
 
 
@@ -11801,27 +9187,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationType, msg_in.stream, true);
-
-    
-
-    deserialize(&viewCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&viewCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&views, msg_in.stream, true);
 
 
@@ -11860,23 +9228,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationTypeCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&viewConfigurationTypeCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&viewConfigurationTypes, msg_in.stream, true);
 
 
@@ -11906,15 +9260,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -11944,15 +9289,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -11982,15 +9318,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -12020,15 +9347,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&state, msg_in.stream, true);
 
 
@@ -12058,15 +9376,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&topLevelUserPath, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&interactionProfile, msg_in.stream, true);
 
 
@@ -12105,23 +9414,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -12152,15 +9447,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddr(XrInstance instance, const 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&name, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&function, msg_in.stream, true);
 
 
@@ -12186,11 +9472,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&instanceProperties, msg_in.stream, true);
 
 
@@ -12220,15 +9501,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize(&referenceSpaceType, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bounds, msg_in.stream, true);
 
 
@@ -12258,15 +9530,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&systemId, msg_in.stream, true);
 
 
@@ -12296,15 +9559,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&properties, msg_in.stream, true);
 
 
@@ -12338,19 +9592,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&systemId, msg_in.stream, true);
-
-    
-
-    deserialize(&viewConfigurationType, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&configurationProperties, msg_in.stream, true);
 
 
@@ -12384,19 +9625,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&space, msg_in.stream, true);
-
-    
-
-    deserialize(&baseSpace, msg_in.stream, true);
-
-    
-
-    deserialize(&time, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&location, msg_in.stream, true);
 
 
@@ -12426,15 +9654,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&locateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&spaceLocations, msg_in.stream, true);
 
 
@@ -12477,27 +9696,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&viewLocateInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&viewState, msg_in.stream, true);
 
     
-
-    deserialize(&viewCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&viewCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&views, msg_in.stream, true);
 
 
@@ -12536,23 +9740,9 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&path, msg_in.stream, true);
-
-    
-
-    deserialize(&bufferCapacityInput, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
 
     
-
     deserialize_ptr(&buffer, msg_in.stream, true);
 
 
@@ -12578,11 +9768,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&eventData, msg_in.stream, true);
 
 
@@ -12607,14 +9792,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&releaseInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -12633,10 +9810,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
 
     return result;
 }
@@ -12664,16 +9837,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&value, msg_in.stream, true);
-
-    
-
-    deserialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, msg_in.stream, true);
+    deserialize_ptr(&buffer, msg_in.stream, true);
 
 
     return result;
@@ -12697,14 +9861,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -12733,15 +9889,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&pathString, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&path, msg_in.stream, true);
 
 
@@ -12771,16 +9918,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize(&value, msg_in.stream, true);
-
-    
-
-    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_in.stream, true);
+    deserialize_ptr(&buffer, msg_in.stream, true);
 
 
     return result;
@@ -12804,14 +9942,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&instance, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&suggestedBindings, msg_in.stream, true);
-
 
     return result;
 }
@@ -12834,14 +9964,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&syncInfo, msg_in.stream, true);
-
 
     return result;
 }
@@ -12869,15 +9991,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
     XrResult result;
     deserialize(&result, msg_in.stream);
     
-
-    deserialize(&session, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&frameWaitInfo, msg_in.stream, true);
-
-    
-
     deserialize_ptr(&frameState, msg_in.stream, true);
 
 
@@ -12902,14 +10015,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
     deserialize(&result, msg_in.stream);
-    
-
-    deserialize(&swapchain, msg_in.stream, true);
-
-    
-
-    deserialize_ptr(&waitInfo, msg_in.stream, true);
-
 
     return result;
 }
