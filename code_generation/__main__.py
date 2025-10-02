@@ -57,7 +57,6 @@ with open(function_ids_path, "w") as function_ids_file:
 apply_function_ids(spec, function_ids)
 
 apply_modifiable_bindings(spec)
-print(json.dumps({f.name: f.modifiable_bindings for f in spec.functions}, indent=4))
 
 # Create output directories if they don't exist
 os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
