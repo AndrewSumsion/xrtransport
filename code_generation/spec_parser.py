@@ -69,6 +69,10 @@ class XrFunction:
     def signature(self):
         param_list = ", ".join(p.declaration() for p in self.params)
         return f"{self.name}({param_list})"
+    
+    def call(self):
+        param_list = ", ".join(p.name for p in self.params)
+        return f"{self.name}({param_list})"
 
 class XrParam:
     def __init__(self, type_, name):
