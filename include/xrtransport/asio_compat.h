@@ -164,10 +164,10 @@ public:
 template<typename StreamType>
 class SyncStreamImpl : public SyncStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit SyncStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit SyncStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -194,10 +194,10 @@ public:
 template<typename StreamType>
 class SyncReadStreamImpl : public SyncReadStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit SyncReadStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit SyncReadStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -240,10 +240,10 @@ public:
 template<typename StreamType>
 class SyncWriteStreamImpl : public SyncWriteStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit SyncWriteStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit SyncWriteStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -278,10 +278,10 @@ public:
 template<typename StreamType>
 class SyncDuplexStreamImpl : public SyncDuplexStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit SyncDuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit SyncDuplexStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -332,10 +332,10 @@ public:
 template<typename StreamType>
 class AsyncStreamImpl : public AsyncStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit AsyncStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit AsyncStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -359,10 +359,10 @@ protected:
 template<typename StreamType>
 class AsyncReadStreamImpl : public AsyncReadStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit AsyncReadStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit AsyncReadStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -398,10 +398,10 @@ protected:
 template<typename StreamType>
 class AsyncWriteStreamImpl : public AsyncWriteStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit AsyncWriteStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit AsyncWriteStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -429,10 +429,10 @@ protected:
 template<typename StreamType>
 class AsyncDuplexStreamImpl : public AsyncDuplexStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit AsyncDuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit AsyncDuplexStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();
@@ -472,10 +472,10 @@ protected:
 template<typename StreamType>
 class DuplexStreamImpl : public DuplexStream {
 private:
-    StreamType& stream_;
+    StreamType stream_;
 
 public:
-    explicit DuplexStreamImpl(StreamType& stream) : stream_(stream) {}
+    explicit DuplexStreamImpl(StreamType stream) : stream_(std::move(stream)) {}
 
     bool is_open() const override {
         return stream_.is_open();

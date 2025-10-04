@@ -5,7 +5,7 @@ add_subdirectory(common/transport)
 
 # Conditional inclusion based on build flags
 if(XRTRANSPORT_BUILD_CLIENT)
-    add_subdirectory(client)
+#    add_subdirectory(client)
 endif()
 
 if(XRTRANSPORT_BUILD_SERVER)

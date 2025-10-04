@@ -46,13 +46,13 @@ public:
     void run() {
         while (true) {
             try {
-                auto socket = std::make_unique<tcp::socket>(io_context_);
-                acceptor_.accept(*socket);
+                tcp::socket socket(io_context_);
+                acceptor_.accept(socket);
 
-                std::cout << "Client connected from " << socket->remote_endpoint() << std::endl;
+                std::cout << "Client connected from " << socket.remote_endpoint() << std::endl;
 
                 // Handle client in separate thread
-                std::thread client_thread([this](std::unique_ptr<tcp::socket> sock) {
+                std::thread client_thread([this](tcp::socket sock) {
                     handle_client(std::move(sock));
                 }, std::move(socket));
                 client_thread.detach();
@@ -64,11 +64,10 @@ public:
     }
 
 private:
-    void handle_client(std::unique_ptr<tcp::socket> socket) {
+    void handle_client(tcp::socket socket) {
         try {
             // Create DuplexStream wrapper around TCP socket
-            TcpDuplexStream stream(*socket);
-            Transport transport(stream);
+            Transport transport(std::make_unique<TcpDuplexStream>(std::move(socket)));
 
             // Register protocol handlers
             register_handlers(transport);
@@ -77,7 +76,7 @@ private:
             transport.start_worker();
 
             // Keep connection alive until socket closes
-            while (socket->is_open()) {
+            while (transport.is_open()) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
 

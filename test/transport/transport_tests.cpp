@@ -13,6 +13,7 @@
 #include <atomic>
 #include <future>
 #include <cstdint>
+#include <memory>
 
 using namespace xrtransport;
 using namespace xrtransport::test;
@@ -20,8 +21,8 @@ using namespace xrtransport::test;
 TEST_CASE("Basic sync sending and awaiting", "[transport][sync]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -42,8 +43,8 @@ TEST_CASE("Basic sync sending and awaiting", "[transport][sync]") {
 TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -70,8 +71,8 @@ TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
 TEST_CASE("Basic async handler", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -95,8 +96,8 @@ TEST_CASE("Basic async handler", "[transport][async]") {
 TEST_CASE("Round trip async handler", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -128,8 +129,8 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
 TEST_CASE("Thread-safe async handler", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     std::atomic<uint32_t> message_received = 0;
@@ -159,8 +160,8 @@ TEST_CASE("Thread-safe async handler", "[transport][async]") {
 TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     uint32_t message_sent = 1000;
     std::atomic<uint32_t> message_received = 0;
@@ -201,8 +202,8 @@ TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
 TEST_CASE("Handler registration and removal", "[transport][handlers]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     std::atomic<bool> handler_called = false;
 
@@ -247,8 +248,8 @@ TEST_CASE("Handler registration and removal", "[transport][handlers]") {
 TEST_CASE("Clear all handlers", "[transport][handlers]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     std::atomic<int> handler_calls = 0;
 
@@ -275,8 +276,8 @@ TEST_CASE("Clear all handlers", "[transport][handlers]") {
 TEST_CASE("await_message handler takeover", "[transport][async]") {
     asio::io_context io_context;
     auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(stream_a);
-    Transport transport_b(stream_b);
+    Transport transport_a(std::move(stream_a));
+    Transport transport_b(std::move(stream_b));
 
     std::atomic<bool> intermediate_received = false;
     std::atomic<bool> message_echoed = false;

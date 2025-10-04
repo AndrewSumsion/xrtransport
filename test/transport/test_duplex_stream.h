@@ -88,7 +88,7 @@ private:
 /**
  * Helper function to create a pair of connected TestDuplexStream instances
  */
-std::pair<TestDuplexStream, TestDuplexStream>
+std::pair<std::unique_ptr<DuplexStream>, std::unique_ptr<DuplexStream>>
 create_connected_streams(asio::io_context& io_context);
 
 } // namespace test

@@ -24,8 +24,6 @@ using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
 class IntegrationTestFixture {
 private:
     static std::unique_ptr<asio::io_context> io_context_;
-    static std::unique_ptr<tcp::socket> client_socket_;
-    static std::unique_ptr<TcpDuplexStream> client_stream_;
     static std::unique_ptr<Transport> transport_;
     static std::thread io_thread_;
     static constexpr uint16_t SERVER_PORT = 12345;
@@ -37,12 +35,12 @@ public:
 
         // Connect to server (assumes server is already running)
         io_context_ = std::make_unique<asio::io_context>();
-        client_socket_ = std::make_unique<tcp::socket>(*io_context_);
+        tcp::socket client_socket_(*io_context_);
 
         try {
             tcp::resolver resolver(*io_context_);
             auto endpoints = resolver.resolve("localhost", std::to_string(SERVER_PORT));
-            asio::connect(*client_socket_, endpoints);
+            asio::connect(client_socket_, endpoints);
 
             std::cout << "Connected to server on port " << SERVER_PORT << std::endl;
 
@@ -53,8 +51,7 @@ public:
         }
 
         // Create Transport
-        client_stream_ = std::make_unique<TcpDuplexStream>(*client_socket_);
-        transport_ = std::make_unique<Transport>(*client_stream_);
+        transport_ = std::make_unique<Transport>(std::make_unique<TcpDuplexStream>(std::move(client_socket_)));
 
         // Start async worker
         transport_->start_worker();
@@ -74,9 +71,7 @@ public:
 
         transport_->clear_handlers();
         transport_->stop_worker();
-        if (client_socket_->is_open()) {
-            client_socket_->close();
-        }
+        transport_->close();
         io_context_->stop();
 
         // Join io thread
@@ -96,8 +91,6 @@ public:
 
 // Static member definitions
 std::unique_ptr<asio::io_context> IntegrationTestFixture::io_context_;
-std::unique_ptr<tcp::socket> IntegrationTestFixture::client_socket_;
-std::unique_ptr<TcpDuplexStream> IntegrationTestFixture::client_stream_;
 std::unique_ptr<Transport> IntegrationTestFixture::transport_;
 std::thread IntegrationTestFixture::io_thread_;
 

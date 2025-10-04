@@ -49,7 +49,7 @@ using MessageLockIn = MessageLock<SyncReadStream>;
 // Transport class for message-based communication
 class Transport {
 private:
-    DuplexStream& stream;
+    std::unique_ptr<DuplexStream> stream;
     mutable std::recursive_mutex stream_mutex;
     std::atomic<bool> should_stop;
     std::unordered_map<uint16_t, std::function<void(Transport&, MessageLockIn)>> handlers;
@@ -61,7 +61,7 @@ private:
     void worker_cycle();
 
 public:
-    explicit Transport(DuplexStream& stream);
+    explicit Transport(std::unique_ptr<DuplexStream> stream);
     ~Transport();
 
     // Disable copy/assignment
@@ -78,6 +78,10 @@ public:
     // Worker management
     void start_worker();
     void stop_worker();
+
+    // Stream status
+    bool is_open() const;
+    void close();
 };
 
 } // namespace xrtransport

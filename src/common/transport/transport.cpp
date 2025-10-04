@@ -6,8 +6,8 @@
 namespace xrtransport {
 
 // Transport implementation
-Transport::Transport(DuplexStream& stream)
-    : stream(stream), should_stop(false) {
+Transport::Transport(std::unique_ptr<DuplexStream> stream)
+    : stream(std::move(stream)), should_stop(false) {
 }
 
 Transport::~Transport() {
@@ -18,9 +18,9 @@ MessageLockOut Transport::start_message(uint16_t header) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
     // Write the header first
-    asio::write(stream, asio::const_buffer(&header, sizeof(header)));
+    asio::write(*stream, asio::const_buffer(&header, sizeof(header)));
 
-    return MessageLockOut(std::move(lock), stream);
+    return MessageLockOut(std::move(lock), *stream);
 }
 
 void Transport::register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler) {
@@ -42,14 +42,14 @@ MessageLockIn Transport::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-        if (stream.available() >= sizeof(header)) {
+        if (stream->available() >= sizeof(header)) {
             uint16_t received_header;
             // TODO: proper error handling
-            asio::read(stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
+            asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
 
             if (received_header == header) {
                 // This is our message
-                return MessageLockIn(std::move(lock), stream);
+                return MessageLockIn(std::move(lock), *stream);
             } else {
                 // Dispatch to handler for this message type
                 dispatch_to_handler(received_header, std::move(lock));
@@ -69,7 +69,7 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
     auto it = handlers.find(header);
     if (it != handlers.end()) {
         // Create MessageLockIn and call handler with Transport reference
-        MessageLockIn message_lock(std::move(lock), stream);
+        MessageLockIn message_lock(std::move(lock), *stream);
         it->second(*this, std::move(message_lock));
     } else {
         throw TransportException("No handler registered for message type: " + std::to_string(header));
@@ -92,7 +92,7 @@ void Transport::worker_cycle() {
     }
 
     // Async wait for read availability
-    stream.async_wait(asio::socket_base::wait_read, [this](asio::error_code ec) {
+    stream->async_wait(asio::socket_base::wait_read, [this](asio::error_code ec) {
         if (ec || should_stop) {
             return; // Stop on error or when requested
         }
@@ -101,10 +101,10 @@ void Transport::worker_cycle() {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
         // Check if enough bytes are available for the header
-        if (stream.available() >= sizeof(uint16_t)) {
+        if (stream->available() >= sizeof(uint16_t)) {
             // Enough data available, read the header synchronously
             uint16_t header;
-            asio::read(stream, asio::mutable_buffer(&header, sizeof(header)));
+            asio::read(*stream, asio::mutable_buffer(&header, sizeof(header)));
 
             // Dispatch to handler
             dispatch_to_handler(header, std::move(lock));
@@ -117,6 +117,14 @@ void Transport::worker_cycle() {
         // Continue the async cycle
         worker_cycle();
     });
+}
+
+bool Transport::is_open() const {
+    return stream->is_open();
+}
+
+void Transport::close() {
+    stream->close();
 }
 
 } // namespace xrtransport
