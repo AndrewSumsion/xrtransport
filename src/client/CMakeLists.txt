@@ -20,7 +20,7 @@ target_link_libraries(xrtransport_client
 target_include_directories(xrtransport_client PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/asio/asio/include
+    ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
 # C++ standard

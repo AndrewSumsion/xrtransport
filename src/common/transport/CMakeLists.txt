@@ -8,8 +8,8 @@ add_library(xrtransport_transport STATIC
 # Set target properties for transport
 target_include_directories(xrtransport_transport PUBLIC
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/OpenXR-SDK/include
-    ${CMAKE_SOURCE_DIR}/asio/asio/include
+    ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
+    ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
 # Set C++ standard for transport

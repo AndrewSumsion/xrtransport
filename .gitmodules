@@ -1,12 +1,12 @@
 [submodule "OpenXR-SDK"]
-	path = OpenXR-SDK
+	path = external/OpenXR-SDK
 	url = https://github.com/KhronosGroup/OpenXR-SDK.git
 [submodule "asio"]
-	path = asio
+	path = external/asio
 	url = https://github.com/chriskohlhoff/asio.git
 [submodule "Catch2"]
-	path = Catch2
+	path = external/Catch2
 	url = https://github.com/catchorg/Catch2.git
 [submodule "spdlog"]
-	path = spdlog
+	path = external/spdlog
 	url = https://github.com/gabime/spdlog.git

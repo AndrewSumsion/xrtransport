@@ -13,8 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add include directories for the project
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/OpenXR-SDK/include
-    ${CMAKE_SOURCE_DIR}/spdlog/include
+    ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
+    ${CMAKE_SOURCE_DIR}/external/spdlog/include
 )
 
 # Build the serialization static library

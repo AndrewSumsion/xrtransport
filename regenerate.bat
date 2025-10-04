@@ -8,5 +8,5 @@ REM - New extensions are added
 
 REM Generate all code from OpenXR specification
 python -m code_generation ^
-    OpenXR-SDK/specification/registry/xr.xml ^
+    external/OpenXR-SDK/specification/registry/xr.xml ^
     %*
