@@ -10,8 +10,6 @@
 
 
 
-
-
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/util.h"
 
