@@ -1,1 +1,1 @@
-from .entry_points import generate_function_entry_points
+from .runtime import generate_runtime_header, generate_runtime_impl

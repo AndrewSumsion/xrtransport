@@ -5,30 +5,26 @@
  * Any changes made to this file will be lost when regenerated.
  *
  * To modify this file, edit the corresponding template in:
- * code_generation/templates/functions/entry_points.mako
+ * code_generation/templates/functions/runtime_impl.mako
  */
 
 <%namespace name="utils" file="utils.mako"/>
 
-#include "transport_manager.h"
+#include "runtime.h"
+
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
 
-#ifdef _MSC_VER
-#define XRAPI_ATTR __declspec(dllexport)
-#endif
-#define XR_EXTENSION_PROTOTYPES
-#include <openxr/openxr.h>
+#include <utility>
 
 using namespace xrtransport;
 
-extern "C" {
+Runtime::Runtime(Transport& transport) : transport(transport) {}
 
 <%utils:for_grouped_functions args="function">
-XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
-    auto& transport = get_transport();
+XrResult Runtime::${function.signature()} {
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = ${function.id};
     serialize(&function_id, msg_out.stream);
@@ -46,5 +42,3 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     return result;
 }
 </%utils:for_grouped_functions>
-
-} // extern "C"

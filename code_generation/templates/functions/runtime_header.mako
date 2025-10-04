@@ -5,20 +5,33 @@
  * Any changes made to this file will be lost when regenerated.
  *
  * To modify this file, edit the corresponding template in:
- * code_generation/templates/functions/entry_points.mako
+ * code_generation/templates/functions/runtime_header.mako
  */
+
+<%namespace name="utils" file="utils.mako"/>
 
 #ifndef XRTRANSPORT_CLIENT_RUNTIME_H
 #define XRTRANSPORT_CLIENT_RUNTIME_H
 
-#include "asio.hpp"
+#include "xrtransport/transport/transport.h"
+
+#include "openxr/openxr.h"
 
 namespace xrtransport {
 
 class Runtime {
-private:
+public:
+    Transport& transport;
     
+    Runtime(Transport& transport);
+    ~Runtime() = default;
+
+<%utils:for_grouped_functions args="function">
+    XrResult ${function.signature()};
+</%utils:for_grouped_functions>
 };
+
+extern Runtime runtime;
 
 } // namespace xrtransport
 
