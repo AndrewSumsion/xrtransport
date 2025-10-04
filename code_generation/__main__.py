@@ -55,6 +55,7 @@ apply_modifiable_bindings(spec)
 template_config = [
     ("client/runtime_header.mako", "src/client/runtime.h"),
     ("client/runtime_impl.mako", "src/client/runtime.cpp"),
+    ("client/entry.mako", "src/client/entry.cpp"),
     ("reflection/struct.mako", "include/xrtransport/reflection/reflection_struct.h"),
     ("structs/deserializer_header.mako", "include/xrtransport/serialization/deserializer.h"),
     ("structs/deserializer_impl.mako", "src/common/serialization/deserializer.cpp"),

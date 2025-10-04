@@ -10,8 +10,6 @@ ${utils.header_comment("client/runtime_header.mako")}
 
 namespace xrtransport {
 
-extern Transport transport;
-
 <%utils:for_grouped_functions args="function">
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()};
 </%utils:for_grouped_functions>

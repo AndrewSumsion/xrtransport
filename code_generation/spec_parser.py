@@ -120,7 +120,8 @@ struct_blacklist = {
 function_blacklist = {
     "xrNegotiateLoaderRuntimeInterface",
     "xrNegotiateLoaderApiLayerInterface",
-    "xrCreateApiLayerInstance"
+    "xrCreateApiLayerInstance",
+    "xrGetInstanceProcAddr"
 }
 
 def get_xml_root(xml_path):

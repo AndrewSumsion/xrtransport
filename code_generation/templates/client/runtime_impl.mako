@@ -2,6 +2,7 @@
 ${utils.header_comment("client/runtime_impl.mako")}
 
 #include "runtime.h"
+#include "transport_manager.h"
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
@@ -18,6 +19,7 @@ namespace xrtransport {
 <%utils:for_grouped_functions args="function">
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     try {
+    auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = ${function.id};
     serialize(&function_id, msg_out.stream);

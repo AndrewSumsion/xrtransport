@@ -17,6 +17,9 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/spdlog/include
 )
 
+# Build with PIC so that static libraries can be linked into shared libraries
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 # Build the serialization static library
 add_subdirectory(src)
 
