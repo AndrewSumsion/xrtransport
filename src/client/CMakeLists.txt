@@ -8,7 +8,6 @@ message(STATUS "Building xrtransport client components")
 # Client library
 add_library(xrtransport_client STATIC
     runtime.cpp
-    dispatch.cpp
 )
 
 # Dependencies
