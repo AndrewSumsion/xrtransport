@@ -10,6 +10,7 @@ ${utils.header_comment("client/runtime_impl.mako")}
 
 #include "openxr/openxr.h"
 
+#include <spdlog/spdlog.h>
 #include <stdexcept>
 
 namespace xrtransport {
@@ -34,6 +35,7 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     return result;
     }
     catch (const std::exception& e) {
+        spdlog::error("Exception in ${function.name}: {}", e.what());
         return XR_ERROR_RUNTIME_FAILURE;
     }
 }

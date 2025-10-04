@@ -1,5 +1,7 @@
 #include "xrtransport/transport/transport.h"
 
+#include <spdlog/spdlog.h>
+#include "xrtransport/fatal_error.h"
 #include <chrono>
 #include <thread>
 
@@ -18,7 +20,12 @@ MessageLockOut Transport::start_message(uint16_t header) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
     // Write the header first
-    asio::write(*stream, asio::const_buffer(&header, sizeof(header)));
+    try {
+        asio::write(*stream, asio::const_buffer(&header, sizeof(header)));
+    } catch (const std::exception& e) {
+        spdlog::error("Failed to write message header in start_message: {}", e.what());
+        throw;
+    }
 
     return MessageLockOut(std::move(lock), *stream);
 }
@@ -44,8 +51,12 @@ MessageLockIn Transport::await_message(uint16_t header) {
 
         if (stream->available() >= sizeof(header)) {
             uint16_t received_header;
-            // TODO: proper error handling
-            asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
+            try {
+                asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
+            } catch (const std::exception& e) {
+                spdlog::error("Failed to read message header in await_message: {}", e.what());
+                throw;
+            }
 
             if (received_header == header) {
                 // This is our message
@@ -72,7 +83,9 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
         MessageLockIn message_lock(std::move(lock), *stream);
         it->second(*this, std::move(message_lock));
     } else {
-        throw TransportException("No handler registered for message type: " + std::to_string(header));
+        // No handler for this message type - stream is corrupted
+        // We don't know how many bytes to read, so stream is permanently out of sync
+        fatal_error("No handler registered for message type: " + std::to_string(header));
     }
 }
 
@@ -93,8 +106,12 @@ void Transport::worker_cycle() {
 
     // Async wait for read availability
     stream->async_wait(asio::socket_base::wait_read, [this](asio::error_code ec) {
-        if (ec || should_stop) {
-            return; // Stop on error or when requested
+        if (should_stop) {
+            return;
+        }
+        if (ec) {
+            spdlog::error("Async wait error in worker_cycle: {}", ec.message());
+            return;
         }
 
         // Acquire lock for synchronous operations
@@ -104,9 +121,15 @@ void Transport::worker_cycle() {
         if (stream->available() >= sizeof(uint16_t)) {
             // Enough data available, read the header synchronously
             uint16_t header;
-            asio::read(*stream, asio::mutable_buffer(&header, sizeof(header)));
+            try {
+                asio::read(*stream, asio::mutable_buffer(&header, sizeof(header)));
+            } catch (const std::exception& e) {
+                spdlog::error("Failed to read message header in worker_cycle: {}", e.what());
+                lock.unlock();
+                return; // Stop worker on read error
+            }
 
-            // Dispatch to handler
+            // Dispatch to handler (will fatal_error if unknown message type)
             dispatch_to_handler(header, std::move(lock));
         } else {
             // Release lock since we're not reading

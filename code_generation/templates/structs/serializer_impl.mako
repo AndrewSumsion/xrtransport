@@ -15,6 +15,7 @@ void serialize(const ${struct.name}* s, SyncWriteStream& out) {
 
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/util.h"
+#include "xrtransport/fatal_error.h"
 
 namespace xrtransport {
 
@@ -25,7 +26,9 @@ std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = 
 };
 
 StructSerializer serializer_lookup(XrStructureType struct_type) {
-    assert(serializer_lookup_table.find(struct_type) != serializer_lookup_table.end());
+    if (serializer_lookup_table.find(struct_type) == serializer_lookup_table.end()) {
+        fatal_error("Unknown XrStructureType in serializer_lookup: " + std::to_string(struct_type));
+    }
     return serializer_lookup_table[struct_type];
 }
 

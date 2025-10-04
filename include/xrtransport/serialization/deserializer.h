@@ -24,8 +24,8 @@
 
 #include <cstdint>
 #include <unordered_map>
-#include <cassert>
 #include <cstring>
+#include <stdexcept>
 
 namespace xrtransport {
 
@@ -10061,7 +10061,7 @@ void deserialize_ptr(const T** x, SyncReadStream& in, bool in_place = false) {
     if (len) {
         if (in_place) {
             if (!*x) {
-                assert(false && "Attempted to deserialize in-place into nullptr");
+                throw std::runtime_error("Attempted to deserialize in-place into nullptr");
             }
             deserialize_array(*x, len, in, in_place);
         }
@@ -10074,7 +10074,7 @@ void deserialize_ptr(const T** x, SyncReadStream& in, bool in_place = false) {
     else {
         if (in_place) {
             if (*x) {
-                assert(false && "Attempted to deserialize in-place nullptr but pointer is allocated");
+                throw std::runtime_error("Attempted to deserialize in-place nullptr but pointer is allocated");
             }
         }
         else {
@@ -10090,7 +10090,7 @@ void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
     if (len) {
         if (in_place) {
             if (!*x) {
-                assert(false && "Attempted to deserialize in-place into nullptr");
+                throw std::runtime_error("Attempted to deserialize in-place into nullptr");
             }
             deserialize_array(*x, len, in, in_place);
         }
@@ -10103,7 +10103,7 @@ void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
     else {
         if (in_place) {
             if (*x) {
-                assert(false && "Attempted to deserialize in-place nullptr but pointer is allocated");
+                throw std::runtime_error("Attempted to deserialize in-place nullptr but pointer is allocated");
             }
         }
         else {
@@ -10119,7 +10119,7 @@ void deserialize_xr(const T** p_s, SyncReadStream& in, bool in_place = false) {
     if (type) {
         const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
         if (in_place && !dest) {
-            assert(false && "Attempted to deserialize in-place to nullptr");
+            throw std::runtime_error("Attempted to deserialize in-place to nullptr");
         }
         XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
         deserializer_lookup(type)(s, in, in_place);
@@ -10129,7 +10129,7 @@ void deserialize_xr(const T** p_s, SyncReadStream& in, bool in_place = false) {
     }
     else {
         if (in_place && *p_s) {
-            assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
+            throw std::runtime_error("Attempted to deserialize in-place nullptr into allocated pointer");
         }
         if (!in_place) {
             *p_s = nullptr;
