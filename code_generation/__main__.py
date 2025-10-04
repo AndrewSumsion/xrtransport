@@ -2,46 +2,39 @@ import os
 import sys
 import argparse
 import json
+import random
+from mako.lookup import TemplateLookup
+from mako import exceptions
 from . import (
     get_xml_root,
     parse_spec,
-    generate_serializer_header,
-    generate_serializer_impl,
-    generate_deserializer_header,
-    generate_deserializer_impl,
-    generate_runtime_header,
-    generate_runtime_impl,
-    generate_struct_reflection,
-    generate_struct_fuzzer,
     generate_function_ids,
     update_function_ids,
     apply_function_ids,
     apply_modifiable_bindings,
-    TEMPLATES_DIR
+    RandomStructGenerator
 )
 
 parser = argparse.ArgumentParser(description="Generate serialization, deserialization, and test code based on OpenXR spec")
 parser.add_argument("openxr_spec_path", help="Path to the xr.xml file for the OpenXR spec")
-parser.add_argument("function_ids", help="Path to function_ids.json")
-parser.add_argument("include_out", help="Path to the folder to place generated header files in")
-parser.add_argument("src_out", help="Path to the folder to place generated C++ implementation files in")
-parser.add_argument("test_out", help="Path to the folder to place generated test code in")
+parser.add_argument("--project_root", default=".", type=str, help="Path to the xrtransport project folder")
 parser.add_argument("--fuzzer-seed", default=1337, type=int, help="Numerical seed to use for the fuzzer")
 parser.add_argument("--regenerate-function-ids", action="store_true", help="Regenerate function ids from spec from scratch. Only use this for a full regenerate. Default behavior already accounts for changes in the spec.")
 args = parser.parse_args()
 
 xr_xml_path = args.openxr_spec_path
-function_ids_path = args.function_ids
-include_path = args.include_out
-src_path = args.src_out
-test_path = args.test_out
+project_root = args.project_root
 fuzzer_seed = args.fuzzer_seed
 should_regenerate_function_ids = args.regenerate_function_ids
+
+random.seed(fuzzer_seed)
 
 xml_root = get_xml_root(xr_xml_path)
 spec = parse_spec(xml_root)
 
 # Update/regenerate function ids and save
+function_ids_path = os.path.join(project_root, "function_ids.json")
+
 if should_regenerate_function_ids:
     function_ids = generate_function_ids(spec)
 else:
@@ -59,35 +52,50 @@ apply_function_ids(spec, function_ids)
 
 apply_modifiable_bindings(spec)
 
-# Create output directories if they don't exist
-os.makedirs(os.path.join(include_path, "serialization"), exist_ok=True)
-os.makedirs(os.path.join(include_path, "reflection"), exist_ok=True)
-os.makedirs(os.path.join(src_path, "serialization"), exist_ok=True)
-os.makedirs(os.path.join(src_path, "client"), exist_ok=True)
-os.makedirs(os.path.join(test_path, "serialization"), exist_ok=True)
+template_config = [
+    ("functions/runtime_header.mako", "src/client/runtime.h"),
+    ("functions/runtime_impl.mako", "src/client/runtime.cpp"),
+    ("reflection/struct.mako", "include/xrtransport/reflection/reflection_struct.h"),
+    ("structs/deserializer_header.mako", "include/xrtransport/serialization/deserializer.h"),
+    ("structs/deserializer_impl.mako", "src/common/serialization/deserializer.cpp"),
+    ("structs/serializer_header.mako", "include/xrtransport/serialization/serializer.h"),
+    ("structs/serializer_impl.mako", "src/common/serialization/serializer.cpp"),
+    ("test/serialization_tests.mako", "test/serialization/fuzzer.cpp", {"struct_generator": RandomStructGenerator(spec)})
+]
 
-serializer_header_path = os.path.join(include_path, "serialization", "serializer.h")
-serializer_impl_path = os.path.join(src_path, "common", "serialization", "serializer.cpp")
-deserializer_header_path = os.path.join(include_path, "serialization", "deserializer.h")
-deserializer_impl_path = os.path.join(src_path, "common", "serialization", "deserializer.cpp")
-reflection_struct_path = os.path.join(include_path, "reflection", "reflection_struct.h")
-runtime_header_path = os.path.join(src_path, "client", "runtime.h")
-runtime_impl_path = os.path.join(src_path, "client", "runtime.cpp")
-serialization_tests_path = os.path.join(test_path, "serialization", "fuzzer.cpp")
+def generate_template(project_root, spec, config_row):
+    # parse config row
+    src, dest = config_row[:2]
+    if len(config_row) > 2:
+        params = config_row[2]
+    else:
+        params = {}
 
-with open(serializer_header_path, "wb") as out:
-    generate_serializer_header(spec, TEMPLATES_DIR, out)
-with open(serializer_impl_path, "wb") as out:
-    generate_serializer_impl(spec, TEMPLATES_DIR, out)
-with open(deserializer_header_path, "wb") as out:
-    generate_deserializer_header(spec, TEMPLATES_DIR, out)
-with open(deserializer_impl_path, "wb") as out:
-    generate_deserializer_impl(spec, TEMPLATES_DIR, out)
-with open(reflection_struct_path, "wb") as out:
-    generate_struct_reflection(spec, TEMPLATES_DIR, out)
-with open(runtime_header_path, "wb") as out:
-    generate_runtime_header(spec, TEMPLATES_DIR, out)
-with open(runtime_impl_path, "wb") as out:
-    generate_runtime_impl(spec, TEMPLATES_DIR, out)
-with open(serialization_tests_path, "wb") as out:
-    generate_struct_fuzzer(spec, TEMPLATES_DIR, out, fuzzer_seed)
+    # setup paths
+    src = os.path.join(project_root, "code_generation", "templates", src)
+    dest = os.path.join(project_root, dest)
+    src_dir = os.path.dirname(src)
+    dest_dir = os.path.dirname(dest)
+    templates_dir = os.path.join(project_root, "code_generation", "templates")
+
+    # ensure destination directory exists
+    os.makedirs(dest_dir, exist_ok=True)
+
+    # include spec by default
+    params["spec"] = spec
+
+    template_lookup = TemplateLookup(directories=[templates_dir, src_dir])
+    template = template_lookup.get_template(os.path.basename(src))
+
+    try:
+        rendered = template.render(**params)
+    except:
+        print(f"Warning! An exception occurred rendering template {src}")
+        print(exceptions.text_error_template().render())
+        return
+
+    with open(dest, "wb") as out:
+        out.write(rendered.encode())
+
+for config_row in template_config:
+    generate_template(project_root, spec, config_row)

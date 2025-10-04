@@ -1,7 +1,5 @@
 import random
 import string
-from mako.lookup import TemplateLookup
-from mako import exceptions
 
 ASSERT_COMMAND = "REQUIRE"
 
@@ -199,17 +197,3 @@ class RandomStructGenerator:
         out = []
         struct_plan.zero(out, struct_name, indent)
         return "\n".join(out)
-
-
-def generate_struct_fuzzer(spec, templates_dir, out, fuzzer_seed):
-    # Make unit test output deterministic (not thread safe)
-    random.seed(fuzzer_seed)
-
-    template_lookup = TemplateLookup(directories=[f"{templates_dir}/test"])
-    template = template_lookup.get_template("serialization_tests.mako")
-    struct_generator = RandomStructGenerator(spec)
-    try:
-        out.write(template.render(spec=spec, struct_generator=struct_generator).encode())
-    except:
-        print("Warning! An exception occurred running unit tests template.")
-        print(exceptions.text_error_template().render())
