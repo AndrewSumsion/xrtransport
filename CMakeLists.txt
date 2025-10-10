@@ -6,6 +6,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(XRTRANSPORT_BUILD_CLIENT "Build client" ON)
 option(XRTRANSPORT_BUILD_SERVER "Build server" ON)
 
+if (XRTRANSPORT_BUILD_SERVER)
+    # Server needs OpenXR loader to be built
+    add_subdirectory(external/OpenXR-SDK)
+endif()
+
 # Set C++ standard for the entire project
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -20,7 +25,7 @@ include_directories(
 # Build with PIC so that static libraries can be linked into shared libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-# Build the serialization static library
+# Build xrtransport
 add_subdirectory(src)
 
 # Build the test executables
