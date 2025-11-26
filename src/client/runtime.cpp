@@ -31,19 +31,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 75001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&threadType, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&threadId, msg_out.stream);
+    serialize(&threadType, msg_out.buffer);
 
+    
+
+    serialize(&threadId, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -65,23 +66,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 74001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(swapchain, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(surface, 1, msg_out.stream);
+    serialize_ptr(swapchain, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(surface, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -117,19 +119,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 21001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&domain, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&level, msg_out.stream);
+    serialize(&domain, msg_out.buffer);
 
+    
+
+    serialize(&level, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -151,27 +154,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 23001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&domain, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(notificationLevel, 1, msg_out.stream);
+    serialize(&domain, msg_out.buffer);
 
     
 
-    serialize_ptr(tempHeadroom, 1, msg_out.stream);
+    serialize_ptr(notificationLevel, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(tempSlope, 1, msg_out.stream);
+    serialize_ptr(tempHeadroom, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(tempSlope, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -206,15 +210,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(nameInfo, 1, msg_out.stream);
+    serialize_ptr(nameInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -234,19 +239,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(messenger, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(messenger, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -272,11 +278,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&messenger, msg_out.stream);
+    serialize(&messenger, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -296,23 +303,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&messageSeverity, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&messageTypes, msg_out.stream);
+    serialize(&messageSeverity, msg_out.buffer);
 
     
 
-    serialize_ptr(callbackData, 1, msg_out.stream);
+    serialize(&messageTypes, msg_out.buffer);
 
+    
+
+    serialize_ptr(callbackData, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -338,15 +346,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(labelInfo, 1, msg_out.stream);
+    serialize_ptr(labelInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -366,11 +375,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -390,15 +400,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(labelInfo, 1, msg_out.stream);
+    serialize_ptr(labelInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -420,19 +431,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 88001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -457,19 +469,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 89001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -494,28 +507,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 91004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -541,28 +555,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 91001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -588,23 +603,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 91002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&vkInstance, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(vkPhysicalDevice, 1, msg_out.stream);
+    serialize(&vkInstance, msg_out.buffer);
 
+    
+
+    serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -627,19 +643,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 91003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -664,19 +681,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 71001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -701,19 +719,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 72001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -738,19 +757,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 87001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(graphicsRequirements, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -777,27 +797,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 90001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&viewConfigurationType, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&viewIndex, msg_out.stream);
+    serialize(&viewConfigurationType, msg_out.buffer);
 
     
 
-    serialize(&visibilityMaskType, msg_out.stream);
+    serialize(&viewIndex, msg_out.buffer);
 
     
 
-    serialize_ptr(visibilityMask, 1, msg_out.stream);
+    serialize(&visibilityMaskType, msg_out.buffer);
 
+    
+
+    serialize_ptr(visibilityMask, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -826,19 +847,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 94002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(performanceCounter, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(time, 1, msg_out.stream);
+    serialize_ptr(performanceCounter, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(time, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -861,19 +883,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 94001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&time, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(performanceCounter, 1, msg_out.stream);
+    serialize(&time, msg_out.buffer);
 
+    
+
+    serialize_ptr(performanceCounter, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -898,19 +921,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 83002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(timespecTime, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(time, 1, msg_out.stream);
+    serialize_ptr(timespecTime, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(time, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -936,19 +960,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 83001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&time, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(timespecTime, 1, msg_out.stream);
+    serialize(&time, msg_out.buffer);
 
+    
+
+    serialize_ptr(timespecTime, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -973,19 +998,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 134001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(anchor, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(anchor, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1008,19 +1034,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 134002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1043,11 +1070,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 134003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1075,23 +1103,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&interactionProfile, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&topLevelPath, msg_out.stream);
+    serialize(&interactionProfile, msg_out.buffer);
 
     
 
-    serialize(&isActive, msg_out.stream);
+    serialize(&topLevelPath, msg_out.buffer);
 
+    
+
+    serialize(&isActive, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1111,23 +1140,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&inputSourcePath, msg_out.stream);
+    serialize(&topLevelPath, msg_out.buffer);
 
     
 
-    serialize(&state, msg_out.stream);
+    serialize(&inputSourcePath, msg_out.buffer);
 
+    
+
+    serialize(&state, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1147,23 +1177,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&inputSourcePath, msg_out.stream);
+    serialize(&topLevelPath, msg_out.buffer);
 
     
 
-    serialize(&state, msg_out.stream);
+    serialize(&inputSourcePath, msg_out.buffer);
 
+    
+
+    serialize(&state, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1183,23 +1214,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&inputSourcePath, msg_out.stream);
+    serialize(&topLevelPath, msg_out.buffer);
 
     
 
-    serialize(&state, msg_out.stream);
+    serialize(&inputSourcePath, msg_out.buffer);
 
+    
+
+    serialize(&state, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1219,27 +1251,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&inputSourcePath, msg_out.stream);
+    serialize(&topLevelPath, msg_out.buffer);
 
     
 
-    serialize(&space, msg_out.stream);
+    serialize(&inputSourcePath, msg_out.buffer);
 
     
 
-    serialize(&pose, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize(&pose, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1263,19 +1296,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 136001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1298,19 +1332,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 136004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(nodeBinding, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(nodeBinding, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1333,11 +1368,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 136002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&nodeBinding, msg_out.stream);
+    serialize(&nodeBinding, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1357,19 +1393,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 136003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&nodeBinding, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&nodeBinding, msg_out.buffer);
 
     
 
-    serialize_ptr(properties, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1394,19 +1431,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 19001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(handTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(handTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1429,11 +1467,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 19002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1453,19 +1492,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 19003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1490,19 +1530,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 127001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1525,19 +1566,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 127002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(updateInfo, 1, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(handMesh, 1, msg_out.stream);
+    serialize_ptr(updateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(handMesh, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1564,19 +1606,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 126001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelUserPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(controllerModelKeyState, 1, msg_out.stream);
+    serialize(&topLevelUserPath, msg_out.buffer);
 
+    
+
+    serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1599,28 +1642,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 126004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&modelKey, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&modelKey, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1646,19 +1690,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 126002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&modelKey, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(properties, 1, msg_out.stream);
+    serialize(&modelKey, msg_out.buffer);
 
+    
+
+    serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1681,19 +1726,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 126003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&modelKey, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize(&modelKey, msg_out.buffer);
 
+    
+
+    serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1718,19 +1764,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 129001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(perceptionAnchor, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(anchor, 1, msg_out.stream);
+    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(anchor, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1756,19 +1803,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 129002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
     
 
     #error "auto-generator doesn't support double pointers (perceptionAnchor)"
     None
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1797,32 +1845,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 125001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&viewConfigurationType, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize(&modeCapacityInput, msg_out.stream);
+    serialize(&viewConfigurationType, msg_out.buffer);
 
     
 
-    serialize_ptr(modeCountOutput, 1, msg_out.stream);
+    serialize(&modeCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(modeCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(modes, modeCapacityInput, msg_out.stream);
+    serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1852,15 +1901,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 60002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_xr(state, msg_out.stream);
+    serialize_xr(state, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1880,15 +1930,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 60001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_xr(state, msg_out.stream);
+    serialize_xr(state, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1915,19 +1966,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 27001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(bodyTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1950,11 +2002,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 27002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -1974,19 +2027,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 27004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2009,15 +2063,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 27003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(skeleton, 1, msg_out.stream);
+    serialize_ptr(skeleton, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2048,11 +2103,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 85001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize_xr(loaderInitInfo, msg_out.stream);
+    serialize_xr(loaderInitInfo, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2076,23 +2132,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 92002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(vulkanInstance, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(vulkanResult, 1, msg_out.stream);
+    serialize_ptr(vulkanInstance, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2118,23 +2175,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 92001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(vulkanDevice, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(vulkanResult, 1, msg_out.stream);
+    serialize_ptr(vulkanDevice, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2160,19 +2218,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 92003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2199,28 +2258,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&featureCapacityInput, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(featureCountOutput, 1, msg_out.stream);
+    serialize(&featureCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(featureCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(features, featureCapacityInput, msg_out.stream);
+    serialize_ptr(features, featureCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2246,19 +2306,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(sceneObserver, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(sceneObserver, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2281,11 +2342,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&sceneObserver, msg_out.stream);
+    serialize(&sceneObserver, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2305,19 +2367,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&sceneObserver, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&sceneObserver, msg_out.buffer);
 
     
 
-    serialize_ptr(scene, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(scene, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2340,11 +2403,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2364,15 +2428,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&sceneObserver, msg_out.stream);
+    serialize(&sceneObserver, msg_out.buffer);
 
     
 
-    serialize_ptr(computeInfo, 1, msg_out.stream);
+    serialize_ptr(computeInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2392,15 +2457,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&sceneObserver, msg_out.stream);
+    serialize(&sceneObserver, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2423,19 +2489,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize_ptr(components, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(components, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2458,19 +2525,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2493,19 +2561,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 131009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize_ptr(buffers, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(buffers, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2530,15 +2599,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 132001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&sceneObserver, msg_out.stream);
+    serialize(&sceneObserver, msg_out.buffer);
 
     
 
-    serialize_ptr(deserializeInfo, 1, msg_out.stream);
+    serialize_ptr(deserializeInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2558,28 +2628,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 132002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize(&countInput, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(readOutput, 1, msg_out.stream);
+    serialize(&countInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(readOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, countInput, msg_out.stream);
+    serialize_ptr(buffer, countInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2607,24 +2678,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 34001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&displayRefreshRateCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.stream);
+    serialize(&displayRefreshRateCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.stream);
+    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2650,15 +2722,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 34002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(displayRefreshRate, 1, msg_out.stream);
+    serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2681,15 +2754,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 34003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&displayRefreshRate, msg_out.stream);
+    serialize(&displayRefreshRate, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2711,24 +2785,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 65001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&pathCapacityInput, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(pathCountOutput, 1, msg_out.stream);
+    serialize(&pathCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(paths, pathCapacityInput, msg_out.stream);
+    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2756,19 +2831,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 68001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(facialTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(facialTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2791,11 +2867,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 68002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&facialTracker, msg_out.stream);
+    serialize(&facialTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2815,15 +2892,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 68003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&facialTracker, msg_out.stream);
+    serialize(&facialTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(facialExpressions, 1, msg_out.stream);
+    serialize_ptr(facialExpressions, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2848,24 +2926,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 28001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&colorSpaceCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(colorSpaceCountOutput, 1, msg_out.stream);
+    serialize(&colorSpaceCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(colorSpaceCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.stream);
+    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2891,15 +2970,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 28002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&colorSpace, msg_out.stream);
+    serialize(&colorSpace, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2921,15 +3001,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 43001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(mesh, 1, msg_out.stream);
+    serialize_ptr(mesh, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2958,19 +3039,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -2993,15 +3075,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize_ptr(uuid, 1, msg_out.stream);
+    serialize_ptr(uuid, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3024,24 +3107,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
-
-    
-
-    serialize(&componentTypeCapacityInput, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.stream);
+    serialize(&componentTypeCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.stream);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3067,19 +3151,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3102,19 +3187,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
-
-    
-
-    serialize(&componentType, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize_ptr(status, 1, msg_out.stream);
+    serialize(&componentType, msg_out.buffer);
 
+    
+
+    serialize_ptr(status, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3139,19 +3225,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 38001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(profile, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(profile, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3177,11 +3264,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 38002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&profile, msg_out.stream);
+    serialize(&profile, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3205,19 +3293,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 46002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(queryInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(keyboard, 1, msg_out.stream);
+    serialize_ptr(queryInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(keyboard, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3243,19 +3332,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 46001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(keyboardSpace, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3283,19 +3373,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(outTriangleMesh, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3318,11 +3409,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3342,15 +3434,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
     
 
     #error "auto-generator doesn't support double pointers (outVertexBuffer)"
     None
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3373,15 +3466,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
     
 
     #error "auto-generator doesn't support double pointers (outIndexBuffer)"
     None
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3404,11 +3498,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3428,19 +3523,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
-
-    
-
-    serialize(&vertexCount, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
     
 
-    serialize(&triangleCount, msg_out.stream);
+    serialize(&vertexCount, msg_out.buffer);
 
+    
+
+    serialize(&triangleCount, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3460,15 +3556,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
     
 
-    serialize_ptr(outVertexCount, 1, msg_out.stream);
+    serialize_ptr(outVertexCount, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3491,11 +3588,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 64006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&mesh, msg_out.stream);
+    serialize(&mesh, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3517,19 +3615,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(outPassthrough, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(outPassthrough, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3552,11 +3651,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&passthrough, msg_out.stream);
+    serialize(&passthrough, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3576,11 +3676,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47012;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&passthrough, msg_out.stream);
+    serialize(&passthrough, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3600,11 +3701,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47011;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&passthrough, msg_out.stream);
+    serialize(&passthrough, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3624,19 +3726,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(outLayer, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(outLayer, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3659,11 +3762,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&layer, msg_out.stream);
+    serialize(&layer, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3683,11 +3787,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&layer, msg_out.stream);
+    serialize(&layer, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3707,11 +3812,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&layer, msg_out.stream);
+    serialize(&layer, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3731,15 +3837,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&layer, msg_out.stream);
+    serialize(&layer, msg_out.buffer);
 
     
 
-    serialize_ptr(style, 1, msg_out.stream);
+    serialize_ptr(style, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3759,19 +3866,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(outGeometryInstance, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3794,11 +3902,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3818,15 +3927,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 47007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(transformation, 1, msg_out.stream);
+    serialize_ptr(transformation, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3848,24 +3958,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 49001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&pathCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(pathCountOutput, 1, msg_out.stream);
+    serialize(&pathCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(paths, pathCapacityInput, msg_out.stream);
+    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3891,19 +4002,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 49002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&path, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(properties, 1, msg_out.stream);
+    serialize(&path, msg_out.buffer);
 
+    
+
+    serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3926,19 +4038,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 49003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(buffer, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(buffer, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -3972,15 +4085,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 142001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&enabled, msg_out.stream);
+    serialize(&enabled, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4002,15 +4116,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 144005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&enabled, msg_out.stream);
+    serialize(&enabled, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4030,19 +4145,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 144004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&markerId, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&timeout, msg_out.stream);
+    serialize(&markerId, msg_out.buffer);
 
+    
+
+    serialize(&timeout, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4062,19 +4178,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 144003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&markerId, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&enable, msg_out.stream);
+    serialize(&markerId, msg_out.buffer);
 
+    
+
+    serialize(&enable, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4094,19 +4211,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 144002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&markerId, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(size, 1, msg_out.stream);
+    serialize(&markerId, msg_out.buffer);
 
+    
+
+    serialize_ptr(size, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4129,19 +4247,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 144001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4166,15 +4285,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 145001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&offset, msg_out.stream);
+    serialize(&offset, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4200,19 +4320,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 112001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4237,19 +4358,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(markerDetector, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(markerDetector, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4272,11 +4394,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4296,15 +4419,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(snapshotInfo, 1, msg_out.stream);
+    serialize_ptr(snapshotInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4327,15 +4451,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4358,24 +4483,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
-
-    
-
-    serialize(&markerCapacityInput, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(markerCountOutput, 1, msg_out.stream);
+    serialize(&markerCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(markerCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(markers, markerCapacityInput, msg_out.stream);
+    serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4401,19 +4527,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
-
-    
-
-    serialize(&marker, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(reprojectionErrorMeters, 1, msg_out.stream);
+    serialize(&marker, msg_out.buffer);
 
+    
+
+    serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4436,19 +4563,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
-
-    
-
-    serialize(&marker, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(meters, 1, msg_out.stream);
+    serialize(&marker, msg_out.buffer);
 
+    
+
+    serialize_ptr(meters, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4471,19 +4599,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
-
-    
-
-    serialize(&marker, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(number, 1, msg_out.stream);
+    serialize(&marker, msg_out.buffer);
 
+    
+
+    serialize_ptr(number, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4506,28 +4635,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&markerDetector, msg_out.stream);
-
-    
-
-    serialize(&marker, msg_out.stream);
+    serialize(&markerDetector, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&marker, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4553,19 +4683,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 117002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4590,15 +4721,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4618,28 +4750,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_xr(queryInfo, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&mapCapacityInput, msg_out.stream);
+    serialize_xr(queryInfo, msg_out.buffer);
 
     
 
-    serialize_ptr(mapCountOutput, 1, msg_out.stream);
+    serialize(&mapCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(mapCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(maps, mapCapacityInput, msg_out.stream);
+    serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4665,15 +4798,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestInfo, 1, msg_out.stream);
+    serialize_ptr(requestInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4693,19 +4827,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(importInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(mapUuid, 1, msg_out.stream);
+    serialize_ptr(importInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(mapUuid, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4731,19 +4866,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(mapUuid, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(map, 1, msg_out.stream);
+    serialize_ptr(mapUuid, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(map, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4766,11 +4902,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&map, msg_out.stream);
+    serialize(&map, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4790,24 +4927,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 116004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&map, msg_out.stream);
-
-    
-
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&map, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4835,19 +4973,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 118001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_xr(createInfo, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_xr(createInfo, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4870,19 +5009,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 118002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4905,15 +5045,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 118003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4938,19 +5079,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(storage, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(storage, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4973,11 +5115,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -4997,19 +5140,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize_xr(queryInfo, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_xr(queryInfo, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5032,19 +5176,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5067,19 +5212,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize_ptr(publishInfo, 1, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(publishInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5102,19 +5248,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5137,19 +5284,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize_ptr(deleteInfo, 1, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(deleteInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5172,19 +5320,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5207,19 +5356,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize_ptr(updateInfo, 1, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(updateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5242,19 +5392,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 119010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&storage, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&storage, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5279,15 +5430,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 121001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(enableInfo, 1, msg_out.stream);
+    serialize_ptr(enableInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5309,15 +5461,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(spatialAnchorStore, 1, msg_out.stream);
+    serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5340,11 +5493,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&spatialAnchorStore, msg_out.stream);
+    serialize(&spatialAnchorStore, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5364,15 +5518,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&spatialAnchorStore, msg_out.stream);
+    serialize(&spatialAnchorStore, msg_out.buffer);
 
     
 
-    serialize_ptr(spatialAnchorPersistenceInfo, 1, msg_out.stream);
+    serialize_ptr(spatialAnchorPersistenceInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5392,24 +5547,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&spatialAnchorStore, msg_out.stream);
-
-    
-
-    serialize(&spatialAnchorNameCapacityInput, msg_out.stream);
+    serialize(&spatialAnchorStore, msg_out.buffer);
 
     
 
-    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.stream);
+    serialize(&spatialAnchorNameCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.stream);
+    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5435,19 +5591,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(spatialAnchorCreateInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(spatialAnchor, 1, msg_out.stream);
+    serialize_ptr(spatialAnchorCreateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(spatialAnchor, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5470,15 +5627,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&spatialAnchorStore, msg_out.stream);
+    serialize(&spatialAnchorStore, msg_out.buffer);
 
     
 
-    serialize_ptr(spatialAnchorPersistenceName, 1, msg_out.stream);
+    serialize_ptr(spatialAnchorPersistenceName, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5498,11 +5656,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 135001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&spatialAnchorStore, msg_out.stream);
+    serialize(&spatialAnchorStore, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5524,28 +5683,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 130002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(markerId, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize_ptr(markerId, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5571,28 +5731,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 130001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&scene, msg_out.stream);
-
-    
-
-    serialize_ptr(markerId, 1, msg_out.stream);
+    serialize(&scene, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize_ptr(markerId, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5620,19 +5781,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 84001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&value, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.stream);
+    serialize(&value, msg_out.buffer);
 
+    
+
+    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5657,19 +5819,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 55001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_xr(info, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_xr(info, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5692,19 +5855,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 55002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&requestId, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(results, 1, msg_out.stream);
+    serialize(&requestId, msg_out.buffer);
 
+    
+
+    serialize_ptr(results, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5729,19 +5893,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 57002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5764,19 +5929,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 57001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5801,15 +5967,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 137002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.stream);
+    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5832,15 +5999,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 137001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.stream);
+    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5873,19 +6041,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 56001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5920,19 +6089,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(boundingBox2DOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5955,19 +6125,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(boundingBox3DOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -5990,19 +6161,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(semanticLabelsOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6025,19 +6197,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(boundary2DOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6060,19 +6233,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(roomLayoutOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6097,15 +6271,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 1001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(digitalLensControl, 1, msg_out.stream);
+    serialize_ptr(digitalLensControl, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6127,19 +6302,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 51001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6164,19 +6340,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 54001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&space, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(spaceContainerOutput, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    
+
+    serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6201,15 +6378,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 98001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(foveationState, 1, msg_out.stream);
+    serialize_ptr(foveationState, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6234,19 +6412,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 36001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(faceTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(faceTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6269,11 +6448,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 36002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&faceTracker, msg_out.stream);
+    serialize(&faceTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6293,19 +6473,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 36003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&faceTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(expressionInfo, 1, msg_out.stream);
+    serialize(&faceTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(expressionWeights, 1, msg_out.stream);
+    serialize_ptr(expressionInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6330,19 +6511,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 35001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(eyeTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(eyeTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6365,11 +6547,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 35002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&eyeTracker, msg_out.stream);
+    serialize(&eyeTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6389,19 +6572,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 35003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&eyeTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(gazeInfo, 1, msg_out.stream);
+    serialize(&eyeTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(eyeGazes, 1, msg_out.stream);
+    serialize_ptr(gazeInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(eyeGazes, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6426,15 +6610,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 48001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&layer, msg_out.stream);
+    serialize(&layer, msg_out.buffer);
 
     
 
-    serialize_ptr(intensity, 1, msg_out.stream);
+    serialize_ptr(intensity, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6458,19 +6643,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 45001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(hapticActionInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(deviceSampleRate, 1, msg_out.stream);
+    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6501,15 +6687,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 103001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(preferences, 1, msg_out.stream);
+    serialize_ptr(preferences, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6534,19 +6721,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(keyboard, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(keyboard, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6569,11 +6757,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6593,23 +6782,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&keyboard, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(keyboardSpace, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6632,15 +6822,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110011;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(locationInfo, 1, msg_out.stream);
+    serialize_ptr(locationInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6660,15 +6851,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(scale, 1, msg_out.stream);
+    serialize_ptr(scale, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6691,15 +6883,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(modelVisibility, 1, msg_out.stream);
+    serialize_ptr(modelVisibility, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6719,15 +6912,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(animationStates, 1, msg_out.stream);
+    serialize_ptr(animationStates, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6750,24 +6944,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
-
-    
-
-    serialize(&textureIdCapacityInput, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(textureIdCountOutput, 1, msg_out.stream);
+    serialize(&textureIdCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(textureIdCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.stream);
+    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6793,19 +6988,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
-
-    
-
-    serialize(&textureId, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(textureData, 1, msg_out.stream);
+    serialize(&textureId, msg_out.buffer);
 
+    
+
+    serialize_ptr(textureData, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6828,19 +7024,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(interactorRootPose, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(interactorRootPose, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6863,15 +7060,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 110001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&keyboard, msg_out.stream);
+    serialize(&keyboard, msg_out.buffer);
 
     
 
-    serialize_ptr(changeInfo, 1, msg_out.stream);
+    serialize_ptr(changeInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6893,24 +7091,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 138001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&cameraCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(cameraCountOutput, 1, msg_out.stream);
+    serialize(&cameraCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(cameraCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(cameras, cameraCapacityInput, msg_out.stream);
+    serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6940,24 +7139,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 104001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&counterPathCapacityInput, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(counterPathCountOutput, 1, msg_out.stream);
+    serialize(&counterPathCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(counterPathCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.stream);
+    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -6983,15 +7183,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 104004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7011,15 +7212,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 104002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7042,19 +7244,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 104003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&counterPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(counter, 1, msg_out.stream);
+    serialize(&counterPath, msg_out.buffer);
 
+    
+
+    serialize_ptr(counter, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7079,19 +7282,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 58001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7119,19 +7323,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 59001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(user, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(user, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7154,15 +7359,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 59003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&user, msg_out.stream);
+    serialize(&user, msg_out.buffer);
 
     
 
-    serialize_ptr(userId, 1, msg_out.stream);
+    serialize_ptr(userId, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7185,11 +7391,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 59002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&user, msg_out.stream);
+    serialize(&user, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7213,19 +7420,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 105001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(resolution, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(resolution, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7250,19 +7458,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 101001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&passthrough, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&passthrough, msg_out.buffer);
 
     
 
-    serialize_ptr(colorLut, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(colorLut, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7285,11 +7494,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 101002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&colorLut, msg_out.stream);
+    serialize(&colorLut, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7309,15 +7519,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 101003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&colorLut, msg_out.stream);
+    serialize(&colorLut, msg_out.buffer);
 
     
 
-    serialize_ptr(updateInfo, 1, msg_out.stream);
+    serialize_ptr(updateInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7339,19 +7550,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 108001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize_ptr(triangleMeshOutput, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7380,19 +7592,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 37001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(faceTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(faceTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7418,11 +7631,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 37002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&faceTracker, msg_out.stream);
+    serialize(&faceTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7442,19 +7656,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 37003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&faceTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(expressionInfo, 1, msg_out.stream);
+    serialize(&faceTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(expressionWeights, 1, msg_out.stream);
+    serialize_ptr(expressionInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7479,19 +7694,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 109001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7519,19 +7735,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(environmentDepthProvider, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7554,11 +7771,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7578,11 +7796,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7602,11 +7821,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7626,19 +7846,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
     
 
-    serialize_ptr(swapchain, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(swapchain, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7661,11 +7882,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7685,23 +7907,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
-
-    
-
-    serialize(&imageCapacityInput, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(imageCountOutput, 1, msg_out.stream);
+    serialize(&imageCapacityInput, msg_out.buffer);
 
     
 
-    serialize_xr_array(images, imageCapacityInput, msg_out.stream);
+    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
 
+    
+
+    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7727,15 +7950,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7758,19 +7982,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
-
-    
-
-    serialize_ptr(acquireInfo, 1, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
     
 
-    serialize_ptr(environmentDepthImage, 1, msg_out.stream);
+    serialize_ptr(acquireInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7793,15 +8018,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 97008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&environmentDepthProvider, msg_out.stream);
+    serialize(&environmentDepthProvider, msg_out.buffer);
 
     
 
-    serialize_ptr(setInfo, 1, msg_out.stream);
+    serialize_ptr(setInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7823,19 +8049,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 139001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&domain, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&hint, msg_out.stream);
+    serialize(&domain, msg_out.buffer);
 
+    
+
+    serialize(&hint, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7857,19 +8084,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 70001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(passthrough, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(passthrough, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7892,11 +8120,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 70002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&passthrough, msg_out.stream);
+    serialize(&passthrough, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7918,15 +8147,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 69001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(applyInfo, 1, msg_out.stream);
+    serialize_ptr(applyInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7951,19 +8181,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 66001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(anchor, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(anchor, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -7986,15 +8217,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 66002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
     
 
-    serialize_ptr(name, 1, msg_out.stream);
+    serialize_ptr(name, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8019,19 +8251,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 67001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(bodyTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8054,11 +8287,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 67002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8078,19 +8312,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 67004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8113,23 +8348,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 67003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
-
-    
-
-    serialize(&baseSpace, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
     
 
-    serialize(&skeletonGenerationId, msg_out.stream);
+    serialize(&baseSpace, msg_out.buffer);
 
     
 
-    serialize_ptr(skeleton, 1, msg_out.stream);
+    serialize(&skeletonGenerationId, msg_out.buffer);
 
+    
+
+    serialize_ptr(skeleton, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8156,15 +8392,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 124001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&handTracker, msg_out.stream);
+    serialize(&handTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locations, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8189,19 +8426,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 2001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(bodyTracker, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8224,11 +8462,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 2002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8248,19 +8487,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 2003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&bodyTracker, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&bodyTracker, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8285,28 +8525,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&snapshot, msg_out.stream);
-
-    
-
-    serialize(&entityId, msg_out.stream);
+    serialize(&snapshot, msg_out.buffer);
 
     
 
-    serialize(&componentTypeCapacityInput, msg_out.stream);
+    serialize(&entityId, msg_out.buffer);
 
     
 
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.stream);
+    serialize(&componentTypeCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.stream);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8332,19 +8573,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8012;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&snapshot, msg_out.stream);
-
-    
-
-    serialize(&entityId, msg_out.stream);
+    serialize(&snapshot, msg_out.buffer);
 
     
 
-    serialize_ptr(uuid, 1, msg_out.stream);
+    serialize(&entityId, msg_out.buffer);
 
+    
+
+    serialize_ptr(uuid, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8367,19 +8609,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8011;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&snapshot, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&snapshot, msg_out.buffer);
 
     
 
-    serialize_xr(componentData, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_xr(componentData, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8402,19 +8645,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(provider, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(provider, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8437,19 +8681,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8015;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(startInfo, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(startInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8472,19 +8717,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8016;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8507,15 +8753,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8010;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8538,19 +8785,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8013;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(queryInfo, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(queryInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8573,19 +8821,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8014;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8608,11 +8857,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&snapshot, msg_out.stream);
+    serialize(&snapshot, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8632,19 +8882,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&snapshot, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&snapshot, msg_out.buffer);
 
     
 
-    serialize_ptr(queriedSenseData, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(queriedSenseData, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8670,11 +8921,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8017;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8694,11 +8946,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8718,19 +8971,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(anchor, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(anchor, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8753,11 +9007,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8777,15 +9032,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&anchor, msg_out.stream);
+    serialize(&anchor, msg_out.buffer);
 
     
 
-    serialize_ptr(uuid, 1, msg_out.stream);
+    serialize_ptr(uuid, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8808,19 +9064,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8845,19 +9102,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8880,19 +9138,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8915,19 +9174,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8950,19 +9210,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -8985,19 +9246,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9020,19 +9282,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9057,19 +9320,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 5003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9092,19 +9356,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 5004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9127,19 +9392,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 5001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9162,19 +9428,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 5002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9199,19 +9466,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 7001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9234,19 +9502,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 7002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&provider, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&provider, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9277,19 +9546,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(planeDetector, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(planeDetector, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9312,11 +9582,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&planeDetector, msg_out.stream);
+    serialize(&planeDetector, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9336,15 +9607,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&planeDetector, msg_out.stream);
+    serialize(&planeDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(beginInfo, 1, msg_out.stream);
+    serialize_ptr(beginInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9364,15 +9636,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&planeDetector, msg_out.stream);
+    serialize(&planeDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9395,19 +9668,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&planeDetector, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&planeDetector, msg_out.buffer);
 
     
 
-    serialize_ptr(locations, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9430,23 +9704,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&planeDetector, msg_out.stream);
-
-    
-
-    serialize(&planeId, msg_out.stream);
+    serialize(&planeDetector, msg_out.buffer);
 
     
 
-    serialize(&polygonBufferIndex, msg_out.stream);
+    serialize(&planeId, msg_out.buffer);
 
     
 
-    serialize_ptr(polygonBuffer, 1, msg_out.stream);
+    serialize(&polygonBufferIndex, msg_out.buffer);
 
+    
+
+    serialize_ptr(polygonBuffer, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9471,19 +9746,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 17002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(pollInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(pollResult, 1, msg_out.stream);
+    serialize_ptr(pollInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(pollResult, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9506,15 +9782,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 17001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(cancelInfo, 1, msg_out.stream);
+    serialize_ptr(cancelInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9538,15 +9815,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 120001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9568,19 +9846,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(detector, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(detector, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9603,11 +9882,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9627,19 +9907,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122008;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize_ptr(stateRequest, 1, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(stateRequest, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9662,19 +9943,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122009;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize(&future, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9697,19 +9979,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122005;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize_ptr(sizeInfo, 1, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(size, 1, msg_out.stream);
+    serialize_ptr(sizeInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(size, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9732,19 +10015,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize_ptr(size, 1, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(buffer, 1, msg_out.stream);
+    serialize_ptr(size, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(buffer, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9770,15 +10054,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(buffer, 1, msg_out.stream);
+    serialize_ptr(buffer, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9804,23 +10089,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122006;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize_ptr(buffer, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(future, 1, msg_out.stream);
+    serialize_ptr(buffer, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9849,23 +10135,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 122007;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&detector, msg_out.stream);
-
-    
-
-    serialize_ptr(completionInfo, 1, msg_out.stream);
+    serialize(&detector, msg_out.buffer);
 
     
 
-    serialize(&future, msg_out.stream);
+    serialize_ptr(completionInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(completion, 1, msg_out.stream);
+    serialize(&future, msg_out.buffer);
 
+    
+
+    serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9890,19 +10177,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 113001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(facialExpressionClient, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(facialExpressionClient, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9925,11 +10213,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 113002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&facialExpressionClient, msg_out.stream);
+    serialize(&facialExpressionClient, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9949,24 +10238,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 113003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&facialExpressionClient, msg_out.stream);
-
-    
-
-    serialize_ptr(blendShapeGetInfo, 1, msg_out.stream);
+    serialize(&facialExpressionClient, msg_out.buffer);
 
     
 
-    serialize(&blendShapeCount, msg_out.stream);
+    serialize_ptr(blendShapeGetInfo, 1, msg_out.buffer);
+
+    
+
+    serialize(&blendShapeCount, msg_out.buffer);
 
     
 
     
-    serialize_ptr(blendShapes, blendShapeCount, msg_out.stream);
+    serialize_ptr(blendShapes, blendShapeCount, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -9991,15 +10281,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 106002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(resumeInfo, 1, msg_out.stream);
+    serialize_ptr(resumeInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10019,15 +10310,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 106001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(pauseInfo, 1, msg_out.stream);
+    serialize_ptr(pauseInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10049,19 +10341,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 96002;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(discoveryRequestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10084,19 +10377,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 96004;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10119,19 +10413,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 96001;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(advertisementRequestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10157,19 +10452,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 96003;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(info, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(requestId, 1, msg_out.stream);
+    serialize_ptr(info, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10195,19 +10491,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 1;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
-
-    
-
-    serialize_ptr(acquireInfo, 1, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(index, 1, msg_out.stream);
+    serialize_ptr(acquireInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(index, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10230,19 +10527,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 2;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(hapticActionInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_xr(hapticFeedback, msg_out.stream);
+    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_xr(hapticFeedback, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10262,15 +10560,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 3;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(attachInfo, 1, msg_out.stream);
+    serialize_ptr(attachInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10290,15 +10589,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 4;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(frameBeginInfo, 1, msg_out.stream);
+    serialize_ptr(frameBeginInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10318,15 +10618,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 5;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(beginInfo, 1, msg_out.stream);
+    serialize_ptr(beginInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10346,19 +10647,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 6;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&actionSet, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&actionSet, msg_out.buffer);
 
     
 
-    serialize_ptr(action, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(action, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10381,19 +10683,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 7;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(actionSet, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(actionSet, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10416,19 +10719,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 8;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10451,15 +10755,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 10;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(instance, 1, msg_out.stream);
+    serialize_ptr(instance, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10482,19 +10787,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 11;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(space, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10517,19 +10823,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 12;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(session, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(session, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10552,19 +10859,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 13;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(createInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(swapchain, 1, msg_out.stream);
+    serialize_ptr(createInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(swapchain, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10587,11 +10895,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 14;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&action, msg_out.stream);
+    serialize(&action, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10611,11 +10920,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 15;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&actionSet, msg_out.stream);
+    serialize(&actionSet, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10635,11 +10945,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 16;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10659,11 +10970,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 17;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10683,11 +10995,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 18;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10707,11 +11020,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 19;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10731,15 +11045,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 20;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(frameEndInfo, 1, msg_out.stream);
+    serialize_ptr(frameEndInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10759,11 +11074,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 21;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10783,20 +11099,21 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 22;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&propertyCapacityInput, msg_out.stream);
-
-    
-
-    serialize_ptr(propertyCountOutput, 1, msg_out.stream);
+    serialize(&propertyCapacityInput, msg_out.buffer);
 
     
 
-    
-    serialize_ptr(properties, propertyCapacityInput, msg_out.stream);
+    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
 
+    
+
+    
+    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10822,28 +11139,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 23;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(enumerateInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&sourceCapacityInput, msg_out.stream);
+    serialize_ptr(enumerateInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(sourceCountOutput, 1, msg_out.stream);
+    serialize(&sourceCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(sourceCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(sources, sourceCapacityInput, msg_out.stream);
+    serialize_ptr(sources, sourceCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10869,32 +11187,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 24;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&viewConfigurationType, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize(&environmentBlendModeCapacityInput, msg_out.stream);
+    serialize(&viewConfigurationType, msg_out.buffer);
 
     
 
-    serialize_ptr(environmentBlendModeCountOutput, 1, msg_out.stream);
+    serialize(&environmentBlendModeCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(environmentBlendModeCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, msg_out.stream);
+    serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10920,25 +11239,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 25;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
     
-    serialize_ptr(layerName, count_null_terminated(layerName), msg_out.stream);
+    serialize_ptr(layerName, count_null_terminated(layerName), msg_out.buffer);
 
     
 
-    serialize(&propertyCapacityInput, msg_out.stream);
+    serialize(&propertyCapacityInput, msg_out.buffer);
 
     
 
-    serialize_ptr(propertyCountOutput, 1, msg_out.stream);
+    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(properties, propertyCapacityInput, msg_out.stream);
+    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -10964,24 +11284,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 26;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&spaceCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(spaceCountOutput, 1, msg_out.stream);
+    serialize(&spaceCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(spaceCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(spaces, spaceCapacityInput, msg_out.stream);
+    serialize_ptr(spaces, spaceCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11007,24 +11328,25 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 27;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&formatCapacityInput, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(formatCountOutput, 1, msg_out.stream);
+    serialize(&formatCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(formatCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(formats, formatCapacityInput, msg_out.stream);
+    serialize_ptr(formats, formatCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11050,23 +11372,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 28;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
-
-    
-
-    serialize(&imageCapacityInput, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(imageCountOutput, 1, msg_out.stream);
+    serialize(&imageCapacityInput, msg_out.buffer);
 
     
 
-    serialize_xr_array(images, imageCapacityInput, msg_out.stream);
+    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
 
+    
+
+    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11092,32 +11415,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 29;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&viewConfigurationType, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize(&viewCapacityInput, msg_out.stream);
+    serialize(&viewConfigurationType, msg_out.buffer);
 
     
 
-    serialize_ptr(viewCountOutput, 1, msg_out.stream);
+    serialize(&viewCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(views, viewCapacityInput, msg_out.stream);
+    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11143,28 +11467,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 30;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&viewConfigurationTypeCapacityInput, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(viewConfigurationTypeCountOutput, 1, msg_out.stream);
+    serialize(&viewConfigurationTypeCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(viewConfigurationTypeCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, msg_out.stream);
+    serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11190,19 +11515,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 31;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11225,19 +11551,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 32;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11260,19 +11587,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 33;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11295,19 +11623,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 34;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(state, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11330,19 +11659,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 35;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&topLevelUserPath, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(interactionProfile, 1, msg_out.stream);
+    serialize(&topLevelUserPath, msg_out.buffer);
 
+    
+
+    serialize_ptr(interactionProfile, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11365,28 +11695,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 36;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11412,15 +11743,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 38;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(instanceProperties, 1, msg_out.stream);
+    serialize_ptr(instanceProperties, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11443,19 +11775,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 39;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize(&referenceSpaceType, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(bounds, 1, msg_out.stream);
+    serialize(&referenceSpaceType, msg_out.buffer);
 
+    
+
+    serialize_ptr(bounds, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11478,19 +11811,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 40;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize_ptr(getInfo, 1, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(systemId, 1, msg_out.stream);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(systemId, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11513,19 +11847,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 41;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(properties, 1, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
+    
+
+    serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11548,23 +11883,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 42;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&systemId, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&viewConfigurationType, msg_out.stream);
+    serialize(&systemId, msg_out.buffer);
 
     
 
-    serialize_ptr(configurationProperties, 1, msg_out.stream);
+    serialize(&viewConfigurationType, msg_out.buffer);
 
+    
+
+    serialize_ptr(configurationProperties, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11587,23 +11923,24 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 43;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&space, msg_out.stream);
-
-    
-
-    serialize(&baseSpace, msg_out.stream);
+    serialize(&space, msg_out.buffer);
 
     
 
-    serialize(&time, msg_out.stream);
+    serialize(&baseSpace, msg_out.buffer);
 
     
 
-    serialize_ptr(location, 1, msg_out.stream);
+    serialize(&time, msg_out.buffer);
 
+    
+
+    serialize_ptr(location, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11626,19 +11963,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 44;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(locateInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(spaceLocations, 1, msg_out.stream);
+    serialize_ptr(locateInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(spaceLocations, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11661,32 +11999,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 45;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(viewLocateInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(viewState, 1, msg_out.stream);
+    serialize_ptr(viewLocateInfo, 1, msg_out.buffer);
 
     
 
-    serialize(&viewCapacityInput, msg_out.stream);
+    serialize_ptr(viewState, 1, msg_out.buffer);
 
     
 
-    serialize_ptr(viewCountOutput, 1, msg_out.stream);
+    serialize(&viewCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(views, viewCapacityInput, msg_out.stream);
+    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11715,28 +12054,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 48;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&path, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize(&bufferCapacityInput, msg_out.stream);
+    serialize(&path, msg_out.buffer);
 
     
 
-    serialize_ptr(bufferCountOutput, 1, msg_out.stream);
+    serialize(&bufferCapacityInput, msg_out.buffer);
+
+    
+
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
 
     
 
     
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.stream);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11762,15 +12102,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 49;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(eventData, 1, msg_out.stream);
+    serialize_ptr(eventData, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11793,15 +12134,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 50;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(releaseInfo, 1, msg_out.stream);
+    serialize_ptr(releaseInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11821,11 +12163,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 51;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11845,19 +12188,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 52;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&value, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, msg_out.stream);
+    serialize(&value, msg_out.buffer);
 
+    
+
+    serialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11880,15 +12224,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 53;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(hapticActionInfo, 1, msg_out.stream);
+    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11908,20 +12253,21 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 54;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    
-    serialize_ptr(pathString, count_null_terminated(pathString), msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(path, 1, msg_out.stream);
+    
+    serialize_ptr(pathString, count_null_terminated(pathString), msg_out.buffer);
 
+    
+
+    serialize_ptr(path, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11944,19 +12290,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 55;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
-
-    
-
-    serialize(&value, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_out.stream);
+    serialize(&value, msg_out.buffer);
 
+    
+
+    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -11979,15 +12326,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 56;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&instance, msg_out.stream);
+    serialize(&instance, msg_out.buffer);
 
     
 
-    serialize_ptr(suggestedBindings, 1, msg_out.stream);
+    serialize_ptr(suggestedBindings, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -12007,15 +12355,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 57;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(syncInfo, 1, msg_out.stream);
+    serialize_ptr(syncInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -12035,19 +12384,20 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 58;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&session, msg_out.stream);
-
-    
-
-    serialize_ptr(frameWaitInfo, 1, msg_out.stream);
+    serialize(&session, msg_out.buffer);
 
     
 
-    serialize_ptr(frameState, 1, msg_out.stream);
+    serialize_ptr(frameWaitInfo, 1, msg_out.buffer);
 
+    
+
+    serialize_ptr(frameState, 1, msg_out.buffer);
+
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
@@ -12070,15 +12420,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = 59;
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     
 
-    serialize(&swapchain, msg_out.stream);
+    serialize(&swapchain, msg_out.buffer);
 
     
 
-    serialize_ptr(waitInfo, 1, msg_out.stream);
+    serialize_ptr(waitInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;

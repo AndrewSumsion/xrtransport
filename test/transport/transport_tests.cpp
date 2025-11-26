@@ -33,7 +33,8 @@ TEST_CASE("Basic sync sending and awaiting", "[transport][sync]") {
     });
 
     auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     b_thread.join();
 
@@ -54,11 +55,12 @@ TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
-        asio::write(msg_out.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
     });
 
     auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     auto msg_in = transport_a.await_message(101);
     asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
@@ -83,7 +85,8 @@ TEST_CASE("Basic async handler", "[transport][async]") {
     transport_b.start_worker();
 
     auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     // run async loop until handler is invoked
     while (!message_received) {
@@ -106,7 +109,7 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
-        asio::write(msg_out.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
     });
     transport_b.start_worker();
 
@@ -116,7 +119,8 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
     transport_a.start_worker();
 
     auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     // run async loop until handler is invoked
     while (!message_received) {
@@ -143,7 +147,8 @@ TEST_CASE("Thread-safe async handler", "[transport][async]") {
     transport_b.start_worker();
 
     auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     // run async loop until handler is invoked
     std::thread io_thread([&](){
@@ -170,7 +175,7 @@ TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
-        asio::write(msg_out.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
     });
     transport_b.start_worker();
 
@@ -184,7 +189,7 @@ TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
     {
         // this lock needs to be released so that transport_a's handler can run
         auto msg_out = transport_a.start_message(100);
-        asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+        asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
     }
 
     // run async loop until handler is invoked
@@ -281,12 +286,13 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
     transport_b.register_handler(100, [&](Transport&, MessageLockIn msg_in){
         uint32_t intermediate_message = 36356;
         auto intermediate_msg_out = transport_b.start_message(102);
-        asio::write(intermediate_msg_out.stream, asio::buffer(&intermediate_message, sizeof(intermediate_message)));
+        asio::write(intermediate_msg_out.buffer, asio::buffer(&intermediate_message, sizeof(intermediate_message)));
+        intermediate_msg_out.flush();
 
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
-        asio::write(msg_out.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
         message_echoed = true;
     });
     transport_b.start_worker();
@@ -307,7 +313,8 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
 
     auto msg_out = transport_a.start_message(100);
     uint32_t message_sent = 1000;
-    asio::write(msg_out.stream, asio::buffer(&message_sent, sizeof(message_sent)));
+    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
+    msg_out.flush();
 
     // message 102 should have been read and handled before this returns
     // no need to release prior lock, because it should be handled from this thread in this call

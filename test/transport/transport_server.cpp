@@ -48,6 +48,7 @@ public:
             try {
                 tcp::socket socket(io_context_);
                 acceptor_.accept(socket);
+                socket.set_option(tcp::no_delay(true));
 
                 std::cout << "Client connected from " << socket.remote_endpoint() << std::endl;
 
@@ -98,7 +99,7 @@ private:
 
             // Echo back with message 101
             auto msg_out = transport.start_message(101);
-            asio::write(msg_out.stream, asio::buffer(&data, sizeof(data)));
+            asio::write(msg_out.buffer, asio::buffer(&data, sizeof(data)));
         });
 
         // Protocol 2: Variable Length Data (102 -> 103)
@@ -113,11 +114,11 @@ private:
             auto msg_out = transport.start_message(103);
 
             // Write N
-            asio::write(msg_out.stream, asio::buffer(&n, sizeof(n)));
+            asio::write(msg_out.buffer, asio::buffer(&n, sizeof(n)));
 
             // Write N zero bytes
             std::vector<uint8_t> zeros(n, 0);
-            asio::write(msg_out.stream, asio::buffer(zeros));
+            asio::write(msg_out.buffer, asio::buffer(zeros));
 
             std::cout << "Sent " << n << " zero bytes" << std::endl;
         });
@@ -131,17 +132,15 @@ private:
             asio::read(msg_in.stream, asio::buffer(&input, sizeof(input)));
 
             // Send message 105 with input * 2
-            {
-                uint32_t doubled = input * 2;
-                auto msg_out = transport.start_message(105);
-                asio::write(msg_out.stream, asio::buffer(&doubled, sizeof(doubled)));
-            }
+            uint32_t doubled = input * 2;
+            auto msg_out1 = transport.start_message(105);
+            asio::write(msg_out1.buffer, asio::buffer(&doubled, sizeof(doubled)));
+            msg_out1.flush(); // need to flush these separately because of destructor ordering
 
             // Send message 106 with input echoed
-            {
-                auto msg_out = transport.start_message(106);
-                asio::write(msg_out.stream, asio::buffer(&input, sizeof(input)));
-            }
+            auto msg_out2 = transport.start_message(106);
+            asio::write(msg_out2.buffer, asio::buffer(&input, sizeof(input)));
+            msg_out2.flush();
 
             std::cout << "Sent doubled value " << (input * 2) << " and echo " << input << std::endl;
         });

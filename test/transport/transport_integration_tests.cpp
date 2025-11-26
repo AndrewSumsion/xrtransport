@@ -41,6 +41,7 @@ public:
             tcp::resolver resolver(*io_context_);
             auto endpoints = resolver.resolve("localhost", std::to_string(SERVER_PORT));
             asio::connect(client_socket_, endpoints);
+            client_socket_.set_option(tcp::no_delay(true));
 
             std::cout << "Connected to server on port " << SERVER_PORT << std::endl;
 
@@ -102,7 +103,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 1: Simple Echo", "[integratio
 
     // Send message 100 with test data
     auto msg_out = transport.start_message(100);
-    asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
+    asio::write(msg_out.buffer, asio::buffer(&test_data, sizeof(test_data)));
+    msg_out.flush();
 
     // Receive response message 101
     auto msg_in = transport.await_message(101);
@@ -151,7 +153,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
 
     // Send message 104 with test input
     auto msg_out = transport.start_message(104);
-    asio::write(msg_out.stream, asio::buffer(&test_input, sizeof(test_input)));
+    asio::write(msg_out.buffer, asio::buffer(&test_input, sizeof(test_input)));
+    msg_out.flush();
 
     // Receive message 106 (echoed value)
     // 105 packet should be received and handled while waiting
@@ -173,7 +176,8 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Multiple Sequential Requests", "[integ
         uint32_t received_data = 0;
 
         auto msg_out = transport.start_message(100);
-        asio::write(msg_out.stream, asio::buffer(&test_data, sizeof(test_data)));
+        asio::write(msg_out.buffer, asio::buffer(&test_data, sizeof(test_data)));
+        msg_out.flush();
 
         auto msg_in = transport.await_message(101);
         asio::read(msg_in.stream, asio::buffer(&received_data, sizeof(received_data)));

@@ -14,6 +14,7 @@
 #include <memory>
 #include <atomic>
 #include <stdexcept>
+#include <vector>
 
 namespace xrtransport {
 
@@ -28,23 +29,77 @@ constexpr uint16_t FUNCTION_CALL = 1;
 constexpr uint16_t FUNCTION_RETURN = 2;
 constexpr uint16_t CUSTOM_BASE = 100;
 
-// RAII stream lock classes
-template <typename Stream>
-struct [[nodiscard]] MessageLock {
-    std::unique_lock<std::recursive_mutex> lock;
-    Stream& stream;
+class SendBuffer : public SyncWriteStream {
+public:
+    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) {
+        ec.clear();
+        std::size_t total = 0;
+        const std::uint8_t* data = static_cast<const std::uint8_t*>(buffer.data());
+        std::size_t size = buffer.size();
+        buffer_.insert(buffer_.end(), data, data + size);
+        total += size;
+        return total;
+    }
 
-    MessageLock(std::unique_lock<std::recursive_mutex>&& lock, Stream& stream)
-        : lock(std::move(lock)), stream(stream) {}
+    std::size_t write_some(const asio::const_buffer& buffer) {
+        asio::error_code ec;
+        auto n = write_some(buffer, ec);
+        if (ec) throw asio::system_error(ec);
+        return n;
+    }
 
-    MessageLock(const MessageLock&) = delete;
-    MessageLock& operator=(const MessageLock&) = delete;
-    MessageLock(MessageLock&&) = default;
-    MessageLock& operator=(MessageLock&&) = default;
+    // No-ops
+    void non_blocking(bool mode) {}
+    bool non_blocking() const { return false; }
+    bool is_open() const { return true; }
+    void close() {}
+    void close(asio::error_code& ec) { ec.clear(); }
+
+    const std::vector<std::uint8_t>& data() const { return buffer_; }
+    std::vector<std::uint8_t>& data() { return buffer_; }
+
+    void clear() { buffer_.clear(); }
+
+private:
+    std::vector<std::uint8_t> buffer_;
 };
 
-using MessageLockOut = MessageLock<SyncWriteStream>;
-using MessageLockIn = MessageLock<SyncReadStream>;
+// RAII stream lock classes
+struct [[nodiscard]] MessageLockIn {
+    std::unique_lock<std::recursive_mutex> lock;
+    SyncReadStream& stream;
+
+    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
+        : lock(std::move(lock)), stream(stream) {}
+
+    MessageLockIn(const MessageLockIn&) = delete;
+    MessageLockIn& operator=(const MessageLockIn&) = delete;
+    MessageLockIn(MessageLockIn&&) = default;
+    MessageLockIn& operator=(MessageLockIn&&) = default;
+};
+
+struct [[nodiscard]] MessageLockOut {
+    std::unique_lock<std::recursive_mutex> lock;
+    SyncWriteStream& stream_;
+    SendBuffer buffer;
+
+    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
+        : lock(std::move(lock)), stream_(stream), buffer() {}
+
+    MessageLockOut(const MessageLockOut&) = delete;
+    MessageLockOut& operator=(const MessageLockOut&) = delete;
+    MessageLockOut(MessageLockOut&&) = default;
+    MessageLockOut& operator=(MessageLockOut&&) = default;
+
+    void flush() {
+        asio::write(stream_, asio::buffer(buffer.data()));
+        buffer.clear();
+    }
+
+    ~MessageLockOut() {
+        flush();
+    }
+};
 
 // Transport class for message-based communication
 class Transport {

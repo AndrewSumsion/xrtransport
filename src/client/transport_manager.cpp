@@ -54,6 +54,7 @@ std::unique_ptr<DuplexStream> create_connection() {
 
         // Connect to the server
         asio::connect(socket, endpoints);
+        socket.set_option(tcp::no_delay(true));
 
     } catch (const std::exception& e) {
         throw std::runtime_error("Failed to connect to server at 127.0.0.1:5892: " + std::string(e.what()));

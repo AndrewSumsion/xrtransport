@@ -22,10 +22,11 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     auto& transport = get_transport();
     auto msg_out = transport.start_message(FUNCTION_CALL);
     uint32_t function_id = ${function.id};
-    serialize(&function_id, msg_out.stream);
+    serialize(&function_id, msg_out.buffer);
     % for param in function.params:
-    ${utils.serialize_member(param, binding_prefix='', stream_var='msg_out.stream')}
+    ${utils.serialize_member(param, binding_prefix='', stream_var='msg_out.buffer')}
     % endfor
+    msg_out.flush();
 
     auto msg_in = transport.await_message(FUNCTION_RETURN);
     XrResult result;
