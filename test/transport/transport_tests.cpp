@@ -237,9 +237,7 @@ TEST_CASE("Handler registration and removal", "[transport][handlers]") {
     REQUIRE_THROWS_AS([&](){
         auto msg_out = transport_a.start_message(200);
         // Run io_context briefly to process the message
-        for (int i = 0; i < 10; ++i) {
-            io_context.run_one();
-        }
+        io_context.run();
     }(), TransportException);
 
     REQUIRE(handler_called.load() == false);
@@ -265,9 +263,7 @@ TEST_CASE("Clear all handlers", "[transport][handlers]") {
     // Try sending to any of the registered handlers - should all throw
     REQUIRE_THROWS_AS([&](){
         auto msg_out = transport_a.start_message(300);
-        for (int i = 0; i < 10; ++i) {
-            io_context.run_one();
-        }
+        io_context.run();
     }(), TransportException);
 
     REQUIRE(handler_calls.load() == 0);
