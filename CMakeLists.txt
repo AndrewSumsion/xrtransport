@@ -15,6 +15,13 @@ endif()
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# For spdlog
+if(MSVC)
+    add_compile_options(/utf-8)
+    # Enable up to Windows 10 features
+    add_compile_definitions(_WIN32_WINNT=0x0A00)
+endif()
+
 # Add include directories for the project
 include_directories(
     ${CMAKE_SOURCE_DIR}/include

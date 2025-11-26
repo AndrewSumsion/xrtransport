@@ -16,4 +16,5 @@ target_link_libraries(serialization_tests PRIVATE
 
 if(MSVC)
     target_compile_options(serialization_tests PRIVATE /Zc:preprocessor)
+    target_link_options(serialization_tests PRIVATE "/STACK:8388608")
 endif()
