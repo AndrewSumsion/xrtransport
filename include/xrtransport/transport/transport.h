@@ -79,12 +79,17 @@ struct [[nodiscard]] MessageLockIn {
 };
 
 struct [[nodiscard]] MessageLockOut {
-    std::unique_lock<std::recursive_mutex> lock;
+private:
     SyncWriteStream& stream_;
+public:
+    std::unique_lock<std::recursive_mutex> lock;
     SendBuffer buffer;
 
-    MessageLockOut(std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), stream_(stream), buffer() {}
+    MessageLockOut(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
+        : lock(std::move(lock)), stream_(stream), buffer() {
+        // write header to buffer
+        asio::write(stream_, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
+    }
 
     MessageLockOut(const MessageLockOut&) = delete;
     MessageLockOut& operator=(const MessageLockOut&) = delete;

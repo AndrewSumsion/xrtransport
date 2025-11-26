@@ -18,15 +18,7 @@ Transport::~Transport() {
 MessageLockOut Transport::start_message(uint16_t header) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-    // Write the header first
-    try {
-        asio::write(*stream, asio::const_buffer(&header, sizeof(header)));
-    } catch (const std::exception& e) {
-        spdlog::error("Failed to write message header in start_message: {}", e.what());
-        throw;
-    }
-
-    return MessageLockOut(std::move(lock), *stream);
+    return MessageLockOut(header, std::move(lock), *stream);
 }
 
 void Transport::register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler) {
