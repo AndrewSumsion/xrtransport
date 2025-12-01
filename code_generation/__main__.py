@@ -58,7 +58,7 @@ template_config = [
     ("client/entry.mako", "src/client/entry.cpp"),
     ("server/function_handlers_header.mako", "src/server/function_handlers.h"),
     ("server/function_handlers_impl.mako", "src/server/function_handlers.cpp"),
-    ("server/function_loader_header.mako", "src/server/function_loader.h"),
+    ("server/function_loader.mako", "include/xrtransport/function_loader.h"),
     ("structs/struct_size.mako", "src/common/serialization/struct_size.cpp"),
     ("structs/deserializer_header.mako", "include/xrtransport/serialization/deserializer.h"),
     ("structs/deserializer_impl.mako", "src/common/serialization/deserializer.cpp"),

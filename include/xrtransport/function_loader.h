@@ -5,7 +5,7 @@
  * Any changes made to this file will be lost when regenerated.
  *
  * To modify this file, edit the corresponding template in:
- * code_generation/templates/server/function_loader_header.mako
+ * code_generation/templates/server/function_loader.mako
  */
 
 #ifndef XRTRANSPORT_FUNCTION_LOADER_H
@@ -25,7 +25,10 @@ public:
 
 class FunctionLoader {
 public:
-    explicit FunctionLoader(PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr);
+    explicit FunctionLoader(PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr) :
+        loader_instance(XR_NULL_HANDLE),
+        pfn_xrGetInstanceProcAddr(pfn_xrGetInstanceProcAddr)
+    {}
 
     // Used by ensure_function_loaded to load XR functions
     // Starts as XR_NULL_HANDLE but must be set once an instance is created
