@@ -2888,7 +2888,7 @@ std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
 
 std::size_t size_lookup(XrStructureType struct_type) {
     if (size_lookup_table.find(struct_type) == size_lookup_table.end()) {
-        throw new UnknownXrStructureTypeException("Unknown XrStructureType in size_lookup: " + std::to_string(struct_type));
+        throw UnknownXrStructureTypeException("Unknown XrStructureType in size_lookup: " + std::to_string(struct_type));
     }
     return size_lookup_table[struct_type];
 }

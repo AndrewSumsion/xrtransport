@@ -2887,7 +2887,7 @@ std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = 
 
 StructSerializer serializer_lookup(XrStructureType struct_type) {
     if (serializer_lookup_table.find(struct_type) == serializer_lookup_table.end()) {
-        throw new UnknownXrStructureTypeException("Unknown XrStructureType in serializer_lookup: " + std::to_string(struct_type));
+        throw UnknownXrStructureTypeException("Unknown XrStructureType in serializer_lookup: " + std::to_string(struct_type));
     }
     return serializer_lookup_table[struct_type];
 }

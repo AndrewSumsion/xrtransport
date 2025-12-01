@@ -31,7 +31,7 @@ std::unordered_map<XrStructureType, StructDeserializer> deserializer_lookup_tabl
 
 StructDeserializer deserializer_lookup(XrStructureType struct_type) {
     if (deserializer_lookup_table.find(struct_type) == deserializer_lookup_table.end()) {
-        throw new UnknownXrStructureTypeException("Unknown XrStructureType in deserializer_lookup: " + std::to_string(struct_type));
+        throw UnknownXrStructureTypeException("Unknown XrStructureType in deserializer_lookup: " + std::to_string(struct_type));
     }
     return deserializer_lookup_table[struct_type];
 }
@@ -44,7 +44,7 @@ std::unordered_map<XrStructureType, StructCleaner> cleaner_lookup_table = {
 
 StructCleaner cleaner_lookup(XrStructureType struct_type) {
     if (cleaner_lookup_table.find(struct_type) == cleaner_lookup_table.end()) {
-        throw new UnknownXrStructureTypeException("Unknown XrStructureType in cleaner_lookup: " + std::to_string(struct_type));
+        throw UnknownXrStructureTypeException("Unknown XrStructureType in cleaner_lookup: " + std::to_string(struct_type));
     }
     return cleaner_lookup_table.at(struct_type);
 }

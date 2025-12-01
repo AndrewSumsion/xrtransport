@@ -76,7 +76,7 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
     } else {
         // No handler for this message type - stream is corrupted
         // We don't know how many bytes to read, so stream is permanently out of sync
-        throw new TransportException("No handler registered for message type: " + std::to_string(header));
+        throw TransportException("No handler registered for message type: " + std::to_string(header));
     }
 }
 
