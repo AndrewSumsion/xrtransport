@@ -51,7 +51,7 @@ void SharedBuffer::wait_for_data(Side side) const {
     std::unique_lock<std::mutex> lock(mutex_);
 
     cv_.wait(lock, [this, side] {
-        return available(side) > 0;
+        return get_read_buffer(side).size() > get_read_pos(side);
     });
 }
 
