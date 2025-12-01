@@ -6,6 +6,8 @@ ${utils.header_comment("server/function_handlers_header.mako")}
 
 #include "xrtransport/transport/transport.h"
 
+#include "function_loader.h"
+
 #include <cstdint>
 #include <stdexcept>
 
@@ -16,10 +18,10 @@ public:
     explicit UnknownFunctionIdException(const std::string& message) : std::runtime_error(message) {}
 };
 
-typedef void (*FunctionHandler)(MessageLockIn, Transport&);
+typedef void (*FunctionHandler)(MessageLockIn, Transport&, FunctionLoader& function_loader);
 
 <%utils:for_grouped_functions args="function">
-void handle_${function.name}(MessageLockIn msg_in, Transport& transport);
+void handle_${function.name}(MessageLockIn msg_in, Transport& transport, FunctionLoader& function_loader);
 </%utils:for_grouped_functions>
 
 FunctionHandler function_handler_lookup(std::uint32_t function_id);
