@@ -1,7 +1,7 @@
 # Transport module CMakeLists.txt
 
 # Create static library for xrtransport transport
-add_library(xrtransport_transport STATIC
+add_library(xrtransport_transport SHARED
     transport.cpp
 )
 

@@ -6,7 +6,7 @@ ${utils.header_comment("server/function_handlers_header.mako")}
 
 #include "xrtransport/transport/transport.h"
 
-#include "function_loader.h"
+#include "xrtransport/server/function_loader.h"
 
 #include <cstdint>
 #include <stdexcept>

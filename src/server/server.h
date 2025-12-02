@@ -2,7 +2,7 @@
 #define XRTRANSPORT_SERVER_H
 
 #include "xrtransport/transport/transport.h"
-#include "xrtransport/function_loader.h"
+#include "xrtransport/server/function_loader.h"
 
 #include "module.h"
 

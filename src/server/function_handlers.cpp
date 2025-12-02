@@ -10,8 +10,7 @@
 
 #include "function_handlers.h"
 
-#include "function_loader.h"
-
+#include "xrtransport/server/function_loader.h"
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"

@@ -3,7 +3,7 @@
 #include "module.h"
 
 #include "xrtransport/transport/transport.h"
-#include "xrtransport/function_loader.h"
+#include "xrtransport/server/function_loader.h"
 #include "xrtransport/asio_compat.h"
 
 #include "openxr/openxr.h"
