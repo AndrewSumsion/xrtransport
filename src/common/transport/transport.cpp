@@ -67,6 +67,11 @@ MessageLockIn Transport::await_message(uint16_t header) {
     }
 }
 
+StreamLock Transport::lock_stream() {
+    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    return StreamLock(std::move(lock), *stream);
+}
+
 void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
     auto it = handlers.find(header);
     if (it != handlers.end()) {

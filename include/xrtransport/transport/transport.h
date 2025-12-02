@@ -16,6 +16,10 @@
 #include <stdexcept>
 #include <vector>
 
+#define XRTRANSPORT_PROTOCOL_VERSION 1
+// "XRTP" as a little-endian uint32_t
+#define XRTRANSPORT_MAGIC 0x50545258
+
 namespace xrtransport {
 
 // Exception for Transport-specific errors
@@ -106,6 +110,20 @@ public:
     }
 };
 
+// Lock class for raw stream access
+struct [[nodiscard]] StreamLock {
+    std::unique_lock<std::recursive_mutex> lock;
+    SyncDuplexStream& stream;
+
+    StreamLock(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
+        : lock(std::move(lock)), stream(stream) {}
+
+    StreamLock(const StreamLock&) = delete;
+    StreamLock& operator=(const StreamLock&) = delete;
+    StreamLock(StreamLock&&) = default;
+    StreamLock& operator=(StreamLock&&) = default;
+};
+
 // Transport class for message-based communication
 class Transport {
 private:
@@ -134,6 +152,9 @@ public:
     void unregister_handler(uint16_t header);
     void clear_handlers();
     MessageLockIn await_message(uint16_t header);
+
+    // Raw stream access
+    StreamLock lock_stream();
 
     // Worker management
     void start_worker();
