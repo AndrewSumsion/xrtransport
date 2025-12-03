@@ -68,13 +68,115 @@ private:
     std::vector<std::uint8_t> buffer_;
 };
 
+// Wrapper for SyncReadStream* to be used like a reference
+// Mainly used so that MessageLockIn can be moveable and have the same syntax as
+// MessageLockOut because OCD :)
+class SyncReadStreamPointerWrapper : public SyncReadStream {
+private:
+    SyncReadStream* p_stream;
+
+public:
+    SyncReadStreamPointerWrapper(SyncReadStream* p_stream)
+        : p_stream(p_stream) {}
+    
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        return p_stream->read_some(buffers);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) {
+        return p_stream->read_some(buffers, ec);
+    }
+
+    std::size_t available() override {
+        return p_stream->available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return p_stream->available(ec);
+    }
+
+    void non_blocking(bool mode) override {
+        return p_stream->non_blocking(mode);
+    }
+
+    bool non_blocking() const override {
+        return p_stream->non_blocking();
+    }
+
+    bool is_open() const override {
+        return p_stream->is_open();
+    }
+
+    void close() override {
+        return p_stream->close();
+    }
+
+    void close(asio::error_code& ec) override {
+        return p_stream->close(ec);
+    }
+};
+
+// Wrapper class for SyncDuplexStream* that can be used like a reference
+class SyncDuplexStreamPointerWrapper : public SyncDuplexStream {
+private:
+    SyncDuplexStream* p_stream;
+
+public:
+    SyncDuplexStreamPointerWrapper(SyncDuplexStream* p_stream)
+         : p_stream(p_stream) {}
+
+    bool is_open() const override {
+        return p_stream->is_open();
+    }
+
+    void close() override {
+        return p_stream->close();
+    }
+
+    void close(asio::error_code& ec) override {
+        return p_stream->close(ec);
+    }
+
+    void non_blocking(bool mode) override {
+        return p_stream->non_blocking(mode);
+    }
+
+    bool non_blocking() const override {
+        return p_stream->non_blocking();
+    }
+
+    std::size_t available() override {
+        return p_stream->available();
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        return p_stream->available(ec);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers) override {
+        return p_stream->read_some(buffers);
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
+        return p_stream->read_some(buffers, ec);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers) override {
+        return p_stream->write_some(buffers);
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
+        return p_stream->write_some(buffers, ec);
+    }
+};
+
 // RAII stream lock classes
 struct [[nodiscard]] MessageLockIn {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncReadStream& stream;
+    SyncReadStreamPointerWrapper stream;
 
     MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
-        : lock(std::move(lock)), stream(stream) {}
+        : lock(std::move(lock)), stream(&stream) {}
 
     MessageLockIn(const MessageLockIn&) = delete;
     MessageLockIn& operator=(const MessageLockIn&) = delete;
@@ -84,15 +186,15 @@ struct [[nodiscard]] MessageLockIn {
 
 struct [[nodiscard]] MessageLockOut {
 private:
-    SyncWriteStream& stream_;
+    SyncWriteStream* p_stream;
 public:
     std::unique_lock<std::recursive_mutex> lock;
     SendBuffer buffer;
 
     MessageLockOut(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), stream_(stream), buffer() {
+        : lock(std::move(lock)), p_stream(&stream), buffer() {
         // write header to buffer
-        asio::write(stream_, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
+        asio::write(stream, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
     }
 
     MessageLockOut(const MessageLockOut&) = delete;
@@ -101,7 +203,7 @@ public:
     MessageLockOut& operator=(MessageLockOut&&) = default;
 
     void flush() {
-        asio::write(stream_, asio::buffer(buffer.data()));
+        asio::write(*p_stream, asio::buffer(buffer.data()));
         buffer.clear();
     }
 
@@ -113,10 +215,10 @@ public:
 // Lock class for raw stream access
 struct [[nodiscard]] StreamLock {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncDuplexStream& stream;
+    SyncDuplexStreamPointerWrapper stream;
 
     StreamLock(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
-        : lock(std::move(lock)), stream(stream) {}
+        : lock(std::move(lock)), stream(&stream) {}
 
     StreamLock(const StreamLock&) = delete;
     StreamLock& operator=(const StreamLock&) = delete;
