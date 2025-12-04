@@ -1,3 +1,33 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(xrtransport_server)
+
+# Server-side OpenXR transport implementation
+message(STATUS "Building xrtransport server components")
+
+# Server library
+add_library(xrtransport_server STATIC
+    server.cpp
+    function_dispatch.cpp
+)
+
+# Dependencies
+target_link_libraries(xrtransport_server
+    xrtransport_transport
+    xrtransport_serialization
+)
+
+# Include directories
+target_include_directories(xrtransport_server PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/external/asio/asio/include
+)
+
+# C++ standard
+set_target_properties(xrtransport_client PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED ON
+)
+
+target_compile_features(xrtransport_client PUBLIC cxx_std_17)

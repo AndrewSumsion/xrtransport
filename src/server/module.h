@@ -78,9 +78,9 @@ public:
         return *this;
     }
 
-    inline bool on_init(Transport* transport, FunctionLoader* function_loader) { pfn_on_init(transport, function_loader); }
-    inline bool on_instance(Transport* transport, FunctionLoader* function_loader, XrInstance instance) { pfn_on_instance(transport, function_loader, instance); }
-    inline void on_shutdown() { pfn_on_shutdown(); }
+    inline bool on_init(Transport* transport, FunctionLoader* function_loader) { return pfn_on_init(transport, function_loader); }
+    inline bool on_instance(Transport* transport, FunctionLoader* function_loader, XrInstance instance) { return pfn_on_instance(transport, function_loader, instance); }
+    inline void on_shutdown() { return pfn_on_shutdown(); }
 };
 
 } // namespace xrtransport

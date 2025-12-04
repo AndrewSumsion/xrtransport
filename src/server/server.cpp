@@ -16,8 +16,11 @@ using std::uint64_t;
 
 namespace xrtransport {
 
-Server::Server(std::unique_ptr<DuplexStream> stream, std::vector<std::string> module_paths) :
-    transport(std::move(stream)), function_loader(xrGetInstanceProcAddr)
+Server::Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths) :
+    transport(std::move(stream)),
+    function_loader(xrGetInstanceProcAddr),
+    function_dispatch(transport, function_loader),
+    transport_io_context(stream_io_context)
 {
     for (auto& module_path : module_paths) {
         modules.push_back(Module(module_path));
@@ -70,7 +73,30 @@ bool Server::do_handshake() {
 }
 
 void Server::run() {
-    
+    transport.register_handler(FUNCTION_CALL, [this](Transport& transport, MessageLockIn msg_in){
+        uint32_t function_id{};
+        asio::read(msg_in.stream, asio::buffer(&function_id, sizeof(uint32_t)));
+        function_dispatch.handle_function(function_id, std::move(msg_in));
+    });
+
+    // initialize all modules (which may add handlers)
+    for (auto& module : modules) {
+        module.on_init(&transport, &function_loader);
+    }
+
+    // set up callback for XrInstance creation
+    function_dispatch.register_instance_callback([this](XrInstance instance){
+        this->instance = instance;
+        for (auto& module : modules) {
+            module.on_instance(&transport, &function_loader, instance);
+        }
+    });
+
+    // queue up first iteration of worker loop
+    transport.start_worker();
+
+    // run worker loop synchronously
+    transport_io_context.run();
 }
 
 }

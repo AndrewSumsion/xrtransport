@@ -8524,6 +8524,10 @@ void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
     
     serialize_ptr(instance, 1, msg_out.buffer);
 
+    // XrInstance created, notify callbacks
+    for (auto& instance_callback : instance_callbacks) {
+        instance_callback(*instance);
+    }
 }
 
 

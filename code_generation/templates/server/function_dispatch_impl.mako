@@ -36,6 +36,12 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     % for binding in function.modifiable_bindings:
     ${utils.serialize_binding(binding, stream_var="msg_out.buffer")}
     % endfor
+    % if function.name == "xrCreateInstance":
+    // XrInstance created, notify callbacks
+    for (auto& instance_callback : instance_callbacks) {
+        instance_callback(*instance);
+    }
+    % endif
 }
 </%utils:for_grouped_functions>
 

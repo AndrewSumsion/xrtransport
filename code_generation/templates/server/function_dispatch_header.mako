@@ -8,9 +8,13 @@ ${utils.header_comment("server/function_dispatch_header.mako")}
 
 #include "xrtransport/server/function_loader.h"
 
+#include "openxr/openxr.h"
+
 #include <cstdint>
 #include <stdexcept>
 #include <unordered_map>
+#include <vector>
+#include <functional>
 #include <string>
 
 namespace xrtransport {
@@ -26,6 +30,7 @@ public:
 private:
     Transport& transport;
     FunctionLoader& function_loader;
+    std::vector<std::function<void(XrInstance)>> instance_callbacks;
     static std::unordered_map<std::uint32_t, Handler> handlers;
 
 public:
@@ -41,6 +46,10 @@ public:
         }
         Handler handler = handlers.at(function_id);
         (this->*handler)(std::move(msg_in));
+    }
+
+    void register_instance_callback(std::function<void(XrInstance)> callback) {
+        instance_callbacks.push_back(std::move(callback));
     }
 };
 
