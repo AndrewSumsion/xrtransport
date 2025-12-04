@@ -18,7 +18,7 @@
 #endif
 
 #include "xrtransport/transport/transport.h"
-#include "xrtransport/function_loader.h"
+#include "xrtransport/server/function_loader.h"
 #include "openxr/openxr.h"
 
 namespace xrtransport {
@@ -60,7 +60,7 @@ public:
         other.pfn_on_instance = nullptr;
         other.pfn_on_shutdown = nullptr;
     }
-    
+
     Module& operator=(Module&& other) noexcept {
         if (handle) {
             MODULE_UNLOAD(handle);

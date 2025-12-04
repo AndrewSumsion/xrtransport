@@ -97,8 +97,8 @@ class XrParam:
         
         return full_type
 
-    def declaration(self):
-        qualifier = self.qualifier + " " if self.qualifier else ""
+    def declaration(self, with_qualifier=True):
+        qualifier = self.qualifier + " " if with_qualifier and self.qualifier else ""
         type = self.type
         pointer = self.pointer if self.pointer else ""
         name = self.name

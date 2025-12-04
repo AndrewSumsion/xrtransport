@@ -1,7 +1,7 @@
 <%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("server/function_handlers_impl.mako")}
+${utils.header_comment("server/function_dispatch_impl.mako")}
 
-#include "function_handlers.h"
+#include "function_dispatch.h"
 
 #include "xrtransport/server/function_loader.h"
 #include "xrtransport/transport/transport.h"
@@ -21,11 +21,11 @@ using std::uint32_t;
 namespace xrtransport {
 
 <%utils:for_grouped_functions args="function">
-void handle_${function.name}(MessageLockIn msg_in, Transport& transport, FunctionLoader& function_loader) {
+void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("${function.name}", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_${function.name}));
     // by this point, the function id has already been read, now read the params
     % for param in function.params:
-    ${param.declaration()};
+    ${param.declaration(with_qualifier=False)};
     ${utils.deserialize_member(param, binding_prefix='', stream_var='msg_in.stream', in_place_var='false')}
     % endfor
 
@@ -39,17 +39,10 @@ void handle_${function.name}(MessageLockIn msg_in, Transport& transport, Functio
 }
 </%utils:for_grouped_functions>
 
-static std::unordered_map<uint32_t, FunctionHandler> function_handler_lookup_table = {
+std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handlers = {
 <%utils:for_grouped_functions args="function">
-    {${function.id}, &handle_${function.name}},
+    {${function.id}, &FunctionDispatch::handle_${function.name}},
 </%utils:for_grouped_functions>
 };
-
-FunctionHandler function_handler_lookup(uint32_t function_id) {
-    if (function_handler_lookup_table.find(function_id) == function_handler_lookup_table.end()) {
-        throw UnknownFunctionIdException("Unknown function id in function_handler_lookup: " + std::to_string(function_id));
-    }
-    return function_handler_lookup_table.at(function_id);
-}
 
 } // namespace xrtransport
