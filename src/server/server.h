@@ -22,7 +22,6 @@ private:
     FunctionDispatch function_dispatch;
     std::vector<Module> modules;
     asio::io_context& transport_io_context;
-    XrInstance instance;
 
 public:
     explicit Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);

@@ -86,7 +86,7 @@ void Server::run() {
 
     // set up callback for XrInstance creation
     function_dispatch.register_instance_callback([this](XrInstance instance){
-        this->instance = instance;
+        function_loader.loader_instance = instance;
         for (auto& module : modules) {
             module.on_instance(&transport, &function_loader, instance);
         }

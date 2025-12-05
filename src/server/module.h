@@ -24,14 +24,16 @@
 namespace xrtransport {
 
 // Module function signatures
-typedef bool (*PFN_module_on_init)(Transport* transport, FunctionLoader* function_loader);
-typedef bool (*PFN_module_on_instance)(Transport* transport, FunctionLoader* function_loader, XrInstance instance);
+typedef void (*PFN_module_on_init)(Transport* transport, FunctionLoader* function_loader);
+typedef void (*PFN_module_get_required_extensions)(std::uint32_t* num_extensions_out, const char** extensions_out);
+typedef void (*PFN_module_on_instance)(Transport* transport, FunctionLoader* function_loader, XrInstance instance);
 typedef void (*PFN_module_on_shutdown)();
 
 class Module {
 private:
     MODULE_HANDLE handle;
     PFN_module_on_init pfn_on_init;
+    PFN_module_get_required_extensions pfn_get_required_extensions;
     PFN_module_on_instance pfn_on_instance;
     PFN_module_on_shutdown pfn_on_shutdown;
 
@@ -39,12 +41,17 @@ public:
     explicit Module(std::string module_path) {
         handle = MODULE_LOAD(module_path.c_str());
         pfn_on_init = reinterpret_cast<PFN_module_on_init>(MODULE_SYM(handle, "on_init"));
+        pfn_get_required_extensions = reinterpret_cast<PFN_module_get_required_extensions>(MODULE_SYM(handle, "get_required_extensions"));
         pfn_on_instance = reinterpret_cast<PFN_module_on_instance>(MODULE_SYM(handle, "on_instance"));
         pfn_on_shutdown = reinterpret_cast<PFN_module_on_shutdown>(MODULE_SYM(handle, "on_shutdown"));
     }
 
     ~Module() {
-        MODULE_UNLOAD(handle);
+        // handle may be null if module was moved
+        if (handle) {
+            on_shutdown();
+            MODULE_UNLOAD(handle);
+        }
     }
 
     Module(const Module&) = delete;
@@ -78,8 +85,9 @@ public:
         return *this;
     }
 
-    inline bool on_init(Transport* transport, FunctionLoader* function_loader) { return pfn_on_init(transport, function_loader); }
-    inline bool on_instance(Transport* transport, FunctionLoader* function_loader, XrInstance instance) { return pfn_on_instance(transport, function_loader, instance); }
+    inline void on_init(Transport* transport, FunctionLoader* function_loader) { return pfn_on_init(transport, function_loader); }
+    inline void get_required_extensions(std::uint32_t* num_extensions_out, const char** extensions_out) { return pfn_get_required_extensions(num_extensions_out, extensions_out); }
+    inline void on_instance(Transport* transport, FunctionLoader* function_loader, XrInstance instance) { return pfn_on_instance(transport, function_loader, instance); }
     inline void on_shutdown() { return pfn_on_shutdown(); }
 };
 
