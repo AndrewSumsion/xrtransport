@@ -53,6 +53,20 @@ void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&threadType);
+
+    
+
+    cleanup(&threadId);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
@@ -92,6 +106,24 @@ void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn m
     
     serialize_ptr(surface, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(swapchain, 1);
+
+    
+
+    cleanup_ptr(surface, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
@@ -128,6 +160,20 @@ void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&domain);
+
+    
+
+    cleanup(&level);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
@@ -175,6 +221,28 @@ void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_
     
     serialize_ptr(tempSlope, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&domain);
+
+    
+
+    cleanup_ptr(notificationLevel, 1);
+
+    
+
+    cleanup_ptr(tempHeadroom, 1);
+
+    
+
+    cleanup_ptr(tempSlope, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
@@ -202,6 +270,16 @@ void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(nameInfo, 1);
+
 }
 
 
@@ -234,6 +312,20 @@ void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_i
     
     serialize_ptr(messenger, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(messenger, 1);
+
 }
 
 
@@ -250,6 +342,12 @@ void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&messenger);
+
 }
 
 
@@ -287,6 +385,24 @@ void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in)
     
     serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&messageSeverity);
+
+    
+
+    cleanup(&messageTypes);
+
+    
+
+    cleanup_ptr(callbackData, 1);
+
 }
 
 
@@ -308,6 +424,16 @@ void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLock
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(labelInfo, 1);
+
 }
 
 
@@ -324,6 +450,12 @@ void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
 }
 
 
@@ -345,6 +477,16 @@ void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn ms
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(labelInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
@@ -376,6 +518,20 @@ void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn m
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
@@ -406,6 +562,20 @@ void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
 
 }
 
@@ -451,6 +621,29 @@ void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -493,6 +686,29 @@ void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_i
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -527,6 +743,24 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in)
     
     serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&vkInstance);
+
+    
+
+    cleanup_ptr(vkPhysicalDevice, 1);
+
 }
 
 
@@ -555,6 +789,20 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn m
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
 
 }
 
@@ -587,6 +835,20 @@ void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn ms
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
@@ -618,6 +880,20 @@ void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn ms
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
@@ -648,6 +924,20 @@ void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn ms
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(graphicsRequirements, 1);
 
 }
 
@@ -692,6 +982,28 @@ void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
     
     serialize_ptr(visibilityMask, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&viewConfigurationType);
+
+    
+
+    cleanup(&viewIndex);
+
+    
+
+    cleanup(&visibilityMaskType);
+
+    
+
+    cleanup_ptr(visibilityMask, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
@@ -727,6 +1039,20 @@ void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageL
     
     serialize_ptr(time, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(performanceCounter, 1);
+
+    
+
+    cleanup_ptr(time, 1);
+
 }
 
 
@@ -755,6 +1081,20 @@ void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageL
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(performanceCounter, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&time);
+
+    
+
+    cleanup_ptr(performanceCounter, 1);
 
 }
 
@@ -790,6 +1130,20 @@ void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_i
     
     serialize_ptr(time, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(timespecTime, 1);
+
+    
+
+    cleanup_ptr(time, 1);
+
 }
 
 
@@ -818,6 +1172,20 @@ void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(timespecTime, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&time);
+
+    
+
+    cleanup_ptr(timespecTime, 1);
 
 }
 
@@ -850,6 +1218,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(anchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(anchor, 1);
+
 }
 
 
@@ -879,6 +1261,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_i
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 
@@ -895,6 +1291,12 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&anchor);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
@@ -934,6 +1336,24 @@ void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&interactionProfile);
+
+    
+
+    cleanup(&topLevelPath);
+
+    
+
+    cleanup(&isActive);
+
 }
 
 
@@ -965,6 +1385,24 @@ void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelPath);
+
+    
+
+    cleanup(&inputSourcePath);
+
+    
+
+    cleanup(&state);
+
 }
 
 
@@ -996,6 +1434,24 @@ void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelPath);
+
+    
+
+    cleanup(&inputSourcePath);
+
+    
+
+    cleanup(&state);
+
 }
 
 
@@ -1027,6 +1483,24 @@ void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelPath);
+
+    
+
+    cleanup(&inputSourcePath);
+
+    
+
+    cleanup(&state);
+
 }
 
 
@@ -1063,6 +1537,28 @@ void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelPath);
+
+    
+
+    cleanup(&inputSourcePath);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup(&pose);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
@@ -1096,6 +1592,20 @@ void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn ms
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 
@@ -1125,6 +1635,20 @@ void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(Messa
     
     serialize_ptr(nodeBinding, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(nodeBinding, 1);
+
 }
 
 
@@ -1141,6 +1665,12 @@ void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&nodeBinding);
+
 }
 
 
@@ -1169,6 +1699,20 @@ void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(Message
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&nodeBinding);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(properties, 1);
 
 }
 
@@ -1201,6 +1745,20 @@ void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
     
     serialize_ptr(handTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(handTracker, 1);
+
 }
 
 
@@ -1217,6 +1775,12 @@ void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
 }
 
 
@@ -1245,6 +1809,20 @@ void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -1277,6 +1855,20 @@ void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 
@@ -1305,6 +1897,20 @@ void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(handMesh, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
+    
+
+    cleanup_ptr(updateInfo, 1);
+
+    
+
+    cleanup_ptr(handMesh, 1);
 
 }
 
@@ -1338,6 +1944,20 @@ void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelUserPath);
+
+    
+
+    cleanup_ptr(controllerModelKeyState, 1);
 
 }
 
@@ -1381,6 +2001,29 @@ void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&modelKey);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -1410,6 +2053,20 @@ void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn m
     
     serialize_ptr(properties, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&modelKey);
+
+    
+
+    cleanup_ptr(properties, 1);
+
 }
 
 
@@ -1438,6 +2095,20 @@ void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&modelKey);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -1473,6 +2144,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(Mess
     
     serialize_ptr(anchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(perceptionAnchor, 1);
+
+    
+
+    cleanup_ptr(anchor, 1);
+
 }
 
 
@@ -1502,6 +2187,20 @@ void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(Mess
     
     serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&anchor);
+
+    
+
+    #error "auto-generator doesn't support double pointers (perceptionAnchor)"
+    None
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
@@ -1555,6 +2254,33 @@ void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg
     
     serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&viewConfigurationType);
+
+    
+
+    cleanup(&modeCapacityInput);
+
+    
+
+    cleanup_ptr(modeCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(modes, modeCapacityInput);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
@@ -1580,6 +2306,16 @@ void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_xr(state);
+
 }
 
 
@@ -1603,6 +2339,16 @@ void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_xr(state, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_xr(state);
 
 }
 
@@ -1637,6 +2383,20 @@ void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
     
     serialize_ptr(bodyTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(bodyTracker, 1);
+
 }
 
 
@@ -1653,6 +2413,12 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
 }
 
 
@@ -1682,6 +2448,20 @@ void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
     
     serialize_ptr(locations, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
+
 }
 
 
@@ -1705,6 +2485,16 @@ void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(skeleton, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
+    
+
+    cleanup_ptr(skeleton, 1);
 
 }
 
@@ -1730,6 +2520,12 @@ void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup_xr(loaderInitInfo);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
@@ -1771,6 +2567,24 @@ void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
     
     serialize_ptr(vulkanResult, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(vulkanInstance, 1);
+
+    
+
+    cleanup_ptr(vulkanResult, 1);
+
 }
 
 
@@ -1808,6 +2622,24 @@ void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
     
     serialize_ptr(vulkanResult, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(vulkanDevice, 1);
+
+    
+
+    cleanup_ptr(vulkanResult, 1);
+
 }
 
 
@@ -1836,6 +2668,20 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(vulkanPhysicalDevice, 1);
 
 }
 
@@ -1883,6 +2729,29 @@ void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn 
     
     serialize_ptr(features, featureCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&featureCapacityInput);
+
+    
+
+    cleanup_ptr(featureCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(features, featureCapacityInput);
+
 }
 
 
@@ -1912,6 +2781,20 @@ void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(sceneObserver, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(sceneObserver, 1);
+
 }
 
 
@@ -1928,6 +2811,12 @@ void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&sceneObserver);
+
 }
 
 
@@ -1957,6 +2846,20 @@ void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(scene, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&sceneObserver);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(scene, 1);
+
 }
 
 
@@ -1973,6 +2876,12 @@ void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
 }
 
 
@@ -1994,6 +2903,16 @@ void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&sceneObserver);
+
+    
+
+    cleanup_ptr(computeInfo, 1);
+
 }
 
 
@@ -2017,6 +2936,16 @@ void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&sceneObserver);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -2047,6 +2976,20 @@ void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(components, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(components, 1);
+
 }
 
 
@@ -2075,6 +3018,20 @@ void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -2105,6 +3062,20 @@ void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
     
     serialize_ptr(buffers, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(buffers, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
@@ -2128,6 +3099,16 @@ void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&sceneObserver);
+
+    
+
+    cleanup_ptr(deserializeInfo, 1);
+
 }
 
 
@@ -2170,6 +3151,29 @@ void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn
     
     serialize_ptr(buffer, countInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup(&countInput);
+
+    
+
+    cleanup_ptr(readOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, countInput);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
@@ -2209,6 +3213,25 @@ void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg
     
     serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&displayRefreshRateCapacityInput);
+
+    
+
+    cleanup_ptr(displayRefreshRateCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(displayRefreshRates, displayRefreshRateCapacityInput);
+
 }
 
 
@@ -2233,6 +3256,16 @@ void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
     
     serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(displayRefreshRate, 1);
+
 }
 
 
@@ -2254,6 +3287,16 @@ void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&displayRefreshRate);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
@@ -2293,6 +3336,25 @@ void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_
     
     serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&pathCapacityInput);
+
+    
+
+    cleanup_ptr(pathCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(paths, pathCapacityInput);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
@@ -2324,6 +3386,20 @@ void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
     
     serialize_ptr(facialTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(facialTracker, 1);
+
 }
 
 
@@ -2340,6 +3416,12 @@ void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&facialTracker);
+
 }
 
 
@@ -2363,6 +3445,16 @@ void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(facialExpressions, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&facialTracker);
+
+    
+
+    cleanup_ptr(facialExpressions, 1);
 
 }
 
@@ -2403,6 +3495,25 @@ void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
     
     serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&colorSpaceCapacityInput);
+
+    
+
+    cleanup_ptr(colorSpaceCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(colorSpaces, colorSpaceCapacityInput);
+
 }
 
 
@@ -2424,6 +3535,16 @@ void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&colorSpace);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
@@ -2449,6 +3570,16 @@ void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(mesh, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
+    
+
+    cleanup_ptr(mesh, 1);
 
 }
 
@@ -2485,6 +3616,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 
@@ -2508,6 +3653,16 @@ void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(uuid, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(uuid, 1);
 
 }
 
@@ -2546,6 +3701,25 @@ void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockI
     
     serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup(&componentTypeCapacityInput);
+
+    
+
+    cleanup_ptr(componentTypeCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(componentTypes, componentTypeCapacityInput);
+
 }
 
 
@@ -2575,6 +3749,20 @@ void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) 
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 
@@ -2603,6 +3791,20 @@ void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(status, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup(&componentType);
+
+    
+
+    cleanup_ptr(status, 1);
 
 }
 
@@ -2638,6 +3840,20 @@ void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
     
     serialize_ptr(profile, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(profile, 1);
+
 }
 
 
@@ -2654,6 +3870,12 @@ void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&profile);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
@@ -2690,6 +3912,20 @@ void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_i
     
     serialize_ptr(keyboard, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(queryInfo, 1);
+
+    
+
+    cleanup_ptr(keyboard, 1);
+
 }
 
 
@@ -2722,6 +3958,20 @@ void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
     
     serialize_ptr(keyboardSpace, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(keyboardSpace, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
@@ -2753,6 +4003,20 @@ void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
     
     serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(outTriangleMesh, 1);
+
 }
 
 
@@ -2769,6 +4033,12 @@ void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
 }
 
 
@@ -2793,6 +4063,16 @@ void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_
     
     serialize_ptr(outVertexBuffer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
+    
+
+    #error "auto-generator doesn't support double pointers (outVertexBuffer)"
+    None
 }
 
 
@@ -2817,6 +4097,16 @@ void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_i
     
     serialize_ptr(outIndexBuffer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
+    
+
+    #error "auto-generator doesn't support double pointers (outIndexBuffer)"
+    None
 }
 
 
@@ -2833,6 +4123,12 @@ void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
 }
 
 
@@ -2859,6 +4155,20 @@ void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
+    
+
+    cleanup(&vertexCount);
+
+    
+
+    cleanup(&triangleCount);
+
 }
 
 
@@ -2883,6 +4193,16 @@ void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLoc
     
     serialize_ptr(outVertexCount, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
+    
+
+    cleanup_ptr(outVertexCount, 1);
+
 }
 
 
@@ -2899,6 +4219,12 @@ void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockI
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&mesh);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
@@ -2930,6 +4256,20 @@ void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
     
     serialize_ptr(outPassthrough, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(outPassthrough, 1);
+
 }
 
 
@@ -2946,6 +4286,12 @@ void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&passthrough);
+
 }
 
 
@@ -2962,6 +4308,12 @@ void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&passthrough);
+
 }
 
 
@@ -2978,6 +4330,12 @@ void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&passthrough);
+
 }
 
 
@@ -3007,6 +4365,20 @@ void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
     
     serialize_ptr(outLayer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(outLayer, 1);
+
 }
 
 
@@ -3023,6 +4395,12 @@ void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&layer);
+
 }
 
 
@@ -3039,6 +4417,12 @@ void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&layer);
+
 }
 
 
@@ -3055,6 +4439,12 @@ void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&layer);
+
 }
 
 
@@ -3076,6 +4466,16 @@ void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&layer);
+
+    
+
+    cleanup_ptr(style, 1);
+
 }
 
 
@@ -3105,6 +4505,20 @@ void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
     
     serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(outGeometryInstance, 1);
+
 }
 
 
@@ -3121,6 +4535,12 @@ void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
 }
 
 
@@ -3142,6 +4562,16 @@ void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(transformation, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
@@ -3181,6 +4611,25 @@ void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in
     
     serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&pathCapacityInput);
+
+    
+
+    cleanup_ptr(pathCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(paths, pathCapacityInput);
+
 }
 
 
@@ -3209,6 +4658,20 @@ void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in)
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&path);
+
+    
+
+    cleanup_ptr(properties, 1);
 
 }
 
@@ -3242,6 +4705,20 @@ void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(buffer, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
@@ -3271,6 +4748,16 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&enabled);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
@@ -3294,6 +4781,16 @@ void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&enabled);
+
 }
 
 
@@ -3320,6 +4817,20 @@ void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&markerId);
+
+    
+
+    cleanup(&timeout);
+
 }
 
 
@@ -3346,6 +4857,20 @@ void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn m
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&markerId);
+
+    
+
+    cleanup(&enable);
+
 }
 
 
@@ -3374,6 +4899,20 @@ void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(size, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&markerId);
+
+    
+
+    cleanup_ptr(size, 1);
 
 }
 
@@ -3404,6 +4943,20 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
@@ -3427,6 +4980,16 @@ void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&offset);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
@@ -3462,6 +5025,20 @@ void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockI
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
@@ -3493,6 +5070,20 @@ void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
     
     serialize_ptr(markerDetector, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(markerDetector, 1);
+
 }
 
 
@@ -3509,6 +5100,12 @@ void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
 }
 
 
@@ -3533,6 +5130,16 @@ void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
     
     serialize_ptr(snapshotInfo, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup_ptr(snapshotInfo, 1);
+
 }
 
 
@@ -3556,6 +5163,16 @@ void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -3594,6 +5211,25 @@ void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
     
     serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup(&markerCapacityInput);
+
+    
+
+    cleanup_ptr(markerCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(markers, markerCapacityInput);
+
 }
 
 
@@ -3622,6 +5258,20 @@ void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup(&marker);
+
+    
+
+    cleanup_ptr(reprojectionErrorMeters, 1);
 
 }
 
@@ -3652,6 +5302,20 @@ void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
     
     serialize_ptr(meters, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup(&marker);
+
+    
+
+    cleanup_ptr(meters, 1);
+
 }
 
 
@@ -3680,6 +5344,20 @@ void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(number, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup(&marker);
+
+    
+
+    cleanup_ptr(number, 1);
 
 }
 
@@ -3723,6 +5401,29 @@ void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&markerDetector);
+
+    
+
+    cleanup(&marker);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -3752,6 +5453,20 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
@@ -3775,6 +5490,16 @@ void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
 }
 
 
@@ -3817,6 +5542,29 @@ void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
     
     serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_xr(queryInfo);
+
+    
+
+    cleanup(&mapCapacityInput);
+
+    
+
+    cleanup_ptr(mapCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(maps, mapCapacityInput);
+
 }
 
 
@@ -3838,6 +5586,16 @@ void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(requestInfo, 1);
+
 }
 
 
@@ -3870,6 +5628,20 @@ void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
     
     serialize_ptr(mapUuid, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(importInfo, 1);
+
+    
+
+    cleanup_ptr(mapUuid, 1);
+
 }
 
 
@@ -3899,6 +5671,20 @@ void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn ms
     
     serialize_ptr(map, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(mapUuid, 1);
+
+    
+
+    cleanup_ptr(map, 1);
+
 }
 
 
@@ -3915,6 +5701,12 @@ void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn m
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&map);
+
 }
 
 
@@ -3952,6 +5744,25 @@ void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn m
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&map);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
@@ -3983,6 +5794,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_xr(createInfo);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -4012,6 +5837,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -4035,6 +5874,16 @@ void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&anchor);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -4067,6 +5916,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_
     
     serialize_ptr(storage, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(storage, 1);
+
 }
 
 
@@ -4083,6 +5946,12 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
 }
 
 
@@ -4111,6 +5980,20 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in)
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup_xr(queryInfo);
+
+    
+
+    cleanup_ptr(future, 1);
 
 }
 
@@ -4141,6 +6024,20 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -4169,6 +6066,20 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup_ptr(publishInfo, 1);
+
+    
+
+    cleanup_ptr(future, 1);
 
 }
 
@@ -4199,6 +6110,20 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn ms
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -4227,6 +6152,20 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup_ptr(deleteInfo, 1);
+
+    
+
+    cleanup_ptr(future, 1);
 
 }
 
@@ -4257,6 +6196,20 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -4285,6 +6238,20 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLoc
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup_ptr(updateInfo, 1);
+
+    
+
+    cleanup_ptr(future, 1);
 
 }
 
@@ -4315,6 +6282,20 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(Message
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&storage);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
@@ -4338,6 +6319,16 @@ void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(enableInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
@@ -4364,6 +6355,16 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLo
     
     serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(spatialAnchorStore, 1);
+
 }
 
 
@@ -4380,6 +6381,12 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageL
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&spatialAnchorStore);
+
 }
 
 
@@ -4401,6 +6408,16 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&spatialAnchorStore);
+
+    
+
+    cleanup_ptr(spatialAnchorPersistenceInfo, 1);
+
 }
 
 
@@ -4438,6 +6455,25 @@ void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(Message
     
     serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&spatialAnchorStore);
+
+    
+
+    cleanup(&spatialAnchorNameCapacityInput);
+
+    
+
+    cleanup_ptr(spatialAnchorNameCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput);
+
 }
 
 
@@ -4467,6 +6503,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(Message
     
     serialize_ptr(spatialAnchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(spatialAnchorCreateInfo, 1);
+
+    
+
+    cleanup_ptr(spatialAnchor, 1);
+
 }
 
 
@@ -4488,6 +6538,16 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&spatialAnchorStore);
+
+    
+
+    cleanup_ptr(spatialAnchorPersistenceName, 1);
+
 }
 
 
@@ -4504,6 +6564,12 @@ void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&spatialAnchorStore);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
@@ -4548,6 +6614,29 @@ void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) 
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(markerId, 1);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -4590,6 +6679,29 @@ void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn ms
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&scene);
+
+    
+
+    cleanup_ptr(markerId, 1);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
@@ -4620,6 +6732,20 @@ void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&value);
+
+    
+
+    cleanup_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR);
 
 }
 
@@ -4652,6 +6778,20 @@ void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_xr(info);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 
@@ -4680,6 +6820,20 @@ void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(results, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&requestId);
+
+    
+
+    cleanup_ptr(results, 1);
 
 }
 
@@ -4712,6 +6866,20 @@ void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 
@@ -4741,6 +6909,20 @@ void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
@@ -4767,6 +6949,16 @@ void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg
     
     serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
+
 }
 
 
@@ -4790,6 +6982,16 @@ void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
 
 }
 
@@ -4836,6 +7038,20 @@ void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
@@ -4871,6 +7087,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
     
     serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(boundingBox2DOutput, 1);
+
 }
 
 
@@ -4899,6 +7129,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(boundingBox3DOutput, 1);
 
 }
 
@@ -4929,6 +7173,20 @@ void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
     
     serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(semanticLabelsOutput, 1);
+
 }
 
 
@@ -4957,6 +7215,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(boundary2DOutput, 1);
 
 }
 
@@ -4987,6 +7259,20 @@ void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
     
     serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(roomLayoutOutput, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
@@ -5010,6 +7296,16 @@ void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(digitalLensControl, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
@@ -5040,6 +7336,20 @@ void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
 
 }
 
@@ -5072,6 +7382,20 @@ void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
     
     serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(spaceContainerOutput, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
@@ -5097,6 +7421,16 @@ void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn ms
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(foveationState, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(foveationState, 1);
 
 }
 
@@ -5129,6 +7463,20 @@ void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
     
     serialize_ptr(faceTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(faceTracker, 1);
+
 }
 
 
@@ -5145,6 +7493,12 @@ void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&faceTracker);
+
 }
 
 
@@ -5173,6 +7527,20 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in)
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(expressionWeights, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&faceTracker);
+
+    
+
+    cleanup_ptr(expressionInfo, 1);
+
+    
+
+    cleanup_ptr(expressionWeights, 1);
 
 }
 
@@ -5205,6 +7573,20 @@ void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
     
     serialize_ptr(eyeTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(eyeTracker, 1);
+
 }
 
 
@@ -5221,6 +7603,12 @@ void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&eyeTracker);
+
 }
 
 
@@ -5250,6 +7638,20 @@ void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
     
     serialize_ptr(eyeGazes, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&eyeTracker);
+
+    
+
+    cleanup_ptr(gazeInfo, 1);
+
+    
+
+    cleanup_ptr(eyeGazes, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
@@ -5273,6 +7675,16 @@ void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(Mess
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&layer);
+
+    
+
+    cleanup_ptr(intensity, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
@@ -5306,6 +7718,20 @@ void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
     
     serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(hapticActionInfo, 1);
+
+    
+
+    cleanup_ptr(deviceSampleRate, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
@@ -5338,6 +7764,16 @@ void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_
     
     serialize_ptr(preferences, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(preferences, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
@@ -5369,6 +7805,20 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) 
     
     serialize_ptr(keyboard, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(keyboard, 1);
+
 }
 
 
@@ -5385,6 +7835,12 @@ void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
 }
 
 
@@ -5419,6 +7875,24 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg
     
     serialize_ptr(keyboardSpace, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(keyboardSpace, 1);
+
 }
 
 
@@ -5440,6 +7914,16 @@ void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(locationInfo, 1);
+
 }
 
 
@@ -5464,6 +7948,16 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in
     
     serialize_ptr(scale, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(scale, 1);
+
 }
 
 
@@ -5485,6 +7979,16 @@ void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLoc
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(modelVisibility, 1);
+
 }
 
 
@@ -5508,6 +8012,16 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(Messa
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(animationStates, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(animationStates, 1);
 
 }
 
@@ -5546,6 +8060,25 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockI
     
     serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup(&textureIdCapacityInput);
+
+    
+
+    cleanup_ptr(textureIdCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(textureIds, textureIdCapacityInput);
+
 }
 
 
@@ -5574,6 +8107,20 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(textureData, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup(&textureId);
+
+    
+
+    cleanup_ptr(textureData, 1);
 
 }
 
@@ -5604,6 +8151,20 @@ void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_i
     
     serialize_ptr(interactorRootPose, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(interactorRootPose, 1);
+
 }
 
 
@@ -5625,6 +8186,16 @@ void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLock
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&keyboard);
+
+    
+
+    cleanup_ptr(changeInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
@@ -5663,6 +8234,25 @@ void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg
 
     
     serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&cameraCapacityInput);
+
+    
+
+    cleanup_ptr(cameraCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(cameras, cameraCapacityInput);
 
 }
 
@@ -5705,6 +8295,25 @@ void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(Mess
     
     serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&counterPathCapacityInput);
+
+    
+
+    cleanup_ptr(counterPathCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(counterPaths, counterPathCapacityInput);
+
 }
 
 
@@ -5726,6 +8335,16 @@ void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(state, 1);
+
 }
 
 
@@ -5749,6 +8368,16 @@ void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -5778,6 +8407,20 @@ void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(counter, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&counterPath);
+
+    
+
+    cleanup_ptr(counter, 1);
 
 }
 
@@ -5813,6 +8456,20 @@ void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
@@ -5844,6 +8501,20 @@ void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
     
     serialize_ptr(user, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(user, 1);
+
 }
 
 
@@ -5868,6 +8539,16 @@ void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
     
     serialize_ptr(userId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&user);
+
+    
+
+    cleanup_ptr(userId, 1);
+
 }
 
 
@@ -5884,6 +8565,12 @@ void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&user);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
@@ -5917,6 +8604,20 @@ void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn 
     
     serialize_ptr(resolution, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(resolution, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
@@ -5948,6 +8649,20 @@ void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_
     
     serialize_ptr(colorLut, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&passthrough);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(colorLut, 1);
+
 }
 
 
@@ -5964,6 +8679,12 @@ void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&colorLut);
+
 }
 
 
@@ -5985,6 +8706,16 @@ void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&colorLut);
+
+    
+
+    cleanup_ptr(updateInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
@@ -6015,6 +8746,20 @@ void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(triangleMeshOutput, 1);
 
 }
 
@@ -6054,6 +8799,20 @@ void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
     
     serialize_ptr(faceTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(faceTracker, 1);
+
 }
 
 
@@ -6070,6 +8829,12 @@ void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&faceTracker);
+
 }
 
 
@@ -6098,6 +8863,20 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(expressionWeights, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&faceTracker);
+
+    
+
+    cleanup_ptr(expressionInfo, 1);
+
+    
+
+    cleanup_ptr(expressionWeights, 1);
 
 }
 
@@ -6133,6 +8912,20 @@ void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
     
     serialize_ptr(requestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
@@ -6164,6 +8957,20 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn
     
     serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(environmentDepthProvider, 1);
+
 }
 
 
@@ -6180,6 +8987,12 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockI
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
 }
 
 
@@ -6196,6 +9009,12 @@ void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
 }
 
 
@@ -6212,6 +9031,12 @@ void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn m
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
 }
 
 
@@ -6241,6 +9066,20 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockI
     
     serialize_ptr(swapchain, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(swapchain, 1);
+
 }
 
 
@@ -6257,6 +9096,12 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLock
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
 }
 
 
@@ -6294,6 +9139,24 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(Mes
     
     serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup(&imageCapacityInput);
+
+    
+
+    cleanup_ptr(imageCountOutput, 1);
+
+    
+
+    cleanup_xr_array(images, imageCapacityInput);
+
 }
 
 
@@ -6317,6 +9180,16 @@ void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLoc
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -6347,6 +9220,20 @@ void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn m
     
     serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
+    
+
+    cleanup_ptr(acquireInfo, 1);
+
+    
+
+    cleanup_ptr(environmentDepthImage, 1);
+
 }
 
 
@@ -6368,6 +9255,16 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&environmentDepthProvider);
+
+    
+
+    cleanup_ptr(setInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
@@ -6396,6 +9293,20 @@ void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageL
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&domain);
+
+    
+
+    cleanup(&hint);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
@@ -6427,6 +9338,20 @@ void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
     
     serialize_ptr(passthrough, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(passthrough, 1);
+
 }
 
 
@@ -6443,6 +9368,12 @@ void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&passthrough);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
@@ -6468,6 +9399,16 @@ void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(applyInfo, 1);
 
 }
 
@@ -6500,6 +9441,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
     
     serialize_ptr(anchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(anchor, 1);
+
 }
 
 
@@ -6523,6 +9478,16 @@ void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(name, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&anchor);
+
+    
+
+    cleanup_ptr(name, 1);
 
 }
 
@@ -6555,6 +9520,20 @@ void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
     
     serialize_ptr(bodyTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(bodyTracker, 1);
+
 }
 
 
@@ -6571,6 +9550,12 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
 }
 
 
@@ -6599,6 +9584,20 @@ void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -6634,6 +9633,24 @@ void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
     
     serialize_ptr(skeleton, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
+    
+
+    cleanup(&baseSpace);
+
+    
+
+    cleanup(&skeletonGenerationId);
+
+    
+
+    cleanup_ptr(skeleton, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
@@ -6661,6 +9678,16 @@ void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in)
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations->locations, locations->locationCount, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&handTracker);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -6693,6 +9720,20 @@ void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
     
     serialize_ptr(bodyTracker, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(bodyTracker, 1);
+
 }
 
 
@@ -6709,6 +9750,12 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
 }
 
 
@@ -6737,6 +9784,20 @@ void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&bodyTracker);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -6782,6 +9843,29 @@ void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLo
     
     serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&snapshot);
+
+    
+
+    cleanup(&entityId);
+
+    
+
+    cleanup(&componentTypeCapacityInput);
+
+    
+
+    cleanup_ptr(componentTypeCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(componentTypes, componentTypeCapacityInput);
+
 }
 
 
@@ -6810,6 +9894,20 @@ void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(uuid, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&snapshot);
+
+    
+
+    cleanup(&entityId);
+
+    
+
+    cleanup_ptr(uuid, 1);
 
 }
 
@@ -6840,6 +9938,20 @@ void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn ms
     
     serialize_xr(componentData, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&snapshot);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_xr(componentData);
+
 }
 
 
@@ -6868,6 +9980,20 @@ void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(provider, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(provider, 1);
 
 }
 
@@ -6898,6 +10024,20 @@ void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(startInfo, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -6927,6 +10067,20 @@ void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn m
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -6950,6 +10104,16 @@ void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -6980,6 +10144,20 @@ void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(queryInfo, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7009,6 +10187,20 @@ void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -7025,6 +10217,12 @@ void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&snapshot);
+
 }
 
 
@@ -7057,6 +10255,20 @@ void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
     
     serialize_ptr(queriedSenseData, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&snapshot);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(queriedSenseData, 1);
+
 }
 
 
@@ -7073,6 +10285,12 @@ void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
 }
 
 
@@ -7089,6 +10307,12 @@ void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
 }
 
 
@@ -7118,6 +10342,20 @@ void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in
     
     serialize_ptr(anchor, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(anchor, 1);
+
 }
 
 
@@ -7134,6 +10372,12 @@ void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&anchor);
+
 }
 
 
@@ -7157,6 +10401,16 @@ void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(uuid, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&anchor);
+
+    
+
+    cleanup_ptr(uuid, 1);
 
 }
 
@@ -7186,6 +10440,20 @@ void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(space, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
 
 }
 
@@ -7218,6 +10486,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in)
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7246,6 +10528,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7276,6 +10572,20 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7304,6 +10614,20 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7334,6 +10658,20 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7362,6 +10700,20 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn m
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7394,6 +10746,20 @@ void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) 
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7422,6 +10788,20 @@ void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7452,6 +10832,20 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7480,6 +10874,20 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLoc
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7512,6 +10920,20 @@ void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -7540,6 +10962,20 @@ void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(completion, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&provider);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
 
 }
 
@@ -7578,6 +11014,20 @@ void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
     
     serialize_ptr(planeDetector, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(planeDetector, 1);
+
 }
 
 
@@ -7594,6 +11044,12 @@ void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&planeDetector);
+
 }
 
 
@@ -7615,6 +11071,16 @@ void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&planeDetector);
+
+    
+
+    cleanup_ptr(beginInfo, 1);
+
 }
 
 
@@ -7638,6 +11104,16 @@ void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&planeDetector);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -7667,6 +11143,20 @@ void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(locations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&planeDetector);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(locations, 1);
 
 }
 
@@ -7702,6 +11192,24 @@ void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
     
     serialize_ptr(polygonBuffer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&planeDetector);
+
+    
+
+    cleanup(&planeId);
+
+    
+
+    cleanup(&polygonBufferIndex);
+
+    
+
+    cleanup_ptr(polygonBuffer, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
@@ -7733,6 +11241,20 @@ void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
     
     serialize_ptr(pollResult, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(pollInfo, 1);
+
+    
+
+    cleanup_ptr(pollResult, 1);
+
 }
 
 
@@ -7754,6 +11276,16 @@ void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(cancelInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
@@ -7779,6 +11311,16 @@ void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(info, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
@@ -7810,6 +11352,20 @@ void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) 
     
     serialize_ptr(detector, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(detector, 1);
+
 }
 
 
@@ -7826,6 +11382,12 @@ void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in)
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
 }
 
 
@@ -7854,6 +11416,20 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(future, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(stateRequest, 1);
+
+    
+
+    cleanup_ptr(future, 1);
 
 }
 
@@ -7884,6 +11460,20 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn ms
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 
@@ -7912,6 +11502,20 @@ void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn 
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(size, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(sizeInfo, 1);
+
+    
+
+    cleanup_ptr(size, 1);
 
 }
 
@@ -7945,6 +11549,20 @@ void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) 
     
     serialize_ptr(buffer, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(size, 1);
+
+    
+
+    cleanup_ptr(buffer, 1);
+
 }
 
 
@@ -7971,6 +11589,16 @@ void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
 
     
     serialize_ptr(buffer->buffer, buffer->bufferSize, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(buffer, 1);
 
 }
 
@@ -8012,6 +11640,24 @@ void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
     
     serialize_ptr(future, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(buffer, 1);
+
+    
+
+    cleanup_ptr(future, 1);
+
 }
 
 
@@ -8046,6 +11692,24 @@ void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in)
     
     serialize_ptr(completion, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&detector);
+
+    
+
+    cleanup_ptr(completionInfo, 1);
+
+    
+
+    cleanup(&future);
+
+    
+
+    cleanup_ptr(completion, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
@@ -8077,6 +11741,20 @@ void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg
     
     serialize_ptr(facialExpressionClient, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(facialExpressionClient, 1);
+
 }
 
 
@@ -8093,6 +11771,12 @@ void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn ms
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&facialExpressionClient);
+
 }
 
 
@@ -8127,6 +11811,25 @@ void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(Messag
     
     serialize_ptr(blendShapes, blendShapeCount, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&facialExpressionClient);
+
+    
+
+    cleanup_ptr(blendShapeGetInfo, 1);
+
+    
+
+    cleanup(&blendShapeCount);
+
+    
+
+    
+    cleanup_ptr(blendShapes, blendShapeCount);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
@@ -8150,6 +11853,16 @@ void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMET
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(resumeInfo, 1);
+
 }
 
 
@@ -8171,6 +11884,16 @@ void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(pauseInfo, 1);
+
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
@@ -8202,6 +11925,20 @@ void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_i
     
     serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(discoveryRequestId, 1);
+
 }
 
 
@@ -8230,6 +11967,20 @@ void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
 
 }
 
@@ -8263,6 +12014,20 @@ void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn m
     
     serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(advertisementRequestId, 1);
+
 }
 
 
@@ -8291,6 +12056,20 @@ void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn ms
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(requestId, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(info, 1);
+
+    
+
+    cleanup_ptr(requestId, 1);
 
 }
 
@@ -8324,6 +12103,20 @@ void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
     
     serialize_ptr(index, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_ptr(acquireInfo, 1);
+
+    
+
+    cleanup_ptr(index, 1);
+
 }
 
 
@@ -8350,6 +12143,20 @@ void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(hapticActionInfo, 1);
+
+    
+
+    cleanup_xr(hapticFeedback);
+
 }
 
 
@@ -8371,6 +12178,16 @@ void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(attachInfo, 1);
+
 }
 
 
@@ -8392,6 +12209,16 @@ void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(frameBeginInfo, 1);
+
 }
 
 
@@ -8413,6 +12240,16 @@ void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(beginInfo, 1);
+
 }
 
 
@@ -8441,6 +12278,20 @@ void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(action, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&actionSet);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(action, 1);
 
 }
 
@@ -8471,6 +12322,20 @@ void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
     
     serialize_ptr(actionSet, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(actionSet, 1);
+
 }
 
 
@@ -8500,6 +12365,20 @@ void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 
@@ -8523,6 +12402,16 @@ void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(instance, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(instance, 1);
 
     // XrInstance created, notify callbacks
     for (auto& instance_callback : instance_callbacks) {
@@ -8557,6 +12446,20 @@ void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
     
     serialize_ptr(space, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(space, 1);
+
 }
 
 
@@ -8585,6 +12488,20 @@ void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(session, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(session, 1);
 
 }
 
@@ -8615,6 +12532,20 @@ void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
     
     serialize_ptr(swapchain, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(createInfo, 1);
+
+    
+
+    cleanup_ptr(swapchain, 1);
+
 }
 
 
@@ -8631,6 +12562,12 @@ void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&action);
+
 }
 
 
@@ -8647,6 +12584,12 @@ void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&actionSet);
+
 }
 
 
@@ -8663,6 +12606,12 @@ void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
 }
 
 
@@ -8679,6 +12628,12 @@ void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
 }
 
 
@@ -8695,6 +12650,12 @@ void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
 }
 
 
@@ -8711,6 +12672,12 @@ void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
 }
 
 
@@ -8732,6 +12699,16 @@ void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(frameEndInfo, 1);
+
 }
 
 
@@ -8748,6 +12725,12 @@ void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
 }
 
 
@@ -8779,6 +12762,21 @@ void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in
 
     
     serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&propertyCapacityInput);
+
+    
+
+    cleanup_ptr(propertyCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(properties, propertyCapacityInput);
 
 }
 
@@ -8821,6 +12819,29 @@ void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg
 
     
     serialize_ptr(sources, sourceCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(enumerateInfo, 1);
+
+    
+
+    cleanup(&sourceCapacityInput);
+
+    
+
+    cleanup_ptr(sourceCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(sources, sourceCapacityInput);
 
 }
 
@@ -8869,6 +12890,33 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg
     
     serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&viewConfigurationType);
+
+    
+
+    cleanup(&environmentBlendModeCapacityInput);
+
+    
+
+    cleanup_ptr(environmentBlendModeCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(environmentBlendModes, environmentBlendModeCapacityInput);
+
 }
 
 
@@ -8905,6 +12953,26 @@ void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLock
 
     
     serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    
+    cleanup_ptr(layerName, count_null_terminated(layerName));
+
+    
+
+    cleanup(&propertyCapacityInput);
+
+    
+
+    cleanup_ptr(propertyCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(properties, propertyCapacityInput);
 
 }
 
@@ -8943,6 +13011,25 @@ void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
     
     serialize_ptr(spaces, spaceCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&spaceCapacityInput);
+
+    
+
+    cleanup_ptr(spaceCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(spaces, spaceCapacityInput);
+
 }
 
 
@@ -8980,6 +13067,25 @@ void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) 
     
     serialize_ptr(formats, formatCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&formatCapacityInput);
+
+    
+
+    cleanup_ptr(formatCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(formats, formatCapacityInput);
+
 }
 
 
@@ -9016,6 +13122,24 @@ void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
 
     
     serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup(&imageCapacityInput);
+
+    
+
+    cleanup_ptr(imageCountOutput, 1);
+
+    
+
+    cleanup_xr_array(images, imageCapacityInput);
 
 }
 
@@ -9064,6 +13188,33 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn ms
     
     serialize_ptr(views, viewCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&viewConfigurationType);
+
+    
+
+    cleanup(&viewCapacityInput);
+
+    
+
+    cleanup_ptr(viewCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(views, viewCapacityInput);
+
 }
 
 
@@ -9106,6 +13257,29 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in
     
     serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&viewConfigurationTypeCapacityInput);
+
+    
+
+    cleanup_ptr(viewConfigurationTypeCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput);
+
 }
 
 
@@ -9134,6 +13308,20 @@ void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -9164,6 +13352,20 @@ void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
     
     serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(state, 1);
+
 }
 
 
@@ -9192,6 +13394,20 @@ void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(state, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(state, 1);
 
 }
 
@@ -9222,6 +13438,20 @@ void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
     
     serialize_ptr(state, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(state, 1);
+
 }
 
 
@@ -9250,6 +13480,20 @@ void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_i
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(interactionProfile, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&topLevelUserPath);
+
+    
+
+    cleanup_ptr(interactionProfile, 1);
 
 }
 
@@ -9293,6 +13537,29 @@ void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -9316,6 +13583,16 @@ void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(instanceProperties, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(instanceProperties, 1);
 
 }
 
@@ -9346,6 +13623,20 @@ void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in
     
     serialize_ptr(bounds, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup(&referenceSpaceType);
+
+    
+
+    cleanup_ptr(bounds, 1);
+
 }
 
 
@@ -9375,6 +13666,20 @@ void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
     
     serialize_ptr(systemId, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(getInfo, 1);
+
+    
+
+    cleanup_ptr(systemId, 1);
+
 }
 
 
@@ -9403,6 +13708,20 @@ void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(properties, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup_ptr(properties, 1);
 
 }
 
@@ -9438,6 +13757,24 @@ void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg
     
     serialize_ptr(configurationProperties, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&systemId);
+
+    
+
+    cleanup(&viewConfigurationType);
+
+    
+
+    cleanup_ptr(configurationProperties, 1);
+
 }
 
 
@@ -9472,6 +13809,24 @@ void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
     
     serialize_ptr(location, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&space);
+
+    
+
+    cleanup(&baseSpace);
+
+    
+
+    cleanup(&time);
+
+    
+
+    cleanup_ptr(location, 1);
+
 }
 
 
@@ -9500,6 +13855,20 @@ void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(spaceLocations, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(locateInfo, 1);
+
+    
+
+    cleanup_ptr(spaceLocations, 1);
 
 }
 
@@ -9551,6 +13920,33 @@ void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
     
     serialize_ptr(views, viewCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(viewLocateInfo, 1);
+
+    
+
+    cleanup_ptr(viewState, 1);
+
+    
+
+    cleanup(&viewCapacityInput);
+
+    
+
+    cleanup_ptr(viewCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(views, viewCapacityInput);
+
 }
 
 
@@ -9593,6 +13989,29 @@ void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&path);
+
+    
+
+    cleanup(&bufferCapacityInput);
+
+    
+
+    cleanup_ptr(bufferCountOutput, 1);
+
+    
+
+    
+    cleanup_ptr(buffer, bufferCapacityInput);
+
 }
 
 
@@ -9617,6 +14036,16 @@ void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
     
     serialize_ptr(eventData, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(eventData, 1);
+
 }
 
 
@@ -9638,6 +14067,16 @@ void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_ptr(releaseInfo, 1);
+
 }
 
 
@@ -9654,6 +14093,12 @@ void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
 }
 
 
@@ -9683,6 +14128,20 @@ void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, XR_MAX_RESULT_STRING_SIZE, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&value);
+
+    
+
+    cleanup_array(buffer, XR_MAX_RESULT_STRING_SIZE);
+
 }
 
 
@@ -9704,6 +14163,16 @@ void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(hapticActionInfo, 1);
+
 }
 
 
@@ -9732,6 +14201,21 @@ void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
     serialize(&_result, msg_out.buffer);
     
     serialize_ptr(path, 1, msg_out.buffer);
+
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    
+    cleanup_ptr(pathString, count_null_terminated(pathString));
+
+    
+
+    cleanup_ptr(path, 1);
 
 }
 
@@ -9762,6 +14246,20 @@ void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
     
     serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup(&value);
+
+    
+
+    cleanup_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE);
+
 }
 
 
@@ -9783,6 +14281,16 @@ void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn 
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&instance);
+
+    
+
+    cleanup_ptr(suggestedBindings, 1);
+
 }
 
 
@@ -9804,6 +14312,16 @@ void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(syncInfo, 1);
+
 }
 
 
@@ -9833,6 +14351,20 @@ void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
     
     serialize_ptr(frameState, 1, msg_out.buffer);
 
+    msg_out.flush();
+
+    
+
+    cleanup(&session);
+
+    
+
+    cleanup_ptr(frameWaitInfo, 1);
+
+    
+
+    cleanup_ptr(frameState, 1);
+
 }
 
 
@@ -9854,6 +14386,16 @@ void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    
+
+    cleanup(&swapchain);
+
+    
+
+    cleanup_ptr(waitInfo, 1);
+
 }
 
 

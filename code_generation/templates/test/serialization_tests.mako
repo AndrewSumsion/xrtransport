@@ -144,6 +144,13 @@ TEST_CASE("Serialization round-trip test", "[serialization]") {
 % for i, plan in enumerate(plans):
 ${struct_generator.compare_struct(plan, f"new_item{i}", "    ")}
 % endfor
+
+    //
+    // Cleanup deserialized structs
+    //
+% for i, plan in enumerate(plans):
+    cleanup(&new_item${i});
+% endfor
 }
 
 TEST_CASE("In-place deserialization round-trip test", "[serialization][in-place]") {
