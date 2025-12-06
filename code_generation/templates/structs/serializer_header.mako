@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("structs/serializer_header.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 <%def name="forward_serializer(struct)">
 void serialize(const ${struct.name}* s, SyncWriteStream& out);
 </%def>

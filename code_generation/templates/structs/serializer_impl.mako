@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("structs/serializer_impl.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 <%def name="serializer(struct)">
 void serialize(const ${struct.name}* s, SyncWriteStream& out) {
     % if struct.header:

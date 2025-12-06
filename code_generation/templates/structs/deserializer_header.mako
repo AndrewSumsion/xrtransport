@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("structs/deserializer_header.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 <%def name="forward_deserializer(struct)">
 void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place = false);
 </%def>

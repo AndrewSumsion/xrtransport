@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("test/serialization_tests.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #include <catch2/catch_test_macros.hpp>
 
 #include "xrtransport/serialization/serializer.h"

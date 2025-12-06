@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("client/runtime_impl.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #include "runtime.h"
 #include "transport_manager.h"
 

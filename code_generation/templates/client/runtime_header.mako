@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("client/runtime_header.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #ifndef XRTRANSPORT_CLIENT_DISPATCH_H
 #define XRTRANSPORT_CLIENT_DISPATCH_H
 

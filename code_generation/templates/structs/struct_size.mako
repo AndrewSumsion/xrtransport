@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("structs/struct_size.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #include "xrtransport/serialization/struct_size.h"
 #include "xrtransport/serialization/error.h"
 

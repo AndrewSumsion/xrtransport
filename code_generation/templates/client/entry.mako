@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("client/entry.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #include "runtime.h"
 
 #define XR_EXTENSION_PROTOTYPES

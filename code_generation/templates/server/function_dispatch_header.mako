@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("server/function_dispatch_header.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #ifndef XRTRANSPORT_FUNCTION_DISPATCH_H
 #define XRTRANSPORT_FUNCTION_DISPATCH_H
 

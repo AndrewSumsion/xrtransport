@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("server/function_loader.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #ifndef XRTRANSPORT_FUNCTION_LOADER_H
 #define XRTRANSPORT_FUNCTION_LOADER_H
 

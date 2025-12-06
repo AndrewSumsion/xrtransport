@@ -1,6 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>\
-${utils.header_comment("server/function_dispatch_impl.mako")}
-
+<%namespace name="utils" file="utils.mako"/>
 #include "function_dispatch.h"
 
 #include "xrtransport/server/function_loader.h"
