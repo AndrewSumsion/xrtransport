@@ -97,13 +97,14 @@ class XrParam:
         
         return full_type
 
-    def declaration(self, with_qualifier=True):
+    def declaration(self, with_qualifier=True, value_initialize=False):
         qualifier = self.qualifier + " " if with_qualifier and self.qualifier else ""
         type = self.type
         pointer = self.pointer if self.pointer else ""
         name = self.name
         array = f"[{self.array}]" if self.array else ""
-        return f"{qualifier}{type}{pointer} {name}{array}"
+        initializer = "{}" if value_initialize else ""
+        return f"{qualifier}{type}{pointer} {name}{array}{initializer}"
 
 struct_blacklist = {
     # ignore structs and functions associated with loader negotiation
