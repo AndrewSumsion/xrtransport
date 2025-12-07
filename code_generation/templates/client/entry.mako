@@ -34,7 +34,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         return XR_ERROR_HANDLE_INVALID;
     }
 
-    if (function_table.find(name) == function_table.end()) {
+    if (function_table.find(name_str) == function_table.end()) {
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
     

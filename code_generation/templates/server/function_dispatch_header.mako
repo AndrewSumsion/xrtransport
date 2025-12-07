@@ -32,7 +32,9 @@ private:
     static std::unordered_map<std::uint32_t, Handler> handlers;
 
 public:
-    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader);
+    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader)
+        : transport(transport), function_loader(function_loader)
+    {}
 
 <%utils:for_grouped_functions args="function">
     void handle_${function.name}(MessageLockIn msg_in);
