@@ -41,7 +41,9 @@ private:
     static std::unordered_map<std::uint32_t, Handler> handlers;
 
 public:
-    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader);
+    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader)
+        : transport(transport), function_loader(function_loader)
+    {}
 
 
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings

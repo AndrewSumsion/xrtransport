@@ -12,9 +12,10 @@ add_library(xrtransport_server STATIC
 )
 
 # Dependencies
-target_link_libraries(xrtransport_server
+target_link_libraries(xrtransport_server PUBLIC
     xrtransport_transport
     xrtransport_serialization
+    openxr_loader
 )
 
 # Include directories
@@ -22,12 +23,15 @@ target_include_directories(xrtransport_server PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/external/asio/asio/include
+    ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
 )
 
-# C++ standard
-set_target_properties(xrtransport_client PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
+# Server executable
+add_executable(xrtransport_server_main
+    main.cpp
 )
 
-target_compile_features(xrtransport_client PUBLIC cxx_std_17)
+# Dependencies (include directories inherited)
+target_link_libraries(xrtransport_server_main
+    xrtransport_server
+)

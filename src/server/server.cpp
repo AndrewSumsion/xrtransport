@@ -97,6 +97,9 @@ void Server::run() {
 
     // run worker loop synchronously
     transport_io_context.run();
+
+    // Once handler loop terminates or io_context is stopped, close the connection
+    transport.close();
 }
 
 }
