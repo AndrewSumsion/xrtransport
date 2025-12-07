@@ -1,12 +1,16 @@
 #include "transport_manager.h"
 
 #include "asio.hpp"
+#include "openxr/openxr.h"
 
 #include <stdexcept>
 #include <iostream>
 #include <thread>
+#include <cstdint>
 
 using asio::ip::tcp;
+using std::uint64_t;
+using std::uint32_t;
 
 namespace xrtransport {
 
@@ -14,6 +18,51 @@ static asio::io_context io_context;
 static std::unique_ptr<asio::executor_work_guard<asio::io_context::executor_type>> work_guard;
 static std::thread io_thread;
 static std::unique_ptr<Transport> transport;
+
+static bool do_handshake(Transport& transport) {
+    auto lock = transport.lock_stream();
+
+    // handle magic
+    uint32_t client_magic = XRTRANSPORT_MAGIC;
+    asio::write(lock.stream, asio::buffer(&client_magic, sizeof(uint32_t)));
+    uint32_t server_magic{};
+    asio::read(lock.stream, asio::buffer(&server_magic, sizeof(uint32_t)));
+    if (client_magic != server_magic) {
+        transport.close();
+        return false;
+    }
+
+    // write client's version numbers
+    uint64_t client_xr_api_version = XR_CURRENT_API_VERSION;
+    asio::write(lock.stream, asio::buffer(&client_xr_api_version, sizeof(uint64_t)));
+    uint32_t client_xrtransport_protocol_version = XRTRANSPORT_PROTOCOL_VERSION;
+    asio::write(lock.stream, asio::buffer(&client_xrtransport_protocol_version, sizeof(uint32_t)));
+
+    // read server's version numbers
+    uint64_t server_xr_api_version{};
+    asio::read(lock.stream, asio::buffer(&server_xr_api_version, sizeof(uint64_t)));
+    uint32_t server_xrtransport_protocol_version{};
+    asio::read(lock.stream, asio::buffer(&server_xrtransport_protocol_version, sizeof(uint32_t)));
+
+    // for now, only allow exact match
+    uint32_t client_ok =
+        client_xr_api_version == server_xr_api_version &&
+        client_xrtransport_protocol_version == server_xrtransport_protocol_version;
+    asio::write(lock.stream, asio::buffer(&client_ok, sizeof(uint32_t)));
+    if (!client_ok) {
+        transport.close();
+        return false;
+    }
+
+    uint32_t server_ok{};
+    asio::read(lock.stream, asio::buffer(&server_ok, sizeof(uint32_t)));
+    if (!server_ok) {
+        transport.close();
+        return false;
+    }
+
+    return true;
+}
 
 Transport& get_transport() {
     // Lazy initialization
@@ -23,6 +72,11 @@ Transport& get_transport() {
             transport = std::make_unique<Transport>(std::move(create_connection()));
         } catch (const std::exception& e) {
             throw std::runtime_error("Failed to initialize transport: " + std::string(e.what()));
+        }
+
+        // Do the initial handshake
+        if (!do_handshake(*transport)) {
+            throw std::runtime_error("Transport handshake failed");
         }
     }
 
