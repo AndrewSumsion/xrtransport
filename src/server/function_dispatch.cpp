@@ -7575,488 +7575,488 @@ void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
 
 std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handlers = {
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-    {75001, &FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR},
+    {4001, &FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-    {74001, &FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR},
+    {5001, &FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    {21001, &FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT},
+    {16001, &FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-    {23001, &FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT},
+    {17001, &FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    {13006, &FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT},
-    {13001, &FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT},
-    {13002, &FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT},
-    {13007, &FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT},
-    {13003, &FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT},
-    {13004, &FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT},
-    {13005, &FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT},
+    {20006, &FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT},
+    {20001, &FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT},
+    {20002, &FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT},
+    {20007, &FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT},
+    {20003, &FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT},
+    {20004, &FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT},
+    {20005, &FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    {88001, &FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR},
+    {24001, &FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    {89001, &FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR},
+    {25001, &FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    {91004, &FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR},
-    {91001, &FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR},
-    {91002, &FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR},
-    {91003, &FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR},
+    {26004, &FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR},
+    {26001, &FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR},
+    {26002, &FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR},
+    {26003, &FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    {71001, &FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR},
+    {28001, &FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    {72001, &FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR},
+    {29001, &FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    {87001, &FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR},
+    {30001, &FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    {90001, &FunctionDispatch::handle_xrGetVisibilityMaskKHR},
+    {32001, &FunctionDispatch::handle_xrGetVisibilityMaskKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-    {94002, &FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR},
-    {94001, &FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR},
+    {36002, &FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR},
+    {36001, &FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-    {83002, &FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR},
-    {83001, &FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR},
+    {37002, &FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR},
+    {37001, &FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    {134001, &FunctionDispatch::handle_xrCreateSpatialAnchorMSFT},
-    {134002, &FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT},
-    {134003, &FunctionDispatch::handle_xrDestroySpatialAnchorMSFT},
+    {40001, &FunctionDispatch::handle_xrCreateSpatialAnchorMSFT},
+    {40002, &FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT},
+    {40003, &FunctionDispatch::handle_xrDestroySpatialAnchorMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-    {12001, &FunctionDispatch::handle_xrSetInputDeviceActiveEXT},
-    {12003, &FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT},
-    {12004, &FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT},
-    {12005, &FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT},
-    {12002, &FunctionDispatch::handle_xrSetInputDeviceLocationEXT},
+    {48001, &FunctionDispatch::handle_xrSetInputDeviceActiveEXT},
+    {48003, &FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT},
+    {48004, &FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT},
+    {48005, &FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT},
+    {48002, &FunctionDispatch::handle_xrSetInputDeviceLocationEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    {136001, &FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT},
-    {136004, &FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT},
-    {136002, &FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT},
-    {136003, &FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT},
+    {50001, &FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT},
+    {50004, &FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT},
+    {50002, &FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT},
+    {50003, &FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    {19001, &FunctionDispatch::handle_xrCreateHandTrackerEXT},
-    {19002, &FunctionDispatch::handle_xrDestroyHandTrackerEXT},
-    {19003, &FunctionDispatch::handle_xrLocateHandJointsEXT},
+    {52001, &FunctionDispatch::handle_xrCreateHandTrackerEXT},
+    {52002, &FunctionDispatch::handle_xrDestroyHandTrackerEXT},
+    {52003, &FunctionDispatch::handle_xrLocateHandJointsEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    {127001, &FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT},
-    {127002, &FunctionDispatch::handle_xrUpdateHandMeshMSFT},
+    {53001, &FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT},
+    {53002, &FunctionDispatch::handle_xrUpdateHandMeshMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    {126001, &FunctionDispatch::handle_xrGetControllerModelKeyMSFT},
-    {126004, &FunctionDispatch::handle_xrLoadControllerModelMSFT},
-    {126002, &FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT},
-    {126003, &FunctionDispatch::handle_xrGetControllerModelStateMSFT},
+    {56001, &FunctionDispatch::handle_xrGetControllerModelKeyMSFT},
+    {56004, &FunctionDispatch::handle_xrLoadControllerModelMSFT},
+    {56002, &FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT},
+    {56003, &FunctionDispatch::handle_xrGetControllerModelStateMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-    {129001, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
-    {129002, &FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
+    {57001, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
+    {57002, &FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    {125001, &FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT},
+    {67001, &FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-    {60002, &FunctionDispatch::handle_xrUpdateSwapchainFB},
-    {60001, &FunctionDispatch::handle_xrGetSwapchainStateFB},
+    {72002, &FunctionDispatch::handle_xrUpdateSwapchainFB},
+    {72001, &FunctionDispatch::handle_xrGetSwapchainStateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    {27001, &FunctionDispatch::handle_xrCreateBodyTrackerFB},
-    {27002, &FunctionDispatch::handle_xrDestroyBodyTrackerFB},
-    {27004, &FunctionDispatch::handle_xrLocateBodyJointsFB},
-    {27003, &FunctionDispatch::handle_xrGetBodySkeletonFB},
+    {77001, &FunctionDispatch::handle_xrCreateBodyTrackerFB},
+    {77002, &FunctionDispatch::handle_xrDestroyBodyTrackerFB},
+    {77004, &FunctionDispatch::handle_xrLocateBodyJointsFB},
+    {77003, &FunctionDispatch::handle_xrGetBodySkeletonFB},
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-    {85001, &FunctionDispatch::handle_xrInitializeLoaderKHR},
+    {89001, &FunctionDispatch::handle_xrInitializeLoaderKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    {92002, &FunctionDispatch::handle_xrCreateVulkanInstanceKHR},
-    {92001, &FunctionDispatch::handle_xrCreateVulkanDeviceKHR},
-    {92003, &FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR},
+    {91002, &FunctionDispatch::handle_xrCreateVulkanInstanceKHR},
+    {91001, &FunctionDispatch::handle_xrCreateVulkanDeviceKHR},
+    {91003, &FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    {131006, &FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT},
-    {131003, &FunctionDispatch::handle_xrCreateSceneObserverMSFT},
-    {131005, &FunctionDispatch::handle_xrDestroySceneObserverMSFT},
-    {131002, &FunctionDispatch::handle_xrCreateSceneMSFT},
-    {131004, &FunctionDispatch::handle_xrDestroySceneMSFT},
-    {131001, &FunctionDispatch::handle_xrComputeNewSceneMSFT},
-    {131008, &FunctionDispatch::handle_xrGetSceneComputeStateMSFT},
-    {131007, &FunctionDispatch::handle_xrGetSceneComponentsMSFT},
-    {131010, &FunctionDispatch::handle_xrLocateSceneComponentsMSFT},
-    {131009, &FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT},
+    {98006, &FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT},
+    {98003, &FunctionDispatch::handle_xrCreateSceneObserverMSFT},
+    {98005, &FunctionDispatch::handle_xrDestroySceneObserverMSFT},
+    {98002, &FunctionDispatch::handle_xrCreateSceneMSFT},
+    {98004, &FunctionDispatch::handle_xrDestroySceneMSFT},
+    {98001, &FunctionDispatch::handle_xrComputeNewSceneMSFT},
+    {98008, &FunctionDispatch::handle_xrGetSceneComputeStateMSFT},
+    {98007, &FunctionDispatch::handle_xrGetSceneComponentsMSFT},
+    {98010, &FunctionDispatch::handle_xrLocateSceneComponentsMSFT},
+    {98009, &FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    {132001, &FunctionDispatch::handle_xrDeserializeSceneMSFT},
-    {132002, &FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT},
+    {99001, &FunctionDispatch::handle_xrDeserializeSceneMSFT},
+    {99002, &FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    {34001, &FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB},
-    {34002, &FunctionDispatch::handle_xrGetDisplayRefreshRateFB},
-    {34003, &FunctionDispatch::handle_xrRequestDisplayRefreshRateFB},
+    {102001, &FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB},
+    {102002, &FunctionDispatch::handle_xrGetDisplayRefreshRateFB},
+    {102003, &FunctionDispatch::handle_xrRequestDisplayRefreshRateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    {65001, &FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX},
+    {104001, &FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX},
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    {68001, &FunctionDispatch::handle_xrCreateFacialTrackerHTC},
-    {68002, &FunctionDispatch::handle_xrDestroyFacialTrackerHTC},
-    {68003, &FunctionDispatch::handle_xrGetFacialExpressionsHTC},
+    {105001, &FunctionDispatch::handle_xrCreateFacialTrackerHTC},
+    {105002, &FunctionDispatch::handle_xrDestroyFacialTrackerHTC},
+    {105003, &FunctionDispatch::handle_xrGetFacialExpressionsHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-    {28001, &FunctionDispatch::handle_xrEnumerateColorSpacesFB},
-    {28002, &FunctionDispatch::handle_xrSetColorSpaceFB},
+    {109001, &FunctionDispatch::handle_xrEnumerateColorSpacesFB},
+    {109002, &FunctionDispatch::handle_xrSetColorSpaceFB},
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    {43001, &FunctionDispatch::handle_xrGetHandMeshFB},
+    {111001, &FunctionDispatch::handle_xrGetHandMeshFB},
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    {53001, &FunctionDispatch::handle_xrCreateSpatialAnchorFB},
-    {53004, &FunctionDispatch::handle_xrGetSpaceUuidFB},
-    {53002, &FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB},
-    {53005, &FunctionDispatch::handle_xrSetSpaceComponentStatusFB},
-    {53003, &FunctionDispatch::handle_xrGetSpaceComponentStatusFB},
+    {114001, &FunctionDispatch::handle_xrCreateSpatialAnchorFB},
+    {114004, &FunctionDispatch::handle_xrGetSpaceUuidFB},
+    {114002, &FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB},
+    {114005, &FunctionDispatch::handle_xrSetSpaceComponentStatusFB},
+    {114003, &FunctionDispatch::handle_xrGetSpaceComponentStatusFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    {38001, &FunctionDispatch::handle_xrCreateFoveationProfileFB},
-    {38002, &FunctionDispatch::handle_xrDestroyFoveationProfileFB},
+    {115001, &FunctionDispatch::handle_xrCreateFoveationProfileFB},
+    {115002, &FunctionDispatch::handle_xrDestroyFoveationProfileFB},
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-    {46002, &FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB},
-    {46001, &FunctionDispatch::handle_xrCreateKeyboardSpaceFB},
+    {117002, &FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB},
+    {117001, &FunctionDispatch::handle_xrCreateKeyboardSpaceFB},
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    {64001, &FunctionDispatch::handle_xrCreateTriangleMeshFB},
-    {64002, &FunctionDispatch::handle_xrDestroyTriangleMeshFB},
-    {64008, &FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB},
-    {64007, &FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB},
-    {64003, &FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB},
-    {64005, &FunctionDispatch::handle_xrTriangleMeshEndUpdateFB},
-    {64004, &FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB},
-    {64006, &FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB},
+    {118001, &FunctionDispatch::handle_xrCreateTriangleMeshFB},
+    {118002, &FunctionDispatch::handle_xrDestroyTriangleMeshFB},
+    {118008, &FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB},
+    {118007, &FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB},
+    {118003, &FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB},
+    {118005, &FunctionDispatch::handle_xrTriangleMeshEndUpdateFB},
+    {118004, &FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB},
+    {118006, &FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    {47002, &FunctionDispatch::handle_xrCreatePassthroughFB},
-    {47005, &FunctionDispatch::handle_xrDestroyPassthroughFB},
-    {47012, &FunctionDispatch::handle_xrPassthroughStartFB},
-    {47011, &FunctionDispatch::handle_xrPassthroughPauseFB},
-    {47003, &FunctionDispatch::handle_xrCreatePassthroughLayerFB},
-    {47006, &FunctionDispatch::handle_xrDestroyPassthroughLayerFB},
-    {47008, &FunctionDispatch::handle_xrPassthroughLayerPauseFB},
-    {47009, &FunctionDispatch::handle_xrPassthroughLayerResumeFB},
-    {47010, &FunctionDispatch::handle_xrPassthroughLayerSetStyleFB},
-    {47001, &FunctionDispatch::handle_xrCreateGeometryInstanceFB},
-    {47004, &FunctionDispatch::handle_xrDestroyGeometryInstanceFB},
-    {47007, &FunctionDispatch::handle_xrGeometryInstanceSetTransformFB},
+    {119002, &FunctionDispatch::handle_xrCreatePassthroughFB},
+    {119005, &FunctionDispatch::handle_xrDestroyPassthroughFB},
+    {119012, &FunctionDispatch::handle_xrPassthroughStartFB},
+    {119011, &FunctionDispatch::handle_xrPassthroughPauseFB},
+    {119003, &FunctionDispatch::handle_xrCreatePassthroughLayerFB},
+    {119006, &FunctionDispatch::handle_xrDestroyPassthroughLayerFB},
+    {119008, &FunctionDispatch::handle_xrPassthroughLayerPauseFB},
+    {119009, &FunctionDispatch::handle_xrPassthroughLayerResumeFB},
+    {119010, &FunctionDispatch::handle_xrPassthroughLayerSetStyleFB},
+    {119001, &FunctionDispatch::handle_xrCreateGeometryInstanceFB},
+    {119004, &FunctionDispatch::handle_xrDestroyGeometryInstanceFB},
+    {119007, &FunctionDispatch::handle_xrGeometryInstanceSetTransformFB},
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-    {49001, &FunctionDispatch::handle_xrEnumerateRenderModelPathsFB},
-    {49002, &FunctionDispatch::handle_xrGetRenderModelPropertiesFB},
-    {49003, &FunctionDispatch::handle_xrLoadRenderModelFB},
+    {120001, &FunctionDispatch::handle_xrEnumerateRenderModelPathsFB},
+    {120002, &FunctionDispatch::handle_xrGetRenderModelPropertiesFB},
+    {120003, &FunctionDispatch::handle_xrLoadRenderModelFB},
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-    {142001, &FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO},
+    {124001, &FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    {144005, &FunctionDispatch::handle_xrSetMarkerTrackingVARJO},
-    {144004, &FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO},
-    {144003, &FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO},
-    {144002, &FunctionDispatch::handle_xrGetMarkerSizeVARJO},
-    {144001, &FunctionDispatch::handle_xrCreateMarkerSpaceVARJO},
+    {125005, &FunctionDispatch::handle_xrSetMarkerTrackingVARJO},
+    {125004, &FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO},
+    {125003, &FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO},
+    {125002, &FunctionDispatch::handle_xrGetMarkerSizeVARJO},
+    {125001, &FunctionDispatch::handle_xrCreateMarkerSpaceVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-    {145001, &FunctionDispatch::handle_xrSetViewOffsetVARJO},
+    {126001, &FunctionDispatch::handle_xrSetViewOffsetVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-    {112001, &FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML},
+    {138001, &FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML},
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    {117001, &FunctionDispatch::handle_xrCreateMarkerDetectorML},
-    {117003, &FunctionDispatch::handle_xrDestroyMarkerDetectorML},
-    {117010, &FunctionDispatch::handle_xrSnapshotMarkerDetectorML},
-    {117004, &FunctionDispatch::handle_xrGetMarkerDetectorStateML},
-    {117009, &FunctionDispatch::handle_xrGetMarkersML},
-    {117007, &FunctionDispatch::handle_xrGetMarkerReprojectionErrorML},
-    {117005, &FunctionDispatch::handle_xrGetMarkerLengthML},
-    {117006, &FunctionDispatch::handle_xrGetMarkerNumberML},
-    {117008, &FunctionDispatch::handle_xrGetMarkerStringML},
-    {117002, &FunctionDispatch::handle_xrCreateMarkerSpaceML},
+    {139001, &FunctionDispatch::handle_xrCreateMarkerDetectorML},
+    {139003, &FunctionDispatch::handle_xrDestroyMarkerDetectorML},
+    {139010, &FunctionDispatch::handle_xrSnapshotMarkerDetectorML},
+    {139004, &FunctionDispatch::handle_xrGetMarkerDetectorStateML},
+    {139009, &FunctionDispatch::handle_xrGetMarkersML},
+    {139007, &FunctionDispatch::handle_xrGetMarkerReprojectionErrorML},
+    {139005, &FunctionDispatch::handle_xrGetMarkerLengthML},
+    {139006, &FunctionDispatch::handle_xrGetMarkerNumberML},
+    {139008, &FunctionDispatch::handle_xrGetMarkerStringML},
+    {139002, &FunctionDispatch::handle_xrCreateMarkerSpaceML},
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    {116003, &FunctionDispatch::handle_xrEnableLocalizationEventsML},
-    {116006, &FunctionDispatch::handle_xrQueryLocalizationMapsML},
-    {116007, &FunctionDispatch::handle_xrRequestMapLocalizationML},
-    {116005, &FunctionDispatch::handle_xrImportLocalizationMapML},
-    {116001, &FunctionDispatch::handle_xrCreateExportedLocalizationMapML},
-    {116002, &FunctionDispatch::handle_xrDestroyExportedLocalizationMapML},
-    {116004, &FunctionDispatch::handle_xrGetExportedLocalizationMapDataML},
+    {140003, &FunctionDispatch::handle_xrEnableLocalizationEventsML},
+    {140006, &FunctionDispatch::handle_xrQueryLocalizationMapsML},
+    {140007, &FunctionDispatch::handle_xrRequestMapLocalizationML},
+    {140005, &FunctionDispatch::handle_xrImportLocalizationMapML},
+    {140001, &FunctionDispatch::handle_xrCreateExportedLocalizationMapML},
+    {140002, &FunctionDispatch::handle_xrDestroyExportedLocalizationMapML},
+    {140004, &FunctionDispatch::handle_xrGetExportedLocalizationMapDataML},
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    {118001, &FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML},
-    {118002, &FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML},
-    {118003, &FunctionDispatch::handle_xrGetSpatialAnchorStateML},
+    {141001, &FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML},
+    {141002, &FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML},
+    {141003, &FunctionDispatch::handle_xrGetSpatialAnchorStateML},
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    {119001, &FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML},
-    {119004, &FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML},
-    {119007, &FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML},
-    {119008, &FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML},
-    {119005, &FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML},
-    {119006, &FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML},
-    {119002, &FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML},
-    {119003, &FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML},
-    {119009, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML},
-    {119010, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML},
+    {142001, &FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML},
+    {142004, &FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML},
+    {142007, &FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML},
+    {142008, &FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML},
+    {142005, &FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML},
+    {142006, &FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML},
+    {142002, &FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML},
+    {142003, &FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML},
+    {142009, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML},
+    {142010, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML},
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    {121001, &FunctionDispatch::handle_xrEnableUserCalibrationEventsML},
+    {473001, &FunctionDispatch::handle_xrEnableUserCalibrationEventsML},
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    {135003, &FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT},
-    {135004, &FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT},
-    {135006, &FunctionDispatch::handle_xrPersistSpatialAnchorMSFT},
-    {135005, &FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT},
-    {135002, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT},
-    {135007, &FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT},
-    {135001, &FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT},
+    {143003, &FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT},
+    {143004, &FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT},
+    {143006, &FunctionDispatch::handle_xrPersistSpatialAnchorMSFT},
+    {143005, &FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT},
+    {143002, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT},
+    {143007, &FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT},
+    {143001, &FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    {130002, &FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT},
-    {130001, &FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT},
+    {148002, &FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT},
+    {148001, &FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-    {84001, &FunctionDispatch::handle_xrStructureTypeToString2KHR},
+    {149001, &FunctionDispatch::handle_xrStructureTypeToString2KHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-    {55001, &FunctionDispatch::handle_xrQuerySpacesFB},
-    {55002, &FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB},
+    {157001, &FunctionDispatch::handle_xrQuerySpacesFB},
+    {157002, &FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    {57002, &FunctionDispatch::handle_xrSaveSpaceFB},
-    {57001, &FunctionDispatch::handle_xrEraseSpaceFB},
+    {159002, &FunctionDispatch::handle_xrSaveSpaceFB},
+    {159001, &FunctionDispatch::handle_xrEraseSpaceFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-    {137002, &FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus},
-    {137001, &FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus},
+    {160002, &FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus},
+    {160001, &FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus},
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    {56001, &FunctionDispatch::handle_xrShareSpacesFB},
+    {170001, &FunctionDispatch::handle_xrShareSpacesFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-    {50002, &FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB},
-    {50003, &FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB},
-    {50005, &FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB},
-    {50001, &FunctionDispatch::handle_xrGetSpaceBoundary2DFB},
-    {50004, &FunctionDispatch::handle_xrGetSpaceRoomLayoutFB},
+    {176002, &FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB},
+    {176003, &FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB},
+    {176005, &FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB},
+    {176001, &FunctionDispatch::handle_xrGetSpaceBoundary2DFB},
+    {176004, &FunctionDispatch::handle_xrGetSpaceRoomLayoutFB},
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-    {1001, &FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE},
+    {197001, &FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE},
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    {51001, &FunctionDispatch::handle_xrRequestSceneCaptureFB},
+    {199001, &FunctionDispatch::handle_xrRequestSceneCaptureFB},
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    {54001, &FunctionDispatch::handle_xrGetSpaceContainerFB},
+    {200001, &FunctionDispatch::handle_xrGetSpaceContainerFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    {98001, &FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA},
+    {201001, &FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA},
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    {36001, &FunctionDispatch::handle_xrCreateFaceTrackerFB},
-    {36002, &FunctionDispatch::handle_xrDestroyFaceTrackerFB},
-    {36003, &FunctionDispatch::handle_xrGetFaceExpressionWeightsFB},
+    {202001, &FunctionDispatch::handle_xrCreateFaceTrackerFB},
+    {202002, &FunctionDispatch::handle_xrDestroyFaceTrackerFB},
+    {202003, &FunctionDispatch::handle_xrGetFaceExpressionWeightsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    {35001, &FunctionDispatch::handle_xrCreateEyeTrackerFB},
-    {35002, &FunctionDispatch::handle_xrDestroyEyeTrackerFB},
-    {35003, &FunctionDispatch::handle_xrGetEyeGazesFB},
+    {203001, &FunctionDispatch::handle_xrCreateEyeTrackerFB},
+    {203002, &FunctionDispatch::handle_xrDestroyEyeTrackerFB},
+    {203003, &FunctionDispatch::handle_xrGetEyeGazesFB},
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    {48001, &FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB},
+    {204001, &FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB},
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    {45001, &FunctionDispatch::handle_xrGetDeviceSampleRateFB},
+    {210001, &FunctionDispatch::handle_xrGetDeviceSampleRateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    {103001, &FunctionDispatch::handle_xrGetPassthroughPreferencesMETA},
+    {218001, &FunctionDispatch::handle_xrGetPassthroughPreferencesMETA},
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    {110002, &FunctionDispatch::handle_xrCreateVirtualKeyboardMETA},
-    {110004, &FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA},
-    {110003, &FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA},
-    {110011, &FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA},
-    {110007, &FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA},
-    {110010, &FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA},
-    {110006, &FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA},
-    {110005, &FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA},
-    {110008, &FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA},
-    {110009, &FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA},
-    {110001, &FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA},
+    {220002, &FunctionDispatch::handle_xrCreateVirtualKeyboardMETA},
+    {220004, &FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA},
+    {220003, &FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA},
+    {220011, &FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA},
+    {220007, &FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA},
+    {220010, &FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA},
+    {220006, &FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA},
+    {220005, &FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA},
+    {220008, &FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA},
+    {220009, &FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA},
+    {220001, &FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA},
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    {138001, &FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS},
+    {227001, &FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS},
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    {104001, &FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA},
-    {104004, &FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA},
-    {104002, &FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA},
-    {104003, &FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA},
+    {233001, &FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA},
+    {233004, &FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA},
+    {233002, &FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA},
+    {233003, &FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA},
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    {58001, &FunctionDispatch::handle_xrSaveSpaceListFB},
+    {239001, &FunctionDispatch::handle_xrSaveSpaceListFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    {59001, &FunctionDispatch::handle_xrCreateSpaceUserFB},
-    {59003, &FunctionDispatch::handle_xrGetSpaceUserIdFB},
-    {59002, &FunctionDispatch::handle_xrDestroySpaceUserFB},
+    {242001, &FunctionDispatch::handle_xrCreateSpaceUserFB},
+    {242003, &FunctionDispatch::handle_xrGetSpaceUserIdFB},
+    {242002, &FunctionDispatch::handle_xrDestroySpaceUserFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    {105001, &FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA},
+    {255001, &FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA},
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    {101001, &FunctionDispatch::handle_xrCreatePassthroughColorLutMETA},
-    {101002, &FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA},
-    {101003, &FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA},
+    {267001, &FunctionDispatch::handle_xrCreatePassthroughColorLutMETA},
+    {267002, &FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA},
+    {267003, &FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA},
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    {108001, &FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA},
+    {270001, &FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA},
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    {37001, &FunctionDispatch::handle_xrCreateFaceTracker2FB},
-    {37002, &FunctionDispatch::handle_xrDestroyFaceTracker2FB},
-    {37003, &FunctionDispatch::handle_xrGetFaceExpressionWeights2FB},
+    {288001, &FunctionDispatch::handle_xrCreateFaceTracker2FB},
+    {288002, &FunctionDispatch::handle_xrDestroyFaceTracker2FB},
+    {288003, &FunctionDispatch::handle_xrGetFaceExpressionWeights2FB},
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    {109001, &FunctionDispatch::handle_xrShareSpacesMETA},
+    {291001, &FunctionDispatch::handle_xrShareSpacesMETA},
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    {97002, &FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA},
-    {97004, &FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA},
-    {97009, &FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA},
-    {97010, &FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA},
-    {97003, &FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA},
-    {97005, &FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA},
-    {97006, &FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA},
-    {97007, &FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA},
-    {97001, &FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA},
-    {97008, &FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA},
+    {292002, &FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA},
+    {292004, &FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA},
+    {292009, &FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA},
+    {292010, &FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA},
+    {292003, &FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA},
+    {292005, &FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA},
+    {292006, &FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA},
+    {292007, &FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA},
+    {292001, &FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA},
+    {292008, &FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA},
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-    {139001, &FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM},
+    {307001, &FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM},
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    {70001, &FunctionDispatch::handle_xrCreatePassthroughHTC},
-    {70002, &FunctionDispatch::handle_xrDestroyPassthroughHTC},
+    {318001, &FunctionDispatch::handle_xrCreatePassthroughHTC},
+    {318002, &FunctionDispatch::handle_xrDestroyPassthroughHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    {69001, &FunctionDispatch::handle_xrApplyFoveationHTC},
+    {319001, &FunctionDispatch::handle_xrApplyFoveationHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    {66001, &FunctionDispatch::handle_xrCreateSpatialAnchorHTC},
-    {66002, &FunctionDispatch::handle_xrGetSpatialAnchorNameHTC},
+    {320001, &FunctionDispatch::handle_xrCreateSpatialAnchorHTC},
+    {320002, &FunctionDispatch::handle_xrGetSpatialAnchorNameHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    {67001, &FunctionDispatch::handle_xrCreateBodyTrackerHTC},
-    {67002, &FunctionDispatch::handle_xrDestroyBodyTrackerHTC},
-    {67004, &FunctionDispatch::handle_xrLocateBodyJointsHTC},
-    {67003, &FunctionDispatch::handle_xrGetBodySkeletonHTC},
+    {321001, &FunctionDispatch::handle_xrCreateBodyTrackerHTC},
+    {321002, &FunctionDispatch::handle_xrDestroyBodyTrackerHTC},
+    {321004, &FunctionDispatch::handle_xrLocateBodyJointsHTC},
+    {321003, &FunctionDispatch::handle_xrGetBodySkeletonHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    {124001, &FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX},
+    {376001, &FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX},
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-    {2001, &FunctionDispatch::handle_xrCreateBodyTrackerBD},
-    {2002, &FunctionDispatch::handle_xrDestroyBodyTrackerBD},
-    {2003, &FunctionDispatch::handle_xrLocateBodyJointsBD},
+    {386001, &FunctionDispatch::handle_xrCreateBodyTrackerBD},
+    {386002, &FunctionDispatch::handle_xrDestroyBodyTrackerBD},
+    {386003, &FunctionDispatch::handle_xrLocateBodyJointsBD},
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    {8007, &FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD},
-    {8012, &FunctionDispatch::handle_xrGetSpatialEntityUuidBD},
-    {8011, &FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD},
-    {8002, &FunctionDispatch::handle_xrCreateSenseDataProviderBD},
-    {8015, &FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD},
-    {8016, &FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD},
-    {8010, &FunctionDispatch::handle_xrGetSenseDataProviderStateBD},
-    {8013, &FunctionDispatch::handle_xrQuerySenseDataAsyncBD},
-    {8014, &FunctionDispatch::handle_xrQuerySenseDataCompleteBD},
-    {8006, &FunctionDispatch::handle_xrDestroySenseDataSnapshotBD},
-    {8009, &FunctionDispatch::handle_xrGetQueriedSenseDataBD},
-    {8017, &FunctionDispatch::handle_xrStopSenseDataProviderBD},
-    {8005, &FunctionDispatch::handle_xrDestroySenseDataProviderBD},
-    {8003, &FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD},
-    {8004, &FunctionDispatch::handle_xrDestroyAnchorBD},
-    {8008, &FunctionDispatch::handle_xrGetAnchorUuidBD},
-    {8001, &FunctionDispatch::handle_xrCreateAnchorSpaceBD},
+    {390007, &FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD},
+    {390012, &FunctionDispatch::handle_xrGetSpatialEntityUuidBD},
+    {390011, &FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD},
+    {390002, &FunctionDispatch::handle_xrCreateSenseDataProviderBD},
+    {390015, &FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD},
+    {390016, &FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD},
+    {390010, &FunctionDispatch::handle_xrGetSenseDataProviderStateBD},
+    {390013, &FunctionDispatch::handle_xrQuerySenseDataAsyncBD},
+    {390014, &FunctionDispatch::handle_xrQuerySenseDataCompleteBD},
+    {390006, &FunctionDispatch::handle_xrDestroySenseDataSnapshotBD},
+    {390009, &FunctionDispatch::handle_xrGetQueriedSenseDataBD},
+    {390017, &FunctionDispatch::handle_xrStopSenseDataProviderBD},
+    {390005, &FunctionDispatch::handle_xrDestroySenseDataProviderBD},
+    {390003, &FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD},
+    {390004, &FunctionDispatch::handle_xrDestroyAnchorBD},
+    {390008, &FunctionDispatch::handle_xrGetAnchorUuidBD},
+    {390001, &FunctionDispatch::handle_xrCreateAnchorSpaceBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-    {4001, &FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD},
-    {4002, &FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD},
-    {4003, &FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD},
-    {4004, &FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD},
-    {4005, &FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD},
-    {4006, &FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD},
+    {391001, &FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD},
+    {391002, &FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD},
+    {391003, &FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD},
+    {391004, &FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD},
+    {391005, &FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD},
+    {391006, &FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    {5003, &FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD},
-    {5004, &FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD},
-    {5001, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD},
-    {5002, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD},
+    {392003, &FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD},
+    {392004, &FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD},
+    {392001, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD},
+    {392002, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-    {7001, &FunctionDispatch::handle_xrCaptureSceneAsyncBD},
-    {7002, &FunctionDispatch::handle_xrCaptureSceneCompleteBD},
+    {393001, &FunctionDispatch::handle_xrCaptureSceneAsyncBD},
+    {393002, &FunctionDispatch::handle_xrCaptureSceneCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-    {22002, &FunctionDispatch::handle_xrCreatePlaneDetectorEXT},
-    {22003, &FunctionDispatch::handle_xrDestroyPlaneDetectorEXT},
-    {22001, &FunctionDispatch::handle_xrBeginPlaneDetectionEXT},
-    {22004, &FunctionDispatch::handle_xrGetPlaneDetectionStateEXT},
-    {22005, &FunctionDispatch::handle_xrGetPlaneDetectionsEXT},
-    {22006, &FunctionDispatch::handle_xrGetPlanePolygonBufferEXT},
+    {430002, &FunctionDispatch::handle_xrCreatePlaneDetectorEXT},
+    {430003, &FunctionDispatch::handle_xrDestroyPlaneDetectorEXT},
+    {430001, &FunctionDispatch::handle_xrBeginPlaneDetectionEXT},
+    {430004, &FunctionDispatch::handle_xrGetPlaneDetectionStateEXT},
+    {430005, &FunctionDispatch::handle_xrGetPlaneDetectionsEXT},
+    {430006, &FunctionDispatch::handle_xrGetPlanePolygonBufferEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-    {17002, &FunctionDispatch::handle_xrPollFutureEXT},
-    {17001, &FunctionDispatch::handle_xrCancelFutureEXT},
+    {470002, &FunctionDispatch::handle_xrPollFutureEXT},
+    {470001, &FunctionDispatch::handle_xrCancelFutureEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-    {120001, &FunctionDispatch::handle_xrSetSystemNotificationsML},
+    {474001, &FunctionDispatch::handle_xrSetSystemNotificationsML},
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    {122002, &FunctionDispatch::handle_xrCreateWorldMeshDetectorML},
-    {122003, &FunctionDispatch::handle_xrDestroyWorldMeshDetectorML},
-    {122008, &FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML},
-    {122009, &FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML},
-    {122005, &FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML},
-    {122001, &FunctionDispatch::handle_xrAllocateWorldMeshBufferML},
-    {122004, &FunctionDispatch::handle_xrFreeWorldMeshBufferML},
-    {122006, &FunctionDispatch::handle_xrRequestWorldMeshAsyncML},
-    {122007, &FunctionDispatch::handle_xrRequestWorldMeshCompleteML},
+    {475002, &FunctionDispatch::handle_xrCreateWorldMeshDetectorML},
+    {475003, &FunctionDispatch::handle_xrDestroyWorldMeshDetectorML},
+    {475008, &FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML},
+    {475009, &FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML},
+    {475005, &FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML},
+    {475001, &FunctionDispatch::handle_xrAllocateWorldMeshBufferML},
+    {475004, &FunctionDispatch::handle_xrFreeWorldMeshBufferML},
+    {475006, &FunctionDispatch::handle_xrRequestWorldMeshAsyncML},
+    {475007, &FunctionDispatch::handle_xrRequestWorldMeshCompleteML},
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-    {113001, &FunctionDispatch::handle_xrCreateFacialExpressionClientML},
-    {113002, &FunctionDispatch::handle_xrDestroyFacialExpressionClientML},
-    {113003, &FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML},
+    {483001, &FunctionDispatch::handle_xrCreateFacialExpressionClientML},
+    {483002, &FunctionDispatch::handle_xrDestroyFacialExpressionClientML},
+    {483003, &FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML},
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    {106002, &FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA},
-    {106001, &FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA},
+    {533002, &FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA},
+    {533001, &FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA},
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    {96002, &FunctionDispatch::handle_xrStartColocationDiscoveryMETA},
-    {96004, &FunctionDispatch::handle_xrStopColocationDiscoveryMETA},
-    {96001, &FunctionDispatch::handle_xrStartColocationAdvertisementMETA},
-    {96003, &FunctionDispatch::handle_xrStopColocationAdvertisementMETA},
+    {572002, &FunctionDispatch::handle_xrStartColocationDiscoveryMETA},
+    {572004, &FunctionDispatch::handle_xrStopColocationDiscoveryMETA},
+    {572001, &FunctionDispatch::handle_xrStartColocationAdvertisementMETA},
+    {572003, &FunctionDispatch::handle_xrStopColocationAdvertisementMETA},
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
     {1, &FunctionDispatch::handle_xrAcquireSwapchainImage},
     {2, &FunctionDispatch::handle_xrApplyHapticFeedback},
@@ -8066,53 +8066,53 @@ std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handle
     {6, &FunctionDispatch::handle_xrCreateAction},
     {7, &FunctionDispatch::handle_xrCreateActionSet},
     {8, &FunctionDispatch::handle_xrCreateActionSpace},
-    {10, &FunctionDispatch::handle_xrCreateInstance},
-    {11, &FunctionDispatch::handle_xrCreateReferenceSpace},
-    {12, &FunctionDispatch::handle_xrCreateSession},
-    {13, &FunctionDispatch::handle_xrCreateSwapchain},
-    {14, &FunctionDispatch::handle_xrDestroyAction},
-    {15, &FunctionDispatch::handle_xrDestroyActionSet},
-    {16, &FunctionDispatch::handle_xrDestroyInstance},
-    {17, &FunctionDispatch::handle_xrDestroySession},
-    {18, &FunctionDispatch::handle_xrDestroySpace},
-    {19, &FunctionDispatch::handle_xrDestroySwapchain},
-    {20, &FunctionDispatch::handle_xrEndFrame},
-    {21, &FunctionDispatch::handle_xrEndSession},
-    {22, &FunctionDispatch::handle_xrEnumerateApiLayerProperties},
-    {23, &FunctionDispatch::handle_xrEnumerateBoundSourcesForAction},
-    {24, &FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes},
-    {25, &FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties},
-    {26, &FunctionDispatch::handle_xrEnumerateReferenceSpaces},
-    {27, &FunctionDispatch::handle_xrEnumerateSwapchainFormats},
-    {28, &FunctionDispatch::handle_xrEnumerateSwapchainImages},
-    {29, &FunctionDispatch::handle_xrEnumerateViewConfigurationViews},
-    {30, &FunctionDispatch::handle_xrEnumerateViewConfigurations},
-    {31, &FunctionDispatch::handle_xrGetActionStateBoolean},
-    {32, &FunctionDispatch::handle_xrGetActionStateFloat},
-    {33, &FunctionDispatch::handle_xrGetActionStatePose},
-    {34, &FunctionDispatch::handle_xrGetActionStateVector2f},
-    {35, &FunctionDispatch::handle_xrGetCurrentInteractionProfile},
-    {36, &FunctionDispatch::handle_xrGetInputSourceLocalizedName},
-    {38, &FunctionDispatch::handle_xrGetInstanceProperties},
-    {39, &FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect},
-    {40, &FunctionDispatch::handle_xrGetSystem},
-    {41, &FunctionDispatch::handle_xrGetSystemProperties},
-    {42, &FunctionDispatch::handle_xrGetViewConfigurationProperties},
-    {43, &FunctionDispatch::handle_xrLocateSpace},
-    {44, &FunctionDispatch::handle_xrLocateSpaces},
-    {45, &FunctionDispatch::handle_xrLocateViews},
-    {48, &FunctionDispatch::handle_xrPathToString},
-    {49, &FunctionDispatch::handle_xrPollEvent},
-    {50, &FunctionDispatch::handle_xrReleaseSwapchainImage},
-    {51, &FunctionDispatch::handle_xrRequestExitSession},
-    {52, &FunctionDispatch::handle_xrResultToString},
-    {53, &FunctionDispatch::handle_xrStopHapticFeedback},
-    {54, &FunctionDispatch::handle_xrStringToPath},
-    {55, &FunctionDispatch::handle_xrStructureTypeToString},
-    {56, &FunctionDispatch::handle_xrSuggestInteractionProfileBindings},
-    {57, &FunctionDispatch::handle_xrSyncActions},
-    {58, &FunctionDispatch::handle_xrWaitFrame},
-    {59, &FunctionDispatch::handle_xrWaitSwapchainImage},
+    {9, &FunctionDispatch::handle_xrCreateInstance},
+    {10, &FunctionDispatch::handle_xrCreateReferenceSpace},
+    {11, &FunctionDispatch::handle_xrCreateSession},
+    {12, &FunctionDispatch::handle_xrCreateSwapchain},
+    {13, &FunctionDispatch::handle_xrDestroyAction},
+    {14, &FunctionDispatch::handle_xrDestroyActionSet},
+    {15, &FunctionDispatch::handle_xrDestroyInstance},
+    {16, &FunctionDispatch::handle_xrDestroySession},
+    {17, &FunctionDispatch::handle_xrDestroySpace},
+    {18, &FunctionDispatch::handle_xrDestroySwapchain},
+    {19, &FunctionDispatch::handle_xrEndFrame},
+    {20, &FunctionDispatch::handle_xrEndSession},
+    {21, &FunctionDispatch::handle_xrEnumerateApiLayerProperties},
+    {22, &FunctionDispatch::handle_xrEnumerateBoundSourcesForAction},
+    {23, &FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes},
+    {24, &FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties},
+    {25, &FunctionDispatch::handle_xrEnumerateReferenceSpaces},
+    {26, &FunctionDispatch::handle_xrEnumerateSwapchainFormats},
+    {27, &FunctionDispatch::handle_xrEnumerateSwapchainImages},
+    {28, &FunctionDispatch::handle_xrEnumerateViewConfigurationViews},
+    {29, &FunctionDispatch::handle_xrEnumerateViewConfigurations},
+    {30, &FunctionDispatch::handle_xrGetActionStateBoolean},
+    {31, &FunctionDispatch::handle_xrGetActionStateFloat},
+    {32, &FunctionDispatch::handle_xrGetActionStatePose},
+    {33, &FunctionDispatch::handle_xrGetActionStateVector2f},
+    {34, &FunctionDispatch::handle_xrGetCurrentInteractionProfile},
+    {35, &FunctionDispatch::handle_xrGetInputSourceLocalizedName},
+    {36, &FunctionDispatch::handle_xrGetInstanceProperties},
+    {37, &FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect},
+    {38, &FunctionDispatch::handle_xrGetSystem},
+    {39, &FunctionDispatch::handle_xrGetSystemProperties},
+    {40, &FunctionDispatch::handle_xrGetViewConfigurationProperties},
+    {41, &FunctionDispatch::handle_xrLocateSpace},
+    {42, &FunctionDispatch::handle_xrLocateSpaces},
+    {43, &FunctionDispatch::handle_xrLocateViews},
+    {44, &FunctionDispatch::handle_xrPathToString},
+    {45, &FunctionDispatch::handle_xrPollEvent},
+    {46, &FunctionDispatch::handle_xrReleaseSwapchainImage},
+    {47, &FunctionDispatch::handle_xrRequestExitSession},
+    {48, &FunctionDispatch::handle_xrResultToString},
+    {49, &FunctionDispatch::handle_xrStopHapticFeedback},
+    {50, &FunctionDispatch::handle_xrStringToPath},
+    {51, &FunctionDispatch::handle_xrStructureTypeToString},
+    {52, &FunctionDispatch::handle_xrSuggestInteractionProfileBindings},
+    {53, &FunctionDispatch::handle_xrSyncActions},
+    {54, &FunctionDispatch::handle_xrWaitFrame},
+    {55, &FunctionDispatch::handle_xrWaitSwapchainImage},
 
 };
 

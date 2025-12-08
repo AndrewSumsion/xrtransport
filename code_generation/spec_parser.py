@@ -38,7 +38,8 @@ class XrSpec:
         return grouped_structs
 
 class XrExtension:
-    def __init__(self, structs=None, functions=None):
+    def __init__(self, number, structs=None, functions=None):
+        self.number = number
         if structs == None:
             structs = []
         if functions == None:
@@ -323,7 +324,7 @@ def collect_extensions(xml_root, structs, functions):
     extensions = {}
     for extension_tag in extension_tags:
         extension_name = extension_tag.attrib["name"]
-        extension = XrExtension()
+        extension = XrExtension(int(extension_tag.attrib["number"]))
         for type_tag in extension_tag.findall("require/type"):
             name = type_tag.attrib["name"]
             # O(N^2), but this needs to be done before the spec is constructed
@@ -354,7 +355,7 @@ def collect_extensions(xml_root, structs, functions):
     
     structs_list = sorted(no_extension_structs, key=lambda x: x.name)
     functions_list = sorted(no_extension_functions, key=lambda x: x.name)
-    extensions[None] = XrExtension(structs_list, functions_list)
+    extensions[None] = XrExtension(0, structs_list, functions_list)
 
     return extensions
             

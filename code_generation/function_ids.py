@@ -1,13 +1,14 @@
 def generate_function_ids(spec):
     results = []
-    # null extension starts at 0
-    extension_counter = 0
 
     # sort by extension name
-    extensions = sorted(spec.extensions.items(), key=lambda x: x[0] if x[0] else "")
+    extensions = spec.extensions.items()
     for ext_name, extension in extensions:
-        ext_entry = {"name": ext_name, "id": extension_counter, "functions": []}
-        extension_counter += 1
+        ext_entry = {
+            "name": ext_name,
+            "id": extension.number if ext_name else 0,
+            "functions": []
+        }
         functions = sorted(extension.functions, key=lambda x: x.name)
 
         function_counter = 1
@@ -20,15 +21,15 @@ def generate_function_ids(spec):
     return results
 
 def update_function_ids(spec, function_ids):
-    existing_extensions = dict((ext["name"], ext) for ext in function_ids)
-    max_extension_id = max(ext["id"] for ext in function_ids)
-    extension_counter = max_extension_id + 1
+    existing_extensions = {ext["name"]: ext for ext in function_ids}
 
-    extensions = sorted(spec.extensions.items(), key=lambda x: x[0] if x[0] else "")
+    extensions = spec.extensions.items()
     for ext_name, extension in extensions:
         if ext_name in existing_extensions:
             ext_entry = existing_extensions[ext_name]
             functions = ext_entry["functions"]
+
+            # Add new function IDs onto the end of existing IDs
             existing_functions = set(func["name"] for func in functions)
             max_function_id = max(func["id"] for func in functions) if functions else 0
             function_counter = max_function_id + 1
@@ -39,8 +40,8 @@ def update_function_ids(spec, function_ids):
                 function_counter += 1
                 ext_entry["functions"].append(function_entry)
         else:
-            ext_entry = {"name": ext_name, "id": extension_counter, "functions": []}
-            extension_counter += 1
+            # Add new extensions with sorted functions
+            ext_entry = {"name": ext_name, "id": extension.number, "functions": []}
             functions = sorted(extension.functions, key=lambda x: x.name)
 
             function_counter = 1
