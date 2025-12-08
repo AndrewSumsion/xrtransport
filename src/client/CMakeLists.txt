@@ -33,3 +33,13 @@ set_target_properties(xrtransport_client PROPERTIES
 )
 
 target_compile_features(xrtransport_client PUBLIC cxx_std_17)
+
+# setup install directory
+install(TARGETS xrtransport_client LIBRARY DESTINATION client)
+install(TARGETS xrtransport_transport LIBRARY DESTINATION client)
+
+if(UNIX)
+    set_target_properties(xrtransport_client PROPERTIES
+        INSTALL_RPATH "$ORIGIN"
+    )
+endif()

@@ -35,3 +35,13 @@ add_executable(xrtransport_server_main
 target_link_libraries(xrtransport_server_main
     xrtransport_server
 )
+
+# setup install directory
+install(TARGETS xrtransport_server_main RUNTIME DESTINATION server)
+install(TARGETS xrtransport_transport LIBRARY DESTINATION server)
+
+if(UNIX)
+    set_target_properties(xrtransport_server_main PROPERTIES
+        INSTALL_RPATH "$ORIGIN"
+    )
+endif()

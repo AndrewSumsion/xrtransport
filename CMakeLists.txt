@@ -8,7 +8,7 @@ option(XRTRANSPORT_BUILD_SERVER "Build server" ON)
 
 if (XRTRANSPORT_BUILD_SERVER)
     # Server needs OpenXR loader to be built
-    add_subdirectory(external/OpenXR-SDK)
+    add_subdirectory(external/OpenXR-SDK EXCLUDE_FROM_ALL)
 endif()
 
 # Set C++ standard for the entire project
