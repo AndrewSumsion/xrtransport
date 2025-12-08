@@ -64,6 +64,8 @@ template_config = [
     ("structs/deserializer_impl.mako", "src/common/serialization/deserializer.cpp"),
     ("structs/serializer_header.mako", "include/xrtransport/serialization/serializer.h"),
     ("structs/serializer_impl.mako", "src/common/serialization/serializer.cpp"),
+    ("extensions/enabled_extensions.mako", "include/xrtransport/extensions/enabled_extensions.h"),
+    ("extensions/extension_functions.mako", "include/xrtransport/extensions/extension_functions.h"),
     ("test/serialization_tests.mako", "test/serialization/fuzzer.cpp", {"struct_generator": RandomStructGenerator(spec)})
 ]
 
