@@ -9,6 +9,7 @@
  */
 #include "runtime.h"
 #include "available_extensions.h"
+#include "transport_manager.h"
 
 #include "xrtransport/extensions/extension_functions.h"
 
@@ -41,6 +42,9 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl
 static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(
     const XrInstanceCreateInfo*                 createInfo,
     XrInstance*                                 instance);
+
+// custom xrtransport functions for API layers
+static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(Transport** transport_out);
 
 static const std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
@@ -601,6 +605,12 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
 
     std::string name_str(name);
 
+    // allow API layers to access transport
+    if (name_str == "xrtransportGetTransport") {
+        *function = reinterpret_cast<PFN_xrVoidFunction>(xrtransportGetTransport);
+        return XR_SUCCESS;
+    }
+
     // for spec compliance
     if (instance == XR_NULL_HANDLE &&
         name_str != "xrEnumerateInstanceExtensionProperties" &&
@@ -769,5 +779,11 @@ extern "C" XRAPI_ATTR XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(cons
     runtimeRequest->runtimeInterfaceVersion = XR_CURRENT_LOADER_API_LAYER_VERSION;
     runtimeRequest->runtimeApiVersion = XR_CURRENT_API_VERSION;
 
+    return XR_SUCCESS;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(Transport** transport_out) {
+    Transport& transport = get_transport();
+    *transport_out = &transport;
     return XR_SUCCESS;
 }
