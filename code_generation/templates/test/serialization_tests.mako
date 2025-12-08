@@ -116,7 +116,7 @@ TEST_CASE("Serialization round-trip test", "[serialization]") {
     //
 <% plans = [struct_generator.generate_plan() for _ in range(250)] %>\
 % for i, plan in enumerate(plans):
-    ${struct_generator.init_struct(plan, f"item{i}", "    ")}
+${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % endfor
 
     //
@@ -158,7 +158,7 @@ TEST_CASE("In-place deserialization round-trip test", "[serialization][in-place]
     // Struct initialization
     //
 % for i, plan in enumerate(plans):
-    ${struct_generator.init_struct(plan, f"item{i}", "    ")}
+${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % endfor
 
     //
