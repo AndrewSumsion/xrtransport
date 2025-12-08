@@ -46,431 +46,14 @@ public:
         : transport(transport), function_loader(function_loader), instance_handler(instance_handler)
     {}
 
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-    void handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-    void handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    void handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-    void handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
-#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    void handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in);
-    void handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in);
-    void handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in);
-    void handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in);
-    void handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in);
-    void handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in);
-    void handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    void handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    void handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    void handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in);
-    void handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in);
-    void handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in);
-    void handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    void handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    void handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    void handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    void handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
-#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-    void handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in);
-    void handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-    void handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in);
-    void handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    void handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in);
-    void handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in);
-    void handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-    void handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in);
-    void handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in);
-    void handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in);
-    void handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in);
-    void handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    void handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in);
-    void handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in);
-    void handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in);
-    void handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    void handle_xrCreateHandTrackerEXT(MessageLockIn msg_in);
-    void handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in);
-    void handle_xrLocateHandJointsEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
-#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    void handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in);
-    void handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    void handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in);
-    void handle_xrLoadControllerModelMSFT(MessageLockIn msg_in);
-    void handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in);
-    void handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
-#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-    void handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in);
-    void handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    void handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-    void handle_xrUpdateSwapchainFB(MessageLockIn msg_in);
-    void handle_xrGetSwapchainStateFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    void handle_xrCreateBodyTrackerFB(MessageLockIn msg_in);
-    void handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in);
-    void handle_xrLocateBodyJointsFB(MessageLockIn msg_in);
-    void handle_xrGetBodySkeletonFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-    void handle_xrInitializeLoaderKHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    void handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in);
-    void handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in);
-    void handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    void handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in);
-    void handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in);
-    void handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in);
-    void handle_xrCreateSceneMSFT(MessageLockIn msg_in);
-    void handle_xrDestroySceneMSFT(MessageLockIn msg_in);
-    void handle_xrComputeNewSceneMSFT(MessageLockIn msg_in);
-    void handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in);
-    void handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in);
-    void handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in);
-    void handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    void handle_xrDeserializeSceneMSFT(MessageLockIn msg_in);
-    void handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    void handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in);
-    void handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in);
-    void handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    void handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    void handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in);
-    void handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in);
-    void handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_color_space
-    void handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in);
-    void handle_xrSetColorSpaceFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_color_space
-#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    void handle_xrGetHandMeshFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    void handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceUuidFB(MessageLockIn msg_in);
-    void handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in);
-    void handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    void handle_xrCreateFoveationProfileFB(MessageLockIn msg_in);
-    void handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_foveation
-#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-    void handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in);
-    void handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    void handle_xrCreateTriangleMeshFB(MessageLockIn msg_in);
-    void handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in);
-    void handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    void handle_xrCreatePassthroughFB(MessageLockIn msg_in);
-    void handle_xrDestroyPassthroughFB(MessageLockIn msg_in);
-    void handle_xrPassthroughStartFB(MessageLockIn msg_in);
-    void handle_xrPassthroughPauseFB(MessageLockIn msg_in);
-    void handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in);
-    void handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in);
-    void handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in);
-    void handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in);
-    void handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in);
-    void handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in);
-    void handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in);
-    void handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough
-#ifdef XRTRANSPORT_EXT_XR_FB_render_model
-    void handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in);
-    void handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in);
-    void handle_xrLoadRenderModelFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_render_model
-#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-    void handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    void handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in);
-    void handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in);
-    void handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in);
-    void handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in);
-    void handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-    void handle_xrSetViewOffsetVARJO(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-#ifdef XRTRANSPORT_EXT_XR_ML_compat
-    void handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_compat
-#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    void handle_xrCreateMarkerDetectorML(MessageLockIn msg_in);
-    void handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in);
-    void handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in);
-    void handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in);
-    void handle_xrGetMarkersML(MessageLockIn msg_in);
-    void handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in);
-    void handle_xrGetMarkerLengthML(MessageLockIn msg_in);
-    void handle_xrGetMarkerNumberML(MessageLockIn msg_in);
-    void handle_xrGetMarkerStringML(MessageLockIn msg_in);
-    void handle_xrCreateMarkerSpaceML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
-#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    void handle_xrEnableLocalizationEventsML(MessageLockIn msg_in);
-    void handle_xrQueryLocalizationMapsML(MessageLockIn msg_in);
-    void handle_xrRequestMapLocalizationML(MessageLockIn msg_in);
-    void handle_xrImportLocalizationMapML(MessageLockIn msg_in);
-    void handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in);
-    void handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in);
-    void handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_localization_map
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    void handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in);
-    void handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in);
-    void handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    void handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in);
-    void handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in);
-    void handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in);
-    void handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in);
-    void handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in);
-    void handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in);
-    void handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in);
-    void handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in);
-    void handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in);
-    void handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    void handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    void handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in);
-    void handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in);
-    void handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in);
-    void handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in);
-    void handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in);
-    void handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in);
-    void handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    void handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in);
-    void handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
-#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-    void handle_xrStructureTypeToString2KHR(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-    void handle_xrQuerySpacesFB(MessageLockIn msg_in);
-    void handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    void handle_xrSaveSpaceFB(MessageLockIn msg_in);
-    void handle_xrEraseSpaceFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-    void handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in);
-    void handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    void handle_xrShareSpacesFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_FB_scene
-    void handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
     void handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    void handle_xrRequestSceneCaptureFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    void handle_xrGetSpaceContainerFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    void handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    void handle_xrCreateFaceTrackerFB(MessageLockIn msg_in);
-    void handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in);
-    void handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    void handle_xrCreateEyeTrackerFB(MessageLockIn msg_in);
-    void handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in);
-    void handle_xrGetEyeGazesFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    void handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    void handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    void handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
-#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    void handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in);
-    void handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in);
-    void handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in);
-    void handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in);
-    void handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in);
-    void handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in);
-    void handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in);
-    void handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in);
-    void handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in);
-    void handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in);
-    void handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    void handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
-#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    void handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in);
-    void handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in);
-    void handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in);
-    void handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    void handle_xrSaveSpaceListFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    void handle_xrCreateSpaceUserFB(MessageLockIn msg_in);
-    void handle_xrGetSpaceUserIdFB(MessageLockIn msg_in);
-    void handle_xrDestroySpaceUserFB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    void handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    void handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in);
-    void handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in);
-    void handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    void handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    void handle_xrCreateFaceTracker2FB(MessageLockIn msg_in);
-    void handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in);
-    void handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    void handle_xrShareSpacesMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    void handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in);
-    void handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in);
-    void handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in);
-    void handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in);
-    void handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in);
-    void handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in);
-    void handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in);
-    void handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in);
-    void handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in);
-    void handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-    void handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    void handle_xrCreatePassthroughHTC(MessageLockIn msg_in);
-    void handle_xrDestroyPassthroughHTC(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
-#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    void handle_xrApplyFoveationHTC(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTC_foveation
-#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    void handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in);
-    void handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTC_anchor
-#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    void handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in);
-    void handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in);
-    void handle_xrLocateBodyJointsHTC(MessageLockIn msg_in);
-    void handle_xrGetBodySkeletonHTC(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    void handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
     void handle_xrCreateBodyTrackerBD(MessageLockIn msg_in);
     void handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in);
     void handle_xrLocateBodyJointsBD(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    void handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in);
-    void handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in);
-    void handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in);
-    void handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in);
-    void handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in);
-    void handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in);
-    void handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in);
-    void handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in);
-    void handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in);
-    void handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in);
-    void handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in);
-    void handle_xrStopSenseDataProviderBD(MessageLockIn msg_in);
-    void handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in);
-    void handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in);
-    void handle_xrDestroyAnchorBD(MessageLockIn msg_in);
-    void handle_xrGetAnchorUuidBD(MessageLockIn msg_in);
-    void handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
     void handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in);
     void handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_in);
@@ -480,56 +63,473 @@ public:
     void handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    void handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in);
-    void handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in);
     void handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn msg_in);
     void handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLockIn msg_in);
+    void handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in);
+    void handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
     void handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in);
     void handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+    void handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in);
+    void handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in);
+    void handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in);
+    void handle_xrDestroyAnchorBD(MessageLockIn msg_in);
+    void handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in);
+    void handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in);
+    void handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in);
+    void handle_xrGetAnchorUuidBD(MessageLockIn msg_in);
+    void handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in);
+    void handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in);
+    void handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in);
+    void handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in);
+    void handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in);
+    void handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in);
+    void handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in);
+    void handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in);
+    void handle_xrStopSenseDataProviderBD(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+    void handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in);
+    void handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in);
+    void handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in);
+    void handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in);
+    void handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+    void handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in);
+    void handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in);
+    void handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in);
+    void handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in);
+    void handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in);
+    void handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in);
+    void handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+    void handle_xrCancelFutureEXT(MessageLockIn msg_in);
+    void handle_xrPollFutureEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+    void handle_xrCreateHandTrackerEXT(MessageLockIn msg_in);
+    void handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in);
+    void handle_xrLocateHandJointsEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+    void handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+    void handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in);
     void handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in);
     void handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in);
-    void handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in);
     void handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in);
     void handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in);
     void handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
-#ifdef XRTRANSPORT_EXT_XR_EXT_future
-    void handle_xrPollFutureEXT(MessageLockIn msg_in);
-    void handle_xrCancelFutureEXT(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_EXT_future
-#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-    void handle_xrSetSystemNotificationsML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
-#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    void handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in);
-    void handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in);
-    void handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in);
-    void handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in);
-    void handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in);
-    void handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in);
-    void handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in);
-    void handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in);
-    void handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+    void handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+    void handle_xrCreateBodyTrackerFB(MessageLockIn msg_in);
+    void handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in);
+    void handle_xrGetBodySkeletonFB(MessageLockIn msg_in);
+    void handle_xrLocateBodyJointsFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+    void handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in);
+    void handle_xrSetColorSpaceFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+    void handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in);
+    void handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in);
+    void handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+    void handle_xrCreateEyeTrackerFB(MessageLockIn msg_in);
+    void handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in);
+    void handle_xrGetEyeGazesFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+    void handle_xrCreateFaceTrackerFB(MessageLockIn msg_in);
+    void handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in);
+    void handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+    void handle_xrCreateFaceTracker2FB(MessageLockIn msg_in);
+    void handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in);
+    void handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+    void handle_xrCreateFoveationProfileFB(MessageLockIn msg_in);
+    void handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+    void handle_xrGetHandMeshFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+    void handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+    void handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in);
+    void handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+    void handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in);
+    void handle_xrCreatePassthroughFB(MessageLockIn msg_in);
+    void handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in);
+    void handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in);
+    void handle_xrDestroyPassthroughFB(MessageLockIn msg_in);
+    void handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in);
+    void handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in);
+    void handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in);
+    void handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in);
+    void handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in);
+    void handle_xrPassthroughPauseFB(MessageLockIn msg_in);
+    void handle_xrPassthroughStartFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+    void handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+    void handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in);
+    void handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in);
+    void handle_xrLoadRenderModelFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+    void handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+    void handle_xrRequestSceneCaptureFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+    void handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in);
+    void handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceUuidFB(MessageLockIn msg_in);
+    void handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+    void handle_xrGetSpaceContainerFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+    void handle_xrQuerySpacesFB(MessageLockIn msg_in);
+    void handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+    void handle_xrShareSpacesFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+    void handle_xrEraseSpaceFB(MessageLockIn msg_in);
+    void handle_xrSaveSpaceFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+    void handle_xrSaveSpaceListFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+    void handle_xrCreateSpaceUserFB(MessageLockIn msg_in);
+    void handle_xrDestroySpaceUserFB(MessageLockIn msg_in);
+    void handle_xrGetSpaceUserIdFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+    void handle_xrGetSwapchainStateFB(MessageLockIn msg_in);
+    void handle_xrUpdateSwapchainFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+    void handle_xrCreateTriangleMeshFB(MessageLockIn msg_in);
+    void handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in);
+    void handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+    void handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+    void handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in);
+    void handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+    void handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in);
+    void handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in);
+    void handle_xrGetBodySkeletonHTC(MessageLockIn msg_in);
+    void handle_xrLocateBodyJointsHTC(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+    void handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in);
+    void handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in);
+    void handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+    void handle_xrApplyFoveationHTC(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+    void handle_xrCreatePassthroughHTC(MessageLockIn msg_in);
+    void handle_xrDestroyPassthroughHTC(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+    void handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+    void handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+    void handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+    void handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+    void handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in);
+    void handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+    void handle_xrStructureTypeToString2KHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+    void handle_xrInitializeLoaderKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+    void handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+    void handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+    void handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+    void handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+    void handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in);
+    void handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in);
+    void handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in);
+    void handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+    void handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in);
+    void handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in);
+    void handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+    void handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in);
+    void handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+    void handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in);
+    void handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in);
+    void handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in);
+    void handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+    void handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in);
+    void handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in);
+    void handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in);
+    void handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in);
+    void handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in);
+    void handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in);
+    void handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in);
+    void handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in);
+    void handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in);
+    void handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+    void handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+    void handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in);
+    void handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in);
+    void handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+    void handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+    void handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in);
+    void handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in);
+    void handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in);
+    void handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+    void handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+    void handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in);
+    void handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+    void handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+    void handle_xrShareSpacesMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+    void handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in);
+    void handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in);
+    void handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in);
+    void handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in);
+    void handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in);
+    void handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in);
+    void handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in);
+    void handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in);
+    void handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in);
+    void handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in);
+    void handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+    void handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
     void handle_xrCreateFacialExpressionClientML(MessageLockIn msg_in);
     void handle_xrDestroyFacialExpressionClientML(MessageLockIn msg_in);
     void handle_xrGetFacialExpressionBlendShapePropertiesML(MessageLockIn msg_in);
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
-#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    void handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in);
-    void handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    void handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in);
-    void handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in);
-    void handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in);
-    void handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in);
-#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+    void handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in);
+    void handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in);
+    void handle_xrEnableLocalizationEventsML(MessageLockIn msg_in);
+    void handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in);
+    void handle_xrImportLocalizationMapML(MessageLockIn msg_in);
+    void handle_xrQueryLocalizationMapsML(MessageLockIn msg_in);
+    void handle_xrRequestMapLocalizationML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+    void handle_xrCreateMarkerDetectorML(MessageLockIn msg_in);
+    void handle_xrCreateMarkerSpaceML(MessageLockIn msg_in);
+    void handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in);
+    void handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in);
+    void handle_xrGetMarkerLengthML(MessageLockIn msg_in);
+    void handle_xrGetMarkerNumberML(MessageLockIn msg_in);
+    void handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in);
+    void handle_xrGetMarkerStringML(MessageLockIn msg_in);
+    void handle_xrGetMarkersML(MessageLockIn msg_in);
+    void handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+    void handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in);
+    void handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in);
+    void handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+    void handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in);
+    void handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in);
+    void handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in);
+    void handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in);
+    void handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in);
+    void handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in);
+    void handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in);
+    void handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in);
+    void handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in);
+    void handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+    void handle_xrSetSystemNotificationsML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+    void handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+    void handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in);
+    void handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in);
+    void handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in);
+    void handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in);
+    void handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in);
+    void handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in);
+    void handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in);
+    void handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in);
+    void handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+    void handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+    void handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+    void handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in);
+    void handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in);
+    void handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in);
+    void handle_xrLoadControllerModelMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+    void handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in);
+    void handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+    void handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in);
+    void handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+    void handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in);
+    void handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+    void handle_xrComputeNewSceneMSFT(MessageLockIn msg_in);
+    void handle_xrCreateSceneMSFT(MessageLockIn msg_in);
+    void handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in);
+    void handle_xrDestroySceneMSFT(MessageLockIn msg_in);
+    void handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in);
+    void handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in);
+    void handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in);
+    void handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in);
+    void handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in);
+    void handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+    void handle_xrDeserializeSceneMSFT(MessageLockIn msg_in);
+    void handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+    void handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in);
+    void handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in);
+    void handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+    void handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in);
+    void handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in);
+    void handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in);
+    void handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in);
+    void handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in);
+    void handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in);
+    void handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+    void handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in);
+    void handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in);
+    void handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in);
+    void handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+    void handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in);
+    void handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+    void handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+    void handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+    void handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+    void handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in);
+    void handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in);
+    void handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in);
+    void handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in);
+    void handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+    void handle_xrSetViewOffsetVARJO(MessageLockIn msg_in);
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
     void handle_xrAcquireSwapchainImage(MessageLockIn msg_in);
     void handle_xrApplyHapticFeedback(MessageLockIn msg_in);
     void handle_xrAttachSessionActionSets(MessageLockIn msg_in);

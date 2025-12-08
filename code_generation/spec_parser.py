@@ -1,6 +1,4 @@
 import xml.etree.ElementTree as ET
-import json
-from .bindings import collect_modifiable_bindings
 
 # structs whose serializers and deserializers are manually specified
 CUSTOM_STRUCTS = [
@@ -276,14 +274,8 @@ def collect_structs(xml_root):
 
         structs.append(struct)
 
-    # sort structs by their assigned XrStructureType
-    def sort_key(struct):
-        if not struct.xr_type in xr_structure_type_values:
-            # sort non-typed structs to the beginning
-            return 0
-        # sort the rest by their XrStructureType value
-        return xr_structure_type_values[struct.xr_type]
-    structs.sort(key=sort_key)
+    # sort structs by name
+    structs.sort(key=lambda x: x.name)
 
     return structs
 
@@ -315,6 +307,9 @@ def collect_functions(xml_root):
         if any(p.type.startswith("PFN") for p in function.params):
             function.flag = True
     
+    # sort by name
+    functions.sort(key=lambda x: x.name)
+
     return functions, function_aliases
 
 def collect_extensions(xml_root, structs, functions):
@@ -350,6 +345,9 @@ def collect_extensions(xml_root, structs, functions):
                 else:
                     extension.structs.append(struct)
                     no_extension_structs.discard(struct)
+        # sort structs and functions by name
+        extension.structs.sort(key=lambda x: x.name)
+        extension.functions.sort(key=lambda x: x.name)
         if extension.structs or extension.functions:
             extensions[extension_name] = extension
     
@@ -357,7 +355,13 @@ def collect_extensions(xml_root, structs, functions):
     functions_list = sorted(no_extension_functions, key=lambda x: x.name)
     extensions[None] = XrExtension(0, structs_list, functions_list)
 
-    return extensions
+    # Sort extensions by name, with None (core) coming last
+    sorted_extensions = {
+        name: extensions[name]
+        for name in sorted(extensions.keys(), key=lambda x: (x is None, x))
+    }
+
+    return sorted_extensions
             
 # concatenate the list of structs based on the list of extension names we're testing
 def filter_test_structs(extensions, test_extensions):

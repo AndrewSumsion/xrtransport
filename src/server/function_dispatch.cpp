@@ -26,3800 +26,6 @@ using std::uint32_t;
 
 namespace xrtransport {
 
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetAndroidApplicationThreadKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetAndroidApplicationThreadKHR));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrAndroidThreadTypeKHR threadType{};
-    deserialize(&threadType, msg_in.stream, false);
-    uint32_t threadId{};
-    deserialize(&threadId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&threadType);
-    cleanup(&threadId);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSwapchainAndroidSurfaceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSwapchainCreateInfo* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrSwapchain* swapchain{};
-    deserialize_ptr(&swapchain, msg_in.stream, false);
-    jobject* surface{};
-    deserialize_ptr(&surface, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    serialize_ptr(surface, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(swapchain, 1);
-    cleanup_ptr(surface, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPerfSettingsSetPerformanceLevelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPerfSettingsDomainEXT domain{};
-    deserialize(&domain, msg_in.stream, false);
-    XrPerfSettingsLevelEXT level{};
-    deserialize(&level, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&domain);
-    cleanup(&level);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrThermalGetTemperatureTrendEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrThermalGetTemperatureTrendEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPerfSettingsDomainEXT domain{};
-    deserialize(&domain, msg_in.stream, false);
-    XrPerfSettingsNotificationLevelEXT* notificationLevel{};
-    deserialize_ptr(&notificationLevel, msg_in.stream, false);
-    float* tempHeadroom{};
-    deserialize_ptr(&tempHeadroom, msg_in.stream, false);
-    float* tempSlope{};
-    deserialize_ptr(&tempSlope, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(notificationLevel, 1, msg_out.buffer);
-    serialize_ptr(tempHeadroom, 1, msg_out.buffer);
-    serialize_ptr(tempSlope, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&domain);
-    cleanup_ptr(notificationLevel, 1);
-    cleanup_ptr(tempHeadroom, 1);
-    cleanup_ptr(tempSlope, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
-#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetDebugUtilsObjectNameEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetDebugUtilsObjectNameEXT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrDebugUtilsObjectNameInfoEXT* nameInfo{};
-    deserialize_ptr(&nameInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(nameInfo, 1);
-}
-
-void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateDebugUtilsMessengerEXT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrDebugUtilsMessengerCreateInfoEXT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrDebugUtilsMessengerEXT* messenger{};
-    deserialize_ptr(&messenger, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(createInfo->userData, 1, msg_out.buffer);
-    serialize_ptr(messenger, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(messenger, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyDebugUtilsMessengerEXT));
-    // by this point, the function id has already been read, now read the params
-    XrDebugUtilsMessengerEXT messenger{};
-    deserialize(&messenger, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyDebugUtilsMessengerEXT(messenger);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&messenger);
-}
-
-void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSubmitDebugUtilsMessageEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSubmitDebugUtilsMessageEXT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrDebugUtilsMessageSeverityFlagsEXT messageSeverity{};
-    deserialize(&messageSeverity, msg_in.stream, false);
-    XrDebugUtilsMessageTypeFlagsEXT messageTypes{};
-    deserialize(&messageTypes, msg_in.stream, false);
-    XrDebugUtilsMessengerCallbackDataEXT* callbackData{};
-    deserialize_ptr(&callbackData, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(callbackData->objects, callbackData->objectCount, msg_out.buffer);
-    serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&messageSeverity);
-    cleanup(&messageTypes);
-    cleanup_ptr(callbackData, 1);
-}
-
-void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSessionBeginDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrDebugUtilsLabelEXT* labelInfo{};
-    deserialize_ptr(&labelInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(labelInfo, 1);
-}
-
-void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSessionEndDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT(session);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-}
-
-void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSessionInsertDebugUtilsLabelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrDebugUtilsLabelEXT* labelInfo{};
-    deserialize_ptr(&labelInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(labelInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetOpenGLGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsOpenGLKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetOpenGLESGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVulkanInstanceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanInstanceExtensionsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVulkanDeviceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanDeviceExtensionsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVulkanGraphicsDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDeviceKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    VkInstance vkInstance{};
-    deserialize(&vkInstance, msg_in.stream, false);
-    VkPhysicalDevice* vkPhysicalDevice{};
-    deserialize_ptr(&vkPhysicalDevice, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup(&vkInstance);
-    cleanup_ptr(vkPhysicalDevice, 1);
-}
-
-void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVulkanGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsVulkanKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetD3D11GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsD3D11KHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetD3D12GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsD3D12KHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMetalGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMetalGraphicsRequirementsKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrGraphicsRequirementsMetalKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup_ptr(graphicsRequirements, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVisibilityMaskKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVisibilityMaskKHR));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
-    uint32_t viewIndex{};
-    deserialize(&viewIndex, msg_in.stream, false);
-    XrVisibilityMaskTypeKHR visibilityMaskType{};
-    deserialize(&visibilityMaskType, msg_in.stream, false);
-    XrVisibilityMaskKHR* visibilityMask{};
-    deserialize_ptr(&visibilityMask, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(visibilityMask, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&viewConfigurationType);
-    cleanup(&viewIndex);
-    cleanup(&visibilityMaskType);
-    cleanup_ptr(visibilityMask, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
-#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrConvertWin32PerformanceCounterToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    LARGE_INTEGER* performanceCounter{};
-    deserialize_ptr(&performanceCounter, msg_in.stream, false);
-    XrTime* time{};
-    deserialize_ptr(&time, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(performanceCounter, 1);
-    cleanup_ptr(time, 1);
-}
-
-void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrConvertTimeToWin32PerformanceCounterKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrTime time{};
-    deserialize(&time, msg_in.stream, false);
-    LARGE_INTEGER* performanceCounter{};
-    deserialize_ptr(&performanceCounter, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(performanceCounter, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&time);
-    cleanup_ptr(performanceCounter, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrConvertTimespecTimeToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimespecTimeToTimeKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    timespec* timespecTime{};
-    deserialize_ptr(&timespecTime, msg_in.stream, false);
-    XrTime* time{};
-    deserialize_ptr(&time, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(timespecTime, 1);
-    cleanup_ptr(time, 1);
-}
-
-void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrConvertTimeToTimespecTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToTimespecTimeKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrTime time{};
-    deserialize(&time, msg_in.stream, false);
-    timespec* timespecTime{};
-    deserialize_ptr(&timespecTime, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&time);
-    cleanup_ptr(timespecTime, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpatialAnchorMSFT* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(anchor, 1);
-}
-
-void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorMSFT anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorMSFT(anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&anchor);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetInputDeviceActiveEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceActiveEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath interactionProfile{};
-    deserialize(&interactionProfile, msg_in.stream, false);
-    XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
-    XrBool32 isActive{};
-    deserialize(&isActive, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&interactionProfile);
-    cleanup(&topLevelPath);
-    cleanup(&isActive);
-}
-
-void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetInputDeviceStateBoolEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateBoolEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
-    XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
-    XrBool32 state{};
-    deserialize(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&topLevelPath);
-    cleanup(&inputSourcePath);
-    cleanup(&state);
-}
-
-void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetInputDeviceStateFloatEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateFloatEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
-    XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
-    float state{};
-    deserialize(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&topLevelPath);
-    cleanup(&inputSourcePath);
-    cleanup(&state);
-}
-
-void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetInputDeviceStateVector2fEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateVector2fEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
-    XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
-    XrVector2f state{};
-    deserialize(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&topLevelPath);
-    cleanup(&inputSourcePath);
-    cleanup(&state);
-}
-
-void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetInputDeviceLocationEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceLocationEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
-    XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrPosef pose{};
-    deserialize(&pose, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&topLevelPath);
-    cleanup(&inputSourcePath);
-    cleanup(&space);
-    cleanup(&pose);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialGraphNodeSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTryCreateSpatialGraphStaticNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpatialGraphNodeBindingMSFT* nodeBinding{};
-    deserialize_ptr(&nodeBinding, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(nodeBinding, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(nodeBinding, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySpatialGraphNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialGraphNodeBindingMSFT nodeBinding{};
-    deserialize(&nodeBinding, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&nodeBinding);
-}
-
-void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpatialGraphNodeBindingPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialGraphNodeBindingMSFT nodeBinding{};
-    deserialize(&nodeBinding, msg_in.stream, false);
-    XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrSpatialGraphNodeBindingPropertiesMSFT* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&nodeBinding);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(properties, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandTrackerEXT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrHandTrackerCreateInfoEXT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrHandTrackerEXT* handTracker{};
-    deserialize_ptr(&handTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateHandTrackerEXT(session, createInfo, handTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(handTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(handTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyHandTrackerEXT));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyHandTrackerEXT(handTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-}
-
-void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLocateHandJointsEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateHandJointsEXT));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-    XrHandJointsLocateInfoEXT* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
-    XrHandJointLocationsEXT* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLocateHandJointsEXT(handTracker, locateInfo, locations);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-    cleanup_ptr(locateInfo, 1);
-    cleanup_ptr(locations, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
-#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateHandMeshSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandMeshSpaceMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-    XrHandMeshSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUpdateHandMeshMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateHandMeshMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-    XrHandMeshUpdateInfoMSFT* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
-    XrHandMeshMSFT* handMesh{};
-    deserialize_ptr(&handMesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(handMesh, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-    cleanup_ptr(updateInfo, 1);
-    cleanup_ptr(handMesh, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetControllerModelKeyMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelKeyMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath topLevelUserPath{};
-    deserialize(&topLevelUserPath, msg_in.stream, false);
-    XrControllerModelKeyStateMSFT* controllerModelKeyState{};
-    deserialize_ptr(&controllerModelKeyState, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&topLevelUserPath);
-    cleanup_ptr(controllerModelKeyState, 1);
-}
-
-void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLoadControllerModelMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadControllerModelMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&modelKey);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetControllerModelPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelPropertiesMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
-    XrControllerModelPropertiesMSFT* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&modelKey);
-    cleanup_ptr(properties, 1);
-}
-
-void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetControllerModelStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelStateMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
-    XrControllerModelStateMSFT* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetControllerModelStateMSFT(session, modelKey, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&modelKey);
-    cleanup_ptr(state, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
-#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPerceptionAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    IUnknown* perceptionAnchor{};
-    deserialize_ptr(&perceptionAnchor, msg_in.stream, false);
-    XrSpatialAnchorMSFT* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(perceptionAnchor, 1);
-    cleanup_ptr(anchor, 1);
-}
-
-void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorMSFT anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-    IUnknown** perceptionAnchor{};
-    #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
-
-    XrResult _result = function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&anchor);
-    #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateReprojectionModesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateReprojectionModesMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
-    uint32_t modeCapacityInput{};
-    deserialize(&modeCapacityInput, msg_in.stream, false);
-    uint32_t* modeCountOutput{};
-    deserialize_ptr(&modeCountOutput, msg_in.stream, false);
-    XrReprojectionModeMSFT* modes{};
-    deserialize_ptr(&modes, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(modeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup(&viewConfigurationType);
-    cleanup(&modeCapacityInput);
-    cleanup_ptr(modeCountOutput, 1);
-    cleanup_ptr(modes, modeCapacityInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUpdateSwapchainFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSwapchainFB));
-    // by this point, the function id has already been read, now read the params
-    XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
-    XrSwapchainStateBaseHeaderFB* state{};
-    deserialize_xr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUpdateSwapchainFB(swapchain, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&swapchain);
-    cleanup_xr(state);
-}
-
-void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSwapchainStateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSwapchainStateFB));
-    // by this point, the function id has already been read, now read the params
-    XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
-    XrSwapchainStateBaseHeaderFB* state{};
-    deserialize_xr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSwapchainStateFB(swapchain, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(state, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&swapchain);
-    cleanup_xr(state);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrBodyTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrBodyTrackerFB* bodyTracker{};
-    deserialize_ptr(&bodyTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(bodyTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyBodyTrackerFB(bodyTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-}
-
-void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLocateBodyJointsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsFB));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-    XrBodyJointsLocateInfoFB* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
-    XrBodyJointLocationsFB* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-    cleanup_ptr(locateInfo, 1);
-    cleanup_ptr(locations, 1);
-}
-
-void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetBodySkeletonFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonFB));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-    XrBodySkeletonFB* skeleton{};
-    deserialize_ptr(&skeleton, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetBodySkeletonFB(bodyTracker, skeleton);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-    cleanup_ptr(skeleton, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrInitializeLoaderKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrInitializeLoaderKHR));
-    // by this point, the function id has already been read, now read the params
-    XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo{};
-    deserialize_xr(&loaderInitInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrInitializeLoaderKHR(loaderInitInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup_xr(loaderInitInfo);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateVulkanInstanceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanInstanceKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrVulkanInstanceCreateInfoKHR* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    VkInstance* vulkanInstance{};
-    deserialize_ptr(&vulkanInstance, msg_in.stream, false);
-    VkResult* vulkanResult{};
-    deserialize_ptr(&vulkanResult, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanInstance, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(vulkanInstance, 1);
-    cleanup_ptr(vulkanResult, 1);
-}
-
-void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateVulkanDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanDeviceKHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrVulkanDeviceCreateInfoKHR* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    VkDevice* vulkanDevice{};
-    deserialize_ptr(&vulkanDevice, msg_in.stream, false);
-    VkResult* vulkanResult{};
-    deserialize_ptr(&vulkanResult, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanDevice, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(vulkanDevice, 1);
-    cleanup_ptr(vulkanResult, 1);
-}
-
-void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVulkanGraphicsDevice2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDevice2KHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrVulkanGraphicsDeviceGetInfoKHR* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    VkPhysicalDevice* vulkanPhysicalDevice{};
-    deserialize_ptr(&vulkanPhysicalDevice, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(vulkanPhysicalDevice, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateSceneComputeFeaturesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
-    uint32_t featureCapacityInput{};
-    deserialize(&featureCapacityInput, msg_in.stream, false);
-    uint32_t* featureCountOutput{};
-    deserialize_ptr(&featureCountOutput, msg_in.stream, false);
-    XrSceneComputeFeatureMSFT* features{};
-    deserialize_ptr(&features, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(featureCountOutput, 1, msg_out.buffer);
-    serialize_ptr(features, featureCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&systemId);
-    cleanup(&featureCapacityInput);
-    cleanup_ptr(featureCountOutput, 1);
-    cleanup_ptr(features, featureCapacityInput);
-}
-
-void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneObserverMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSceneObserverCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSceneObserverMSFT* sceneObserver{};
-    deserialize_ptr(&sceneObserver, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(sceneObserver, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(sceneObserver, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneObserverMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySceneObserverMSFT(sceneObserver);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&sceneObserver);
-}
-
-void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
-    XrSceneCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSceneMSFT* scene{};
-    deserialize_ptr(&scene, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSceneMSFT(sceneObserver, createInfo, scene);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(scene, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&sceneObserver);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(scene, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySceneMSFT(scene);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-}
-
-void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrComputeNewSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrComputeNewSceneMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
-    XrNewSceneComputeInfoMSFT* computeInfo{};
-    deserialize_ptr(&computeInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrComputeNewSceneMSFT(sceneObserver, computeInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&sceneObserver);
-    cleanup_ptr(computeInfo, 1);
-}
-
-void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSceneComputeStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComputeStateMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
-    XrSceneComputeStateMSFT* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSceneComputeStateMSFT(sceneObserver, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&sceneObserver);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComponentsMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrSceneComponentsGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrSceneComponentsMSFT* components{};
-    deserialize_ptr(&components, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSceneComponentsMSFT(scene, getInfo, components);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(components, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(components, 1);
-}
-
-void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLocateSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateSceneComponentsMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrSceneComponentsLocateInfoMSFT* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
-    XrSceneComponentLocationsMSFT* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(locateInfo, 1);
-    cleanup_ptr(locations, 1);
-}
-
-void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSceneMeshBuffersMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMeshBuffersMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrSceneMeshBuffersGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrSceneMeshBuffersMSFT* buffers{};
-    deserialize_ptr(&buffers, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffers, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(buffers, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDeserializeSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeserializeSceneMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
-    XrSceneDeserializeInfoMSFT* deserializeInfo{};
-    deserialize_ptr(&deserializeInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&sceneObserver);
-    cleanup_ptr(deserializeInfo, 1);
-}
-
-void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSerializedSceneFragmentDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrSerializedSceneFragmentDataGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    uint32_t countInput{};
-    deserialize(&countInput, msg_in.stream, false);
-    uint32_t* readOutput{};
-    deserialize_ptr(&readOutput, msg_in.stream, false);
-    uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(readOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, countInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(getInfo, 1);
-    cleanup(&countInput);
-    cleanup_ptr(readOutput, 1);
-    cleanup_ptr(buffer, countInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateDisplayRefreshRatesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateDisplayRefreshRatesFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint32_t displayRefreshRateCapacityInput{};
-    deserialize(&displayRefreshRateCapacityInput, msg_in.stream, false);
-    uint32_t* displayRefreshRateCountOutput{};
-    deserialize_ptr(&displayRefreshRateCountOutput, msg_in.stream, false);
-    float* displayRefreshRates{};
-    deserialize_ptr(&displayRefreshRates, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.buffer);
-    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&displayRefreshRateCapacityInput);
-    cleanup_ptr(displayRefreshRateCountOutput, 1);
-    cleanup_ptr(displayRefreshRates, displayRefreshRateCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDisplayRefreshRateFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    float* displayRefreshRate{};
-    deserialize_ptr(&displayRefreshRate, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetDisplayRefreshRateFB(session, displayRefreshRate);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(displayRefreshRate, 1);
-}
-
-void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestDisplayRefreshRateFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    float displayRefreshRate{};
-    deserialize(&displayRefreshRate, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&displayRefreshRate);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateViveTrackerPathsHTCX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateViveTrackerPathsHTCX));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    uint32_t pathCapacityInput{};
-    deserialize(&pathCapacityInput, msg_in.stream, false);
-    uint32_t* pathCountOutput{};
-    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
-    XrViveTrackerPathsHTCX* paths{};
-    deserialize_ptr(&paths, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&pathCapacityInput);
-    cleanup_ptr(pathCountOutput, 1);
-    cleanup_ptr(paths, pathCapacityInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFacialTrackerHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFacialTrackerCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrFacialTrackerHTC* facialTracker{};
-    deserialize_ptr(&facialTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(facialTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(facialTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFacialTrackerHTC));
-    // by this point, the function id has already been read, now read the params
-    XrFacialTrackerHTC facialTracker{};
-    deserialize(&facialTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyFacialTrackerHTC(facialTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&facialTracker);
-}
-
-void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetFacialExpressionsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFacialExpressionsHTC));
-    // by this point, the function id has already been read, now read the params
-    XrFacialTrackerHTC facialTracker{};
-    deserialize(&facialTracker, msg_in.stream, false);
-    XrFacialExpressionsHTC* facialExpressions{};
-    deserialize_ptr(&facialExpressions, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(facialExpressions, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&facialTracker);
-    cleanup_ptr(facialExpressions, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_color_space
-void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateColorSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateColorSpacesFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint32_t colorSpaceCapacityInput{};
-    deserialize(&colorSpaceCapacityInput, msg_in.stream, false);
-    uint32_t* colorSpaceCountOutput{};
-    deserialize_ptr(&colorSpaceCountOutput, msg_in.stream, false);
-    XrColorSpaceFB* colorSpaces{};
-    deserialize_ptr(&colorSpaces, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(colorSpaceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&colorSpaceCapacityInput);
-    cleanup_ptr(colorSpaceCountOutput, 1);
-    cleanup_ptr(colorSpaces, colorSpaceCapacityInput);
-}
-
-void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetColorSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetColorSpaceFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrColorSpaceFB colorSpace{};
-    deserialize(&colorSpace, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetColorSpaceFB(session, colorSpace);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&colorSpace);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_color_space
-#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetHandMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetHandMeshFB));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-    XrHandTrackingMeshFB* mesh{};
-    deserialize_ptr(&mesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetHandMeshFB(handTracker, mesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(mesh, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-    cleanup_ptr(mesh, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorCreateInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceUuidFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUuidFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceUuidFB(space, uuid);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&space);
-    cleanup_ptr(uuid, 1);
-}
-
-void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateSpaceSupportedComponentsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    uint32_t componentTypeCapacityInput{};
-    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
-    uint32_t* componentTypeCountOutput{};
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
-    XrSpaceComponentTypeFB* componentTypes{};
-    deserialize_ptr(&componentTypes, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&space);
-    cleanup(&componentTypeCapacityInput);
-    cleanup_ptr(componentTypeCountOutput, 1);
-    cleanup_ptr(componentTypes, componentTypeCapacityInput);
-}
-
-void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSpaceComponentStatusFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrSpaceComponentStatusSetInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetSpaceComponentStatusFB(space, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&space);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceComponentStatusFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrSpaceComponentTypeFB componentType{};
-    deserialize(&componentType, msg_in.stream, false);
-    XrSpaceComponentStatusFB* status{};
-    deserialize_ptr(&status, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceComponentStatusFB(space, componentType, status);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(status, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&space);
-    cleanup(&componentType);
-    cleanup_ptr(status, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation
-void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFoveationProfileFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFoveationProfileCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrFoveationProfileFB* profile{};
-    deserialize_ptr(&profile, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateFoveationProfileFB(session, createInfo, profile);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(createInfo->next, msg_out.buffer);
-    serialize_ptr(profile, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(profile, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFoveationProfileFB));
-    // by this point, the function id has already been read, now read the params
-    XrFoveationProfileFB profile{};
-    deserialize(&profile, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyFoveationProfileFB(profile);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&profile);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_foveation
-#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySystemTrackedKeyboardFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySystemTrackedKeyboardFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrKeyboardTrackingQueryFB* queryInfo{};
-    deserialize_ptr(&queryInfo, msg_in.stream, false);
-    XrKeyboardTrackingDescriptionFB* keyboard{};
-    deserialize_ptr(&keyboard, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(queryInfo->next, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(queryInfo, 1);
-    cleanup_ptr(keyboard, 1);
-}
-
-void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateKeyboardSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateKeyboardSpaceFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrKeyboardSpaceCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* keyboardSpace{};
-    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(createInfo->next, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(keyboardSpace, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateTriangleMeshFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrTriangleMeshCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrTriangleMeshFB* outTriangleMesh{};
-    deserialize_ptr(&outTriangleMesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(outTriangleMesh, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyTriangleMeshFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyTriangleMeshFB(mesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-}
-
-void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshGetVertexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetVertexBufferFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-    XrVector3f** outVertexBuffer{};
-    #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outVertexBuffer, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-    #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
-}
-
-void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshGetIndexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetIndexBufferFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-    uint32_t** outIndexBuffer{};
-    #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outIndexBuffer, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-    #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
-}
-
-void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshBeginUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginUpdateFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshBeginUpdateFB(mesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-}
-
-void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshEndUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndUpdateFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-    uint32_t vertexCount{};
-    deserialize(&vertexCount, msg_in.stream, false);
-    uint32_t triangleCount{};
-    deserialize(&triangleCount, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-    cleanup(&vertexCount);
-    cleanup(&triangleCount);
-}
-
-void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshBeginVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-    uint32_t* outVertexCount{};
-    deserialize_ptr(&outVertexCount, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outVertexCount, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-    cleanup_ptr(outVertexCount, 1);
-}
-
-void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrTriangleMeshEndVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB));
-    // by this point, the function id has already been read, now read the params
-    XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB(mesh);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&mesh);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreatePassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPassthroughCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrPassthroughFB* outPassthrough{};
-    deserialize_ptr(&outPassthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreatePassthroughFB(session, createInfo, outPassthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outPassthrough, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(outPassthrough, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyPassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyPassthroughFB(passthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&passthrough);
-}
-
-void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughStartFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughStartFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughStartFB(passthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&passthrough);
-}
-
-void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughPauseFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughPauseFB(passthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&passthrough);
-}
-
-void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreatePassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughLayerFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPassthroughLayerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrPassthroughLayerFB* outLayer{};
-    deserialize_ptr(&outLayer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreatePassthroughLayerFB(session, createInfo, outLayer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outLayer, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(outLayer, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyPassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughLayerFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyPassthroughLayerFB(layer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&layer);
-}
-
-void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughLayerPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerPauseFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughLayerPauseFB(layer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&layer);
-}
-
-void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughLayerResumeFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerResumeFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughLayerResumeFB(layer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&layer);
-}
-
-void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughLayerSetStyleFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetStyleFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
-    XrPassthroughStyleFB* style{};
-    deserialize_ptr(&style, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughLayerSetStyleFB(layer, style);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&layer);
-    cleanup_ptr(style, 1);
-}
-
-void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateGeometryInstanceFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrGeometryInstanceCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrGeometryInstanceFB* outGeometryInstance{};
-    deserialize_ptr(&outGeometryInstance, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(outGeometryInstance, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyGeometryInstanceFB));
-    // by this point, the function id has already been read, now read the params
-    XrGeometryInstanceFB instance{};
-    deserialize(&instance, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyGeometryInstanceFB(instance);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-}
-
-void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGeometryInstanceSetTransformFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGeometryInstanceSetTransformFB));
-    // by this point, the function id has already been read, now read the params
-    XrGeometryInstanceFB instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrGeometryInstanceTransformFB* transformation{};
-    deserialize_ptr(&transformation, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGeometryInstanceSetTransformFB(instance, transformation);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(transformation, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough
-#ifdef XRTRANSPORT_EXT_XR_FB_render_model
-void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateRenderModelPathsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateRenderModelPathsFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint32_t pathCapacityInput{};
-    deserialize(&pathCapacityInput, msg_in.stream, false);
-    uint32_t* pathCountOutput{};
-    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
-    XrRenderModelPathInfoFB* paths{};
-    deserialize_ptr(&paths, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&pathCapacityInput);
-    cleanup_ptr(pathCountOutput, 1);
-    cleanup_ptr(paths, pathCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetRenderModelPropertiesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRenderModelPropertiesFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath path{};
-    deserialize(&path, msg_in.stream, false);
-    XrRenderModelPropertiesFB* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetRenderModelPropertiesFB(session, path, properties);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&path);
-    cleanup_ptr(properties, 1);
-}
-
-void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLoadRenderModelFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadRenderModelFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrRenderModelLoadInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrRenderModelBufferFB* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLoadRenderModelFB(session, info, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(info->next, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(buffer, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_render_model
-#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetEnvironmentDepthEstimationVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrBool32 enabled{};
-    deserialize(&enabled, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO(session, enabled);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&enabled);
-}
-
-#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetMarkerTrackingVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrBool32 enabled{};
-    deserialize(&enabled, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetMarkerTrackingVARJO(session, enabled);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&enabled);
-}
-
-void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetMarkerTrackingTimeoutVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
-    XrDuration timeout{};
-    deserialize(&timeout, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&markerId);
-    cleanup(&timeout);
-}
-
-void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetMarkerTrackingPredictionVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingPredictionVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
-    XrBool32 enable{};
-    deserialize(&enable, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&markerId);
-    cleanup(&enable);
-}
-
-void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerSizeVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerSizeVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
-    XrExtent2Df* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerSizeVARJO(session, markerId, size);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&markerId);
-    cleanup_ptr(size, 1);
-}
-
-void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateMarkerSpaceVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrMarkerSpaceCreateInfoVARJO* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateMarkerSpaceVARJO(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetViewOffsetVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetViewOffsetVARJO));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    float offset{};
-    deserialize(&offset, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetViewOffsetVARJO(session, offset);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&offset);
-}
-
-#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-#ifdef XRTRANSPORT_EXT_XR_ML_compat
-void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpaceFromCoordinateFrameUIDML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrCoordinateSpaceCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_compat
-#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerDetectorML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrMarkerDetectorCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrMarkerDetectorML* markerDetector{};
-    deserialize_ptr(&markerDetector, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateMarkerDetectorML(session, createInfo, markerDetector);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(markerDetector, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(markerDetector, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyMarkerDetectorML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyMarkerDetectorML(markerDetector);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-}
-
-void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSnapshotMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSnapshotMarkerDetectorML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerDetectorSnapshotInfoML* snapshotInfo{};
-    deserialize_ptr(&snapshotInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(snapshotInfo, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup_ptr(snapshotInfo, 1);
-}
-
-void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerDetectorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerDetectorStateML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerDetectorStateML* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerDetectorStateML(markerDetector, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkersML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkersML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    uint32_t markerCapacityInput{};
-    deserialize(&markerCapacityInput, msg_in.stream, false);
-    uint32_t* markerCountOutput{};
-    deserialize_ptr(&markerCountOutput, msg_in.stream, false);
-    XrMarkerML* markers{};
-    deserialize_ptr(&markers, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(markerCountOutput, 1, msg_out.buffer);
-    serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup(&markerCapacityInput);
-    cleanup_ptr(markerCountOutput, 1);
-    cleanup_ptr(markers, markerCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerReprojectionErrorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerReprojectionErrorML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
-    float* reprojectionErrorMeters{};
-    deserialize_ptr(&reprojectionErrorMeters, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup(&marker);
-    cleanup_ptr(reprojectionErrorMeters, 1);
-}
-
-void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerLengthML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerLengthML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
-    float* meters{};
-    deserialize_ptr(&meters, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerLengthML(markerDetector, marker, meters);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(meters, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup(&marker);
-    cleanup_ptr(meters, 1);
-}
-
-void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerNumberML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerNumberML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
-    uint64_t* number{};
-    deserialize_ptr(&number, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerNumberML(markerDetector, marker, number);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(number, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup(&marker);
-    cleanup_ptr(number, 1);
-}
-
-void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetMarkerStringML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerStringML));
-    // by this point, the function id has already been read, now read the params
-    XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
-    XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&markerDetector);
-    cleanup(&marker);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateMarkerSpaceML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrMarkerSpaceCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateMarkerSpaceML(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
-#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnableLocalizationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableLocalizationEventsML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrLocalizationEnableEventsInfoML* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnableLocalizationEventsML(session, info);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-}
-
-void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQueryLocalizationMapsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryLocalizationMapsML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrLocalizationMapQueryInfoBaseHeaderML* queryInfo{};
-    deserialize_xr(&queryInfo, msg_in.stream, false);
-    uint32_t mapCapacityInput{};
-    deserialize(&mapCapacityInput, msg_in.stream, false);
-    uint32_t* mapCountOutput{};
-    deserialize_ptr(&mapCountOutput, msg_in.stream, false);
-    XrLocalizationMapML* maps{};
-    deserialize_ptr(&maps, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(mapCountOutput, 1, msg_out.buffer);
-    serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_xr(queryInfo);
-    cleanup(&mapCapacityInput);
-    cleanup_ptr(mapCountOutput, 1);
-    cleanup_ptr(maps, mapCapacityInput);
-}
-
-void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestMapLocalizationML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestMapLocalizationML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrMapLocalizationRequestInfoML* requestInfo{};
-    deserialize_ptr(&requestInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrRequestMapLocalizationML(session, requestInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(requestInfo, 1);
-}
-
-void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrImportLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrImportLocalizationMapML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrLocalizationMapImportInfoML* importInfo{};
-    deserialize_ptr(&importInfo, msg_in.stream, false);
-    XrUuidEXT* mapUuid{};
-    deserialize_ptr(&mapUuid, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrImportLocalizationMapML(session, importInfo, mapUuid);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(importInfo->data, importInfo->size, msg_out.buffer);
-    serialize_ptr(mapUuid, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(importInfo, 1);
-    cleanup_ptr(mapUuid, 1);
-}
-
-void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateExportedLocalizationMapML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrUuidEXT* mapUuid{};
-    deserialize_ptr(&mapUuid, msg_in.stream, false);
-    XrExportedLocalizationMapML* map{};
-    deserialize_ptr(&map, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateExportedLocalizationMapML(session, mapUuid, map);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(map, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(mapUuid, 1);
-    cleanup_ptr(map, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyExportedLocalizationMapML));
-    // by this point, the function id has already been read, now read the params
-    XrExportedLocalizationMapML map{};
-    deserialize(&map, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyExportedLocalizationMapML(map);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&map);
-}
-
-void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetExportedLocalizationMapDataML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetExportedLocalizationMapDataML));
-    // by this point, the function id has already been read, now read the params
-    XrExportedLocalizationMapML map{};
-    deserialize(&map, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&map);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_localization_map
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsAsyncML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo{};
-    deserialize_xr(&createInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_xr(createInfo);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsCompleteML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrCreateSpatialAnchorsCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsCompleteML(session, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpatialAnchorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorStateML));
-    // by this point, the function id has already been read, now read the params
-    XrSpace anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-    XrSpatialAnchorStateML* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpatialAnchorStateML(anchor, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&anchor);
-    cleanup_ptr(state, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsStorageML));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorsCreateStorageInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpatialAnchorsStorageML* storage{};
-    deserialize_ptr(&storage, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(storage, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(storage, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorsStorageML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorsStorageML(storage);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-}
-
-void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsAsyncML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo{};
-    deserialize_xr(&queryInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup_xr(queryInfo);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsCompleteML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrSpatialAnchorsQueryCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsCompleteML(storage, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPublishSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsAsyncML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrSpatialAnchorsPublishInfoML* publishInfo{};
-    deserialize_ptr(&publishInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup_ptr(publishInfo, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPublishSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsCompleteML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrSpatialAnchorsPublishCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsCompleteML(storage, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsAsyncML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrSpatialAnchorsDeleteInfoML* deleteInfo{};
-    deserialize_ptr(&deleteInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup_ptr(deleteInfo, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsCompleteML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrSpatialAnchorsDeleteCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrSpatialAnchorsUpdateExpirationInfoML* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup_ptr(updateInfo, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrSpatialAnchorsUpdateExpirationCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&storage);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnableUserCalibrationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableUserCalibrationEventsML));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrUserCalibrationEnableEventsInfoML* enableInfo{};
-    deserialize_ptr(&enableInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnableUserCalibrationEventsML(instance, enableInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(enableInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore{};
-    deserialize_ptr(&spatialAnchorStore, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(spatialAnchorStore, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&spatialAnchorStore);
-}
-
-void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPersistSpatialAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
-    XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo{};
-    deserialize_ptr(&spatialAnchorPersistenceInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&spatialAnchorStore);
-    cleanup_ptr(spatialAnchorPersistenceInfo, 1);
-}
-
-void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumeratePersistedSpatialAnchorNamesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
-    uint32_t spatialAnchorNameCapacityInput{};
-    deserialize(&spatialAnchorNameCapacityInput, msg_in.stream, false);
-    uint32_t* spatialAnchorNameCountOutput{};
-    deserialize_ptr(&spatialAnchorNameCountOutput, msg_in.stream, false);
-    XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames{};
-    deserialize_ptr(&spatialAnchorNames, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.buffer);
-    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&spatialAnchorStore);
-    cleanup(&spatialAnchorNameCapacityInput);
-    cleanup_ptr(spatialAnchorNameCountOutput, 1);
-    cleanup_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput);
-}
-
-void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPersistedNameMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo{};
-    deserialize_ptr(&spatialAnchorCreateInfo, msg_in.stream, false);
-    XrSpatialAnchorMSFT* spatialAnchor{};
-    deserialize_ptr(&spatialAnchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(spatialAnchorCreateInfo, 1);
-    cleanup_ptr(spatialAnchor, 1);
-}
-
-void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUnpersistSpatialAnchorMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
-    XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName{};
-    deserialize_ptr(&spatialAnchorPersistenceName, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&spatialAnchorStore);
-    cleanup_ptr(spatialAnchorPersistenceName, 1);
-}
-
-void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrClearSpatialAnchorStoreMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrClearSpatialAnchorStoreMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&spatialAnchorStore);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSceneMarkerRawDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerRawDataMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrUuidMSFT* markerId{};
-    deserialize_ptr(&markerId, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(markerId, 1);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSceneMarkerDecodedStringMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT));
-    // by this point, the function id has already been read, now read the params
-    XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
-    XrUuidMSFT* markerId{};
-    deserialize_ptr(&markerId, msg_in.stream, false);
-    uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
-    uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
-    char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&scene);
-    cleanup_ptr(markerId, 1);
-    cleanup(&bufferCapacityInput);
-    cleanup_ptr(bufferCountOutput, 1);
-    cleanup_ptr(buffer, bufferCapacityInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
-#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStructureTypeToString2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStructureTypeToString2KHR));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrStructureType value{};
-    deserialize(&value, msg_in.stream, false);
-    char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]{};
-    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStructureTypeToString2KHR(instance, value, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&value);
-    cleanup_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR);
-}
-
-#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpacesFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceQueryInfoBaseHeaderFB* info{};
-    deserialize_xr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySpacesFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_xr(info);
-    cleanup_ptr(requestId, 1);
-}
-
-void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRetrieveSpaceQueryResultsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRetrieveSpaceQueryResultsFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrAsyncRequestIdFB requestId{};
-    deserialize(&requestId, msg_in.stream, false);
-    XrSpaceQueryResultsFB* results{};
-    deserialize_ptr(&results, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrRetrieveSpaceQueryResultsFB(session, requestId, results);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(results, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&requestId);
-    cleanup_ptr(results, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSaveSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceSaveInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSaveSpaceFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEraseSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEraseSpaceFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceEraseInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEraseSpaceFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetAudioOutputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioOutputDeviceGuidOculus));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetAudioOutputDeviceGuidOculus(instance, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
-}
-
-void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetAudioInputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioInputDeviceGuidOculus));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetAudioInputDeviceGuidOculus(instance, buffer);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
-}
-
-#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrShareSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceShareInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrShareSpacesFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(info->users, info->userCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_FB_scene
-void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceBoundingBox2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox2DFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrRect2Df* boundingBox2DOutput{};
-    deserialize_ptr(&boundingBox2DOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(boundingBox2DOutput, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceBoundingBox3DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox3DFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrRect3DfFB* boundingBox3DOutput{};
-    deserialize_ptr(&boundingBox3DOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(boundingBox3DOutput, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceSemanticLabelsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceSemanticLabelsFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrSemanticLabelsFB* semanticLabelsOutput{};
-    deserialize_ptr(&semanticLabelsOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(semanticLabelsOutput, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceBoundary2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundary2DFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrBoundary2DFB* boundary2DOutput{};
-    deserialize_ptr(&boundary2DOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(boundary2DOutput, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceRoomLayoutFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceRoomLayoutFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrRoomLayoutFB* roomLayoutOutput{};
-    deserialize_ptr(&roomLayoutOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(roomLayoutOutput, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDigitalLensControlALMALENCE", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetDigitalLensControlALMALENCE));
@@ -3840,1302 +46,6 @@ void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg
 }
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestSceneCaptureFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestSceneCaptureFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSceneCaptureRequestInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrRequestSceneCaptureFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceContainerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceContainerFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrSpaceContainerFB* spaceContainerOutput{};
-    deserialize_ptr(&spaceContainerOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceContainerFB(session, space, spaceContainerOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&space);
-    cleanup_ptr(spaceContainerOutput, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetFoveationEyeTrackedStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFoveationEyeTrackedStateMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFoveationEyeTrackedStateMETA* foveationState{};
-    deserialize_ptr(&foveationState, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetFoveationEyeTrackedStateMETA(session, foveationState);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(foveationState, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(foveationState, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFaceTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrFaceTrackerFB* faceTracker{};
-    deserialize_ptr(&faceTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateFaceTrackerFB(session, createInfo, faceTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(faceTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrFaceTrackerFB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyFaceTrackerFB(faceTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&faceTracker);
-}
-
-void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetFaceExpressionWeightsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeightsFB));
-    // by this point, the function id has already been read, now read the params
-    XrFaceTrackerFB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
-    XrFaceExpressionInfoFB* expressionInfo{};
-    deserialize_ptr(&expressionInfo, msg_in.stream, false);
-    XrFaceExpressionWeightsFB* expressionWeights{};
-    deserialize_ptr(&expressionWeights, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&faceTracker);
-    cleanup_ptr(expressionInfo, 1);
-    cleanup_ptr(expressionWeights, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEyeTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrEyeTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrEyeTrackerFB* eyeTracker{};
-    deserialize_ptr(&eyeTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(eyeTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(eyeTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEyeTrackerFB));
-    // by this point, the function id has already been read, now read the params
-    XrEyeTrackerFB eyeTracker{};
-    deserialize(&eyeTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyEyeTrackerFB(eyeTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&eyeTracker);
-}
-
-void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetEyeGazesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEyeGazesFB));
-    // by this point, the function id has already been read, now read the params
-    XrEyeTrackerFB eyeTracker{};
-    deserialize(&eyeTracker, msg_in.stream, false);
-    XrEyeGazesInfoFB* gazeInfo{};
-    deserialize_ptr(&gazeInfo, msg_in.stream, false);
-    XrEyeGazesFB* eyeGazes{};
-    deserialize_ptr(&eyeGazes, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(eyeGazes, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&eyeTracker);
-    cleanup_ptr(gazeInfo, 1);
-    cleanup_ptr(eyeGazes, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPassthroughLayerSetKeyboardHandsIntensityFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
-    XrPassthroughKeyboardHandsIntensityFB* intensity{};
-    deserialize_ptr(&intensity, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&layer);
-    cleanup_ptr(intensity, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetDeviceSampleRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDeviceSampleRateFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrHapticActionInfo* hapticActionInfo{};
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, false);
-    XrDevicePcmSampleRateGetInfoFB* deviceSampleRate{};
-    deserialize_ptr(&deviceSampleRate, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(hapticActionInfo, 1);
-    cleanup_ptr(deviceSampleRate, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetPassthroughPreferencesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPassthroughPreferencesMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPassthroughPreferencesMETA* preferences{};
-    deserialize_ptr(&preferences, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetPassthroughPreferencesMETA(session, preferences);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(preferences, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(preferences, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
-#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrVirtualKeyboardCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrVirtualKeyboardMETA* keyboard{};
-    deserialize_ptr(&keyboard, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(keyboard, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyVirtualKeyboardMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyVirtualKeyboardMETA(keyboard);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-}
-
-void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateVirtualKeyboardSpaceMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardSpaceCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* keyboardSpace{};
-    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&keyboard);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(keyboardSpace, 1);
-}
-
-void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSuggestVirtualKeyboardLocationMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardLocationInfoMETA* locationInfo{};
-    deserialize_ptr(&locationInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(locationInfo, 1);
-}
-
-void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVirtualKeyboardScaleMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardScaleMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    float* scale{};
-    deserialize_ptr(&scale, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardScaleMETA(keyboard, scale);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(scale, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(scale, 1);
-}
-
-void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetVirtualKeyboardModelVisibilityMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility{};
-    deserialize_ptr(&modelVisibility, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(modelVisibility, 1);
-}
-
-void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVirtualKeyboardModelAnimationStatesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardModelAnimationStatesMETA* animationStates{};
-    deserialize_ptr(&animationStates, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(animationStates, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(animationStates, 1);
-}
-
-void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVirtualKeyboardDirtyTexturesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    uint32_t textureIdCapacityInput{};
-    deserialize(&textureIdCapacityInput, msg_in.stream, false);
-    uint32_t* textureIdCountOutput{};
-    deserialize_ptr(&textureIdCountOutput, msg_in.stream, false);
-    uint64_t* textureIds{};
-    deserialize_ptr(&textureIds, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(textureIdCountOutput, 1, msg_out.buffer);
-    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup(&textureIdCapacityInput);
-    cleanup_ptr(textureIdCountOutput, 1);
-    cleanup_ptr(textureIds, textureIdCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetVirtualKeyboardTextureDataMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    uint64_t textureId{};
-    deserialize(&textureId, msg_in.stream, false);
-    XrVirtualKeyboardTextureDataMETA* textureData{};
-    deserialize_ptr(&textureData, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(textureData, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup(&textureId);
-    cleanup_ptr(textureData, 1);
-}
-
-void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSendVirtualKeyboardInputMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSendVirtualKeyboardInputMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardInputInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrPosef* interactorRootPose{};
-    deserialize_ptr(&interactorRootPose, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(interactorRootPose, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(interactorRootPose, 1);
-}
-
-void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrChangeVirtualKeyboardTextContextMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA));
-    // by this point, the function id has already been read, now read the params
-    XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
-    XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo{};
-    deserialize_ptr(&changeInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&keyboard);
-    cleanup_ptr(changeInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateExternalCamerasOCULUS", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateExternalCamerasOCULUS));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    uint32_t cameraCapacityInput{};
-    deserialize(&cameraCapacityInput, msg_in.stream, false);
-    uint32_t* cameraCountOutput{};
-    deserialize_ptr(&cameraCountOutput, msg_in.stream, false);
-    XrExternalCameraOCULUS* cameras{};
-    deserialize_ptr(&cameras, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(cameraCountOutput, 1, msg_out.buffer);
-    serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&cameraCapacityInput);
-    cleanup_ptr(cameraCountOutput, 1);
-    cleanup_ptr(cameras, cameraCapacityInput);
-}
-
-#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
-#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumeratePerformanceMetricsCounterPathsMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    uint32_t counterPathCapacityInput{};
-    deserialize(&counterPathCapacityInput, msg_in.stream, false);
-    uint32_t* counterPathCountOutput{};
-    deserialize_ptr(&counterPathCountOutput, msg_in.stream, false);
-    XrPath* counterPaths{};
-    deserialize_ptr(&counterPaths, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(counterPathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup(&counterPathCapacityInput);
-    cleanup_ptr(counterPathCountOutput, 1);
-    cleanup_ptr(counterPaths, counterPathCapacityInput);
-}
-
-void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetPerformanceMetricsStateMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPerformanceMetricsStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetPerformanceMetricsStateMETA(session, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPerformanceMetricsStateMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPerformanceMetricsStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetPerformanceMetricsStateMETA(session, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQueryPerformanceMetricsCounterMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryPerformanceMetricsCounterMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPath counterPath{};
-    deserialize(&counterPath, msg_in.stream, false);
-    XrPerformanceMetricsCounterMETA* counter{};
-    deserialize_ptr(&counter, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(counter, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&counterPath);
-    cleanup_ptr(counter, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSaveSpaceListFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceListFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceListSaveInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSaveSpaceListFB(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceUserFB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpaceUserCreateInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrSpaceUserFB* user{};
-    deserialize_ptr(&user, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpaceUserFB(session, info, user);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(user, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(user, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceUserIdFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUserIdFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpaceUserFB user{};
-    deserialize(&user, msg_in.stream, false);
-    XrSpaceUserIdFB* userId{};
-    deserialize_ptr(&userId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceUserIdFB(user, userId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(userId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&user);
-    cleanup_ptr(userId, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpaceUserFB));
-    // by this point, the function id has already been read, now read the params
-    XrSpaceUserFB user{};
-    deserialize(&user, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySpaceUserFB(user);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&user);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetRecommendedLayerResolutionMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRecommendedLayerResolutionMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrRecommendedLayerResolutionGetInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrRecommendedLayerResolutionMETA* resolution{};
-    deserialize_ptr(&resolution, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetRecommendedLayerResolutionMETA(session, info, resolution);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(resolution, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(resolution, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughColorLutMETA));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
-    XrPassthroughColorLutCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrPassthroughColorLutMETA* colorLut{};
-    deserialize_ptr(&colorLut, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(colorLut, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&passthrough);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(colorLut, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyPassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughColorLutMETA));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughColorLutMETA colorLut{};
-    deserialize(&colorLut, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyPassthroughColorLutMETA(colorLut);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&colorLut);
-}
-
-void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrUpdatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdatePassthroughColorLutMETA));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughColorLutMETA colorLut{};
-    deserialize(&colorLut, msg_in.stream, false);
-    XrPassthroughColorLutUpdateInfoMETA* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&colorLut);
-    cleanup_ptr(updateInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpaceTriangleMeshMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceTriangleMeshMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
-    XrSpaceTriangleMeshGetInfoMETA* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrSpaceTriangleMeshMETA* triangleMeshOutput{};
-    deserialize_ptr(&triangleMeshOutput, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&space);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(triangleMeshOutput, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTracker2FB));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFaceTrackerCreateInfo2FB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrFaceTracker2FB* faceTracker{};
-    deserialize_ptr(&faceTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateFaceTracker2FB(session, createInfo, faceTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(createInfo->requestedDataSources, createInfo->requestedDataSourceCount, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(faceTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTracker2FB));
-    // by this point, the function id has already been read, now read the params
-    XrFaceTracker2FB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyFaceTracker2FB(faceTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&faceTracker);
-}
-
-void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetFaceExpressionWeights2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeights2FB));
-    // by this point, the function id has already been read, now read the params
-    XrFaceTracker2FB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
-    XrFaceExpressionInfo2FB* expressionInfo{};
-    deserialize_ptr(&expressionInfo, msg_in.stream, false);
-    XrFaceExpressionWeights2FB* expressionWeights{};
-    deserialize_ptr(&expressionWeights, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&faceTracker);
-    cleanup_ptr(expressionInfo, 1);
-    cleanup_ptr(expressionWeights, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrShareSpacesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrShareSpacesInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrShareSpacesMETA(session, info, requestId);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthProviderMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrEnvironmentDepthProviderCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrEnvironmentDepthProviderMETA* environmentDepthProvider{};
-    deserialize_ptr(&environmentDepthProvider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(environmentDepthProvider, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-}
-
-void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStartEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartEnvironmentDepthProviderMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-}
-
-void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStopEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopEnvironmentDepthProviderMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-}
-
-void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-    XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrEnvironmentDepthSwapchainMETA* swapchain{};
-    deserialize_ptr(&swapchain, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(swapchain, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&swapchain);
-}
-
-void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateEnvironmentDepthSwapchainImagesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
-    uint32_t imageCapacityInput{};
-    deserialize(&imageCapacityInput, msg_in.stream, false);
-    uint32_t* imageCountOutput{};
-    deserialize_ptr(&imageCountOutput, msg_in.stream, false);
-    XrSwapchainImageBaseHeader* images{};
-    deserialize_xr_array(&images, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
-    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&swapchain);
-    cleanup(&imageCapacityInput);
-    cleanup_ptr(imageCountOutput, 1);
-    cleanup_xr_array(images, imageCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetEnvironmentDepthSwapchainStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
-    XrEnvironmentDepthSwapchainStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&swapchain);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrAcquireEnvironmentDepthImageMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAcquireEnvironmentDepthImageMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-    XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo{};
-    deserialize_ptr(&acquireInfo, msg_in.stream, false);
-    XrEnvironmentDepthImageMETA* environmentDepthImage{};
-    deserialize_ptr(&environmentDepthImage, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-    cleanup_ptr(acquireInfo, 1);
-    cleanup_ptr(environmentDepthImage, 1);
-}
-
-void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetEnvironmentDepthHandRemovalMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA));
-    // by this point, the function id has already been read, now read the params
-    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
-    XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo{};
-    deserialize_ptr(&setInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&environmentDepthProvider);
-    cleanup_ptr(setInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetTrackingOptimizationSettingsHintQCOM", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrTrackingOptimizationSettingsDomainQCOM domain{};
-    deserialize(&domain, msg_in.stream, false);
-    XrTrackingOptimizationSettingsHintQCOM hint{};
-    deserialize(&hint, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&domain);
-    cleanup(&hint);
-}
-
-#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreatePassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrPassthroughCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrPassthroughHTC* passthrough{};
-    deserialize_ptr(&passthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreatePassthroughHTC(session, createInfo, passthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(passthrough, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(passthrough, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyPassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughHTC));
-    // by this point, the function id has already been read, now read the params
-    XrPassthroughHTC passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyPassthroughHTC(passthrough);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&passthrough);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
-#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrApplyFoveationHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyFoveationHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFoveationApplyInfoHTC* applyInfo{};
-    deserialize_ptr(&applyInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrApplyFoveationHTC(session, applyInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(applyInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTC_foveation
-#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialAnchorHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSpatialAnchorCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorHTC(session, createInfo, anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(anchor, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpatialAnchorNameHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorNameHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSpace anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-    XrSpatialAnchorNameHTC* name{};
-    deserialize_ptr(&name, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpatialAnchorNameHTC(anchor, name);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(name, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&anchor);
-    cleanup_ptr(name, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTC_anchor
-#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerHTC));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrBodyTrackerCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrBodyTrackerHTC* bodyTracker{};
-    deserialize_ptr(&bodyTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(bodyTracker, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerHTC));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyBodyTrackerHTC(bodyTracker);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-}
-
-void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrLocateBodyJointsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsHTC));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-    XrBodyJointsLocateInfoHTC* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
-    XrBodyJointLocationsHTC* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-    cleanup_ptr(locateInfo, 1);
-    cleanup_ptr(locations, 1);
-}
-
-void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetBodySkeletonHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonHTC));
-    // by this point, the function id has already been read, now read the params
-    XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
-    XrSpace baseSpace{};
-    deserialize(&baseSpace, msg_in.stream, false);
-    uint32_t skeletonGenerationId{};
-    deserialize(&skeletonGenerationId, msg_in.stream, false);
-    XrBodySkeletonHTC* skeleton{};
-    deserialize_ptr(&skeleton, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&bodyTracker);
-    cleanup(&baseSpace);
-    cleanup(&skeletonGenerationId);
-    cleanup_ptr(skeleton, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrApplyForceFeedbackCurlMNDX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyForceFeedbackCurlMNDX));
-    // by this point, the function id has already been read, now read the params
-    XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
-    XrForceFeedbackCurlApplyLocationsMNDX* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrApplyForceFeedbackCurlMNDX(handTracker, locations);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations->locations, locations->locationCount, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&handTracker);
-    cleanup_ptr(locations, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerBD));
@@ -5197,356 +107,6 @@ void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrEnumerateSpatialEntityComponentTypesBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
-    XrSpatialEntityIdBD entityId{};
-    deserialize(&entityId, msg_in.stream, false);
-    uint32_t componentTypeCapacityInput{};
-    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
-    uint32_t* componentTypeCountOutput{};
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
-    XrSpatialEntityComponentTypeBD* componentTypes{};
-    deserialize_ptr(&componentTypes, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&snapshot);
-    cleanup(&entityId);
-    cleanup(&componentTypeCapacityInput);
-    cleanup_ptr(componentTypeCountOutput, 1);
-    cleanup_ptr(componentTypes, componentTypeCapacityInput);
-}
-
-void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpatialEntityUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityUuidBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
-    XrSpatialEntityIdBD entityId{};
-    deserialize(&entityId, msg_in.stream, false);
-    XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&snapshot);
-    cleanup(&entityId);
-    cleanup_ptr(uuid, 1);
-}
-
-void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSpatialEntityComponentDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityComponentDataBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
-    XrSpatialEntityComponentGetInfoBD* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrSpatialEntityComponentDataBaseHeaderBD* componentData{};
-    deserialize_xr(&componentData, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(componentData, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&snapshot);
-    cleanup_ptr(getInfo, 1);
-    cleanup_xr(componentData);
-}
-
-void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSenseDataProviderBD));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrSenseDataProviderCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSenseDataProviderBD* provider{};
-    deserialize_ptr(&provider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSenseDataProviderBD(session, createInfo, provider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(provider, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(provider, 1);
-}
-
-void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStartSenseDataProviderAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderAsyncBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrSenseDataProviderStartInfoBD* startInfo{};
-    deserialize_ptr(&startInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup_ptr(startInfo, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStartSenseDataProviderCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderCompleteBD));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStartSenseDataProviderCompleteBD(session, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetSenseDataProviderStateBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSenseDataProviderStateBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrSenseDataProviderStateBD* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetSenseDataProviderStateBD(provider, state);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup_ptr(state, 1);
-}
-
-void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySenseDataAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataAsyncBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrSenseDataQueryInfoBD* queryInfo{};
-    deserialize_ptr(&queryInfo, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySenseDataAsyncBD(provider, queryInfo, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup_ptr(queryInfo, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrQuerySenseDataCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataCompleteBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrSenseDataQueryCompletionBD* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrQuerySenseDataCompleteBD(provider, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
-void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySenseDataSnapshotBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataSnapshotBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySenseDataSnapshotBD(snapshot);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&snapshot);
-}
-
-void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetQueriedSenseDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetQueriedSenseDataBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
-    XrQueriedSenseDataGetInfoBD* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrQueriedSenseDataBD* queriedSenseData{};
-    deserialize_ptr(&queriedSenseData, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(queriedSenseData, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&snapshot);
-    cleanup_ptr(getInfo, 1);
-    cleanup_ptr(queriedSenseData, 1);
-}
-
-void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStopSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopSenseDataProviderBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrStopSenseDataProviderBD(provider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-}
-
-void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroySenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataProviderBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroySenseDataProviderBD(provider);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-}
-
-void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateSpatialEntityAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialEntityAnchorBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrSpatialEntityAnchorCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrAnchorBD* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(anchor, 1);
-}
-
-void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyAnchorBD));
-    // by this point, the function id has already been read, now read the params
-    XrAnchorBD anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrDestroyAnchorBD(anchor);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&anchor);
-}
-
-void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetAnchorUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAnchorUuidBD));
-    // by this point, the function id has already been read, now read the params
-    XrAnchorBD anchor{};
-    deserialize(&anchor, msg_in.stream, false);
-    XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrGetAnchorUuidBD(anchor, uuid);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&anchor);
-    cleanup_ptr(uuid, 1);
-}
-
-void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateAnchorSpaceBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateAnchorSpaceBD));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrAnchorSpaceCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCreateAnchorSpaceBD(session, createInfo, space);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(createInfo, 1);
-    cleanup_ptr(space, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorAsyncBD));
@@ -5682,50 +242,6 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn m
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrShareSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorAsyncBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrSpatialAnchorShareInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrShareSpatialAnchorAsyncBD(provider, info, future);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(future, 1);
-}
-
-void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrShareSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorCompleteBD));
-    // by this point, the function id has already been read, now read the params
-    XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrShareSpatialAnchorCompleteBD(provider, future, completion);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&provider);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
-}
-
 void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDownloadSharedSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDownloadSharedSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
@@ -5759,6 +275,50 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLoc
     deserialize_ptr(&completion, msg_in.stream, false);
 
     XrResult _result = function_loader.pfn_xrDownloadSharedSpatialAnchorCompleteBD(provider, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrShareSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorAsyncBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrSpatialAnchorShareInfoBD* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrShareSpatialAnchorAsyncBD(provider, info, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrShareSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorCompleteBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrFutureCompletionEXT* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrShareSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
@@ -5817,7 +377,761 @@ void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateAnchorSpaceBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateAnchorSpaceBD));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrAnchorSpaceCreateInfoBD* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateAnchorSpaceBD(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSenseDataProviderBD));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSenseDataProviderCreateInfoBD* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSenseDataProviderBD* provider{};
+    deserialize_ptr(&provider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSenseDataProviderBD(session, createInfo, provider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(provider, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(provider, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialEntityAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialEntityAnchorBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrSpatialEntityAnchorCreateInfoBD* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrAnchorBD* anchor{};
+    deserialize_ptr(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(anchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(anchor, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyAnchorBD));
+    // by this point, the function id has already been read, now read the params
+    XrAnchorBD anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyAnchorBD(anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&anchor);
+}
+
+void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataProviderBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySenseDataProviderBD(provider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+}
+
+void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySenseDataSnapshotBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataSnapshotBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataSnapshotBD snapshot{};
+    deserialize(&snapshot, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySenseDataSnapshotBD(snapshot);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&snapshot);
+}
+
+void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateSpatialEntityComponentTypesBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataSnapshotBD snapshot{};
+    deserialize(&snapshot, msg_in.stream, false);
+    XrSpatialEntityIdBD entityId{};
+    deserialize(&entityId, msg_in.stream, false);
+    uint32_t componentTypeCapacityInput{};
+    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
+    uint32_t* componentTypeCountOutput{};
+    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
+    XrSpatialEntityComponentTypeBD* componentTypes{};
+    deserialize_ptr(&componentTypes, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&snapshot);
+    cleanup(&entityId);
+    cleanup(&componentTypeCapacityInput);
+    cleanup_ptr(componentTypeCountOutput, 1);
+    cleanup_ptr(componentTypes, componentTypeCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetAnchorUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAnchorUuidBD));
+    // by this point, the function id has already been read, now read the params
+    XrAnchorBD anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+    XrUuidEXT* uuid{};
+    deserialize_ptr(&uuid, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetAnchorUuidBD(anchor, uuid);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(uuid, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&anchor);
+    cleanup_ptr(uuid, 1);
+}
+
+void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetQueriedSenseDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetQueriedSenseDataBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataSnapshotBD snapshot{};
+    deserialize(&snapshot, msg_in.stream, false);
+    XrQueriedSenseDataGetInfoBD* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrQueriedSenseDataBD* queriedSenseData{};
+    deserialize_ptr(&queriedSenseData, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(getInfo, 1, msg_out.buffer);
+    serialize_ptr(queriedSenseData, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&snapshot);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(queriedSenseData, 1);
+}
+
+void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSenseDataProviderStateBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSenseDataProviderStateBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrSenseDataProviderStateBD* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSenseDataProviderStateBD(provider, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpatialEntityComponentDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityComponentDataBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataSnapshotBD snapshot{};
+    deserialize(&snapshot, msg_in.stream, false);
+    XrSpatialEntityComponentGetInfoBD* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrSpatialEntityComponentDataBaseHeaderBD* componentData{};
+    deserialize_xr(&componentData, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(componentData, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&snapshot);
+    cleanup_ptr(getInfo, 1);
+    cleanup_xr(componentData);
+}
+
+void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpatialEntityUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityUuidBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataSnapshotBD snapshot{};
+    deserialize(&snapshot, msg_in.stream, false);
+    XrSpatialEntityIdBD entityId{};
+    deserialize(&entityId, msg_in.stream, false);
+    XrUuidEXT* uuid{};
+    deserialize_ptr(&uuid, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(uuid, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&snapshot);
+    cleanup(&entityId);
+    cleanup_ptr(uuid, 1);
+}
+
+void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySenseDataAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataAsyncBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrSenseDataQueryInfoBD* queryInfo{};
+    deserialize_ptr(&queryInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySenseDataAsyncBD(provider, queryInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup_ptr(queryInfo, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySenseDataCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataCompleteBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrSenseDataQueryCompletionBD* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySenseDataCompleteBD(provider, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStartSenseDataProviderAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderAsyncBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+    XrSenseDataProviderStartInfoBD* startInfo{};
+    deserialize_ptr(&startInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+    cleanup_ptr(startInfo, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStartSenseDataProviderCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderCompleteBD));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrFutureCompletionEXT* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStartSenseDataProviderCompleteBD(session, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStopSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopSenseDataProviderBD));
+    // by this point, the function id has already been read, now read the params
+    XrSenseDataProviderBD provider{};
+    deserialize(&provider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStopSenseDataProviderBD(provider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&provider);
+}
+
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetInputDeviceActiveEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceActiveEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath interactionProfile{};
+    deserialize(&interactionProfile, msg_in.stream, false);
+    XrPath topLevelPath{};
+    deserialize(&topLevelPath, msg_in.stream, false);
+    XrBool32 isActive{};
+    deserialize(&isActive, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&interactionProfile);
+    cleanup(&topLevelPath);
+    cleanup(&isActive);
+}
+
+void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetInputDeviceLocationEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceLocationEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath topLevelPath{};
+    deserialize(&topLevelPath, msg_in.stream, false);
+    XrPath inputSourcePath{};
+    deserialize(&inputSourcePath, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrPosef pose{};
+    deserialize(&pose, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&topLevelPath);
+    cleanup(&inputSourcePath);
+    cleanup(&space);
+    cleanup(&pose);
+}
+
+void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetInputDeviceStateBoolEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateBoolEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath topLevelPath{};
+    deserialize(&topLevelPath, msg_in.stream, false);
+    XrPath inputSourcePath{};
+    deserialize(&inputSourcePath, msg_in.stream, false);
+    XrBool32 state{};
+    deserialize(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&topLevelPath);
+    cleanup(&inputSourcePath);
+    cleanup(&state);
+}
+
+void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetInputDeviceStateFloatEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateFloatEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath topLevelPath{};
+    deserialize(&topLevelPath, msg_in.stream, false);
+    XrPath inputSourcePath{};
+    deserialize(&inputSourcePath, msg_in.stream, false);
+    float state{};
+    deserialize(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&topLevelPath);
+    cleanup(&inputSourcePath);
+    cleanup(&state);
+}
+
+void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetInputDeviceStateVector2fEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateVector2fEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath topLevelPath{};
+    deserialize(&topLevelPath, msg_in.stream, false);
+    XrPath inputSourcePath{};
+    deserialize(&inputSourcePath, msg_in.stream, false);
+    XrVector2f state{};
+    deserialize(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&topLevelPath);
+    cleanup(&inputSourcePath);
+    cleanup(&state);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateDebugUtilsMessengerEXT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrDebugUtilsMessengerCreateInfoEXT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrDebugUtilsMessengerEXT* messenger{};
+    deserialize_ptr(&messenger, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(createInfo->userData, 1, msg_out.buffer);
+    serialize_ptr(messenger, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(messenger, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyDebugUtilsMessengerEXT));
+    // by this point, the function id has already been read, now read the params
+    XrDebugUtilsMessengerEXT messenger{};
+    deserialize(&messenger, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyDebugUtilsMessengerEXT(messenger);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&messenger);
+}
+
+void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSessionBeginDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrDebugUtilsLabelEXT* labelInfo{};
+    deserialize_ptr(&labelInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(labelInfo, 1);
+}
+
+void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSessionEndDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT(session);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+}
+
+void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSessionInsertDebugUtilsLabelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrDebugUtilsLabelEXT* labelInfo{};
+    deserialize_ptr(&labelInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(labelInfo, 1);
+}
+
+void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetDebugUtilsObjectNameEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetDebugUtilsObjectNameEXT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrDebugUtilsObjectNameInfoEXT* nameInfo{};
+    deserialize_ptr(&nameInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(nameInfo, 1);
+}
+
+void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSubmitDebugUtilsMessageEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSubmitDebugUtilsMessageEXT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrDebugUtilsMessageSeverityFlagsEXT messageSeverity{};
+    deserialize(&messageSeverity, msg_in.stream, false);
+    XrDebugUtilsMessageTypeFlagsEXT messageTypes{};
+    deserialize(&messageTypes, msg_in.stream, false);
+    XrDebugUtilsMessengerCallbackDataEXT* callbackData{};
+    deserialize_ptr(&callbackData, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(callbackData->objects, callbackData->objectCount, msg_out.buffer);
+    serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&messageSeverity);
+    cleanup(&messageTypes);
+    cleanup_ptr(callbackData, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCancelFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCancelFutureEXT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrFutureCancelInfoEXT* cancelInfo{};
+    deserialize_ptr(&cancelInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCancelFutureEXT(instance, cancelInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(cancelInfo, 1);
+}
+
+void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPollFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPollFutureEXT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrFuturePollInfoEXT* pollInfo{};
+    deserialize_ptr(&pollInfo, msg_in.stream, false);
+    XrFuturePollResultEXT* pollResult{};
+    deserialize_ptr(&pollResult, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPollFutureEXT(instance, pollInfo, pollResult);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(pollResult, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(pollInfo, 1);
+    cleanup_ptr(pollResult, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandTrackerEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrHandTrackerCreateInfoEXT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrHandTrackerEXT* handTracker{};
+    deserialize_ptr(&handTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateHandTrackerEXT(session, createInfo, handTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(handTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(handTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyHandTrackerEXT));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyHandTrackerEXT(handTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+}
+
+void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLocateHandJointsEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateHandJointsEXT));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+    XrHandJointsLocateInfoEXT* locateInfo{};
+    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    XrHandJointLocationsEXT* locations{};
+    deserialize_ptr(&locations, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrLocateHandJointsEXT(handTracker, locateInfo, locations);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(locations, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+    cleanup_ptr(locateInfo, 1);
+    cleanup_ptr(locations, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPerfSettingsSetPerformanceLevelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPerfSettingsDomainEXT domain{};
+    deserialize(&domain, msg_in.stream, false);
+    XrPerfSettingsLevelEXT level{};
+    deserialize(&level, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&domain);
+    cleanup(&level);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrBeginPlaneDetectionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrBeginPlaneDetectionEXT));
+    // by this point, the function id has already been read, now read the params
+    XrPlaneDetectorEXT planeDetector{};
+    deserialize(&planeDetector, msg_in.stream, false);
+    XrPlaneDetectorBeginInfoEXT* beginInfo{};
+    deserialize_ptr(&beginInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&planeDetector);
+    cleanup_ptr(beginInfo, 1);
+}
+
 void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePlaneDetectorEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePlaneDetectorEXT));
     // by this point, the function id has already been read, now read the params
@@ -5853,24 +1167,6 @@ void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
     msg_out.flush();
 
     cleanup(&planeDetector);
-}
-
-void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrBeginPlaneDetectionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrBeginPlaneDetectionEXT));
-    // by this point, the function id has already been read, now read the params
-    XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
-    XrPlaneDetectorBeginInfoEXT* beginInfo{};
-    deserialize_ptr(&beginInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&planeDetector);
-    cleanup_ptr(beginInfo, 1);
 }
 
 void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) {
@@ -5940,268 +1236,3130 @@ void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
-#ifdef XRTRANSPORT_EXT_XR_EXT_future
-void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPollFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPollFutureEXT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrFuturePollInfoEXT* pollInfo{};
-    deserialize_ptr(&pollInfo, msg_in.stream, false);
-    XrFuturePollResultEXT* pollResult{};
-    deserialize_ptr(&pollResult, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPollFutureEXT(instance, pollInfo, pollResult);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pollResult, 1, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(pollInfo, 1);
-    cleanup_ptr(pollResult, 1);
-}
-
-void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCancelFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCancelFutureEXT));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrFutureCancelInfoEXT* cancelInfo{};
-    deserialize_ptr(&cancelInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrCancelFutureEXT(instance, cancelInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(cancelInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_EXT_future
-#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrSetSystemNotificationsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSystemNotificationsML));
-    // by this point, the function id has already been read, now read the params
-    XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
-    XrSystemNotificationsSetInfoML* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrSetSystemNotificationsML(instance, info);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&instance);
-    cleanup_ptr(info, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
-#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateWorldMeshDetectorML));
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrThermalGetTemperatureTrendEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrThermalGetTemperatureTrendEXT));
     // by this point, the function id has already been read, now read the params
     XrSession session{};
     deserialize(&session, msg_in.stream, false);
-    XrWorldMeshDetectorCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-    XrWorldMeshDetectorML* detector{};
-    deserialize_ptr(&detector, msg_in.stream, false);
+    XrPerfSettingsDomainEXT domain{};
+    deserialize(&domain, msg_in.stream, false);
+    XrPerfSettingsNotificationLevelEXT* notificationLevel{};
+    deserialize_ptr(&notificationLevel, msg_in.stream, false);
+    float* tempHeadroom{};
+    deserialize_ptr(&tempHeadroom, msg_in.stream, false);
+    float* tempSlope{};
+    deserialize_ptr(&tempSlope, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrCreateWorldMeshDetectorML(session, createInfo, detector);
+    XrResult _result = function_loader.pfn_xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(detector, 1, msg_out.buffer);
+    serialize_ptr(notificationLevel, 1, msg_out.buffer);
+    serialize_ptr(tempHeadroom, 1, msg_out.buffer);
+    serialize_ptr(tempSlope, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&domain);
+    cleanup_ptr(notificationLevel, 1);
+    cleanup_ptr(tempHeadroom, 1);
+    cleanup_ptr(tempSlope, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrBodyTrackerCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrBodyTrackerFB* bodyTracker{};
+    deserialize_ptr(&bodyTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bodyTracker, 1, msg_out.buffer);
     msg_out.flush();
 
     cleanup(&session);
     cleanup_ptr(createInfo, 1);
-    cleanup_ptr(detector, 1);
+    cleanup_ptr(bodyTracker, 1);
 }
 
-void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyWorldMeshDetectorML));
+void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    XrBodyTrackerFB bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrDestroyWorldMeshDetectorML(detector);
+    XrResult _result = function_loader.pfn_xrDestroyBodyTrackerFB(bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
+    cleanup(&bodyTracker);
 }
 
-void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestWorldMeshStateAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateAsyncML));
+void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetBodySkeletonFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshStateRequestInfoML* stateRequest{};
-    deserialize_ptr(&stateRequest, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    XrBodyTrackerFB bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
+    XrBodySkeletonFB* skeleton{};
+    deserialize_ptr(&skeleton, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
+    XrResult _result = function_loader.pfn_xrGetBodySkeletonFB(bodyTracker, skeleton);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    serialize_ptr(skeleton, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup_ptr(stateRequest, 1);
-    cleanup_ptr(future, 1);
+    cleanup(&bodyTracker);
+    cleanup_ptr(skeleton, 1);
 }
 
-void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestWorldMeshStateCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateCompleteML));
+void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLocateBodyJointsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrWorldMeshStateRequestCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    XrBodyTrackerFB bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
+    XrBodyJointsLocateInfoFB* locateInfo{};
+    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    XrBodyJointLocationsFB* locations{};
+    deserialize_ptr(&locations, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrRequestWorldMeshStateCompleteML(detector, future, completion);
+    XrResult _result = function_loader.pfn_xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    serialize_ptr(locations, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
+    cleanup(&bodyTracker);
+    cleanup_ptr(locateInfo, 1);
+    cleanup_ptr(locations, 1);
 }
 
-void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrGetWorldMeshBufferRecommendSizeML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML));
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateColorSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateColorSpacesFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo{};
-    deserialize_ptr(&sizeInfo, msg_in.stream, false);
-    XrWorldMeshBufferSizeML* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint32_t colorSpaceCapacityInput{};
+    deserialize(&colorSpaceCapacityInput, msg_in.stream, false);
+    uint32_t* colorSpaceCountOutput{};
+    deserialize_ptr(&colorSpaceCountOutput, msg_in.stream, false);
+    XrColorSpaceFB* colorSpaces{};
+    deserialize_ptr(&colorSpaces, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
+    XrResult _result = function_loader.pfn_xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
+    serialize_ptr(colorSpaceCountOutput, 1, msg_out.buffer);
+    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup_ptr(sizeInfo, 1);
-    cleanup_ptr(size, 1);
+    cleanup(&session);
+    cleanup(&colorSpaceCapacityInput);
+    cleanup_ptr(colorSpaceCountOutput, 1);
+    cleanup_ptr(colorSpaces, colorSpaceCapacityInput);
 }
 
-void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrAllocateWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAllocateWorldMeshBufferML));
+void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetColorSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetColorSpaceFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshBufferSizeML* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
-    XrWorldMeshBufferML* buffer{};
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrColorSpaceFB colorSpace{};
+    deserialize(&colorSpace, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetColorSpaceFB(session, colorSpace);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&colorSpace);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateDisplayRefreshRatesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateDisplayRefreshRatesFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint32_t displayRefreshRateCapacityInput{};
+    deserialize(&displayRefreshRateCapacityInput, msg_in.stream, false);
+    uint32_t* displayRefreshRateCountOutput{};
+    deserialize_ptr(&displayRefreshRateCountOutput, msg_in.stream, false);
+    float* displayRefreshRates{};
+    deserialize_ptr(&displayRefreshRates, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.buffer);
+    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&displayRefreshRateCapacityInput);
+    cleanup_ptr(displayRefreshRateCountOutput, 1);
+    cleanup_ptr(displayRefreshRates, displayRefreshRateCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDisplayRefreshRateFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    float* displayRefreshRate{};
+    deserialize_ptr(&displayRefreshRate, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetDisplayRefreshRateFB(session, displayRefreshRate);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(displayRefreshRate, 1);
+}
+
+void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestDisplayRefreshRateFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    float displayRefreshRate{};
+    deserialize(&displayRefreshRate, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&displayRefreshRate);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEyeTrackerFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrEyeTrackerCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrEyeTrackerFB* eyeTracker{};
+    deserialize_ptr(&eyeTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(eyeTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(eyeTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEyeTrackerFB));
+    // by this point, the function id has already been read, now read the params
+    XrEyeTrackerFB eyeTracker{};
+    deserialize(&eyeTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyEyeTrackerFB(eyeTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&eyeTracker);
+}
+
+void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetEyeGazesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEyeGazesFB));
+    // by this point, the function id has already been read, now read the params
+    XrEyeTrackerFB eyeTracker{};
+    deserialize(&eyeTracker, msg_in.stream, false);
+    XrEyeGazesInfoFB* gazeInfo{};
+    deserialize_ptr(&gazeInfo, msg_in.stream, false);
+    XrEyeGazesFB* eyeGazes{};
+    deserialize_ptr(&eyeGazes, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(eyeGazes, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&eyeTracker);
+    cleanup_ptr(gazeInfo, 1);
+    cleanup_ptr(eyeGazes, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTrackerFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFaceTrackerCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrFaceTrackerFB* faceTracker{};
+    deserialize_ptr(&faceTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateFaceTrackerFB(session, createInfo, faceTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(faceTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(faceTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTrackerFB));
+    // by this point, the function id has already been read, now read the params
+    XrFaceTrackerFB faceTracker{};
+    deserialize(&faceTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyFaceTrackerFB(faceTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&faceTracker);
+}
+
+void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetFaceExpressionWeightsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeightsFB));
+    // by this point, the function id has already been read, now read the params
+    XrFaceTrackerFB faceTracker{};
+    deserialize(&faceTracker, msg_in.stream, false);
+    XrFaceExpressionInfoFB* expressionInfo{};
+    deserialize_ptr(&expressionInfo, msg_in.stream, false);
+    XrFaceExpressionWeightsFB* expressionWeights{};
+    deserialize_ptr(&expressionWeights, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&faceTracker);
+    cleanup_ptr(expressionInfo, 1);
+    cleanup_ptr(expressionWeights, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTracker2FB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFaceTrackerCreateInfo2FB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrFaceTracker2FB* faceTracker{};
+    deserialize_ptr(&faceTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateFaceTracker2FB(session, createInfo, faceTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(createInfo->requestedDataSources, createInfo->requestedDataSourceCount, msg_out.buffer);
+    serialize_ptr(faceTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(faceTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTracker2FB));
+    // by this point, the function id has already been read, now read the params
+    XrFaceTracker2FB faceTracker{};
+    deserialize(&faceTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyFaceTracker2FB(faceTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&faceTracker);
+}
+
+void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetFaceExpressionWeights2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeights2FB));
+    // by this point, the function id has already been read, now read the params
+    XrFaceTracker2FB faceTracker{};
+    deserialize(&faceTracker, msg_in.stream, false);
+    XrFaceExpressionInfo2FB* expressionInfo{};
+    deserialize_ptr(&expressionInfo, msg_in.stream, false);
+    XrFaceExpressionWeights2FB* expressionWeights{};
+    deserialize_ptr(&expressionWeights, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&faceTracker);
+    cleanup_ptr(expressionInfo, 1);
+    cleanup_ptr(expressionWeights, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFoveationProfileFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFoveationProfileCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrFoveationProfileFB* profile{};
+    deserialize_ptr(&profile, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateFoveationProfileFB(session, createInfo, profile);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(createInfo->next, msg_out.buffer);
+    serialize_ptr(profile, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(profile, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFoveationProfileFB));
+    // by this point, the function id has already been read, now read the params
+    XrFoveationProfileFB profile{};
+    deserialize(&profile, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyFoveationProfileFB(profile);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&profile);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetHandMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetHandMeshFB));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+    XrHandTrackingMeshFB* mesh{};
+    deserialize_ptr(&mesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetHandMeshFB(handTracker, mesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(mesh, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+    cleanup_ptr(mesh, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetDeviceSampleRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDeviceSampleRateFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrHapticActionInfo* hapticActionInfo{};
+    deserialize_ptr(&hapticActionInfo, msg_in.stream, false);
+    XrDevicePcmSampleRateGetInfoFB* deviceSampleRate{};
+    deserialize_ptr(&deviceSampleRate, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(hapticActionInfo, 1);
+    cleanup_ptr(deviceSampleRate, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateKeyboardSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateKeyboardSpaceFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrKeyboardSpaceCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* keyboardSpace{};
+    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(createInfo->next, msg_out.buffer);
+    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(keyboardSpace, 1);
+}
+
+void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySystemTrackedKeyboardFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySystemTrackedKeyboardFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrKeyboardTrackingQueryFB* queryInfo{};
+    deserialize_ptr(&queryInfo, msg_in.stream, false);
+    XrKeyboardTrackingDescriptionFB* keyboard{};
+    deserialize_ptr(&keyboard, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(queryInfo->next, msg_out.buffer);
+    serialize_ptr(keyboard, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(queryInfo, 1);
+    cleanup_ptr(keyboard, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateGeometryInstanceFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrGeometryInstanceCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrGeometryInstanceFB* outGeometryInstance{};
+    deserialize_ptr(&outGeometryInstance, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(outGeometryInstance, 1);
+}
+
+void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreatePassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPassthroughCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrPassthroughFB* outPassthrough{};
+    deserialize_ptr(&outPassthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreatePassthroughFB(session, createInfo, outPassthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outPassthrough, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(outPassthrough, 1);
+}
+
+void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreatePassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughLayerFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPassthroughLayerCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrPassthroughLayerFB* outLayer{};
+    deserialize_ptr(&outLayer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreatePassthroughLayerFB(session, createInfo, outLayer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outLayer, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(outLayer, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyGeometryInstanceFB));
+    // by this point, the function id has already been read, now read the params
+    XrGeometryInstanceFB instance{};
+    deserialize(&instance, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyGeometryInstanceFB(instance);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+}
+
+void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyPassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughFB passthrough{};
+    deserialize(&passthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyPassthroughFB(passthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&passthrough);
+}
+
+void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyPassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughLayerFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughLayerFB layer{};
+    deserialize(&layer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyPassthroughLayerFB(layer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&layer);
+}
+
+void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGeometryInstanceSetTransformFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGeometryInstanceSetTransformFB));
+    // by this point, the function id has already been read, now read the params
+    XrGeometryInstanceFB instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrGeometryInstanceTransformFB* transformation{};
+    deserialize_ptr(&transformation, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGeometryInstanceSetTransformFB(instance, transformation);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(transformation, 1);
+}
+
+void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughLayerPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerPauseFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughLayerFB layer{};
+    deserialize(&layer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughLayerPauseFB(layer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&layer);
+}
+
+void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughLayerResumeFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerResumeFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughLayerFB layer{};
+    deserialize(&layer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughLayerResumeFB(layer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&layer);
+}
+
+void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughLayerSetStyleFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetStyleFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughLayerFB layer{};
+    deserialize(&layer, msg_in.stream, false);
+    XrPassthroughStyleFB* style{};
+    deserialize_ptr(&style, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughLayerSetStyleFB(layer, style);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&layer);
+    cleanup_ptr(style, 1);
+}
+
+void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughPauseFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughFB passthrough{};
+    deserialize(&passthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughPauseFB(passthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&passthrough);
+}
+
+void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughStartFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughStartFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughFB passthrough{};
+    deserialize(&passthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughStartFB(passthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&passthrough);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPassthroughLayerSetKeyboardHandsIntensityFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughLayerFB layer{};
+    deserialize(&layer, msg_in.stream, false);
+    XrPassthroughKeyboardHandsIntensityFB* intensity{};
+    deserialize_ptr(&intensity, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&layer);
+    cleanup_ptr(intensity, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateRenderModelPathsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateRenderModelPathsFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint32_t pathCapacityInput{};
+    deserialize(&pathCapacityInput, msg_in.stream, false);
+    uint32_t* pathCountOutput{};
+    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
+    XrRenderModelPathInfoFB* paths{};
+    deserialize_ptr(&paths, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
+    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&pathCapacityInput);
+    cleanup_ptr(pathCountOutput, 1);
+    cleanup_ptr(paths, pathCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetRenderModelPropertiesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRenderModelPropertiesFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath path{};
+    deserialize(&path, msg_in.stream, false);
+    XrRenderModelPropertiesFB* properties{};
+    deserialize_ptr(&properties, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetRenderModelPropertiesFB(session, path, properties);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(properties, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&path);
+    cleanup_ptr(properties, 1);
+}
+
+void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLoadRenderModelFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadRenderModelFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrRenderModelLoadInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrRenderModelBufferFB* buffer{};
     deserialize_ptr(&buffer, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrAllocateWorldMeshBufferML(detector, size, buffer);
+    XrResult _result = function_loader.pfn_xrLoadRenderModelFB(session, info, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_xr(size->next, msg_out.buffer);
+    serialize_xr(info->next, msg_out.buffer);
     serialize_ptr(buffer, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup_ptr(size, 1);
+    cleanup(&session);
+    cleanup_ptr(info, 1);
     cleanup_ptr(buffer, 1);
 }
 
-void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrFreeWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrFreeWorldMeshBufferML));
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceBoundary2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundary2DFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshBufferML* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrBoundary2DFB* boundary2DOutput{};
+    deserialize_ptr(&boundary2DOutput, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrFreeWorldMeshBufferML(detector, buffer);
+    XrResult _result = function_loader.pfn_xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_xr(buffer->next, msg_out.buffer);
-    serialize_ptr(buffer->buffer, buffer->bufferSize, msg_out.buffer);
+    serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup_ptr(buffer, 1);
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(boundary2DOutput, 1);
 }
 
-void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestWorldMeshAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshAsyncML));
+void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceBoundingBox2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox2DFB));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshGetInfoML* getInfo{};
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrRect2Df* boundingBox2DOutput{};
+    deserialize_ptr(&boundingBox2DOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(boundingBox2DOutput, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceBoundingBox3DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox3DFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrRect3DfFB* boundingBox3DOutput{};
+    deserialize_ptr(&boundingBox3DOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(boundingBox3DOutput, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceRoomLayoutFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceRoomLayoutFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrRoomLayoutFB* roomLayoutOutput{};
+    deserialize_ptr(&roomLayoutOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(roomLayoutOutput, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceSemanticLabelsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceSemanticLabelsFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrSemanticLabelsFB* semanticLabelsOutput{};
+    deserialize_ptr(&semanticLabelsOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(semanticLabelsOutput, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestSceneCaptureFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestSceneCaptureFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSceneCaptureRequestInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestSceneCaptureFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorCreateInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateSpaceSupportedComponentsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    uint32_t componentTypeCapacityInput{};
+    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
+    uint32_t* componentTypeCountOutput{};
+    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
+    XrSpaceComponentTypeFB* componentTypes{};
+    deserialize_ptr(&componentTypes, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&space);
+    cleanup(&componentTypeCapacityInput);
+    cleanup_ptr(componentTypeCountOutput, 1);
+    cleanup_ptr(componentTypes, componentTypeCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceComponentStatusFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrSpaceComponentTypeFB componentType{};
+    deserialize(&componentType, msg_in.stream, false);
+    XrSpaceComponentStatusFB* status{};
+    deserialize_ptr(&status, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceComponentStatusFB(space, componentType, status);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(status, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&space);
+    cleanup(&componentType);
+    cleanup_ptr(status, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceUuidFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUuidFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrUuidEXT* uuid{};
+    deserialize_ptr(&uuid, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceUuidFB(space, uuid);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(uuid, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&space);
+    cleanup_ptr(uuid, 1);
+}
+
+void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSpaceComponentStatusFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrSpaceComponentStatusSetInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetSpaceComponentStatusFB(space, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&space);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceContainerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceContainerFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrSpaceContainerFB* spaceContainerOutput{};
+    deserialize_ptr(&spaceContainerOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceContainerFB(session, space, spaceContainerOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&space);
+    cleanup_ptr(spaceContainerOutput, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpacesFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceQueryInfoBaseHeaderFB* info{};
+    deserialize_xr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySpacesFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_xr(info);
+    cleanup_ptr(requestId, 1);
+}
+
+void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRetrieveSpaceQueryResultsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRetrieveSpaceQueryResultsFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrAsyncRequestIdFB requestId{};
+    deserialize(&requestId, msg_in.stream, false);
+    XrSpaceQueryResultsFB* results{};
+    deserialize_ptr(&results, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRetrieveSpaceQueryResultsFB(session, requestId, results);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(results, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&requestId);
+    cleanup_ptr(results, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrShareSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceShareInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrShareSpacesFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
+    serialize_ptr(info->users, info->userCount, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEraseSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEraseSpaceFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceEraseInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEraseSpaceFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSaveSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceSaveInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSaveSpaceFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSaveSpaceListFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceListFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceListSaveInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSaveSpaceListFB(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceUserFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpaceUserCreateInfoFB* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrSpaceUserFB* user{};
+    deserialize_ptr(&user, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpaceUserFB(session, info, user);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(user, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(user, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpaceUserFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpaceUserFB user{};
+    deserialize(&user, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySpaceUserFB(user);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&user);
+}
+
+void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceUserIdFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUserIdFB));
+    // by this point, the function id has already been read, now read the params
+    XrSpaceUserFB user{};
+    deserialize(&user, msg_in.stream, false);
+    XrSpaceUserIdFB* userId{};
+    deserialize_ptr(&userId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceUserIdFB(user, userId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(userId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&user);
+    cleanup_ptr(userId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSwapchainStateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSwapchainStateFB));
+    // by this point, the function id has already been read, now read the params
+    XrSwapchain swapchain{};
+    deserialize(&swapchain, msg_in.stream, false);
+    XrSwapchainStateBaseHeaderFB* state{};
+    deserialize_xr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSwapchainStateFB(swapchain, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(state, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&swapchain);
+    cleanup_xr(state);
+}
+
+void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUpdateSwapchainFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSwapchainFB));
+    // by this point, the function id has already been read, now read the params
+    XrSwapchain swapchain{};
+    deserialize(&swapchain, msg_in.stream, false);
+    XrSwapchainStateBaseHeaderFB* state{};
+    deserialize_xr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUpdateSwapchainFB(swapchain, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&swapchain);
+    cleanup_xr(state);
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateTriangleMeshFB));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrTriangleMeshCreateInfoFB* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrTriangleMeshFB* outTriangleMesh{};
+    deserialize_ptr(&outTriangleMesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(outTriangleMesh, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyTriangleMeshFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyTriangleMeshFB(mesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+}
+
+void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshBeginUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginUpdateFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshBeginUpdateFB(mesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+}
+
+void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshBeginVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+    uint32_t* outVertexCount{};
+    deserialize_ptr(&outVertexCount, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outVertexCount, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+    cleanup_ptr(outVertexCount, 1);
+}
+
+void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshEndUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndUpdateFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+    uint32_t vertexCount{};
+    deserialize(&vertexCount, msg_in.stream, false);
+    uint32_t triangleCount{};
+    deserialize(&triangleCount, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+    cleanup(&vertexCount);
+    cleanup(&triangleCount);
+}
+
+void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshEndVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB(mesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+}
+
+void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshGetIndexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetIndexBufferFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+    uint32_t** outIndexBuffer{};
+    #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outIndexBuffer, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+    #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
+}
+
+void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTriangleMeshGetVertexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetVertexBufferFB));
+    // by this point, the function id has already been read, now read the params
+    XrTriangleMeshFB mesh{};
+    deserialize(&mesh, msg_in.stream, false);
+    XrVector3f** outVertexBuffer{};
+    #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
+
+    XrResult _result = function_loader.pfn_xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(outVertexBuffer, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&mesh);
+    #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
+}
+
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateViveTrackerPathsHTCX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateViveTrackerPathsHTCX));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    uint32_t pathCapacityInput{};
+    deserialize(&pathCapacityInput, msg_in.stream, false);
+    uint32_t* pathCountOutput{};
+    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
+    XrViveTrackerPathsHTCX* paths{};
+    deserialize_ptr(&paths, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
+    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&pathCapacityInput);
+    cleanup_ptr(pathCountOutput, 1);
+    cleanup_ptr(paths, pathCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorCreateInfoHTC* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* anchor{};
+    deserialize_ptr(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorHTC(session, createInfo, anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(anchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(anchor, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpatialAnchorNameHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorNameHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSpace anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+    XrSpatialAnchorNameHTC* name{};
+    deserialize_ptr(&name, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpatialAnchorNameHTC(anchor, name);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(name, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&anchor);
+    cleanup_ptr(name, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrBodyTrackerCreateInfoHTC* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrBodyTrackerHTC* bodyTracker{};
+    deserialize_ptr(&bodyTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(bodyTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerHTC));
+    // by this point, the function id has already been read, now read the params
+    XrBodyTrackerHTC bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyBodyTrackerHTC(bodyTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&bodyTracker);
+}
+
+void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetBodySkeletonHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonHTC));
+    // by this point, the function id has already been read, now read the params
+    XrBodyTrackerHTC bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
+    XrSpace baseSpace{};
+    deserialize(&baseSpace, msg_in.stream, false);
+    uint32_t skeletonGenerationId{};
+    deserialize(&skeletonGenerationId, msg_in.stream, false);
+    XrBodySkeletonHTC* skeleton{};
+    deserialize_ptr(&skeleton, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(skeleton, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&bodyTracker);
+    cleanup(&baseSpace);
+    cleanup(&skeletonGenerationId);
+    cleanup_ptr(skeleton, 1);
+}
+
+void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLocateBodyJointsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsHTC));
+    // by this point, the function id has already been read, now read the params
+    XrBodyTrackerHTC bodyTracker{};
+    deserialize(&bodyTracker, msg_in.stream, false);
+    XrBodyJointsLocateInfoHTC* locateInfo{};
+    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    XrBodyJointLocationsHTC* locations{};
+    deserialize_ptr(&locations, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(locations, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&bodyTracker);
+    cleanup_ptr(locateInfo, 1);
+    cleanup_ptr(locations, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFacialTrackerHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFacialTrackerCreateInfoHTC* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrFacialTrackerHTC* facialTracker{};
+    deserialize_ptr(&facialTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(facialTracker, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(facialTracker, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFacialTrackerHTC));
+    // by this point, the function id has already been read, now read the params
+    XrFacialTrackerHTC facialTracker{};
+    deserialize(&facialTracker, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyFacialTrackerHTC(facialTracker);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&facialTracker);
+}
+
+void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetFacialExpressionsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFacialExpressionsHTC));
+    // by this point, the function id has already been read, now read the params
+    XrFacialTrackerHTC facialTracker{};
+    deserialize(&facialTracker, msg_in.stream, false);
+    XrFacialExpressionsHTC* facialExpressions{};
+    deserialize_ptr(&facialExpressions, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(facialExpressions, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&facialTracker);
+    cleanup_ptr(facialExpressions, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrApplyFoveationHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyFoveationHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFoveationApplyInfoHTC* applyInfo{};
+    deserialize_ptr(&applyInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrApplyFoveationHTC(session, applyInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(applyInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreatePassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughHTC));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPassthroughCreateInfoHTC* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrPassthroughHTC* passthrough{};
+    deserialize_ptr(&passthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreatePassthroughHTC(session, createInfo, passthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(passthrough, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(passthrough, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyPassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughHTC));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughHTC passthrough{};
+    deserialize(&passthrough, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyPassthroughHTC(passthrough);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&passthrough);
+}
+
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetD3D11GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsD3D11KHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetD3D12GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsD3D12KHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSwapchainAndroidSurfaceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSwapchainCreateInfo* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrSwapchain* swapchain{};
+    deserialize_ptr(&swapchain, msg_in.stream, false);
+    jobject* surface{};
+    deserialize_ptr(&surface, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(swapchain, 1, msg_out.buffer);
+    serialize_ptr(surface, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(swapchain, 1);
+    cleanup_ptr(surface, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetAndroidApplicationThreadKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetAndroidApplicationThreadKHR));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrAndroidThreadTypeKHR threadType{};
+    deserialize(&threadType, msg_in.stream, false);
+    uint32_t threadId{};
+    deserialize(&threadId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&threadType);
+    cleanup(&threadId);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrConvertTimeToTimespecTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToTimespecTimeKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrTime time{};
+    deserialize(&time, msg_in.stream, false);
+    timespec* timespecTime{};
+    deserialize_ptr(&timespecTime, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(timespecTime, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&time);
+    cleanup_ptr(timespecTime, 1);
+}
+
+void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrConvertTimespecTimeToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimespecTimeToTimeKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    timespec* timespecTime{};
+    deserialize_ptr(&timespecTime, msg_in.stream, false);
+    XrTime* time{};
+    deserialize_ptr(&time, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(timespecTime, 1, msg_out.buffer);
+    serialize_ptr(time, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(timespecTime, 1);
+    cleanup_ptr(time, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStructureTypeToString2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStructureTypeToString2KHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrStructureType value{};
+    deserialize(&value, msg_in.stream, false);
+    char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]{};
+    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStructureTypeToString2KHR(instance, value, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&value);
+    cleanup_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrInitializeLoaderKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrInitializeLoaderKHR));
+    // by this point, the function id has already been read, now read the params
+    XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo{};
+    deserialize_xr(&loaderInitInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrInitializeLoaderKHR(loaderInitInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup_xr(loaderInitInfo);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMetalGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMetalGraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsMetalKHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetOpenGLGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsOpenGLKHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetOpenGLESGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVisibilityMaskKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVisibilityMaskKHR));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrViewConfigurationType viewConfigurationType{};
+    deserialize(&viewConfigurationType, msg_in.stream, false);
+    uint32_t viewIndex{};
+    deserialize(&viewIndex, msg_in.stream, false);
+    XrVisibilityMaskTypeKHR visibilityMaskType{};
+    deserialize(&visibilityMaskType, msg_in.stream, false);
+    XrVisibilityMaskKHR* visibilityMask{};
+    deserialize_ptr(&visibilityMask, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(visibilityMask, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&viewConfigurationType);
+    cleanup(&viewIndex);
+    cleanup(&visibilityMaskType);
+    cleanup_ptr(visibilityMask, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVulkanDeviceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanDeviceExtensionsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    char* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVulkanGraphicsDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDeviceKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    VkInstance vkInstance{};
+    deserialize(&vkInstance, msg_in.stream, false);
+    VkPhysicalDevice* vkPhysicalDevice{};
+    deserialize_ptr(&vkPhysicalDevice, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup(&vkInstance);
+    cleanup_ptr(vkPhysicalDevice, 1);
+}
+
+void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVulkanGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrGraphicsRequirementsVulkanKHR* graphicsRequirements{};
+    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup_ptr(graphicsRequirements, 1);
+}
+
+void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVulkanInstanceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanInstanceExtensionsKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    char* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateVulkanDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanDeviceKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrVulkanDeviceCreateInfoKHR* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    VkDevice* vulkanDevice{};
+    deserialize_ptr(&vulkanDevice, msg_in.stream, false);
+    VkResult* vulkanResult{};
+    deserialize_ptr(&vulkanResult, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(vulkanDevice, 1, msg_out.buffer);
+    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(vulkanDevice, 1);
+    cleanup_ptr(vulkanResult, 1);
+}
+
+void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateVulkanInstanceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanInstanceKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrVulkanInstanceCreateInfoKHR* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    VkInstance* vulkanInstance{};
+    deserialize_ptr(&vulkanInstance, msg_in.stream, false);
+    VkResult* vulkanResult{};
+    deserialize_ptr(&vulkanResult, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(vulkanInstance, 1, msg_out.buffer);
+    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(vulkanInstance, 1);
+    cleanup_ptr(vulkanResult, 1);
+}
+
+void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVulkanGraphicsDevice2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDevice2KHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrVulkanGraphicsDeviceGetInfoKHR* getInfo{};
     deserialize_ptr(&getInfo, msg_in.stream, false);
-    XrWorldMeshBufferML* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
-    XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    VkPhysicalDevice* vulkanPhysicalDevice{};
+    deserialize_ptr(&vulkanPhysicalDevice, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
+    XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(getInfo->blocks, getInfo->blockCount, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
+    cleanup(&instance);
     cleanup_ptr(getInfo, 1);
-    cleanup_ptr(buffer, 1);
-    cleanup_ptr(future, 1);
+    cleanup_ptr(vulkanPhysicalDevice, 1);
 }
 
-void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrRequestWorldMeshCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshCompleteML));
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrConvertTimeToWin32PerformanceCounterKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR));
     // by this point, the function id has already been read, now read the params
-    XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
-    XrWorldMeshRequestCompletionInfoML* completionInfo{};
-    deserialize_ptr(&completionInfo, msg_in.stream, false);
-    XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
-    XrWorldMeshRequestCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrTime time{};
+    deserialize(&time, msg_in.stream, false);
+    LARGE_INTEGER* performanceCounter{};
+    deserialize_ptr(&performanceCounter, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
+    XrResult _result = function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    serialize_ptr(performanceCounter, 1, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&detector);
-    cleanup_ptr(completionInfo, 1);
-    cleanup(&future);
-    cleanup_ptr(completion, 1);
+    cleanup(&instance);
+    cleanup(&time);
+    cleanup_ptr(performanceCounter, 1);
 }
 
-#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrConvertWin32PerformanceCounterToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    LARGE_INTEGER* performanceCounter{};
+    deserialize_ptr(&performanceCounter, msg_in.stream, false);
+    XrTime* time{};
+    deserialize_ptr(&time, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(time, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(performanceCounter, 1);
+    cleanup_ptr(time, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStartColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationAdvertisementMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrColocationAdvertisementStartInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* advertisementRequestId{};
+    deserialize_ptr(&advertisementRequestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(info->buffer, info->bufferSize, msg_out.buffer);
+    serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(advertisementRequestId, 1);
+}
+
+void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStartColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationDiscoveryMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrColocationDiscoveryStartInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* discoveryRequestId{};
+    deserialize_ptr(&discoveryRequestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(discoveryRequestId, 1);
+}
+
+void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStopColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationAdvertisementMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrColocationAdvertisementStopInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStopColocationAdvertisementMETA(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStopColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationDiscoveryMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrColocationDiscoveryStopInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStopColocationDiscoveryMETA(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrAcquireEnvironmentDepthImageMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAcquireEnvironmentDepthImageMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo{};
+    deserialize_ptr(&acquireInfo, msg_in.stream, false);
+    XrEnvironmentDepthImageMETA* environmentDepthImage{};
+    deserialize_ptr(&environmentDepthImage, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+    cleanup_ptr(acquireInfo, 1);
+    cleanup_ptr(environmentDepthImage, 1);
+}
+
+void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthProviderMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrEnvironmentDepthProviderCreateInfoMETA* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrEnvironmentDepthProviderMETA* environmentDepthProvider{};
+    deserialize_ptr(&environmentDepthProvider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(environmentDepthProvider, 1);
+}
+
+void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrEnvironmentDepthSwapchainMETA* swapchain{};
+    deserialize_ptr(&swapchain, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(swapchain, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(swapchain, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+}
+
+void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthSwapchainMETA swapchain{};
+    deserialize(&swapchain, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&swapchain);
+}
+
+void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateEnvironmentDepthSwapchainImagesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthSwapchainMETA swapchain{};
+    deserialize(&swapchain, msg_in.stream, false);
+    uint32_t imageCapacityInput{};
+    deserialize(&imageCapacityInput, msg_in.stream, false);
+    uint32_t* imageCountOutput{};
+    deserialize_ptr(&imageCountOutput, msg_in.stream, false);
+    XrSwapchainImageBaseHeader* images{};
+    deserialize_xr_array(&images, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
+    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&swapchain);
+    cleanup(&imageCapacityInput);
+    cleanup_ptr(imageCountOutput, 1);
+    cleanup_xr_array(images, imageCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetEnvironmentDepthSwapchainStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthSwapchainMETA swapchain{};
+    deserialize(&swapchain, msg_in.stream, false);
+    XrEnvironmentDepthSwapchainStateMETA* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&swapchain);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetEnvironmentDepthHandRemovalMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo{};
+    deserialize_ptr(&setInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+    cleanup_ptr(setInfo, 1);
+}
+
+void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStartEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartEnvironmentDepthProviderMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+}
+
+void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrStopEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopEnvironmentDepthProviderMETA));
+    // by this point, the function id has already been read, now read the params
+    XrEnvironmentDepthProviderMETA environmentDepthProvider{};
+    deserialize(&environmentDepthProvider, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&environmentDepthProvider);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetFoveationEyeTrackedStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFoveationEyeTrackedStateMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFoveationEyeTrackedStateMETA* foveationState{};
+    deserialize_ptr(&foveationState, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetFoveationEyeTrackedStateMETA(session, foveationState);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(foveationState, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(foveationState, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughColorLutMETA));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughFB passthrough{};
+    deserialize(&passthrough, msg_in.stream, false);
+    XrPassthroughColorLutCreateInfoMETA* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrPassthroughColorLutMETA* colorLut{};
+    deserialize_ptr(&colorLut, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(colorLut, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&passthrough);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(colorLut, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyPassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughColorLutMETA));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughColorLutMETA colorLut{};
+    deserialize(&colorLut, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyPassthroughColorLutMETA(colorLut);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&colorLut);
+}
+
+void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUpdatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdatePassthroughColorLutMETA));
+    // by this point, the function id has already been read, now read the params
+    XrPassthroughColorLutMETA colorLut{};
+    deserialize(&colorLut, msg_in.stream, false);
+    XrPassthroughColorLutUpdateInfoMETA* updateInfo{};
+    deserialize_ptr(&updateInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&colorLut);
+    cleanup_ptr(updateInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetPassthroughPreferencesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPassthroughPreferencesMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPassthroughPreferencesMETA* preferences{};
+    deserialize_ptr(&preferences, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetPassthroughPreferencesMETA(session, preferences);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(preferences, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(preferences, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumeratePerformanceMetricsCounterPathsMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    uint32_t counterPathCapacityInput{};
+    deserialize(&counterPathCapacityInput, msg_in.stream, false);
+    uint32_t* counterPathCountOutput{};
+    deserialize_ptr(&counterPathCountOutput, msg_in.stream, false);
+    XrPath* counterPaths{};
+    deserialize_ptr(&counterPaths, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(counterPathCountOutput, 1, msg_out.buffer);
+    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&counterPathCapacityInput);
+    cleanup_ptr(counterPathCountOutput, 1);
+    cleanup_ptr(counterPaths, counterPathCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPerformanceMetricsStateMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPerformanceMetricsStateMETA* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetPerformanceMetricsStateMETA(session, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQueryPerformanceMetricsCounterMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryPerformanceMetricsCounterMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath counterPath{};
+    deserialize(&counterPath, msg_in.stream, false);
+    XrPerformanceMetricsCounterMETA* counter{};
+    deserialize_ptr(&counter, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(counter, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&counterPath);
+    cleanup_ptr(counter, 1);
+}
+
+void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetPerformanceMetricsStateMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPerformanceMetricsStateMETA* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetPerformanceMetricsStateMETA(session, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(state, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetRecommendedLayerResolutionMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRecommendedLayerResolutionMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrRecommendedLayerResolutionGetInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrRecommendedLayerResolutionMETA* resolution{};
+    deserialize_ptr(&resolution, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetRecommendedLayerResolutionMETA(session, info, resolution);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(resolution, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(resolution, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPauseSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo{};
+    deserialize_ptr(&pauseInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(pauseInfo, 1);
+}
+
+void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrResumeSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo{};
+    deserialize_ptr(&resumeInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(resumeInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpaceTriangleMeshMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceTriangleMeshMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSpace space{};
+    deserialize(&space, msg_in.stream, false);
+    XrSpaceTriangleMeshGetInfoMETA* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrSpaceTriangleMeshMETA* triangleMeshOutput{};
+    deserialize_ptr(&triangleMeshOutput, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&space);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(triangleMeshOutput, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrShareSpacesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrShareSpacesInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrAsyncRequestIdFB* requestId{};
+    deserialize_ptr(&requestId, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrShareSpacesMETA(session, info, requestId);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
+    serialize_ptr(requestId, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(requestId, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrChangeVirtualKeyboardTextContextMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo{};
+    deserialize_ptr(&changeInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(changeInfo, 1);
+}
+
+void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrVirtualKeyboardCreateInfoMETA* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrVirtualKeyboardMETA* keyboard{};
+    deserialize_ptr(&keyboard, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(keyboard, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(keyboard, 1);
+}
+
+void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateVirtualKeyboardSpaceMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardSpaceCreateInfoMETA* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* keyboardSpace{};
+    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&keyboard);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(keyboardSpace, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyVirtualKeyboardMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyVirtualKeyboardMETA(keyboard);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+}
+
+void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVirtualKeyboardDirtyTexturesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    uint32_t textureIdCapacityInput{};
+    deserialize(&textureIdCapacityInput, msg_in.stream, false);
+    uint32_t* textureIdCountOutput{};
+    deserialize_ptr(&textureIdCountOutput, msg_in.stream, false);
+    uint64_t* textureIds{};
+    deserialize_ptr(&textureIds, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(textureIdCountOutput, 1, msg_out.buffer);
+    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup(&textureIdCapacityInput);
+    cleanup_ptr(textureIdCountOutput, 1);
+    cleanup_ptr(textureIds, textureIdCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVirtualKeyboardModelAnimationStatesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardModelAnimationStatesMETA* animationStates{};
+    deserialize_ptr(&animationStates, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(animationStates, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(animationStates, 1);
+}
+
+void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVirtualKeyboardScaleMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardScaleMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    float* scale{};
+    deserialize_ptr(&scale, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardScaleMETA(keyboard, scale);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(scale, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(scale, 1);
+}
+
+void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetVirtualKeyboardTextureDataMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    uint64_t textureId{};
+    deserialize(&textureId, msg_in.stream, false);
+    XrVirtualKeyboardTextureDataMETA* textureData{};
+    deserialize_ptr(&textureData, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(textureData, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup(&textureId);
+    cleanup_ptr(textureData, 1);
+}
+
+void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSendVirtualKeyboardInputMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSendVirtualKeyboardInputMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardInputInfoMETA* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+    XrPosef* interactorRootPose{};
+    deserialize_ptr(&interactorRootPose, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(interactorRootPose, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(info, 1);
+    cleanup_ptr(interactorRootPose, 1);
+}
+
+void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetVirtualKeyboardModelVisibilityMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility{};
+    deserialize_ptr(&modelVisibility, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(modelVisibility, 1);
+}
+
+void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSuggestVirtualKeyboardLocationMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA));
+    // by this point, the function id has already been read, now read the params
+    XrVirtualKeyboardMETA keyboard{};
+    deserialize(&keyboard, msg_in.stream, false);
+    XrVirtualKeyboardLocationInfoMETA* locationInfo{};
+    deserialize_ptr(&locationInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&keyboard);
+    cleanup_ptr(locationInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpaceFromCoordinateFrameUIDML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrCoordinateSpaceCreateInfoML* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFacialExpressionClientML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFacialExpressionClientML));
@@ -6266,135 +4424,1977 @@ void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(Messag
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
-#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrResumeSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA));
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateExportedLocalizationMapML));
     // by this point, the function id has already been read, now read the params
     XrSession session{};
     deserialize(&session, msg_in.stream, false);
-    XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo{};
-    deserialize_ptr(&resumeInfo, msg_in.stream, false);
+    XrUuidEXT* mapUuid{};
+    deserialize_ptr(&mapUuid, msg_in.stream, false);
+    XrExportedLocalizationMapML* map{};
+    deserialize_ptr(&map, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
+    XrResult _result = function_loader.pfn_xrCreateExportedLocalizationMapML(session, mapUuid, map);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(map, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(mapUuid, 1);
+    cleanup_ptr(map, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyExportedLocalizationMapML));
+    // by this point, the function id has already been read, now read the params
+    XrExportedLocalizationMapML map{};
+    deserialize(&map, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyExportedLocalizationMapML(map);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&session);
-    cleanup_ptr(resumeInfo, 1);
+    cleanup(&map);
 }
 
-void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrPauseSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA));
+void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnableLocalizationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableLocalizationEventsML));
     // by this point, the function id has already been read, now read the params
     XrSession session{};
     deserialize(&session, msg_in.stream, false);
-    XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo{};
-    deserialize_ptr(&pauseInfo, msg_in.stream, false);
-
-    XrResult _result = function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    msg_out.flush();
-
-    cleanup(&session);
-    cleanup_ptr(pauseInfo, 1);
-}
-
-#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStartColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationDiscoveryMETA));
-    // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrColocationDiscoveryStartInfoMETA* info{};
+    XrLocalizationEnableEventsInfoML* info{};
     deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* discoveryRequestId{};
-    deserialize_ptr(&discoveryRequestId, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
+    XrResult _result = function_loader.pfn_xrEnableLocalizationEventsML(session, info);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
     msg_out.flush();
 
     cleanup(&session);
     cleanup_ptr(info, 1);
-    cleanup_ptr(discoveryRequestId, 1);
 }
 
-void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStopColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationDiscoveryMETA));
+void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetExportedLocalizationMapDataML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetExportedLocalizationMapDataML));
     // by this point, the function id has already been read, now read the params
-    XrSession session{};
-    deserialize(&session, msg_in.stream, false);
-    XrColocationDiscoveryStopInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    XrExportedLocalizationMapML map{};
+    deserialize(&map, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    char* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrStopColocationDiscoveryMETA(session, info, requestId);
+    XrResult _result = function_loader.pfn_xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
     msg_out.flush();
 
-    cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
+    cleanup(&map);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
 }
 
-void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStartColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationAdvertisementMETA));
+void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrImportLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrImportLocalizationMapML));
     // by this point, the function id has already been read, now read the params
     XrSession session{};
     deserialize(&session, msg_in.stream, false);
-    XrColocationAdvertisementStartInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* advertisementRequestId{};
-    deserialize_ptr(&advertisementRequestId, msg_in.stream, false);
+    XrLocalizationMapImportInfoML* importInfo{};
+    deserialize_ptr(&importInfo, msg_in.stream, false);
+    XrUuidEXT* mapUuid{};
+    deserialize_ptr(&mapUuid, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
+    XrResult _result = function_loader.pfn_xrImportLocalizationMapML(session, importInfo, mapUuid);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->buffer, info->bufferSize, msg_out.buffer);
-    serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
+    serialize_ptr(importInfo->data, importInfo->size, msg_out.buffer);
+    serialize_ptr(mapUuid, 1, msg_out.buffer);
     msg_out.flush();
 
     cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(advertisementRequestId, 1);
+    cleanup_ptr(importInfo, 1);
+    cleanup_ptr(mapUuid, 1);
 }
 
-void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrStopColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationAdvertisementMETA));
+void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQueryLocalizationMapsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryLocalizationMapsML));
     // by this point, the function id has already been read, now read the params
     XrSession session{};
     deserialize(&session, msg_in.stream, false);
-    XrColocationAdvertisementStopInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
-    XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    XrLocalizationMapQueryInfoBaseHeaderML* queryInfo{};
+    deserialize_xr(&queryInfo, msg_in.stream, false);
+    uint32_t mapCapacityInput{};
+    deserialize(&mapCapacityInput, msg_in.stream, false);
+    uint32_t* mapCountOutput{};
+    deserialize_ptr(&mapCountOutput, msg_in.stream, false);
+    XrLocalizationMapML* maps{};
+    deserialize_ptr(&maps, msg_in.stream, false);
 
-    XrResult _result = function_loader.pfn_xrStopColocationAdvertisementMETA(session, info, requestId);
+    XrResult _result = function_loader.pfn_xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
     serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    serialize_ptr(mapCountOutput, 1, msg_out.buffer);
+    serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
     msg_out.flush();
 
     cleanup(&session);
-    cleanup_ptr(info, 1);
-    cleanup_ptr(requestId, 1);
+    cleanup_xr(queryInfo);
+    cleanup(&mapCapacityInput);
+    cleanup_ptr(mapCountOutput, 1);
+    cleanup_ptr(maps, mapCapacityInput);
 }
 
-#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestMapLocalizationML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestMapLocalizationML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrMapLocalizationRequestInfoML* requestInfo{};
+    deserialize_ptr(&requestInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestMapLocalizationML(session, requestInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(requestInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerDetectorML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrMarkerDetectorCreateInfoML* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrMarkerDetectorML* markerDetector{};
+    deserialize_ptr(&markerDetector, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateMarkerDetectorML(session, createInfo, markerDetector);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(markerDetector, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(markerDetector, 1);
+}
+
+void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateMarkerSpaceML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrMarkerSpaceCreateInfoML* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateMarkerSpaceML(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyMarkerDetectorML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyMarkerDetectorML(markerDetector);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+}
+
+void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerDetectorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerDetectorStateML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerDetectorStateML* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerDetectorStateML(markerDetector, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerLengthML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerLengthML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerML marker{};
+    deserialize(&marker, msg_in.stream, false);
+    float* meters{};
+    deserialize_ptr(&meters, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerLengthML(markerDetector, marker, meters);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(meters, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup(&marker);
+    cleanup_ptr(meters, 1);
+}
+
+void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerNumberML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerNumberML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerML marker{};
+    deserialize(&marker, msg_in.stream, false);
+    uint64_t* number{};
+    deserialize_ptr(&number, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerNumberML(markerDetector, marker, number);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(number, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup(&marker);
+    cleanup_ptr(number, 1);
+}
+
+void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerReprojectionErrorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerReprojectionErrorML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerML marker{};
+    deserialize(&marker, msg_in.stream, false);
+    float* reprojectionErrorMeters{};
+    deserialize_ptr(&reprojectionErrorMeters, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup(&marker);
+    cleanup_ptr(reprojectionErrorMeters, 1);
+}
+
+void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerStringML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerStringML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerML marker{};
+    deserialize(&marker, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    char* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup(&marker);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkersML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkersML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    uint32_t markerCapacityInput{};
+    deserialize(&markerCapacityInput, msg_in.stream, false);
+    uint32_t* markerCountOutput{};
+    deserialize_ptr(&markerCountOutput, msg_in.stream, false);
+    XrMarkerML* markers{};
+    deserialize_ptr(&markers, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(markerCountOutput, 1, msg_out.buffer);
+    serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup(&markerCapacityInput);
+    cleanup_ptr(markerCountOutput, 1);
+    cleanup_ptr(markers, markerCapacityInput);
+}
+
+void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSnapshotMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSnapshotMarkerDetectorML));
+    // by this point, the function id has already been read, now read the params
+    XrMarkerDetectorML markerDetector{};
+    deserialize(&markerDetector, msg_in.stream, false);
+    XrMarkerDetectorSnapshotInfoML* snapshotInfo{};
+    deserialize_ptr(&snapshotInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(snapshotInfo, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&markerDetector);
+    cleanup_ptr(snapshotInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo{};
+    deserialize_xr(&createInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_xr(createInfo);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrCreateSpatialAnchorsCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsCompleteML(session, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpatialAnchorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorStateML));
+    // by this point, the function id has already been read, now read the params
+    XrSpace anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+    XrSpatialAnchorStateML* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpatialAnchorStateML(anchor, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&anchor);
+    cleanup_ptr(state, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsStorageML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorsCreateStorageInfoML* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpatialAnchorsStorageML* storage{};
+    deserialize_ptr(&storage, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(storage, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(storage, 1);
+}
+
+void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrSpatialAnchorsDeleteInfoML* deleteInfo{};
+    deserialize_ptr(&deleteInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup_ptr(deleteInfo, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrSpatialAnchorsDeleteCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorsStorageML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorsStorageML(storage);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+}
+
+void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPublishSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrSpatialAnchorsPublishInfoML* publishInfo{};
+    deserialize_ptr(&publishInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup_ptr(publishInfo, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPublishSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrSpatialAnchorsPublishCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsCompleteML(storage, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo{};
+    deserialize_xr(&queryInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup_xr(queryInfo);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrQuerySpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrSpatialAnchorsQueryCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsCompleteML(storage, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrSpatialAnchorsUpdateExpirationInfoML* updateInfo{};
+    deserialize_ptr(&updateInfo, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup_ptr(updateInfo, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorsStorageML storage{};
+    deserialize(&storage, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrSpatialAnchorsUpdateExpirationCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&storage);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetSystemNotificationsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSystemNotificationsML));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemNotificationsSetInfoML* info{};
+    deserialize_ptr(&info, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetSystemNotificationsML(instance, info);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(info, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnableUserCalibrationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableUserCalibrationEventsML));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrUserCalibrationEnableEventsInfoML* enableInfo{};
+    deserialize_ptr(&enableInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnableUserCalibrationEventsML(instance, enableInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_ptr(enableInfo, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrAllocateWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAllocateWorldMeshBufferML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshBufferSizeML* size{};
+    deserialize_ptr(&size, msg_in.stream, false);
+    XrWorldMeshBufferML* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrAllocateWorldMeshBufferML(detector, size, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(size->next, msg_out.buffer);
+    serialize_ptr(buffer, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(size, 1);
+    cleanup_ptr(buffer, 1);
+}
+
+void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateWorldMeshDetectorML));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrWorldMeshDetectorCreateInfoML* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrWorldMeshDetectorML* detector{};
+    deserialize_ptr(&detector, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateWorldMeshDetectorML(session, createInfo, detector);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(detector, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(detector, 1);
+}
+
+void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyWorldMeshDetectorML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroyWorldMeshDetectorML(detector);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+}
+
+void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrFreeWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrFreeWorldMeshBufferML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshBufferML* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrFreeWorldMeshBufferML(detector, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_xr(buffer->next, msg_out.buffer);
+    serialize_ptr(buffer->buffer, buffer->bufferSize, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(buffer, 1);
+}
+
+void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetWorldMeshBufferRecommendSizeML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo{};
+    deserialize_ptr(&sizeInfo, msg_in.stream, false);
+    XrWorldMeshBufferSizeML* size{};
+    deserialize_ptr(&size, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(size, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(sizeInfo, 1);
+    cleanup_ptr(size, 1);
+}
+
+void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestWorldMeshAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshGetInfoML* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrWorldMeshBufferML* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(getInfo->blocks, getInfo->blockCount, msg_out.buffer);
+    serialize_ptr(buffer, 1, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(buffer, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestWorldMeshCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshRequestCompletionInfoML* completionInfo{};
+    deserialize_ptr(&completionInfo, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrWorldMeshRequestCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(completionInfo, 1);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestWorldMeshStateAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateAsyncML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrWorldMeshStateRequestInfoML* stateRequest{};
+    deserialize_ptr(&stateRequest, msg_in.stream, false);
+    XrFutureEXT* future{};
+    deserialize_ptr(&future, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(future, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup_ptr(stateRequest, 1);
+    cleanup_ptr(future, 1);
+}
+
+void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrRequestWorldMeshStateCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateCompleteML));
+    // by this point, the function id has already been read, now read the params
+    XrWorldMeshDetectorML detector{};
+    deserialize(&detector, msg_in.stream, false);
+    XrFutureEXT future{};
+    deserialize(&future, msg_in.stream, false);
+    XrWorldMeshStateRequestCompletionML* completion{};
+    deserialize_ptr(&completion, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrRequestWorldMeshStateCompleteML(detector, future, completion);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(completion, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&detector);
+    cleanup(&future);
+    cleanup_ptr(completion, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrApplyForceFeedbackCurlMNDX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyForceFeedbackCurlMNDX));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+    XrForceFeedbackCurlApplyLocationsMNDX* locations{};
+    deserialize_ptr(&locations, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrApplyForceFeedbackCurlMNDX(handTracker, locations);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(locations->locations, locations->locationCount, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+    cleanup_ptr(locations, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateReprojectionModesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateReprojectionModesMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    XrViewConfigurationType viewConfigurationType{};
+    deserialize(&viewConfigurationType, msg_in.stream, false);
+    uint32_t modeCapacityInput{};
+    deserialize(&modeCapacityInput, msg_in.stream, false);
+    uint32_t* modeCountOutput{};
+    deserialize_ptr(&modeCountOutput, msg_in.stream, false);
+    XrReprojectionModeMSFT* modes{};
+    deserialize_ptr(&modes, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(modeCountOutput, 1, msg_out.buffer);
+    serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup(&viewConfigurationType);
+    cleanup(&modeCapacityInput);
+    cleanup_ptr(modeCountOutput, 1);
+    cleanup_ptr(modes, modeCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetControllerModelKeyMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelKeyMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrPath topLevelUserPath{};
+    deserialize(&topLevelUserPath, msg_in.stream, false);
+    XrControllerModelKeyStateMSFT* controllerModelKeyState{};
+    deserialize_ptr(&controllerModelKeyState, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&topLevelUserPath);
+    cleanup_ptr(controllerModelKeyState, 1);
+}
+
+void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetControllerModelPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelPropertiesMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrControllerModelKeyMSFT modelKey{};
+    deserialize(&modelKey, msg_in.stream, false);
+    XrControllerModelPropertiesMSFT* properties{};
+    deserialize_ptr(&properties, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(properties, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&modelKey);
+    cleanup_ptr(properties, 1);
+}
+
+void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetControllerModelStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelStateMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrControllerModelKeyMSFT modelKey{};
+    deserialize(&modelKey, msg_in.stream, false);
+    XrControllerModelStateMSFT* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetControllerModelStateMSFT(session, modelKey, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&modelKey);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLoadControllerModelMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadControllerModelMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrControllerModelKeyMSFT modelKey{};
+    deserialize(&modelKey, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    uint8_t* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&modelKey);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateHandMeshSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandMeshSpaceMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+    XrHandMeshSpaceCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUpdateHandMeshMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateHandMeshMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrHandTrackerEXT handTracker{};
+    deserialize(&handTracker, msg_in.stream, false);
+    XrHandMeshUpdateInfoMSFT* updateInfo{};
+    deserialize_ptr(&updateInfo, msg_in.stream, false);
+    XrHandMeshMSFT* handMesh{};
+    deserialize_ptr(&handMesh, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(handMesh, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&handTracker);
+    cleanup_ptr(updateInfo, 1);
+    cleanup_ptr(handMesh, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPerceptionAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    IUnknown* perceptionAnchor{};
+    deserialize_ptr(&perceptionAnchor, msg_in.stream, false);
+    XrSpatialAnchorMSFT* anchor{};
+    deserialize_ptr(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
+    serialize_ptr(anchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(perceptionAnchor, 1);
+    cleanup_ptr(anchor, 1);
+}
+
+void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorMSFT anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+    IUnknown** perceptionAnchor{};
+    #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
+
+    XrResult _result = function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&anchor);
+    #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSceneMarkerDecodedStringMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrUuidMSFT* markerId{};
+    deserialize_ptr(&markerId, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    char* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(markerId, 1);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSceneMarkerRawDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerRawDataMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrUuidMSFT* markerId{};
+    deserialize_ptr(&markerId, msg_in.stream, false);
+    uint32_t bufferCapacityInput{};
+    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    uint32_t* bufferCountOutput{};
+    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    uint8_t* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(markerId, 1);
+    cleanup(&bufferCapacityInput);
+    cleanup_ptr(bufferCountOutput, 1);
+    cleanup_ptr(buffer, bufferCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrComputeNewSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrComputeNewSceneMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneObserverMSFT sceneObserver{};
+    deserialize(&sceneObserver, msg_in.stream, false);
+    XrNewSceneComputeInfoMSFT* computeInfo{};
+    deserialize_ptr(&computeInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrComputeNewSceneMSFT(sceneObserver, computeInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&sceneObserver);
+    cleanup_ptr(computeInfo, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneObserverMSFT sceneObserver{};
+    deserialize(&sceneObserver, msg_in.stream, false);
+    XrSceneCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSceneMSFT* scene{};
+    deserialize_ptr(&scene, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSceneMSFT(sceneObserver, createInfo, scene);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(scene, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&sceneObserver);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(scene, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneObserverMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSceneObserverCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSceneObserverMSFT* sceneObserver{};
+    deserialize_ptr(&sceneObserver, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(sceneObserver, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(sceneObserver, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySceneMSFT(scene);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+}
+
+void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneObserverMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneObserverMSFT sceneObserver{};
+    deserialize(&sceneObserver, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySceneObserverMSFT(sceneObserver);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&sceneObserver);
+}
+
+void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateSceneComputeFeaturesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    XrSystemId systemId{};
+    deserialize(&systemId, msg_in.stream, false);
+    uint32_t featureCapacityInput{};
+    deserialize(&featureCapacityInput, msg_in.stream, false);
+    uint32_t* featureCountOutput{};
+    deserialize_ptr(&featureCountOutput, msg_in.stream, false);
+    XrSceneComputeFeatureMSFT* features{};
+    deserialize_ptr(&features, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(featureCountOutput, 1, msg_out.buffer);
+    serialize_ptr(features, featureCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup(&systemId);
+    cleanup(&featureCapacityInput);
+    cleanup_ptr(featureCountOutput, 1);
+    cleanup_ptr(features, featureCapacityInput);
+}
+
+void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComponentsMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrSceneComponentsGetInfoMSFT* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrSceneComponentsMSFT* components{};
+    deserialize_ptr(&components, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSceneComponentsMSFT(scene, getInfo, components);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(components, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(components, 1);
+}
+
+void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSceneComputeStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComputeStateMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneObserverMSFT sceneObserver{};
+    deserialize(&sceneObserver, msg_in.stream, false);
+    XrSceneComputeStateMSFT* state{};
+    deserialize_ptr(&state, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSceneComputeStateMSFT(sceneObserver, state);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(state, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&sceneObserver);
+    cleanup_ptr(state, 1);
+}
+
+void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSceneMeshBuffersMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMeshBuffersMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrSceneMeshBuffersGetInfoMSFT* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrSceneMeshBuffersMSFT* buffers{};
+    deserialize_ptr(&buffers, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(buffers, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(buffers, 1);
+}
+
+void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrLocateSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateSceneComponentsMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrSceneComponentsLocateInfoMSFT* locateInfo{};
+    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    XrSceneComponentLocationsMSFT* locations{};
+    deserialize_ptr(&locations, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(locations, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(locateInfo, 1);
+    cleanup_ptr(locations, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDeserializeSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeserializeSceneMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneObserverMSFT sceneObserver{};
+    deserialize(&sceneObserver, msg_in.stream, false);
+    XrSceneDeserializeInfoMSFT* deserializeInfo{};
+    deserialize_ptr(&deserializeInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&sceneObserver);
+    cleanup_ptr(deserializeInfo, 1);
+}
+
+void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSerializedSceneFragmentDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSceneMSFT scene{};
+    deserialize(&scene, msg_in.stream, false);
+    XrSerializedSceneFragmentDataGetInfoMSFT* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    uint32_t countInput{};
+    deserialize(&countInput, msg_in.stream, false);
+    uint32_t* readOutput{};
+    deserialize_ptr(&readOutput, msg_in.stream, false);
+    uint8_t* buffer{};
+    deserialize_ptr(&buffer, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(readOutput, 1, msg_out.buffer);
+    serialize_ptr(buffer, countInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&scene);
+    cleanup_ptr(getInfo, 1);
+    cleanup(&countInput);
+    cleanup_ptr(readOutput, 1);
+    cleanup_ptr(buffer, countInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpatialAnchorMSFT* anchor{};
+    deserialize_ptr(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(anchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(anchor, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorSpaceCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorMSFT anchor{};
+    deserialize(&anchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorMSFT(anchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&anchor);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrClearSpatialAnchorStoreMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrClearSpatialAnchorStoreMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
+    deserialize(&spatialAnchorStore, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&spatialAnchorStore);
+}
+
+void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPersistedNameMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo{};
+    deserialize_ptr(&spatialAnchorCreateInfo, msg_in.stream, false);
+    XrSpatialAnchorMSFT* spatialAnchor{};
+    deserialize_ptr(&spatialAnchor, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(spatialAnchor, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(spatialAnchorCreateInfo, 1);
+    cleanup_ptr(spatialAnchor, 1);
+}
+
+void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore{};
+    deserialize_ptr(&spatialAnchorStore, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(spatialAnchorStore, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
+    deserialize(&spatialAnchorStore, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&spatialAnchorStore);
+}
+
+void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumeratePersistedSpatialAnchorNamesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
+    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    uint32_t spatialAnchorNameCapacityInput{};
+    deserialize(&spatialAnchorNameCapacityInput, msg_in.stream, false);
+    uint32_t* spatialAnchorNameCountOutput{};
+    deserialize_ptr(&spatialAnchorNameCountOutput, msg_in.stream, false);
+    XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames{};
+    deserialize_ptr(&spatialAnchorNames, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.buffer);
+    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&spatialAnchorStore);
+    cleanup(&spatialAnchorNameCapacityInput);
+    cleanup_ptr(spatialAnchorNameCountOutput, 1);
+    cleanup_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput);
+}
+
+void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrPersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPersistSpatialAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
+    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo{};
+    deserialize_ptr(&spatialAnchorPersistenceInfo, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&spatialAnchorStore);
+    cleanup_ptr(spatialAnchorPersistenceInfo, 1);
+}
+
+void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUnpersistSpatialAnchorMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
+    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName{};
+    deserialize_ptr(&spatialAnchorPersistenceName, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&spatialAnchorStore);
+    cleanup_ptr(spatialAnchorPersistenceName, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateSpatialGraphNodeSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroySpatialGraphNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialGraphNodeBindingMSFT nodeBinding{};
+    deserialize(&nodeBinding, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&nodeBinding);
+}
+
+void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetSpatialGraphNodeBindingPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSpatialGraphNodeBindingMSFT nodeBinding{};
+    deserialize(&nodeBinding, msg_in.stream, false);
+    XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo{};
+    deserialize_ptr(&getInfo, msg_in.stream, false);
+    XrSpatialGraphNodeBindingPropertiesMSFT* properties{};
+    deserialize_ptr(&properties, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(properties, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&nodeBinding);
+    cleanup_ptr(getInfo, 1);
+    cleanup_ptr(properties, 1);
+}
+
+void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrTryCreateSpatialGraphStaticNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpatialGraphNodeBindingMSFT* nodeBinding{};
+    deserialize_ptr(&nodeBinding, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(nodeBinding, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(nodeBinding, 1);
+}
+
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetAudioInputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioInputDeviceGuidOculus));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
+    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetAudioInputDeviceGuidOculus(instance, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
+}
+
+void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetAudioOutputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioOutputDeviceGuidOculus));
+    // by this point, the function id has already been read, now read the params
+    XrInstance instance{};
+    deserialize(&instance, msg_in.stream, false);
+    wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
+    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetAudioOutputDeviceGuidOculus(instance, buffer);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&instance);
+    cleanup_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS);
+}
+
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrEnumerateExternalCamerasOCULUS", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateExternalCamerasOCULUS));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint32_t cameraCapacityInput{};
+    deserialize(&cameraCapacityInput, msg_in.stream, false);
+    uint32_t* cameraCountOutput{};
+    deserialize_ptr(&cameraCountOutput, msg_in.stream, false);
+    XrExternalCameraOCULUS* cameras{};
+    deserialize_ptr(&cameras, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(cameraCountOutput, 1, msg_out.buffer);
+    serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&cameraCapacityInput);
+    cleanup_ptr(cameraCountOutput, 1);
+    cleanup_ptr(cameras, cameraCapacityInput);
+}
+
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetTrackingOptimizationSettingsHintQCOM", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrTrackingOptimizationSettingsDomainQCOM domain{};
+    deserialize(&domain, msg_in.stream, false);
+    XrTrackingOptimizationSettingsHintQCOM hint{};
+    deserialize(&hint, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&domain);
+    cleanup(&hint);
+}
+
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetEnvironmentDepthEstimationVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrBool32 enabled{};
+    deserialize(&enabled, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO(session, enabled);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&enabled);
+}
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateMarkerSpaceVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrMarkerSpaceCreateInfoVARJO* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrSpace* space{};
+    deserialize_ptr(&space, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrCreateMarkerSpaceVARJO(session, createInfo, space);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(space, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(space, 1);
+}
+
+void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrGetMarkerSizeVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerSizeVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint64_t markerId{};
+    deserialize(&markerId, msg_in.stream, false);
+    XrExtent2Df* size{};
+    deserialize_ptr(&size, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrGetMarkerSizeVARJO(session, markerId, size);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(size, 1, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&markerId);
+    cleanup_ptr(size, 1);
+}
+
+void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetMarkerTrackingPredictionVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingPredictionVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint64_t markerId{};
+    deserialize(&markerId, msg_in.stream, false);
+    XrBool32 enable{};
+    deserialize(&enable, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&markerId);
+    cleanup(&enable);
+}
+
+void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetMarkerTrackingTimeoutVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    uint64_t markerId{};
+    deserialize(&markerId, msg_in.stream, false);
+    XrDuration timeout{};
+    deserialize(&timeout, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&markerId);
+    cleanup(&timeout);
+}
+
+void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetMarkerTrackingVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    XrBool32 enabled{};
+    deserialize(&enabled, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetMarkerTrackingVARJO(session, enabled);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&enabled);
+}
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrSetViewOffsetVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetViewOffsetVARJO));
+    // by this point, the function id has already been read, now read the params
+    XrSession session{};
+    deserialize(&session, msg_in.stream, false);
+    float offset{};
+    deserialize(&offset, msg_in.stream, false);
+
+    XrResult _result = function_loader.pfn_xrSetViewOffsetVARJO(session, offset);
+    
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    msg_out.flush();
+
+    cleanup(&session);
+    cleanup(&offset);
+}
+
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAcquireSwapchainImage", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAcquireSwapchainImage));
     // by this point, the function id has already been read, now read the params
@@ -7574,431 +7574,14 @@ void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
 
 
 std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handlers = {
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-    {4001, &FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-    {5001, &FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    {16001, &FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-    {17001, &FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
-#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    {20006, &FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT},
-    {20001, &FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT},
-    {20002, &FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT},
-    {20007, &FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT},
-    {20003, &FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT},
-    {20004, &FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT},
-    {20005, &FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    {24001, &FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    {25001, &FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    {26004, &FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR},
-    {26001, &FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR},
-    {26002, &FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR},
-    {26003, &FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    {28001, &FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    {29001, &FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    {30001, &FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    {32001, &FunctionDispatch::handle_xrGetVisibilityMaskKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
-#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-    {36002, &FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR},
-    {36001, &FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-    {37002, &FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR},
-    {37001, &FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    {40001, &FunctionDispatch::handle_xrCreateSpatialAnchorMSFT},
-    {40002, &FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT},
-    {40003, &FunctionDispatch::handle_xrDestroySpatialAnchorMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-    {48001, &FunctionDispatch::handle_xrSetInputDeviceActiveEXT},
-    {48003, &FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT},
-    {48004, &FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT},
-    {48005, &FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT},
-    {48002, &FunctionDispatch::handle_xrSetInputDeviceLocationEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    {50001, &FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT},
-    {50004, &FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT},
-    {50002, &FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT},
-    {50003, &FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    {52001, &FunctionDispatch::handle_xrCreateHandTrackerEXT},
-    {52002, &FunctionDispatch::handle_xrDestroyHandTrackerEXT},
-    {52003, &FunctionDispatch::handle_xrLocateHandJointsEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
-#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    {53001, &FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT},
-    {53002, &FunctionDispatch::handle_xrUpdateHandMeshMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    {56001, &FunctionDispatch::handle_xrGetControllerModelKeyMSFT},
-    {56004, &FunctionDispatch::handle_xrLoadControllerModelMSFT},
-    {56002, &FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT},
-    {56003, &FunctionDispatch::handle_xrGetControllerModelStateMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
-#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-    {57001, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
-    {57002, &FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    {67001, &FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-    {72002, &FunctionDispatch::handle_xrUpdateSwapchainFB},
-    {72001, &FunctionDispatch::handle_xrGetSwapchainStateFB},
-#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    {77001, &FunctionDispatch::handle_xrCreateBodyTrackerFB},
-    {77002, &FunctionDispatch::handle_xrDestroyBodyTrackerFB},
-    {77004, &FunctionDispatch::handle_xrLocateBodyJointsFB},
-    {77003, &FunctionDispatch::handle_xrGetBodySkeletonFB},
-#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-    {89001, &FunctionDispatch::handle_xrInitializeLoaderKHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    {91002, &FunctionDispatch::handle_xrCreateVulkanInstanceKHR},
-    {91001, &FunctionDispatch::handle_xrCreateVulkanDeviceKHR},
-    {91003, &FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    {98006, &FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT},
-    {98003, &FunctionDispatch::handle_xrCreateSceneObserverMSFT},
-    {98005, &FunctionDispatch::handle_xrDestroySceneObserverMSFT},
-    {98002, &FunctionDispatch::handle_xrCreateSceneMSFT},
-    {98004, &FunctionDispatch::handle_xrDestroySceneMSFT},
-    {98001, &FunctionDispatch::handle_xrComputeNewSceneMSFT},
-    {98008, &FunctionDispatch::handle_xrGetSceneComputeStateMSFT},
-    {98007, &FunctionDispatch::handle_xrGetSceneComponentsMSFT},
-    {98010, &FunctionDispatch::handle_xrLocateSceneComponentsMSFT},
-    {98009, &FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    {99001, &FunctionDispatch::handle_xrDeserializeSceneMSFT},
-    {99002, &FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    {102001, &FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB},
-    {102002, &FunctionDispatch::handle_xrGetDisplayRefreshRateFB},
-    {102003, &FunctionDispatch::handle_xrRequestDisplayRefreshRateFB},
-#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    {104001, &FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX},
-#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    {105001, &FunctionDispatch::handle_xrCreateFacialTrackerHTC},
-    {105002, &FunctionDispatch::handle_xrDestroyFacialTrackerHTC},
-    {105003, &FunctionDispatch::handle_xrGetFacialExpressionsHTC},
-#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_color_space
-    {109001, &FunctionDispatch::handle_xrEnumerateColorSpacesFB},
-    {109002, &FunctionDispatch::handle_xrSetColorSpaceFB},
-#endif // XRTRANSPORT_EXT_XR_FB_color_space
-#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    {111001, &FunctionDispatch::handle_xrGetHandMeshFB},
-#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    {114001, &FunctionDispatch::handle_xrCreateSpatialAnchorFB},
-    {114004, &FunctionDispatch::handle_xrGetSpaceUuidFB},
-    {114002, &FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB},
-    {114005, &FunctionDispatch::handle_xrSetSpaceComponentStatusFB},
-    {114003, &FunctionDispatch::handle_xrGetSpaceComponentStatusFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    {115001, &FunctionDispatch::handle_xrCreateFoveationProfileFB},
-    {115002, &FunctionDispatch::handle_xrDestroyFoveationProfileFB},
-#endif // XRTRANSPORT_EXT_XR_FB_foveation
-#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-    {117002, &FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB},
-    {117001, &FunctionDispatch::handle_xrCreateKeyboardSpaceFB},
-#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    {118001, &FunctionDispatch::handle_xrCreateTriangleMeshFB},
-    {118002, &FunctionDispatch::handle_xrDestroyTriangleMeshFB},
-    {118008, &FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB},
-    {118007, &FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB},
-    {118003, &FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB},
-    {118005, &FunctionDispatch::handle_xrTriangleMeshEndUpdateFB},
-    {118004, &FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB},
-    {118006, &FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB},
-#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    {119002, &FunctionDispatch::handle_xrCreatePassthroughFB},
-    {119005, &FunctionDispatch::handle_xrDestroyPassthroughFB},
-    {119012, &FunctionDispatch::handle_xrPassthroughStartFB},
-    {119011, &FunctionDispatch::handle_xrPassthroughPauseFB},
-    {119003, &FunctionDispatch::handle_xrCreatePassthroughLayerFB},
-    {119006, &FunctionDispatch::handle_xrDestroyPassthroughLayerFB},
-    {119008, &FunctionDispatch::handle_xrPassthroughLayerPauseFB},
-    {119009, &FunctionDispatch::handle_xrPassthroughLayerResumeFB},
-    {119010, &FunctionDispatch::handle_xrPassthroughLayerSetStyleFB},
-    {119001, &FunctionDispatch::handle_xrCreateGeometryInstanceFB},
-    {119004, &FunctionDispatch::handle_xrDestroyGeometryInstanceFB},
-    {119007, &FunctionDispatch::handle_xrGeometryInstanceSetTransformFB},
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough
-#ifdef XRTRANSPORT_EXT_XR_FB_render_model
-    {120001, &FunctionDispatch::handle_xrEnumerateRenderModelPathsFB},
-    {120002, &FunctionDispatch::handle_xrGetRenderModelPropertiesFB},
-    {120003, &FunctionDispatch::handle_xrLoadRenderModelFB},
-#endif // XRTRANSPORT_EXT_XR_FB_render_model
-#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-    {124001, &FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO},
-#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    {125005, &FunctionDispatch::handle_xrSetMarkerTrackingVARJO},
-    {125004, &FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO},
-    {125003, &FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO},
-    {125002, &FunctionDispatch::handle_xrGetMarkerSizeVARJO},
-    {125001, &FunctionDispatch::handle_xrCreateMarkerSpaceVARJO},
-#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-    {126001, &FunctionDispatch::handle_xrSetViewOffsetVARJO},
-#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-#ifdef XRTRANSPORT_EXT_XR_ML_compat
-    {138001, &FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML},
-#endif // XRTRANSPORT_EXT_XR_ML_compat
-#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    {139001, &FunctionDispatch::handle_xrCreateMarkerDetectorML},
-    {139003, &FunctionDispatch::handle_xrDestroyMarkerDetectorML},
-    {139010, &FunctionDispatch::handle_xrSnapshotMarkerDetectorML},
-    {139004, &FunctionDispatch::handle_xrGetMarkerDetectorStateML},
-    {139009, &FunctionDispatch::handle_xrGetMarkersML},
-    {139007, &FunctionDispatch::handle_xrGetMarkerReprojectionErrorML},
-    {139005, &FunctionDispatch::handle_xrGetMarkerLengthML},
-    {139006, &FunctionDispatch::handle_xrGetMarkerNumberML},
-    {139008, &FunctionDispatch::handle_xrGetMarkerStringML},
-    {139002, &FunctionDispatch::handle_xrCreateMarkerSpaceML},
-#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
-#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    {140003, &FunctionDispatch::handle_xrEnableLocalizationEventsML},
-    {140006, &FunctionDispatch::handle_xrQueryLocalizationMapsML},
-    {140007, &FunctionDispatch::handle_xrRequestMapLocalizationML},
-    {140005, &FunctionDispatch::handle_xrImportLocalizationMapML},
-    {140001, &FunctionDispatch::handle_xrCreateExportedLocalizationMapML},
-    {140002, &FunctionDispatch::handle_xrDestroyExportedLocalizationMapML},
-    {140004, &FunctionDispatch::handle_xrGetExportedLocalizationMapDataML},
-#endif // XRTRANSPORT_EXT_XR_ML_localization_map
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    {141001, &FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML},
-    {141002, &FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML},
-    {141003, &FunctionDispatch::handle_xrGetSpatialAnchorStateML},
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    {142001, &FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML},
-    {142004, &FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML},
-    {142007, &FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML},
-    {142008, &FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML},
-    {142005, &FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML},
-    {142006, &FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML},
-    {142002, &FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML},
-    {142003, &FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML},
-    {142009, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML},
-    {142010, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML},
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    {473001, &FunctionDispatch::handle_xrEnableUserCalibrationEventsML},
-#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    {143003, &FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT},
-    {143004, &FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT},
-    {143006, &FunctionDispatch::handle_xrPersistSpatialAnchorMSFT},
-    {143005, &FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT},
-    {143002, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT},
-    {143007, &FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT},
-    {143001, &FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    {148002, &FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT},
-    {148001, &FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
-#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-    {149001, &FunctionDispatch::handle_xrStructureTypeToString2KHR},
-#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-    {157001, &FunctionDispatch::handle_xrQuerySpacesFB},
-    {157002, &FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    {159002, &FunctionDispatch::handle_xrSaveSpaceFB},
-    {159001, &FunctionDispatch::handle_xrEraseSpaceFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-    {160002, &FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus},
-    {160001, &FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus},
-#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    {170001, &FunctionDispatch::handle_xrShareSpacesFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_FB_scene
-    {176002, &FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB},
-    {176003, &FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB},
-    {176005, &FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB},
-    {176001, &FunctionDispatch::handle_xrGetSpaceBoundary2DFB},
-    {176004, &FunctionDispatch::handle_xrGetSpaceRoomLayoutFB},
-#endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
     {197001, &FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE},
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    {199001, &FunctionDispatch::handle_xrRequestSceneCaptureFB},
-#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    {200001, &FunctionDispatch::handle_xrGetSpaceContainerFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    {201001, &FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA},
-#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    {202001, &FunctionDispatch::handle_xrCreateFaceTrackerFB},
-    {202002, &FunctionDispatch::handle_xrDestroyFaceTrackerFB},
-    {202003, &FunctionDispatch::handle_xrGetFaceExpressionWeightsFB},
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    {203001, &FunctionDispatch::handle_xrCreateEyeTrackerFB},
-    {203002, &FunctionDispatch::handle_xrDestroyEyeTrackerFB},
-    {203003, &FunctionDispatch::handle_xrGetEyeGazesFB},
-#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    {204001, &FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB},
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    {210001, &FunctionDispatch::handle_xrGetDeviceSampleRateFB},
-#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    {218001, &FunctionDispatch::handle_xrGetPassthroughPreferencesMETA},
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
-#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    {220002, &FunctionDispatch::handle_xrCreateVirtualKeyboardMETA},
-    {220004, &FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA},
-    {220003, &FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA},
-    {220011, &FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA},
-    {220007, &FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA},
-    {220010, &FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA},
-    {220006, &FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA},
-    {220005, &FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA},
-    {220008, &FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA},
-    {220009, &FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA},
-    {220001, &FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA},
-#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    {227001, &FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS},
-#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
-#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    {233001, &FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA},
-    {233004, &FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA},
-    {233002, &FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA},
-    {233003, &FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA},
-#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    {239001, &FunctionDispatch::handle_xrSaveSpaceListFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    {242001, &FunctionDispatch::handle_xrCreateSpaceUserFB},
-    {242003, &FunctionDispatch::handle_xrGetSpaceUserIdFB},
-    {242002, &FunctionDispatch::handle_xrDestroySpaceUserFB},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    {255001, &FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA},
-#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    {267001, &FunctionDispatch::handle_xrCreatePassthroughColorLutMETA},
-    {267002, &FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA},
-    {267003, &FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA},
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    {270001, &FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA},
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    {288001, &FunctionDispatch::handle_xrCreateFaceTracker2FB},
-    {288002, &FunctionDispatch::handle_xrDestroyFaceTracker2FB},
-    {288003, &FunctionDispatch::handle_xrGetFaceExpressionWeights2FB},
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    {291001, &FunctionDispatch::handle_xrShareSpacesMETA},
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    {292002, &FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA},
-    {292004, &FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA},
-    {292009, &FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA},
-    {292010, &FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA},
-    {292003, &FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA},
-    {292005, &FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA},
-    {292006, &FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA},
-    {292007, &FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA},
-    {292001, &FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA},
-    {292008, &FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA},
-#endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-    {307001, &FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM},
-#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    {318001, &FunctionDispatch::handle_xrCreatePassthroughHTC},
-    {318002, &FunctionDispatch::handle_xrDestroyPassthroughHTC},
-#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
-#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    {319001, &FunctionDispatch::handle_xrApplyFoveationHTC},
-#endif // XRTRANSPORT_EXT_XR_HTC_foveation
-#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    {320001, &FunctionDispatch::handle_xrCreateSpatialAnchorHTC},
-    {320002, &FunctionDispatch::handle_xrGetSpatialAnchorNameHTC},
-#endif // XRTRANSPORT_EXT_XR_HTC_anchor
-#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    {321001, &FunctionDispatch::handle_xrCreateBodyTrackerHTC},
-    {321002, &FunctionDispatch::handle_xrDestroyBodyTrackerHTC},
-    {321004, &FunctionDispatch::handle_xrLocateBodyJointsHTC},
-    {321003, &FunctionDispatch::handle_xrGetBodySkeletonHTC},
-#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    {376001, &FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX},
-#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
     {386001, &FunctionDispatch::handle_xrCreateBodyTrackerBD},
     {386002, &FunctionDispatch::handle_xrDestroyBodyTrackerBD},
     {386003, &FunctionDispatch::handle_xrLocateBodyJointsBD},
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    {390007, &FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD},
-    {390012, &FunctionDispatch::handle_xrGetSpatialEntityUuidBD},
-    {390011, &FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD},
-    {390002, &FunctionDispatch::handle_xrCreateSenseDataProviderBD},
-    {390015, &FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD},
-    {390016, &FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD},
-    {390010, &FunctionDispatch::handle_xrGetSenseDataProviderStateBD},
-    {390013, &FunctionDispatch::handle_xrQuerySenseDataAsyncBD},
-    {390014, &FunctionDispatch::handle_xrQuerySenseDataCompleteBD},
-    {390006, &FunctionDispatch::handle_xrDestroySenseDataSnapshotBD},
-    {390009, &FunctionDispatch::handle_xrGetQueriedSenseDataBD},
-    {390017, &FunctionDispatch::handle_xrStopSenseDataProviderBD},
-    {390005, &FunctionDispatch::handle_xrDestroySenseDataProviderBD},
-    {390003, &FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD},
-    {390004, &FunctionDispatch::handle_xrDestroyAnchorBD},
-    {390008, &FunctionDispatch::handle_xrGetAnchorUuidBD},
-    {390001, &FunctionDispatch::handle_xrCreateAnchorSpaceBD},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
     {391001, &FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD},
     {391002, &FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD},
@@ -8008,56 +7591,473 @@ std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handle
     {391006, &FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    {392003, &FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD},
-    {392004, &FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD},
     {392001, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD},
     {392002, &FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD},
+    {392003, &FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD},
+    {392004, &FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
     {393001, &FunctionDispatch::handle_xrCaptureSceneAsyncBD},
     {393002, &FunctionDispatch::handle_xrCaptureSceneCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+    {390001, &FunctionDispatch::handle_xrCreateAnchorSpaceBD},
+    {390002, &FunctionDispatch::handle_xrCreateSenseDataProviderBD},
+    {390003, &FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD},
+    {390004, &FunctionDispatch::handle_xrDestroyAnchorBD},
+    {390005, &FunctionDispatch::handle_xrDestroySenseDataProviderBD},
+    {390006, &FunctionDispatch::handle_xrDestroySenseDataSnapshotBD},
+    {390007, &FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD},
+    {390008, &FunctionDispatch::handle_xrGetAnchorUuidBD},
+    {390009, &FunctionDispatch::handle_xrGetQueriedSenseDataBD},
+    {390010, &FunctionDispatch::handle_xrGetSenseDataProviderStateBD},
+    {390011, &FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD},
+    {390012, &FunctionDispatch::handle_xrGetSpatialEntityUuidBD},
+    {390013, &FunctionDispatch::handle_xrQuerySenseDataAsyncBD},
+    {390014, &FunctionDispatch::handle_xrQuerySenseDataCompleteBD},
+    {390015, &FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD},
+    {390016, &FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD},
+    {390017, &FunctionDispatch::handle_xrStopSenseDataProviderBD},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
+#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+    {48001, &FunctionDispatch::handle_xrSetInputDeviceActiveEXT},
+    {48002, &FunctionDispatch::handle_xrSetInputDeviceLocationEXT},
+    {48003, &FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT},
+    {48004, &FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT},
+    {48005, &FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+    {20001, &FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT},
+    {20002, &FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT},
+    {20003, &FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT},
+    {20004, &FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT},
+    {20005, &FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT},
+    {20006, &FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT},
+    {20007, &FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+    {470001, &FunctionDispatch::handle_xrCancelFutureEXT},
+    {470002, &FunctionDispatch::handle_xrPollFutureEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_future
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+    {52001, &FunctionDispatch::handle_xrCreateHandTrackerEXT},
+    {52002, &FunctionDispatch::handle_xrDestroyHandTrackerEXT},
+    {52003, &FunctionDispatch::handle_xrLocateHandJointsEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+    {16001, &FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+    {430001, &FunctionDispatch::handle_xrBeginPlaneDetectionEXT},
     {430002, &FunctionDispatch::handle_xrCreatePlaneDetectorEXT},
     {430003, &FunctionDispatch::handle_xrDestroyPlaneDetectorEXT},
-    {430001, &FunctionDispatch::handle_xrBeginPlaneDetectionEXT},
     {430004, &FunctionDispatch::handle_xrGetPlaneDetectionStateEXT},
     {430005, &FunctionDispatch::handle_xrGetPlaneDetectionsEXT},
     {430006, &FunctionDispatch::handle_xrGetPlanePolygonBufferEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
-#ifdef XRTRANSPORT_EXT_XR_EXT_future
-    {470002, &FunctionDispatch::handle_xrPollFutureEXT},
-    {470001, &FunctionDispatch::handle_xrCancelFutureEXT},
-#endif // XRTRANSPORT_EXT_XR_EXT_future
-#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-    {474001, &FunctionDispatch::handle_xrSetSystemNotificationsML},
-#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
-#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    {475002, &FunctionDispatch::handle_xrCreateWorldMeshDetectorML},
-    {475003, &FunctionDispatch::handle_xrDestroyWorldMeshDetectorML},
-    {475008, &FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML},
-    {475009, &FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML},
-    {475005, &FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML},
-    {475001, &FunctionDispatch::handle_xrAllocateWorldMeshBufferML},
-    {475004, &FunctionDispatch::handle_xrFreeWorldMeshBufferML},
-    {475006, &FunctionDispatch::handle_xrRequestWorldMeshAsyncML},
-    {475007, &FunctionDispatch::handle_xrRequestWorldMeshCompleteML},
-#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+    {17001, &FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT},
+#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+    {77001, &FunctionDispatch::handle_xrCreateBodyTrackerFB},
+    {77002, &FunctionDispatch::handle_xrDestroyBodyTrackerFB},
+    {77003, &FunctionDispatch::handle_xrGetBodySkeletonFB},
+    {77004, &FunctionDispatch::handle_xrLocateBodyJointsFB},
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_color_space
+    {109001, &FunctionDispatch::handle_xrEnumerateColorSpacesFB},
+    {109002, &FunctionDispatch::handle_xrSetColorSpaceFB},
+#endif // XRTRANSPORT_EXT_XR_FB_color_space
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+    {102001, &FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB},
+    {102002, &FunctionDispatch::handle_xrGetDisplayRefreshRateFB},
+    {102003, &FunctionDispatch::handle_xrRequestDisplayRefreshRateFB},
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+    {203001, &FunctionDispatch::handle_xrCreateEyeTrackerFB},
+    {203002, &FunctionDispatch::handle_xrDestroyEyeTrackerFB},
+    {203003, &FunctionDispatch::handle_xrGetEyeGazesFB},
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+    {202001, &FunctionDispatch::handle_xrCreateFaceTrackerFB},
+    {202002, &FunctionDispatch::handle_xrDestroyFaceTrackerFB},
+    {202003, &FunctionDispatch::handle_xrGetFaceExpressionWeightsFB},
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+    {288001, &FunctionDispatch::handle_xrCreateFaceTracker2FB},
+    {288002, &FunctionDispatch::handle_xrDestroyFaceTracker2FB},
+    {288003, &FunctionDispatch::handle_xrGetFaceExpressionWeights2FB},
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+    {115001, &FunctionDispatch::handle_xrCreateFoveationProfileFB},
+    {115002, &FunctionDispatch::handle_xrDestroyFoveationProfileFB},
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+    {111001, &FunctionDispatch::handle_xrGetHandMeshFB},
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+    {210001, &FunctionDispatch::handle_xrGetDeviceSampleRateFB},
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
+#ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+    {117001, &FunctionDispatch::handle_xrCreateKeyboardSpaceFB},
+    {117002, &FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB},
+#endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+    {119001, &FunctionDispatch::handle_xrCreateGeometryInstanceFB},
+    {119002, &FunctionDispatch::handle_xrCreatePassthroughFB},
+    {119003, &FunctionDispatch::handle_xrCreatePassthroughLayerFB},
+    {119004, &FunctionDispatch::handle_xrDestroyGeometryInstanceFB},
+    {119005, &FunctionDispatch::handle_xrDestroyPassthroughFB},
+    {119006, &FunctionDispatch::handle_xrDestroyPassthroughLayerFB},
+    {119007, &FunctionDispatch::handle_xrGeometryInstanceSetTransformFB},
+    {119008, &FunctionDispatch::handle_xrPassthroughLayerPauseFB},
+    {119009, &FunctionDispatch::handle_xrPassthroughLayerResumeFB},
+    {119010, &FunctionDispatch::handle_xrPassthroughLayerSetStyleFB},
+    {119011, &FunctionDispatch::handle_xrPassthroughPauseFB},
+    {119012, &FunctionDispatch::handle_xrPassthroughStartFB},
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+    {204001, &FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB},
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+#ifdef XRTRANSPORT_EXT_XR_FB_render_model
+    {120001, &FunctionDispatch::handle_xrEnumerateRenderModelPathsFB},
+    {120002, &FunctionDispatch::handle_xrGetRenderModelPropertiesFB},
+    {120003, &FunctionDispatch::handle_xrLoadRenderModelFB},
+#endif // XRTRANSPORT_EXT_XR_FB_render_model
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+    {176001, &FunctionDispatch::handle_xrGetSpaceBoundary2DFB},
+    {176002, &FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB},
+    {176003, &FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB},
+    {176004, &FunctionDispatch::handle_xrGetSpaceRoomLayoutFB},
+    {176005, &FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB},
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+    {199001, &FunctionDispatch::handle_xrRequestSceneCaptureFB},
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+    {114001, &FunctionDispatch::handle_xrCreateSpatialAnchorFB},
+    {114002, &FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB},
+    {114003, &FunctionDispatch::handle_xrGetSpaceComponentStatusFB},
+    {114004, &FunctionDispatch::handle_xrGetSpaceUuidFB},
+    {114005, &FunctionDispatch::handle_xrSetSpaceComponentStatusFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+    {200001, &FunctionDispatch::handle_xrGetSpaceContainerFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+    {157001, &FunctionDispatch::handle_xrQuerySpacesFB},
+    {157002, &FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+    {170001, &FunctionDispatch::handle_xrShareSpacesFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+    {159001, &FunctionDispatch::handle_xrEraseSpaceFB},
+    {159002, &FunctionDispatch::handle_xrSaveSpaceFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+    {239001, &FunctionDispatch::handle_xrSaveSpaceListFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+    {242001, &FunctionDispatch::handle_xrCreateSpaceUserFB},
+    {242002, &FunctionDispatch::handle_xrDestroySpaceUserFB},
+    {242003, &FunctionDispatch::handle_xrGetSpaceUserIdFB},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+    {72001, &FunctionDispatch::handle_xrGetSwapchainStateFB},
+    {72002, &FunctionDispatch::handle_xrUpdateSwapchainFB},
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+    {118001, &FunctionDispatch::handle_xrCreateTriangleMeshFB},
+    {118002, &FunctionDispatch::handle_xrDestroyTriangleMeshFB},
+    {118003, &FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB},
+    {118004, &FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB},
+    {118005, &FunctionDispatch::handle_xrTriangleMeshEndUpdateFB},
+    {118006, &FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB},
+    {118007, &FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB},
+    {118008, &FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB},
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+    {104001, &FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX},
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+    {320001, &FunctionDispatch::handle_xrCreateSpatialAnchorHTC},
+    {320002, &FunctionDispatch::handle_xrGetSpatialAnchorNameHTC},
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+    {321001, &FunctionDispatch::handle_xrCreateBodyTrackerHTC},
+    {321002, &FunctionDispatch::handle_xrDestroyBodyTrackerHTC},
+    {321003, &FunctionDispatch::handle_xrGetBodySkeletonHTC},
+    {321004, &FunctionDispatch::handle_xrLocateBodyJointsHTC},
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+    {105001, &FunctionDispatch::handle_xrCreateFacialTrackerHTC},
+    {105002, &FunctionDispatch::handle_xrDestroyFacialTrackerHTC},
+    {105003, &FunctionDispatch::handle_xrGetFacialExpressionsHTC},
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+    {319001, &FunctionDispatch::handle_xrApplyFoveationHTC},
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+    {318001, &FunctionDispatch::handle_xrCreatePassthroughHTC},
+    {318002, &FunctionDispatch::handle_xrDestroyPassthroughHTC},
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+    {28001, &FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+    {29001, &FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+    {5001, &FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+    {4001, &FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+    {37001, &FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR},
+    {37002, &FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+    {149001, &FunctionDispatch::handle_xrStructureTypeToString2KHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+    {89001, &FunctionDispatch::handle_xrInitializeLoaderKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+    {30001, &FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+    {24001, &FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+    {25001, &FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+    {32001, &FunctionDispatch::handle_xrGetVisibilityMaskKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+    {26001, &FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR},
+    {26002, &FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR},
+    {26003, &FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR},
+    {26004, &FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+    {91001, &FunctionDispatch::handle_xrCreateVulkanDeviceKHR},
+    {91002, &FunctionDispatch::handle_xrCreateVulkanInstanceKHR},
+    {91003, &FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+    {36001, &FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR},
+    {36002, &FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR},
+#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+    {572001, &FunctionDispatch::handle_xrStartColocationAdvertisementMETA},
+    {572002, &FunctionDispatch::handle_xrStartColocationDiscoveryMETA},
+    {572003, &FunctionDispatch::handle_xrStopColocationAdvertisementMETA},
+    {572004, &FunctionDispatch::handle_xrStopColocationDiscoveryMETA},
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+    {292001, &FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA},
+    {292002, &FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA},
+    {292003, &FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA},
+    {292004, &FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA},
+    {292005, &FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA},
+    {292006, &FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA},
+    {292007, &FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA},
+    {292008, &FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA},
+    {292009, &FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA},
+    {292010, &FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA},
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+    {201001, &FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA},
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+    {267001, &FunctionDispatch::handle_xrCreatePassthroughColorLutMETA},
+    {267002, &FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA},
+    {267003, &FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA},
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+    {218001, &FunctionDispatch::handle_xrGetPassthroughPreferencesMETA},
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+    {233001, &FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA},
+    {233002, &FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA},
+    {233003, &FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA},
+    {233004, &FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA},
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+    {255001, &FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA},
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+    {533001, &FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA},
+    {533002, &FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA},
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+    {270001, &FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA},
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+    {291001, &FunctionDispatch::handle_xrShareSpacesMETA},
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+    {220001, &FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA},
+    {220002, &FunctionDispatch::handle_xrCreateVirtualKeyboardMETA},
+    {220003, &FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA},
+    {220004, &FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA},
+    {220005, &FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA},
+    {220006, &FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA},
+    {220007, &FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA},
+    {220008, &FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA},
+    {220009, &FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA},
+    {220010, &FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA},
+    {220011, &FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA},
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+    {138001, &FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML},
+#endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
     {483001, &FunctionDispatch::handle_xrCreateFacialExpressionClientML},
     {483002, &FunctionDispatch::handle_xrDestroyFacialExpressionClientML},
     {483003, &FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML},
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
-#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    {533002, &FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA},
-    {533001, &FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA},
-#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    {572002, &FunctionDispatch::handle_xrStartColocationDiscoveryMETA},
-    {572004, &FunctionDispatch::handle_xrStopColocationDiscoveryMETA},
-    {572001, &FunctionDispatch::handle_xrStartColocationAdvertisementMETA},
-    {572003, &FunctionDispatch::handle_xrStopColocationAdvertisementMETA},
-#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+    {140001, &FunctionDispatch::handle_xrCreateExportedLocalizationMapML},
+    {140002, &FunctionDispatch::handle_xrDestroyExportedLocalizationMapML},
+    {140003, &FunctionDispatch::handle_xrEnableLocalizationEventsML},
+    {140004, &FunctionDispatch::handle_xrGetExportedLocalizationMapDataML},
+    {140005, &FunctionDispatch::handle_xrImportLocalizationMapML},
+    {140006, &FunctionDispatch::handle_xrQueryLocalizationMapsML},
+    {140007, &FunctionDispatch::handle_xrRequestMapLocalizationML},
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+    {139001, &FunctionDispatch::handle_xrCreateMarkerDetectorML},
+    {139002, &FunctionDispatch::handle_xrCreateMarkerSpaceML},
+    {139003, &FunctionDispatch::handle_xrDestroyMarkerDetectorML},
+    {139004, &FunctionDispatch::handle_xrGetMarkerDetectorStateML},
+    {139005, &FunctionDispatch::handle_xrGetMarkerLengthML},
+    {139006, &FunctionDispatch::handle_xrGetMarkerNumberML},
+    {139007, &FunctionDispatch::handle_xrGetMarkerReprojectionErrorML},
+    {139008, &FunctionDispatch::handle_xrGetMarkerStringML},
+    {139009, &FunctionDispatch::handle_xrGetMarkersML},
+    {139010, &FunctionDispatch::handle_xrSnapshotMarkerDetectorML},
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+    {141001, &FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML},
+    {141002, &FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML},
+    {141003, &FunctionDispatch::handle_xrGetSpatialAnchorStateML},
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+    {142001, &FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML},
+    {142002, &FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML},
+    {142003, &FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML},
+    {142004, &FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML},
+    {142005, &FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML},
+    {142006, &FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML},
+    {142007, &FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML},
+    {142008, &FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML},
+    {142009, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML},
+    {142010, &FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML},
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+#ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+    {474001, &FunctionDispatch::handle_xrSetSystemNotificationsML},
+#endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+    {473001, &FunctionDispatch::handle_xrEnableUserCalibrationEventsML},
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
+#ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+    {475001, &FunctionDispatch::handle_xrAllocateWorldMeshBufferML},
+    {475002, &FunctionDispatch::handle_xrCreateWorldMeshDetectorML},
+    {475003, &FunctionDispatch::handle_xrDestroyWorldMeshDetectorML},
+    {475004, &FunctionDispatch::handle_xrFreeWorldMeshBufferML},
+    {475005, &FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML},
+    {475006, &FunctionDispatch::handle_xrRequestWorldMeshAsyncML},
+    {475007, &FunctionDispatch::handle_xrRequestWorldMeshCompleteML},
+    {475008, &FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML},
+    {475009, &FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML},
+#endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+    {376001, &FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX},
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+    {67001, &FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+    {56001, &FunctionDispatch::handle_xrGetControllerModelKeyMSFT},
+    {56002, &FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT},
+    {56003, &FunctionDispatch::handle_xrGetControllerModelStateMSFT},
+    {56004, &FunctionDispatch::handle_xrLoadControllerModelMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+    {53001, &FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT},
+    {53002, &FunctionDispatch::handle_xrUpdateHandMeshMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+    {57001, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
+    {57002, &FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+    {148001, &FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT},
+    {148002, &FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+    {98001, &FunctionDispatch::handle_xrComputeNewSceneMSFT},
+    {98002, &FunctionDispatch::handle_xrCreateSceneMSFT},
+    {98003, &FunctionDispatch::handle_xrCreateSceneObserverMSFT},
+    {98004, &FunctionDispatch::handle_xrDestroySceneMSFT},
+    {98005, &FunctionDispatch::handle_xrDestroySceneObserverMSFT},
+    {98006, &FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT},
+    {98007, &FunctionDispatch::handle_xrGetSceneComponentsMSFT},
+    {98008, &FunctionDispatch::handle_xrGetSceneComputeStateMSFT},
+    {98009, &FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT},
+    {98010, &FunctionDispatch::handle_xrLocateSceneComponentsMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+    {99001, &FunctionDispatch::handle_xrDeserializeSceneMSFT},
+    {99002, &FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+    {40001, &FunctionDispatch::handle_xrCreateSpatialAnchorMSFT},
+    {40002, &FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT},
+    {40003, &FunctionDispatch::handle_xrDestroySpatialAnchorMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+    {143001, &FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT},
+    {143002, &FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT},
+    {143003, &FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT},
+    {143004, &FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT},
+    {143005, &FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT},
+    {143006, &FunctionDispatch::handle_xrPersistSpatialAnchorMSFT},
+    {143007, &FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+    {50001, &FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT},
+    {50002, &FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT},
+    {50003, &FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT},
+    {50004, &FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+    {160001, &FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus},
+    {160002, &FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus},
+#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+    {227001, &FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS},
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+    {307001, &FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM},
+#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+    {124001, &FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO},
+#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+    {125001, &FunctionDispatch::handle_xrCreateMarkerSpaceVARJO},
+    {125002, &FunctionDispatch::handle_xrGetMarkerSizeVARJO},
+    {125003, &FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO},
+    {125004, &FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO},
+    {125005, &FunctionDispatch::handle_xrSetMarkerTrackingVARJO},
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+    {126001, &FunctionDispatch::handle_xrSetViewOffsetVARJO},
+#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
     {1, &FunctionDispatch::handle_xrAcquireSwapchainImage},
     {2, &FunctionDispatch::handle_xrApplyHapticFeedback},
     {3, &FunctionDispatch::handle_xrAttachSessionActionSets},

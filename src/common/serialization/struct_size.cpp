@@ -17,340 +17,293 @@
 namespace xrtransport {
 
 std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
-    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, sizeof(XrCompositionLayerCubeKHR)},
-    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, sizeof(XrCompositionLayerCubeKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
-    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, sizeof(XrInstanceCreateInfoAndroidKHR)},
-    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, sizeof(XrInstanceCreateInfoAndroidKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, sizeof(XrCompositionLayerDepthInfoKHR)},
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, sizeof(XrCompositionLayerDepthInfoKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
-    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, sizeof(XrVulkanSwapchainFormatListCreateInfoKHR)},
-    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, sizeof(XrVulkanSwapchainFormatListCreateInfoKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
-#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, sizeof(XrEventDataPerfSettingsEXT)},
-    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, sizeof(XrEventDataPerfSettingsEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
-    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, sizeof(XrCompositionLayerCylinderKHR)},
-    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, sizeof(XrCompositionLayerCylinderKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
-    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, sizeof(XrCompositionLayerEquirectKHR)},
-    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, sizeof(XrCompositionLayerEquirectKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
-#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, sizeof(XrDebugUtilsObjectNameInfoEXT)},
-    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, sizeof(XrDebugUtilsLabelEXT)},
-    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, sizeof(XrDebugUtilsMessengerCallbackDataEXT)},
-    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, sizeof(XrDebugUtilsMessengerCreateInfoEXT)},
-    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, sizeof(XrDebugUtilsObjectNameInfoEXT)},
-    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, sizeof(XrDebugUtilsMessengerCallbackDataEXT)},
-    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, sizeof(XrDebugUtilsMessengerCreateInfoEXT)},
-    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, sizeof(XrDebugUtilsLabelEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, sizeof(XrGraphicsBindingOpenGLWin32KHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, sizeof(XrGraphicsBindingOpenGLXlibKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, sizeof(XrGraphicsBindingOpenGLXcbKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, sizeof(XrGraphicsBindingOpenGLWaylandKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, sizeof(XrSwapchainImageOpenGLKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, sizeof(XrGraphicsRequirementsOpenGLKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, sizeof(XrGraphicsBindingOpenGLWin32KHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, sizeof(XrGraphicsBindingOpenGLXlibKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, sizeof(XrGraphicsBindingOpenGLXcbKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, sizeof(XrGraphicsBindingOpenGLWaylandKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, sizeof(XrSwapchainImageOpenGLKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, sizeof(XrGraphicsRequirementsOpenGLKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, sizeof(XrGraphicsBindingOpenGLESAndroidKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, sizeof(XrSwapchainImageOpenGLESKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, sizeof(XrGraphicsRequirementsOpenGLESKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, sizeof(XrGraphicsBindingOpenGLESAndroidKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, sizeof(XrSwapchainImageOpenGLESKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, sizeof(XrGraphicsRequirementsOpenGLESKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, sizeof(XrGraphicsBindingVulkanKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, sizeof(XrSwapchainImageVulkanKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, sizeof(XrGraphicsRequirementsVulkanKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, sizeof(XrGraphicsBindingVulkanKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, sizeof(XrSwapchainImageVulkanKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, sizeof(XrGraphicsRequirementsVulkanKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, sizeof(XrGraphicsBindingD3D11KHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, sizeof(XrSwapchainImageD3D11KHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, sizeof(XrGraphicsRequirementsD3D11KHR)},
-    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, sizeof(XrGraphicsBindingD3D11KHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, sizeof(XrSwapchainImageD3D11KHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, sizeof(XrGraphicsRequirementsD3D11KHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, sizeof(XrGraphicsBindingD3D12KHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, sizeof(XrSwapchainImageD3D12KHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, sizeof(XrGraphicsRequirementsD3D12KHR)},
-    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, sizeof(XrGraphicsBindingD3D12KHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, sizeof(XrSwapchainImageD3D12KHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, sizeof(XrGraphicsRequirementsD3D12KHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, sizeof(XrGraphicsBindingMetalKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, sizeof(XrSwapchainImageMetalKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, sizeof(XrGraphicsRequirementsMetalKHR)},
-    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, sizeof(XrGraphicsBindingMetalKHR)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, sizeof(XrSwapchainImageMetalKHR)},
-    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, sizeof(XrGraphicsRequirementsMetalKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
-#ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
-    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, sizeof(XrSystemEyeGazeInteractionPropertiesEXT)},
-    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, sizeof(XrEyeGazeSampleTimeEXT)},
-    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, sizeof(XrSystemEyeGazeInteractionPropertiesEXT)},
-    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, sizeof(XrEyeGazeSampleTimeEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
-#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    {XR_TYPE_VISIBILITY_MASK_KHR, sizeof(XrVisibilityMaskKHR)},
-    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, sizeof(XrEventDataVisibilityMaskChangedKHR)},
-    {XR_TYPE_VISIBILITY_MASK_KHR, sizeof(XrVisibilityMaskKHR)},
-    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, sizeof(XrEventDataVisibilityMaskChangedKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
-#ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
-    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, sizeof(XrSessionCreateInfoOverlayEXTX)},
-    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, sizeof(XrEventDataMainSessionVisibilityChangedEXTX)},
-    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, sizeof(XrSessionCreateInfoOverlayEXTX)},
-    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, sizeof(XrEventDataMainSessionVisibilityChangedEXTX)},
-#endif // XRTRANSPORT_EXT_XR_EXTX_overlay
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, sizeof(XrCompositionLayerColorScaleBiasKHR)},
-    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, sizeof(XrCompositionLayerColorScaleBiasKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorSpaceCreateInfoMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
-    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, sizeof(XrCompositionLayerImageLayoutFB)},
-    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, sizeof(XrCompositionLayerImageLayoutFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
-#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
-    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, sizeof(XrCompositionLayerAlphaBlendFB)},
-    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, sizeof(XrCompositionLayerAlphaBlendFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
-#ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, sizeof(XrViewConfigurationDepthRangeEXT)},
-    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, sizeof(XrViewConfigurationDepthRangeEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-#ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
-    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, sizeof(XrGraphicsBindingEGLMNDX)},
-    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, sizeof(XrGraphicsBindingEGLMNDX)},
-#endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, sizeof(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, sizeof(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
-    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, sizeof(XrSystemHandTrackingPropertiesEXT)},
-    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, sizeof(XrHandTrackerCreateInfoEXT)},
-    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, sizeof(XrHandJointsLocateInfoEXT)},
-    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, sizeof(XrHandJointLocationsEXT)},
-    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, sizeof(XrHandJointVelocitiesEXT)},
-    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, sizeof(XrSystemHandTrackingPropertiesEXT)},
-    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, sizeof(XrHandTrackerCreateInfoEXT)},
-    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, sizeof(XrHandJointsLocateInfoEXT)},
-    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, sizeof(XrHandJointLocationsEXT)},
-    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, sizeof(XrHandJointVelocitiesEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
-#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, sizeof(XrSystemHandTrackingMeshPropertiesMSFT)},
-    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, sizeof(XrHandMeshSpaceCreateInfoMSFT)},
-    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, sizeof(XrHandMeshUpdateInfoMSFT)},
-    {XR_TYPE_HAND_MESH_MSFT, sizeof(XrHandMeshMSFT)},
-    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, sizeof(XrHandPoseTypeInfoMSFT)},
-    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, sizeof(XrSystemHandTrackingMeshPropertiesMSFT)},
-    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, sizeof(XrHandMeshSpaceCreateInfoMSFT)},
-    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, sizeof(XrHandMeshUpdateInfoMSFT)},
-    {XR_TYPE_HAND_MESH_MSFT, sizeof(XrHandMeshMSFT)},
-    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, sizeof(XrHandPoseTypeInfoMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-#ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, sizeof(XrSecondaryViewConfigurationStateMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, sizeof(XrSecondaryViewConfigurationFrameStateMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, sizeof(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, sizeof(XrSecondaryViewConfigurationLayerInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, sizeof(XrSecondaryViewConfigurationStateMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, sizeof(XrSecondaryViewConfigurationFrameStateMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, sizeof(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, sizeof(XrSecondaryViewConfigurationLayerInfoMSFT)},
-    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
-#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, sizeof(XrControllerModelKeyStateMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, sizeof(XrControllerModelNodePropertiesMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, sizeof(XrControllerModelPropertiesMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, sizeof(XrControllerModelNodeStateMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, sizeof(XrControllerModelStateMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, sizeof(XrControllerModelKeyStateMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, sizeof(XrControllerModelNodePropertiesMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, sizeof(XrControllerModelPropertiesMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, sizeof(XrControllerModelNodeStateMSFT)},
-    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, sizeof(XrControllerModelStateMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+    {XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE, sizeof(XrDigitalLensControlALMALENCE)},
+#endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+#ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
+    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, sizeof(XrBodyJointLocationsBD)},
+    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, sizeof(XrBodyJointLocationsBD)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, sizeof(XrBodyJointsLocateInfoBD)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, sizeof(XrBodyJointsLocateInfoBD)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, sizeof(XrBodyTrackerCreateInfoBD)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, sizeof(XrBodyTrackerCreateInfoBD)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, sizeof(XrSystemBodyTrackingPropertiesBD)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, sizeof(XrSystemBodyTrackingPropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_BD_future_progress
+    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, sizeof(XrFuturePollResultProgressBD)},
+    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, sizeof(XrFuturePollResultProgressBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_future_progress
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, sizeof(XrSpatialAnchorCreateCompletionBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, sizeof(XrSpatialAnchorCreateCompletionBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialAnchorCreateInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialAnchorCreateInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, sizeof(XrSpatialAnchorPersistInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, sizeof(XrSpatialAnchorPersistInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, sizeof(XrSpatialAnchorUnpersistInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, sizeof(XrSpatialAnchorUnpersistInfoBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorPropertiesBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorPropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, sizeof(XrSharedSpatialAnchorDownloadInfoBD)},
+    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, sizeof(XrSharedSpatialAnchorDownloadInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, sizeof(XrSpatialAnchorShareInfoBD)},
+    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, sizeof(XrSpatialAnchorShareInfoBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorSharingPropertiesBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorSharingPropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, sizeof(XrSenseDataProviderCreateInfoSpatialMeshBD)},
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, sizeof(XrSenseDataProviderCreateInfoSpatialMeshBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, sizeof(XrSystemSpatialMeshPropertiesBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, sizeof(XrSystemSpatialMeshPropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
+    {XR_TYPE_SCENE_CAPTURE_INFO_BD, sizeof(XrSceneCaptureInfoBD)},
+    {XR_TYPE_SCENE_CAPTURE_INFO_BD, sizeof(XrSceneCaptureInfoBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, sizeof(XrSystemSpatialScenePropertiesBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, sizeof(XrSystemSpatialScenePropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
+#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, sizeof(XrAnchorSpaceCreateInfoBD)},
+    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, sizeof(XrAnchorSpaceCreateInfoBD)},
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, sizeof(XrEventDataSenseDataProviderStateChangedBD)},
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, sizeof(XrEventDataSenseDataProviderStateChangedBD)},
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, sizeof(XrEventDataSenseDataUpdatedBD)},
+    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, sizeof(XrEventDataSenseDataUpdatedBD)},
+    {XR_TYPE_QUERIED_SENSE_DATA_BD, sizeof(XrQueriedSenseDataBD)},
+    {XR_TYPE_QUERIED_SENSE_DATA_BD, sizeof(XrQueriedSenseDataBD)},
+    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, sizeof(XrQueriedSenseDataGetInfoBD)},
+    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, sizeof(XrQueriedSenseDataGetInfoBD)},
+    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, sizeof(XrSenseDataFilterSemanticBD)},
+    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, sizeof(XrSenseDataFilterSemanticBD)},
+    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, sizeof(XrSenseDataFilterUuidBD)},
+    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, sizeof(XrSenseDataFilterUuidBD)},
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, sizeof(XrSenseDataProviderCreateInfoBD)},
+    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, sizeof(XrSenseDataProviderCreateInfoBD)},
+    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, sizeof(XrSenseDataProviderStartInfoBD)},
+    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, sizeof(XrSenseDataProviderStartInfoBD)},
+    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, sizeof(XrSenseDataQueryCompletionBD)},
+    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, sizeof(XrSenseDataQueryCompletionBD)},
+    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, sizeof(XrSenseDataQueryInfoBD)},
+    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, sizeof(XrSenseDataQueryInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialEntityAnchorCreateInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialEntityAnchorCreateInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox2DBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox2DBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox3DBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox3DBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, sizeof(XrSpatialEntityComponentDataLocationBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, sizeof(XrSpatialEntityComponentDataLocationBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, sizeof(XrSpatialEntityComponentDataPolygonBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, sizeof(XrSpatialEntityComponentDataPolygonBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, sizeof(XrSpatialEntityComponentDataSemanticBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, sizeof(XrSpatialEntityComponentDataSemanticBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, sizeof(XrSpatialEntityComponentDataTriangleMeshBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, sizeof(XrSpatialEntityComponentDataTriangleMeshBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, sizeof(XrSpatialEntityComponentGetInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, sizeof(XrSpatialEntityComponentGetInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, sizeof(XrSpatialEntityLocationGetInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, sizeof(XrSpatialEntityLocationGetInfoBD)},
+    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, sizeof(XrSpatialEntityStateBD)},
+    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, sizeof(XrSpatialEntityStateBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, sizeof(XrSystemSpatialSensingPropertiesBD)},
+    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, sizeof(XrSystemSpatialSensingPropertiesBD)},
+#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
     {XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC, sizeof(XrViewConfigurationViewFovEPIC)},
     {XR_TYPE_VIEW_CONFIGURATION_VIEW_FOV_EPIC, sizeof(XrViewConfigurationViewFovEPIC)},
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
-#ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
-    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, sizeof(XrHolographicWindowAttachmentMSFT)},
-    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, sizeof(XrHolographicWindowAttachmentMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
-#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, sizeof(XrCompositionLayerReprojectionInfoMSFT)},
-    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, sizeof(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
-    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, sizeof(XrCompositionLayerReprojectionInfoMSFT)},
-    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, sizeof(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-#ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
-    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, sizeof(XrAndroidSurfaceSwapchainCreateInfoFB)},
-    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, sizeof(XrAndroidSurfaceSwapchainCreateInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
-#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
-    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, sizeof(XrCompositionLayerSecureContentFB)},
-    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, sizeof(XrCompositionLayerSecureContentFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
-#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, sizeof(XrSystemBodyTrackingPropertiesFB)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, sizeof(XrBodyTrackerCreateInfoFB)},
-    {XR_TYPE_BODY_SKELETON_FB, sizeof(XrBodySkeletonFB)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, sizeof(XrBodyJointsLocateInfoFB)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, sizeof(XrBodyJointLocationsFB)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, sizeof(XrBodyTrackerCreateInfoFB)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, sizeof(XrBodyJointsLocateInfoFB)},
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, sizeof(XrSystemBodyTrackingPropertiesFB)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, sizeof(XrBodyJointLocationsFB)},
-    {XR_TYPE_BODY_SKELETON_FB, sizeof(XrBodySkeletonFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
+    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, sizeof(XrEventDataMainSessionVisibilityChangedEXTX)},
+    {XR_TYPE_EVENT_DATA_MAIN_SESSION_VISIBILITY_CHANGED_EXTX, sizeof(XrEventDataMainSessionVisibilityChangedEXTX)},
+    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, sizeof(XrSessionCreateInfoOverlayEXTX)},
+    {XR_TYPE_SESSION_CREATE_INFO_OVERLAY_EXTX, sizeof(XrSessionCreateInfoOverlayEXTX)},
+#endif // XRTRANSPORT_EXT_XR_EXTX_overlay
+#ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, sizeof(XrActiveActionSetPrioritiesEXT)},
+    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, sizeof(XrActiveActionSetPrioritiesEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
+#ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, sizeof(XrDebugUtilsLabelEXT)},
+    {XR_TYPE_DEBUG_UTILS_LABEL_EXT, sizeof(XrDebugUtilsLabelEXT)},
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, sizeof(XrDebugUtilsMessengerCallbackDataEXT)},
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT, sizeof(XrDebugUtilsMessengerCallbackDataEXT)},
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, sizeof(XrDebugUtilsMessengerCreateInfoEXT)},
+    {XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT, sizeof(XrDebugUtilsMessengerCreateInfoEXT)},
+    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, sizeof(XrDebugUtilsObjectNameInfoEXT)},
+    {XR_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT, sizeof(XrDebugUtilsObjectNameInfoEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
     {XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT, sizeof(XrInteractionProfileDpadBindingEXT)},
     {XR_TYPE_INTERACTION_PROFILE_DPAD_BINDING_EXT, sizeof(XrInteractionProfileDpadBindingEXT)},
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
-#ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
-    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, sizeof(XrInteractionProfileAnalogThresholdVALVE)},
-    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, sizeof(XrInteractionProfileAnalogThresholdVALVE)},
-#endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+#ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, sizeof(XrEyeGazeSampleTimeEXT)},
+    {XR_TYPE_EYE_GAZE_SAMPLE_TIME_EXT, sizeof(XrEyeGazeSampleTimeEXT)},
+    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, sizeof(XrSystemEyeGazeInteractionPropertiesEXT)},
+    {XR_TYPE_SYSTEM_EYE_GAZE_INTERACTION_PROPERTIES_EXT, sizeof(XrSystemEyeGazeInteractionPropertiesEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
+#ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, sizeof(XrFrameSynthesisConfigViewEXT)},
+    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, sizeof(XrFrameSynthesisConfigViewEXT)},
+    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, sizeof(XrFrameSynthesisInfoEXT)},
+    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, sizeof(XrFrameSynthesisInfoEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
+#ifdef XRTRANSPORT_EXT_XR_EXT_future
+    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, sizeof(XrFutureCancelInfoEXT)},
+    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, sizeof(XrFutureCancelInfoEXT)},
+    {XR_TYPE_FUTURE_COMPLETION_EXT, sizeof(XrFutureCompletionEXT)},
+    {XR_TYPE_FUTURE_COMPLETION_EXT, sizeof(XrFutureCompletionEXT)},
+    {XR_TYPE_FUTURE_POLL_INFO_EXT, sizeof(XrFuturePollInfoEXT)},
+    {XR_TYPE_FUTURE_POLL_INFO_EXT, sizeof(XrFuturePollInfoEXT)},
+    {XR_TYPE_FUTURE_POLL_RESULT_EXT, sizeof(XrFuturePollResultEXT)},
+    {XR_TYPE_FUTURE_POLL_RESULT_EXT, sizeof(XrFuturePollResultEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
     {XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT, sizeof(XrHandJointsMotionRangeInfoEXT)},
     {XR_TYPE_HAND_JOINTS_MOTION_RANGE_INFO_EXT, sizeof(XrHandJointsMotionRangeInfoEXT)},
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
-#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
-#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
-    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, sizeof(XrLoaderInitInfoAndroidKHR)},
-    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, sizeof(XrLoaderInitInfoAndroidKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
-#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, sizeof(XrVulkanInstanceCreateInfoKHR)},
-    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, sizeof(XrVulkanDeviceCreateInfoKHR)},
-    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, sizeof(XrVulkanGraphicsDeviceGetInfoKHR)},
-    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, sizeof(XrVulkanInstanceCreateInfoKHR)},
-    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, sizeof(XrVulkanDeviceCreateInfoKHR)},
-    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, sizeof(XrVulkanGraphicsDeviceGetInfoKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
-    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, sizeof(XrCompositionLayerEquirect2KHR)},
-    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, sizeof(XrCompositionLayerEquirect2KHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, sizeof(XrSceneObserverCreateInfoMSFT)},
-    {XR_TYPE_SCENE_CREATE_INFO_MSFT, sizeof(XrSceneCreateInfoMSFT)},
-    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, sizeof(XrNewSceneComputeInfoMSFT)},
-    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, sizeof(XrVisualMeshComputeLodInfoMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_MSFT, sizeof(XrSceneComponentsMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, sizeof(XrSceneComponentsGetInfoMSFT)},
-    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, sizeof(XrSceneComponentLocationsMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, sizeof(XrSceneComponentsLocateInfoMSFT)},
-    {XR_TYPE_SCENE_OBJECTS_MSFT, sizeof(XrSceneObjectsMSFT)},
-    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, sizeof(XrSceneComponentParentFilterInfoMSFT)},
-    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, sizeof(XrSceneObjectTypesFilterInfoMSFT)},
-    {XR_TYPE_SCENE_PLANES_MSFT, sizeof(XrScenePlanesMSFT)},
-    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, sizeof(XrScenePlaneAlignmentFilterInfoMSFT)},
-    {XR_TYPE_SCENE_MESHES_MSFT, sizeof(XrSceneMeshesMSFT)},
-    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, sizeof(XrSceneMeshBuffersGetInfoMSFT)},
-    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, sizeof(XrSceneMeshBuffersMSFT)},
-    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, sizeof(XrSceneMeshVertexBufferMSFT)},
-    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, sizeof(XrSceneMeshIndicesUint32MSFT)},
-    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, sizeof(XrSceneMeshIndicesUint16MSFT)},
-    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, sizeof(XrSceneObserverCreateInfoMSFT)},
-    {XR_TYPE_SCENE_CREATE_INFO_MSFT, sizeof(XrSceneCreateInfoMSFT)},
-    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, sizeof(XrNewSceneComputeInfoMSFT)},
-    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, sizeof(XrVisualMeshComputeLodInfoMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_MSFT, sizeof(XrSceneComponentsMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, sizeof(XrSceneComponentsGetInfoMSFT)},
-    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, sizeof(XrSceneComponentLocationsMSFT)},
-    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, sizeof(XrSceneComponentsLocateInfoMSFT)},
-    {XR_TYPE_SCENE_OBJECTS_MSFT, sizeof(XrSceneObjectsMSFT)},
-    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, sizeof(XrSceneComponentParentFilterInfoMSFT)},
-    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, sizeof(XrSceneObjectTypesFilterInfoMSFT)},
-    {XR_TYPE_SCENE_PLANES_MSFT, sizeof(XrScenePlanesMSFT)},
-    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, sizeof(XrScenePlaneAlignmentFilterInfoMSFT)},
-    {XR_TYPE_SCENE_MESHES_MSFT, sizeof(XrSceneMeshesMSFT)},
-    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, sizeof(XrSceneMeshBuffersGetInfoMSFT)},
-    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, sizeof(XrSceneMeshBuffersMSFT)},
-    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, sizeof(XrSceneMeshVertexBufferMSFT)},
-    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, sizeof(XrSceneMeshIndicesUint32MSFT)},
-    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, sizeof(XrSceneMeshIndicesUint16MSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, sizeof(XrSerializedSceneFragmentDataGetInfoMSFT)},
-    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, sizeof(XrSceneDeserializeInfoMSFT)},
-    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, sizeof(XrSerializedSceneFragmentDataGetInfoMSFT)},
-    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, sizeof(XrSceneDeserializeInfoMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, sizeof(XrEventDataDisplayRefreshRateChangedFB)},
-    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, sizeof(XrEventDataDisplayRefreshRateChangedFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, sizeof(XrViveTrackerPathsHTCX)},
-    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, sizeof(XrEventDataViveTrackerConnectedHTCX)},
-    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, sizeof(XrViveTrackerPathsHTCX)},
-    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, sizeof(XrEventDataViveTrackerConnectedHTCX)},
-#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, sizeof(XrSystemFacialTrackingPropertiesHTC)},
-    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, sizeof(XrFacialExpressionsHTC)},
-    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, sizeof(XrFacialTrackerCreateInfoHTC)},
-    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, sizeof(XrSystemFacialTrackingPropertiesHTC)},
-    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, sizeof(XrFacialTrackerCreateInfoHTC)},
-    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, sizeof(XrFacialExpressionsHTC)},
-#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, sizeof(XrHandJointLocationsEXT)},
+    {XR_TYPE_HAND_JOINT_LOCATIONS_EXT, sizeof(XrHandJointLocationsEXT)},
+    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, sizeof(XrHandJointVelocitiesEXT)},
+    {XR_TYPE_HAND_JOINT_VELOCITIES_EXT, sizeof(XrHandJointVelocitiesEXT)},
+    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, sizeof(XrHandJointsLocateInfoEXT)},
+    {XR_TYPE_HAND_JOINTS_LOCATE_INFO_EXT, sizeof(XrHandJointsLocateInfoEXT)},
+    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, sizeof(XrHandTrackerCreateInfoEXT)},
+    {XR_TYPE_HAND_TRACKER_CREATE_INFO_EXT, sizeof(XrHandTrackerCreateInfoEXT)},
+    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, sizeof(XrSystemHandTrackingPropertiesEXT)},
+    {XR_TYPE_SYSTEM_HAND_TRACKING_PROPERTIES_EXT, sizeof(XrSystemHandTrackingPropertiesEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
+#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, sizeof(XrHandTrackingDataSourceInfoEXT)},
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, sizeof(XrHandTrackingDataSourceInfoEXT)},
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, sizeof(XrHandTrackingDataSourceStateEXT)},
+    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, sizeof(XrHandTrackingDataSourceStateEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
+#ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, sizeof(XrEventDataPerfSettingsEXT)},
+    {XR_TYPE_EVENT_DATA_PERF_SETTINGS_EXT, sizeof(XrEventDataPerfSettingsEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
+#ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, sizeof(XrPlaneDetectorBeginInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, sizeof(XrPlaneDetectorBeginInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, sizeof(XrPlaneDetectorCreateInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, sizeof(XrPlaneDetectorCreateInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, sizeof(XrPlaneDetectorGetInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, sizeof(XrPlaneDetectorGetInfoEXT)},
+    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, sizeof(XrPlaneDetectorLocationEXT)},
+    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, sizeof(XrPlaneDetectorLocationEXT)},
+    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, sizeof(XrPlaneDetectorLocationsEXT)},
+    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, sizeof(XrPlaneDetectorLocationsEXT)},
+    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, sizeof(XrPlaneDetectorPolygonBufferEXT)},
+    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, sizeof(XrPlaneDetectorPolygonBufferEXT)},
+    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, sizeof(XrSystemPlaneDetectionPropertiesEXT)},
+    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, sizeof(XrSystemPlaneDetectionPropertiesEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
+#ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
+    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, sizeof(XrEventDataUserPresenceChangedEXT)},
+    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, sizeof(XrEventDataUserPresenceChangedEXT)},
+    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, sizeof(XrSystemUserPresencePropertiesEXT)},
+    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, sizeof(XrSystemUserPresencePropertiesEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_user_presence
+#ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, sizeof(XrViewConfigurationDepthRangeEXT)},
+    {XR_TYPE_VIEW_CONFIGURATION_DEPTH_RANGE_EXT, sizeof(XrViewConfigurationDepthRangeEXT)},
+#endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
+#ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, sizeof(XrAndroidSurfaceSwapchainCreateInfoFB)},
+    {XR_TYPE_ANDROID_SURFACE_SWAPCHAIN_CREATE_INFO_FB, sizeof(XrAndroidSurfaceSwapchainCreateInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
+#ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, sizeof(XrBodyJointLocationsFB)},
+    {XR_TYPE_BODY_JOINT_LOCATIONS_FB, sizeof(XrBodyJointLocationsFB)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, sizeof(XrBodyJointsLocateInfoFB)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_FB, sizeof(XrBodyJointsLocateInfoFB)},
+    {XR_TYPE_BODY_SKELETON_FB, sizeof(XrBodySkeletonFB)},
+    {XR_TYPE_BODY_SKELETON_FB, sizeof(XrBodySkeletonFB)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, sizeof(XrBodyTrackerCreateInfoFB)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_FB, sizeof(XrBodyTrackerCreateInfoFB)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, sizeof(XrSystemBodyTrackingPropertiesFB)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_FB, sizeof(XrSystemBodyTrackingPropertiesFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
     {XR_TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB, sizeof(XrSystemColorSpacePropertiesFB)},
     {XR_TYPE_SYSTEM_COLOR_SPACE_PROPERTIES_FB, sizeof(XrSystemColorSpacePropertiesFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
-#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    {XR_TYPE_HAND_TRACKING_MESH_FB, sizeof(XrHandTrackingMeshFB)},
-    {XR_TYPE_HAND_TRACKING_SCALE_FB, sizeof(XrHandTrackingScaleFB)},
-    {XR_TYPE_HAND_TRACKING_MESH_FB, sizeof(XrHandTrackingMeshFB)},
-    {XR_TYPE_HAND_TRACKING_SCALE_FB, sizeof(XrHandTrackingScaleFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, sizeof(XrCompositionLayerAlphaBlendFB)},
+    {XR_TYPE_COMPOSITION_LAYER_ALPHA_BLEND_FB, sizeof(XrCompositionLayerAlphaBlendFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, sizeof(XrCompositionLayerDepthTestFB)},
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, sizeof(XrCompositionLayerDepthTestFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, sizeof(XrCompositionLayerImageLayoutFB)},
+    {XR_TYPE_COMPOSITION_LAYER_IMAGE_LAYOUT_FB, sizeof(XrCompositionLayerImageLayoutFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, sizeof(XrCompositionLayerSecureContentFB)},
+    {XR_TYPE_COMPOSITION_LAYER_SECURE_CONTENT_FB, sizeof(XrCompositionLayerSecureContentFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
+#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, sizeof(XrCompositionLayerSettingsFB)},
+    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, sizeof(XrCompositionLayerSettingsFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
+#ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, sizeof(XrEventDataDisplayRefreshRateChangedFB)},
+    {XR_TYPE_EVENT_DATA_DISPLAY_REFRESH_RATE_CHANGED_FB, sizeof(XrEventDataDisplayRefreshRateChangedFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+    {XR_TYPE_EYE_GAZES_FB, sizeof(XrEyeGazesFB)},
+    {XR_TYPE_EYE_GAZES_FB, sizeof(XrEyeGazesFB)},
+    {XR_TYPE_EYE_GAZES_INFO_FB, sizeof(XrEyeGazesInfoFB)},
+    {XR_TYPE_EYE_GAZES_INFO_FB, sizeof(XrEyeGazesInfoFB)},
+    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, sizeof(XrEyeTrackerCreateInfoFB)},
+    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, sizeof(XrEyeTrackerCreateInfoFB)},
+    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, sizeof(XrSystemEyeTrackingPropertiesFB)},
+    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, sizeof(XrSystemEyeTrackingPropertiesFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+    {XR_TYPE_FACE_EXPRESSION_INFO_FB, sizeof(XrFaceExpressionInfoFB)},
+    {XR_TYPE_FACE_EXPRESSION_INFO_FB, sizeof(XrFaceExpressionInfoFB)},
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, sizeof(XrFaceExpressionWeightsFB)},
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, sizeof(XrFaceExpressionWeightsFB)},
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, sizeof(XrFaceTrackerCreateInfoFB)},
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, sizeof(XrFaceTrackerCreateInfoFB)},
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, sizeof(XrSystemFaceTrackingPropertiesFB)},
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, sizeof(XrSystemFaceTrackingPropertiesFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
+#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, sizeof(XrFaceExpressionInfo2FB)},
+    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, sizeof(XrFaceExpressionInfo2FB)},
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, sizeof(XrFaceExpressionWeights2FB)},
+    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, sizeof(XrFaceExpressionWeights2FB)},
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, sizeof(XrFaceTrackerCreateInfo2FB)},
+    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, sizeof(XrFaceTrackerCreateInfo2FB)},
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, sizeof(XrSystemFaceTrackingProperties2FB)},
+    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, sizeof(XrSystemFaceTrackingProperties2FB)},
+#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation
+    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationProfileCreateInfoFB)},
+    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationProfileCreateInfoFB)},
+    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, sizeof(XrSwapchainCreateInfoFoveationFB)},
+    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, sizeof(XrSwapchainCreateInfoFoveationFB)},
+    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, sizeof(XrSwapchainStateFoveationFB)},
+    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, sizeof(XrSwapchainStateFoveationFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_foveation
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
+    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationLevelProfileCreateInfoFB)},
+    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationLevelProfileCreateInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
+#ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, sizeof(XrSwapchainImageFoveationVulkanFB)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, sizeof(XrSwapchainImageFoveationVulkanFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
     {XR_TYPE_HAND_TRACKING_AIM_STATE_FB, sizeof(XrHandTrackingAimStateFB)},
     {XR_TYPE_HAND_TRACKING_AIM_STATE_FB, sizeof(XrHandTrackingAimStateFB)},
@@ -359,239 +312,158 @@ std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
     {XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB, sizeof(XrHandTrackingCapsulesStateFB)},
     {XR_TYPE_HAND_TRACKING_CAPSULES_STATE_FB, sizeof(XrHandTrackingCapsulesStateFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, sizeof(XrSystemSpatialEntityPropertiesFB)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, sizeof(XrSpatialAnchorCreateInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, sizeof(XrSpaceComponentStatusSetInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, sizeof(XrSpaceComponentStatusFB)},
-    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, sizeof(XrEventDataSpatialAnchorCreateCompleteFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, sizeof(XrEventDataSpaceSetStatusCompleteFB)},
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, sizeof(XrSystemSpatialEntityPropertiesFB)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, sizeof(XrSpatialAnchorCreateInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, sizeof(XrSpaceComponentStatusSetInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, sizeof(XrSpaceComponentStatusFB)},
-    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, sizeof(XrEventDataSpatialAnchorCreateCompleteFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, sizeof(XrEventDataSpaceSetStatusCompleteFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationProfileCreateInfoFB)},
-    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, sizeof(XrSwapchainCreateInfoFoveationFB)},
-    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, sizeof(XrSwapchainStateFoveationFB)},
-    {XR_TYPE_FOVEATION_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationProfileCreateInfoFB)},
-    {XR_TYPE_SWAPCHAIN_CREATE_INFO_FOVEATION_FB, sizeof(XrSwapchainCreateInfoFoveationFB)},
-    {XR_TYPE_SWAPCHAIN_STATE_FOVEATION_FB, sizeof(XrSwapchainStateFoveationFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_foveation
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
-    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationLevelProfileCreateInfoFB)},
-    {XR_TYPE_FOVEATION_LEVEL_PROFILE_CREATE_INFO_FB, sizeof(XrFoveationLevelProfileCreateInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
+#ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+    {XR_TYPE_HAND_TRACKING_MESH_FB, sizeof(XrHandTrackingMeshFB)},
+    {XR_TYPE_HAND_TRACKING_MESH_FB, sizeof(XrHandTrackingMeshFB)},
+    {XR_TYPE_HAND_TRACKING_SCALE_FB, sizeof(XrHandTrackingScaleFB)},
+    {XR_TYPE_HAND_TRACKING_SCALE_FB, sizeof(XrHandTrackingScaleFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, sizeof(XrHapticAmplitudeEnvelopeVibrationFB)},
+    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, sizeof(XrHapticAmplitudeEnvelopeVibrationFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
+#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, sizeof(XrDevicePcmSampleRateStateFB)},
+    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, sizeof(XrDevicePcmSampleRateStateFB)},
+    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, sizeof(XrHapticPcmVibrationFB)},
+    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, sizeof(XrHapticPcmVibrationFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, sizeof(XrKeyboardSpaceCreateInfoFB)},
+    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, sizeof(XrKeyboardSpaceCreateInfoFB)},
+    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, sizeof(XrKeyboardTrackingQueryFB)},
+    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, sizeof(XrKeyboardTrackingQueryFB)},
     {XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB, sizeof(XrSystemKeyboardTrackingPropertiesFB)},
-    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, sizeof(XrKeyboardSpaceCreateInfoFB)},
-    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, sizeof(XrKeyboardTrackingQueryFB)},
-    {XR_TYPE_KEYBOARD_SPACE_CREATE_INFO_FB, sizeof(XrKeyboardSpaceCreateInfoFB)},
-    {XR_TYPE_KEYBOARD_TRACKING_QUERY_FB, sizeof(XrKeyboardTrackingQueryFB)},
     {XR_TYPE_SYSTEM_KEYBOARD_TRACKING_PROPERTIES_FB, sizeof(XrSystemKeyboardTrackingPropertiesFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, sizeof(XrTriangleMeshCreateInfoFB)},
-    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, sizeof(XrTriangleMeshCreateInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, sizeof(XrSystemPassthroughPropertiesFB)},
-    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, sizeof(XrSystemPassthroughProperties2FB)},
-    {XR_TYPE_PASSTHROUGH_CREATE_INFO_FB, sizeof(XrPassthroughCreateInfoFB)},
-    {XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB, sizeof(XrPassthroughLayerCreateInfoFB)},
     {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB, sizeof(XrCompositionLayerPassthroughFB)},
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB, sizeof(XrCompositionLayerPassthroughFB)},
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, sizeof(XrEventDataPassthroughStateChangedFB)},
+    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, sizeof(XrEventDataPassthroughStateChangedFB)},
+    {XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB, sizeof(XrGeometryInstanceCreateInfoFB)},
     {XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB, sizeof(XrGeometryInstanceCreateInfoFB)},
     {XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB, sizeof(XrGeometryInstanceTransformFB)},
-    {XR_TYPE_PASSTHROUGH_STYLE_FB, sizeof(XrPassthroughStyleFB)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, sizeof(XrPassthroughColorMapMonoToRgbaFB)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, sizeof(XrPassthroughColorMapMonoToMonoFB)},
+    {XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB, sizeof(XrGeometryInstanceTransformFB)},
     {XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB, sizeof(XrPassthroughBrightnessContrastSaturationFB)},
-    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, sizeof(XrEventDataPassthroughStateChangedFB)},
-    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, sizeof(XrSystemPassthroughPropertiesFB)},
+    {XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB, sizeof(XrPassthroughBrightnessContrastSaturationFB)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, sizeof(XrPassthroughColorMapMonoToMonoFB)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, sizeof(XrPassthroughColorMapMonoToMonoFB)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, sizeof(XrPassthroughColorMapMonoToRgbaFB)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, sizeof(XrPassthroughColorMapMonoToRgbaFB)},
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_FB, sizeof(XrPassthroughCreateInfoFB)},
     {XR_TYPE_PASSTHROUGH_CREATE_INFO_FB, sizeof(XrPassthroughCreateInfoFB)},
     {XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB, sizeof(XrPassthroughLayerCreateInfoFB)},
-    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_FB, sizeof(XrCompositionLayerPassthroughFB)},
-    {XR_TYPE_GEOMETRY_INSTANCE_CREATE_INFO_FB, sizeof(XrGeometryInstanceCreateInfoFB)},
-    {XR_TYPE_GEOMETRY_INSTANCE_TRANSFORM_FB, sizeof(XrGeometryInstanceTransformFB)},
-    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, sizeof(XrSystemPassthroughProperties2FB)},
+    {XR_TYPE_PASSTHROUGH_LAYER_CREATE_INFO_FB, sizeof(XrPassthroughLayerCreateInfoFB)},
     {XR_TYPE_PASSTHROUGH_STYLE_FB, sizeof(XrPassthroughStyleFB)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_RGBA_FB, sizeof(XrPassthroughColorMapMonoToRgbaFB)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_MONO_TO_MONO_FB, sizeof(XrPassthroughColorMapMonoToMonoFB)},
-    {XR_TYPE_PASSTHROUGH_BRIGHTNESS_CONTRAST_SATURATION_FB, sizeof(XrPassthroughBrightnessContrastSaturationFB)},
-    {XR_TYPE_EVENT_DATA_PASSTHROUGH_STATE_CHANGED_FB, sizeof(XrEventDataPassthroughStateChangedFB)},
+    {XR_TYPE_PASSTHROUGH_STYLE_FB, sizeof(XrPassthroughStyleFB)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, sizeof(XrSystemPassthroughProperties2FB)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES2_FB, sizeof(XrSystemPassthroughProperties2FB)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, sizeof(XrSystemPassthroughPropertiesFB)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_PROPERTIES_FB, sizeof(XrSystemPassthroughPropertiesFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
+#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, sizeof(XrPassthroughKeyboardHandsIntensityFB)},
+    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, sizeof(XrPassthroughKeyboardHandsIntensityFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
+    {XR_TYPE_RENDER_MODEL_BUFFER_FB, sizeof(XrRenderModelBufferFB)},
+    {XR_TYPE_RENDER_MODEL_BUFFER_FB, sizeof(XrRenderModelBufferFB)},
+    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, sizeof(XrRenderModelCapabilitiesRequestFB)},
+    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, sizeof(XrRenderModelCapabilitiesRequestFB)},
+    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, sizeof(XrRenderModelLoadInfoFB)},
+    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, sizeof(XrRenderModelLoadInfoFB)},
+    {XR_TYPE_RENDER_MODEL_PATH_INFO_FB, sizeof(XrRenderModelPathInfoFB)},
     {XR_TYPE_RENDER_MODEL_PATH_INFO_FB, sizeof(XrRenderModelPathInfoFB)},
     {XR_TYPE_RENDER_MODEL_PROPERTIES_FB, sizeof(XrRenderModelPropertiesFB)},
-    {XR_TYPE_RENDER_MODEL_BUFFER_FB, sizeof(XrRenderModelBufferFB)},
-    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, sizeof(XrRenderModelLoadInfoFB)},
-    {XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB, sizeof(XrSystemRenderModelPropertiesFB)},
-    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, sizeof(XrRenderModelCapabilitiesRequestFB)},
-    {XR_TYPE_RENDER_MODEL_PATH_INFO_FB, sizeof(XrRenderModelPathInfoFB)},
     {XR_TYPE_RENDER_MODEL_PROPERTIES_FB, sizeof(XrRenderModelPropertiesFB)},
-    {XR_TYPE_RENDER_MODEL_BUFFER_FB, sizeof(XrRenderModelBufferFB)},
-    {XR_TYPE_RENDER_MODEL_LOAD_INFO_FB, sizeof(XrRenderModelLoadInfoFB)},
     {XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB, sizeof(XrSystemRenderModelPropertiesFB)},
-    {XR_TYPE_RENDER_MODEL_CAPABILITIES_REQUEST_FB, sizeof(XrRenderModelCapabilitiesRequestFB)},
+    {XR_TYPE_SYSTEM_RENDER_MODEL_PROPERTIES_FB, sizeof(XrSystemRenderModelPropertiesFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
-#ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
-    {XR_TYPE_BINDING_MODIFICATIONS_KHR, sizeof(XrBindingModificationsKHR)},
-    {XR_TYPE_BINDING_MODIFICATIONS_KHR, sizeof(XrBindingModificationsKHR)},
-#endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
-#ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
-    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, sizeof(XrViewLocateFoveatedRenderingVARJO)},
-    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, sizeof(XrFoveatedViewConfigurationViewVARJO)},
-    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, sizeof(XrSystemFoveatedRenderingPropertiesVARJO)},
-    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, sizeof(XrViewLocateFoveatedRenderingVARJO)},
-    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, sizeof(XrFoveatedViewConfigurationViewVARJO)},
-    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, sizeof(XrSystemFoveatedRenderingPropertiesVARJO)},
-#endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
-#ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, sizeof(XrCompositionLayerDepthTestVARJO)},
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, sizeof(XrCompositionLayerDepthTestVARJO)},
-#endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, sizeof(XrSystemMarkerTrackingPropertiesVARJO)},
-    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, sizeof(XrEventDataMarkerTrackingUpdateVARJO)},
-    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, sizeof(XrMarkerSpaceCreateInfoVARJO)},
-    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, sizeof(XrSystemMarkerTrackingPropertiesVARJO)},
-    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, sizeof(XrEventDataMarkerTrackingUpdateVARJO)},
-    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, sizeof(XrMarkerSpaceCreateInfoVARJO)},
-#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
-    {XR_TYPE_FRAME_END_INFO_ML, sizeof(XrFrameEndInfoML)},
-    {XR_TYPE_FRAME_END_INFO_ML, sizeof(XrFrameEndInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
-#ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
-    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, sizeof(XrGlobalDimmerFrameEndInfoML)},
-    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, sizeof(XrGlobalDimmerFrameEndInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
-#ifdef XRTRANSPORT_EXT_XR_ML_compat
-    {XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML, sizeof(XrCoordinateSpaceCreateInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_compat
-#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, sizeof(XrSystemMarkerUnderstandingPropertiesML)},
-    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, sizeof(XrMarkerDetectorCreateInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, sizeof(XrMarkerDetectorArucoInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, sizeof(XrMarkerDetectorSizeInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, sizeof(XrMarkerDetectorAprilTagInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, sizeof(XrMarkerDetectorCustomProfileInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, sizeof(XrMarkerDetectorSnapshotInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_STATE_ML, sizeof(XrMarkerDetectorStateML)},
-    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, sizeof(XrMarkerSpaceCreateInfoML)},
-    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, sizeof(XrSystemMarkerUnderstandingPropertiesML)},
-    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, sizeof(XrMarkerDetectorCreateInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, sizeof(XrMarkerDetectorArucoInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, sizeof(XrMarkerDetectorSizeInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, sizeof(XrMarkerDetectorAprilTagInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, sizeof(XrMarkerDetectorCustomProfileInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, sizeof(XrMarkerDetectorSnapshotInfoML)},
-    {XR_TYPE_MARKER_DETECTOR_STATE_ML, sizeof(XrMarkerDetectorStateML)},
-    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, sizeof(XrMarkerSpaceCreateInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
-#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    {XR_TYPE_LOCALIZATION_MAP_ML, sizeof(XrLocalizationMapML)},
-    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, sizeof(XrEventDataLocalizationChangedML)},
-    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, sizeof(XrMapLocalizationRequestInfoML)},
-    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, sizeof(XrLocalizationMapImportInfoML)},
-    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, sizeof(XrLocalizationEnableEventsInfoML)},
-    {XR_TYPE_LOCALIZATION_MAP_ML, sizeof(XrLocalizationMapML)},
-    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, sizeof(XrEventDataLocalizationChangedML)},
-    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, sizeof(XrMapLocalizationRequestInfoML)},
-    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, sizeof(XrLocalizationMapImportInfoML)},
-    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, sizeof(XrLocalizationEnableEventsInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_localization_map
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, sizeof(XrSpatialAnchorsCreateInfoFromPoseML)},
-    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, sizeof(XrCreateSpatialAnchorsCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, sizeof(XrSpatialAnchorStateML)},
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, sizeof(XrSpatialAnchorsCreateInfoFromPoseML)},
-    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, sizeof(XrCreateSpatialAnchorsCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, sizeof(XrSpatialAnchorStateML)},
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
-#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, sizeof(XrSpatialAnchorsCreateStorageInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, sizeof(XrSpatialAnchorsQueryInfoRadiusML)},
-    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, sizeof(XrSpatialAnchorsQueryCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, sizeof(XrSpatialAnchorsCreateInfoFromUuidsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, sizeof(XrSpatialAnchorsPublishInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, sizeof(XrSpatialAnchorsPublishCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, sizeof(XrSpatialAnchorsDeleteInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, sizeof(XrSpatialAnchorsDeleteCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, sizeof(XrSpatialAnchorsUpdateExpirationInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsPublishCompletionDetailsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsDeleteCompletionDetailsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, sizeof(XrSpatialAnchorsCreateStorageInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, sizeof(XrSpatialAnchorsQueryInfoRadiusML)},
-    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, sizeof(XrSpatialAnchorsQueryCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, sizeof(XrSpatialAnchorsCreateInfoFromUuidsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, sizeof(XrSpatialAnchorsPublishInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, sizeof(XrSpatialAnchorsPublishCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, sizeof(XrSpatialAnchorsDeleteInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, sizeof(XrSpatialAnchorsDeleteCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, sizeof(XrSpatialAnchorsUpdateExpirationInfoML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionML)},
-    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsPublishCompletionDetailsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsDeleteCompletionDetailsML)},
-    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
-#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, sizeof(XrEventDataHeadsetFitChangedML)},
-    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, sizeof(XrEventDataEyeCalibrationChangedML)},
-    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, sizeof(XrUserCalibrationEnableEventsInfoML)},
-    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, sizeof(XrEventDataHeadsetFitChangedML)},
-    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, sizeof(XrEventDataEyeCalibrationChangedML)},
-    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, sizeof(XrUserCalibrationEnableEventsInfoML)},
-#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
-#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, sizeof(XrSpatialAnchorPersistenceInfoMSFT)},
-    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
-    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, sizeof(XrSpatialAnchorPersistenceInfoMSFT)},
-    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    {XR_TYPE_SCENE_MARKERS_MSFT, sizeof(XrSceneMarkersMSFT)},
-    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, sizeof(XrSceneMarkerTypeFilterMSFT)},
-    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, sizeof(XrSceneMarkerQRCodesMSFT)},
-    {XR_TYPE_SCENE_MARKERS_MSFT, sizeof(XrSceneMarkersMSFT)},
-    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, sizeof(XrSceneMarkerTypeFilterMSFT)},
-    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, sizeof(XrSceneMarkerQRCodesMSFT)},
-#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_FB_scene
+    {XR_TYPE_BOUNDARY_2D_FB, sizeof(XrBoundary2DFB)},
+    {XR_TYPE_BOUNDARY_2D_FB, sizeof(XrBoundary2DFB)},
+    {XR_TYPE_ROOM_LAYOUT_FB, sizeof(XrRoomLayoutFB)},
+    {XR_TYPE_ROOM_LAYOUT_FB, sizeof(XrRoomLayoutFB)},
+    {XR_TYPE_SEMANTIC_LABELS_FB, sizeof(XrSemanticLabelsFB)},
+    {XR_TYPE_SEMANTIC_LABELS_FB, sizeof(XrSemanticLabelsFB)},
+    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, sizeof(XrSemanticLabelsSupportInfoFB)},
+    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, sizeof(XrSemanticLabelsSupportInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_scene
+#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, sizeof(XrEventDataSceneCaptureCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, sizeof(XrEventDataSceneCaptureCompleteFB)},
+    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, sizeof(XrSceneCaptureRequestInfoFB)},
+    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, sizeof(XrSceneCaptureRequestInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
+#ifdef XRTRANSPORT_EXT_XR_FB_space_warp
+    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, sizeof(XrCompositionLayerSpaceWarpInfoFB)},
+    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, sizeof(XrCompositionLayerSpaceWarpInfoFB)},
+    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, sizeof(XrSystemSpaceWarpPropertiesFB)},
+    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, sizeof(XrSystemSpaceWarpPropertiesFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_space_warp
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, sizeof(XrEventDataSpaceSetStatusCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_SET_STATUS_COMPLETE_FB, sizeof(XrEventDataSpaceSetStatusCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, sizeof(XrEventDataSpatialAnchorCreateCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPATIAL_ANCHOR_CREATE_COMPLETE_FB, sizeof(XrEventDataSpatialAnchorCreateCompleteFB)},
+    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, sizeof(XrSpaceComponentStatusFB)},
+    {XR_TYPE_SPACE_COMPONENT_STATUS_FB, sizeof(XrSpaceComponentStatusFB)},
+    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, sizeof(XrSpaceComponentStatusSetInfoFB)},
+    {XR_TYPE_SPACE_COMPONENT_STATUS_SET_INFO_FB, sizeof(XrSpaceComponentStatusSetInfoFB)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, sizeof(XrSpatialAnchorCreateInfoFB)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_FB, sizeof(XrSpatialAnchorCreateInfoFB)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, sizeof(XrSystemSpatialEntityPropertiesFB)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_PROPERTIES_FB, sizeof(XrSystemSpatialEntityPropertiesFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+    {XR_TYPE_SPACE_CONTAINER_FB, sizeof(XrSpaceContainerFB)},
+    {XR_TYPE_SPACE_CONTAINER_FB, sizeof(XrSpaceContainerFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, sizeof(XrEventDataSpaceQueryCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, sizeof(XrEventDataSpaceQueryCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, sizeof(XrEventDataSpaceQueryResultsAvailableFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, sizeof(XrEventDataSpaceQueryResultsAvailableFB)},
+    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, sizeof(XrSpaceComponentFilterInfoFB)},
+    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, sizeof(XrSpaceComponentFilterInfoFB)},
     {XR_TYPE_SPACE_QUERY_INFO_FB, sizeof(XrSpaceQueryInfoFB)},
+    {XR_TYPE_SPACE_QUERY_INFO_FB, sizeof(XrSpaceQueryInfoFB)},
+    {XR_TYPE_SPACE_QUERY_RESULTS_FB, sizeof(XrSpaceQueryResultsFB)},
+    {XR_TYPE_SPACE_QUERY_RESULTS_FB, sizeof(XrSpaceQueryResultsFB)},
+    {XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB, sizeof(XrSpaceStorageLocationFilterInfoFB)},
     {XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB, sizeof(XrSpaceStorageLocationFilterInfoFB)},
     {XR_TYPE_SPACE_UUID_FILTER_INFO_FB, sizeof(XrSpaceUuidFilterInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, sizeof(XrSpaceComponentFilterInfoFB)},
-    {XR_TYPE_SPACE_QUERY_RESULTS_FB, sizeof(XrSpaceQueryResultsFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, sizeof(XrEventDataSpaceQueryResultsAvailableFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, sizeof(XrEventDataSpaceQueryCompleteFB)},
-    {XR_TYPE_SPACE_QUERY_INFO_FB, sizeof(XrSpaceQueryInfoFB)},
-    {XR_TYPE_SPACE_QUERY_RESULTS_FB, sizeof(XrSpaceQueryResultsFB)},
-    {XR_TYPE_SPACE_STORAGE_LOCATION_FILTER_INFO_FB, sizeof(XrSpaceStorageLocationFilterInfoFB)},
     {XR_TYPE_SPACE_UUID_FILTER_INFO_FB, sizeof(XrSpaceUuidFilterInfoFB)},
-    {XR_TYPE_SPACE_COMPONENT_FILTER_INFO_FB, sizeof(XrSpaceComponentFilterInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_QUERY_RESULTS_AVAILABLE_FB, sizeof(XrEventDataSpaceQueryResultsAvailableFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_QUERY_COMPLETE_FB, sizeof(XrEventDataSpaceQueryCompleteFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, sizeof(XrEventDataSpaceShareCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, sizeof(XrEventDataSpaceShareCompleteFB)},
+    {XR_TYPE_SPACE_SHARE_INFO_FB, sizeof(XrSpaceShareInfoFB)},
+    {XR_TYPE_SPACE_SHARE_INFO_FB, sizeof(XrSpaceShareInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    {XR_TYPE_SPACE_SAVE_INFO_FB, sizeof(XrSpaceSaveInfoFB)},
-    {XR_TYPE_SPACE_ERASE_INFO_FB, sizeof(XrSpaceEraseInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceSaveCompleteFB)},
     {XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB, sizeof(XrEventDataSpaceEraseCompleteFB)},
-    {XR_TYPE_SPACE_SAVE_INFO_FB, sizeof(XrSpaceSaveInfoFB)},
-    {XR_TYPE_SPACE_ERASE_INFO_FB, sizeof(XrSpaceEraseInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceSaveCompleteFB)},
     {XR_TYPE_EVENT_DATA_SPACE_ERASE_COMPLETE_FB, sizeof(XrEventDataSpaceEraseCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceSaveCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceSaveCompleteFB)},
+    {XR_TYPE_SPACE_ERASE_INFO_FB, sizeof(XrSpaceEraseInfoFB)},
+    {XR_TYPE_SPACE_ERASE_INFO_FB, sizeof(XrSpaceEraseInfoFB)},
+    {XR_TYPE_SPACE_SAVE_INFO_FB, sizeof(XrSpaceSaveInfoFB)},
+    {XR_TYPE_SPACE_SAVE_INFO_FB, sizeof(XrSpaceSaveInfoFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
-    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, sizeof(XrSwapchainImageFoveationVulkanFB)},
-    {XR_TYPE_SWAPCHAIN_IMAGE_FOVEATION_VULKAN_FB, sizeof(XrSwapchainImageFoveationVulkanFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceListSaveCompleteFB)},
+    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceListSaveCompleteFB)},
+    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, sizeof(XrSpaceListSaveInfoFB)},
+    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, sizeof(XrSpaceListSaveInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, sizeof(XrSpaceUserCreateInfoFB)},
+    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, sizeof(XrSpaceUserCreateInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+#ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+#endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
     {XR_TYPE_SWAPCHAIN_STATE_ANDROID_SURFACE_DIMENSIONS_FB, sizeof(XrSwapchainStateAndroidSurfaceDimensionsFB)},
     {XR_TYPE_SWAPCHAIN_STATE_ANDROID_SURFACE_DIMENSIONS_FB, sizeof(XrSwapchainStateAndroidSurfaceDimensionsFB)},
@@ -604,491 +476,619 @@ std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
     {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB, sizeof(XrSwapchainStateSamplerVulkanFB)},
     {XR_TYPE_SWAPCHAIN_STATE_SAMPLER_VULKAN_FB, sizeof(XrSwapchainStateSamplerVulkanFB)},
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    {XR_TYPE_SPACE_SHARE_INFO_FB, sizeof(XrSpaceShareInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, sizeof(XrEventDataSpaceShareCompleteFB)},
-    {XR_TYPE_SPACE_SHARE_INFO_FB, sizeof(XrSpaceShareInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_SHARE_COMPLETE_FB, sizeof(XrEventDataSpaceShareCompleteFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_FB_space_warp
-    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, sizeof(XrCompositionLayerSpaceWarpInfoFB)},
-    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, sizeof(XrSystemSpaceWarpPropertiesFB)},
-    {XR_TYPE_COMPOSITION_LAYER_SPACE_WARP_INFO_FB, sizeof(XrCompositionLayerSpaceWarpInfoFB)},
-    {XR_TYPE_SYSTEM_SPACE_WARP_PROPERTIES_FB, sizeof(XrSystemSpaceWarpPropertiesFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_space_warp
-#ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
-    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, sizeof(XrHapticAmplitudeEnvelopeVibrationFB)},
-    {XR_TYPE_HAPTIC_AMPLITUDE_ENVELOPE_VIBRATION_FB, sizeof(XrHapticAmplitudeEnvelopeVibrationFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
-#ifdef XRTRANSPORT_EXT_XR_FB_scene
-    {XR_TYPE_SEMANTIC_LABELS_FB, sizeof(XrSemanticLabelsFB)},
-    {XR_TYPE_ROOM_LAYOUT_FB, sizeof(XrRoomLayoutFB)},
-    {XR_TYPE_BOUNDARY_2D_FB, sizeof(XrBoundary2DFB)},
-    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, sizeof(XrSemanticLabelsSupportInfoFB)},
-    {XR_TYPE_SEMANTIC_LABELS_FB, sizeof(XrSemanticLabelsFB)},
-    {XR_TYPE_ROOM_LAYOUT_FB, sizeof(XrRoomLayoutFB)},
-    {XR_TYPE_BOUNDARY_2D_FB, sizeof(XrBoundary2DFB)},
-    {XR_TYPE_SEMANTIC_LABELS_SUPPORT_INFO_FB, sizeof(XrSemanticLabelsSupportInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_scene
-#ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-    {XR_TYPE_DIGITAL_LENS_CONTROL_ALMALENCE, sizeof(XrDigitalLensControlALMALENCE)},
-#endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-#ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, sizeof(XrEventDataSceneCaptureCompleteFB)},
-    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, sizeof(XrSceneCaptureRequestInfoFB)},
-    {XR_TYPE_EVENT_DATA_SCENE_CAPTURE_COMPLETE_FB, sizeof(XrEventDataSceneCaptureCompleteFB)},
-    {XR_TYPE_SCENE_CAPTURE_REQUEST_INFO_FB, sizeof(XrSceneCaptureRequestInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_scene_capture
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    {XR_TYPE_SPACE_CONTAINER_FB, sizeof(XrSpaceContainerFB)},
-    {XR_TYPE_SPACE_CONTAINER_FB, sizeof(XrSpaceContainerFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, sizeof(XrFoveationEyeTrackedProfileCreateInfoMETA)},
-    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, sizeof(XrFoveationEyeTrackedStateMETA)},
-    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, sizeof(XrSystemFoveationEyeTrackedPropertiesMETA)},
-    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, sizeof(XrFoveationEyeTrackedProfileCreateInfoMETA)},
-    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, sizeof(XrFoveationEyeTrackedStateMETA)},
-    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, sizeof(XrSystemFoveationEyeTrackedPropertiesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, sizeof(XrSystemFaceTrackingPropertiesFB)},
-    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, sizeof(XrFaceTrackerCreateInfoFB)},
-    {XR_TYPE_FACE_EXPRESSION_INFO_FB, sizeof(XrFaceExpressionInfoFB)},
-    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, sizeof(XrFaceExpressionWeightsFB)},
-    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES_FB, sizeof(XrSystemFaceTrackingPropertiesFB)},
-    {XR_TYPE_FACE_TRACKER_CREATE_INFO_FB, sizeof(XrFaceTrackerCreateInfoFB)},
-    {XR_TYPE_FACE_EXPRESSION_INFO_FB, sizeof(XrFaceExpressionInfoFB)},
-    {XR_TYPE_FACE_EXPRESSION_WEIGHTS_FB, sizeof(XrFaceExpressionWeightsFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking
-#ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, sizeof(XrEyeTrackerCreateInfoFB)},
-    {XR_TYPE_EYE_GAZES_INFO_FB, sizeof(XrEyeGazesInfoFB)},
-    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, sizeof(XrSystemEyeTrackingPropertiesFB)},
-    {XR_TYPE_EYE_GAZES_FB, sizeof(XrEyeGazesFB)},
-    {XR_TYPE_EYE_TRACKER_CREATE_INFO_FB, sizeof(XrEyeTrackerCreateInfoFB)},
-    {XR_TYPE_EYE_GAZES_INFO_FB, sizeof(XrEyeGazesInfoFB)},
-    {XR_TYPE_EYE_GAZES_FB, sizeof(XrEyeGazesFB)},
-    {XR_TYPE_SYSTEM_EYE_TRACKING_PROPERTIES_FB, sizeof(XrSystemEyeTrackingPropertiesFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-#ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, sizeof(XrPassthroughKeyboardHandsIntensityFB)},
-    {XR_TYPE_PASSTHROUGH_KEYBOARD_HANDS_INTENSITY_FB, sizeof(XrPassthroughKeyboardHandsIntensityFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
-    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, sizeof(XrCompositionLayerSettingsFB)},
-    {XR_TYPE_COMPOSITION_LAYER_SETTINGS_FB, sizeof(XrCompositionLayerSettingsFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
-#ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, sizeof(XrHapticPcmVibrationFB)},
-    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, sizeof(XrDevicePcmSampleRateStateFB)},
-    {XR_TYPE_HAPTIC_PCM_VIBRATION_FB, sizeof(XrHapticPcmVibrationFB)},
-    {XR_TYPE_DEVICE_PCM_SAMPLE_RATE_STATE_FB, sizeof(XrDevicePcmSampleRateStateFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
-#ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
-    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, sizeof(XrFrameSynthesisInfoEXT)},
-    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, sizeof(XrFrameSynthesisConfigViewEXT)},
-    {XR_TYPE_FRAME_SYNTHESIS_INFO_EXT, sizeof(XrFrameSynthesisInfoEXT)},
-    {XR_TYPE_FRAME_SYNTHESIS_CONFIG_VIEW_EXT, sizeof(XrFrameSynthesisConfigViewEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
-#ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, sizeof(XrCompositionLayerDepthTestFB)},
-    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_FB, sizeof(XrCompositionLayerDepthTestFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
-#ifdef XRTRANSPORT_EXT_XR_META_local_dimming
-    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, sizeof(XrLocalDimmingFrameEndInfoMETA)},
-    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, sizeof(XrLocalDimmingFrameEndInfoMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_local_dimming
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, sizeof(XrPassthroughPreferencesMETA)},
-    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, sizeof(XrPassthroughPreferencesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
-#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, sizeof(XrSystemVirtualKeyboardPropertiesMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, sizeof(XrVirtualKeyboardCreateInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, sizeof(XrVirtualKeyboardSpaceCreateInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, sizeof(XrVirtualKeyboardLocationInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, sizeof(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, sizeof(XrVirtualKeyboardAnimationStateMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, sizeof(XrVirtualKeyboardModelAnimationStatesMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, sizeof(XrVirtualKeyboardTextureDataMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, sizeof(XrVirtualKeyboardInputInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, sizeof(XrVirtualKeyboardTextContextChangeInfoMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, sizeof(XrEventDataVirtualKeyboardCommitTextMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, sizeof(XrEventDataVirtualKeyboardBackspaceMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, sizeof(XrEventDataVirtualKeyboardEnterMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, sizeof(XrEventDataVirtualKeyboardShownMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, sizeof(XrEventDataVirtualKeyboardHiddenMETA)},
-    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, sizeof(XrSystemVirtualKeyboardPropertiesMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, sizeof(XrVirtualKeyboardCreateInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, sizeof(XrVirtualKeyboardSpaceCreateInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, sizeof(XrVirtualKeyboardLocationInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, sizeof(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, sizeof(XrVirtualKeyboardAnimationStateMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, sizeof(XrVirtualKeyboardModelAnimationStatesMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, sizeof(XrVirtualKeyboardTextureDataMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, sizeof(XrVirtualKeyboardInputInfoMETA)},
-    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, sizeof(XrVirtualKeyboardTextContextChangeInfoMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, sizeof(XrEventDataVirtualKeyboardCommitTextMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, sizeof(XrEventDataVirtualKeyboardBackspaceMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, sizeof(XrEventDataVirtualKeyboardEnterMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, sizeof(XrEventDataVirtualKeyboardShownMETA)},
-    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, sizeof(XrEventDataVirtualKeyboardHiddenMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, sizeof(XrExternalCameraOCULUS)},
-    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, sizeof(XrExternalCameraOCULUS)},
-#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
-#ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
-    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, sizeof(XrVulkanSwapchainCreateInfoMETA)},
-    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, sizeof(XrVulkanSwapchainCreateInfoMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
-#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, sizeof(XrPerformanceMetricsStateMETA)},
-    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, sizeof(XrPerformanceMetricsCounterMETA)},
-    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, sizeof(XrPerformanceMetricsStateMETA)},
-    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, sizeof(XrPerformanceMetricsCounterMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, sizeof(XrSpaceListSaveInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceListSaveCompleteFB)},
-    {XR_TYPE_SPACE_LIST_SAVE_INFO_FB, sizeof(XrSpaceListSaveInfoFB)},
-    {XR_TYPE_EVENT_DATA_SPACE_LIST_SAVE_COMPLETE_FB, sizeof(XrEventDataSpaceListSaveCompleteFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-#ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, sizeof(XrSpaceUserCreateInfoFB)},
-    {XR_TYPE_SPACE_USER_CREATE_INFO_FB, sizeof(XrSpaceUserCreateInfoFB)},
-#endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-#ifdef XRTRANSPORT_EXT_XR_META_headset_id
-    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, sizeof(XrSystemHeadsetIdPropertiesMETA)},
-    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, sizeof(XrSystemHeadsetIdPropertiesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_headset_id
-#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, sizeof(XrRecommendedLayerResolutionMETA)},
-    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, sizeof(XrRecommendedLayerResolutionGetInfoMETA)},
-    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, sizeof(XrRecommendedLayerResolutionMETA)},
-    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, sizeof(XrRecommendedLayerResolutionGetInfoMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, sizeof(XrPassthroughColorLutCreateInfoMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, sizeof(XrPassthroughColorLutUpdateInfoMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, sizeof(XrPassthroughColorMapLutMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, sizeof(XrPassthroughColorMapInterpolatedLutMETA)},
-    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, sizeof(XrSystemPassthroughColorLutPropertiesMETA)},
-    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, sizeof(XrSystemPassthroughColorLutPropertiesMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, sizeof(XrPassthroughColorLutCreateInfoMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, sizeof(XrPassthroughColorLutUpdateInfoMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, sizeof(XrPassthroughColorMapLutMETA)},
-    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, sizeof(XrPassthroughColorMapInterpolatedLutMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, sizeof(XrSpaceTriangleMeshGetInfoMETA)},
-    {XR_TYPE_SPACE_TRIANGLE_MESH_META, sizeof(XrSpaceTriangleMeshMETA)},
-    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, sizeof(XrSpaceTriangleMeshGetInfoMETA)},
-    {XR_TYPE_SPACE_TRIANGLE_MESH_META, sizeof(XrSpaceTriangleMeshMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+#ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, sizeof(XrTriangleMeshCreateInfoFB)},
+    {XR_TYPE_TRIANGLE_MESH_CREATE_INFO_FB, sizeof(XrTriangleMeshCreateInfoFB)},
+#endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
+#ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, sizeof(XrEventDataViveTrackerConnectedHTCX)},
+    {XR_TYPE_EVENT_DATA_VIVE_TRACKER_CONNECTED_HTCX, sizeof(XrEventDataViveTrackerConnectedHTCX)},
+    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, sizeof(XrViveTrackerPathsHTCX)},
+    {XR_TYPE_VIVE_TRACKER_PATHS_HTCX, sizeof(XrViveTrackerPathsHTCX)},
+#endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, sizeof(XrSpatialAnchorCreateInfoHTC)},
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, sizeof(XrSpatialAnchorCreateInfoHTC)},
+    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, sizeof(XrSystemAnchorPropertiesHTC)},
+    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, sizeof(XrSystemAnchorPropertiesHTC)},
+#endif // XRTRANSPORT_EXT_XR_HTC_anchor
+#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, sizeof(XrBodyJointLocationsHTC)},
+    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, sizeof(XrBodyJointLocationsHTC)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, sizeof(XrBodyJointsLocateInfoHTC)},
+    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, sizeof(XrBodyJointsLocateInfoHTC)},
+    {XR_TYPE_BODY_SKELETON_HTC, sizeof(XrBodySkeletonHTC)},
+    {XR_TYPE_BODY_SKELETON_HTC, sizeof(XrBodySkeletonHTC)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, sizeof(XrBodyTrackerCreateInfoHTC)},
+    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, sizeof(XrBodyTrackerCreateInfoHTC)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, sizeof(XrSystemBodyTrackingPropertiesHTC)},
+    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, sizeof(XrSystemBodyTrackingPropertiesHTC)},
+#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, sizeof(XrFacialExpressionsHTC)},
+    {XR_TYPE_FACIAL_EXPRESSIONS_HTC, sizeof(XrFacialExpressionsHTC)},
+    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, sizeof(XrFacialTrackerCreateInfoHTC)},
+    {XR_TYPE_FACIAL_TRACKER_CREATE_INFO_HTC, sizeof(XrFacialTrackerCreateInfoHTC)},
+    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, sizeof(XrSystemFacialTrackingPropertiesHTC)},
+    {XR_TYPE_SYSTEM_FACIAL_TRACKING_PROPERTIES_HTC, sizeof(XrSystemFacialTrackingPropertiesHTC)},
+#endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
+#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, sizeof(XrFoveationApplyInfoHTC)},
+    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, sizeof(XrFoveationApplyInfoHTC)},
+    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, sizeof(XrFoveationCustomModeInfoHTC)},
+    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, sizeof(XrFoveationCustomModeInfoHTC)},
+    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, sizeof(XrFoveationDynamicModeInfoHTC)},
+    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, sizeof(XrFoveationDynamicModeInfoHTC)},
+#endif // XRTRANSPORT_EXT_XR_HTC_foveation
+#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, sizeof(XrCompositionLayerPassthroughHTC)},
+    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, sizeof(XrCompositionLayerPassthroughHTC)},
+    {XR_TYPE_PASSTHROUGH_COLOR_HTC, sizeof(XrPassthroughColorHTC)},
+    {XR_TYPE_PASSTHROUGH_COLOR_HTC, sizeof(XrPassthroughColorHTC)},
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, sizeof(XrPassthroughCreateInfoHTC)},
+    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, sizeof(XrPassthroughCreateInfoHTC)},
+    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, sizeof(XrPassthroughMeshTransformInfoHTC)},
+    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, sizeof(XrPassthroughMeshTransformInfoHTC)},
+#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, sizeof(XrGraphicsBindingD3D11KHR)},
+    {XR_TYPE_GRAPHICS_BINDING_D3D11_KHR, sizeof(XrGraphicsBindingD3D11KHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, sizeof(XrGraphicsRequirementsD3D11KHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D11_KHR, sizeof(XrGraphicsRequirementsD3D11KHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, sizeof(XrSwapchainImageD3D11KHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D11_KHR, sizeof(XrSwapchainImageD3D11KHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, sizeof(XrGraphicsBindingD3D12KHR)},
+    {XR_TYPE_GRAPHICS_BINDING_D3D12_KHR, sizeof(XrGraphicsBindingD3D12KHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, sizeof(XrGraphicsRequirementsD3D12KHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_D3D12_KHR, sizeof(XrGraphicsRequirementsD3D12KHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, sizeof(XrSwapchainImageD3D12KHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_D3D12_KHR, sizeof(XrSwapchainImageD3D12KHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
+    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, sizeof(XrInstanceCreateInfoAndroidKHR)},
+    {XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR, sizeof(XrInstanceCreateInfoAndroidKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
+#ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
+    {XR_TYPE_BINDING_MODIFICATIONS_KHR, sizeof(XrBindingModificationsKHR)},
+    {XR_TYPE_BINDING_MODIFICATIONS_KHR, sizeof(XrBindingModificationsKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, sizeof(XrCompositionLayerColorScaleBiasKHR)},
+    {XR_TYPE_COMPOSITION_LAYER_COLOR_SCALE_BIAS_KHR, sizeof(XrCompositionLayerColorScaleBiasKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, sizeof(XrCompositionLayerCubeKHR)},
+    {XR_TYPE_COMPOSITION_LAYER_CUBE_KHR, sizeof(XrCompositionLayerCubeKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, sizeof(XrCompositionLayerCylinderKHR)},
+    {XR_TYPE_COMPOSITION_LAYER_CYLINDER_KHR, sizeof(XrCompositionLayerCylinderKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, sizeof(XrCompositionLayerDepthInfoKHR)},
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_INFO_KHR, sizeof(XrCompositionLayerDepthInfoKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, sizeof(XrCompositionLayerEquirectKHR)},
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT_KHR, sizeof(XrCompositionLayerEquirectKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
+#ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, sizeof(XrCompositionLayerEquirect2KHR)},
+    {XR_TYPE_COMPOSITION_LAYER_EQUIRECT2_KHR, sizeof(XrCompositionLayerEquirect2KHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init
+#ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
+    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, sizeof(XrLoaderInitInfoAndroidKHR)},
+    {XR_TYPE_LOADER_INIT_INFO_ANDROID_KHR, sizeof(XrLoaderInitInfoAndroidKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
+#ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, sizeof(XrGraphicsBindingMetalKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_METAL_KHR, sizeof(XrGraphicsBindingMetalKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, sizeof(XrGraphicsRequirementsMetalKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_METAL_KHR, sizeof(XrGraphicsRequirementsMetalKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, sizeof(XrSwapchainImageMetalKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_METAL_KHR, sizeof(XrSwapchainImageMetalKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, sizeof(XrGraphicsBindingOpenGLWaylandKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WAYLAND_KHR, sizeof(XrGraphicsBindingOpenGLWaylandKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, sizeof(XrGraphicsBindingOpenGLWin32KHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_WIN32_KHR, sizeof(XrGraphicsBindingOpenGLWin32KHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, sizeof(XrGraphicsBindingOpenGLXcbKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XCB_KHR, sizeof(XrGraphicsBindingOpenGLXcbKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, sizeof(XrGraphicsBindingOpenGLXlibKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_XLIB_KHR, sizeof(XrGraphicsBindingOpenGLXlibKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, sizeof(XrGraphicsRequirementsOpenGLKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_KHR, sizeof(XrGraphicsRequirementsOpenGLKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, sizeof(XrSwapchainImageOpenGLKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_KHR, sizeof(XrSwapchainImageOpenGLKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, sizeof(XrGraphicsBindingOpenGLESAndroidKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_OPENGL_ES_ANDROID_KHR, sizeof(XrGraphicsBindingOpenGLESAndroidKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, sizeof(XrGraphicsRequirementsOpenGLESKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_OPENGL_ES_KHR, sizeof(XrGraphicsRequirementsOpenGLESKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, sizeof(XrSwapchainImageOpenGLESKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_OPENGL_ES_KHR, sizeof(XrSwapchainImageOpenGLESKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, sizeof(XrEventDataVisibilityMaskChangedKHR)},
+    {XR_TYPE_EVENT_DATA_VISIBILITY_MASK_CHANGED_KHR, sizeof(XrEventDataVisibilityMaskChangedKHR)},
+    {XR_TYPE_VISIBILITY_MASK_KHR, sizeof(XrVisibilityMaskKHR)},
+    {XR_TYPE_VISIBILITY_MASK_KHR, sizeof(XrVisibilityMaskKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, sizeof(XrGraphicsBindingVulkanKHR)},
+    {XR_TYPE_GRAPHICS_BINDING_VULKAN_KHR, sizeof(XrGraphicsBindingVulkanKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, sizeof(XrGraphicsRequirementsVulkanKHR)},
+    {XR_TYPE_GRAPHICS_REQUIREMENTS_VULKAN_KHR, sizeof(XrGraphicsRequirementsVulkanKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, sizeof(XrSwapchainImageVulkanKHR)},
+    {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN_KHR, sizeof(XrSwapchainImageVulkanKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, sizeof(XrVulkanDeviceCreateInfoKHR)},
+    {XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR, sizeof(XrVulkanDeviceCreateInfoKHR)},
+    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, sizeof(XrVulkanGraphicsDeviceGetInfoKHR)},
+    {XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR, sizeof(XrVulkanGraphicsDeviceGetInfoKHR)},
+    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, sizeof(XrVulkanInstanceCreateInfoKHR)},
+    {XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR, sizeof(XrVulkanInstanceCreateInfoKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+#ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
+    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, sizeof(XrVulkanSwapchainFormatListCreateInfoKHR)},
+    {XR_TYPE_VULKAN_SWAPCHAIN_FORMAT_LIST_CREATE_INFO_KHR, sizeof(XrVulkanSwapchainFormatListCreateInfoKHR)},
+#endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
     {XR_TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FULL_BODY_META, sizeof(XrSystemPropertiesBodyTrackingFullBodyMETA)},
     {XR_TYPE_SYSTEM_PROPERTIES_BODY_TRACKING_FULL_BODY_META, sizeof(XrSystemPropertiesBodyTrackingFullBodyMETA)},
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
+#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, sizeof(XrColocationAdvertisementStartInfoMETA)},
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, sizeof(XrColocationAdvertisementStartInfoMETA)},
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, sizeof(XrColocationAdvertisementStopInfoMETA)},
+    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, sizeof(XrColocationAdvertisementStopInfoMETA)},
+    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, sizeof(XrColocationDiscoveryStartInfoMETA)},
+    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, sizeof(XrColocationDiscoveryStartInfoMETA)},
+    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, sizeof(XrColocationDiscoveryStopInfoMETA)},
+    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, sizeof(XrColocationDiscoveryStopInfoMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, sizeof(XrEventDataColocationDiscoveryResultMETA)},
+    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, sizeof(XrEventDataColocationDiscoveryResultMETA)},
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStartColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStartColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStartColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStartColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStopColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStopColocationAdvertisementCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStopColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStopColocationDiscoveryCompleteMETA)},
+    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, sizeof(XrSystemColocationDiscoveryPropertiesMETA)},
+    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, sizeof(XrSystemColocationDiscoveryPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
+#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, sizeof(XrEnvironmentDepthHandRemovalSetInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, sizeof(XrEnvironmentDepthHandRemovalSetInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, sizeof(XrEnvironmentDepthImageAcquireInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, sizeof(XrEnvironmentDepthImageAcquireInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, sizeof(XrEnvironmentDepthImageMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, sizeof(XrEnvironmentDepthImageMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, sizeof(XrEnvironmentDepthImageViewMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, sizeof(XrEnvironmentDepthImageViewMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, sizeof(XrEnvironmentDepthProviderCreateInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, sizeof(XrEnvironmentDepthProviderCreateInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, sizeof(XrEnvironmentDepthSwapchainCreateInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, sizeof(XrEnvironmentDepthSwapchainCreateInfoMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, sizeof(XrEnvironmentDepthSwapchainStateMETA)},
+    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, sizeof(XrEnvironmentDepthSwapchainStateMETA)},
+    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, sizeof(XrSystemEnvironmentDepthPropertiesMETA)},
+    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, sizeof(XrSystemEnvironmentDepthPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_environment_depth
+#ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, sizeof(XrFoveationEyeTrackedProfileCreateInfoMETA)},
+    {XR_TYPE_FOVEATION_EYE_TRACKED_PROFILE_CREATE_INFO_META, sizeof(XrFoveationEyeTrackedProfileCreateInfoMETA)},
+    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, sizeof(XrFoveationEyeTrackedStateMETA)},
+    {XR_TYPE_FOVEATION_EYE_TRACKED_STATE_META, sizeof(XrFoveationEyeTrackedStateMETA)},
+    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, sizeof(XrSystemFoveationEyeTrackedPropertiesMETA)},
+    {XR_TYPE_SYSTEM_FOVEATION_EYE_TRACKED_PROPERTIES_META, sizeof(XrSystemFoveationEyeTrackedPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+#ifdef XRTRANSPORT_EXT_XR_META_headset_id
+    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, sizeof(XrSystemHeadsetIdPropertiesMETA)},
+    {XR_TYPE_SYSTEM_HEADSET_ID_PROPERTIES_META, sizeof(XrSystemHeadsetIdPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_headset_id
+#ifdef XRTRANSPORT_EXT_XR_META_local_dimming
+    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, sizeof(XrLocalDimmingFrameEndInfoMETA)},
+    {XR_TYPE_LOCAL_DIMMING_FRAME_END_INFO_META, sizeof(XrLocalDimmingFrameEndInfoMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_local_dimming
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, sizeof(XrPassthroughColorLutCreateInfoMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_CREATE_INFO_META, sizeof(XrPassthroughColorLutCreateInfoMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, sizeof(XrPassthroughColorLutUpdateInfoMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_LUT_UPDATE_INFO_META, sizeof(XrPassthroughColorLutUpdateInfoMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, sizeof(XrPassthroughColorMapInterpolatedLutMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_INTERPOLATED_LUT_META, sizeof(XrPassthroughColorMapInterpolatedLutMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, sizeof(XrPassthroughColorMapLutMETA)},
+    {XR_TYPE_PASSTHROUGH_COLOR_MAP_LUT_META, sizeof(XrPassthroughColorMapLutMETA)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, sizeof(XrSystemPassthroughColorLutPropertiesMETA)},
+    {XR_TYPE_SYSTEM_PASSTHROUGH_COLOR_LUT_PROPERTIES_META, sizeof(XrSystemPassthroughColorLutPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
     {XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META, sizeof(XrEventDataPassthroughLayerResumedMETA)},
     {XR_TYPE_EVENT_DATA_PASSTHROUGH_LAYER_RESUMED_META, sizeof(XrEventDataPassthroughLayerResumedMETA)},
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
-#ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, sizeof(XrSystemFaceTrackingProperties2FB)},
-    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, sizeof(XrFaceTrackerCreateInfo2FB)},
-    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, sizeof(XrFaceExpressionInfo2FB)},
-    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, sizeof(XrFaceExpressionWeights2FB)},
-    {XR_TYPE_SYSTEM_FACE_TRACKING_PROPERTIES2_FB, sizeof(XrSystemFaceTrackingProperties2FB)},
-    {XR_TYPE_FACE_TRACKER_CREATE_INFO2_FB, sizeof(XrFaceTrackerCreateInfo2FB)},
-    {XR_TYPE_FACE_EXPRESSION_INFO2_FB, sizeof(XrFaceExpressionInfo2FB)},
-    {XR_TYPE_FACE_EXPRESSION_WEIGHTS2_FB, sizeof(XrFaceExpressionWeights2FB)},
-#endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
+#ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, sizeof(XrPassthroughPreferencesMETA)},
+    {XR_TYPE_PASSTHROUGH_PREFERENCES_META, sizeof(XrPassthroughPreferencesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
+#ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, sizeof(XrPerformanceMetricsCounterMETA)},
+    {XR_TYPE_PERFORMANCE_METRICS_COUNTER_META, sizeof(XrPerformanceMetricsCounterMETA)},
+    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, sizeof(XrPerformanceMetricsStateMETA)},
+    {XR_TYPE_PERFORMANCE_METRICS_STATE_META, sizeof(XrPerformanceMetricsStateMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_performance_metrics
+#ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, sizeof(XrRecommendedLayerResolutionGetInfoMETA)},
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_GET_INFO_META, sizeof(XrRecommendedLayerResolutionGetInfoMETA)},
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, sizeof(XrRecommendedLayerResolutionMETA)},
+    {XR_TYPE_RECOMMENDED_LAYER_RESOLUTION_META, sizeof(XrRecommendedLayerResolutionMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
+    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
+    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, sizeof(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
+    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, sizeof(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, sizeof(XrShareSpacesRecipientGroupsMETA)},
+    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, sizeof(XrShareSpacesRecipientGroupsMETA)},
+    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, sizeof(XrSpaceGroupUuidFilterInfoMETA)},
+    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, sizeof(XrSpaceGroupUuidFilterInfoMETA)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, sizeof(XrSpaceTriangleMeshGetInfoMETA)},
+    {XR_TYPE_SPACE_TRIANGLE_MESH_GET_INFO_META, sizeof(XrSpaceTriangleMeshGetInfoMETA)},
+    {XR_TYPE_SPACE_TRIANGLE_MESH_META, sizeof(XrSpaceTriangleMeshMETA)},
+    {XR_TYPE_SPACE_TRIANGLE_MESH_META, sizeof(XrSpaceTriangleMeshMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntitySharingPropertiesMETA)},
-    {XR_TYPE_SHARE_SPACES_INFO_META, sizeof(XrShareSpacesInfoMETA)},
     {XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META, sizeof(XrEventDataShareSpacesCompleteMETA)},
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntitySharingPropertiesMETA)},
-    {XR_TYPE_SHARE_SPACES_INFO_META, sizeof(XrShareSpacesInfoMETA)},
     {XR_TYPE_EVENT_DATA_SHARE_SPACES_COMPLETE_META, sizeof(XrEventDataShareSpacesCompleteMETA)},
+    {XR_TYPE_SHARE_SPACES_INFO_META, sizeof(XrShareSpacesInfoMETA)},
+    {XR_TYPE_SHARE_SPACES_INFO_META, sizeof(XrShareSpacesInfoMETA)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntitySharingPropertiesMETA)},
+    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntitySharingPropertiesMETA)},
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-#ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, sizeof(XrEnvironmentDepthProviderCreateInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, sizeof(XrEnvironmentDepthSwapchainCreateInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, sizeof(XrEnvironmentDepthSwapchainStateMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, sizeof(XrEnvironmentDepthImageAcquireInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, sizeof(XrEnvironmentDepthImageViewMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, sizeof(XrEnvironmentDepthImageMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, sizeof(XrEnvironmentDepthHandRemovalSetInfoMETA)},
-    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, sizeof(XrSystemEnvironmentDepthPropertiesMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_PROVIDER_CREATE_INFO_META, sizeof(XrEnvironmentDepthProviderCreateInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_CREATE_INFO_META, sizeof(XrEnvironmentDepthSwapchainCreateInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_SWAPCHAIN_STATE_META, sizeof(XrEnvironmentDepthSwapchainStateMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_ACQUIRE_INFO_META, sizeof(XrEnvironmentDepthImageAcquireInfoMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_VIEW_META, sizeof(XrEnvironmentDepthImageViewMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_IMAGE_META, sizeof(XrEnvironmentDepthImageMETA)},
-    {XR_TYPE_ENVIRONMENT_DEPTH_HAND_REMOVAL_SET_INFO_META, sizeof(XrEnvironmentDepthHandRemovalSetInfoMETA)},
-    {XR_TYPE_SYSTEM_ENVIRONMENT_DEPTH_PROPERTIES_META, sizeof(XrSystemEnvironmentDepthPropertiesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, sizeof(XrPassthroughCreateInfoHTC)},
-    {XR_TYPE_PASSTHROUGH_COLOR_HTC, sizeof(XrPassthroughColorHTC)},
-    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, sizeof(XrPassthroughMeshTransformInfoHTC)},
-    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, sizeof(XrCompositionLayerPassthroughHTC)},
-    {XR_TYPE_PASSTHROUGH_CREATE_INFO_HTC, sizeof(XrPassthroughCreateInfoHTC)},
-    {XR_TYPE_PASSTHROUGH_COLOR_HTC, sizeof(XrPassthroughColorHTC)},
-    {XR_TYPE_PASSTHROUGH_MESH_TRANSFORM_INFO_HTC, sizeof(XrPassthroughMeshTransformInfoHTC)},
-    {XR_TYPE_COMPOSITION_LAYER_PASSTHROUGH_HTC, sizeof(XrCompositionLayerPassthroughHTC)},
-#endif // XRTRANSPORT_EXT_XR_HTC_passthrough
-#ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, sizeof(XrFoveationApplyInfoHTC)},
-    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, sizeof(XrFoveationDynamicModeInfoHTC)},
-    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, sizeof(XrFoveationCustomModeInfoHTC)},
-    {XR_TYPE_FOVEATION_APPLY_INFO_HTC, sizeof(XrFoveationApplyInfoHTC)},
-    {XR_TYPE_FOVEATION_DYNAMIC_MODE_INFO_HTC, sizeof(XrFoveationDynamicModeInfoHTC)},
-    {XR_TYPE_FOVEATION_CUSTOM_MODE_INFO_HTC, sizeof(XrFoveationCustomModeInfoHTC)},
-#endif // XRTRANSPORT_EXT_XR_HTC_foveation
-#ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, sizeof(XrSystemAnchorPropertiesHTC)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, sizeof(XrSpatialAnchorCreateInfoHTC)},
-    {XR_TYPE_SYSTEM_ANCHOR_PROPERTIES_HTC, sizeof(XrSystemAnchorPropertiesHTC)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_HTC, sizeof(XrSpatialAnchorCreateInfoHTC)},
-#endif // XRTRANSPORT_EXT_XR_HTC_anchor
-#ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, sizeof(XrSystemBodyTrackingPropertiesHTC)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, sizeof(XrBodyTrackerCreateInfoHTC)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, sizeof(XrBodyJointsLocateInfoHTC)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, sizeof(XrBodyJointLocationsHTC)},
-    {XR_TYPE_BODY_SKELETON_HTC, sizeof(XrBodySkeletonHTC)},
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_HTC, sizeof(XrSystemBodyTrackingPropertiesHTC)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_HTC, sizeof(XrBodyTrackerCreateInfoHTC)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_HTC, sizeof(XrBodyJointsLocateInfoHTC)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_HTC, sizeof(XrBodyJointLocationsHTC)},
-    {XR_TYPE_BODY_SKELETON_HTC, sizeof(XrBodySkeletonHTC)},
-#endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
-    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, sizeof(XrActiveActionSetPrioritiesEXT)},
-    {XR_TYPE_ACTIVE_ACTION_SET_PRIORITIES_EXT, sizeof(XrActiveActionSetPrioritiesEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
-#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, sizeof(XrSystemForceFeedbackCurlPropertiesMNDX)},
-    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, sizeof(XrForceFeedbackCurlApplyLocationsMNDX)},
-    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, sizeof(XrSystemForceFeedbackCurlPropertiesMNDX)},
-    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, sizeof(XrForceFeedbackCurlApplyLocationsMNDX)},
-#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-#ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, sizeof(XrSystemBodyTrackingPropertiesBD)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, sizeof(XrBodyTrackerCreateInfoBD)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, sizeof(XrBodyJointsLocateInfoBD)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, sizeof(XrBodyJointLocationsBD)},
-    {XR_TYPE_BODY_TRACKER_CREATE_INFO_BD, sizeof(XrBodyTrackerCreateInfoBD)},
-    {XR_TYPE_BODY_JOINTS_LOCATE_INFO_BD, sizeof(XrBodyJointsLocateInfoBD)},
-    {XR_TYPE_BODY_JOINT_LOCATIONS_BD, sizeof(XrBodyJointLocationsBD)},
-    {XR_TYPE_SYSTEM_BODY_TRACKING_PROPERTIES_BD, sizeof(XrSystemBodyTrackingPropertiesBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_body_tracking
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, sizeof(XrSystemSpatialSensingPropertiesBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, sizeof(XrSpatialEntityComponentGetInfoBD)},
-    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, sizeof(XrSpatialEntityLocationGetInfoBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, sizeof(XrSpatialEntityComponentDataLocationBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, sizeof(XrSpatialEntityComponentDataSemanticBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox2DBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, sizeof(XrSpatialEntityComponentDataPolygonBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox3DBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, sizeof(XrSpatialEntityComponentDataTriangleMeshBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, sizeof(XrSenseDataProviderCreateInfoBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, sizeof(XrSenseDataProviderStartInfoBD)},
-    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, sizeof(XrEventDataSenseDataProviderStateChangedBD)},
-    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, sizeof(XrEventDataSenseDataUpdatedBD)},
-    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, sizeof(XrSenseDataQueryInfoBD)},
-    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, sizeof(XrSenseDataQueryCompletionBD)},
-    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, sizeof(XrQueriedSenseDataGetInfoBD)},
-    {XR_TYPE_QUERIED_SENSE_DATA_BD, sizeof(XrQueriedSenseDataBD)},
-    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, sizeof(XrSpatialEntityStateBD)},
-    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, sizeof(XrSenseDataFilterUuidBD)},
-    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, sizeof(XrSenseDataFilterSemanticBD)},
-    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialEntityAnchorCreateInfoBD)},
-    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, sizeof(XrAnchorSpaceCreateInfoBD)},
-    {XR_TYPE_SYSTEM_SPATIAL_SENSING_PROPERTIES_BD, sizeof(XrSystemSpatialSensingPropertiesBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_GET_INFO_BD, sizeof(XrSpatialEntityComponentGetInfoBD)},
-    {XR_TYPE_SPATIAL_ENTITY_LOCATION_GET_INFO_BD, sizeof(XrSpatialEntityLocationGetInfoBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_LOCATION_BD, sizeof(XrSpatialEntityComponentDataLocationBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_SEMANTIC_BD, sizeof(XrSpatialEntityComponentDataSemanticBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_2D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox2DBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_POLYGON_BD, sizeof(XrSpatialEntityComponentDataPolygonBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_BOUNDING_BOX_3D_BD, sizeof(XrSpatialEntityComponentDataBoundingBox3DBD)},
-    {XR_TYPE_SPATIAL_ENTITY_COMPONENT_DATA_TRIANGLE_MESH_BD, sizeof(XrSpatialEntityComponentDataTriangleMeshBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_BD, sizeof(XrSenseDataProviderCreateInfoBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_START_INFO_BD, sizeof(XrSenseDataProviderStartInfoBD)},
-    {XR_TYPE_EVENT_DATA_SENSE_DATA_PROVIDER_STATE_CHANGED_BD, sizeof(XrEventDataSenseDataProviderStateChangedBD)},
-    {XR_TYPE_EVENT_DATA_SENSE_DATA_UPDATED_BD, sizeof(XrEventDataSenseDataUpdatedBD)},
-    {XR_TYPE_SENSE_DATA_QUERY_INFO_BD, sizeof(XrSenseDataQueryInfoBD)},
-    {XR_TYPE_SENSE_DATA_QUERY_COMPLETION_BD, sizeof(XrSenseDataQueryCompletionBD)},
-    {XR_TYPE_SENSE_DATA_FILTER_UUID_BD, sizeof(XrSenseDataFilterUuidBD)},
-    {XR_TYPE_SENSE_DATA_FILTER_SEMANTIC_BD, sizeof(XrSenseDataFilterSemanticBD)},
-    {XR_TYPE_QUERIED_SENSE_DATA_GET_INFO_BD, sizeof(XrQueriedSenseDataGetInfoBD)},
-    {XR_TYPE_QUERIED_SENSE_DATA_BD, sizeof(XrQueriedSenseDataBD)},
-    {XR_TYPE_SPATIAL_ENTITY_STATE_BD, sizeof(XrSpatialEntityStateBD)},
-    {XR_TYPE_SPATIAL_ENTITY_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialEntityAnchorCreateInfoBD)},
-    {XR_TYPE_ANCHOR_SPACE_CREATE_INFO_BD, sizeof(XrAnchorSpaceCreateInfoBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorPropertiesBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialAnchorCreateInfoBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, sizeof(XrSpatialAnchorCreateCompletionBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, sizeof(XrSpatialAnchorPersistInfoBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, sizeof(XrSpatialAnchorUnpersistInfoBD)},
-    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorPropertiesBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_BD, sizeof(XrSpatialAnchorCreateInfoBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_CREATE_COMPLETION_BD, sizeof(XrSpatialAnchorCreateCompletionBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_PERSIST_INFO_BD, sizeof(XrSpatialAnchorPersistInfoBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_UNPERSIST_INFO_BD, sizeof(XrSpatialAnchorUnpersistInfoBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorSharingPropertiesBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, sizeof(XrSpatialAnchorShareInfoBD)},
-    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, sizeof(XrSharedSpatialAnchorDownloadInfoBD)},
-    {XR_TYPE_SYSTEM_SPATIAL_ANCHOR_SHARING_PROPERTIES_BD, sizeof(XrSystemSpatialAnchorSharingPropertiesBD)},
-    {XR_TYPE_SPATIAL_ANCHOR_SHARE_INFO_BD, sizeof(XrSpatialAnchorShareInfoBD)},
-    {XR_TYPE_SHARED_SPATIAL_ANCHOR_DOWNLOAD_INFO_BD, sizeof(XrSharedSpatialAnchorDownloadInfoBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, sizeof(XrSystemSpatialScenePropertiesBD)},
-    {XR_TYPE_SCENE_CAPTURE_INFO_BD, sizeof(XrSceneCaptureInfoBD)},
-    {XR_TYPE_SYSTEM_SPATIAL_SCENE_PROPERTIES_BD, sizeof(XrSystemSpatialScenePropertiesBD)},
-    {XR_TYPE_SCENE_CAPTURE_INFO_BD, sizeof(XrSceneCaptureInfoBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
-#ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
-    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, sizeof(XrSystemSpatialMeshPropertiesBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, sizeof(XrSenseDataProviderCreateInfoSpatialMeshBD)},
-    {XR_TYPE_SYSTEM_SPATIAL_MESH_PROPERTIES_BD, sizeof(XrSystemSpatialMeshPropertiesBD)},
-    {XR_TYPE_SENSE_DATA_PROVIDER_CREATE_INFO_SPATIAL_MESH_BD, sizeof(XrSenseDataProviderCreateInfoSpatialMeshBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
-#ifdef XRTRANSPORT_EXT_XR_BD_future_progress
-    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, sizeof(XrFuturePollResultProgressBD)},
-    {XR_TYPE_FUTURE_POLL_RESULT_PROGRESS_BD, sizeof(XrFuturePollResultProgressBD)},
-#endif // XRTRANSPORT_EXT_XR_BD_future_progress
-#ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
-    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, sizeof(XrHandTrackingDataSourceInfoEXT)},
-    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, sizeof(XrHandTrackingDataSourceStateEXT)},
-    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_INFO_EXT, sizeof(XrHandTrackingDataSourceInfoEXT)},
-    {XR_TYPE_HAND_TRACKING_DATA_SOURCE_STATE_EXT, sizeof(XrHandTrackingDataSourceStateEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
-#ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, sizeof(XrSystemPlaneDetectionPropertiesEXT)},
-    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, sizeof(XrPlaneDetectorCreateInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, sizeof(XrPlaneDetectorBeginInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, sizeof(XrPlaneDetectorGetInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, sizeof(XrPlaneDetectorLocationEXT)},
-    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, sizeof(XrPlaneDetectorLocationsEXT)},
-    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, sizeof(XrPlaneDetectorPolygonBufferEXT)},
-    {XR_TYPE_PLANE_DETECTOR_CREATE_INFO_EXT, sizeof(XrPlaneDetectorCreateInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_BEGIN_INFO_EXT, sizeof(XrPlaneDetectorBeginInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_GET_INFO_EXT, sizeof(XrPlaneDetectorGetInfoEXT)},
-    {XR_TYPE_PLANE_DETECTOR_LOCATIONS_EXT, sizeof(XrPlaneDetectorLocationsEXT)},
-    {XR_TYPE_PLANE_DETECTOR_LOCATION_EXT, sizeof(XrPlaneDetectorLocationEXT)},
-    {XR_TYPE_PLANE_DETECTOR_POLYGON_BUFFER_EXT, sizeof(XrPlaneDetectorPolygonBufferEXT)},
-    {XR_TYPE_SYSTEM_PLANE_DETECTION_PROPERTIES_EXT, sizeof(XrSystemPlaneDetectionPropertiesEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
-#ifdef XRTRANSPORT_EXT_XR_EXT_future
-    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, sizeof(XrFutureCancelInfoEXT)},
-    {XR_TYPE_FUTURE_POLL_INFO_EXT, sizeof(XrFuturePollInfoEXT)},
-    {XR_TYPE_FUTURE_COMPLETION_EXT, sizeof(XrFutureCompletionEXT)},
-    {XR_TYPE_FUTURE_POLL_RESULT_EXT, sizeof(XrFuturePollResultEXT)},
-    {XR_TYPE_FUTURE_CANCEL_INFO_EXT, sizeof(XrFutureCancelInfoEXT)},
-    {XR_TYPE_FUTURE_POLL_INFO_EXT, sizeof(XrFuturePollInfoEXT)},
-    {XR_TYPE_FUTURE_COMPLETION_EXT, sizeof(XrFutureCompletionEXT)},
-    {XR_TYPE_FUTURE_POLL_RESULT_EXT, sizeof(XrFuturePollResultEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_future
-#ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
-    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, sizeof(XrEventDataUserPresenceChangedEXT)},
-    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, sizeof(XrSystemUserPresencePropertiesEXT)},
-    {XR_TYPE_EVENT_DATA_USER_PRESENCE_CHANGED_EXT, sizeof(XrEventDataUserPresenceChangedEXT)},
-    {XR_TYPE_SYSTEM_USER_PRESENCE_PROPERTIES_EXT, sizeof(XrSystemUserPresencePropertiesEXT)},
-#endif // XRTRANSPORT_EXT_XR_EXT_user_presence
+#ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, sizeof(XrEventDataVirtualKeyboardBackspaceMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_BACKSPACE_META, sizeof(XrEventDataVirtualKeyboardBackspaceMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, sizeof(XrEventDataVirtualKeyboardCommitTextMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_COMMIT_TEXT_META, sizeof(XrEventDataVirtualKeyboardCommitTextMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, sizeof(XrEventDataVirtualKeyboardEnterMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_ENTER_META, sizeof(XrEventDataVirtualKeyboardEnterMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, sizeof(XrEventDataVirtualKeyboardHiddenMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_HIDDEN_META, sizeof(XrEventDataVirtualKeyboardHiddenMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, sizeof(XrEventDataVirtualKeyboardShownMETA)},
+    {XR_TYPE_EVENT_DATA_VIRTUAL_KEYBOARD_SHOWN_META, sizeof(XrEventDataVirtualKeyboardShownMETA)},
+    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, sizeof(XrSystemVirtualKeyboardPropertiesMETA)},
+    {XR_TYPE_SYSTEM_VIRTUAL_KEYBOARD_PROPERTIES_META, sizeof(XrSystemVirtualKeyboardPropertiesMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, sizeof(XrVirtualKeyboardAnimationStateMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_ANIMATION_STATE_META, sizeof(XrVirtualKeyboardAnimationStateMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, sizeof(XrVirtualKeyboardCreateInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_CREATE_INFO_META, sizeof(XrVirtualKeyboardCreateInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, sizeof(XrVirtualKeyboardInputInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_INPUT_INFO_META, sizeof(XrVirtualKeyboardInputInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, sizeof(XrVirtualKeyboardLocationInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_LOCATION_INFO_META, sizeof(XrVirtualKeyboardLocationInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, sizeof(XrVirtualKeyboardModelAnimationStatesMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_ANIMATION_STATES_META, sizeof(XrVirtualKeyboardModelAnimationStatesMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, sizeof(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_MODEL_VISIBILITY_SET_INFO_META, sizeof(XrVirtualKeyboardModelVisibilitySetInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, sizeof(XrVirtualKeyboardSpaceCreateInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_SPACE_CREATE_INFO_META, sizeof(XrVirtualKeyboardSpaceCreateInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, sizeof(XrVirtualKeyboardTextContextChangeInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXT_CONTEXT_CHANGE_INFO_META, sizeof(XrVirtualKeyboardTextContextChangeInfoMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, sizeof(XrVirtualKeyboardTextureDataMETA)},
+    {XR_TYPE_VIRTUAL_KEYBOARD_TEXTURE_DATA_META, sizeof(XrVirtualKeyboardTextureDataMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
+#ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, sizeof(XrVulkanSwapchainCreateInfoMETA)},
+    {XR_TYPE_VULKAN_SWAPCHAIN_CREATE_INFO_META, sizeof(XrVulkanSwapchainCreateInfoMETA)},
+#endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
+#ifdef XRTRANSPORT_EXT_XR_ML_compat
+    {XR_TYPE_COORDINATE_SPACE_CREATE_INFO_ML, sizeof(XrCoordinateSpaceCreateInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_compat
+#ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, sizeof(XrFacialExpressionBlendShapeGetInfoML)},
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, sizeof(XrFacialExpressionBlendShapeGetInfoML)},
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, sizeof(XrFacialExpressionBlendShapePropertiesML)},
+    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, sizeof(XrFacialExpressionBlendShapePropertiesML)},
+    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, sizeof(XrFacialExpressionClientCreateInfoML)},
+    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, sizeof(XrFacialExpressionClientCreateInfoML)},
+    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, sizeof(XrSystemFacialExpressionPropertiesML)},
+    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, sizeof(XrSystemFacialExpressionPropertiesML)},
+#endif // XRTRANSPORT_EXT_XR_ML_facial_expression
+#ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
+    {XR_TYPE_FRAME_END_INFO_ML, sizeof(XrFrameEndInfoML)},
+    {XR_TYPE_FRAME_END_INFO_ML, sizeof(XrFrameEndInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
+#ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
+    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, sizeof(XrGlobalDimmerFrameEndInfoML)},
+    {XR_TYPE_GLOBAL_DIMMER_FRAME_END_INFO_ML, sizeof(XrGlobalDimmerFrameEndInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
+#ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, sizeof(XrEventDataLocalizationChangedML)},
+    {XR_TYPE_EVENT_DATA_LOCALIZATION_CHANGED_ML, sizeof(XrEventDataLocalizationChangedML)},
+    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, sizeof(XrLocalizationEnableEventsInfoML)},
+    {XR_TYPE_LOCALIZATION_ENABLE_EVENTS_INFO_ML, sizeof(XrLocalizationEnableEventsInfoML)},
+    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, sizeof(XrLocalizationMapImportInfoML)},
+    {XR_TYPE_LOCALIZATION_MAP_IMPORT_INFO_ML, sizeof(XrLocalizationMapImportInfoML)},
+    {XR_TYPE_LOCALIZATION_MAP_ML, sizeof(XrLocalizationMapML)},
+    {XR_TYPE_LOCALIZATION_MAP_ML, sizeof(XrLocalizationMapML)},
+    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, sizeof(XrMapLocalizationRequestInfoML)},
+    {XR_TYPE_MAP_LOCALIZATION_REQUEST_INFO_ML, sizeof(XrMapLocalizationRequestInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_localization_map
+#ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, sizeof(XrMarkerDetectorAprilTagInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_APRIL_TAG_INFO_ML, sizeof(XrMarkerDetectorAprilTagInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, sizeof(XrMarkerDetectorArucoInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_ARUCO_INFO_ML, sizeof(XrMarkerDetectorArucoInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, sizeof(XrMarkerDetectorCreateInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_CREATE_INFO_ML, sizeof(XrMarkerDetectorCreateInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, sizeof(XrMarkerDetectorCustomProfileInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_CUSTOM_PROFILE_INFO_ML, sizeof(XrMarkerDetectorCustomProfileInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, sizeof(XrMarkerDetectorSizeInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_SIZE_INFO_ML, sizeof(XrMarkerDetectorSizeInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, sizeof(XrMarkerDetectorSnapshotInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_SNAPSHOT_INFO_ML, sizeof(XrMarkerDetectorSnapshotInfoML)},
+    {XR_TYPE_MARKER_DETECTOR_STATE_ML, sizeof(XrMarkerDetectorStateML)},
+    {XR_TYPE_MARKER_DETECTOR_STATE_ML, sizeof(XrMarkerDetectorStateML)},
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, sizeof(XrMarkerSpaceCreateInfoML)},
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_ML, sizeof(XrMarkerSpaceCreateInfoML)},
+    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, sizeof(XrSystemMarkerUnderstandingPropertiesML)},
+    {XR_TYPE_SYSTEM_MARKER_UNDERSTANDING_PROPERTIES_ML, sizeof(XrSystemMarkerUnderstandingPropertiesML)},
+#endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, sizeof(XrCreateSpatialAnchorsCompletionML)},
+    {XR_TYPE_CREATE_SPATIAL_ANCHORS_COMPLETION_ML, sizeof(XrCreateSpatialAnchorsCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, sizeof(XrSpatialAnchorStateML)},
+    {XR_TYPE_SPATIAL_ANCHOR_STATE_ML, sizeof(XrSpatialAnchorStateML)},
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, sizeof(XrSpatialAnchorsCreateInfoFromPoseML)},
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_POSE_ML, sizeof(XrSpatialAnchorsCreateInfoFromPoseML)},
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
+#ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, sizeof(XrSpatialAnchorsCreateInfoFromUuidsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_INFO_FROM_UUIDS_ML, sizeof(XrSpatialAnchorsCreateInfoFromUuidsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, sizeof(XrSpatialAnchorsCreateStorageInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_CREATE_STORAGE_INFO_ML, sizeof(XrSpatialAnchorsCreateStorageInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsDeleteCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsDeleteCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, sizeof(XrSpatialAnchorsDeleteCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_COMPLETION_ML, sizeof(XrSpatialAnchorsDeleteCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, sizeof(XrSpatialAnchorsDeleteInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_DELETE_INFO_ML, sizeof(XrSpatialAnchorsDeleteInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsPublishCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsPublishCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, sizeof(XrSpatialAnchorsPublishCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_COMPLETION_ML, sizeof(XrSpatialAnchorsPublishCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, sizeof(XrSpatialAnchorsPublishInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_PUBLISH_INFO_ML, sizeof(XrSpatialAnchorsPublishInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, sizeof(XrSpatialAnchorsQueryCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_COMPLETION_ML, sizeof(XrSpatialAnchorsQueryCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, sizeof(XrSpatialAnchorsQueryInfoRadiusML)},
+    {XR_TYPE_SPATIAL_ANCHORS_QUERY_INFO_RADIUS_ML, sizeof(XrSpatialAnchorsQueryInfoRadiusML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_DETAILS_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionDetailsML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_COMPLETION_ML, sizeof(XrSpatialAnchorsUpdateExpirationCompletionML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, sizeof(XrSpatialAnchorsUpdateExpirationInfoML)},
+    {XR_TYPE_SPATIAL_ANCHORS_UPDATE_EXPIRATION_INFO_ML, sizeof(XrSpatialAnchorsUpdateExpirationInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
     {XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML, sizeof(XrSystemNotificationsSetInfoML)},
     {XR_TYPE_SYSTEM_NOTIFICATIONS_SET_INFO_ML, sizeof(XrSystemNotificationsSetInfoML)},
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
+#ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, sizeof(XrEventDataEyeCalibrationChangedML)},
+    {XR_TYPE_EVENT_DATA_EYE_CALIBRATION_CHANGED_ML, sizeof(XrEventDataEyeCalibrationChangedML)},
+    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, sizeof(XrEventDataHeadsetFitChangedML)},
+    {XR_TYPE_EVENT_DATA_HEADSET_FIT_CHANGED_ML, sizeof(XrEventDataHeadsetFitChangedML)},
+    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, sizeof(XrUserCalibrationEnableEventsInfoML)},
+    {XR_TYPE_USER_CALIBRATION_ENABLE_EVENTS_INFO_ML, sizeof(XrUserCalibrationEnableEventsInfoML)},
+#endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, sizeof(XrWorldMeshDetectorCreateInfoML)},
+    {XR_TYPE_WORLD_MESH_BLOCK_ML, sizeof(XrWorldMeshBlockML)},
+    {XR_TYPE_WORLD_MESH_BLOCK_ML, sizeof(XrWorldMeshBlockML)},
+    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, sizeof(XrWorldMeshBlockRequestML)},
+    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, sizeof(XrWorldMeshBlockRequestML)},
     {XR_TYPE_WORLD_MESH_BLOCK_STATE_ML, sizeof(XrWorldMeshBlockStateML)},
-    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, sizeof(XrWorldMeshStateRequestInfoML)},
-    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshStateRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_BLOCK_STATE_ML, sizeof(XrWorldMeshBlockStateML)},
+    {XR_TYPE_WORLD_MESH_BUFFER_ML, sizeof(XrWorldMeshBufferML)},
+    {XR_TYPE_WORLD_MESH_BUFFER_ML, sizeof(XrWorldMeshBufferML)},
+    {XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML, sizeof(XrWorldMeshBufferRecommendedSizeInfoML)},
     {XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML, sizeof(XrWorldMeshBufferRecommendedSizeInfoML)},
     {XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML, sizeof(XrWorldMeshBufferSizeML)},
-    {XR_TYPE_WORLD_MESH_BUFFER_ML, sizeof(XrWorldMeshBufferML)},
-    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, sizeof(XrWorldMeshBlockRequestML)},
-    {XR_TYPE_WORLD_MESH_GET_INFO_ML, sizeof(XrWorldMeshGetInfoML)},
-    {XR_TYPE_WORLD_MESH_BLOCK_ML, sizeof(XrWorldMeshBlockML)},
-    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML, sizeof(XrWorldMeshRequestCompletionInfoML)},
-    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshRequestCompletionML)},
-    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, sizeof(XrWorldMeshDetectorCreateInfoML)},
-    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, sizeof(XrWorldMeshStateRequestInfoML)},
-    {XR_TYPE_WORLD_MESH_BLOCK_STATE_ML, sizeof(XrWorldMeshBlockStateML)},
-    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshStateRequestCompletionML)},
-    {XR_TYPE_WORLD_MESH_BUFFER_RECOMMENDED_SIZE_INFO_ML, sizeof(XrWorldMeshBufferRecommendedSizeInfoML)},
     {XR_TYPE_WORLD_MESH_BUFFER_SIZE_ML, sizeof(XrWorldMeshBufferSizeML)},
-    {XR_TYPE_WORLD_MESH_BUFFER_ML, sizeof(XrWorldMeshBufferML)},
-    {XR_TYPE_WORLD_MESH_BLOCK_REQUEST_ML, sizeof(XrWorldMeshBlockRequestML)},
+    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, sizeof(XrWorldMeshDetectorCreateInfoML)},
+    {XR_TYPE_WORLD_MESH_DETECTOR_CREATE_INFO_ML, sizeof(XrWorldMeshDetectorCreateInfoML)},
     {XR_TYPE_WORLD_MESH_GET_INFO_ML, sizeof(XrWorldMeshGetInfoML)},
-    {XR_TYPE_WORLD_MESH_BLOCK_ML, sizeof(XrWorldMeshBlockML)},
-    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_GET_INFO_ML, sizeof(XrWorldMeshGetInfoML)},
     {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML, sizeof(XrWorldMeshRequestCompletionInfoML)},
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_INFO_ML, sizeof(XrWorldMeshRequestCompletionInfoML)},
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshStateRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_COMPLETION_ML, sizeof(XrWorldMeshStateRequestCompletionML)},
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, sizeof(XrWorldMeshStateRequestInfoML)},
+    {XR_TYPE_WORLD_MESH_STATE_REQUEST_INFO_ML, sizeof(XrWorldMeshStateRequestInfoML)},
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-#ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, sizeof(XrSystemFacialExpressionPropertiesML)},
-    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, sizeof(XrFacialExpressionClientCreateInfoML)},
-    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, sizeof(XrFacialExpressionBlendShapeGetInfoML)},
-    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, sizeof(XrFacialExpressionBlendShapePropertiesML)},
-    {XR_TYPE_SYSTEM_FACIAL_EXPRESSION_PROPERTIES_ML, sizeof(XrSystemFacialExpressionPropertiesML)},
-    {XR_TYPE_FACIAL_EXPRESSION_CLIENT_CREATE_INFO_ML, sizeof(XrFacialExpressionClientCreateInfoML)},
-    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_GET_INFO_ML, sizeof(XrFacialExpressionBlendShapeGetInfoML)},
-    {XR_TYPE_FACIAL_EXPRESSION_BLEND_SHAPE_PROPERTIES_ML, sizeof(XrFacialExpressionBlendShapePropertiesML)},
-#endif // XRTRANSPORT_EXT_XR_ML_facial_expression
-#ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, sizeof(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
-    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
-    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
-    {XR_TYPE_SYSTEM_SIMULTANEOUS_HANDS_AND_CONTROLLERS_PROPERTIES_META, sizeof(XrSystemSimultaneousHandsAndControllersPropertiesMETA)},
-    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_RESUME_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA)},
-    {XR_TYPE_SIMULTANEOUS_HANDS_AND_CONTROLLERS_TRACKING_PAUSE_INFO_META, sizeof(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-#ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, sizeof(XrColocationDiscoveryStartInfoMETA)},
-    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, sizeof(XrColocationDiscoveryStopInfoMETA)},
-    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, sizeof(XrColocationAdvertisementStartInfoMETA)},
-    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, sizeof(XrColocationAdvertisementStopInfoMETA)},
-    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStartColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStopColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStartColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, sizeof(XrEventDataColocationDiscoveryResultMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStopColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, sizeof(XrSystemColocationDiscoveryPropertiesMETA)},
-    {XR_TYPE_COLOCATION_DISCOVERY_START_INFO_META, sizeof(XrColocationDiscoveryStartInfoMETA)},
-    {XR_TYPE_COLOCATION_DISCOVERY_STOP_INFO_META, sizeof(XrColocationDiscoveryStopInfoMETA)},
-    {XR_TYPE_COLOCATION_ADVERTISEMENT_START_INFO_META, sizeof(XrColocationAdvertisementStartInfoMETA)},
-    {XR_TYPE_COLOCATION_ADVERTISEMENT_STOP_INFO_META, sizeof(XrColocationAdvertisementStopInfoMETA)},
-    {XR_TYPE_EVENT_DATA_START_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStartColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataStopColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_ADVERTISEMENT_COMPLETE_META, sizeof(XrEventDataColocationAdvertisementCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_START_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStartColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_RESULT_META, sizeof(XrEventDataColocationDiscoveryResultMETA)},
-    {XR_TYPE_EVENT_DATA_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_EVENT_DATA_STOP_COLOCATION_DISCOVERY_COMPLETE_META, sizeof(XrEventDataStopColocationDiscoveryCompleteMETA)},
-    {XR_TYPE_SYSTEM_COLOCATION_DISCOVERY_PROPERTIES_META, sizeof(XrSystemColocationDiscoveryPropertiesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
-#ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
-    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, sizeof(XrShareSpacesRecipientGroupsMETA)},
-    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, sizeof(XrSpaceGroupUuidFilterInfoMETA)},
-    {XR_TYPE_SHARE_SPACES_RECIPIENT_GROUPS_META, sizeof(XrShareSpacesRecipientGroupsMETA)},
-    {XR_TYPE_SPACE_GROUP_UUID_FILTER_INFO_META, sizeof(XrSpaceGroupUuidFilterInfoMETA)},
-    {XR_TYPE_SYSTEM_SPATIAL_ENTITY_GROUP_SHARING_PROPERTIES_META, sizeof(XrSystemSpatialEntityGroupSharingPropertiesMETA)},
-#endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
+#ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
+    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, sizeof(XrGraphicsBindingEGLMNDX)},
+    {XR_TYPE_GRAPHICS_BINDING_EGL_MNDX, sizeof(XrGraphicsBindingEGLMNDX)},
+#endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
+#ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, sizeof(XrForceFeedbackCurlApplyLocationsMNDX)},
+    {XR_TYPE_FORCE_FEEDBACK_CURL_APPLY_LOCATIONS_MNDX, sizeof(XrForceFeedbackCurlApplyLocationsMNDX)},
+    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, sizeof(XrSystemForceFeedbackCurlPropertiesMNDX)},
+    {XR_TYPE_SYSTEM_FORCE_FEEDBACK_CURL_PROPERTIES_MNDX, sizeof(XrSystemForceFeedbackCurlPropertiesMNDX)},
+#endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+#ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, sizeof(XrCompositionLayerReprojectionInfoMSFT)},
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_INFO_MSFT, sizeof(XrCompositionLayerReprojectionInfoMSFT)},
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, sizeof(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
+    {XR_TYPE_COMPOSITION_LAYER_REPROJECTION_PLANE_OVERRIDE_MSFT, sizeof(XrCompositionLayerReprojectionPlaneOverrideMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+#ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, sizeof(XrControllerModelKeyStateMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_KEY_STATE_MSFT, sizeof(XrControllerModelKeyStateMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, sizeof(XrControllerModelNodePropertiesMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_NODE_PROPERTIES_MSFT, sizeof(XrControllerModelNodePropertiesMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, sizeof(XrControllerModelNodeStateMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_NODE_STATE_MSFT, sizeof(XrControllerModelNodeStateMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, sizeof(XrControllerModelPropertiesMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_PROPERTIES_MSFT, sizeof(XrControllerModelPropertiesMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, sizeof(XrControllerModelStateMSFT)},
+    {XR_TYPE_CONTROLLER_MODEL_STATE_MSFT, sizeof(XrControllerModelStateMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
+#ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+    {XR_TYPE_HAND_MESH_MSFT, sizeof(XrHandMeshMSFT)},
+    {XR_TYPE_HAND_MESH_MSFT, sizeof(XrHandMeshMSFT)},
+    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, sizeof(XrHandMeshSpaceCreateInfoMSFT)},
+    {XR_TYPE_HAND_MESH_SPACE_CREATE_INFO_MSFT, sizeof(XrHandMeshSpaceCreateInfoMSFT)},
+    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, sizeof(XrHandMeshUpdateInfoMSFT)},
+    {XR_TYPE_HAND_MESH_UPDATE_INFO_MSFT, sizeof(XrHandMeshUpdateInfoMSFT)},
+    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, sizeof(XrHandPoseTypeInfoMSFT)},
+    {XR_TYPE_HAND_POSE_TYPE_INFO_MSFT, sizeof(XrHandPoseTypeInfoMSFT)},
+    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, sizeof(XrSystemHandTrackingMeshPropertiesMSFT)},
+    {XR_TYPE_SYSTEM_HAND_TRACKING_MESH_PROPERTIES_MSFT, sizeof(XrSystemHandTrackingMeshPropertiesMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+#ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, sizeof(XrHolographicWindowAttachmentMSFT)},
+    {XR_TYPE_HOLOGRAPHIC_WINDOW_ATTACHMENT_MSFT, sizeof(XrHolographicWindowAttachmentMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, sizeof(XrSceneMarkerQRCodesMSFT)},
+    {XR_TYPE_SCENE_MARKER_QR_CODES_MSFT, sizeof(XrSceneMarkerQRCodesMSFT)},
+    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, sizeof(XrSceneMarkerTypeFilterMSFT)},
+    {XR_TYPE_SCENE_MARKER_TYPE_FILTER_MSFT, sizeof(XrSceneMarkerTypeFilterMSFT)},
+    {XR_TYPE_SCENE_MARKERS_MSFT, sizeof(XrSceneMarkersMSFT)},
+    {XR_TYPE_SCENE_MARKERS_MSFT, sizeof(XrSceneMarkersMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, sizeof(XrNewSceneComputeInfoMSFT)},
+    {XR_TYPE_NEW_SCENE_COMPUTE_INFO_MSFT, sizeof(XrNewSceneComputeInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, sizeof(XrSceneComponentLocationsMSFT)},
+    {XR_TYPE_SCENE_COMPONENT_LOCATIONS_MSFT, sizeof(XrSceneComponentLocationsMSFT)},
+    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, sizeof(XrSceneComponentParentFilterInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENT_PARENT_FILTER_INFO_MSFT, sizeof(XrSceneComponentParentFilterInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, sizeof(XrSceneComponentsGetInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_GET_INFO_MSFT, sizeof(XrSceneComponentsGetInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, sizeof(XrSceneComponentsLocateInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_LOCATE_INFO_MSFT, sizeof(XrSceneComponentsLocateInfoMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_MSFT, sizeof(XrSceneComponentsMSFT)},
+    {XR_TYPE_SCENE_COMPONENTS_MSFT, sizeof(XrSceneComponentsMSFT)},
+    {XR_TYPE_SCENE_CREATE_INFO_MSFT, sizeof(XrSceneCreateInfoMSFT)},
+    {XR_TYPE_SCENE_CREATE_INFO_MSFT, sizeof(XrSceneCreateInfoMSFT)},
+    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, sizeof(XrSceneMeshBuffersGetInfoMSFT)},
+    {XR_TYPE_SCENE_MESH_BUFFERS_GET_INFO_MSFT, sizeof(XrSceneMeshBuffersGetInfoMSFT)},
+    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, sizeof(XrSceneMeshBuffersMSFT)},
+    {XR_TYPE_SCENE_MESH_BUFFERS_MSFT, sizeof(XrSceneMeshBuffersMSFT)},
+    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, sizeof(XrSceneMeshIndicesUint16MSFT)},
+    {XR_TYPE_SCENE_MESH_INDICES_UINT16_MSFT, sizeof(XrSceneMeshIndicesUint16MSFT)},
+    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, sizeof(XrSceneMeshIndicesUint32MSFT)},
+    {XR_TYPE_SCENE_MESH_INDICES_UINT32_MSFT, sizeof(XrSceneMeshIndicesUint32MSFT)},
+    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, sizeof(XrSceneMeshVertexBufferMSFT)},
+    {XR_TYPE_SCENE_MESH_VERTEX_BUFFER_MSFT, sizeof(XrSceneMeshVertexBufferMSFT)},
+    {XR_TYPE_SCENE_MESHES_MSFT, sizeof(XrSceneMeshesMSFT)},
+    {XR_TYPE_SCENE_MESHES_MSFT, sizeof(XrSceneMeshesMSFT)},
+    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, sizeof(XrSceneObjectTypesFilterInfoMSFT)},
+    {XR_TYPE_SCENE_OBJECT_TYPES_FILTER_INFO_MSFT, sizeof(XrSceneObjectTypesFilterInfoMSFT)},
+    {XR_TYPE_SCENE_OBJECTS_MSFT, sizeof(XrSceneObjectsMSFT)},
+    {XR_TYPE_SCENE_OBJECTS_MSFT, sizeof(XrSceneObjectsMSFT)},
+    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, sizeof(XrSceneObserverCreateInfoMSFT)},
+    {XR_TYPE_SCENE_OBSERVER_CREATE_INFO_MSFT, sizeof(XrSceneObserverCreateInfoMSFT)},
+    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, sizeof(XrScenePlaneAlignmentFilterInfoMSFT)},
+    {XR_TYPE_SCENE_PLANE_ALIGNMENT_FILTER_INFO_MSFT, sizeof(XrScenePlaneAlignmentFilterInfoMSFT)},
+    {XR_TYPE_SCENE_PLANES_MSFT, sizeof(XrScenePlanesMSFT)},
+    {XR_TYPE_SCENE_PLANES_MSFT, sizeof(XrScenePlanesMSFT)},
+    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, sizeof(XrVisualMeshComputeLodInfoMSFT)},
+    {XR_TYPE_VISUAL_MESH_COMPUTE_LOD_INFO_MSFT, sizeof(XrVisualMeshComputeLodInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+#ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, sizeof(XrSceneDeserializeInfoMSFT)},
+    {XR_TYPE_SCENE_DESERIALIZE_INFO_MSFT, sizeof(XrSceneDeserializeInfoMSFT)},
+    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, sizeof(XrSerializedSceneFragmentDataGetInfoMSFT)},
+    {XR_TYPE_SERIALIZED_SCENE_FRAGMENT_DATA_GET_INFO_MSFT, sizeof(XrSerializedSceneFragmentDataGetInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+#ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, sizeof(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_END_INFO_MSFT, sizeof(XrSecondaryViewConfigurationFrameEndInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, sizeof(XrSecondaryViewConfigurationFrameStateMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_FRAME_STATE_MSFT, sizeof(XrSecondaryViewConfigurationFrameStateMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, sizeof(XrSecondaryViewConfigurationLayerInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_LAYER_INFO_MSFT, sizeof(XrSecondaryViewConfigurationLayerInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SESSION_BEGIN_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSessionBeginInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, sizeof(XrSecondaryViewConfigurationStateMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_STATE_MSFT, sizeof(XrSecondaryViewConfigurationStateMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
+    {XR_TYPE_SECONDARY_VIEW_CONFIGURATION_SWAPCHAIN_CREATE_INFO_MSFT, sizeof(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+    {XR_TYPE_SPATIAL_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_ANCHOR_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorSpaceCreateInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_ANCHOR_FROM_PERSISTED_ANCHOR_CREATE_INFO_MSFT, sizeof(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, sizeof(XrSpatialAnchorPersistenceInfoMSFT)},
+    {XR_TYPE_SPATIAL_ANCHOR_PERSISTENCE_INFO_MSFT, sizeof(XrSpatialAnchorPersistenceInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+#ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_GET_INFO_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_NODE_BINDING_PROPERTIES_MSFT, sizeof(XrSpatialGraphNodeBindingPropertiesMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_NODE_SPACE_CREATE_INFO_MSFT, sizeof(XrSpatialGraphNodeSpaceCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, sizeof(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
+    {XR_TYPE_SPATIAL_GRAPH_STATIC_NODE_BINDING_CREATE_INFO_MSFT, sizeof(XrSpatialGraphStaticNodeBindingCreateInfoMSFT)},
+#endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+#ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, sizeof(XrExternalCameraOCULUS)},
+    {XR_TYPE_EXTERNAL_CAMERA_OCULUS, sizeof(XrExternalCameraOCULUS)},
+#endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
+#ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, sizeof(XrInteractionProfileAnalogThresholdVALVE)},
+    {XR_TYPE_INTERACTION_PROFILE_ANALOG_THRESHOLD_VALVE, sizeof(XrInteractionProfileAnalogThresholdVALVE)},
+#endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
+#ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, sizeof(XrCompositionLayerDepthTestVARJO)},
+    {XR_TYPE_COMPOSITION_LAYER_DEPTH_TEST_VARJO, sizeof(XrCompositionLayerDepthTestVARJO)},
+#endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
+#ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, sizeof(XrFoveatedViewConfigurationViewVARJO)},
+    {XR_TYPE_FOVEATED_VIEW_CONFIGURATION_VIEW_VARJO, sizeof(XrFoveatedViewConfigurationViewVARJO)},
+    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, sizeof(XrSystemFoveatedRenderingPropertiesVARJO)},
+    {XR_TYPE_SYSTEM_FOVEATED_RENDERING_PROPERTIES_VARJO, sizeof(XrSystemFoveatedRenderingPropertiesVARJO)},
+    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, sizeof(XrViewLocateFoveatedRenderingVARJO)},
+    {XR_TYPE_VIEW_LOCATE_FOVEATED_RENDERING_VARJO, sizeof(XrViewLocateFoveatedRenderingVARJO)},
+#endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
+#ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, sizeof(XrEventDataMarkerTrackingUpdateVARJO)},
+    {XR_TYPE_EVENT_DATA_MARKER_TRACKING_UPDATE_VARJO, sizeof(XrEventDataMarkerTrackingUpdateVARJO)},
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, sizeof(XrMarkerSpaceCreateInfoVARJO)},
+    {XR_TYPE_MARKER_SPACE_CREATE_INFO_VARJO, sizeof(XrMarkerSpaceCreateInfoVARJO)},
+    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, sizeof(XrSystemMarkerTrackingPropertiesVARJO)},
+    {XR_TYPE_SYSTEM_MARKER_TRACKING_PROPERTIES_VARJO, sizeof(XrSystemMarkerTrackingPropertiesVARJO)},
+#endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
     {XR_TYPE_ACTION_CREATE_INFO, sizeof(XrActionCreateInfo)},
     {XR_TYPE_ACTION_SET_CREATE_INFO, sizeof(XrActionSetCreateInfo)},
     {XR_TYPE_ACTION_SPACE_CREATE_INFO, sizeof(XrActionSpaceCreateInfo)},
