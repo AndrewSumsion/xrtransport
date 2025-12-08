@@ -14,6 +14,8 @@
 
 namespace xrtransport {
 
+namespace runtime {
+
 <%utils:for_grouped_functions args="function">\
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     try {
@@ -43,4 +45,6 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
 
 </%utils:for_grouped_functions>
 
-}
+} // namespace runtime
+
+} // namespace xrtransport

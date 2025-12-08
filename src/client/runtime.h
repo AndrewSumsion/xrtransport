@@ -16,6 +16,8 @@
 
 namespace xrtransport {
 
+namespace runtime {
+
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl);
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
@@ -556,6 +558,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState);
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo);
 
+
+} // namespace runtime
 
 } // namespace xrtransport
 

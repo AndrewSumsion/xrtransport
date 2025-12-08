@@ -22,6 +22,8 @@
 
 namespace xrtransport {
 
+namespace runtime {
+
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) {
     try {
@@ -8489,4 +8491,6 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
 
 
 
-}
+} // namespace runtime
+
+} // namespace xrtransport

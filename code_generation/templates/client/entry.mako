@@ -12,7 +12,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
 
 static std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
 <%utils:for_grouped_functions args="function">\
-    {"${function.name}", (PFN_xrVoidFunction)xrtransport::${function.name}},
+    {"${function.name}", (PFN_xrVoidFunction)xrtransport::runtime::${function.name}},
 </%utils:for_grouped_functions>
     {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl}
 };
