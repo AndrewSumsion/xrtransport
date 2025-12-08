@@ -10,6 +10,7 @@ add_library(xrtransport_client SHARED
     runtime.cpp
     transport_manager.cpp
     entry.cpp
+    available_extensions.cpp
 )
 
 # Dependencies

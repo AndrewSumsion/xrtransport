@@ -137,6 +137,15 @@ void Server::instance_handler(MessageLockIn msg_in) {
     serialize_ptr(instance, 1, msg_out.buffer);
     msg_out.flush();
 
+    if (XR_SUCCEEDED(_result)) {
+        function_loader.loader_instance = *instance;
+
+        // Notify modules that XrInstance was created
+        for (auto& module : modules) {
+            module.on_instance(&transport, &function_loader, *instance);
+        }
+    }
+
     // Restore createInfo to make sure cleanup works as expected
     createInfo->enabledExtensionCount = old_enabled_extension_count;
     createInfo->enabledExtensionNames = old_enabled_extension_names;
@@ -144,11 +153,6 @@ void Server::instance_handler(MessageLockIn msg_in) {
     // Cleanup from deserializer
     cleanup_ptr(createInfo, 1);
     cleanup_ptr(instance, 1);
-
-    // Notify modules that XrInstance was created
-    for (auto& module : modules) {
-        module.on_instance(&transport, &function_loader, *instance);
-    }
 }
 
 }

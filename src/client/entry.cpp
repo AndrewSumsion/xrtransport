@@ -8,558 +8,589 @@
  * code_generation/templates/client/entry.mako
  */
 #include "runtime.h"
+#include "available_extensions.h"
+
+#include "xrtransport/extensions/extension_functions.h"
 
 #define XR_EXTENSION_PROTOTYPES
 #include "openxr/openxr_loader_negotiation.h"
+#ifdef __ANDROID__
+#define XR_USE_PLATFORM_ANDROID
+#include "openxr/openxr_platform.h"
+#endif
+#include "openxr/openxr.h"
 
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
+#include <cstring>
+#include <cstdlib>
+
+using namespace xrtransport;
 
 // different name to allow static, this symbol must not be exported per spec
-static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function);
+static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(
+    XrInstance                                  instance,
+    const char*                                 name,
+    PFN_xrVoidFunction*                         function);
+static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(
+    const char*                                 layerName,
+    uint32_t                                    propertyCapacityInput,
+    uint32_t*                                   propertyCountOutput,
+    XrExtensionProperties*                      properties);
+static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(
+    const XrInstanceCreateInfo*                 createInfo,
+    XrInstance*                                 instance);
 
-static std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
+static const std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-    {"xrSetDigitalLensControlALMALENCE", (PFN_xrVoidFunction)xrtransport::runtime::xrSetDigitalLensControlALMALENCE},
+    {"xrSetDigitalLensControlALMALENCE", (PFN_xrVoidFunction)runtime::xrSetDigitalLensControlALMALENCE},
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-    {"xrCreateBodyTrackerBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateBodyTrackerBD},
-    {"xrDestroyBodyTrackerBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyBodyTrackerBD},
-    {"xrLocateBodyJointsBD", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateBodyJointsBD},
+    {"xrCreateBodyTrackerBD", (PFN_xrVoidFunction)runtime::xrCreateBodyTrackerBD},
+    {"xrDestroyBodyTrackerBD", (PFN_xrVoidFunction)runtime::xrDestroyBodyTrackerBD},
+    {"xrLocateBodyJointsBD", (PFN_xrVoidFunction)runtime::xrLocateBodyJointsBD},
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-    {"xrCreateSpatialAnchorAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorAsyncBD},
-    {"xrCreateSpatialAnchorCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorCompleteBD},
-    {"xrPersistSpatialAnchorAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrPersistSpatialAnchorAsyncBD},
-    {"xrPersistSpatialAnchorCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrPersistSpatialAnchorCompleteBD},
-    {"xrUnpersistSpatialAnchorAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrUnpersistSpatialAnchorAsyncBD},
-    {"xrUnpersistSpatialAnchorCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrUnpersistSpatialAnchorCompleteBD},
+    {"xrCreateSpatialAnchorAsyncBD", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorAsyncBD},
+    {"xrCreateSpatialAnchorCompleteBD", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorCompleteBD},
+    {"xrPersistSpatialAnchorAsyncBD", (PFN_xrVoidFunction)runtime::xrPersistSpatialAnchorAsyncBD},
+    {"xrPersistSpatialAnchorCompleteBD", (PFN_xrVoidFunction)runtime::xrPersistSpatialAnchorCompleteBD},
+    {"xrUnpersistSpatialAnchorAsyncBD", (PFN_xrVoidFunction)runtime::xrUnpersistSpatialAnchorAsyncBD},
+    {"xrUnpersistSpatialAnchorCompleteBD", (PFN_xrVoidFunction)runtime::xrUnpersistSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    {"xrDownloadSharedSpatialAnchorAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDownloadSharedSpatialAnchorAsyncBD},
-    {"xrDownloadSharedSpatialAnchorCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDownloadSharedSpatialAnchorCompleteBD},
-    {"xrShareSpatialAnchorAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrShareSpatialAnchorAsyncBD},
-    {"xrShareSpatialAnchorCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrShareSpatialAnchorCompleteBD},
+    {"xrDownloadSharedSpatialAnchorAsyncBD", (PFN_xrVoidFunction)runtime::xrDownloadSharedSpatialAnchorAsyncBD},
+    {"xrDownloadSharedSpatialAnchorCompleteBD", (PFN_xrVoidFunction)runtime::xrDownloadSharedSpatialAnchorCompleteBD},
+    {"xrShareSpatialAnchorAsyncBD", (PFN_xrVoidFunction)runtime::xrShareSpatialAnchorAsyncBD},
+    {"xrShareSpatialAnchorCompleteBD", (PFN_xrVoidFunction)runtime::xrShareSpatialAnchorCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-    {"xrCaptureSceneAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCaptureSceneAsyncBD},
-    {"xrCaptureSceneCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCaptureSceneCompleteBD},
+    {"xrCaptureSceneAsyncBD", (PFN_xrVoidFunction)runtime::xrCaptureSceneAsyncBD},
+    {"xrCaptureSceneCompleteBD", (PFN_xrVoidFunction)runtime::xrCaptureSceneCompleteBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    {"xrCreateAnchorSpaceBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateAnchorSpaceBD},
-    {"xrCreateSenseDataProviderBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSenseDataProviderBD},
-    {"xrCreateSpatialEntityAnchorBD", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialEntityAnchorBD},
-    {"xrDestroyAnchorBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyAnchorBD},
-    {"xrDestroySenseDataProviderBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySenseDataProviderBD},
-    {"xrDestroySenseDataSnapshotBD", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySenseDataSnapshotBD},
-    {"xrEnumerateSpatialEntityComponentTypesBD", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateSpatialEntityComponentTypesBD},
-    {"xrGetAnchorUuidBD", (PFN_xrVoidFunction)xrtransport::runtime::xrGetAnchorUuidBD},
-    {"xrGetQueriedSenseDataBD", (PFN_xrVoidFunction)xrtransport::runtime::xrGetQueriedSenseDataBD},
-    {"xrGetSenseDataProviderStateBD", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSenseDataProviderStateBD},
-    {"xrGetSpatialEntityComponentDataBD", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpatialEntityComponentDataBD},
-    {"xrGetSpatialEntityUuidBD", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpatialEntityUuidBD},
-    {"xrQuerySenseDataAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySenseDataAsyncBD},
-    {"xrQuerySenseDataCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySenseDataCompleteBD},
-    {"xrStartSenseDataProviderAsyncBD", (PFN_xrVoidFunction)xrtransport::runtime::xrStartSenseDataProviderAsyncBD},
-    {"xrStartSenseDataProviderCompleteBD", (PFN_xrVoidFunction)xrtransport::runtime::xrStartSenseDataProviderCompleteBD},
-    {"xrStopSenseDataProviderBD", (PFN_xrVoidFunction)xrtransport::runtime::xrStopSenseDataProviderBD},
+    {"xrCreateAnchorSpaceBD", (PFN_xrVoidFunction)runtime::xrCreateAnchorSpaceBD},
+    {"xrCreateSenseDataProviderBD", (PFN_xrVoidFunction)runtime::xrCreateSenseDataProviderBD},
+    {"xrCreateSpatialEntityAnchorBD", (PFN_xrVoidFunction)runtime::xrCreateSpatialEntityAnchorBD},
+    {"xrDestroyAnchorBD", (PFN_xrVoidFunction)runtime::xrDestroyAnchorBD},
+    {"xrDestroySenseDataProviderBD", (PFN_xrVoidFunction)runtime::xrDestroySenseDataProviderBD},
+    {"xrDestroySenseDataSnapshotBD", (PFN_xrVoidFunction)runtime::xrDestroySenseDataSnapshotBD},
+    {"xrEnumerateSpatialEntityComponentTypesBD", (PFN_xrVoidFunction)runtime::xrEnumerateSpatialEntityComponentTypesBD},
+    {"xrGetAnchorUuidBD", (PFN_xrVoidFunction)runtime::xrGetAnchorUuidBD},
+    {"xrGetQueriedSenseDataBD", (PFN_xrVoidFunction)runtime::xrGetQueriedSenseDataBD},
+    {"xrGetSenseDataProviderStateBD", (PFN_xrVoidFunction)runtime::xrGetSenseDataProviderStateBD},
+    {"xrGetSpatialEntityComponentDataBD", (PFN_xrVoidFunction)runtime::xrGetSpatialEntityComponentDataBD},
+    {"xrGetSpatialEntityUuidBD", (PFN_xrVoidFunction)runtime::xrGetSpatialEntityUuidBD},
+    {"xrQuerySenseDataAsyncBD", (PFN_xrVoidFunction)runtime::xrQuerySenseDataAsyncBD},
+    {"xrQuerySenseDataCompleteBD", (PFN_xrVoidFunction)runtime::xrQuerySenseDataCompleteBD},
+    {"xrStartSenseDataProviderAsyncBD", (PFN_xrVoidFunction)runtime::xrStartSenseDataProviderAsyncBD},
+    {"xrStartSenseDataProviderCompleteBD", (PFN_xrVoidFunction)runtime::xrStartSenseDataProviderCompleteBD},
+    {"xrStopSenseDataProviderBD", (PFN_xrVoidFunction)runtime::xrStopSenseDataProviderBD},
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-    {"xrSetInputDeviceActiveEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetInputDeviceActiveEXT},
-    {"xrSetInputDeviceLocationEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetInputDeviceLocationEXT},
-    {"xrSetInputDeviceStateBoolEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetInputDeviceStateBoolEXT},
-    {"xrSetInputDeviceStateFloatEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetInputDeviceStateFloatEXT},
-    {"xrSetInputDeviceStateVector2fEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetInputDeviceStateVector2fEXT},
+    {"xrSetInputDeviceActiveEXT", (PFN_xrVoidFunction)runtime::xrSetInputDeviceActiveEXT},
+    {"xrSetInputDeviceLocationEXT", (PFN_xrVoidFunction)runtime::xrSetInputDeviceLocationEXT},
+    {"xrSetInputDeviceStateBoolEXT", (PFN_xrVoidFunction)runtime::xrSetInputDeviceStateBoolEXT},
+    {"xrSetInputDeviceStateFloatEXT", (PFN_xrVoidFunction)runtime::xrSetInputDeviceStateFloatEXT},
+    {"xrSetInputDeviceStateVector2fEXT", (PFN_xrVoidFunction)runtime::xrSetInputDeviceStateVector2fEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    {"xrCreateDebugUtilsMessengerEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateDebugUtilsMessengerEXT},
-    {"xrDestroyDebugUtilsMessengerEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyDebugUtilsMessengerEXT},
-    {"xrSessionBeginDebugUtilsLabelRegionEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSessionBeginDebugUtilsLabelRegionEXT},
-    {"xrSessionEndDebugUtilsLabelRegionEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSessionEndDebugUtilsLabelRegionEXT},
-    {"xrSessionInsertDebugUtilsLabelEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSessionInsertDebugUtilsLabelEXT},
-    {"xrSetDebugUtilsObjectNameEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSetDebugUtilsObjectNameEXT},
-    {"xrSubmitDebugUtilsMessageEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrSubmitDebugUtilsMessageEXT},
+    {"xrCreateDebugUtilsMessengerEXT", (PFN_xrVoidFunction)runtime::xrCreateDebugUtilsMessengerEXT},
+    {"xrDestroyDebugUtilsMessengerEXT", (PFN_xrVoidFunction)runtime::xrDestroyDebugUtilsMessengerEXT},
+    {"xrSessionBeginDebugUtilsLabelRegionEXT", (PFN_xrVoidFunction)runtime::xrSessionBeginDebugUtilsLabelRegionEXT},
+    {"xrSessionEndDebugUtilsLabelRegionEXT", (PFN_xrVoidFunction)runtime::xrSessionEndDebugUtilsLabelRegionEXT},
+    {"xrSessionInsertDebugUtilsLabelEXT", (PFN_xrVoidFunction)runtime::xrSessionInsertDebugUtilsLabelEXT},
+    {"xrSetDebugUtilsObjectNameEXT", (PFN_xrVoidFunction)runtime::xrSetDebugUtilsObjectNameEXT},
+    {"xrSubmitDebugUtilsMessageEXT", (PFN_xrVoidFunction)runtime::xrSubmitDebugUtilsMessageEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-    {"xrCancelFutureEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrCancelFutureEXT},
-    {"xrPollFutureEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrPollFutureEXT},
+    {"xrCancelFutureEXT", (PFN_xrVoidFunction)runtime::xrCancelFutureEXT},
+    {"xrPollFutureEXT", (PFN_xrVoidFunction)runtime::xrPollFutureEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    {"xrCreateHandTrackerEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateHandTrackerEXT},
-    {"xrDestroyHandTrackerEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyHandTrackerEXT},
-    {"xrLocateHandJointsEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateHandJointsEXT},
+    {"xrCreateHandTrackerEXT", (PFN_xrVoidFunction)runtime::xrCreateHandTrackerEXT},
+    {"xrDestroyHandTrackerEXT", (PFN_xrVoidFunction)runtime::xrDestroyHandTrackerEXT},
+    {"xrLocateHandJointsEXT", (PFN_xrVoidFunction)runtime::xrLocateHandJointsEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    {"xrPerfSettingsSetPerformanceLevelEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrPerfSettingsSetPerformanceLevelEXT},
+    {"xrPerfSettingsSetPerformanceLevelEXT", (PFN_xrVoidFunction)runtime::xrPerfSettingsSetPerformanceLevelEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-    {"xrBeginPlaneDetectionEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrBeginPlaneDetectionEXT},
-    {"xrCreatePlaneDetectorEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreatePlaneDetectorEXT},
-    {"xrDestroyPlaneDetectorEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyPlaneDetectorEXT},
-    {"xrGetPlaneDetectionStateEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetPlaneDetectionStateEXT},
-    {"xrGetPlaneDetectionsEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetPlaneDetectionsEXT},
-    {"xrGetPlanePolygonBufferEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetPlanePolygonBufferEXT},
+    {"xrBeginPlaneDetectionEXT", (PFN_xrVoidFunction)runtime::xrBeginPlaneDetectionEXT},
+    {"xrCreatePlaneDetectorEXT", (PFN_xrVoidFunction)runtime::xrCreatePlaneDetectorEXT},
+    {"xrDestroyPlaneDetectorEXT", (PFN_xrVoidFunction)runtime::xrDestroyPlaneDetectorEXT},
+    {"xrGetPlaneDetectionStateEXT", (PFN_xrVoidFunction)runtime::xrGetPlaneDetectionStateEXT},
+    {"xrGetPlaneDetectionsEXT", (PFN_xrVoidFunction)runtime::xrGetPlaneDetectionsEXT},
+    {"xrGetPlanePolygonBufferEXT", (PFN_xrVoidFunction)runtime::xrGetPlanePolygonBufferEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-    {"xrThermalGetTemperatureTrendEXT", (PFN_xrVoidFunction)xrtransport::runtime::xrThermalGetTemperatureTrendEXT},
+    {"xrThermalGetTemperatureTrendEXT", (PFN_xrVoidFunction)runtime::xrThermalGetTemperatureTrendEXT},
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    {"xrCreateBodyTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateBodyTrackerFB},
-    {"xrDestroyBodyTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyBodyTrackerFB},
-    {"xrGetBodySkeletonFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetBodySkeletonFB},
-    {"xrLocateBodyJointsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateBodyJointsFB},
+    {"xrCreateBodyTrackerFB", (PFN_xrVoidFunction)runtime::xrCreateBodyTrackerFB},
+    {"xrDestroyBodyTrackerFB", (PFN_xrVoidFunction)runtime::xrDestroyBodyTrackerFB},
+    {"xrGetBodySkeletonFB", (PFN_xrVoidFunction)runtime::xrGetBodySkeletonFB},
+    {"xrLocateBodyJointsFB", (PFN_xrVoidFunction)runtime::xrLocateBodyJointsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-    {"xrEnumerateColorSpacesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateColorSpacesFB},
-    {"xrSetColorSpaceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrSetColorSpaceFB},
+    {"xrEnumerateColorSpacesFB", (PFN_xrVoidFunction)runtime::xrEnumerateColorSpacesFB},
+    {"xrSetColorSpaceFB", (PFN_xrVoidFunction)runtime::xrSetColorSpaceFB},
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    {"xrEnumerateDisplayRefreshRatesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateDisplayRefreshRatesFB},
-    {"xrGetDisplayRefreshRateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetDisplayRefreshRateFB},
-    {"xrRequestDisplayRefreshRateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestDisplayRefreshRateFB},
+    {"xrEnumerateDisplayRefreshRatesFB", (PFN_xrVoidFunction)runtime::xrEnumerateDisplayRefreshRatesFB},
+    {"xrGetDisplayRefreshRateFB", (PFN_xrVoidFunction)runtime::xrGetDisplayRefreshRateFB},
+    {"xrRequestDisplayRefreshRateFB", (PFN_xrVoidFunction)runtime::xrRequestDisplayRefreshRateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    {"xrCreateEyeTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateEyeTrackerFB},
-    {"xrDestroyEyeTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyEyeTrackerFB},
-    {"xrGetEyeGazesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetEyeGazesFB},
+    {"xrCreateEyeTrackerFB", (PFN_xrVoidFunction)runtime::xrCreateEyeTrackerFB},
+    {"xrDestroyEyeTrackerFB", (PFN_xrVoidFunction)runtime::xrDestroyEyeTrackerFB},
+    {"xrGetEyeGazesFB", (PFN_xrVoidFunction)runtime::xrGetEyeGazesFB},
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    {"xrCreateFaceTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateFaceTrackerFB},
-    {"xrDestroyFaceTrackerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyFaceTrackerFB},
-    {"xrGetFaceExpressionWeightsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetFaceExpressionWeightsFB},
+    {"xrCreateFaceTrackerFB", (PFN_xrVoidFunction)runtime::xrCreateFaceTrackerFB},
+    {"xrDestroyFaceTrackerFB", (PFN_xrVoidFunction)runtime::xrDestroyFaceTrackerFB},
+    {"xrGetFaceExpressionWeightsFB", (PFN_xrVoidFunction)runtime::xrGetFaceExpressionWeightsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    {"xrCreateFaceTracker2FB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateFaceTracker2FB},
-    {"xrDestroyFaceTracker2FB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyFaceTracker2FB},
-    {"xrGetFaceExpressionWeights2FB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetFaceExpressionWeights2FB},
+    {"xrCreateFaceTracker2FB", (PFN_xrVoidFunction)runtime::xrCreateFaceTracker2FB},
+    {"xrDestroyFaceTracker2FB", (PFN_xrVoidFunction)runtime::xrDestroyFaceTracker2FB},
+    {"xrGetFaceExpressionWeights2FB", (PFN_xrVoidFunction)runtime::xrGetFaceExpressionWeights2FB},
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    {"xrCreateFoveationProfileFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateFoveationProfileFB},
-    {"xrDestroyFoveationProfileFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyFoveationProfileFB},
+    {"xrCreateFoveationProfileFB", (PFN_xrVoidFunction)runtime::xrCreateFoveationProfileFB},
+    {"xrDestroyFoveationProfileFB", (PFN_xrVoidFunction)runtime::xrDestroyFoveationProfileFB},
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    {"xrGetHandMeshFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetHandMeshFB},
+    {"xrGetHandMeshFB", (PFN_xrVoidFunction)runtime::xrGetHandMeshFB},
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    {"xrGetDeviceSampleRateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetDeviceSampleRateFB},
+    {"xrGetDeviceSampleRateFB", (PFN_xrVoidFunction)runtime::xrGetDeviceSampleRateFB},
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-    {"xrCreateKeyboardSpaceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateKeyboardSpaceFB},
-    {"xrQuerySystemTrackedKeyboardFB", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySystemTrackedKeyboardFB},
+    {"xrCreateKeyboardSpaceFB", (PFN_xrVoidFunction)runtime::xrCreateKeyboardSpaceFB},
+    {"xrQuerySystemTrackedKeyboardFB", (PFN_xrVoidFunction)runtime::xrQuerySystemTrackedKeyboardFB},
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    {"xrCreateGeometryInstanceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateGeometryInstanceFB},
-    {"xrCreatePassthroughFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreatePassthroughFB},
-    {"xrCreatePassthroughLayerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreatePassthroughLayerFB},
-    {"xrDestroyGeometryInstanceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyGeometryInstanceFB},
-    {"xrDestroyPassthroughFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyPassthroughFB},
-    {"xrDestroyPassthroughLayerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyPassthroughLayerFB},
-    {"xrGeometryInstanceSetTransformFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGeometryInstanceSetTransformFB},
-    {"xrPassthroughLayerPauseFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughLayerPauseFB},
-    {"xrPassthroughLayerResumeFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughLayerResumeFB},
-    {"xrPassthroughLayerSetStyleFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughLayerSetStyleFB},
-    {"xrPassthroughPauseFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughPauseFB},
-    {"xrPassthroughStartFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughStartFB},
+    {"xrCreateGeometryInstanceFB", (PFN_xrVoidFunction)runtime::xrCreateGeometryInstanceFB},
+    {"xrCreatePassthroughFB", (PFN_xrVoidFunction)runtime::xrCreatePassthroughFB},
+    {"xrCreatePassthroughLayerFB", (PFN_xrVoidFunction)runtime::xrCreatePassthroughLayerFB},
+    {"xrDestroyGeometryInstanceFB", (PFN_xrVoidFunction)runtime::xrDestroyGeometryInstanceFB},
+    {"xrDestroyPassthroughFB", (PFN_xrVoidFunction)runtime::xrDestroyPassthroughFB},
+    {"xrDestroyPassthroughLayerFB", (PFN_xrVoidFunction)runtime::xrDestroyPassthroughLayerFB},
+    {"xrGeometryInstanceSetTransformFB", (PFN_xrVoidFunction)runtime::xrGeometryInstanceSetTransformFB},
+    {"xrPassthroughLayerPauseFB", (PFN_xrVoidFunction)runtime::xrPassthroughLayerPauseFB},
+    {"xrPassthroughLayerResumeFB", (PFN_xrVoidFunction)runtime::xrPassthroughLayerResumeFB},
+    {"xrPassthroughLayerSetStyleFB", (PFN_xrVoidFunction)runtime::xrPassthroughLayerSetStyleFB},
+    {"xrPassthroughPauseFB", (PFN_xrVoidFunction)runtime::xrPassthroughPauseFB},
+    {"xrPassthroughStartFB", (PFN_xrVoidFunction)runtime::xrPassthroughStartFB},
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    {"xrPassthroughLayerSetKeyboardHandsIntensityFB", (PFN_xrVoidFunction)xrtransport::runtime::xrPassthroughLayerSetKeyboardHandsIntensityFB},
+    {"xrPassthroughLayerSetKeyboardHandsIntensityFB", (PFN_xrVoidFunction)runtime::xrPassthroughLayerSetKeyboardHandsIntensityFB},
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-    {"xrEnumerateRenderModelPathsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateRenderModelPathsFB},
-    {"xrGetRenderModelPropertiesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetRenderModelPropertiesFB},
-    {"xrLoadRenderModelFB", (PFN_xrVoidFunction)xrtransport::runtime::xrLoadRenderModelFB},
+    {"xrEnumerateRenderModelPathsFB", (PFN_xrVoidFunction)runtime::xrEnumerateRenderModelPathsFB},
+    {"xrGetRenderModelPropertiesFB", (PFN_xrVoidFunction)runtime::xrGetRenderModelPropertiesFB},
+    {"xrLoadRenderModelFB", (PFN_xrVoidFunction)runtime::xrLoadRenderModelFB},
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-    {"xrGetSpaceBoundary2DFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceBoundary2DFB},
-    {"xrGetSpaceBoundingBox2DFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceBoundingBox2DFB},
-    {"xrGetSpaceBoundingBox3DFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceBoundingBox3DFB},
-    {"xrGetSpaceRoomLayoutFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceRoomLayoutFB},
-    {"xrGetSpaceSemanticLabelsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceSemanticLabelsFB},
+    {"xrGetSpaceBoundary2DFB", (PFN_xrVoidFunction)runtime::xrGetSpaceBoundary2DFB},
+    {"xrGetSpaceBoundingBox2DFB", (PFN_xrVoidFunction)runtime::xrGetSpaceBoundingBox2DFB},
+    {"xrGetSpaceBoundingBox3DFB", (PFN_xrVoidFunction)runtime::xrGetSpaceBoundingBox3DFB},
+    {"xrGetSpaceRoomLayoutFB", (PFN_xrVoidFunction)runtime::xrGetSpaceRoomLayoutFB},
+    {"xrGetSpaceSemanticLabelsFB", (PFN_xrVoidFunction)runtime::xrGetSpaceSemanticLabelsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    {"xrRequestSceneCaptureFB", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestSceneCaptureFB},
+    {"xrRequestSceneCaptureFB", (PFN_xrVoidFunction)runtime::xrRequestSceneCaptureFB},
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    {"xrCreateSpatialAnchorFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorFB},
-    {"xrEnumerateSpaceSupportedComponentsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateSpaceSupportedComponentsFB},
-    {"xrGetSpaceComponentStatusFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceComponentStatusFB},
-    {"xrGetSpaceUuidFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceUuidFB},
-    {"xrSetSpaceComponentStatusFB", (PFN_xrVoidFunction)xrtransport::runtime::xrSetSpaceComponentStatusFB},
+    {"xrCreateSpatialAnchorFB", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorFB},
+    {"xrEnumerateSpaceSupportedComponentsFB", (PFN_xrVoidFunction)runtime::xrEnumerateSpaceSupportedComponentsFB},
+    {"xrGetSpaceComponentStatusFB", (PFN_xrVoidFunction)runtime::xrGetSpaceComponentStatusFB},
+    {"xrGetSpaceUuidFB", (PFN_xrVoidFunction)runtime::xrGetSpaceUuidFB},
+    {"xrSetSpaceComponentStatusFB", (PFN_xrVoidFunction)runtime::xrSetSpaceComponentStatusFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    {"xrGetSpaceContainerFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceContainerFB},
+    {"xrGetSpaceContainerFB", (PFN_xrVoidFunction)runtime::xrGetSpaceContainerFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-    {"xrQuerySpacesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySpacesFB},
-    {"xrRetrieveSpaceQueryResultsFB", (PFN_xrVoidFunction)xrtransport::runtime::xrRetrieveSpaceQueryResultsFB},
+    {"xrQuerySpacesFB", (PFN_xrVoidFunction)runtime::xrQuerySpacesFB},
+    {"xrRetrieveSpaceQueryResultsFB", (PFN_xrVoidFunction)runtime::xrRetrieveSpaceQueryResultsFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    {"xrShareSpacesFB", (PFN_xrVoidFunction)xrtransport::runtime::xrShareSpacesFB},
+    {"xrShareSpacesFB", (PFN_xrVoidFunction)runtime::xrShareSpacesFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    {"xrEraseSpaceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrEraseSpaceFB},
-    {"xrSaveSpaceFB", (PFN_xrVoidFunction)xrtransport::runtime::xrSaveSpaceFB},
+    {"xrEraseSpaceFB", (PFN_xrVoidFunction)runtime::xrEraseSpaceFB},
+    {"xrSaveSpaceFB", (PFN_xrVoidFunction)runtime::xrSaveSpaceFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    {"xrSaveSpaceListFB", (PFN_xrVoidFunction)xrtransport::runtime::xrSaveSpaceListFB},
+    {"xrSaveSpaceListFB", (PFN_xrVoidFunction)runtime::xrSaveSpaceListFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    {"xrCreateSpaceUserFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpaceUserFB},
-    {"xrDestroySpaceUserFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpaceUserFB},
-    {"xrGetSpaceUserIdFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceUserIdFB},
+    {"xrCreateSpaceUserFB", (PFN_xrVoidFunction)runtime::xrCreateSpaceUserFB},
+    {"xrDestroySpaceUserFB", (PFN_xrVoidFunction)runtime::xrDestroySpaceUserFB},
+    {"xrGetSpaceUserIdFB", (PFN_xrVoidFunction)runtime::xrGetSpaceUserIdFB},
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-    {"xrGetSwapchainStateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSwapchainStateFB},
-    {"xrUpdateSwapchainFB", (PFN_xrVoidFunction)xrtransport::runtime::xrUpdateSwapchainFB},
+    {"xrGetSwapchainStateFB", (PFN_xrVoidFunction)runtime::xrGetSwapchainStateFB},
+    {"xrUpdateSwapchainFB", (PFN_xrVoidFunction)runtime::xrUpdateSwapchainFB},
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    {"xrCreateTriangleMeshFB", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateTriangleMeshFB},
-    {"xrDestroyTriangleMeshFB", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyTriangleMeshFB},
-    {"xrTriangleMeshBeginUpdateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshBeginUpdateFB},
-    {"xrTriangleMeshBeginVertexBufferUpdateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshBeginVertexBufferUpdateFB},
-    {"xrTriangleMeshEndUpdateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshEndUpdateFB},
-    {"xrTriangleMeshEndVertexBufferUpdateFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshEndVertexBufferUpdateFB},
-    {"xrTriangleMeshGetIndexBufferFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshGetIndexBufferFB},
-    {"xrTriangleMeshGetVertexBufferFB", (PFN_xrVoidFunction)xrtransport::runtime::xrTriangleMeshGetVertexBufferFB},
+    {"xrCreateTriangleMeshFB", (PFN_xrVoidFunction)runtime::xrCreateTriangleMeshFB},
+    {"xrDestroyTriangleMeshFB", (PFN_xrVoidFunction)runtime::xrDestroyTriangleMeshFB},
+    {"xrTriangleMeshBeginUpdateFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshBeginUpdateFB},
+    {"xrTriangleMeshBeginVertexBufferUpdateFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshBeginVertexBufferUpdateFB},
+    {"xrTriangleMeshEndUpdateFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshEndUpdateFB},
+    {"xrTriangleMeshEndVertexBufferUpdateFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshEndVertexBufferUpdateFB},
+    {"xrTriangleMeshGetIndexBufferFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshGetIndexBufferFB},
+    {"xrTriangleMeshGetVertexBufferFB", (PFN_xrVoidFunction)runtime::xrTriangleMeshGetVertexBufferFB},
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    {"xrEnumerateViveTrackerPathsHTCX", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateViveTrackerPathsHTCX},
+    {"xrEnumerateViveTrackerPathsHTCX", (PFN_xrVoidFunction)runtime::xrEnumerateViveTrackerPathsHTCX},
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    {"xrCreateSpatialAnchorHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorHTC},
-    {"xrGetSpatialAnchorNameHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpatialAnchorNameHTC},
+    {"xrCreateSpatialAnchorHTC", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorHTC},
+    {"xrGetSpatialAnchorNameHTC", (PFN_xrVoidFunction)runtime::xrGetSpatialAnchorNameHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    {"xrCreateBodyTrackerHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateBodyTrackerHTC},
-    {"xrDestroyBodyTrackerHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyBodyTrackerHTC},
-    {"xrGetBodySkeletonHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrGetBodySkeletonHTC},
-    {"xrLocateBodyJointsHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateBodyJointsHTC},
+    {"xrCreateBodyTrackerHTC", (PFN_xrVoidFunction)runtime::xrCreateBodyTrackerHTC},
+    {"xrDestroyBodyTrackerHTC", (PFN_xrVoidFunction)runtime::xrDestroyBodyTrackerHTC},
+    {"xrGetBodySkeletonHTC", (PFN_xrVoidFunction)runtime::xrGetBodySkeletonHTC},
+    {"xrLocateBodyJointsHTC", (PFN_xrVoidFunction)runtime::xrLocateBodyJointsHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    {"xrCreateFacialTrackerHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateFacialTrackerHTC},
-    {"xrDestroyFacialTrackerHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyFacialTrackerHTC},
-    {"xrGetFacialExpressionsHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrGetFacialExpressionsHTC},
+    {"xrCreateFacialTrackerHTC", (PFN_xrVoidFunction)runtime::xrCreateFacialTrackerHTC},
+    {"xrDestroyFacialTrackerHTC", (PFN_xrVoidFunction)runtime::xrDestroyFacialTrackerHTC},
+    {"xrGetFacialExpressionsHTC", (PFN_xrVoidFunction)runtime::xrGetFacialExpressionsHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    {"xrApplyFoveationHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrApplyFoveationHTC},
+    {"xrApplyFoveationHTC", (PFN_xrVoidFunction)runtime::xrApplyFoveationHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    {"xrCreatePassthroughHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrCreatePassthroughHTC},
-    {"xrDestroyPassthroughHTC", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyPassthroughHTC},
+    {"xrCreatePassthroughHTC", (PFN_xrVoidFunction)runtime::xrCreatePassthroughHTC},
+    {"xrDestroyPassthroughHTC", (PFN_xrVoidFunction)runtime::xrDestroyPassthroughHTC},
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    {"xrGetD3D11GraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetD3D11GraphicsRequirementsKHR},
+    {"xrGetD3D11GraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetD3D11GraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    {"xrGetD3D12GraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetD3D12GraphicsRequirementsKHR},
+    {"xrGetD3D12GraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetD3D12GraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-    {"xrCreateSwapchainAndroidSurfaceKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSwapchainAndroidSurfaceKHR},
+    {"xrCreateSwapchainAndroidSurfaceKHR", (PFN_xrVoidFunction)runtime::xrCreateSwapchainAndroidSurfaceKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-    {"xrSetAndroidApplicationThreadKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrSetAndroidApplicationThreadKHR},
+    {"xrSetAndroidApplicationThreadKHR", (PFN_xrVoidFunction)runtime::xrSetAndroidApplicationThreadKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-    {"xrConvertTimeToTimespecTimeKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrConvertTimeToTimespecTimeKHR},
-    {"xrConvertTimespecTimeToTimeKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrConvertTimespecTimeToTimeKHR},
+    {"xrConvertTimeToTimespecTimeKHR", (PFN_xrVoidFunction)runtime::xrConvertTimeToTimespecTimeKHR},
+    {"xrConvertTimespecTimeToTimeKHR", (PFN_xrVoidFunction)runtime::xrConvertTimespecTimeToTimeKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-    {"xrStructureTypeToString2KHR", (PFN_xrVoidFunction)xrtransport::runtime::xrStructureTypeToString2KHR},
+    {"xrStructureTypeToString2KHR", (PFN_xrVoidFunction)runtime::xrStructureTypeToString2KHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-    {"xrInitializeLoaderKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrInitializeLoaderKHR},
+    {"xrInitializeLoaderKHR", (PFN_xrVoidFunction)runtime::xrInitializeLoaderKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    {"xrGetMetalGraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMetalGraphicsRequirementsKHR},
+    {"xrGetMetalGraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetMetalGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    {"xrGetOpenGLGraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetOpenGLGraphicsRequirementsKHR},
+    {"xrGetOpenGLGraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetOpenGLGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    {"xrGetOpenGLESGraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetOpenGLESGraphicsRequirementsKHR},
+    {"xrGetOpenGLESGraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetOpenGLESGraphicsRequirementsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    {"xrGetVisibilityMaskKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVisibilityMaskKHR},
+    {"xrGetVisibilityMaskKHR", (PFN_xrVoidFunction)runtime::xrGetVisibilityMaskKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    {"xrGetVulkanDeviceExtensionsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVulkanDeviceExtensionsKHR},
-    {"xrGetVulkanGraphicsDeviceKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVulkanGraphicsDeviceKHR},
-    {"xrGetVulkanGraphicsRequirementsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVulkanGraphicsRequirementsKHR},
-    {"xrGetVulkanInstanceExtensionsKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVulkanInstanceExtensionsKHR},
+    {"xrGetVulkanDeviceExtensionsKHR", (PFN_xrVoidFunction)runtime::xrGetVulkanDeviceExtensionsKHR},
+    {"xrGetVulkanGraphicsDeviceKHR", (PFN_xrVoidFunction)runtime::xrGetVulkanGraphicsDeviceKHR},
+    {"xrGetVulkanGraphicsRequirementsKHR", (PFN_xrVoidFunction)runtime::xrGetVulkanGraphicsRequirementsKHR},
+    {"xrGetVulkanInstanceExtensionsKHR", (PFN_xrVoidFunction)runtime::xrGetVulkanInstanceExtensionsKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    {"xrCreateVulkanDeviceKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateVulkanDeviceKHR},
-    {"xrCreateVulkanInstanceKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateVulkanInstanceKHR},
-    {"xrGetVulkanGraphicsDevice2KHR", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVulkanGraphicsDevice2KHR},
+    {"xrCreateVulkanDeviceKHR", (PFN_xrVoidFunction)runtime::xrCreateVulkanDeviceKHR},
+    {"xrCreateVulkanInstanceKHR", (PFN_xrVoidFunction)runtime::xrCreateVulkanInstanceKHR},
+    {"xrGetVulkanGraphicsDevice2KHR", (PFN_xrVoidFunction)runtime::xrGetVulkanGraphicsDevice2KHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-    {"xrConvertTimeToWin32PerformanceCounterKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrConvertTimeToWin32PerformanceCounterKHR},
-    {"xrConvertWin32PerformanceCounterToTimeKHR", (PFN_xrVoidFunction)xrtransport::runtime::xrConvertWin32PerformanceCounterToTimeKHR},
+    {"xrConvertTimeToWin32PerformanceCounterKHR", (PFN_xrVoidFunction)runtime::xrConvertTimeToWin32PerformanceCounterKHR},
+    {"xrConvertWin32PerformanceCounterToTimeKHR", (PFN_xrVoidFunction)runtime::xrConvertWin32PerformanceCounterToTimeKHR},
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    {"xrStartColocationAdvertisementMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStartColocationAdvertisementMETA},
-    {"xrStartColocationDiscoveryMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStartColocationDiscoveryMETA},
-    {"xrStopColocationAdvertisementMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStopColocationAdvertisementMETA},
-    {"xrStopColocationDiscoveryMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStopColocationDiscoveryMETA},
+    {"xrStartColocationAdvertisementMETA", (PFN_xrVoidFunction)runtime::xrStartColocationAdvertisementMETA},
+    {"xrStartColocationDiscoveryMETA", (PFN_xrVoidFunction)runtime::xrStartColocationDiscoveryMETA},
+    {"xrStopColocationAdvertisementMETA", (PFN_xrVoidFunction)runtime::xrStopColocationAdvertisementMETA},
+    {"xrStopColocationDiscoveryMETA", (PFN_xrVoidFunction)runtime::xrStopColocationDiscoveryMETA},
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    {"xrAcquireEnvironmentDepthImageMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrAcquireEnvironmentDepthImageMETA},
-    {"xrCreateEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateEnvironmentDepthProviderMETA},
-    {"xrCreateEnvironmentDepthSwapchainMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateEnvironmentDepthSwapchainMETA},
-    {"xrDestroyEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyEnvironmentDepthProviderMETA},
-    {"xrDestroyEnvironmentDepthSwapchainMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyEnvironmentDepthSwapchainMETA},
-    {"xrEnumerateEnvironmentDepthSwapchainImagesMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateEnvironmentDepthSwapchainImagesMETA},
-    {"xrGetEnvironmentDepthSwapchainStateMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetEnvironmentDepthSwapchainStateMETA},
-    {"xrSetEnvironmentDepthHandRemovalMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrSetEnvironmentDepthHandRemovalMETA},
-    {"xrStartEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStartEnvironmentDepthProviderMETA},
-    {"xrStopEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrStopEnvironmentDepthProviderMETA},
+    {"xrAcquireEnvironmentDepthImageMETA", (PFN_xrVoidFunction)runtime::xrAcquireEnvironmentDepthImageMETA},
+    {"xrCreateEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)runtime::xrCreateEnvironmentDepthProviderMETA},
+    {"xrCreateEnvironmentDepthSwapchainMETA", (PFN_xrVoidFunction)runtime::xrCreateEnvironmentDepthSwapchainMETA},
+    {"xrDestroyEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)runtime::xrDestroyEnvironmentDepthProviderMETA},
+    {"xrDestroyEnvironmentDepthSwapchainMETA", (PFN_xrVoidFunction)runtime::xrDestroyEnvironmentDepthSwapchainMETA},
+    {"xrEnumerateEnvironmentDepthSwapchainImagesMETA", (PFN_xrVoidFunction)runtime::xrEnumerateEnvironmentDepthSwapchainImagesMETA},
+    {"xrGetEnvironmentDepthSwapchainStateMETA", (PFN_xrVoidFunction)runtime::xrGetEnvironmentDepthSwapchainStateMETA},
+    {"xrSetEnvironmentDepthHandRemovalMETA", (PFN_xrVoidFunction)runtime::xrSetEnvironmentDepthHandRemovalMETA},
+    {"xrStartEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)runtime::xrStartEnvironmentDepthProviderMETA},
+    {"xrStopEnvironmentDepthProviderMETA", (PFN_xrVoidFunction)runtime::xrStopEnvironmentDepthProviderMETA},
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    {"xrGetFoveationEyeTrackedStateMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetFoveationEyeTrackedStateMETA},
+    {"xrGetFoveationEyeTrackedStateMETA", (PFN_xrVoidFunction)runtime::xrGetFoveationEyeTrackedStateMETA},
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    {"xrCreatePassthroughColorLutMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrCreatePassthroughColorLutMETA},
-    {"xrDestroyPassthroughColorLutMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyPassthroughColorLutMETA},
-    {"xrUpdatePassthroughColorLutMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrUpdatePassthroughColorLutMETA},
+    {"xrCreatePassthroughColorLutMETA", (PFN_xrVoidFunction)runtime::xrCreatePassthroughColorLutMETA},
+    {"xrDestroyPassthroughColorLutMETA", (PFN_xrVoidFunction)runtime::xrDestroyPassthroughColorLutMETA},
+    {"xrUpdatePassthroughColorLutMETA", (PFN_xrVoidFunction)runtime::xrUpdatePassthroughColorLutMETA},
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    {"xrGetPassthroughPreferencesMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetPassthroughPreferencesMETA},
+    {"xrGetPassthroughPreferencesMETA", (PFN_xrVoidFunction)runtime::xrGetPassthroughPreferencesMETA},
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    {"xrEnumeratePerformanceMetricsCounterPathsMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumeratePerformanceMetricsCounterPathsMETA},
-    {"xrGetPerformanceMetricsStateMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetPerformanceMetricsStateMETA},
-    {"xrQueryPerformanceMetricsCounterMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrQueryPerformanceMetricsCounterMETA},
-    {"xrSetPerformanceMetricsStateMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrSetPerformanceMetricsStateMETA},
+    {"xrEnumeratePerformanceMetricsCounterPathsMETA", (PFN_xrVoidFunction)runtime::xrEnumeratePerformanceMetricsCounterPathsMETA},
+    {"xrGetPerformanceMetricsStateMETA", (PFN_xrVoidFunction)runtime::xrGetPerformanceMetricsStateMETA},
+    {"xrQueryPerformanceMetricsCounterMETA", (PFN_xrVoidFunction)runtime::xrQueryPerformanceMetricsCounterMETA},
+    {"xrSetPerformanceMetricsStateMETA", (PFN_xrVoidFunction)runtime::xrSetPerformanceMetricsStateMETA},
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    {"xrGetRecommendedLayerResolutionMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetRecommendedLayerResolutionMETA},
+    {"xrGetRecommendedLayerResolutionMETA", (PFN_xrVoidFunction)runtime::xrGetRecommendedLayerResolutionMETA},
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    {"xrPauseSimultaneousHandsAndControllersTrackingMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrPauseSimultaneousHandsAndControllersTrackingMETA},
-    {"xrResumeSimultaneousHandsAndControllersTrackingMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrResumeSimultaneousHandsAndControllersTrackingMETA},
+    {"xrPauseSimultaneousHandsAndControllersTrackingMETA", (PFN_xrVoidFunction)runtime::xrPauseSimultaneousHandsAndControllersTrackingMETA},
+    {"xrResumeSimultaneousHandsAndControllersTrackingMETA", (PFN_xrVoidFunction)runtime::xrResumeSimultaneousHandsAndControllersTrackingMETA},
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    {"xrGetSpaceTriangleMeshMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpaceTriangleMeshMETA},
+    {"xrGetSpaceTriangleMeshMETA", (PFN_xrVoidFunction)runtime::xrGetSpaceTriangleMeshMETA},
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    {"xrShareSpacesMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrShareSpacesMETA},
+    {"xrShareSpacesMETA", (PFN_xrVoidFunction)runtime::xrShareSpacesMETA},
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    {"xrChangeVirtualKeyboardTextContextMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrChangeVirtualKeyboardTextContextMETA},
-    {"xrCreateVirtualKeyboardMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateVirtualKeyboardMETA},
-    {"xrCreateVirtualKeyboardSpaceMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateVirtualKeyboardSpaceMETA},
-    {"xrDestroyVirtualKeyboardMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyVirtualKeyboardMETA},
-    {"xrGetVirtualKeyboardDirtyTexturesMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVirtualKeyboardDirtyTexturesMETA},
-    {"xrGetVirtualKeyboardModelAnimationStatesMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVirtualKeyboardModelAnimationStatesMETA},
-    {"xrGetVirtualKeyboardScaleMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVirtualKeyboardScaleMETA},
-    {"xrGetVirtualKeyboardTextureDataMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrGetVirtualKeyboardTextureDataMETA},
-    {"xrSendVirtualKeyboardInputMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrSendVirtualKeyboardInputMETA},
-    {"xrSetVirtualKeyboardModelVisibilityMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrSetVirtualKeyboardModelVisibilityMETA},
-    {"xrSuggestVirtualKeyboardLocationMETA", (PFN_xrVoidFunction)xrtransport::runtime::xrSuggestVirtualKeyboardLocationMETA},
+    {"xrChangeVirtualKeyboardTextContextMETA", (PFN_xrVoidFunction)runtime::xrChangeVirtualKeyboardTextContextMETA},
+    {"xrCreateVirtualKeyboardMETA", (PFN_xrVoidFunction)runtime::xrCreateVirtualKeyboardMETA},
+    {"xrCreateVirtualKeyboardSpaceMETA", (PFN_xrVoidFunction)runtime::xrCreateVirtualKeyboardSpaceMETA},
+    {"xrDestroyVirtualKeyboardMETA", (PFN_xrVoidFunction)runtime::xrDestroyVirtualKeyboardMETA},
+    {"xrGetVirtualKeyboardDirtyTexturesMETA", (PFN_xrVoidFunction)runtime::xrGetVirtualKeyboardDirtyTexturesMETA},
+    {"xrGetVirtualKeyboardModelAnimationStatesMETA", (PFN_xrVoidFunction)runtime::xrGetVirtualKeyboardModelAnimationStatesMETA},
+    {"xrGetVirtualKeyboardScaleMETA", (PFN_xrVoidFunction)runtime::xrGetVirtualKeyboardScaleMETA},
+    {"xrGetVirtualKeyboardTextureDataMETA", (PFN_xrVoidFunction)runtime::xrGetVirtualKeyboardTextureDataMETA},
+    {"xrSendVirtualKeyboardInputMETA", (PFN_xrVoidFunction)runtime::xrSendVirtualKeyboardInputMETA},
+    {"xrSetVirtualKeyboardModelVisibilityMETA", (PFN_xrVoidFunction)runtime::xrSetVirtualKeyboardModelVisibilityMETA},
+    {"xrSuggestVirtualKeyboardLocationMETA", (PFN_xrVoidFunction)runtime::xrSuggestVirtualKeyboardLocationMETA},
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-    {"xrCreateSpaceFromCoordinateFrameUIDML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpaceFromCoordinateFrameUIDML},
+    {"xrCreateSpaceFromCoordinateFrameUIDML", (PFN_xrVoidFunction)runtime::xrCreateSpaceFromCoordinateFrameUIDML},
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-    {"xrCreateFacialExpressionClientML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateFacialExpressionClientML},
-    {"xrDestroyFacialExpressionClientML", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyFacialExpressionClientML},
-    {"xrGetFacialExpressionBlendShapePropertiesML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetFacialExpressionBlendShapePropertiesML},
+    {"xrCreateFacialExpressionClientML", (PFN_xrVoidFunction)runtime::xrCreateFacialExpressionClientML},
+    {"xrDestroyFacialExpressionClientML", (PFN_xrVoidFunction)runtime::xrDestroyFacialExpressionClientML},
+    {"xrGetFacialExpressionBlendShapePropertiesML", (PFN_xrVoidFunction)runtime::xrGetFacialExpressionBlendShapePropertiesML},
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    {"xrCreateExportedLocalizationMapML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateExportedLocalizationMapML},
-    {"xrDestroyExportedLocalizationMapML", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyExportedLocalizationMapML},
-    {"xrEnableLocalizationEventsML", (PFN_xrVoidFunction)xrtransport::runtime::xrEnableLocalizationEventsML},
-    {"xrGetExportedLocalizationMapDataML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetExportedLocalizationMapDataML},
-    {"xrImportLocalizationMapML", (PFN_xrVoidFunction)xrtransport::runtime::xrImportLocalizationMapML},
-    {"xrQueryLocalizationMapsML", (PFN_xrVoidFunction)xrtransport::runtime::xrQueryLocalizationMapsML},
-    {"xrRequestMapLocalizationML", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestMapLocalizationML},
+    {"xrCreateExportedLocalizationMapML", (PFN_xrVoidFunction)runtime::xrCreateExportedLocalizationMapML},
+    {"xrDestroyExportedLocalizationMapML", (PFN_xrVoidFunction)runtime::xrDestroyExportedLocalizationMapML},
+    {"xrEnableLocalizationEventsML", (PFN_xrVoidFunction)runtime::xrEnableLocalizationEventsML},
+    {"xrGetExportedLocalizationMapDataML", (PFN_xrVoidFunction)runtime::xrGetExportedLocalizationMapDataML},
+    {"xrImportLocalizationMapML", (PFN_xrVoidFunction)runtime::xrImportLocalizationMapML},
+    {"xrQueryLocalizationMapsML", (PFN_xrVoidFunction)runtime::xrQueryLocalizationMapsML},
+    {"xrRequestMapLocalizationML", (PFN_xrVoidFunction)runtime::xrRequestMapLocalizationML},
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    {"xrCreateMarkerDetectorML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateMarkerDetectorML},
-    {"xrCreateMarkerSpaceML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateMarkerSpaceML},
-    {"xrDestroyMarkerDetectorML", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyMarkerDetectorML},
-    {"xrGetMarkerDetectorStateML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerDetectorStateML},
-    {"xrGetMarkerLengthML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerLengthML},
-    {"xrGetMarkerNumberML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerNumberML},
-    {"xrGetMarkerReprojectionErrorML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerReprojectionErrorML},
-    {"xrGetMarkerStringML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerStringML},
-    {"xrGetMarkersML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkersML},
-    {"xrSnapshotMarkerDetectorML", (PFN_xrVoidFunction)xrtransport::runtime::xrSnapshotMarkerDetectorML},
+    {"xrCreateMarkerDetectorML", (PFN_xrVoidFunction)runtime::xrCreateMarkerDetectorML},
+    {"xrCreateMarkerSpaceML", (PFN_xrVoidFunction)runtime::xrCreateMarkerSpaceML},
+    {"xrDestroyMarkerDetectorML", (PFN_xrVoidFunction)runtime::xrDestroyMarkerDetectorML},
+    {"xrGetMarkerDetectorStateML", (PFN_xrVoidFunction)runtime::xrGetMarkerDetectorStateML},
+    {"xrGetMarkerLengthML", (PFN_xrVoidFunction)runtime::xrGetMarkerLengthML},
+    {"xrGetMarkerNumberML", (PFN_xrVoidFunction)runtime::xrGetMarkerNumberML},
+    {"xrGetMarkerReprojectionErrorML", (PFN_xrVoidFunction)runtime::xrGetMarkerReprojectionErrorML},
+    {"xrGetMarkerStringML", (PFN_xrVoidFunction)runtime::xrGetMarkerStringML},
+    {"xrGetMarkersML", (PFN_xrVoidFunction)runtime::xrGetMarkersML},
+    {"xrSnapshotMarkerDetectorML", (PFN_xrVoidFunction)runtime::xrSnapshotMarkerDetectorML},
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    {"xrCreateSpatialAnchorsAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorsAsyncML},
-    {"xrCreateSpatialAnchorsCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorsCompleteML},
-    {"xrGetSpatialAnchorStateML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpatialAnchorStateML},
+    {"xrCreateSpatialAnchorsAsyncML", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorsAsyncML},
+    {"xrCreateSpatialAnchorsCompleteML", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorsCompleteML},
+    {"xrGetSpatialAnchorStateML", (PFN_xrVoidFunction)runtime::xrGetSpatialAnchorStateML},
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    {"xrCreateSpatialAnchorsStorageML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorsStorageML},
-    {"xrDeleteSpatialAnchorsAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrDeleteSpatialAnchorsAsyncML},
-    {"xrDeleteSpatialAnchorsCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrDeleteSpatialAnchorsCompleteML},
-    {"xrDestroySpatialAnchorsStorageML", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpatialAnchorsStorageML},
-    {"xrPublishSpatialAnchorsAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrPublishSpatialAnchorsAsyncML},
-    {"xrPublishSpatialAnchorsCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrPublishSpatialAnchorsCompleteML},
-    {"xrQuerySpatialAnchorsAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySpatialAnchorsAsyncML},
-    {"xrQuerySpatialAnchorsCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrQuerySpatialAnchorsCompleteML},
-    {"xrUpdateSpatialAnchorsExpirationAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrUpdateSpatialAnchorsExpirationAsyncML},
-    {"xrUpdateSpatialAnchorsExpirationCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrUpdateSpatialAnchorsExpirationCompleteML},
+    {"xrCreateSpatialAnchorsStorageML", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorsStorageML},
+    {"xrDeleteSpatialAnchorsAsyncML", (PFN_xrVoidFunction)runtime::xrDeleteSpatialAnchorsAsyncML},
+    {"xrDeleteSpatialAnchorsCompleteML", (PFN_xrVoidFunction)runtime::xrDeleteSpatialAnchorsCompleteML},
+    {"xrDestroySpatialAnchorsStorageML", (PFN_xrVoidFunction)runtime::xrDestroySpatialAnchorsStorageML},
+    {"xrPublishSpatialAnchorsAsyncML", (PFN_xrVoidFunction)runtime::xrPublishSpatialAnchorsAsyncML},
+    {"xrPublishSpatialAnchorsCompleteML", (PFN_xrVoidFunction)runtime::xrPublishSpatialAnchorsCompleteML},
+    {"xrQuerySpatialAnchorsAsyncML", (PFN_xrVoidFunction)runtime::xrQuerySpatialAnchorsAsyncML},
+    {"xrQuerySpatialAnchorsCompleteML", (PFN_xrVoidFunction)runtime::xrQuerySpatialAnchorsCompleteML},
+    {"xrUpdateSpatialAnchorsExpirationAsyncML", (PFN_xrVoidFunction)runtime::xrUpdateSpatialAnchorsExpirationAsyncML},
+    {"xrUpdateSpatialAnchorsExpirationCompleteML", (PFN_xrVoidFunction)runtime::xrUpdateSpatialAnchorsExpirationCompleteML},
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-    {"xrSetSystemNotificationsML", (PFN_xrVoidFunction)xrtransport::runtime::xrSetSystemNotificationsML},
+    {"xrSetSystemNotificationsML", (PFN_xrVoidFunction)runtime::xrSetSystemNotificationsML},
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    {"xrEnableUserCalibrationEventsML", (PFN_xrVoidFunction)xrtransport::runtime::xrEnableUserCalibrationEventsML},
+    {"xrEnableUserCalibrationEventsML", (PFN_xrVoidFunction)runtime::xrEnableUserCalibrationEventsML},
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    {"xrAllocateWorldMeshBufferML", (PFN_xrVoidFunction)xrtransport::runtime::xrAllocateWorldMeshBufferML},
-    {"xrCreateWorldMeshDetectorML", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateWorldMeshDetectorML},
-    {"xrDestroyWorldMeshDetectorML", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyWorldMeshDetectorML},
-    {"xrFreeWorldMeshBufferML", (PFN_xrVoidFunction)xrtransport::runtime::xrFreeWorldMeshBufferML},
-    {"xrGetWorldMeshBufferRecommendSizeML", (PFN_xrVoidFunction)xrtransport::runtime::xrGetWorldMeshBufferRecommendSizeML},
-    {"xrRequestWorldMeshAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestWorldMeshAsyncML},
-    {"xrRequestWorldMeshCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestWorldMeshCompleteML},
-    {"xrRequestWorldMeshStateAsyncML", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestWorldMeshStateAsyncML},
-    {"xrRequestWorldMeshStateCompleteML", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestWorldMeshStateCompleteML},
+    {"xrAllocateWorldMeshBufferML", (PFN_xrVoidFunction)runtime::xrAllocateWorldMeshBufferML},
+    {"xrCreateWorldMeshDetectorML", (PFN_xrVoidFunction)runtime::xrCreateWorldMeshDetectorML},
+    {"xrDestroyWorldMeshDetectorML", (PFN_xrVoidFunction)runtime::xrDestroyWorldMeshDetectorML},
+    {"xrFreeWorldMeshBufferML", (PFN_xrVoidFunction)runtime::xrFreeWorldMeshBufferML},
+    {"xrGetWorldMeshBufferRecommendSizeML", (PFN_xrVoidFunction)runtime::xrGetWorldMeshBufferRecommendSizeML},
+    {"xrRequestWorldMeshAsyncML", (PFN_xrVoidFunction)runtime::xrRequestWorldMeshAsyncML},
+    {"xrRequestWorldMeshCompleteML", (PFN_xrVoidFunction)runtime::xrRequestWorldMeshCompleteML},
+    {"xrRequestWorldMeshStateAsyncML", (PFN_xrVoidFunction)runtime::xrRequestWorldMeshStateAsyncML},
+    {"xrRequestWorldMeshStateCompleteML", (PFN_xrVoidFunction)runtime::xrRequestWorldMeshStateCompleteML},
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    {"xrApplyForceFeedbackCurlMNDX", (PFN_xrVoidFunction)xrtransport::runtime::xrApplyForceFeedbackCurlMNDX},
+    {"xrApplyForceFeedbackCurlMNDX", (PFN_xrVoidFunction)runtime::xrApplyForceFeedbackCurlMNDX},
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    {"xrEnumerateReprojectionModesMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateReprojectionModesMSFT},
+    {"xrEnumerateReprojectionModesMSFT", (PFN_xrVoidFunction)runtime::xrEnumerateReprojectionModesMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    {"xrGetControllerModelKeyMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetControllerModelKeyMSFT},
-    {"xrGetControllerModelPropertiesMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetControllerModelPropertiesMSFT},
-    {"xrGetControllerModelStateMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetControllerModelStateMSFT},
-    {"xrLoadControllerModelMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrLoadControllerModelMSFT},
+    {"xrGetControllerModelKeyMSFT", (PFN_xrVoidFunction)runtime::xrGetControllerModelKeyMSFT},
+    {"xrGetControllerModelPropertiesMSFT", (PFN_xrVoidFunction)runtime::xrGetControllerModelPropertiesMSFT},
+    {"xrGetControllerModelStateMSFT", (PFN_xrVoidFunction)runtime::xrGetControllerModelStateMSFT},
+    {"xrLoadControllerModelMSFT", (PFN_xrVoidFunction)runtime::xrLoadControllerModelMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    {"xrCreateHandMeshSpaceMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateHandMeshSpaceMSFT},
-    {"xrUpdateHandMeshMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrUpdateHandMeshMSFT},
+    {"xrCreateHandMeshSpaceMSFT", (PFN_xrVoidFunction)runtime::xrCreateHandMeshSpaceMSFT},
+    {"xrUpdateHandMeshMSFT", (PFN_xrVoidFunction)runtime::xrUpdateHandMeshMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-    {"xrCreateSpatialAnchorFromPerceptionAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
-    {"xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
+    {"xrCreateSpatialAnchorFromPerceptionAnchorMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorFromPerceptionAnchorMSFT},
+    {"xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", (PFN_xrVoidFunction)runtime::xrTryGetPerceptionAnchorFromSpatialAnchorMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    {"xrGetSceneMarkerDecodedStringMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSceneMarkerDecodedStringMSFT},
-    {"xrGetSceneMarkerRawDataMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSceneMarkerRawDataMSFT},
+    {"xrGetSceneMarkerDecodedStringMSFT", (PFN_xrVoidFunction)runtime::xrGetSceneMarkerDecodedStringMSFT},
+    {"xrGetSceneMarkerRawDataMSFT", (PFN_xrVoidFunction)runtime::xrGetSceneMarkerRawDataMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    {"xrComputeNewSceneMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrComputeNewSceneMSFT},
-    {"xrCreateSceneMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSceneMSFT},
-    {"xrCreateSceneObserverMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSceneObserverMSFT},
-    {"xrDestroySceneMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySceneMSFT},
-    {"xrDestroySceneObserverMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySceneObserverMSFT},
-    {"xrEnumerateSceneComputeFeaturesMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateSceneComputeFeaturesMSFT},
-    {"xrGetSceneComponentsMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSceneComponentsMSFT},
-    {"xrGetSceneComputeStateMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSceneComputeStateMSFT},
-    {"xrGetSceneMeshBuffersMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSceneMeshBuffersMSFT},
-    {"xrLocateSceneComponentsMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateSceneComponentsMSFT},
+    {"xrComputeNewSceneMSFT", (PFN_xrVoidFunction)runtime::xrComputeNewSceneMSFT},
+    {"xrCreateSceneMSFT", (PFN_xrVoidFunction)runtime::xrCreateSceneMSFT},
+    {"xrCreateSceneObserverMSFT", (PFN_xrVoidFunction)runtime::xrCreateSceneObserverMSFT},
+    {"xrDestroySceneMSFT", (PFN_xrVoidFunction)runtime::xrDestroySceneMSFT},
+    {"xrDestroySceneObserverMSFT", (PFN_xrVoidFunction)runtime::xrDestroySceneObserverMSFT},
+    {"xrEnumerateSceneComputeFeaturesMSFT", (PFN_xrVoidFunction)runtime::xrEnumerateSceneComputeFeaturesMSFT},
+    {"xrGetSceneComponentsMSFT", (PFN_xrVoidFunction)runtime::xrGetSceneComponentsMSFT},
+    {"xrGetSceneComputeStateMSFT", (PFN_xrVoidFunction)runtime::xrGetSceneComputeStateMSFT},
+    {"xrGetSceneMeshBuffersMSFT", (PFN_xrVoidFunction)runtime::xrGetSceneMeshBuffersMSFT},
+    {"xrLocateSceneComponentsMSFT", (PFN_xrVoidFunction)runtime::xrLocateSceneComponentsMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    {"xrDeserializeSceneMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDeserializeSceneMSFT},
-    {"xrGetSerializedSceneFragmentDataMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSerializedSceneFragmentDataMSFT},
+    {"xrDeserializeSceneMSFT", (PFN_xrVoidFunction)runtime::xrDeserializeSceneMSFT},
+    {"xrGetSerializedSceneFragmentDataMSFT", (PFN_xrVoidFunction)runtime::xrGetSerializedSceneFragmentDataMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    {"xrCreateSpatialAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorMSFT},
-    {"xrCreateSpatialAnchorSpaceMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorSpaceMSFT},
-    {"xrDestroySpatialAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpatialAnchorMSFT},
+    {"xrCreateSpatialAnchorMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorMSFT},
+    {"xrCreateSpatialAnchorSpaceMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorSpaceMSFT},
+    {"xrDestroySpatialAnchorMSFT", (PFN_xrVoidFunction)runtime::xrDestroySpatialAnchorMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    {"xrClearSpatialAnchorStoreMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrClearSpatialAnchorStoreMSFT},
-    {"xrCreateSpatialAnchorFromPersistedNameMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorFromPersistedNameMSFT},
-    {"xrCreateSpatialAnchorStoreConnectionMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialAnchorStoreConnectionMSFT},
-    {"xrDestroySpatialAnchorStoreConnectionMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpatialAnchorStoreConnectionMSFT},
-    {"xrEnumeratePersistedSpatialAnchorNamesMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumeratePersistedSpatialAnchorNamesMSFT},
-    {"xrPersistSpatialAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrPersistSpatialAnchorMSFT},
-    {"xrUnpersistSpatialAnchorMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrUnpersistSpatialAnchorMSFT},
+    {"xrClearSpatialAnchorStoreMSFT", (PFN_xrVoidFunction)runtime::xrClearSpatialAnchorStoreMSFT},
+    {"xrCreateSpatialAnchorFromPersistedNameMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorFromPersistedNameMSFT},
+    {"xrCreateSpatialAnchorStoreConnectionMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialAnchorStoreConnectionMSFT},
+    {"xrDestroySpatialAnchorStoreConnectionMSFT", (PFN_xrVoidFunction)runtime::xrDestroySpatialAnchorStoreConnectionMSFT},
+    {"xrEnumeratePersistedSpatialAnchorNamesMSFT", (PFN_xrVoidFunction)runtime::xrEnumeratePersistedSpatialAnchorNamesMSFT},
+    {"xrPersistSpatialAnchorMSFT", (PFN_xrVoidFunction)runtime::xrPersistSpatialAnchorMSFT},
+    {"xrUnpersistSpatialAnchorMSFT", (PFN_xrVoidFunction)runtime::xrUnpersistSpatialAnchorMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    {"xrCreateSpatialGraphNodeSpaceMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSpatialGraphNodeSpaceMSFT},
-    {"xrDestroySpatialGraphNodeBindingMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpatialGraphNodeBindingMSFT},
-    {"xrGetSpatialGraphNodeBindingPropertiesMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSpatialGraphNodeBindingPropertiesMSFT},
-    {"xrTryCreateSpatialGraphStaticNodeBindingMSFT", (PFN_xrVoidFunction)xrtransport::runtime::xrTryCreateSpatialGraphStaticNodeBindingMSFT},
+    {"xrCreateSpatialGraphNodeSpaceMSFT", (PFN_xrVoidFunction)runtime::xrCreateSpatialGraphNodeSpaceMSFT},
+    {"xrDestroySpatialGraphNodeBindingMSFT", (PFN_xrVoidFunction)runtime::xrDestroySpatialGraphNodeBindingMSFT},
+    {"xrGetSpatialGraphNodeBindingPropertiesMSFT", (PFN_xrVoidFunction)runtime::xrGetSpatialGraphNodeBindingPropertiesMSFT},
+    {"xrTryCreateSpatialGraphStaticNodeBindingMSFT", (PFN_xrVoidFunction)runtime::xrTryCreateSpatialGraphStaticNodeBindingMSFT},
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-    {"xrGetAudioInputDeviceGuidOculus", (PFN_xrVoidFunction)xrtransport::runtime::xrGetAudioInputDeviceGuidOculus},
-    {"xrGetAudioOutputDeviceGuidOculus", (PFN_xrVoidFunction)xrtransport::runtime::xrGetAudioOutputDeviceGuidOculus},
+    {"xrGetAudioInputDeviceGuidOculus", (PFN_xrVoidFunction)runtime::xrGetAudioInputDeviceGuidOculus},
+    {"xrGetAudioOutputDeviceGuidOculus", (PFN_xrVoidFunction)runtime::xrGetAudioOutputDeviceGuidOculus},
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    {"xrEnumerateExternalCamerasOCULUS", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateExternalCamerasOCULUS},
+    {"xrEnumerateExternalCamerasOCULUS", (PFN_xrVoidFunction)runtime::xrEnumerateExternalCamerasOCULUS},
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-    {"xrSetTrackingOptimizationSettingsHintQCOM", (PFN_xrVoidFunction)xrtransport::runtime::xrSetTrackingOptimizationSettingsHintQCOM},
+    {"xrSetTrackingOptimizationSettingsHintQCOM", (PFN_xrVoidFunction)runtime::xrSetTrackingOptimizationSettingsHintQCOM},
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-    {"xrSetEnvironmentDepthEstimationVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrSetEnvironmentDepthEstimationVARJO},
+    {"xrSetEnvironmentDepthEstimationVARJO", (PFN_xrVoidFunction)runtime::xrSetEnvironmentDepthEstimationVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    {"xrCreateMarkerSpaceVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateMarkerSpaceVARJO},
-    {"xrGetMarkerSizeVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrGetMarkerSizeVARJO},
-    {"xrSetMarkerTrackingPredictionVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrSetMarkerTrackingPredictionVARJO},
-    {"xrSetMarkerTrackingTimeoutVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrSetMarkerTrackingTimeoutVARJO},
-    {"xrSetMarkerTrackingVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrSetMarkerTrackingVARJO},
+    {"xrCreateMarkerSpaceVARJO", (PFN_xrVoidFunction)runtime::xrCreateMarkerSpaceVARJO},
+    {"xrGetMarkerSizeVARJO", (PFN_xrVoidFunction)runtime::xrGetMarkerSizeVARJO},
+    {"xrSetMarkerTrackingPredictionVARJO", (PFN_xrVoidFunction)runtime::xrSetMarkerTrackingPredictionVARJO},
+    {"xrSetMarkerTrackingTimeoutVARJO", (PFN_xrVoidFunction)runtime::xrSetMarkerTrackingTimeoutVARJO},
+    {"xrSetMarkerTrackingVARJO", (PFN_xrVoidFunction)runtime::xrSetMarkerTrackingVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-    {"xrSetViewOffsetVARJO", (PFN_xrVoidFunction)xrtransport::runtime::xrSetViewOffsetVARJO},
+    {"xrSetViewOffsetVARJO", (PFN_xrVoidFunction)runtime::xrSetViewOffsetVARJO},
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-    {"xrAcquireSwapchainImage", (PFN_xrVoidFunction)xrtransport::runtime::xrAcquireSwapchainImage},
-    {"xrApplyHapticFeedback", (PFN_xrVoidFunction)xrtransport::runtime::xrApplyHapticFeedback},
-    {"xrAttachSessionActionSets", (PFN_xrVoidFunction)xrtransport::runtime::xrAttachSessionActionSets},
-    {"xrBeginFrame", (PFN_xrVoidFunction)xrtransport::runtime::xrBeginFrame},
-    {"xrBeginSession", (PFN_xrVoidFunction)xrtransport::runtime::xrBeginSession},
-    {"xrCreateAction", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateAction},
-    {"xrCreateActionSet", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateActionSet},
-    {"xrCreateActionSpace", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateActionSpace},
-    {"xrCreateInstance", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateInstance},
-    {"xrCreateReferenceSpace", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateReferenceSpace},
-    {"xrCreateSession", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSession},
-    {"xrCreateSwapchain", (PFN_xrVoidFunction)xrtransport::runtime::xrCreateSwapchain},
-    {"xrDestroyAction", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyAction},
-    {"xrDestroyActionSet", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyActionSet},
-    {"xrDestroyInstance", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroyInstance},
-    {"xrDestroySession", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySession},
-    {"xrDestroySpace", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySpace},
-    {"xrDestroySwapchain", (PFN_xrVoidFunction)xrtransport::runtime::xrDestroySwapchain},
-    {"xrEndFrame", (PFN_xrVoidFunction)xrtransport::runtime::xrEndFrame},
-    {"xrEndSession", (PFN_xrVoidFunction)xrtransport::runtime::xrEndSession},
-    {"xrEnumerateApiLayerProperties", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateApiLayerProperties},
-    {"xrEnumerateBoundSourcesForAction", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateBoundSourcesForAction},
-    {"xrEnumerateEnvironmentBlendModes", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateEnvironmentBlendModes},
-    {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateInstanceExtensionProperties},
-    {"xrEnumerateReferenceSpaces", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateReferenceSpaces},
-    {"xrEnumerateSwapchainFormats", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateSwapchainFormats},
-    {"xrEnumerateSwapchainImages", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateSwapchainImages},
-    {"xrEnumerateViewConfigurationViews", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateViewConfigurationViews},
-    {"xrEnumerateViewConfigurations", (PFN_xrVoidFunction)xrtransport::runtime::xrEnumerateViewConfigurations},
-    {"xrGetActionStateBoolean", (PFN_xrVoidFunction)xrtransport::runtime::xrGetActionStateBoolean},
-    {"xrGetActionStateFloat", (PFN_xrVoidFunction)xrtransport::runtime::xrGetActionStateFloat},
-    {"xrGetActionStatePose", (PFN_xrVoidFunction)xrtransport::runtime::xrGetActionStatePose},
-    {"xrGetActionStateVector2f", (PFN_xrVoidFunction)xrtransport::runtime::xrGetActionStateVector2f},
-    {"xrGetCurrentInteractionProfile", (PFN_xrVoidFunction)xrtransport::runtime::xrGetCurrentInteractionProfile},
-    {"xrGetInputSourceLocalizedName", (PFN_xrVoidFunction)xrtransport::runtime::xrGetInputSourceLocalizedName},
-    {"xrGetInstanceProperties", (PFN_xrVoidFunction)xrtransport::runtime::xrGetInstanceProperties},
-    {"xrGetReferenceSpaceBoundsRect", (PFN_xrVoidFunction)xrtransport::runtime::xrGetReferenceSpaceBoundsRect},
-    {"xrGetSystem", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSystem},
-    {"xrGetSystemProperties", (PFN_xrVoidFunction)xrtransport::runtime::xrGetSystemProperties},
-    {"xrGetViewConfigurationProperties", (PFN_xrVoidFunction)xrtransport::runtime::xrGetViewConfigurationProperties},
-    {"xrLocateSpace", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateSpace},
-    {"xrLocateSpaces", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateSpaces},
-    {"xrLocateViews", (PFN_xrVoidFunction)xrtransport::runtime::xrLocateViews},
-    {"xrPathToString", (PFN_xrVoidFunction)xrtransport::runtime::xrPathToString},
-    {"xrPollEvent", (PFN_xrVoidFunction)xrtransport::runtime::xrPollEvent},
-    {"xrReleaseSwapchainImage", (PFN_xrVoidFunction)xrtransport::runtime::xrReleaseSwapchainImage},
-    {"xrRequestExitSession", (PFN_xrVoidFunction)xrtransport::runtime::xrRequestExitSession},
-    {"xrResultToString", (PFN_xrVoidFunction)xrtransport::runtime::xrResultToString},
-    {"xrStopHapticFeedback", (PFN_xrVoidFunction)xrtransport::runtime::xrStopHapticFeedback},
-    {"xrStringToPath", (PFN_xrVoidFunction)xrtransport::runtime::xrStringToPath},
-    {"xrStructureTypeToString", (PFN_xrVoidFunction)xrtransport::runtime::xrStructureTypeToString},
-    {"xrSuggestInteractionProfileBindings", (PFN_xrVoidFunction)xrtransport::runtime::xrSuggestInteractionProfileBindings},
-    {"xrSyncActions", (PFN_xrVoidFunction)xrtransport::runtime::xrSyncActions},
-    {"xrWaitFrame", (PFN_xrVoidFunction)xrtransport::runtime::xrWaitFrame},
-    {"xrWaitSwapchainImage", (PFN_xrVoidFunction)xrtransport::runtime::xrWaitSwapchainImage},
+    {"xrAcquireSwapchainImage", (PFN_xrVoidFunction)runtime::xrAcquireSwapchainImage},
+    {"xrApplyHapticFeedback", (PFN_xrVoidFunction)runtime::xrApplyHapticFeedback},
+    {"xrAttachSessionActionSets", (PFN_xrVoidFunction)runtime::xrAttachSessionActionSets},
+    {"xrBeginFrame", (PFN_xrVoidFunction)runtime::xrBeginFrame},
+    {"xrBeginSession", (PFN_xrVoidFunction)runtime::xrBeginSession},
+    {"xrCreateAction", (PFN_xrVoidFunction)runtime::xrCreateAction},
+    {"xrCreateActionSet", (PFN_xrVoidFunction)runtime::xrCreateActionSet},
+    {"xrCreateActionSpace", (PFN_xrVoidFunction)runtime::xrCreateActionSpace},
+    {"xrCreateReferenceSpace", (PFN_xrVoidFunction)runtime::xrCreateReferenceSpace},
+    {"xrCreateSession", (PFN_xrVoidFunction)runtime::xrCreateSession},
+    {"xrCreateSwapchain", (PFN_xrVoidFunction)runtime::xrCreateSwapchain},
+    {"xrDestroyAction", (PFN_xrVoidFunction)runtime::xrDestroyAction},
+    {"xrDestroyActionSet", (PFN_xrVoidFunction)runtime::xrDestroyActionSet},
+    {"xrDestroyInstance", (PFN_xrVoidFunction)runtime::xrDestroyInstance},
+    {"xrDestroySession", (PFN_xrVoidFunction)runtime::xrDestroySession},
+    {"xrDestroySpace", (PFN_xrVoidFunction)runtime::xrDestroySpace},
+    {"xrDestroySwapchain", (PFN_xrVoidFunction)runtime::xrDestroySwapchain},
+    {"xrEndFrame", (PFN_xrVoidFunction)runtime::xrEndFrame},
+    {"xrEndSession", (PFN_xrVoidFunction)runtime::xrEndSession},
+    {"xrEnumerateApiLayerProperties", (PFN_xrVoidFunction)runtime::xrEnumerateApiLayerProperties},
+    {"xrEnumerateBoundSourcesForAction", (PFN_xrVoidFunction)runtime::xrEnumerateBoundSourcesForAction},
+    {"xrEnumerateEnvironmentBlendModes", (PFN_xrVoidFunction)runtime::xrEnumerateEnvironmentBlendModes},
+    {"xrEnumerateReferenceSpaces", (PFN_xrVoidFunction)runtime::xrEnumerateReferenceSpaces},
+    {"xrEnumerateSwapchainFormats", (PFN_xrVoidFunction)runtime::xrEnumerateSwapchainFormats},
+    {"xrEnumerateSwapchainImages", (PFN_xrVoidFunction)runtime::xrEnumerateSwapchainImages},
+    {"xrEnumerateViewConfigurationViews", (PFN_xrVoidFunction)runtime::xrEnumerateViewConfigurationViews},
+    {"xrEnumerateViewConfigurations", (PFN_xrVoidFunction)runtime::xrEnumerateViewConfigurations},
+    {"xrGetActionStateBoolean", (PFN_xrVoidFunction)runtime::xrGetActionStateBoolean},
+    {"xrGetActionStateFloat", (PFN_xrVoidFunction)runtime::xrGetActionStateFloat},
+    {"xrGetActionStatePose", (PFN_xrVoidFunction)runtime::xrGetActionStatePose},
+    {"xrGetActionStateVector2f", (PFN_xrVoidFunction)runtime::xrGetActionStateVector2f},
+    {"xrGetCurrentInteractionProfile", (PFN_xrVoidFunction)runtime::xrGetCurrentInteractionProfile},
+    {"xrGetInputSourceLocalizedName", (PFN_xrVoidFunction)runtime::xrGetInputSourceLocalizedName},
+    {"xrGetInstanceProperties", (PFN_xrVoidFunction)runtime::xrGetInstanceProperties},
+    {"xrGetReferenceSpaceBoundsRect", (PFN_xrVoidFunction)runtime::xrGetReferenceSpaceBoundsRect},
+    {"xrGetSystem", (PFN_xrVoidFunction)runtime::xrGetSystem},
+    {"xrGetSystemProperties", (PFN_xrVoidFunction)runtime::xrGetSystemProperties},
+    {"xrGetViewConfigurationProperties", (PFN_xrVoidFunction)runtime::xrGetViewConfigurationProperties},
+    {"xrLocateSpace", (PFN_xrVoidFunction)runtime::xrLocateSpace},
+    {"xrLocateSpaces", (PFN_xrVoidFunction)runtime::xrLocateSpaces},
+    {"xrLocateViews", (PFN_xrVoidFunction)runtime::xrLocateViews},
+    {"xrPathToString", (PFN_xrVoidFunction)runtime::xrPathToString},
+    {"xrPollEvent", (PFN_xrVoidFunction)runtime::xrPollEvent},
+    {"xrReleaseSwapchainImage", (PFN_xrVoidFunction)runtime::xrReleaseSwapchainImage},
+    {"xrRequestExitSession", (PFN_xrVoidFunction)runtime::xrRequestExitSession},
+    {"xrResultToString", (PFN_xrVoidFunction)runtime::xrResultToString},
+    {"xrStopHapticFeedback", (PFN_xrVoidFunction)runtime::xrStopHapticFeedback},
+    {"xrStringToPath", (PFN_xrVoidFunction)runtime::xrStringToPath},
+    {"xrStructureTypeToString", (PFN_xrVoidFunction)runtime::xrStructureTypeToString},
+    {"xrSuggestInteractionProfileBindings", (PFN_xrVoidFunction)runtime::xrSuggestInteractionProfileBindings},
+    {"xrSyncActions", (PFN_xrVoidFunction)runtime::xrSyncActions},
+    {"xrWaitFrame", (PFN_xrVoidFunction)runtime::xrWaitFrame},
+    {"xrWaitSwapchainImage", (PFN_xrVoidFunction)runtime::xrWaitSwapchainImage},
 
-    {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl}
+    {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl},
+    {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrEnumerateInstanceExtensionPropertiesImpl},
+    {"xrCreateInstance", (PFN_xrVoidFunction)xrCreateInstanceImpl}
+};
+
+static XrInstance saved_instance = XR_NULL_HANDLE;
+static std::unordered_set<std::string> available_functions = {
+    "xrEnumerateInstanceExtensionProperties",
+    "xrEnumerateApiLayerProperties",
+    "xrCreateInstance"
 };
 
 static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function) {
@@ -579,6 +610,12 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         return XR_ERROR_HANDLE_INVALID;
     }
 
+    // check if function is in core or enabled extensions
+    if (available_functions.find(name_str) == available_functions.end()) {
+        return XR_ERROR_FUNCTION_UNSUPPORTED;
+    }
+
+    // double-check to be sure that function is in dispatch table
     if (function_table.find(name_str) == function_table.end()) {
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
@@ -588,6 +625,128 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
     }
     *function = function_table.at(name_str);
     return XR_SUCCESS;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
+    // If a layer is specified, just don't return anything
+    // TODO: maybe we should expose server extensions to this?
+    if (layerName) {
+        *propertyCountOutput = 0;
+        return XR_SUCCESS;
+    }
+
+    auto& available_extensions = get_available_extensions();
+
+    uint32_t extension_count = available_extensions.size();
+
+    if (propertyCapacityInput != 0 && propertyCapacityInput < extension_count) {
+        *propertyCountOutput = extension_count;
+        return XR_ERROR_SIZE_INSUFFICIENT;
+    }
+
+    if (propertyCapacityInput == 0) {
+        *propertyCountOutput = extension_count;
+        return XR_SUCCESS;
+    }
+
+    int i = 0;
+    for (const auto& [extension_name, extension_version] : available_extensions) {
+        XrExtensionProperties& ext_out = properties[i++];
+        std::memcpy(ext_out.extensionName, extension_name.c_str(), extension_name.size() + 1);
+        ext_out.extensionVersion = extension_version;
+    }
+
+    return XR_SUCCESS;
+}
+
+static XrBaseOutStructure* remove_from_chain(XrBaseOutStructure* base, XrStructureType target_type) {
+    XrBaseOutStructure* result = nullptr;
+
+    XrBaseOutStructure* prev_node = base;
+    XrBaseOutStructure* node = base->next;
+    while (node != nullptr) {
+        if (node->type == target_type) {
+            // if we haven't already found one of the target type, save it
+            if (!result) {
+                result = node;
+            }
+            prev_node->next = node->next;
+            node = node->next;
+        }
+        else {
+            prev_node = node;
+            node = node->next;
+        }
+    }
+
+    return result;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreateInfo* create_info, XrInstance* instance) {
+    if (saved_instance != XR_NULL_HANDLE) {
+        // can't create multiple instances
+        return XR_ERROR_LIMIT_REACHED;
+    }
+
+    if (create_info->applicationInfo.apiVersion > XR_CURRENT_API_VERSION) {
+        return XR_ERROR_API_VERSION_UNSUPPORTED;
+    }
+
+    // check available extensions and populate available functions
+    auto& available_extensions = get_available_extensions();
+
+    // first make sure all extensions are available
+    for (int i = 0; i < create_info->enabledExtensionCount; i++) {
+        std::string extension_name = create_info->enabledExtensionNames[i];
+        if (available_extensions.find(extension_name) == available_extensions.end()) {
+            return XR_ERROR_EXTENSION_NOT_PRESENT;
+        }
+    }
+
+    // now populate available functions
+    for (int i = 0; i < create_info->enabledExtensionCount; i++) {
+        std::string extension_name = create_info->enabledExtensionNames[i];
+        for (auto& function_name : extension_functions.at(extension_name)) {
+            available_functions.emplace(function_name);
+        }
+    }
+
+    // populate core functions
+    for (auto& function_name : core_functions) {
+        available_functions.emplace(function_name);
+    }
+
+    // Remove platform structs from pNext chain
+
+    // Technically a violation of the spec to manipulate the chain, but it's easier than copying the whole chain
+    // and I don't think anyone relies on their XrInstanceCreateInfo not being edited.
+    XrBaseOutStructure* chain_base = reinterpret_cast<XrBaseOutStructure*>(const_cast<XrInstanceCreateInfo*>(create_info));
+
+    // TODO: save this, and use a Transport handler to relay messages from the host to this callback
+    // either way it needs to be removed from the chain before going to the host
+    auto debug_create_info = reinterpret_cast<XrDebugUtilsMessengerCreateInfoEXT*>(remove_from_chain(chain_base, XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT));
+
+#ifdef __ANDROID__
+    // TODO: It is unclear if we will need to save the contents of this struct
+    // either way it needs to be removed from the chain before going to the host
+    auto android_create_info = reinterpret_cast<XrInstanceCreateInfoAndroidKHR*>(remove_from_chain(chain_base, XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR));
+
+    // this struct is required on Android
+    if (!android_create_info) {
+        return XR_ERROR_INITIALIZATION_FAILED;
+    }
+#endif
+
+    // Do the instance creation
+    XrResult result = runtime::xrCreateInstance(create_info, instance);
+    if (XR_SUCCEEDED(result)) {
+        saved_instance = *instance;
+    }
+    else {
+        // If instance creation failed, no functions are available
+        available_functions.clear();
+    }
+    return result;
 }
 
 extern "C" XRAPI_ATTR XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {

@@ -1,20 +1,55 @@
 <%namespace name="utils" file="utils.mako"/>\
 #include "runtime.h"
+#include "available_extensions.h"
+
+#include "xrtransport/extensions/extension_functions.h"
 
 #define XR_EXTENSION_PROTOTYPES
 #include "openxr/openxr_loader_negotiation.h"
+#ifdef __ANDROID__
+#define XR_USE_PLATFORM_ANDROID
+#include "openxr/openxr_platform.h"
+#endif
+#include "openxr/openxr.h"
 
 #include <unordered_map>
+#include <unordered_set>
 #include <string>
+#include <cstring>
+#include <cstdlib>
+
+using namespace xrtransport;
 
 // different name to allow static, this symbol must not be exported per spec
-static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function);
+static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(
+    XrInstance                                  instance,
+    const char*                                 name,
+    PFN_xrVoidFunction*                         function);
+static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(
+    const char*                                 layerName,
+    uint32_t                                    propertyCapacityInput,
+    uint32_t*                                   propertyCountOutput,
+    XrExtensionProperties*                      properties);
+static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(
+    const XrInstanceCreateInfo*                 createInfo,
+    XrInstance*                                 instance);
 
-static std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
+static const std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
 <%utils:for_grouped_functions args="function">\
-    {"${function.name}", (PFN_xrVoidFunction)xrtransport::runtime::${function.name}},
+% if not function.name in ["xrEnumerateInstanceExtensionProperties", "xrCreateInstance"]:
+    {"${function.name}", (PFN_xrVoidFunction)runtime::${function.name}},
+% endif
 </%utils:for_grouped_functions>
-    {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl}
+    {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl},
+    {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrEnumerateInstanceExtensionPropertiesImpl},
+    {"xrCreateInstance", (PFN_xrVoidFunction)xrCreateInstanceImpl}
+};
+
+static XrInstance saved_instance = XR_NULL_HANDLE;
+static std::unordered_set<std::string> available_functions = {
+    "xrEnumerateInstanceExtensionProperties",
+    "xrEnumerateApiLayerProperties",
+    "xrCreateInstance"
 };
 
 static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function) {
@@ -34,6 +69,12 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         return XR_ERROR_HANDLE_INVALID;
     }
 
+    // check if function is in core or enabled extensions
+    if (available_functions.find(name_str) == available_functions.end()) {
+        return XR_ERROR_FUNCTION_UNSUPPORTED;
+    }
+
+    // double-check to be sure that function is in dispatch table
     if (function_table.find(name_str) == function_table.end()) {
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
@@ -43,6 +84,128 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
     }
     *function = function_table.at(name_str);
     return XR_SUCCESS;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
+    // If a layer is specified, just don't return anything
+    // TODO: maybe we should expose server extensions to this?
+    if (layerName) {
+        *propertyCountOutput = 0;
+        return XR_SUCCESS;
+    }
+
+    auto& available_extensions = get_available_extensions();
+
+    uint32_t extension_count = available_extensions.size();
+
+    if (propertyCapacityInput != 0 && propertyCapacityInput < extension_count) {
+        *propertyCountOutput = extension_count;
+        return XR_ERROR_SIZE_INSUFFICIENT;
+    }
+
+    if (propertyCapacityInput == 0) {
+        *propertyCountOutput = extension_count;
+        return XR_SUCCESS;
+    }
+
+    int i = 0;
+    for (const auto& [extension_name, extension_version] : available_extensions) {
+        XrExtensionProperties& ext_out = properties[i++];
+        std::memcpy(ext_out.extensionName, extension_name.c_str(), extension_name.size() + 1);
+        ext_out.extensionVersion = extension_version;
+    }
+
+    return XR_SUCCESS;
+}
+
+static XrBaseOutStructure* remove_from_chain(XrBaseOutStructure* base, XrStructureType target_type) {
+    XrBaseOutStructure* result = nullptr;
+
+    XrBaseOutStructure* prev_node = base;
+    XrBaseOutStructure* node = base->next;
+    while (node != nullptr) {
+        if (node->type == target_type) {
+            // if we haven't already found one of the target type, save it
+            if (!result) {
+                result = node;
+            }
+            prev_node->next = node->next;
+            node = node->next;
+        }
+        else {
+            prev_node = node;
+            node = node->next;
+        }
+    }
+
+    return result;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreateInfo* create_info, XrInstance* instance) {
+    if (saved_instance != XR_NULL_HANDLE) {
+        // can't create multiple instances
+        return XR_ERROR_LIMIT_REACHED;
+    }
+
+    if (create_info->applicationInfo.apiVersion > XR_CURRENT_API_VERSION) {
+        return XR_ERROR_API_VERSION_UNSUPPORTED;
+    }
+
+    // check available extensions and populate available functions
+    auto& available_extensions = get_available_extensions();
+
+    // first make sure all extensions are available
+    for (int i = 0; i < create_info->enabledExtensionCount; i++) {
+        std::string extension_name = create_info->enabledExtensionNames[i];
+        if (available_extensions.find(extension_name) == available_extensions.end()) {
+            return XR_ERROR_EXTENSION_NOT_PRESENT;
+        }
+    }
+
+    // now populate available functions
+    for (int i = 0; i < create_info->enabledExtensionCount; i++) {
+        std::string extension_name = create_info->enabledExtensionNames[i];
+        for (auto& function_name : extension_functions.at(extension_name)) {
+            available_functions.emplace(function_name);
+        }
+    }
+
+    // populate core functions
+    for (auto& function_name : core_functions) {
+        available_functions.emplace(function_name);
+    }
+
+    // Remove platform structs from pNext chain
+
+    // Technically a violation of the spec to manipulate the chain, but it's easier than copying the whole chain
+    // and I don't think anyone relies on their XrInstanceCreateInfo not being edited.
+    XrBaseOutStructure* chain_base = reinterpret_cast<XrBaseOutStructure*>(const_cast<XrInstanceCreateInfo*>(create_info));
+
+    // TODO: save this, and use a Transport handler to relay messages from the host to this callback
+    // either way it needs to be removed from the chain before going to the host
+    auto debug_create_info = reinterpret_cast<XrDebugUtilsMessengerCreateInfoEXT*>(remove_from_chain(chain_base, XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT));
+
+#ifdef __ANDROID__
+    // TODO: It is unclear if we will need to save the contents of this struct
+    // either way it needs to be removed from the chain before going to the host
+    auto android_create_info = reinterpret_cast<XrInstanceCreateInfoAndroidKHR*>(remove_from_chain(chain_base, XR_TYPE_INSTANCE_CREATE_INFO_ANDROID_KHR));
+
+    // this struct is required on Android
+    if (!android_create_info) {
+        return XR_ERROR_INITIALIZATION_FAILED;
+    }
+#endif
+
+    // Do the instance creation
+    XrResult result = runtime::xrCreateInstance(create_info, instance);
+    if (XR_SUCCEEDED(result)) {
+        saved_instance = *instance;
+    }
+    else {
+        // If instance creation failed, no functions are available
+        available_functions.clear();
+    }
+    return result;
 }
 
 extern "C" XRAPI_ATTR XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {
