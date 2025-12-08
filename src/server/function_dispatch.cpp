@@ -12383,40 +12383,8 @@ void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
 
 
 void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateInstance", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateInstance));
-    // by this point, the function id has already been read, now read the params
-    XrInstanceCreateInfo* createInfo{};
-    
-
-    deserialize_ptr(&createInfo, msg_in.stream, false);
-
-    XrInstance* instance{};
-    
-
-    deserialize_ptr(&instance, msg_in.stream, false);
-
-
-    XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
-    
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    
-    serialize_ptr(instance, 1, msg_out.buffer);
-
-    msg_out.flush();
-
-    
-
-    cleanup_ptr(createInfo, 1);
-
-    
-
-    cleanup_ptr(instance, 1);
-
-    // XrInstance created, notify callbacks
-    for (auto& instance_callback : instance_callbacks) {
-        instance_callback(*instance);
-    }
+    // redirect to supplied xrCreateInstance handler
+    instance_handler(std::move(msg_in));
 }
 
 

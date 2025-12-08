@@ -28,12 +28,14 @@ public:
 private:
     Transport& transport;
     FunctionLoader& function_loader;
-    std::vector<std::function<void(XrInstance)>> instance_callbacks;
+    // This particular handler for xrCreateInstance is supplied via dependency injection because
+    // a lot of extra work needs to be done for module extension handling.
+    std::function<void(MessageLockIn)> instance_handler;
     static std::unordered_map<std::uint32_t, Handler> handlers;
 
 public:
-    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader)
-        : transport(transport), function_loader(function_loader)
+    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader, std::function<void(MessageLockIn)> instance_handler)
+        : transport(transport), function_loader(function_loader), instance_handler(instance_handler)
     {}
 
 <%utils:for_grouped_functions args="function">
@@ -46,10 +48,6 @@ public:
         }
         Handler handler = handlers.at(function_id);
         (this->*handler)(std::move(msg_in));
-    }
-
-    void register_instance_callback(std::function<void(XrInstance)> callback) {
-        instance_callbacks.push_back(std::move(callback));
     }
 };
 

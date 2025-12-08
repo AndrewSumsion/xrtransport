@@ -23,6 +23,9 @@ private:
     std::vector<Module> modules;
     asio::io_context& transport_io_context;
 
+    // Custom handler of xrCreateInstance provided to FunctionDispatch via dependency injection
+    void instance_handler(MessageLockIn msg_in);
+
 public:
     explicit Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);
 

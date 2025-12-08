@@ -20,6 +20,7 @@ namespace xrtransport {
 
 <%utils:for_grouped_functions args="function">
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
+% if function.name != "xrCreateInstance":
     function_loader.ensure_function_loaded("${function.name}", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_${function.name}));
     // by this point, the function id has already been read, now read the params
     % for param in function.params:
@@ -39,12 +40,10 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     % for param in function.params:
     ${utils.cleanup_member(param, binding_prefix='')}
     % endfor
-    % if function.name == "xrCreateInstance":
-    // XrInstance created, notify callbacks
-    for (auto& instance_callback : instance_callbacks) {
-        instance_callback(*instance);
-    }
-    % endif
+% else:
+    // redirect to supplied xrCreateInstance handler
+    instance_handler(std::move(msg_in));
+% endif
 }
 </%utils:for_grouped_functions>
 

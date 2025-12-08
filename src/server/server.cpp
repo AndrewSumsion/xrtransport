@@ -4,6 +4,8 @@
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/server/function_loader.h"
+#include "xrtransport/serialization/serializer.h"
+#include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/asio_compat.h"
 
 #include "openxr/openxr.h"
@@ -19,7 +21,7 @@ namespace xrtransport {
 Server::Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths) :
     transport(std::move(stream)),
     function_loader(xrGetInstanceProcAddr),
-    function_dispatch(transport, function_loader),
+    function_dispatch(transport, function_loader, [this](MessageLockIn msg_in){instance_handler(std::move(msg_in));}),
     transport_io_context(stream_io_context)
 {
     for (auto& module_path : module_paths) {
@@ -84,14 +86,6 @@ void Server::run() {
         module.on_init(&transport, &function_loader);
     }
 
-    // set up callback for XrInstance creation
-    function_dispatch.register_instance_callback([this](XrInstance instance){
-        function_loader.loader_instance = instance;
-        for (auto& module : modules) {
-            module.on_instance(&transport, &function_loader, instance);
-        }
-    });
-
     // queue up first iteration of worker loop
     transport.start_worker();
 
@@ -100,6 +94,61 @@ void Server::run() {
 
     // Once handler loop terminates or io_context is stopped, close the connection
     transport.close();
+}
+
+void Server::instance_handler(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrCreateInstance", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateInstance));
+    
+    // Read in args sent by client
+    XrInstanceCreateInfo* createInfo{};
+    deserialize_ptr(&createInfo, msg_in.stream, false);
+    XrInstance* instance{};
+    deserialize_ptr(&instance, msg_in.stream, false);
+
+    // Put existing extensions into vector
+    uint32_t old_enabled_extension_count = createInfo->enabledExtensionCount;
+    const char* const* old_enabled_extension_names = createInfo->enabledExtensionNames;
+    std::vector<const char*> enabled_extensions(old_enabled_extension_names, old_enabled_extension_names + old_enabled_extension_count);
+
+    // Collect requested extensions from modules
+    for (auto& module : modules) {
+        // Get count to resize vector
+        uint32_t num_extensions{};
+        module.get_required_extensions(&num_extensions, nullptr);
+
+        // Get pointer to end of vector and resize
+        const char** end = enabled_extensions.data() + enabled_extensions.size();
+        enabled_extensions.resize(enabled_extensions.size() + num_extensions);
+
+        // Fill in new slots
+        module.get_required_extensions(&num_extensions, end);
+    }
+
+    // Update createInfo
+    createInfo->enabledExtensionCount = enabled_extensions.size();
+    createInfo->enabledExtensionNames = enabled_extensions.data();
+
+    // Call xrCreateInstance
+    XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
+
+    // Send response to client
+    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    serialize(&_result, msg_out.buffer);
+    serialize_ptr(instance, 1, msg_out.buffer);
+    msg_out.flush();
+
+    // Restore createInfo to make sure cleanup works as expected
+    createInfo->enabledExtensionCount = old_enabled_extension_count;
+    createInfo->enabledExtensionNames = old_enabled_extension_names;
+
+    // Cleanup from deserializer
+    cleanup_ptr(createInfo, 1);
+    cleanup_ptr(instance, 1);
+
+    // Notify modules that XrInstance was created
+    for (auto& module : modules) {
+        module.on_instance(&transport, &function_loader, *instance);
+    }
 }
 
 }
