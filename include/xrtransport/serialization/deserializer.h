@@ -11,7 +11,6 @@
 
 
 
-
 #ifndef XRTRANSPORT_DESERIALIZER_GENERATED_H
 #define XRTRANSPORT_DESERIALIZER_GENERATED_H
 
@@ -30,9991 +29,2421 @@
 namespace xrtransport {
 
 // Forward declarations (deserializers)
-
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
-
-
 void deserialize(XrCompositionLayerCubeKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerCubeKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
-
-
 void deserialize(XrInstanceCreateInfoAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInstanceCreateInfoAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
-
-
 void deserialize(XrCompositionLayerDepthInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerDepthInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
-
-
 void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-
-
 void deserialize(XrEventDataPerfSettingsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataPerfSettingsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
-
-
 void deserialize(XrCompositionLayerCylinderKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerCylinderKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
-
-
 void deserialize(XrCompositionLayerEquirectKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerEquirectKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-
-
 void deserialize(XrDebugUtilsObjectNameInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsLabelEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsObjectNameInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsMessengerCallbackDataEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsMessengerCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDebugUtilsLabelEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-
-
 void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageOpenGLKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsOpenGLKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLWin32KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLXlibKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLXcbKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLWaylandKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageOpenGLKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsOpenGLKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-
-
 void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageOpenGLESKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingOpenGLESAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageOpenGLESKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsOpenGLESKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-
-
 void deserialize(XrGraphicsBindingVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsVulkanKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-
-
 void deserialize(XrGraphicsBindingD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsD3D11KHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-
-
 void deserialize(XrGraphicsBindingD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsD3D12KHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-
-
 void deserialize(XrGraphicsBindingMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsRequirementsMetalKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
-
-
 void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazeSampleTimeEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemEyeGazeInteractionPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazeSampleTimeEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-
-
 void deserialize(XrVisibilityMaskKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVisibilityMaskChangedKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVisibilityMaskKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVisibilityMaskChangedKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
-
-
 void deserialize(XrSessionCreateInfoOverlayEXTX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSessionCreateInfoOverlayEXTX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataMainSessionVisibilityChangedEXTX* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXTX_overlay
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-
-
 void deserialize(XrCompositionLayerColorScaleBiasKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerColorScaleBiasKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-
-
 void deserialize(XrSpatialAnchorCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorSpaceCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
-
-
 void deserialize(XrCompositionLayerImageLayoutFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerImageLayoutFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
-
-
 void deserialize(XrCompositionLayerAlphaBlendFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerAlphaBlendFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-
-
 void deserialize(XrViewConfigurationDepthRangeEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewConfigurationDepthRangeEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
-
-
 void deserialize(XrGraphicsBindingEGLMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGraphicsBindingEGLMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-
-
 void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-
-
 void deserialize(XrSystemHandTrackingPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackerCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointsLocateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointLocationEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointVelocityEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointLocationsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointVelocitiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemHandTrackingPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackerCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointsLocateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointLocationsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointVelocitiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-
-
 void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshUpdateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshIndexBufferMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshVertexBufferMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshVertexMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandPoseTypeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemHandTrackingMeshPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshSpaceCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshUpdateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandMeshMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandPoseTypeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
-
-
 void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationFrameStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-
-
 void deserialize(XrControllerModelKeyStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelNodePropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelNodeStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelKeyStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelNodePropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelPropertiesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelNodeStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrControllerModelStateMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
-#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
-
-
 void deserialize(XrViewConfigurationViewFovEPIC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewConfigurationViewFovEPIC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
-
-
 void deserialize(XrHolographicWindowAttachmentMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHolographicWindowAttachmentMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-
-
 void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerReprojectionInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
-
-
 void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-
-
 void deserialize(XrSwapchainStateBaseHeaderFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
-
-
 void deserialize(XrCompositionLayerSecureContentFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerSecureContentFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-
-
 void deserialize(XrBodyJointLocationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemBodyTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonJointFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemBodyTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
-
-
 void deserialize(XrInteractionProfileDpadBindingEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInteractionProfileDpadBindingEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
-
-
 void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInteractionProfileAnalogThresholdVALVE* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
-
-
 void deserialize(XrHandJointsMotionRangeInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandJointsMotionRangeInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-
-
 void deserialize(XrLoaderInitInfoBaseHeaderKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
-
-
 void deserialize(XrLoaderInitInfoAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLoaderInitInfoAndroidKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-
-
 void deserialize(XrVulkanInstanceCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanDeviceCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanInstanceCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanDeviceCreateInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanGraphicsDeviceGetInfoKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
-
-
 void deserialize(XrCompositionLayerEquirect2KHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerEquirect2KHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-
-
 void deserialize(XrUuidMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObserverCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrNewSceneComputeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVisualMeshComputeLodInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneSphereBoundMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneOrientedBoxBoundMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneFrustumBoundMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneBoundsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentLocationMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentLocationsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsLocateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObjectMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObjectsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentParentFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrScenePlaneMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrScenePlanesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshBuffersMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshVertexBufferMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshIndicesUint32MSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshIndicesUint16MSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObserverCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrNewSceneComputeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVisualMeshComputeLodInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentLocationsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentsLocateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObjectsMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneComponentParentFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneObjectTypesFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrScenePlanesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrScenePlaneAlignmentFilterInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshBuffersGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshBuffersMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshVertexBufferMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshIndicesUint32MSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMeshIndicesUint16MSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-
-
 void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDeserializeSceneFragmentMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneDeserializeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneDeserializeInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-
-
 void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataDisplayRefreshRateChangedFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-
-
 void deserialize(XrViveTrackerPathsHTCX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataViveTrackerConnectedHTCX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViveTrackerPathsHTCX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataViveTrackerConnectedHTCX* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-
-
 void deserialize(XrSystemFacialTrackingPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionsHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialTrackerCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFacialTrackingPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialTrackerCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionsHTC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-
-
 void deserialize(XrSystemColorSpacePropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemColorSpacePropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-
-
 void deserialize(XrVector4sFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingMeshFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingScaleFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingMeshFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingScaleFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
-
-
 void deserialize(XrHandTrackingAimStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingAimStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
-
-
 void deserialize(XrHandCapsuleFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingCapsulesStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingCapsulesStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-
-
 void deserialize(XrSystemSpatialEntityPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentStatusSetInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentStatusFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialEntityPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentStatusSetInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentStatusFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpatialAnchorCreateCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceSetStatusCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-
-
 void deserialize(XrFoveationProfileCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainCreateInfoFoveationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainStateFoveationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationProfileCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainCreateInfoFoveationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainStateFoveationFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
-
-
 void deserialize(XrFoveationLevelProfileCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationLevelProfileCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-
-
 void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrKeyboardTrackingDescriptionFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrKeyboardSpaceCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrKeyboardTrackingQueryFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrKeyboardSpaceCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrKeyboardTrackingQueryFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemKeyboardTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-
-
 void deserialize(XrTriangleMeshCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrTriangleMeshCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-
-
 void deserialize(XrSystemPassthroughPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPassthroughProperties2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughLayerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerPassthroughFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGeometryInstanceCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGeometryInstanceTransformFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughStyleFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapMonoToMonoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataPassthroughStateChangedFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPassthroughPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughLayerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerPassthroughFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGeometryInstanceCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGeometryInstanceTransformFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPassthroughProperties2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughStyleFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapMonoToRgbaFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapMonoToMonoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughBrightnessContrastSaturationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataPassthroughStateChangedFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-
-
 void deserialize(XrRenderModelPathInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelBufferFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelLoadInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemRenderModelPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelCapabilitiesRequestFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelPathInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelBufferFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelLoadInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemRenderModelPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRenderModelCapabilitiesRequestFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
-
-
 void deserialize(XrBindingModificationsKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBindingModificationBaseHeaderKHR* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBindingModificationsKHR* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
-
-
 void deserialize(XrViewLocateFoveatedRenderingVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveatedViewConfigurationViewVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewLocateFoveatedRenderingVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveatedViewConfigurationViewVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFoveatedRenderingPropertiesVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-
-
 void deserialize(XrCompositionLayerDepthTestVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerDepthTestVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-
-
 void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerSpaceCreateInfoVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemMarkerTrackingPropertiesVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataMarkerTrackingUpdateVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerSpaceCreateInfoVARJO* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
-
-
 void deserialize(XrFrameEndInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameEndInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
-
-
 void deserialize(XrGlobalDimmerFrameEndInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrGlobalDimmerFrameEndInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-
-
 void deserialize(XrCoordinateSpaceCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-
-
 void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorArucoInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorSizeInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorAprilTagInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorCustomProfileInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorSnapshotInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorStateML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerSpaceCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemMarkerUnderstandingPropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorArucoInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorSizeInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorAprilTagInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorCustomProfileInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorSnapshotInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerDetectorStateML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMarkerSpaceCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-
-
 void deserialize(XrLocalizationMapML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataLocalizationChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationMapQueryInfoBaseHeaderML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMapLocalizationRequestInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationMapImportInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationEnableEventsInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationMapML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataLocalizationChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrMapLocalizationRequestInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationMapImportInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalizationEnableEventsInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-
-
 void deserialize(XrSpatialAnchorsCreateInfoBaseHeaderML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCreateSpatialAnchorsCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorStateML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsCreateInfoFromPoseML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCreateSpatialAnchorsCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorStateML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-
-
 void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsQueryInfoBaseHeaderML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsQueryCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCompletionResultML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsCreateStorageInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsQueryInfoRadiusML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsQueryCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsPublishCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-
-
 void deserialize(XrEventDataHeadsetFitChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataEyeCalibrationChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrUserCalibrationEnableEventsInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataHeadsetFitChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataEyeCalibrationChangedML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrUserCalibrationEnableEventsInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-
-
 void deserialize(XrSpatialAnchorPersistenceNameMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorPersistenceInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-
-
 void deserialize(XrSceneMarkerMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkersMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkerTypeFilterMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkerQRCodeMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkerQRCodesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkersMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkerTypeFilterMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneMarkerQRCodesMSFT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
-#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-
-
 void deserialize(XrSpaceQueryInfoBaseHeaderFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceFilterInfoBaseHeaderFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceQueryInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceStorageLocationFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceUuidFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceQueryResultFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceQueryResultsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceQueryCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceQueryInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceQueryResultsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceStorageLocationFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceUuidFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceComponentFilterInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceQueryResultsAvailableFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceQueryCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-
-
 void deserialize(XrSpaceSaveInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceEraseInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceSaveCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceEraseCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceSaveInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceEraseInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceSaveCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceEraseCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
-
-
 void deserialize(XrSwapchainImageFoveationVulkanFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageFoveationVulkanFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
-
-
 void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
-
-
 void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainStateSamplerOpenGLESFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
-
-
 void deserialize(XrSwapchainStateSamplerVulkanFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainStateSamplerVulkanFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-
-
 void deserialize(XrSpaceShareInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceShareCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceShareInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceShareCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
-
-
 void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpaceWarpPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerSpaceWarpInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpaceWarpPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_space_warp
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
-
-
 void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHapticAmplitudeEnvelopeVibrationFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-
-
 void deserialize(XrOffset3DfFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRect3DfFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSemanticLabelsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRoomLayoutFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBoundary2DFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSemanticLabelsSupportInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSemanticLabelsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRoomLayoutFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBoundary2DFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSemanticLabelsSupportInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-
-
 void deserialize(XrDigitalLensControlALMALENCE* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-
-
 void deserialize(XrEventDataSceneCaptureCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCaptureRequestInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSceneCaptureCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCaptureRequestInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-
-
 void deserialize(XrSpaceContainerFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceContainerFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-
-
 void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationEyeTrackedStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationEyeTrackedStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-
-
 void deserialize(XrSystemFaceTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionStatusFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionWeightsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFaceTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionWeightsFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-
-
 void deserialize(XrEyeGazeFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazesInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemEyeTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeTrackerCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazesInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEyeGazesFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemEyeTrackingPropertiesFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-
-
 void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughKeyboardHandsIntensityFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
-
-
 void deserialize(XrCompositionLayerSettingsFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerSettingsFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-
-
 void deserialize(XrHapticPcmVibrationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDevicePcmSampleRateStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHapticPcmVibrationFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrDevicePcmSampleRateStateFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
-
-
 void deserialize(XrFrameSynthesisInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameSynthesisConfigViewEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameSynthesisInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameSynthesisConfigViewEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
-
-
 void deserialize(XrCompositionLayerDepthTestFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerDepthTestFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
-
-
 void deserialize(XrLocalDimmingFrameEndInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrLocalDimmingFrameEndInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_local_dimming
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-
-
 void deserialize(XrPassthroughPreferencesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughPreferencesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-
-
 void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardLocationInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardAnimationStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardTextureDataMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardInputInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardShownMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemVirtualKeyboardPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardLocationInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardAnimationStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardModelAnimationStatesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardTextureDataMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardInputInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardCommitTextMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardBackspaceMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardEnterMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardShownMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataVirtualKeyboardHiddenMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-
-
 void deserialize(XrExternalCameraIntrinsicsOCULUS* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExternalCameraExtrinsicsOCULUS* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExternalCameraOCULUS* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExternalCameraOCULUS* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
-
-
 void deserialize(XrVulkanSwapchainCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVulkanSwapchainCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-
-
 void deserialize(XrPerformanceMetricsStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPerformanceMetricsCounterMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPerformanceMetricsStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPerformanceMetricsCounterMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-
-
 void deserialize(XrSpaceListSaveInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceListSaveCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceListSaveInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSpaceListSaveCompleteFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-
-
 void deserialize(XrSpaceUserCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceUserCreateInfoFB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
-
-
 void deserialize(XrSystemHeadsetIdPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemHeadsetIdPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_headset_id
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-
-
 void deserialize(XrRecommendedLayerResolutionMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRecommendedLayerResolutionMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRecommendedLayerResolutionGetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-
-
 void deserialize(XrPassthroughColorLutDataMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorLutCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapLutMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPassthroughColorLutPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorLutCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorLutUpdateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapLutMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorMapInterpolatedLutMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-
-
 void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceTriangleMeshMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceTriangleMeshGetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceTriangleMeshMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
-
-
 void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
-
-
 void deserialize(XrEventDataPassthroughLayerResumedMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataPassthroughLayerResumedMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-
-
 void deserialize(XrSystemFaceTrackingProperties2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceTrackerCreateInfo2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionInfo2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionWeights2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFaceTrackingProperties2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceTrackerCreateInfo2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionInfo2FB* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFaceExpressionWeights2FB* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-
-
 void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrShareSpacesRecipientBaseHeaderMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrShareSpacesInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataShareSpacesCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialEntitySharingPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrShareSpacesInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataShareSpacesCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-
-
 void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageViewMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthProviderCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthSwapchainStateMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageAcquireInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageViewMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthImageMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemEnvironmentDepthPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-
-
 void deserialize(XrPassthroughCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughMeshTransformInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerPassthroughHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughColorHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPassthroughMeshTransformInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerPassthroughHTC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-
-
 void deserialize(XrFoveationApplyInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationConfigurationHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationDynamicModeInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationCustomModeInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationApplyInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationDynamicModeInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFoveationCustomModeInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-
-
 void deserialize(XrSystemAnchorPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorNameHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemAnchorPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-
-
 void deserialize(XrSystemBodyTrackingPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemBodyTrackingPropertiesHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonHTC* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
-
-
 void deserialize(XrActiveActionSetPrioritiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActiveActionSetPriorityEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActiveActionSetPrioritiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-
-
 void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrForceFeedbackCurlApplyLocationMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrForceFeedbackCurlApplyLocationsMNDX* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-
-
 void deserialize(XrSystemBodyTrackingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyTrackerCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointsLocateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodyJointLocationsBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemBodyTrackingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-
-
 void deserialize(XrSystemSpatialSensingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataBaseHeaderBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityLocationGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataLocationBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataSemanticBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataPolygonBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderStartInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSenseDataUpdatedBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataQueryInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataQueryCompletionBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrQueriedSenseDataGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrQueriedSenseDataBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityStateBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataFilterUuidBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataFilterSemanticBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrAnchorSpaceCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialSensingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityLocationGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataLocationBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataSemanticBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataPolygonBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityComponentDataTriangleMeshBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderStartInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSenseDataProviderStateChangedBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSenseDataUpdatedBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataQueryInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataQueryCompletionBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataFilterUuidBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataFilterSemanticBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrQueriedSenseDataGetInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrQueriedSenseDataBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityStateBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialEntityAnchorCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrAnchorSpaceCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-
-
 void deserialize(XrSystemSpatialAnchorPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateCompletionBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorPersistInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorUnpersistInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialAnchorPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorCreateCompletionBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorPersistInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorUnpersistInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-
-
 void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorShareInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialAnchorSharingPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpatialAnchorShareInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSharedSpatialAnchorDownloadInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-
-
 void deserialize(XrSystemSpatialScenePropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCaptureInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialScenePropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSceneCaptureInfoBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
-
-
 void deserialize(XrSystemSpatialMeshPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialMeshPropertiesBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
-
-
 void deserialize(XrFuturePollResultProgressBD* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFuturePollResultProgressBD* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_future_progress
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
-
-
 void deserialize(XrHandTrackingDataSourceInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingDataSourceStateEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingDataSourceInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHandTrackingDataSourceStateEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-
-
 void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorBeginInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorGetInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorLocationEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorLocationsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorPolygonBufferEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorCreateInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorBeginInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorGetInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorLocationsEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorLocationEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPlaneDetectorPolygonBufferEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemPlaneDetectionPropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-
-
 void deserialize(XrFutureCancelInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFuturePollInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFutureCompletionBaseHeaderEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFutureCompletionEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFuturePollResultEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFutureCancelInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFuturePollInfoEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFutureCompletionEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFuturePollResultEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
-
-
 void deserialize(XrEventDataUserPresenceChangedEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemUserPresencePropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataUserPresenceChangedEXT* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemUserPresencePropertiesEXT* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_user_presence
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-
-
 void deserialize(XrSystemNotificationsSetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemNotificationsSetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-
-
 void deserialize(XrWorldMeshDetectorCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockStateML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshStateRequestInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshStateRequestCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferSizeML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockRequestML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshGetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshRequestCompletionInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshRequestCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshDetectorCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshStateRequestInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockStateML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshStateRequestCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferRecommendedSizeInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferSizeML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBufferML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockRequestML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshGetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshBlockML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshRequestCompletionML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrWorldMeshRequestCompletionInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-
-
 void deserialize(XrSystemFacialExpressionPropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionClientCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionBlendShapePropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemFacialExpressionPropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionClientCreateInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionBlendShapeGetInfoML* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFacialExpressionBlendShapePropertiesML* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-
-
 void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-
-
 void deserialize(XrColocationDiscoveryStartInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationDiscoveryStopInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationAdvertisementStartInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationAdvertisementStopInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationDiscoveryResultMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationDiscoveryStartInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationDiscoveryStopInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationAdvertisementStartInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColocationAdvertisementStopInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationAdvertisementCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationDiscoveryResultMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemColocationDiscoveryPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
-
-
 void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrShareSpacesRecipientGroupsMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrShareSpacesRecipientGroupsMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceGroupUuidFilterInfoMETA* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncReadStream& in, bool in_place = false);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
-
-
 void deserialize(XrActionCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionSetCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionSpaceCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionStateBoolean* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionStateFloat* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionStateGetInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionStatePose* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionStateVector2f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionSuggestedBinding* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActionsSyncInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrActiveActionSet* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrApiLayerProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrApplicationInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBodySkeletonJointHTC* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBoundSourcesForActionEnumerateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrBoxf* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColor3f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrColor4f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerBaseHeader* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerProjection* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerProjectionView* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrCompositionLayerQuad* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataBaseHeader* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataBuffer* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataEventsLost* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataInstanceLossPending* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataInteractionProfileChanged* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataReferenceSpaceChangePending* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrEventDataSessionStateChanged* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExtensionProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExtent2Df* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExtent2Di* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrExtent3Df* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFovf* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameBeginInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameEndInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameState* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrameWaitInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrFrustumf* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHapticActionInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHapticBaseHeader* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrHapticVibration* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInputSourceLocalizedNameGetInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInstanceCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInstanceProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInteractionProfileState* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrInteractionProfileSuggestedBinding* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrOffset2Df* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrOffset2Di* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrPosef* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrQuaternionf* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRect2Df* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrRect2Di* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrReferenceSpaceCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSessionActionSetsAttachInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSessionBeginInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSessionCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceLocation* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceLocationData* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceLocations* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceVelocities* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceVelocity* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpaceVelocityData* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpacesLocateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSpheref* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainCreateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageAcquireInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageBaseHeader* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageReleaseInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainImageWaitInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSwapchainSubImage* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemGetInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemGraphicsProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrSystemTrackingProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrUuid* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVector2f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVector3f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrVector4f* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrView* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewConfigurationProperties* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewConfigurationView* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewLocateInfo* s, SyncReadStream& in, bool in_place = false);
-
-
-
-
 void deserialize(XrViewState* s, SyncReadStream& in, bool in_place = false);
 
 
-
-
 // Forward declarations (cleaners)
-
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-#ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-#endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
-
-
 void cleanup(const XrCompositionLayerCubeKHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerCubeKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
-
-
 void cleanup(const XrInstanceCreateInfoAndroidKHR* s);
-
-
-
-
 void cleanup(const XrInstanceCreateInfoAndroidKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
-
-
 void cleanup(const XrCompositionLayerDepthInfoKHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerDepthInfoKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
-
-
 void cleanup(const XrVulkanSwapchainFormatListCreateInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanSwapchainFormatListCreateInfoKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-
-
 void cleanup(const XrEventDataPerfSettingsEXT* s);
-
-
-
-
 void cleanup(const XrEventDataPerfSettingsEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
-#ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-#endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
-
-
 void cleanup(const XrCompositionLayerCylinderKHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerCylinderKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
-
-
 void cleanup(const XrCompositionLayerEquirectKHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerEquirectKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-
-
 void cleanup(const XrDebugUtilsObjectNameInfoEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsLabelEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsMessengerCallbackDataEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsMessengerCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsObjectNameInfoEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsMessengerCallbackDataEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsMessengerCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrDebugUtilsLabelEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-
-
 void cleanup(const XrGraphicsBindingOpenGLWin32KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLXlibKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLXcbKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLWaylandKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageOpenGLKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsOpenGLKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLWin32KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLXlibKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLXcbKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLWaylandKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageOpenGLKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsOpenGLKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-
-
 void cleanup(const XrGraphicsBindingOpenGLESAndroidKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageOpenGLESKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsOpenGLESKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingOpenGLESAndroidKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageOpenGLESKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsOpenGLESKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-
-
 void cleanup(const XrGraphicsBindingVulkanKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageVulkanKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsVulkanKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingVulkanKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageVulkanKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsVulkanKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-
-
 void cleanup(const XrGraphicsBindingD3D11KHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageD3D11KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsD3D11KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingD3D11KHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageD3D11KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsD3D11KHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-
-
 void cleanup(const XrGraphicsBindingD3D12KHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageD3D12KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsD3D12KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingD3D12KHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageD3D12KHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsD3D12KHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-
-
 void cleanup(const XrGraphicsBindingMetalKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageMetalKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsMetalKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingMetalKHR* s);
-
-
-
-
 void cleanup(const XrSwapchainImageMetalKHR* s);
-
-
-
-
 void cleanup(const XrGraphicsRequirementsMetalKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
-
-
 void cleanup(const XrSystemEyeGazeInteractionPropertiesEXT* s);
-
-
-
-
 void cleanup(const XrEyeGazeSampleTimeEXT* s);
-
-
-
-
 void cleanup(const XrSystemEyeGazeInteractionPropertiesEXT* s);
-
-
-
-
 void cleanup(const XrEyeGazeSampleTimeEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-
-
 void cleanup(const XrVisibilityMaskKHR* s);
-
-
-
-
 void cleanup(const XrEventDataVisibilityMaskChangedKHR* s);
-
-
-
-
 void cleanup(const XrVisibilityMaskKHR* s);
-
-
-
-
 void cleanup(const XrEventDataVisibilityMaskChangedKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
-
-
 void cleanup(const XrSessionCreateInfoOverlayEXTX* s);
-
-
-
-
 void cleanup(const XrEventDataMainSessionVisibilityChangedEXTX* s);
-
-
-
-
 void cleanup(const XrSessionCreateInfoOverlayEXTX* s);
-
-
-
-
 void cleanup(const XrEventDataMainSessionVisibilityChangedEXTX* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXTX_overlay
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-
-
 void cleanup(const XrCompositionLayerColorScaleBiasKHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerColorScaleBiasKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
-#ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-#ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-#endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-
-
 void cleanup(const XrSpatialAnchorCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorSpaceCreateInfoMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
-
-
 void cleanup(const XrCompositionLayerImageLayoutFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerImageLayoutFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
-
-
 void cleanup(const XrCompositionLayerAlphaBlendFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerAlphaBlendFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-
-
 void cleanup(const XrViewConfigurationDepthRangeEXT* s);
-
-
-
-
 void cleanup(const XrViewConfigurationDepthRangeEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
-#ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-#endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
-
-
 void cleanup(const XrGraphicsBindingEGLMNDX* s);
-
-
-
-
 void cleanup(const XrGraphicsBindingEGLMNDX* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-
-
 void cleanup(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphNodeBindingPropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialGraphNodeBindingPropertiesMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-
-
 void cleanup(const XrSystemHandTrackingPropertiesEXT* s);
-
-
-
-
 void cleanup(const XrHandTrackerCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandJointsLocateInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandJointLocationEXT* s);
-
-
-
-
 void cleanup(const XrHandJointVelocityEXT* s);
-
-
-
-
 void cleanup(const XrHandJointLocationsEXT* s);
-
-
-
-
 void cleanup(const XrHandJointVelocitiesEXT* s);
-
-
-
-
 void cleanup(const XrSystemHandTrackingPropertiesEXT* s);
-
-
-
-
 void cleanup(const XrHandTrackerCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandJointsLocateInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandJointLocationsEXT* s);
-
-
-
-
 void cleanup(const XrHandJointVelocitiesEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-
-
 void cleanup(const XrSystemHandTrackingMeshPropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshSpaceCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshUpdateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshIndexBufferMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshVertexBufferMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshVertexMSFT* s);
-
-
-
-
 void cleanup(const XrHandPoseTypeInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSystemHandTrackingMeshPropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshSpaceCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshUpdateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrHandMeshMSFT* s);
-
-
-
-
 void cleanup(const XrHandPoseTypeInfoMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
-
-
 void cleanup(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationStateMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationFrameStateMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationLayerInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationStateMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationFrameStateMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationLayerInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-
-
 void cleanup(const XrControllerModelKeyStateMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelNodePropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelPropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelNodeStateMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelStateMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelKeyStateMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelNodePropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelPropertiesMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelNodeStateMSFT* s);
-
-
-
-
 void cleanup(const XrControllerModelStateMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
-#ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-#endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
-
-
 void cleanup(const XrViewConfigurationViewFovEPIC* s);
-
-
-
-
 void cleanup(const XrViewConfigurationViewFovEPIC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
-
-
 void cleanup(const XrHolographicWindowAttachmentMSFT* s);
-
-
-
-
 void cleanup(const XrHolographicWindowAttachmentMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-
-
 void cleanup(const XrCompositionLayerReprojectionInfoMSFT* s);
-
-
-
-
 void cleanup(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s);
-
-
-
-
 void cleanup(const XrCompositionLayerReprojectionInfoMSFT* s);
-
-
-
-
 void cleanup(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
-
-
 void cleanup(const XrAndroidSurfaceSwapchainCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrAndroidSurfaceSwapchainCreateInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-
-
 void cleanup(const XrSwapchainStateBaseHeaderFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
-
-
 void cleanup(const XrCompositionLayerSecureContentFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerSecureContentFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-
-
 void cleanup(const XrBodyJointLocationFB* s);
-
-
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrBodySkeletonJointFB* s);
-
-
-
-
 void cleanup(const XrBodySkeletonFB* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoFB* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsFB* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsFB* s);
-
-
-
-
 void cleanup(const XrBodySkeletonFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
-
-
 void cleanup(const XrInteractionProfileDpadBindingEXT* s);
-
-
-
-
 void cleanup(const XrInteractionProfileDpadBindingEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
-
-
 void cleanup(const XrInteractionProfileAnalogThresholdVALVE* s);
-
-
-
-
 void cleanup(const XrInteractionProfileAnalogThresholdVALVE* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
-
-
 void cleanup(const XrHandJointsMotionRangeInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandJointsMotionRangeInfoEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-
-
 void cleanup(const XrLoaderInitInfoBaseHeaderKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
-
-
 void cleanup(const XrLoaderInitInfoAndroidKHR* s);
-
-
-
-
 void cleanup(const XrLoaderInitInfoAndroidKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-
-
 void cleanup(const XrVulkanInstanceCreateInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanDeviceCreateInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanGraphicsDeviceGetInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanInstanceCreateInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanDeviceCreateInfoKHR* s);
-
-
-
-
 void cleanup(const XrVulkanGraphicsDeviceGetInfoKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
-
-
 void cleanup(const XrCompositionLayerEquirect2KHR* s);
-
-
-
-
 void cleanup(const XrCompositionLayerEquirect2KHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-
-
 void cleanup(const XrUuidMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObserverCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrNewSceneComputeInfoMSFT* s);
-
-
-
-
 void cleanup(const XrVisualMeshComputeLodInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneSphereBoundMSFT* s);
-
-
-
-
 void cleanup(const XrSceneOrientedBoxBoundMSFT* s);
-
-
-
-
 void cleanup(const XrSceneFrustumBoundMSFT* s);
-
-
-
-
 void cleanup(const XrSceneBoundsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentLocationMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentLocationsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsLocateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObjectMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObjectsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentParentFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObjectTypesFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrScenePlaneMSFT* s);
-
-
-
-
 void cleanup(const XrScenePlanesMSFT* s);
-
-
-
-
 void cleanup(const XrScenePlaneAlignmentFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshesMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshBuffersGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshBuffersMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshVertexBufferMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshIndicesUint32MSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshIndicesUint16MSFT* s);
-
-
-
-
 void cleanup(const XrSceneObserverCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrNewSceneComputeInfoMSFT* s);
-
-
-
-
 void cleanup(const XrVisualMeshComputeLodInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentLocationsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentsLocateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObjectsMSFT* s);
-
-
-
-
 void cleanup(const XrSceneComponentParentFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneObjectTypesFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrScenePlanesMSFT* s);
-
-
-
-
 void cleanup(const XrScenePlaneAlignmentFilterInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshesMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshBuffersGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshBuffersMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshVertexBufferMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshIndicesUint32MSFT* s);
-
-
-
-
 void cleanup(const XrSceneMeshIndicesUint16MSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-
-
 void cleanup(const XrSerializedSceneFragmentDataGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrDeserializeSceneFragmentMSFT* s);
-
-
-
-
 void cleanup(const XrSceneDeserializeInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSerializedSceneFragmentDataGetInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSceneDeserializeInfoMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-
-
 void cleanup(const XrEventDataDisplayRefreshRateChangedFB* s);
-
-
-
-
 void cleanup(const XrEventDataDisplayRefreshRateChangedFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-
-
 void cleanup(const XrViveTrackerPathsHTCX* s);
-
-
-
-
 void cleanup(const XrEventDataViveTrackerConnectedHTCX* s);
-
-
-
-
 void cleanup(const XrViveTrackerPathsHTCX* s);
-
-
-
-
 void cleanup(const XrEventDataViveTrackerConnectedHTCX* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-
-
 void cleanup(const XrSystemFacialTrackingPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrFacialExpressionsHTC* s);
-
-
-
-
 void cleanup(const XrFacialTrackerCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrSystemFacialTrackingPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrFacialTrackerCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrFacialExpressionsHTC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-
-
 void cleanup(const XrSystemColorSpacePropertiesFB* s);
-
-
-
-
 void cleanup(const XrSystemColorSpacePropertiesFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-
-
 void cleanup(const XrVector4sFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingMeshFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingScaleFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingMeshFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingScaleFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
-
-
 void cleanup(const XrHandTrackingAimStateFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingAimStateFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
-
-
 void cleanup(const XrHandCapsuleFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingCapsulesStateFB* s);
-
-
-
-
 void cleanup(const XrHandTrackingCapsulesStateFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-
-
 void cleanup(const XrSystemSpatialEntityPropertiesFB* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentStatusSetInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentStatusFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpatialAnchorCreateCompleteFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceSetStatusCompleteFB* s);
-
-
-
-
 void cleanup(const XrSystemSpatialEntityPropertiesFB* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentStatusSetInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentStatusFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpatialAnchorCreateCompleteFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceSetStatusCompleteFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-
-
 void cleanup(const XrFoveationProfileCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrSwapchainCreateInfoFoveationFB* s);
-
-
-
-
 void cleanup(const XrSwapchainStateFoveationFB* s);
-
-
-
-
 void cleanup(const XrFoveationProfileCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrSwapchainCreateInfoFoveationFB* s);
-
-
-
-
 void cleanup(const XrSwapchainStateFoveationFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
-
-
 void cleanup(const XrFoveationLevelProfileCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrFoveationLevelProfileCreateInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-
-
 void cleanup(const XrSystemKeyboardTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrKeyboardTrackingDescriptionFB* s);
-
-
-
-
 void cleanup(const XrKeyboardSpaceCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrKeyboardTrackingQueryFB* s);
-
-
-
-
 void cleanup(const XrKeyboardSpaceCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrKeyboardTrackingQueryFB* s);
-
-
-
-
 void cleanup(const XrSystemKeyboardTrackingPropertiesFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-
-
 void cleanup(const XrTriangleMeshCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrTriangleMeshCreateInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-
-
 void cleanup(const XrSystemPassthroughPropertiesFB* s);
-
-
-
-
 void cleanup(const XrSystemPassthroughProperties2FB* s);
-
-
-
-
 void cleanup(const XrPassthroughCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrPassthroughLayerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerPassthroughFB* s);
-
-
-
-
 void cleanup(const XrGeometryInstanceCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrGeometryInstanceTransformFB* s);
-
-
-
-
 void cleanup(const XrPassthroughStyleFB* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapMonoToRgbaFB* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapMonoToMonoFB* s);
-
-
-
-
 void cleanup(const XrPassthroughBrightnessContrastSaturationFB* s);
-
-
-
-
 void cleanup(const XrEventDataPassthroughStateChangedFB* s);
-
-
-
-
 void cleanup(const XrSystemPassthroughPropertiesFB* s);
-
-
-
-
 void cleanup(const XrPassthroughCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrPassthroughLayerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerPassthroughFB* s);
-
-
-
-
 void cleanup(const XrGeometryInstanceCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrGeometryInstanceTransformFB* s);
-
-
-
-
 void cleanup(const XrSystemPassthroughProperties2FB* s);
-
-
-
-
 void cleanup(const XrPassthroughStyleFB* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapMonoToRgbaFB* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapMonoToMonoFB* s);
-
-
-
-
 void cleanup(const XrPassthroughBrightnessContrastSaturationFB* s);
-
-
-
-
 void cleanup(const XrEventDataPassthroughStateChangedFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-
-
 void cleanup(const XrRenderModelPathInfoFB* s);
-
-
-
-
 void cleanup(const XrRenderModelPropertiesFB* s);
-
-
-
-
 void cleanup(const XrRenderModelBufferFB* s);
-
-
-
-
 void cleanup(const XrRenderModelLoadInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemRenderModelPropertiesFB* s);
-
-
-
-
 void cleanup(const XrRenderModelCapabilitiesRequestFB* s);
-
-
-
-
 void cleanup(const XrRenderModelPathInfoFB* s);
-
-
-
-
 void cleanup(const XrRenderModelPropertiesFB* s);
-
-
-
-
 void cleanup(const XrRenderModelBufferFB* s);
-
-
-
-
 void cleanup(const XrRenderModelLoadInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemRenderModelPropertiesFB* s);
-
-
-
-
 void cleanup(const XrRenderModelCapabilitiesRequestFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
-
-
 void cleanup(const XrBindingModificationsKHR* s);
-
-
-
-
 void cleanup(const XrBindingModificationBaseHeaderKHR* s);
-
-
-
-
 void cleanup(const XrBindingModificationsKHR* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
-
-
 void cleanup(const XrViewLocateFoveatedRenderingVARJO* s);
-
-
-
-
 void cleanup(const XrFoveatedViewConfigurationViewVARJO* s);
-
-
-
-
 void cleanup(const XrSystemFoveatedRenderingPropertiesVARJO* s);
-
-
-
-
 void cleanup(const XrViewLocateFoveatedRenderingVARJO* s);
-
-
-
-
 void cleanup(const XrFoveatedViewConfigurationViewVARJO* s);
-
-
-
-
 void cleanup(const XrSystemFoveatedRenderingPropertiesVARJO* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-
-
 void cleanup(const XrCompositionLayerDepthTestVARJO* s);
-
-
-
-
 void cleanup(const XrCompositionLayerDepthTestVARJO* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
-#ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-#endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-
-
 void cleanup(const XrSystemMarkerTrackingPropertiesVARJO* s);
-
-
-
-
 void cleanup(const XrEventDataMarkerTrackingUpdateVARJO* s);
-
-
-
-
 void cleanup(const XrMarkerSpaceCreateInfoVARJO* s);
-
-
-
-
 void cleanup(const XrSystemMarkerTrackingPropertiesVARJO* s);
-
-
-
-
 void cleanup(const XrEventDataMarkerTrackingUpdateVARJO* s);
-
-
-
-
 void cleanup(const XrMarkerSpaceCreateInfoVARJO* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-#ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-#endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
-
-
 void cleanup(const XrFrameEndInfoML* s);
-
-
-
-
 void cleanup(const XrFrameEndInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
-
-
 void cleanup(const XrGlobalDimmerFrameEndInfoML* s);
-
-
-
-
 void cleanup(const XrGlobalDimmerFrameEndInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-
-
 void cleanup(const XrCoordinateSpaceCreateInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-
-
 void cleanup(const XrSystemMarkerUnderstandingPropertiesML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorCreateInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorArucoInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorSizeInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorAprilTagInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorCustomProfileInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorSnapshotInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorStateML* s);
-
-
-
-
 void cleanup(const XrMarkerSpaceCreateInfoML* s);
-
-
-
-
 void cleanup(const XrSystemMarkerUnderstandingPropertiesML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorCreateInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorArucoInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorSizeInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorAprilTagInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorCustomProfileInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorSnapshotInfoML* s);
-
-
-
-
 void cleanup(const XrMarkerDetectorStateML* s);
-
-
-
-
 void cleanup(const XrMarkerSpaceCreateInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-
-
 void cleanup(const XrLocalizationMapML* s);
-
-
-
-
 void cleanup(const XrEventDataLocalizationChangedML* s);
-
-
-
-
 void cleanup(const XrLocalizationMapQueryInfoBaseHeaderML* s);
-
-
-
-
 void cleanup(const XrMapLocalizationRequestInfoML* s);
-
-
-
-
 void cleanup(const XrLocalizationMapImportInfoML* s);
-
-
-
-
 void cleanup(const XrLocalizationEnableEventsInfoML* s);
-
-
-
-
 void cleanup(const XrLocalizationMapML* s);
-
-
-
-
 void cleanup(const XrEventDataLocalizationChangedML* s);
-
-
-
-
 void cleanup(const XrMapLocalizationRequestInfoML* s);
-
-
-
-
 void cleanup(const XrLocalizationMapImportInfoML* s);
-
-
-
-
 void cleanup(const XrLocalizationEnableEventsInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-
-
 void cleanup(const XrSpatialAnchorsCreateInfoBaseHeaderML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsCreateInfoFromPoseML* s);
-
-
-
-
 void cleanup(const XrCreateSpatialAnchorsCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorStateML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsCreateInfoFromPoseML* s);
-
-
-
-
 void cleanup(const XrCreateSpatialAnchorsCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorStateML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-
-
 void cleanup(const XrSpatialAnchorsCreateStorageInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsQueryInfoBaseHeaderML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsQueryInfoRadiusML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsQueryCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsCreateInfoFromUuidsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishCompletionDetailsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteCompletionDetailsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCompletionResultML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsCreateStorageInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsQueryInfoRadiusML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsQueryCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsCreateInfoFromUuidsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationInfoML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationCompletionML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsPublishCompletionDetailsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsDeleteCompletionDetailsML* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-
-
 void cleanup(const XrEventDataHeadsetFitChangedML* s);
-
-
-
-
 void cleanup(const XrEventDataEyeCalibrationChangedML* s);
-
-
-
-
 void cleanup(const XrUserCalibrationEnableEventsInfoML* s);
-
-
-
-
 void cleanup(const XrEventDataHeadsetFitChangedML* s);
-
-
-
-
 void cleanup(const XrEventDataEyeCalibrationChangedML* s);
-
-
-
-
 void cleanup(const XrUserCalibrationEnableEventsInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-
-
 void cleanup(const XrSpatialAnchorPersistenceNameMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorPersistenceInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorPersistenceInfoMSFT* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-
-
 void cleanup(const XrSceneMarkerMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkersMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkerTypeFilterMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkerQRCodeMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkerQRCodesMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkersMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkerTypeFilterMSFT* s);
-
-
-
-
 void cleanup(const XrSceneMarkerQRCodesMSFT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
-#ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-#endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-
-
 void cleanup(const XrSpaceQueryInfoBaseHeaderFB* s);
-
-
-
-
 void cleanup(const XrSpaceFilterInfoBaseHeaderFB* s);
-
-
-
-
 void cleanup(const XrSpaceQueryInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceStorageLocationFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceUuidFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceQueryResultFB* s);
-
-
-
-
 void cleanup(const XrSpaceQueryResultsFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceQueryResultsAvailableFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceQueryCompleteFB* s);
-
-
-
-
 void cleanup(const XrSpaceQueryInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceQueryResultsFB* s);
-
-
-
-
 void cleanup(const XrSpaceStorageLocationFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceUuidFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceComponentFilterInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceQueryResultsAvailableFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceQueryCompleteFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-
-
 void cleanup(const XrSpaceSaveInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceEraseInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceSaveCompleteFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceEraseCompleteFB* s);
-
-
-
-
 void cleanup(const XrSpaceSaveInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceEraseInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceSaveCompleteFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceEraseCompleteFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-#ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-#endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
-
-
 void cleanup(const XrSwapchainImageFoveationVulkanFB* s);
-
-
-
-
 void cleanup(const XrSwapchainImageFoveationVulkanFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
-
-
 void cleanup(const XrSwapchainStateAndroidSurfaceDimensionsFB* s);
-
-
-
-
 void cleanup(const XrSwapchainStateAndroidSurfaceDimensionsFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
-
-
 void cleanup(const XrSwapchainStateSamplerOpenGLESFB* s);
-
-
-
-
 void cleanup(const XrSwapchainStateSamplerOpenGLESFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
-
-
 void cleanup(const XrSwapchainStateSamplerVulkanFB* s);
-
-
-
-
 void cleanup(const XrSwapchainStateSamplerVulkanFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-
-
 void cleanup(const XrSpaceShareInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceShareCompleteFB* s);
-
-
-
-
 void cleanup(const XrSpaceShareInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceShareCompleteFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
-
-
 void cleanup(const XrCompositionLayerSpaceWarpInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemSpaceWarpPropertiesFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerSpaceWarpInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemSpaceWarpPropertiesFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_space_warp
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
-
-
 void cleanup(const XrHapticAmplitudeEnvelopeVibrationFB* s);
-
-
-
-
 void cleanup(const XrHapticAmplitudeEnvelopeVibrationFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-
-
 void cleanup(const XrOffset3DfFB* s);
-
-
-
-
 void cleanup(const XrRect3DfFB* s);
-
-
-
-
 void cleanup(const XrSemanticLabelsFB* s);
-
-
-
-
 void cleanup(const XrRoomLayoutFB* s);
-
-
-
-
 void cleanup(const XrBoundary2DFB* s);
-
-
-
-
 void cleanup(const XrSemanticLabelsSupportInfoFB* s);
-
-
-
-
 void cleanup(const XrSemanticLabelsFB* s);
-
-
-
-
 void cleanup(const XrRoomLayoutFB* s);
-
-
-
-
 void cleanup(const XrBoundary2DFB* s);
-
-
-
-
 void cleanup(const XrSemanticLabelsSupportInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-
-
 void cleanup(const XrDigitalLensControlALMALENCE* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-
-
 void cleanup(const XrEventDataSceneCaptureCompleteFB* s);
-
-
-
-
 void cleanup(const XrSceneCaptureRequestInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSceneCaptureCompleteFB* s);
-
-
-
-
 void cleanup(const XrSceneCaptureRequestInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-
-
 void cleanup(const XrSpaceContainerFB* s);
-
-
-
-
 void cleanup(const XrSpaceContainerFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-
-
 void cleanup(const XrFoveationEyeTrackedProfileCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrFoveationEyeTrackedStateMETA* s);
-
-
-
-
 void cleanup(const XrSystemFoveationEyeTrackedPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrFoveationEyeTrackedProfileCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrFoveationEyeTrackedStateMETA* s);
-
-
-
-
 void cleanup(const XrSystemFoveationEyeTrackedPropertiesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-
-
 void cleanup(const XrSystemFaceTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrFaceTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionInfoFB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionStatusFB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionWeightsFB* s);
-
-
-
-
 void cleanup(const XrSystemFaceTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrFaceTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionInfoFB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionWeightsFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-
-
 void cleanup(const XrEyeGazeFB* s);
-
-
-
-
 void cleanup(const XrEyeTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrEyeGazesInfoFB* s);
-
-
-
-
 void cleanup(const XrSystemEyeTrackingPropertiesFB* s);
-
-
-
-
 void cleanup(const XrEyeGazesFB* s);
-
-
-
-
 void cleanup(const XrEyeTrackerCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrEyeGazesInfoFB* s);
-
-
-
-
 void cleanup(const XrEyeGazesFB* s);
-
-
-
-
 void cleanup(const XrSystemEyeTrackingPropertiesFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-
-
 void cleanup(const XrPassthroughKeyboardHandsIntensityFB* s);
-
-
-
-
 void cleanup(const XrPassthroughKeyboardHandsIntensityFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
-
-
 void cleanup(const XrCompositionLayerSettingsFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerSettingsFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-
-
 void cleanup(const XrHapticPcmVibrationFB* s);
-
-
-
-
 void cleanup(const XrDevicePcmSampleRateStateFB* s);
-
-
-
-
 void cleanup(const XrHapticPcmVibrationFB* s);
-
-
-
-
 void cleanup(const XrDevicePcmSampleRateStateFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
-
-
 void cleanup(const XrFrameSynthesisInfoEXT* s);
-
-
-
-
 void cleanup(const XrFrameSynthesisConfigViewEXT* s);
-
-
-
-
 void cleanup(const XrFrameSynthesisInfoEXT* s);
-
-
-
-
 void cleanup(const XrFrameSynthesisConfigViewEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
-
-
 void cleanup(const XrCompositionLayerDepthTestFB* s);
-
-
-
-
 void cleanup(const XrCompositionLayerDepthTestFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
-
-
 void cleanup(const XrLocalDimmingFrameEndInfoMETA* s);
-
-
-
-
 void cleanup(const XrLocalDimmingFrameEndInfoMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_local_dimming
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-
-
 void cleanup(const XrPassthroughPreferencesMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughPreferencesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-
-
 void cleanup(const XrSystemVirtualKeyboardPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardSpaceCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardLocationInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardAnimationStateMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardModelAnimationStatesMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardTextureDataMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardInputInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardTextContextChangeInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardCommitTextMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardBackspaceMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardEnterMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardShownMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardHiddenMETA* s);
-
-
-
-
 void cleanup(const XrSystemVirtualKeyboardPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardSpaceCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardLocationInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardAnimationStateMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardModelAnimationStatesMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardTextureDataMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardInputInfoMETA* s);
-
-
-
-
 void cleanup(const XrVirtualKeyboardTextContextChangeInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardCommitTextMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardBackspaceMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardEnterMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardShownMETA* s);
-
-
-
-
 void cleanup(const XrEventDataVirtualKeyboardHiddenMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-
-
 void cleanup(const XrExternalCameraIntrinsicsOCULUS* s);
-
-
-
-
 void cleanup(const XrExternalCameraExtrinsicsOCULUS* s);
-
-
-
-
 void cleanup(const XrExternalCameraOCULUS* s);
-
-
-
-
 void cleanup(const XrExternalCameraOCULUS* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
-
-
 void cleanup(const XrVulkanSwapchainCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrVulkanSwapchainCreateInfoMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-
-
 void cleanup(const XrPerformanceMetricsStateMETA* s);
-
-
-
-
 void cleanup(const XrPerformanceMetricsCounterMETA* s);
-
-
-
-
 void cleanup(const XrPerformanceMetricsStateMETA* s);
-
-
-
-
 void cleanup(const XrPerformanceMetricsCounterMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-
-
 void cleanup(const XrSpaceListSaveInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceListSaveCompleteFB* s);
-
-
-
-
 void cleanup(const XrSpaceListSaveInfoFB* s);
-
-
-
-
 void cleanup(const XrEventDataSpaceListSaveCompleteFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-
-
 void cleanup(const XrSpaceUserCreateInfoFB* s);
-
-
-
-
 void cleanup(const XrSpaceUserCreateInfoFB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
-
-
 void cleanup(const XrSystemHeadsetIdPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrSystemHeadsetIdPropertiesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_headset_id
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-
-
 void cleanup(const XrRecommendedLayerResolutionMETA* s);
-
-
-
-
 void cleanup(const XrRecommendedLayerResolutionGetInfoMETA* s);
-
-
-
-
 void cleanup(const XrRecommendedLayerResolutionMETA* s);
-
-
-
-
 void cleanup(const XrRecommendedLayerResolutionGetInfoMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-
-
 void cleanup(const XrPassthroughColorLutDataMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorLutCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorLutUpdateInfoMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapLutMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapInterpolatedLutMETA* s);
-
-
-
-
 void cleanup(const XrSystemPassthroughColorLutPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrSystemPassthroughColorLutPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorLutCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorLutUpdateInfoMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapLutMETA* s);
-
-
-
-
 void cleanup(const XrPassthroughColorMapInterpolatedLutMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-
-
 void cleanup(const XrSpaceTriangleMeshGetInfoMETA* s);
-
-
-
-
 void cleanup(const XrSpaceTriangleMeshMETA* s);
-
-
-
-
 void cleanup(const XrSpaceTriangleMeshGetInfoMETA* s);
-
-
-
-
 void cleanup(const XrSpaceTriangleMeshMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
-
-
 void cleanup(const XrSystemPropertiesBodyTrackingFullBodyMETA* s);
-
-
-
-
 void cleanup(const XrSystemPropertiesBodyTrackingFullBodyMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
-
-
 void cleanup(const XrEventDataPassthroughLayerResumedMETA* s);
-
-
-
-
 void cleanup(const XrEventDataPassthroughLayerResumedMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-
-
 void cleanup(const XrSystemFaceTrackingProperties2FB* s);
-
-
-
-
 void cleanup(const XrFaceTrackerCreateInfo2FB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionInfo2FB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionWeights2FB* s);
-
-
-
-
 void cleanup(const XrSystemFaceTrackingProperties2FB* s);
-
-
-
-
 void cleanup(const XrFaceTrackerCreateInfo2FB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionInfo2FB* s);
-
-
-
-
 void cleanup(const XrFaceExpressionWeights2FB* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-
-
 void cleanup(const XrSystemSpatialEntitySharingPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrShareSpacesRecipientBaseHeaderMETA* s);
-
-
-
-
 void cleanup(const XrShareSpacesInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataShareSpacesCompleteMETA* s);
-
-
-
-
 void cleanup(const XrSystemSpatialEntitySharingPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrShareSpacesInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataShareSpacesCompleteMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-
-
 void cleanup(const XrEnvironmentDepthProviderCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthSwapchainCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthSwapchainStateMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageAcquireInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageViewMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthHandRemovalSetInfoMETA* s);
-
-
-
-
 void cleanup(const XrSystemEnvironmentDepthPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthProviderCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthSwapchainCreateInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthSwapchainStateMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageAcquireInfoMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageViewMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthImageMETA* s);
-
-
-
-
 void cleanup(const XrEnvironmentDepthHandRemovalSetInfoMETA* s);
-
-
-
-
 void cleanup(const XrSystemEnvironmentDepthPropertiesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
-#ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-#endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-
-
 void cleanup(const XrPassthroughCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrPassthroughColorHTC* s);
-
-
-
-
 void cleanup(const XrPassthroughMeshTransformInfoHTC* s);
-
-
-
-
 void cleanup(const XrCompositionLayerPassthroughHTC* s);
-
-
-
-
 void cleanup(const XrPassthroughCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrPassthroughColorHTC* s);
-
-
-
-
 void cleanup(const XrPassthroughMeshTransformInfoHTC* s);
-
-
-
-
 void cleanup(const XrCompositionLayerPassthroughHTC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-
-
 void cleanup(const XrFoveationApplyInfoHTC* s);
-
-
-
-
 void cleanup(const XrFoveationConfigurationHTC* s);
-
-
-
-
 void cleanup(const XrFoveationDynamicModeInfoHTC* s);
-
-
-
-
 void cleanup(const XrFoveationCustomModeInfoHTC* s);
-
-
-
-
 void cleanup(const XrFoveationApplyInfoHTC* s);
-
-
-
-
 void cleanup(const XrFoveationDynamicModeInfoHTC* s);
-
-
-
-
 void cleanup(const XrFoveationCustomModeInfoHTC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-
-
 void cleanup(const XrSystemAnchorPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorNameHTC* s);
-
-
-
-
 void cleanup(const XrSystemAnchorPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoHTC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoHTC* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsHTC* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationHTC* s);
-
-
-
-
 void cleanup(const XrBodySkeletonHTC* s);
-
-
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesHTC* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoHTC* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoHTC* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsHTC* s);
-
-
-
-
 void cleanup(const XrBodySkeletonHTC* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
-
-
 void cleanup(const XrActiveActionSetPrioritiesEXT* s);
-
-
-
-
 void cleanup(const XrActiveActionSetPriorityEXT* s);
-
-
-
-
 void cleanup(const XrActiveActionSetPrioritiesEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-
-
 void cleanup(const XrSystemForceFeedbackCurlPropertiesMNDX* s);
-
-
-
-
 void cleanup(const XrForceFeedbackCurlApplyLocationsMNDX* s);
-
-
-
-
 void cleanup(const XrForceFeedbackCurlApplyLocationMNDX* s);
-
-
-
-
 void cleanup(const XrSystemForceFeedbackCurlPropertiesMNDX* s);
-
-
-
-
 void cleanup(const XrForceFeedbackCurlApplyLocationsMNDX* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesBD* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoBD* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsBD* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationBD* s);
-
-
-
-
 void cleanup(const XrBodyTrackerCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrBodyJointsLocateInfoBD* s);
-
-
-
-
 void cleanup(const XrBodyJointLocationsBD* s);
-
-
-
-
 void cleanup(const XrSystemBodyTrackingPropertiesBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-
-
 void cleanup(const XrSystemSpatialSensingPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentGetInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataBaseHeaderBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityLocationGetInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataLocationBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataSemanticBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataBoundingBox2DBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataPolygonBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataBoundingBox3DBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataTriangleMeshBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderStartInfoBD* s);
-
-
-
-
 void cleanup(const XrEventDataSenseDataProviderStateChangedBD* s);
-
-
-
-
 void cleanup(const XrEventDataSenseDataUpdatedBD* s);
-
-
-
-
 void cleanup(const XrSenseDataQueryInfoBD* s);
-
-
-
-
 void cleanup(const XrSenseDataQueryCompletionBD* s);
-
-
-
-
 void cleanup(const XrQueriedSenseDataGetInfoBD* s);
-
-
-
-
 void cleanup(const XrQueriedSenseDataBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityStateBD* s);
-
-
-
-
 void cleanup(const XrSenseDataFilterUuidBD* s);
-
-
-
-
 void cleanup(const XrSenseDataFilterSemanticBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityAnchorCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrAnchorSpaceCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrSystemSpatialSensingPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentGetInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityLocationGetInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataLocationBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataSemanticBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataBoundingBox2DBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataPolygonBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataBoundingBox3DBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityComponentDataTriangleMeshBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderStartInfoBD* s);
-
-
-
-
 void cleanup(const XrEventDataSenseDataProviderStateChangedBD* s);
-
-
-
-
 void cleanup(const XrEventDataSenseDataUpdatedBD* s);
-
-
-
-
 void cleanup(const XrSenseDataQueryInfoBD* s);
-
-
-
-
 void cleanup(const XrSenseDataQueryCompletionBD* s);
-
-
-
-
 void cleanup(const XrSenseDataFilterUuidBD* s);
-
-
-
-
 void cleanup(const XrSenseDataFilterSemanticBD* s);
-
-
-
-
 void cleanup(const XrQueriedSenseDataGetInfoBD* s);
-
-
-
-
 void cleanup(const XrQueriedSenseDataBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityStateBD* s);
-
-
-
-
 void cleanup(const XrSpatialEntityAnchorCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrAnchorSpaceCreateInfoBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-
-
 void cleanup(const XrSystemSpatialAnchorPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateCompletionBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorPersistInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorUnpersistInfoBD* s);
-
-
-
-
 void cleanup(const XrSystemSpatialAnchorPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorCreateCompletionBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorPersistInfoBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorUnpersistInfoBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-
-
 void cleanup(const XrSystemSpatialAnchorSharingPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorShareInfoBD* s);
-
-
-
-
 void cleanup(const XrSharedSpatialAnchorDownloadInfoBD* s);
-
-
-
-
 void cleanup(const XrSystemSpatialAnchorSharingPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSpatialAnchorShareInfoBD* s);
-
-
-
-
 void cleanup(const XrSharedSpatialAnchorDownloadInfoBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-
-
 void cleanup(const XrSystemSpatialScenePropertiesBD* s);
-
-
-
-
 void cleanup(const XrSceneCaptureInfoBD* s);
-
-
-
-
 void cleanup(const XrSystemSpatialScenePropertiesBD* s);
-
-
-
-
 void cleanup(const XrSceneCaptureInfoBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
-
-
 void cleanup(const XrSystemSpatialMeshPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderCreateInfoSpatialMeshBD* s);
-
-
-
-
 void cleanup(const XrSystemSpatialMeshPropertiesBD* s);
-
-
-
-
 void cleanup(const XrSenseDataProviderCreateInfoSpatialMeshBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
-
-
 void cleanup(const XrFuturePollResultProgressBD* s);
-
-
-
-
 void cleanup(const XrFuturePollResultProgressBD* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_BD_future_progress
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
-
-
 void cleanup(const XrHandTrackingDataSourceInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandTrackingDataSourceStateEXT* s);
-
-
-
-
 void cleanup(const XrHandTrackingDataSourceInfoEXT* s);
-
-
-
-
 void cleanup(const XrHandTrackingDataSourceStateEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-
-
 void cleanup(const XrSystemPlaneDetectionPropertiesEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorBeginInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorGetInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorLocationEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorLocationsEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorPolygonBufferEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorCreateInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorBeginInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorGetInfoEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorLocationsEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorLocationEXT* s);
-
-
-
-
 void cleanup(const XrPlaneDetectorPolygonBufferEXT* s);
-
-
-
-
 void cleanup(const XrSystemPlaneDetectionPropertiesEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-
-
 void cleanup(const XrFutureCancelInfoEXT* s);
-
-
-
-
 void cleanup(const XrFuturePollInfoEXT* s);
-
-
-
-
 void cleanup(const XrFutureCompletionBaseHeaderEXT* s);
-
-
-
-
 void cleanup(const XrFutureCompletionEXT* s);
-
-
-
-
 void cleanup(const XrFuturePollResultEXT* s);
-
-
-
-
 void cleanup(const XrFutureCancelInfoEXT* s);
-
-
-
-
 void cleanup(const XrFuturePollInfoEXT* s);
-
-
-
-
 void cleanup(const XrFutureCompletionEXT* s);
-
-
-
-
 void cleanup(const XrFuturePollResultEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
-
-
 void cleanup(const XrEventDataUserPresenceChangedEXT* s);
-
-
-
-
 void cleanup(const XrSystemUserPresencePropertiesEXT* s);
-
-
-
-
 void cleanup(const XrEventDataUserPresenceChangedEXT* s);
-
-
-
-
 void cleanup(const XrSystemUserPresencePropertiesEXT* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_EXT_user_presence
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-
-
 void cleanup(const XrSystemNotificationsSetInfoML* s);
-
-
-
-
 void cleanup(const XrSystemNotificationsSetInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-
-
 void cleanup(const XrWorldMeshDetectorCreateInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockStateML* s);
-
-
-
-
 void cleanup(const XrWorldMeshStateRequestInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshStateRequestCompletionML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferRecommendedSizeInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferSizeML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockRequestML* s);
-
-
-
-
 void cleanup(const XrWorldMeshGetInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockML* s);
-
-
-
-
 void cleanup(const XrWorldMeshRequestCompletionInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshRequestCompletionML* s);
-
-
-
-
 void cleanup(const XrWorldMeshDetectorCreateInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshStateRequestInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockStateML* s);
-
-
-
-
 void cleanup(const XrWorldMeshStateRequestCompletionML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferRecommendedSizeInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferSizeML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBufferML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockRequestML* s);
-
-
-
-
 void cleanup(const XrWorldMeshGetInfoML* s);
-
-
-
-
 void cleanup(const XrWorldMeshBlockML* s);
-
-
-
-
 void cleanup(const XrWorldMeshRequestCompletionML* s);
-
-
-
-
 void cleanup(const XrWorldMeshRequestCompletionInfoML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-
-
 void cleanup(const XrSystemFacialExpressionPropertiesML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionClientCreateInfoML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionBlendShapeGetInfoML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionBlendShapePropertiesML* s);
-
-
-
-
 void cleanup(const XrSystemFacialExpressionPropertiesML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionClientCreateInfoML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionBlendShapeGetInfoML* s);
-
-
-
-
 void cleanup(const XrFacialExpressionBlendShapePropertiesML* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-
-
 void cleanup(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s);
-
-
-
-
 void cleanup(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s);
-
-
-
-
 void cleanup(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s);
-
-
-
-
 void cleanup(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-
-
 void cleanup(const XrColocationDiscoveryStartInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationDiscoveryStopInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationAdvertisementStartInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationAdvertisementStopInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStartColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStopColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStartColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationDiscoveryResultMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStopColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrSystemColocationDiscoveryPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrColocationDiscoveryStartInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationDiscoveryStopInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationAdvertisementStartInfoMETA* s);
-
-
-
-
 void cleanup(const XrColocationAdvertisementStopInfoMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStartColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStopColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationAdvertisementCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStartColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationDiscoveryResultMETA* s);
-
-
-
-
 void cleanup(const XrEventDataColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrEventDataStopColocationDiscoveryCompleteMETA* s);
-
-
-
-
 void cleanup(const XrSystemColocationDiscoveryPropertiesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
-
-
 void cleanup(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s);
-
-
-
-
 void cleanup(const XrShareSpacesRecipientGroupsMETA* s);
-
-
-
-
 void cleanup(const XrSpaceGroupUuidFilterInfoMETA* s);
-
-
-
-
 void cleanup(const XrShareSpacesRecipientGroupsMETA* s);
-
-
-
-
 void cleanup(const XrSpaceGroupUuidFilterInfoMETA* s);
-
-
-
-
 void cleanup(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s);
-
-
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
-
-
 void cleanup(const XrActionCreateInfo* s);
-
-
-
-
 void cleanup(const XrActionSetCreateInfo* s);
-
-
-
-
 void cleanup(const XrActionSpaceCreateInfo* s);
-
-
-
-
 void cleanup(const XrActionStateBoolean* s);
-
-
-
-
 void cleanup(const XrActionStateFloat* s);
-
-
-
-
 void cleanup(const XrActionStateGetInfo* s);
-
-
-
-
 void cleanup(const XrActionStatePose* s);
-
-
-
-
 void cleanup(const XrActionStateVector2f* s);
-
-
-
-
 void cleanup(const XrActionSuggestedBinding* s);
-
-
-
-
 void cleanup(const XrActionsSyncInfo* s);
-
-
-
-
 void cleanup(const XrActiveActionSet* s);
-
-
-
-
 void cleanup(const XrApiLayerProperties* s);
-
-
-
-
 void cleanup(const XrApplicationInfo* s);
-
-
-
-
 void cleanup(const XrBodySkeletonJointHTC* s);
-
-
-
-
 void cleanup(const XrBoundSourcesForActionEnumerateInfo* s);
-
-
-
-
 void cleanup(const XrBoxf* s);
-
-
-
-
 void cleanup(const XrColor3f* s);
-
-
-
-
 void cleanup(const XrColor4f* s);
-
-
-
-
 void cleanup(const XrCompositionLayerBaseHeader* s);
-
-
-
-
 void cleanup(const XrCompositionLayerProjection* s);
-
-
-
-
 void cleanup(const XrCompositionLayerProjectionView* s);
-
-
-
-
 void cleanup(const XrCompositionLayerQuad* s);
-
-
-
-
 void cleanup(const XrEventDataBaseHeader* s);
-
-
-
-
 void cleanup(const XrEventDataBuffer* s);
-
-
-
-
 void cleanup(const XrEventDataEventsLost* s);
-
-
-
-
 void cleanup(const XrEventDataInstanceLossPending* s);
-
-
-
-
 void cleanup(const XrEventDataInteractionProfileChanged* s);
-
-
-
-
 void cleanup(const XrEventDataReferenceSpaceChangePending* s);
-
-
-
-
 void cleanup(const XrEventDataSessionStateChanged* s);
-
-
-
-
 void cleanup(const XrExtensionProperties* s);
-
-
-
-
 void cleanup(const XrExtent2Df* s);
-
-
-
-
 void cleanup(const XrExtent2Di* s);
-
-
-
-
 void cleanup(const XrExtent3Df* s);
-
-
-
-
 void cleanup(const XrFovf* s);
-
-
-
-
 void cleanup(const XrFrameBeginInfo* s);
-
-
-
-
 void cleanup(const XrFrameEndInfo* s);
-
-
-
-
 void cleanup(const XrFrameState* s);
-
-
-
-
 void cleanup(const XrFrameWaitInfo* s);
-
-
-
-
 void cleanup(const XrFrustumf* s);
-
-
-
-
 void cleanup(const XrHapticActionInfo* s);
-
-
-
-
 void cleanup(const XrHapticBaseHeader* s);
-
-
-
-
 void cleanup(const XrHapticVibration* s);
-
-
-
-
 void cleanup(const XrInputSourceLocalizedNameGetInfo* s);
-
-
-
-
 void cleanup(const XrInstanceCreateInfo* s);
-
-
-
-
 void cleanup(const XrInstanceProperties* s);
-
-
-
-
 void cleanup(const XrInteractionProfileState* s);
-
-
-
-
 void cleanup(const XrInteractionProfileSuggestedBinding* s);
-
-
-
-
 void cleanup(const XrOffset2Df* s);
-
-
-
-
 void cleanup(const XrOffset2Di* s);
-
-
-
-
 void cleanup(const XrPosef* s);
-
-
-
-
 void cleanup(const XrQuaternionf* s);
-
-
-
-
 void cleanup(const XrRect2Df* s);
-
-
-
-
 void cleanup(const XrRect2Di* s);
-
-
-
-
 void cleanup(const XrReferenceSpaceCreateInfo* s);
-
-
-
-
 void cleanup(const XrSessionActionSetsAttachInfo* s);
-
-
-
-
 void cleanup(const XrSessionBeginInfo* s);
-
-
-
-
 void cleanup(const XrSessionCreateInfo* s);
-
-
-
-
 void cleanup(const XrSpaceLocation* s);
-
-
-
-
 void cleanup(const XrSpaceLocationData* s);
-
-
-
-
 void cleanup(const XrSpaceLocations* s);
-
-
-
-
 void cleanup(const XrSpaceVelocities* s);
-
-
-
-
 void cleanup(const XrSpaceVelocity* s);
-
-
-
-
 void cleanup(const XrSpaceVelocityData* s);
-
-
-
-
 void cleanup(const XrSpacesLocateInfo* s);
-
-
-
-
 void cleanup(const XrSpheref* s);
-
-
-
-
 void cleanup(const XrSwapchainCreateInfo* s);
-
-
-
-
 void cleanup(const XrSwapchainImageAcquireInfo* s);
-
-
-
-
 void cleanup(const XrSwapchainImageBaseHeader* s);
-
-
-
-
 void cleanup(const XrSwapchainImageReleaseInfo* s);
-
-
-
-
 void cleanup(const XrSwapchainImageWaitInfo* s);
-
-
-
-
 void cleanup(const XrSwapchainSubImage* s);
-
-
-
-
 void cleanup(const XrSystemGetInfo* s);
-
-
-
-
 void cleanup(const XrSystemGraphicsProperties* s);
-
-
-
-
 void cleanup(const XrSystemProperties* s);
-
-
-
-
 void cleanup(const XrSystemTrackingProperties* s);
-
-
-
-
 void cleanup(const XrUuid* s);
-
-
-
-
 void cleanup(const XrVector2f* s);
-
-
-
-
 void cleanup(const XrVector3f* s);
-
-
-
-
 void cleanup(const XrVector4f* s);
-
-
-
-
 void cleanup(const XrView* s);
-
-
-
-
 void cleanup(const XrViewConfigurationProperties* s);
-
-
-
-
 void cleanup(const XrViewConfigurationView* s);
-
-
-
-
 void cleanup(const XrViewLocateInfo* s);
-
-
-
-
 void cleanup(const XrViewState* s);
-
-
 
 
 // Struct deserializer lookup

@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #include <catch2/catch_test_macros.hpp>
 
 #include "xrtransport/serialization/serializer.h"
@@ -114,7 +114,7 @@ TEST_CASE("Serialization round-trip test", "[serialization]") {
     //
     // Struct initialization
     //
-<% plans = [struct_generator.generate_plan() for _ in range(250)] %>
+<% plans = [struct_generator.generate_plan() for _ in range(250)] %>\
 % for i, plan in enumerate(plans):
     ${struct_generator.init_struct(plan, f"item{i}", "    ")}
 % endfor

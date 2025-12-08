@@ -1,6 +1,6 @@
-<%namespace name="utils" file="utils.mako"/>
-<%def name="forward_serializer(struct)">
-void serialize(const ${struct.name}* s, SyncWriteStream& out);
+<%namespace name="utils" file="utils.mako"/>\
+<%def name="forward_serializer(struct)">\
+void serialize(const ${struct.name}* s, SyncWriteStream& out);\
 </%def>
 
 #ifndef XRTRANSPORT_SERIALIZER_GENERATED_H
@@ -20,7 +20,7 @@ void serialize(const ${struct.name}* s, SyncWriteStream& out);
 namespace xrtransport {
 
 // Forward declarations
-<%utils:for_grouped_structs args="struct">
+<%utils:for_grouped_structs args="struct">\
 ${forward_serializer(struct)}
 </%utils:for_grouped_structs>
 

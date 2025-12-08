@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #include "function_dispatch.h"
 
 #include "xrtransport/server/function_loader.h"
@@ -18,7 +18,7 @@ using std::uint32_t;
 
 namespace xrtransport {
 
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
     function_loader.ensure_function_loaded("${function.name}", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_${function.name}));
@@ -45,10 +45,11 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     instance_handler(std::move(msg_in));
 % endif
 }
+
 </%utils:for_grouped_functions>
 
 std::unordered_map<uint32_t, FunctionDispatch::Handler> FunctionDispatch::handlers = {
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
     {${function.id}, &FunctionDispatch::handle_${function.name}},
 </%utils:for_grouped_functions>
 };

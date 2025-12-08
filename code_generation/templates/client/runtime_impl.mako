@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #include "runtime.h"
 #include "transport_manager.h"
 
@@ -14,7 +14,7 @@
 
 namespace xrtransport {
 
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     try {
     auto& transport = get_transport();
@@ -40,6 +40,7 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
         return XR_ERROR_RUNTIME_FAILURE;
     }
 }
+
 </%utils:for_grouped_functions>
 
 }

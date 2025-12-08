@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #include "runtime.h"
 
 #define XR_EXTENSION_PROTOTYPES
@@ -11,7 +11,7 @@
 static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function);
 
 static std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
     {"${function.name}", (PFN_xrVoidFunction)xrtransport::${function.name}},
 </%utils:for_grouped_functions>
     {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl}

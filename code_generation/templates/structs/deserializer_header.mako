@@ -1,10 +1,10 @@
-<%namespace name="utils" file="utils.mako"/>
-<%def name="forward_deserializer(struct)">
-void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place = false);
+<%namespace name="utils" file="utils.mako"/>\
+<%def name="forward_deserializer(struct)">\
+void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place = false);\
 </%def>
 
-<%def name="forward_cleaner(struct)">
-void cleanup(const ${struct.name}* s);
+<%def name="forward_cleaner(struct)">\
+void cleanup(const ${struct.name}* s);\
 </%def>
 
 #ifndef XRTRANSPORT_DESERIALIZER_GENERATED_H
@@ -25,12 +25,12 @@ void cleanup(const ${struct.name}* s);
 namespace xrtransport {
 
 // Forward declarations (deserializers)
-<%utils:for_grouped_structs args="struct">
+<%utils:for_grouped_structs args="struct">\
 ${forward_deserializer(struct)}
 </%utils:for_grouped_structs>
 
 // Forward declarations (cleaners)
-<%utils:for_grouped_structs args="struct">
+<%utils:for_grouped_structs args="struct">\
 ${forward_cleaner(struct)}
 </%utils:for_grouped_structs>
 

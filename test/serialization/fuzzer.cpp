@@ -7,7 +7,6 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/test/serialization_tests.mako
  */
-
 #include <catch2/catch_test_macros.hpp>
 
 #include "xrtransport/serialization/serializer.h"
@@ -123,7 +122,6 @@ TEST_CASE("Serialization round-trip test", "[serialization]") {
     //
     // Struct initialization
     //
-
         XrSystemTrackingProperties item0{};
     item0.orientationTracking = (XrBool32) 0xbb5d75b895f628f2;
     item0.positionTracking = (XrBool32) 0xd30a286ec6737b8b;

@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #ifndef XRTRANSPORT_FUNCTION_LOADER_H
 #define XRTRANSPORT_FUNCTION_LOADER_H
 
@@ -29,7 +29,7 @@ public:
     // used to load functions
     PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
 
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
     PFN_${function.name} pfn_${function.name} = nullptr;
 </%utils:for_grouped_functions>
 

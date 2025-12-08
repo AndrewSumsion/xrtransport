@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #ifndef XRTRANSPORT_FUNCTION_DISPATCH_H
 #define XRTRANSPORT_FUNCTION_DISPATCH_H
 
@@ -38,7 +38,7 @@ public:
         : transport(transport), function_loader(function_loader), instance_handler(instance_handler)
     {}
 
-<%utils:for_grouped_functions args="function">
+<%utils:for_grouped_functions args="function">\
     void handle_${function.name}(MessageLockIn msg_in);
 </%utils:for_grouped_functions>
 

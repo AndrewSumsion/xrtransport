@@ -1,4 +1,4 @@
-<%namespace name="utils" file="utils.mako"/>
+<%namespace name="utils" file="utils.mako"/>\
 #include "xrtransport/serialization/struct_size.h"
 #include "xrtransport/serialization/error.h"
 
@@ -9,7 +9,7 @@
 namespace xrtransport {
 
 std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
-<%utils:for_grouped_structs xr_structs_only="True" args="struct">
+<%utils:for_grouped_structs xr_structs_only="True" args="struct">\
     {${struct.xr_type}, sizeof(${struct.name})},
 </%utils:for_grouped_structs>
 };
