@@ -7,6 +7,7 @@
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/asio_compat.h"
+#include "xrtransport/time.h"
 
 #include "openxr/openxr.h"
 
@@ -81,6 +82,16 @@ void Server::run() {
         function_dispatch.handle_function(function_id, std::move(msg_in));
     });
 
+    transport.register_handler(SYNCHRONIZATION_REQUEST, [this](Transport& transport, MessageLockIn msg_in) {
+        XrTime client_time{};
+        asio::read(msg_in.stream, asio::buffer(&client_time, sizeof(XrTime)));
+
+        auto msg_out = transport.start_message(SYNCHRONIZATION_RESPONSE);
+        XrTime server_time = get_time();
+        asio::write(msg_out.buffer, asio::buffer(&server_time, sizeof(XrTime)));
+        msg_out.flush();
+    });
+
     // initialize all modules (which may add handlers)
     for (auto& module : modules) {
         module.on_init(&transport, &function_loader);
@@ -100,10 +111,11 @@ void Server::instance_handler(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateInstance", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateInstance));
     
     // Read in args sent by client
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstanceCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrInstance* instance{};
-    deserialize_ptr(&instance, msg_in.stream, false);
+    deserialize_ptr(&instance, d_ctx);
 
     // Put existing extensions into vector
     uint32_t old_enabled_extension_count = createInfo->enabledExtensionCount;
@@ -133,8 +145,9 @@ void Server::instance_handler(MessageLockIn msg_in) {
 
     // Send response to client
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(instance, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(instance, 1, s_ctx);
     msg_out.flush();
 
     if (XR_SUCCEEDED(_result)) {

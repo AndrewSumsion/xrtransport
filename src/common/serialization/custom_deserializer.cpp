@@ -2,7 +2,7 @@
 
 namespace xrtransport {
 
-void deserialize(XrInstanceCreateInfo* s, SyncReadStream& in, bool in_place) {
+void deserialize(XrInstanceCreateInfo* s, DeserializeContext& ctx) {
 
 }
 
@@ -10,7 +10,7 @@ void cleanup(const XrInstanceCreateInfo* s) {
 
 }
 
-void deserialize(XrFrameEndInfo* s, SyncReadStream& in, bool in_place) {
+void deserialize(XrFrameEndInfo* s, DeserializeContext& ctx) {
 
 }
 

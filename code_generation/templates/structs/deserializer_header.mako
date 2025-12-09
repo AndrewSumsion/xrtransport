@@ -1,6 +1,6 @@
 <%namespace name="utils" file="utils.mako"/>\
 <%def name="forward_deserializer(struct)">\
-void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place = false);\
+void deserialize(${struct.name}* s, DeserializeContext& ctx);\
 </%def>
 
 <%def name="forward_cleaner(struct)">\
@@ -24,6 +24,20 @@ void cleanup(const ${struct.name}* s);\
 
 namespace xrtransport {
 
+struct DeserializeContext {
+    SyncReadStream& in;
+    bool in_place;
+    XrDuration time_offset;
+
+    explicit DeserializeContext(SyncReadStream& in)
+        : in(in), in_place(false), time_offset(0)
+    {}
+
+    explicit DeserializeContext(SyncReadStream& in, bool in_place, XrDuration time_offset)
+        : in(in), in_place(in_place), time_offset(time_offset)
+    {}
+};
+
 // Forward declarations (deserializers)
 <%utils:for_grouped_structs args="struct">\
 ${forward_deserializer(struct)}
@@ -36,8 +50,8 @@ ${forward_cleaner(struct)}
 
 // Struct deserializer lookup
 // Only to be used with OpenXR pNext structs
-using StructDeserializer = void(*)(XrBaseOutStructure*, SyncReadStream&, bool);
-#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, SyncReadStream&, bool)>(&deserialize)))
+using StructDeserializer = void(*)(XrBaseOutStructure*, DeserializeContext&);
+#define STRUCT_DESERIALIZER_PTR(t) (reinterpret_cast<StructDeserializer>(static_cast<void(*)(t*, DeserializeContext&)>(&deserialize)))
 
 StructDeserializer deserializer_lookup(XrStructureType struct_type);
 
@@ -48,48 +62,50 @@ using StructCleaner = void(*)(const XrBaseOutStructure*);
 
 StructCleaner cleaner_lookup(XrStructureType struct_type);
 
+void deserialize_time(XrTime* time, DeserializeContext& ctx);
+
 // Generic deserializers
 template <typename T>
-void deserialize(T* x, SyncReadStream& in, bool in_place = false) {
+void deserialize(T* x, DeserializeContext& ctx) {
     static_assert(
         !std::is_class<T>::value,
         "T must be a supported type"
     );
-    asio::read(in, asio::mutable_buffer(x, sizeof(T)));
+    asio::read(ctx.in, asio::buffer(x, sizeof(T)));
 }
 
 template <typename T>
-void deserialize(const T* x, SyncReadStream& in, bool in_place = false) {
-    deserialize(const_cast<typename std::remove_const<T>::type*>(x), in, in_place);
+void deserialize(const T* x, DeserializeContext& ctx) {
+    deserialize(const_cast<typename std::remove_const<T>::type*>(x), ctx);
 }
 
 template <typename T>
-void deserialize_array(T* x, std::size_t len, SyncReadStream& in, bool in_place = false) {
+void deserialize_array(T* x, std::size_t len, DeserializeContext& ctx) {
     for (std::size_t i = 0; i < len; i++) {
-        deserialize(&x[i], in, in_place);
+        deserialize(&x[i], ctx);
     }
 }
 
 // For weird const-correctness reasons, we need a const and non-const version
 template <typename T>
-void deserialize_ptr(const T** x, SyncReadStream& in, bool in_place = false) {
+void deserialize_ptr(const T** x, DeserializeContext& ctx) {
     std::uint32_t len{};
-    deserialize(&len, in, in_place);
+    deserialize(&len, ctx);
     if (len) {
-        if (in_place) {
+        if (ctx.in_place) {
             if (!*x) {
                 throw std::runtime_error("Attempted to deserialize in-place into nullptr");
             }
-            deserialize_array(*x, len, in, in_place);
+            deserialize_array(*x, len, ctx);
         }
         else {
             T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
-            deserialize_array(data, len, in, in_place);
+            deserialize_array(data, len, ctx);
             *x = data;
         }
     }
     else {
-        if (in_place) {
+        if (ctx.in_place) {
             if (*x) {
                 throw std::runtime_error("Attempted to deserialize in-place nullptr but pointer is allocated");
             }
@@ -101,24 +117,24 @@ void deserialize_ptr(const T** x, SyncReadStream& in, bool in_place = false) {
 }
 
 template <typename T>
-void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
+void deserialize_ptr(T** x, DeserializeContext& ctx) {
     std::uint32_t len{};
-    deserialize(&len, in, in_place);
+    deserialize(&len, ctx);
     if (len) {
-        if (in_place) {
+        if (ctx.in_place) {
             if (!*x) {
                 throw std::runtime_error("Attempted to deserialize in-place into nullptr");
             }
-            deserialize_array(*x, len, in, in_place);
+            deserialize_array(*x, len, ctx);
         }
         else {
             T* data = static_cast<T*>(std::malloc(sizeof(T) * len));
-            deserialize_array(data, len, in, in_place);
+            deserialize_array(data, len, ctx);
             *x = data;
         }
     }
     else {
-        if (in_place) {
+        if (ctx.in_place) {
             if (*x) {
                 throw std::runtime_error("Attempted to deserialize in-place nullptr but pointer is allocated");
             }
@@ -130,66 +146,66 @@ void deserialize_ptr(T** x, SyncReadStream& in, bool in_place = false) {
 }
 
 template <typename T>
-void deserialize_xr(const T** p_s, SyncReadStream& in, bool in_place = false) {
+void deserialize_xr(const T** p_s, DeserializeContext& ctx) {
     XrStructureType type{};
-    deserialize(&type, in, in_place);
+    deserialize(&type, ctx);
     if (type) {
-        const void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
+        const void* dest = ctx.in_place ? *p_s : std::malloc(size_lookup(type));
+        if (ctx.in_place && !dest) {
             throw std::runtime_error("Attempted to deserialize in-place to nullptr");
         }
         XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(const_cast<void*>(dest));
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
+        deserializer_lookup(type)(s, ctx);
+        if (!ctx.in_place) {
             *p_s = reinterpret_cast<T*>(s);
         }
     }
     else {
-        if (in_place && *p_s) {
+        if (ctx.in_place && *p_s) {
             throw std::runtime_error("Attempted to deserialize in-place nullptr into allocated pointer");
         }
-        if (!in_place) {
+        if (!ctx.in_place) {
             *p_s = nullptr;
         }
     }
 }
 
 template <typename T>
-void deserialize_xr(T** p_s, SyncReadStream& in, bool in_place = false) {
+void deserialize_xr(T** p_s, DeserializeContext& ctx) {
     XrStructureType type{};
-    deserialize(&type, in, in_place);
+    deserialize(&type, ctx);
     if (type) {
-        void* dest = in_place ? *p_s : std::malloc(size_lookup(type));
-        if (in_place && !dest) {
+        void* dest = ctx.in_place ? *p_s : std::malloc(size_lookup(type));
+        if (ctx.in_place && !dest) {
             assert(false && "Attempted to deserialize in-place to nullptr");
         }
         XrBaseOutStructure* s = static_cast<XrBaseOutStructure*>(dest);
-        deserializer_lookup(type)(s, in, in_place);
-        if (!in_place) {
+        deserializer_lookup(type)(s, ctx);
+        if (!ctx.in_place) {
             *p_s = reinterpret_cast<T*>(s);
         }
     }
     else {
-        if (in_place && *p_s) {
+        if (ctx.in_place && *p_s) {
             assert(false && "Attempted to deserialize in-place nullptr into allocated pointer");
         }
-        if (!in_place) {
+        if (!ctx.in_place) {
             *p_s = nullptr;
         }
     }
 }
 
 template <typename T>
-void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
+void deserialize_xr_array(T** p_s, DeserializeContext& ctx) {
     std::uint32_t count{};
-    deserialize(&count, in);
+    deserialize(&count, ctx);
     if (count) {
         XrStructureType type{};
-        deserialize(&type, in);
+        deserialize(&type, ctx);
         std::size_t struct_size = size_lookup(type);
         StructDeserializer deserializer = deserializer_lookup(type);
         T* dest;
-        if (in_place) {
+        if (ctx.in_place) {
             dest = *p_s;
         }
         else {
@@ -200,23 +216,23 @@ void deserialize_xr_array(T** p_s, SyncReadStream& in, bool in_place = false) {
         XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(dest);
         for(std::uint32_t i = 0; i < count; i++) {
             XrBaseOutStructure* s = reinterpret_cast<XrBaseOutStructure*>(buffer);
-            deserializer(s, in, in_place);
+            deserializer(s, ctx);
             buffer += struct_size;
         }
     }
 }
 
 template <typename T>
-void deserialize_xr_array(const T** p_s, SyncReadStream& in, bool in_place = false) {
+void deserialize_xr_array(const T** p_s, DeserializeContext& ctx) {
     std::uint32_t count{};
-    deserialize(&count, in);
+    deserialize(&count, ctx);
     if (count) {
         XrStructureType type{};
-        deserialize(&type, in);
+        deserialize(&type, ctx);
         std::size_t struct_size = size_lookup(type);
         StructDeserializer deserializer = deserializer_lookup(type);
         T* dest;
-        if (in_place) {
+        if (ctx.in_place) {
             dest = *p_s;
         }
         else {
@@ -227,7 +243,7 @@ void deserialize_xr_array(const T** p_s, SyncReadStream& in, bool in_place = fal
         XrBaseOutStructure* first = reinterpret_cast<XrBaseOutStructure*>(dest);
         for(std::uint32_t i = 0; i < count; i++) {
             XrBaseOutStructure* s = reinterpret_cast<XrBaseOutStructure*>(buffer);
-            deserializer(s, in, in_place);
+            deserializer(s, ctx);
             buffer += struct_size;
         }
     }

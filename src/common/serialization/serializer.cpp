@@ -1153,7957 +1153,7964 @@ StructSerializer serializer_lookup(XrStructureType struct_type) {
 // Serializers
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 
-void serialize(const XrDigitalLensControlALMALENCE* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrDigitalLensControlALMALENCE* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 
-void serialize(const XrBodyJointLocationBD* s, SyncWriteStream& out) {
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
+void serialize(const XrBodyJointLocationBD* s, SerializeContext& ctx) {
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->allJointPosesTracked, out);
-    serialize(&s->jointLocationCount, out);
-    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+void serialize(const XrBodyJointLocationsBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->allJointPosesTracked, ctx);
+    serialize(&s->jointLocationCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointLocationCount, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->allJointPosesTracked, out);
-    serialize(&s->jointLocationCount, out);
-    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
+void serialize(const XrBodyJointLocationsBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->allJointPosesTracked, ctx);
+    serialize(&s->jointLocationCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointLocationCount, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointSet, out);
+void serialize(const XrBodyTrackerCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointSet, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointSet, out);
+void serialize(const XrBodyTrackerCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointSet, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_future_progress
 
-void serialize(const XrFuturePollResultProgressBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isSupported, out);
-    serialize(&s->progressPercentage, out);
+void serialize(const XrFuturePollResultProgressBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isSupported, ctx);
+    serialize(&s->progressPercentage, ctx);
 }
 
 
-void serialize(const XrFuturePollResultProgressBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isSupported, out);
-    serialize(&s->progressPercentage, out);
+void serialize(const XrFuturePollResultProgressBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isSupported, ctx);
+    serialize(&s->progressPercentage, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_future_progress
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->anchor, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->anchor, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateCompletionBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->anchor, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSpatialAnchorCreateCompletionBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->anchor, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->pose, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->pose, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->pose, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->pose, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorPersistInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorPersistInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorPersistInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorUnpersistInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialAnchor, out);
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialAnchor, ctx);
 }
 
 
-void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialAnchor, out);
+void serialize(const XrSystemSpatialAnchorPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialAnchor, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSharedSpatialAnchorDownloadInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorShareInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorShareInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchor, out);
+void serialize(const XrSpatialAnchorShareInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchor, ctx);
 }
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialAnchorSharing, out);
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialAnchorSharing, ctx);
 }
 
 
-void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialAnchorSharing, out);
+void serialize(const XrSystemSpatialAnchorSharingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialAnchorSharing, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_mesh
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->configFlags, out);
-    serialize(&s->lod, out);
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->configFlags, ctx);
+    serialize(&s->lod, ctx);
 }
 
 
-void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->configFlags, out);
-    serialize(&s->lod, out);
+void serialize(const XrSenseDataProviderCreateInfoSpatialMeshBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->configFlags, ctx);
+    serialize(&s->lod, ctx);
 }
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialMesh, out);
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialMesh, ctx);
 }
 
 
-void serialize(const XrSystemSpatialMeshPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialMesh, out);
+void serialize(const XrSystemSpatialMeshPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialMesh, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_mesh
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 
-void serialize(const XrSceneCaptureInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneCaptureInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneCaptureInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneCaptureInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialScene, out);
+void serialize(const XrSystemSpatialScenePropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialScene, ctx);
 }
 
 
-void serialize(const XrSystemSpatialScenePropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialScene, out);
+void serialize(const XrSystemSpatialScenePropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialScene, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchor, out);
-    serialize(&s->poseInAnchorSpace, out);
+void serialize(const XrAnchorSpaceCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchor, ctx);
+    serialize(&s->poseInAnchorSpace, ctx);
 }
 
 
-void serialize(const XrAnchorSpaceCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchor, out);
-    serialize(&s->poseInAnchorSpace, out);
+void serialize(const XrAnchorSpaceCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchor, ctx);
+    serialize(&s->poseInAnchorSpace, ctx);
 }
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->provider, out);
-    serialize(&s->newState, out);
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->provider, ctx);
+    serialize(&s->newState, ctx);
 }
 
 
-void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->provider, out);
-    serialize(&s->newState, out);
+void serialize(const XrEventDataSenseDataProviderStateChangedBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->provider, ctx);
+    serialize(&s->newState, ctx);
 }
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->provider, out);
+void serialize(const XrEventDataSenseDataUpdatedBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->provider, ctx);
 }
 
 
-void serialize(const XrEventDataSenseDataUpdatedBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->provider, out);
+void serialize(const XrEventDataSenseDataUpdatedBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->provider, ctx);
 }
 
 
-void serialize(const XrQueriedSenseDataBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->stateCapacityInput, out);
-    serialize(&s->stateCountOutput, out);
-    serialize_ptr(s->states, s->stateCapacityInput, out);
+void serialize(const XrQueriedSenseDataBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->stateCapacityInput, ctx);
+    serialize(&s->stateCountOutput, ctx);
+    serialize_ptr(s->states, s->stateCapacityInput, ctx);
 }
 
 
-void serialize(const XrQueriedSenseDataBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->stateCapacityInput, out);
-    serialize(&s->stateCountOutput, out);
-    serialize_ptr(s->states, s->stateCapacityInput, out);
+void serialize(const XrQueriedSenseDataBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->stateCapacityInput, ctx);
+    serialize(&s->stateCountOutput, ctx);
+    serialize_ptr(s->states, s->stateCapacityInput, ctx);
 }
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrQueriedSenseDataGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrQueriedSenseDataGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrQueriedSenseDataGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->labelCount, out);
-    serialize_ptr(s->labels, s->labelCount, out);
+void serialize(const XrSenseDataFilterSemanticBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->labelCount, ctx);
+    serialize_ptr(s->labels, s->labelCount, ctx);
 }
 
 
-void serialize(const XrSenseDataFilterSemanticBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->labelCount, out);
-    serialize_ptr(s->labels, s->labelCount, out);
+void serialize(const XrSenseDataFilterSemanticBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->labelCount, ctx);
+    serialize_ptr(s->labels, s->labelCount, ctx);
 }
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSenseDataFilterUuidBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSenseDataFilterUuidBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSenseDataFilterUuidBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->providerType, out);
+void serialize(const XrSenseDataProviderCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->providerType, ctx);
 }
 
 
-void serialize(const XrSenseDataProviderCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->providerType, out);
+void serialize(const XrSenseDataProviderCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->providerType, ctx);
 }
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSenseDataProviderStartInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSenseDataProviderStartInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSenseDataProviderStartInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->snapshot, out);
+void serialize(const XrSenseDataQueryCompletionBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->snapshot, ctx);
 }
 
 
-void serialize(const XrSenseDataQueryCompletionBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->snapshot, out);
+void serialize(const XrSenseDataQueryCompletionBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->snapshot, ctx);
 }
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSenseDataQueryInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSenseDataQueryInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSenseDataQueryInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->snapshot, out);
-    serialize(&s->entityId, out);
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->snapshot, ctx);
+    serialize(&s->entityId, ctx);
 }
 
 
-void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->snapshot, out);
-    serialize(&s->entityId, out);
+void serialize(const XrSpatialEntityAnchorCreateInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->snapshot, ctx);
+    serialize(&s->entityId, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSpatialEntityComponentDataBaseHeaderBD* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->boundingBox2D, out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->boundingBox2D, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->boundingBox2D, out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox2DBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->boundingBox2D, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->boundingBox3D, out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->boundingBox3D, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->boundingBox3D, out);
+void serialize(const XrSpatialEntityComponentDataBoundingBox3DBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->boundingBox3D, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataLocationBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
+void serialize(const XrSpatialEntityComponentDataLocationBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataPolygonBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->labelCapacityInput, out);
-    serialize(&s->labelCountOutput, out);
-    serialize_ptr(s->labels, s->labelCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->labelCapacityInput, ctx);
+    serialize(&s->labelCountOutput, ctx);
+    serialize_ptr(s->labels, s->labelCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->labelCapacityInput, out);
-    serialize(&s->labelCountOutput, out);
-    serialize_ptr(s->labels, s->labelCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataSemanticBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->labelCapacityInput, ctx);
+    serialize(&s->labelCountOutput, ctx);
+    serialize_ptr(s->labels, s->labelCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSpatialEntityComponentDataTriangleMeshBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->entityId, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->entityId, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSpatialEntityComponentGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->entityId, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSpatialEntityComponentGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->entityId, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
 }
 
 
-void serialize(const XrSpatialEntityLocationGetInfoBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
+void serialize(const XrSpatialEntityLocationGetInfoBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
 }
 
 
-void serialize(const XrSpatialEntityStateBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->entityId, out);
-    serialize(&s->lastUpdateTime, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSpatialEntityStateBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->entityId, ctx);
+    serialize_time(&s->lastUpdateTime, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpatialEntityStateBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->entityId, out);
-    serialize(&s->lastUpdateTime, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSpatialEntityStateBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->entityId, ctx);
+    serialize_time(&s->lastUpdateTime, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialSensing, out);
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialSensing, ctx);
 }
 
 
-void serialize(const XrSystemSpatialSensingPropertiesBD* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialSensing, out);
+void serialize(const XrSystemSpatialSensingPropertiesBD* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialSensing, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedFov, out);
-    serialize(&s->maxMutableFov, out);
+void serialize(const XrViewConfigurationViewFovEPIC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedFov, ctx);
+    serialize(&s->maxMutableFov, ctx);
 }
 
 
-void serialize(const XrViewConfigurationViewFovEPIC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedFov, out);
-    serialize(&s->maxMutableFov, out);
+void serialize(const XrViewConfigurationViewFovEPIC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedFov, ctx);
+    serialize(&s->maxMutableFov, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EPIC_view_configuration_fov
 #ifdef XRTRANSPORT_EXT_XR_EXTX_overlay
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->visible, out);
-    serialize(&s->flags, out);
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->visible, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->visible, out);
-    serialize(&s->flags, out);
+void serialize(const XrEventDataMainSessionVisibilityChangedEXTX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->visible, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->sessionLayersPlacement, out);
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->sessionLayersPlacement, ctx);
 }
 
 
-void serialize(const XrSessionCreateInfoOverlayEXTX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->sessionLayersPlacement, out);
+void serialize(const XrSessionCreateInfoOverlayEXTX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->sessionLayersPlacement, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXTX_overlay
 #ifdef XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->actionSetPriorityCount, out);
-    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, out);
+void serialize(const XrActiveActionSetPrioritiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->actionSetPriorityCount, ctx);
+    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, ctx);
 }
 
 
-void serialize(const XrActiveActionSetPrioritiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->actionSetPriorityCount, out);
-    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, out);
+void serialize(const XrActiveActionSetPrioritiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->actionSetPriorityCount, ctx);
+    serialize_ptr(s->actionSetPriorities, s->actionSetPriorityCount, ctx);
 }
 
 
-void serialize(const XrActiveActionSetPriorityEXT* s, SyncWriteStream& out) {
-    serialize(&s->actionSet, out);
-    serialize(&s->priorityOverride, out);
+void serialize(const XrActiveActionSetPriorityEXT* s, SerializeContext& ctx) {
+    serialize(&s->actionSet, ctx);
+    serialize(&s->priorityOverride, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_active_action_set_priority
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 
-void serialize(const XrDebugUtilsLabelEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->labelName, count_null_terminated(s->labelName), out);
+void serialize(const XrDebugUtilsLabelEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->labelName, count_null_terminated(s->labelName), ctx);
 }
 
 
-void serialize(const XrDebugUtilsLabelEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->labelName, count_null_terminated(s->labelName), out);
+void serialize(const XrDebugUtilsLabelEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->labelName, count_null_terminated(s->labelName), ctx);
 }
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->messageId, count_null_terminated(s->messageId), out);
-    serialize_ptr(s->functionName, count_null_terminated(s->functionName), out);
-    serialize_ptr(s->message, count_null_terminated(s->message), out);
-    serialize(&s->objectCount, out);
-    serialize_ptr(s->objects, s->objectCount, out);
-    serialize(&s->sessionLabelCount, out);
-    serialize_ptr(s->sessionLabels, s->sessionLabelCount, out);
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->messageId, count_null_terminated(s->messageId), ctx);
+    serialize_ptr(s->functionName, count_null_terminated(s->functionName), ctx);
+    serialize_ptr(s->message, count_null_terminated(s->message), ctx);
+    serialize(&s->objectCount, ctx);
+    serialize_ptr(s->objects, s->objectCount, ctx);
+    serialize(&s->sessionLabelCount, ctx);
+    serialize_ptr(s->sessionLabels, s->sessionLabelCount, ctx);
 }
 
 
-void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->messageId, count_null_terminated(s->messageId), out);
-    serialize_ptr(s->functionName, count_null_terminated(s->functionName), out);
-    serialize_ptr(s->message, count_null_terminated(s->message), out);
-    serialize(&s->objectCount, out);
-    serialize_ptr(s->objects, s->objectCount, out);
-    serialize(&s->sessionLabelCount, out);
-    serialize_ptr(s->sessionLabels, s->sessionLabelCount, out);
+void serialize(const XrDebugUtilsMessengerCallbackDataEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->messageId, count_null_terminated(s->messageId), ctx);
+    serialize_ptr(s->functionName, count_null_terminated(s->functionName), ctx);
+    serialize_ptr(s->message, count_null_terminated(s->message), ctx);
+    serialize(&s->objectCount, ctx);
+    serialize_ptr(s->objects, s->objectCount, ctx);
+    serialize(&s->sessionLabelCount, ctx);
+    serialize_ptr(s->sessionLabels, s->sessionLabelCount, ctx);
 }
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->messageSeverities, out);
-    serialize(&s->messageTypes, out);
-    serialize(&s->userCallback, out);
-    serialize_ptr(s->userData, 1, out);
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->messageSeverities, ctx);
+    serialize(&s->messageTypes, ctx);
+    serialize(&s->userCallback, ctx);
+    serialize_ptr(s->userData, 1, ctx);
 }
 
 
-void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->messageSeverities, out);
-    serialize(&s->messageTypes, out);
-    serialize(&s->userCallback, out);
-    serialize_ptr(s->userData, 1, out);
+void serialize(const XrDebugUtilsMessengerCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->messageSeverities, ctx);
+    serialize(&s->messageTypes, ctx);
+    serialize(&s->userCallback, ctx);
+    serialize_ptr(s->userData, 1, ctx);
 }
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->objectType, out);
-    serialize(&s->objectHandle, out);
-    serialize_ptr(s->objectName, count_null_terminated(s->objectName), out);
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->objectType, ctx);
+    serialize(&s->objectHandle, ctx);
+    serialize_ptr(s->objectName, count_null_terminated(s->objectName), ctx);
 }
 
 
-void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->objectType, out);
-    serialize(&s->objectHandle, out);
-    serialize_ptr(s->objectName, count_null_terminated(s->objectName), out);
+void serialize(const XrDebugUtilsObjectNameInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->objectType, ctx);
+    serialize(&s->objectHandle, ctx);
+    serialize_ptr(s->objectName, count_null_terminated(s->objectName), ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_dpad_binding
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->binding, out);
-    serialize(&s->actionSet, out);
-    serialize(&s->forceThreshold, out);
-    serialize(&s->forceThresholdReleased, out);
-    serialize(&s->centerRegion, out);
-    serialize(&s->wedgeAngle, out);
-    serialize(&s->isSticky, out);
-    serialize_xr(s->onHaptic, out);
-    serialize_xr(s->offHaptic, out);
+void serialize(const XrInteractionProfileDpadBindingEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->binding, ctx);
+    serialize(&s->actionSet, ctx);
+    serialize(&s->forceThreshold, ctx);
+    serialize(&s->forceThresholdReleased, ctx);
+    serialize(&s->centerRegion, ctx);
+    serialize(&s->wedgeAngle, ctx);
+    serialize(&s->isSticky, ctx);
+    serialize_xr(s->onHaptic, ctx);
+    serialize_xr(s->offHaptic, ctx);
 }
 
 
-void serialize(const XrInteractionProfileDpadBindingEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->binding, out);
-    serialize(&s->actionSet, out);
-    serialize(&s->forceThreshold, out);
-    serialize(&s->forceThresholdReleased, out);
-    serialize(&s->centerRegion, out);
-    serialize(&s->wedgeAngle, out);
-    serialize(&s->isSticky, out);
-    serialize_xr(s->onHaptic, out);
-    serialize_xr(s->offHaptic, out);
+void serialize(const XrInteractionProfileDpadBindingEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->binding, ctx);
+    serialize(&s->actionSet, ctx);
+    serialize(&s->forceThreshold, ctx);
+    serialize(&s->forceThresholdReleased, ctx);
+    serialize(&s->centerRegion, ctx);
+    serialize(&s->wedgeAngle, ctx);
+    serialize(&s->isSticky, ctx);
+    serialize_xr(s->onHaptic, ctx);
+    serialize_xr(s->offHaptic, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_dpad_binding
 #ifdef XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazeSampleTimeEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEyeGazeSampleTimeEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazeSampleTimeEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEyeGazeInteraction, out);
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEyeGazeInteraction, ctx);
 }
 
 
-void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEyeGazeInteraction, out);
+void serialize(const XrSystemEyeGazeInteractionPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEyeGazeInteraction, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_eye_gaze_interaction
 #ifdef XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedMotionVectorImageRectWidth, out);
-    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+void serialize(const XrFrameSynthesisConfigViewEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedMotionVectorImageRectWidth, ctx);
+    serialize(&s->recommendedMotionVectorImageRectHeight, ctx);
 }
 
 
-void serialize(const XrFrameSynthesisConfigViewEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedMotionVectorImageRectWidth, out);
-    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+void serialize(const XrFrameSynthesisConfigViewEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedMotionVectorImageRectWidth, ctx);
+    serialize(&s->recommendedMotionVectorImageRectHeight, ctx);
 }
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->motionVectorSubImage, out);
-    serialize(&s->motionVectorScale, out);
-    serialize(&s->motionVectorOffset, out);
-    serialize(&s->appSpaceDeltaPose, out);
-    serialize(&s->depthSubImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrFrameSynthesisInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->motionVectorSubImage, ctx);
+    serialize(&s->motionVectorScale, ctx);
+    serialize(&s->motionVectorOffset, ctx);
+    serialize(&s->appSpaceDeltaPose, ctx);
+    serialize(&s->depthSubImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 
-void serialize(const XrFrameSynthesisInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->motionVectorSubImage, out);
-    serialize(&s->motionVectorScale, out);
-    serialize(&s->motionVectorOffset, out);
-    serialize(&s->appSpaceDeltaPose, out);
-    serialize(&s->depthSubImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrFrameSynthesisInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->motionVectorSubImage, ctx);
+    serialize(&s->motionVectorScale, ctx);
+    serialize(&s->motionVectorOffset, ctx);
+    serialize(&s->appSpaceDeltaPose, ctx);
+    serialize(&s->depthSubImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_frame_synthesis
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 
-void serialize(const XrFutureCancelInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->future, out);
+void serialize(const XrFutureCancelInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->future, ctx);
 }
 
 
-void serialize(const XrFutureCancelInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->future, out);
+void serialize(const XrFutureCancelInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->future, ctx);
 }
 
 
-void serialize(const XrFutureCompletionBaseHeaderEXT* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrFutureCompletionBaseHeaderEXT* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrFutureCompletionEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrFutureCompletionEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrFutureCompletionEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrFutureCompletionEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrFuturePollInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->future, out);
+void serialize(const XrFuturePollInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->future, ctx);
 }
 
 
-void serialize(const XrFuturePollInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->future, out);
+void serialize(const XrFuturePollInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->future, ctx);
 }
 
 
-void serialize(const XrFuturePollResultEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->state, out);
+void serialize(const XrFuturePollResultEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->state, ctx);
 }
 
 
-void serialize(const XrFuturePollResultEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->state, out);
+void serialize(const XrFuturePollResultEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->state, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handJointsMotionRange, out);
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handJointsMotionRange, ctx);
 }
 
 
-void serialize(const XrHandJointsMotionRangeInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handJointsMotionRange, out);
+void serialize(const XrHandJointsMotionRangeInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handJointsMotionRange, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_joints_motion_range
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 
-void serialize(const XrHandJointLocationEXT* s, SyncWriteStream& out) {
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
+void serialize(const XrHandJointLocationEXT* s, SerializeContext& ctx) {
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
 }
 
 
-void serialize(const XrHandJointLocationsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointLocations, s->jointCount, out);
+void serialize(const XrHandJointLocationsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointCount, ctx);
 }
 
 
-void serialize(const XrHandJointLocationsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointLocations, s->jointCount, out);
+void serialize(const XrHandJointLocationsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointCount, ctx);
 }
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointVelocities, s->jointCount, out);
+void serialize(const XrHandJointVelocitiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointVelocities, s->jointCount, ctx);
 }
 
 
-void serialize(const XrHandJointVelocitiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointVelocities, s->jointCount, out);
+void serialize(const XrHandJointVelocitiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointVelocities, s->jointCount, ctx);
 }
 
 
-void serialize(const XrHandJointVelocityEXT* s, SyncWriteStream& out) {
-    serialize(&s->velocityFlags, out);
-    serialize(&s->linearVelocity, out);
-    serialize(&s->angularVelocity, out);
+void serialize(const XrHandJointVelocityEXT* s, SerializeContext& ctx) {
+    serialize(&s->velocityFlags, ctx);
+    serialize(&s->linearVelocity, ctx);
+    serialize(&s->angularVelocity, ctx);
 }
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrHandJointsLocateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrHandJointsLocateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrHandJointsLocateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->hand, out);
-    serialize(&s->handJointSet, out);
+void serialize(const XrHandTrackerCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->hand, ctx);
+    serialize(&s->handJointSet, ctx);
 }
 
 
-void serialize(const XrHandTrackerCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->hand, out);
-    serialize(&s->handJointSet, out);
+void serialize(const XrHandTrackerCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->hand, ctx);
+    serialize(&s->handJointSet, ctx);
 }
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsHandTracking, out);
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsHandTracking, ctx);
 }
 
 
-void serialize(const XrSystemHandTrackingPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsHandTracking, out);
+void serialize(const XrSystemHandTrackingPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsHandTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedDataSourceCount, out);
-    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedDataSourceCount, ctx);
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, ctx);
 }
 
 
-void serialize(const XrHandTrackingDataSourceInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedDataSourceCount, out);
-    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+void serialize(const XrHandTrackingDataSourceInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedDataSourceCount, ctx);
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, ctx);
 }
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->dataSource, out);
+void serialize(const XrHandTrackingDataSourceStateEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->dataSource, ctx);
 }
 
 
-void serialize(const XrHandTrackingDataSourceStateEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->dataSource, out);
+void serialize(const XrHandTrackingDataSourceStateEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->dataSource, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking_data_source
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 
-void serialize(const XrEventDataPerfSettingsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->domain, out);
-    serialize(&s->subDomain, out);
-    serialize(&s->fromLevel, out);
-    serialize(&s->toLevel, out);
+void serialize(const XrEventDataPerfSettingsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->domain, ctx);
+    serialize(&s->subDomain, ctx);
+    serialize(&s->fromLevel, ctx);
+    serialize(&s->toLevel, ctx);
 }
 
 
-void serialize(const XrEventDataPerfSettingsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->domain, out);
-    serialize(&s->subDomain, out);
-    serialize(&s->fromLevel, out);
-    serialize(&s->toLevel, out);
+void serialize(const XrEventDataPerfSettingsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->domain, ctx);
+    serialize(&s->subDomain, ctx);
+    serialize(&s->fromLevel, ctx);
+    serialize(&s->toLevel, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->orientationCount, out);
-    serialize_ptr(s->orientations, s->orientationCount, out);
-    serialize(&s->semanticTypeCount, out);
-    serialize_ptr(s->semanticTypes, s->semanticTypeCount, out);
-    serialize(&s->maxPlanes, out);
-    serialize(&s->minArea, out);
-    serialize(&s->boundingBoxPose, out);
-    serialize(&s->boundingBoxExtent, out);
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->orientationCount, ctx);
+    serialize_ptr(s->orientations, s->orientationCount, ctx);
+    serialize(&s->semanticTypeCount, ctx);
+    serialize_ptr(s->semanticTypes, s->semanticTypeCount, ctx);
+    serialize(&s->maxPlanes, ctx);
+    serialize(&s->minArea, ctx);
+    serialize(&s->boundingBoxPose, ctx);
+    serialize(&s->boundingBoxExtent, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorBeginInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->orientationCount, out);
-    serialize_ptr(s->orientations, s->orientationCount, out);
-    serialize(&s->semanticTypeCount, out);
-    serialize_ptr(s->semanticTypes, s->semanticTypeCount, out);
-    serialize(&s->maxPlanes, out);
-    serialize(&s->minArea, out);
-    serialize(&s->boundingBoxPose, out);
-    serialize(&s->boundingBoxExtent, out);
+void serialize(const XrPlaneDetectorBeginInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->orientationCount, ctx);
+    serialize_ptr(s->orientations, s->orientationCount, ctx);
+    serialize(&s->semanticTypeCount, ctx);
+    serialize_ptr(s->semanticTypes, s->semanticTypeCount, ctx);
+    serialize(&s->maxPlanes, ctx);
+    serialize(&s->minArea, ctx);
+    serialize(&s->boundingBoxPose, ctx);
+    serialize(&s->boundingBoxExtent, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorCreateInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPlaneDetectorCreateInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrPlaneDetectorGetInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorGetInfoEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrPlaneDetectorGetInfoEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->planeId, out);
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
-    serialize(&s->extents, out);
-    serialize(&s->orientation, out);
-    serialize(&s->semanticType, out);
-    serialize(&s->polygonBufferCount, out);
+void serialize(const XrPlaneDetectorLocationEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->planeId, ctx);
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->extents, ctx);
+    serialize(&s->orientation, ctx);
+    serialize(&s->semanticType, ctx);
+    serialize(&s->polygonBufferCount, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorLocationEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->planeId, out);
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
-    serialize(&s->extents, out);
-    serialize(&s->orientation, out);
-    serialize(&s->semanticType, out);
-    serialize(&s->polygonBufferCount, out);
+void serialize(const XrPlaneDetectorLocationEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->planeId, ctx);
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->extents, ctx);
+    serialize(&s->orientation, ctx);
+    serialize(&s->semanticType, ctx);
+    serialize(&s->polygonBufferCount, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->planeLocationCapacityInput, out);
-    serialize(&s->planeLocationCountOutput, out);
-    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, out);
+void serialize(const XrPlaneDetectorLocationsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->planeLocationCapacityInput, ctx);
+    serialize(&s->planeLocationCountOutput, ctx);
+    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorLocationsEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->planeLocationCapacityInput, out);
-    serialize(&s->planeLocationCountOutput, out);
-    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, out);
+void serialize(const XrPlaneDetectorLocationsEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->planeLocationCapacityInput, ctx);
+    serialize(&s->planeLocationCountOutput, ctx);
+    serialize_ptr(s->planeLocations, s->planeLocationCapacityInput, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrPlaneDetectorPolygonBufferEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportedFeatures, out);
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportedFeatures, ctx);
 }
 
 
-void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportedFeatures, out);
+void serialize(const XrSystemPlaneDetectionPropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportedFeatures, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_user_presence
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->isUserPresent, out);
+void serialize(const XrEventDataUserPresenceChangedEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->isUserPresent, ctx);
 }
 
 
-void serialize(const XrEventDataUserPresenceChangedEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->isUserPresent, out);
+void serialize(const XrEventDataUserPresenceChangedEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->isUserPresent, ctx);
 }
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsUserPresence, out);
+void serialize(const XrSystemUserPresencePropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsUserPresence, ctx);
 }
 
 
-void serialize(const XrSystemUserPresencePropertiesEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsUserPresence, out);
+void serialize(const XrSystemUserPresencePropertiesEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsUserPresence, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_user_presence
 #ifdef XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedNearZ, out);
-    serialize(&s->minNearZ, out);
-    serialize(&s->recommendedFarZ, out);
-    serialize(&s->maxFarZ, out);
+void serialize(const XrViewConfigurationDepthRangeEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedNearZ, ctx);
+    serialize(&s->minNearZ, ctx);
+    serialize(&s->recommendedFarZ, ctx);
+    serialize(&s->maxFarZ, ctx);
 }
 
 
-void serialize(const XrViewConfigurationDepthRangeEXT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedNearZ, out);
-    serialize(&s->minNearZ, out);
-    serialize(&s->recommendedFarZ, out);
-    serialize(&s->maxFarZ, out);
+void serialize(const XrViewConfigurationDepthRangeEXT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedNearZ, ctx);
+    serialize(&s->minNearZ, ctx);
+    serialize(&s->recommendedFarZ, ctx);
+    serialize(&s->maxFarZ, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_EXT_view_configuration_depth_range
 #ifdef XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 
-void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrAndroidSurfaceSwapchainCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_android_surface_swapchain_create
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 
-void serialize(const XrBodyJointLocationFB* s, SyncWriteStream& out) {
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
+void serialize(const XrBodyJointLocationFB* s, SerializeContext& ctx) {
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->confidence, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointLocations, s->jointCount, out);
-    serialize(&s->skeletonChangedCount, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointLocationsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->confidence, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointCount, ctx);
+    serialize(&s->skeletonChangedCount, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->confidence, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->jointLocations, s->jointCount, out);
-    serialize(&s->skeletonChangedCount, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointLocationsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->confidence, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointCount, ctx);
+    serialize(&s->skeletonChangedCount, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodySkeletonFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->joints, s->jointCount, out);
+void serialize(const XrBodySkeletonFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->joints, s->jointCount, ctx);
 }
 
 
-void serialize(const XrBodySkeletonFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->joints, s->jointCount, out);
+void serialize(const XrBodySkeletonFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->joints, s->jointCount, ctx);
 }
 
 
-void serialize(const XrBodySkeletonJointFB* s, SyncWriteStream& out) {
-    serialize(&s->joint, out);
-    serialize(&s->parentJoint, out);
-    serialize(&s->pose, out);
+void serialize(const XrBodySkeletonJointFB* s, SerializeContext& ctx) {
+    serialize(&s->joint, ctx);
+    serialize(&s->parentJoint, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bodyJointSet, out);
+void serialize(const XrBodyTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bodyJointSet, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bodyJointSet, out);
+void serialize(const XrBodyTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bodyJointSet, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorSpace, out);
+void serialize(const XrSystemColorSpacePropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorSpace, ctx);
 }
 
 
-void serialize(const XrSystemColorSpacePropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorSpace, out);
+void serialize(const XrSystemColorSpacePropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorSpace, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->srcFactorColor, out);
-    serialize(&s->dstFactorColor, out);
-    serialize(&s->srcFactorAlpha, out);
-    serialize(&s->dstFactorAlpha, out);
+void serialize(const XrCompositionLayerAlphaBlendFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->srcFactorColor, ctx);
+    serialize(&s->dstFactorColor, ctx);
+    serialize(&s->srcFactorAlpha, ctx);
+    serialize(&s->dstFactorAlpha, ctx);
 }
 
 
-void serialize(const XrCompositionLayerAlphaBlendFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->srcFactorColor, out);
-    serialize(&s->dstFactorColor, out);
-    serialize(&s->srcFactorAlpha, out);
-    serialize(&s->dstFactorAlpha, out);
+void serialize(const XrCompositionLayerAlphaBlendFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->srcFactorColor, ctx);
+    serialize(&s->dstFactorColor, ctx);
+    serialize(&s->srcFactorAlpha, ctx);
+    serialize(&s->dstFactorAlpha, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_alpha_blend
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 
-void serialize(const XrCompositionLayerDepthTestFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->depthMask, out);
-    serialize(&s->compareOp, out);
+void serialize(const XrCompositionLayerDepthTestFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->depthMask, ctx);
+    serialize(&s->compareOp, ctx);
 }
 
 
-void serialize(const XrCompositionLayerDepthTestFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->depthMask, out);
-    serialize(&s->compareOp, out);
+void serialize(const XrCompositionLayerDepthTestFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->depthMask, ctx);
+    serialize(&s->compareOp, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrCompositionLayerImageLayoutFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrCompositionLayerImageLayoutFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrCompositionLayerImageLayoutFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_image_layout
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 
-void serialize(const XrCompositionLayerSecureContentFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrCompositionLayerSecureContentFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrCompositionLayerSecureContentFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrCompositionLayerSecureContentFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_secure_content
 #ifdef XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 
-void serialize(const XrCompositionLayerSettingsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
+void serialize(const XrCompositionLayerSettingsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
 }
 
 
-void serialize(const XrCompositionLayerSettingsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
+void serialize(const XrCompositionLayerSettingsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_composition_layer_settings
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fromDisplayRefreshRate, out);
-    serialize(&s->toDisplayRefreshRate, out);
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fromDisplayRefreshRate, ctx);
+    serialize(&s->toDisplayRefreshRate, ctx);
 }
 
 
-void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fromDisplayRefreshRate, out);
-    serialize(&s->toDisplayRefreshRate, out);
+void serialize(const XrEventDataDisplayRefreshRateChangedFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fromDisplayRefreshRate, ctx);
+    serialize(&s->toDisplayRefreshRate, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 
-void serialize(const XrEyeGazeFB* s, SyncWriteStream& out) {
-    serialize(&s->isValid, out);
-    serialize(&s->gazePose, out);
-    serialize(&s->gazeConfidence, out);
+void serialize(const XrEyeGazeFB* s, SerializeContext& ctx) {
+    serialize(&s->isValid, ctx);
+    serialize(&s->gazePose, ctx);
+    serialize(&s->gazeConfidence, ctx);
 }
 
 
-void serialize(const XrEyeGazesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEyeGazesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->gaze, XR_EYE_POSITION_COUNT_FB, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEyeGazesInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazesInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEyeGazesInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrEyeGazesInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrEyeTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrEyeTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrEyeTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEyeTracking, out);
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEyeTracking, ctx);
 }
 
 
-void serialize(const XrSystemEyeTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEyeTracking, out);
+void serialize(const XrSystemEyeTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEyeTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 
-void serialize(const XrFaceExpressionInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionStatusFB* s, SyncWriteStream& out) {
-    serialize(&s->isValid, out);
-    serialize(&s->isEyeFollowingBlendshapesValid, out);
+void serialize(const XrFaceExpressionStatusFB* s, SerializeContext& ctx) {
+    serialize(&s->isValid, ctx);
+    serialize(&s->isEyeFollowingBlendshapesValid, ctx);
 }
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->weightCount, out);
-    serialize_ptr(s->weights, s->weightCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidences, s->confidenceCount, out);
-    serialize(&s->status, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionWeightsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->weightCount, ctx);
+    serialize_ptr(s->weights, s->weightCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidences, s->confidenceCount, ctx);
+    serialize(&s->status, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionWeightsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->weightCount, out);
-    serialize_ptr(s->weights, s->weightCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidences, s->confidenceCount, out);
-    serialize(&s->status, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionWeightsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->weightCount, ctx);
+    serialize_ptr(s->weights, s->weightCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidences, s->confidenceCount, ctx);
+    serialize(&s->status, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->faceExpressionSet, out);
+void serialize(const XrFaceTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->faceExpressionSet, ctx);
 }
 
 
-void serialize(const XrFaceTrackerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->faceExpressionSet, out);
+void serialize(const XrFaceTrackerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->faceExpressionSet, ctx);
 }
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFaceTracking, out);
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFaceTracking, ctx);
 }
 
 
-void serialize(const XrSystemFaceTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFaceTracking, out);
+void serialize(const XrSystemFaceTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFaceTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 
-void serialize(const XrFaceExpressionInfo2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionInfo2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionInfo2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionInfo2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->weightCount, out);
-    serialize_ptr(s->weights, s->weightCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidences, s->confidenceCount, out);
-    serialize(&s->isValid, out);
-    serialize(&s->isEyeFollowingBlendshapesValid, out);
-    serialize(&s->dataSource, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionWeights2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->weightCount, ctx);
+    serialize_ptr(s->weights, s->weightCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidences, s->confidenceCount, ctx);
+    serialize(&s->isValid, ctx);
+    serialize(&s->isEyeFollowingBlendshapesValid, ctx);
+    serialize(&s->dataSource, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceExpressionWeights2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->weightCount, out);
-    serialize_ptr(s->weights, s->weightCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidences, s->confidenceCount, out);
-    serialize(&s->isValid, out);
-    serialize(&s->isEyeFollowingBlendshapesValid, out);
-    serialize(&s->dataSource, out);
-    serialize(&s->time, out);
+void serialize(const XrFaceExpressionWeights2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->weightCount, ctx);
+    serialize_ptr(s->weights, s->weightCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidences, s->confidenceCount, ctx);
+    serialize(&s->isValid, ctx);
+    serialize(&s->isEyeFollowingBlendshapesValid, ctx);
+    serialize(&s->dataSource, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->faceExpressionSet, out);
-    serialize(&s->requestedDataSourceCount, out);
-    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+void serialize(const XrFaceTrackerCreateInfo2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->faceExpressionSet, ctx);
+    serialize(&s->requestedDataSourceCount, ctx);
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, ctx);
 }
 
 
-void serialize(const XrFaceTrackerCreateInfo2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->faceExpressionSet, out);
-    serialize(&s->requestedDataSourceCount, out);
-    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, out);
+void serialize(const XrFaceTrackerCreateInfo2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->faceExpressionSet, ctx);
+    serialize(&s->requestedDataSourceCount, ctx);
+    serialize_ptr(s->requestedDataSources, s->requestedDataSourceCount, ctx);
 }
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsVisualFaceTracking, out);
-    serialize(&s->supportsAudioFaceTracking, out);
+void serialize(const XrSystemFaceTrackingProperties2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsVisualFaceTracking, ctx);
+    serialize(&s->supportsAudioFaceTracking, ctx);
 }
 
 
-void serialize(const XrSystemFaceTrackingProperties2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsVisualFaceTracking, out);
-    serialize(&s->supportsAudioFaceTracking, out);
+void serialize(const XrSystemFaceTrackingProperties2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsVisualFaceTracking, ctx);
+    serialize(&s->supportsAudioFaceTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFoveationProfileCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrFoveationProfileCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFoveationProfileCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSwapchainCreateInfoFoveationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrSwapchainCreateInfoFoveationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->profile, out);
+void serialize(const XrSwapchainStateFoveationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->profile, ctx);
 }
 
 
-void serialize(const XrSwapchainStateFoveationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->profile, out);
+void serialize(const XrSwapchainStateFoveationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->profile, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_configuration
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->level, out);
-    serialize(&s->verticalOffset, out);
-    serialize(&s->dynamic, out);
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->level, ctx);
+    serialize(&s->verticalOffset, ctx);
+    serialize(&s->dynamic, ctx);
 }
 
 
-void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->level, out);
-    serialize(&s->verticalOffset, out);
-    serialize(&s->dynamic, out);
+void serialize(const XrFoveationLevelProfileCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->level, ctx);
+    serialize(&s->verticalOffset, ctx);
+    serialize(&s->dynamic, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_configuration
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrSwapchainImageFoveationVulkanFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrSwapchainImageFoveationVulkanFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 
-void serialize(const XrHandTrackingAimStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
-    serialize(&s->aimPose, out);
-    serialize(&s->pinchStrengthIndex, out);
-    serialize(&s->pinchStrengthMiddle, out);
-    serialize(&s->pinchStrengthRing, out);
-    serialize(&s->pinchStrengthLittle, out);
+void serialize(const XrHandTrackingAimStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
+    serialize(&s->aimPose, ctx);
+    serialize(&s->pinchStrengthIndex, ctx);
+    serialize(&s->pinchStrengthMiddle, ctx);
+    serialize(&s->pinchStrengthRing, ctx);
+    serialize(&s->pinchStrengthLittle, ctx);
 }
 
 
-void serialize(const XrHandTrackingAimStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
-    serialize(&s->aimPose, out);
-    serialize(&s->pinchStrengthIndex, out);
-    serialize(&s->pinchStrengthMiddle, out);
-    serialize(&s->pinchStrengthRing, out);
-    serialize(&s->pinchStrengthLittle, out);
+void serialize(const XrHandTrackingAimStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
+    serialize(&s->aimPose, ctx);
+    serialize(&s->pinchStrengthIndex, ctx);
+    serialize(&s->pinchStrengthMiddle, ctx);
+    serialize(&s->pinchStrengthRing, ctx);
+    serialize(&s->pinchStrengthLittle, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_aim
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 
-void serialize(const XrHandCapsuleFB* s, SyncWriteStream& out) {
-    serialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, out);
-    serialize(&s->radius, out);
-    serialize(&s->joint, out);
+void serialize(const XrHandCapsuleFB* s, SerializeContext& ctx) {
+    serialize_array(s->points, XR_HAND_TRACKING_CAPSULE_POINT_COUNT_FB, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->joint, ctx);
 }
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, out);
+void serialize(const XrHandTrackingCapsulesStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, ctx);
 }
 
 
-void serialize(const XrHandTrackingCapsulesStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, out);
+void serialize(const XrHandTrackingCapsulesStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->capsules, XR_HAND_TRACKING_CAPSULE_COUNT_FB, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_capsules
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 
-void serialize(const XrHandTrackingMeshFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCapacityInput, out);
-    serialize(&s->jointCountOutput, out);
-    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, out);
-    serialize_ptr(s->jointRadii, s->jointCapacityInput, out);
-    serialize_ptr(s->jointParents, s->jointCapacityInput, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrHandTrackingMeshFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCapacityInput, ctx);
+    serialize(&s->jointCountOutput, ctx);
+    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, ctx);
+    serialize_ptr(s->jointRadii, s->jointCapacityInput, ctx);
+    serialize_ptr(s->jointParents, s->jointCapacityInput, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrHandTrackingMeshFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCapacityInput, out);
-    serialize(&s->jointCountOutput, out);
-    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, out);
-    serialize_ptr(s->jointRadii, s->jointCapacityInput, out);
-    serialize_ptr(s->jointParents, s->jointCapacityInput, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, out);
-    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrHandTrackingMeshFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCapacityInput, ctx);
+    serialize(&s->jointCountOutput, ctx);
+    serialize_ptr(s->jointBindPoses, s->jointCapacityInput, ctx);
+    serialize_ptr(s->jointRadii, s->jointCapacityInput, ctx);
+    serialize_ptr(s->jointParents, s->jointCapacityInput, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertexPositions, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexNormals, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexUVs, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexBlendIndices, s->vertexCapacityInput, ctx);
+    serialize_ptr(s->vertexBlendWeights, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrHandTrackingScaleFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sensorOutput, out);
-    serialize(&s->currentOutput, out);
-    serialize(&s->overrideHandScale, out);
-    serialize(&s->overrideValueInput, out);
+void serialize(const XrHandTrackingScaleFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sensorOutput, ctx);
+    serialize(&s->currentOutput, ctx);
+    serialize(&s->overrideHandScale, ctx);
+    serialize(&s->overrideValueInput, ctx);
 }
 
 
-void serialize(const XrHandTrackingScaleFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sensorOutput, out);
-    serialize(&s->currentOutput, out);
-    serialize(&s->overrideHandScale, out);
-    serialize(&s->overrideValueInput, out);
+void serialize(const XrHandTrackingScaleFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sensorOutput, ctx);
+    serialize(&s->currentOutput, ctx);
+    serialize(&s->overrideHandScale, ctx);
+    serialize(&s->overrideValueInput, ctx);
 }
 
 
-void serialize(const XrVector4sFB* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
-    serialize(&s->z, out);
-    serialize(&s->w, out);
+void serialize(const XrVector4sFB* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
+    serialize(&s->z, ctx);
+    serialize(&s->w, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->duration, out);
-    serialize(&s->amplitudeCount, out);
-    serialize_ptr(s->amplitudes, s->amplitudeCount, out);
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->duration, ctx);
+    serialize(&s->amplitudeCount, ctx);
+    serialize_ptr(s->amplitudes, s->amplitudeCount, ctx);
 }
 
 
-void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->duration, out);
-    serialize(&s->amplitudeCount, out);
-    serialize_ptr(s->amplitudes, s->amplitudeCount, out);
+void serialize(const XrHapticAmplitudeEnvelopeVibrationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->duration, ctx);
+    serialize(&s->amplitudeCount, ctx);
+    serialize_ptr(s->amplitudes, s->amplitudeCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_amplitude_envelope
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sampleRate, out);
+void serialize(const XrDevicePcmSampleRateStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sampleRate, ctx);
 }
 
 
-void serialize(const XrDevicePcmSampleRateStateFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sampleRate, out);
+void serialize(const XrDevicePcmSampleRateStateFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sampleRate, ctx);
 }
 
 
-void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
-    serialize(&s->sampleRate, out);
-    serialize(&s->append, out);
-    serialize_ptr(s->samplesConsumed, 1, out);
+void serialize(const XrHapticPcmVibrationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
+    serialize(&s->sampleRate, ctx);
+    serialize(&s->append, ctx);
+    serialize_ptr(s->samplesConsumed, 1, ctx);
 }
 
 
-void serialize(const XrHapticPcmVibrationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
-    serialize(&s->sampleRate, out);
-    serialize(&s->append, out);
-    serialize_ptr(s->samplesConsumed, 1, out);
+void serialize(const XrHapticPcmVibrationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
+    serialize(&s->sampleRate, ctx);
+    serialize(&s->append, ctx);
+    serialize_ptr(s->samplesConsumed, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->trackedKeyboardId, out);
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->trackedKeyboardId, ctx);
 }
 
 
-void serialize(const XrKeyboardSpaceCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->trackedKeyboardId, out);
+void serialize(const XrKeyboardSpaceCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->trackedKeyboardId, ctx);
 }
 
 
-void serialize(const XrKeyboardTrackingDescriptionFB* s, SyncWriteStream& out) {
-    serialize(&s->trackedKeyboardId, out);
-    serialize(&s->size, out);
-    serialize(&s->flags, out);
-    serialize_array(s->name, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB, out);
+void serialize(const XrKeyboardTrackingDescriptionFB* s, SerializeContext& ctx) {
+    serialize(&s->trackedKeyboardId, ctx);
+    serialize(&s->size, ctx);
+    serialize(&s->flags, ctx);
+    serialize_array(s->name, XR_MAX_KEYBOARD_TRACKING_NAME_SIZE_FB, ctx);
 }
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrKeyboardTrackingQueryFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrKeyboardTrackingQueryFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrKeyboardTrackingQueryFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsKeyboardTracking, out);
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsKeyboardTracking, ctx);
 }
 
 
-void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsKeyboardTracking, out);
+void serialize(const XrSystemKeyboardTrackingPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsKeyboardTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 
-void serialize(const XrCompositionLayerPassthroughFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->space, out);
-    serialize(&s->layerHandle, out);
+void serialize(const XrCompositionLayerPassthroughFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->layerHandle, ctx);
 }
 
 
-void serialize(const XrCompositionLayerPassthroughFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->space, out);
-    serialize(&s->layerHandle, out);
+void serialize(const XrCompositionLayerPassthroughFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->layerHandle, ctx);
 }
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrEventDataPassthroughStateChangedFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrEventDataPassthroughStateChangedFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrEventDataPassthroughStateChangedFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layer, out);
-    serialize(&s->mesh, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrGeometryInstanceCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layer, ctx);
+    serialize(&s->mesh, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrGeometryInstanceCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layer, out);
-    serialize(&s->mesh, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrGeometryInstanceCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layer, ctx);
+    serialize(&s->mesh, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrGeometryInstanceTransformFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrGeometryInstanceTransformFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrGeometryInstanceTransformFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->brightness, out);
-    serialize(&s->contrast, out);
-    serialize(&s->saturation, out);
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->brightness, ctx);
+    serialize(&s->contrast, ctx);
+    serialize(&s->saturation, ctx);
 }
 
 
-void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->brightness, out);
-    serialize(&s->contrast, out);
-    serialize(&s->saturation, out);
+void serialize(const XrPassthroughBrightnessContrastSaturationFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->brightness, ctx);
+    serialize(&s->contrast, ctx);
+    serialize(&s->saturation, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+void serialize(const XrPassthroughColorMapMonoToMonoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, out);
+void serialize(const XrPassthroughColorMapMonoToRgbaFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->textureColorMap, XR_PASSTHROUGH_COLOR_MAP_MONO_SIZE_FB, ctx);
 }
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPassthroughCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrPassthroughCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPassthroughCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->passthrough, out);
-    serialize(&s->flags, out);
-    serialize(&s->purpose, out);
+void serialize(const XrPassthroughLayerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->passthrough, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->purpose, ctx);
 }
 
 
-void serialize(const XrPassthroughLayerCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->passthrough, out);
-    serialize(&s->flags, out);
-    serialize(&s->purpose, out);
+void serialize(const XrPassthroughLayerCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->passthrough, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->purpose, ctx);
 }
 
 
-void serialize(const XrPassthroughStyleFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->textureOpacityFactor, out);
-    serialize(&s->edgeColor, out);
+void serialize(const XrPassthroughStyleFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->textureOpacityFactor, ctx);
+    serialize(&s->edgeColor, ctx);
 }
 
 
-void serialize(const XrPassthroughStyleFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->textureOpacityFactor, out);
-    serialize(&s->edgeColor, out);
+void serialize(const XrPassthroughStyleFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->textureOpacityFactor, ctx);
+    serialize(&s->edgeColor, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->capabilities, out);
+void serialize(const XrSystemPassthroughProperties2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->capabilities, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughProperties2FB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->capabilities, out);
+void serialize(const XrSystemPassthroughProperties2FB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->capabilities, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsPassthrough, out);
+void serialize(const XrSystemPassthroughPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsPassthrough, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsPassthrough, out);
+void serialize(const XrSystemPassthroughPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsPassthrough, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->leftHandIntensity, out);
-    serialize(&s->rightHandIntensity, out);
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->leftHandIntensity, ctx);
+    serialize(&s->rightHandIntensity, ctx);
 }
 
 
-void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->leftHandIntensity, out);
-    serialize(&s->rightHandIntensity, out);
+void serialize(const XrPassthroughKeyboardHandsIntensityFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->leftHandIntensity, ctx);
+    serialize(&s->rightHandIntensity, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 
-void serialize(const XrRenderModelBufferFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrRenderModelBufferFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 
-void serialize(const XrRenderModelBufferFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrRenderModelBufferFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrRenderModelCapabilitiesRequestFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrRenderModelCapabilitiesRequestFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->modelKey, out);
+void serialize(const XrRenderModelLoadInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->modelKey, ctx);
 }
 
 
-void serialize(const XrRenderModelLoadInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->modelKey, out);
+void serialize(const XrRenderModelLoadInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->modelKey, ctx);
 }
 
 
-void serialize(const XrRenderModelPathInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->path, out);
+void serialize(const XrRenderModelPathInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->path, ctx);
 }
 
 
-void serialize(const XrRenderModelPathInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->path, out);
+void serialize(const XrRenderModelPathInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->path, ctx);
 }
 
 
-void serialize(const XrRenderModelPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vendorId, out);
-    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, out);
-    serialize(&s->modelKey, out);
-    serialize(&s->modelVersion, out);
-    serialize(&s->flags, out);
+void serialize(const XrRenderModelPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vendorId, ctx);
+    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, ctx);
+    serialize(&s->modelKey, ctx);
+    serialize(&s->modelVersion, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrRenderModelPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vendorId, out);
-    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, out);
-    serialize(&s->modelKey, out);
-    serialize(&s->modelVersion, out);
-    serialize(&s->flags, out);
+void serialize(const XrRenderModelPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vendorId, ctx);
+    serialize_array(s->modelName, XR_MAX_RENDER_MODEL_NAME_SIZE_FB, ctx);
+    serialize(&s->modelKey, ctx);
+    serialize(&s->modelVersion, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsRenderModelLoading, out);
+void serialize(const XrSystemRenderModelPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsRenderModelLoading, ctx);
 }
 
 
-void serialize(const XrSystemRenderModelPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsRenderModelLoading, out);
+void serialize(const XrSystemRenderModelPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsRenderModelLoading, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 
-void serialize(const XrBoundary2DFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrBoundary2DFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrBoundary2DFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrBoundary2DFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrOffset3DfFB* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
-    serialize(&s->z, out);
+void serialize(const XrOffset3DfFB* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
+    serialize(&s->z, ctx);
 }
 
 
-void serialize(const XrRect3DfFB* s, SyncWriteStream& out) {
-    serialize(&s->offset, out);
-    serialize(&s->extent, out);
+void serialize(const XrRect3DfFB* s, SerializeContext& ctx) {
+    serialize(&s->offset, ctx);
+    serialize(&s->extent, ctx);
 }
 
 
-void serialize(const XrRoomLayoutFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->floorUuid, out);
-    serialize(&s->ceilingUuid, out);
-    serialize(&s->wallUuidCapacityInput, out);
-    serialize(&s->wallUuidCountOutput, out);
-    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, out);
+void serialize(const XrRoomLayoutFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->floorUuid, ctx);
+    serialize(&s->ceilingUuid, ctx);
+    serialize(&s->wallUuidCapacityInput, ctx);
+    serialize(&s->wallUuidCountOutput, ctx);
+    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, ctx);
 }
 
 
-void serialize(const XrRoomLayoutFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->floorUuid, out);
-    serialize(&s->ceilingUuid, out);
-    serialize(&s->wallUuidCapacityInput, out);
-    serialize(&s->wallUuidCountOutput, out);
-    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, out);
+void serialize(const XrRoomLayoutFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->floorUuid, ctx);
+    serialize(&s->ceilingUuid, ctx);
+    serialize(&s->wallUuidCapacityInput, ctx);
+    serialize(&s->wallUuidCountOutput, ctx);
+    serialize_ptr(s->wallUuids, s->wallUuidCapacityInput, ctx);
 }
 
 
-void serialize(const XrSemanticLabelsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrSemanticLabelsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 
-void serialize(const XrSemanticLabelsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrSemanticLabelsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), out);
+void serialize(const XrSemanticLabelsSupportInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), ctx);
 }
 
 
-void serialize(const XrSemanticLabelsSupportInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), out);
+void serialize(const XrSemanticLabelsSupportInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize_ptr(s->recognizedLabels, count_null_terminated(s->recognizedLabels), ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataSceneCaptureCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSceneCaptureCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestByteCount, out);
-    serialize_ptr(s->request, s->requestByteCount, out);
+void serialize(const XrSceneCaptureRequestInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestByteCount, ctx);
+    serialize_ptr(s->request, s->requestByteCount, ctx);
 }
 
 
-void serialize(const XrSceneCaptureRequestInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestByteCount, out);
-    serialize_ptr(s->request, s->requestByteCount, out);
+void serialize(const XrSceneCaptureRequestInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestByteCount, ctx);
+    serialize_ptr(s->request, s->requestByteCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_space_warp
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->motionVectorSubImage, out);
-    serialize(&s->appSpaceDeltaPose, out);
-    serialize(&s->depthSubImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->motionVectorSubImage, ctx);
+    serialize(&s->appSpaceDeltaPose, ctx);
+    serialize(&s->depthSubImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 
-void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->motionVectorSubImage, out);
-    serialize(&s->appSpaceDeltaPose, out);
-    serialize(&s->depthSubImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrCompositionLayerSpaceWarpInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->motionVectorSubImage, ctx);
+    serialize(&s->appSpaceDeltaPose, ctx);
+    serialize(&s->depthSubImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedMotionVectorImageRectWidth, out);
-    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedMotionVectorImageRectWidth, ctx);
+    serialize(&s->recommendedMotionVectorImageRectHeight, ctx);
 }
 
 
-void serialize(const XrSystemSpaceWarpPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedMotionVectorImageRectWidth, out);
-    serialize(&s->recommendedMotionVectorImageRectHeight, out);
+void serialize(const XrSystemSpaceWarpPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedMotionVectorImageRectWidth, ctx);
+    serialize(&s->recommendedMotionVectorImageRectHeight, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_space_warp
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->componentType, out);
-    serialize(&s->enabled, out);
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->componentType, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->componentType, out);
-    serialize(&s->enabled, out);
+void serialize(const XrEventDataSpaceSetStatusCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->componentType, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
+void serialize(const XrEventDataSpatialAnchorCreateCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpaceComponentStatusFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
-    serialize(&s->changePending, out);
+void serialize(const XrSpaceComponentStatusFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
+    serialize(&s->changePending, ctx);
 }
 
 
-void serialize(const XrSpaceComponentStatusFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
-    serialize(&s->changePending, out);
+void serialize(const XrSpaceComponentStatusFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
+    serialize(&s->changePending, ctx);
 }
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
-    serialize(&s->enabled, out);
-    serialize(&s->timeout, out);
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
+    serialize(&s->enabled, ctx);
+    serialize(&s->timeout, ctx);
 }
 
 
-void serialize(const XrSpaceComponentStatusSetInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
-    serialize(&s->enabled, out);
-    serialize(&s->timeout, out);
+void serialize(const XrSpaceComponentStatusSetInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
+    serialize(&s->enabled, ctx);
+    serialize(&s->timeout, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntity, out);
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntity, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntityPropertiesFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntity, out);
+void serialize(const XrSystemSpatialEntityPropertiesFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntity, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 
-void serialize(const XrSpaceContainerFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCapacityInput, out);
-    serialize(&s->uuidCountOutput, out);
-    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+void serialize(const XrSpaceContainerFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCapacityInput, ctx);
+    serialize(&s->uuidCountOutput, ctx);
+    serialize_ptr(s->uuids, s->uuidCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpaceContainerFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCapacityInput, out);
-    serialize(&s->uuidCountOutput, out);
-    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+void serialize(const XrSpaceContainerFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCapacityInput, ctx);
+    serialize(&s->uuidCountOutput, ctx);
+    serialize_ptr(s->uuids, s->uuidCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceQueryCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceQueryCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
+void serialize(const XrEventDataSpaceQueryResultsAvailableFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
 }
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSpaceComponentFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSpaceComponentFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSpaceComponentFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSpaceFilterInfoBaseHeaderFB* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSpaceQueryInfoBaseHeaderFB* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->queryAction, out);
-    serialize(&s->maxResultCount, out);
-    serialize(&s->timeout, out);
-    serialize_xr(s->filter, out);
-    serialize_xr(s->excludeFilter, out);
+void serialize(const XrSpaceQueryInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->queryAction, ctx);
+    serialize(&s->maxResultCount, ctx);
+    serialize(&s->timeout, ctx);
+    serialize_xr(s->filter, ctx);
+    serialize_xr(s->excludeFilter, ctx);
 }
 
 
-void serialize(const XrSpaceQueryInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->queryAction, out);
-    serialize(&s->maxResultCount, out);
-    serialize(&s->timeout, out);
-    serialize_xr(s->filter, out);
-    serialize_xr(s->excludeFilter, out);
+void serialize(const XrSpaceQueryInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->queryAction, ctx);
+    serialize(&s->maxResultCount, ctx);
+    serialize(&s->timeout, ctx);
+    serialize_xr(s->filter, ctx);
+    serialize_xr(s->excludeFilter, ctx);
 }
 
 
-void serialize(const XrSpaceQueryResultFB* s, SyncWriteStream& out) {
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
+void serialize(const XrSpaceQueryResultFB* s, SerializeContext& ctx) {
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
 }
 
 
-void serialize(const XrSpaceQueryResultsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCapacityInput, out);
-    serialize(&s->resultCountOutput, out);
-    serialize_ptr(s->results, s->resultCapacityInput, out);
+void serialize(const XrSpaceQueryResultsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCapacityInput, ctx);
+    serialize(&s->resultCountOutput, ctx);
+    serialize_ptr(s->results, s->resultCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpaceQueryResultsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCapacityInput, out);
-    serialize(&s->resultCountOutput, out);
-    serialize_ptr(s->results, s->resultCapacityInput, out);
+void serialize(const XrSpaceQueryResultsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCapacityInput, ctx);
+    serialize(&s->resultCountOutput, ctx);
+    serialize_ptr(s->results, s->resultCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceStorageLocationFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpaceUuidFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpaceUuidFilterInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpaceUuidFilterInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceShareCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceShareCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceShareCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrSpaceShareInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize(&s->userCount, out);
-    serialize_ptr(s->users, s->userCount, out);
+void serialize(const XrSpaceShareInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize(&s->userCount, ctx);
+    serialize_ptr(s->users, s->userCount, ctx);
 }
 
 
-void serialize(const XrSpaceShareInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize(&s->userCount, out);
-    serialize_ptr(s->users, s->userCount, out);
+void serialize(const XrSpaceShareInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize(&s->userCount, ctx);
+    serialize_ptr(s->users, s->userCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->location, out);
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceEraseCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->location, out);
+void serialize(const XrEventDataSpaceEraseCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->location, out);
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceSaveCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
-    serialize(&s->space, out);
-    serialize(&s->uuid, out);
-    serialize(&s->location, out);
+void serialize(const XrEventDataSpaceSaveCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceEraseInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceEraseInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceEraseInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceEraseInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceSaveInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->location, out);
-    serialize(&s->persistenceMode, out);
+void serialize(const XrSpaceSaveInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->persistenceMode, ctx);
 }
 
 
-void serialize(const XrSpaceSaveInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->location, out);
-    serialize(&s->persistenceMode, out);
+void serialize(const XrSpaceSaveInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->location, ctx);
+    serialize(&s->persistenceMode, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataSpaceListSaveCompleteFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceListSaveInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize(&s->location, ctx);
 }
 
 
-void serialize(const XrSpaceListSaveInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize(&s->location, out);
+void serialize(const XrSpaceListSaveInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize(&s->location, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 
-void serialize(const XrSpaceUserCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->userId, out);
+void serialize(const XrSpaceUserCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->userId, ctx);
 }
 
 
-void serialize(const XrSpaceUserCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->userId, out);
+void serialize(const XrSpaceUserCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->userId, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 
-void serialize(const XrSwapchainStateBaseHeaderFB* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSwapchainStateBaseHeaderFB* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrSwapchainStateAndroidSurfaceDimensionsFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_android_surface
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minFilter, out);
-    serialize(&s->magFilter, out);
-    serialize(&s->wrapModeS, out);
-    serialize(&s->wrapModeT, out);
-    serialize(&s->swizzleRed, out);
-    serialize(&s->swizzleGreen, out);
-    serialize(&s->swizzleBlue, out);
-    serialize(&s->swizzleAlpha, out);
-    serialize(&s->maxAnisotropy, out);
-    serialize(&s->borderColor, out);
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minFilter, ctx);
+    serialize(&s->magFilter, ctx);
+    serialize(&s->wrapModeS, ctx);
+    serialize(&s->wrapModeT, ctx);
+    serialize(&s->swizzleRed, ctx);
+    serialize(&s->swizzleGreen, ctx);
+    serialize(&s->swizzleBlue, ctx);
+    serialize(&s->swizzleAlpha, ctx);
+    serialize(&s->maxAnisotropy, ctx);
+    serialize(&s->borderColor, ctx);
 }
 
 
-void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minFilter, out);
-    serialize(&s->magFilter, out);
-    serialize(&s->wrapModeS, out);
-    serialize(&s->wrapModeT, out);
-    serialize(&s->swizzleRed, out);
-    serialize(&s->swizzleGreen, out);
-    serialize(&s->swizzleBlue, out);
-    serialize(&s->swizzleAlpha, out);
-    serialize(&s->maxAnisotropy, out);
-    serialize(&s->borderColor, out);
+void serialize(const XrSwapchainStateSamplerOpenGLESFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minFilter, ctx);
+    serialize(&s->magFilter, ctx);
+    serialize(&s->wrapModeS, ctx);
+    serialize(&s->wrapModeT, ctx);
+    serialize(&s->swizzleRed, ctx);
+    serialize(&s->swizzleGreen, ctx);
+    serialize(&s->swizzleBlue, ctx);
+    serialize(&s->swizzleAlpha, ctx);
+    serialize(&s->maxAnisotropy, ctx);
+    serialize(&s->borderColor, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_opengl_es
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minFilter, out);
-    serialize(&s->magFilter, out);
-    serialize(&s->mipmapMode, out);
-    serialize(&s->wrapModeS, out);
-    serialize(&s->wrapModeT, out);
-    serialize(&s->swizzleRed, out);
-    serialize(&s->swizzleGreen, out);
-    serialize(&s->swizzleBlue, out);
-    serialize(&s->swizzleAlpha, out);
-    serialize(&s->maxAnisotropy, out);
-    serialize(&s->borderColor, out);
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minFilter, ctx);
+    serialize(&s->magFilter, ctx);
+    serialize(&s->mipmapMode, ctx);
+    serialize(&s->wrapModeS, ctx);
+    serialize(&s->wrapModeT, ctx);
+    serialize(&s->swizzleRed, ctx);
+    serialize(&s->swizzleGreen, ctx);
+    serialize(&s->swizzleBlue, ctx);
+    serialize(&s->swizzleAlpha, ctx);
+    serialize(&s->maxAnisotropy, ctx);
+    serialize(&s->borderColor, ctx);
 }
 
 
-void serialize(const XrSwapchainStateSamplerVulkanFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minFilter, out);
-    serialize(&s->magFilter, out);
-    serialize(&s->mipmapMode, out);
-    serialize(&s->wrapModeS, out);
-    serialize(&s->wrapModeT, out);
-    serialize(&s->swizzleRed, out);
-    serialize(&s->swizzleGreen, out);
-    serialize(&s->swizzleBlue, out);
-    serialize(&s->swizzleAlpha, out);
-    serialize(&s->maxAnisotropy, out);
-    serialize(&s->borderColor, out);
+void serialize(const XrSwapchainStateSamplerVulkanFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minFilter, ctx);
+    serialize(&s->magFilter, ctx);
+    serialize(&s->mipmapMode, ctx);
+    serialize(&s->wrapModeS, ctx);
+    serialize(&s->wrapModeT, ctx);
+    serialize(&s->swizzleRed, ctx);
+    serialize(&s->swizzleGreen, ctx);
+    serialize(&s->swizzleBlue, ctx);
+    serialize(&s->swizzleAlpha, ctx);
+    serialize(&s->maxAnisotropy, ctx);
+    serialize(&s->borderColor, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state_vulkan
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->windingOrder, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertexBuffer, 1, out);
-    serialize(&s->triangleCount, out);
-    serialize_ptr(s->indexBuffer, 1, out);
+void serialize(const XrTriangleMeshCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->windingOrder, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertexBuffer, 1, ctx);
+    serialize(&s->triangleCount, ctx);
+    serialize_ptr(s->indexBuffer, 1, ctx);
 }
 
 
-void serialize(const XrTriangleMeshCreateInfoFB* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->windingOrder, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertexBuffer, 1, out);
-    serialize(&s->triangleCount, out);
-    serialize_ptr(s->indexBuffer, 1, out);
+void serialize(const XrTriangleMeshCreateInfoFB* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->windingOrder, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertexBuffer, 1, ctx);
+    serialize(&s->triangleCount, ctx);
+    serialize_ptr(s->indexBuffer, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->paths, 1, out);
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->paths, 1, ctx);
 }
 
 
-void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->paths, 1, out);
+void serialize(const XrEventDataViveTrackerConnectedHTCX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->paths, 1, ctx);
 }
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->persistentPath, out);
-    serialize(&s->rolePath, out);
+void serialize(const XrViveTrackerPathsHTCX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->persistentPath, ctx);
+    serialize(&s->rolePath, ctx);
 }
 
 
-void serialize(const XrViveTrackerPathsHTCX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->persistentPath, out);
-    serialize(&s->rolePath, out);
+void serialize(const XrViveTrackerPathsHTCX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->persistentPath, ctx);
+    serialize(&s->rolePath, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->name, out);
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize(&s->name, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->name, out);
+void serialize(const XrSpatialAnchorCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize(&s->name, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorNameHTC* s, SyncWriteStream& out) {
-    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, out);
+void serialize(const XrSpatialAnchorNameHTC* s, SerializeContext& ctx) {
+    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_HTC, ctx);
 }
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsAnchor, out);
+void serialize(const XrSystemAnchorPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsAnchor, ctx);
 }
 
 
-void serialize(const XrSystemAnchorPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsAnchor, out);
+void serialize(const XrSystemAnchorPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsAnchor, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 
-void serialize(const XrBodyJointLocationHTC* s, SyncWriteStream& out) {
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
+void serialize(const XrBodyJointLocationHTC* s, SerializeContext& ctx) {
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->combinedLocationFlags, out);
-    serialize(&s->confidenceLevel, out);
-    serialize(&s->jointLocationCount, out);
-    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
-    serialize(&s->skeletonGenerationId, out);
+void serialize(const XrBodyJointLocationsHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->combinedLocationFlags, ctx);
+    serialize(&s->confidenceLevel, ctx);
+    serialize(&s->jointLocationCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointLocationCount, ctx);
+    serialize(&s->skeletonGenerationId, ctx);
 }
 
 
-void serialize(const XrBodyJointLocationsHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->combinedLocationFlags, out);
-    serialize(&s->confidenceLevel, out);
-    serialize(&s->jointLocationCount, out);
-    serialize_ptr(s->jointLocations, s->jointLocationCount, out);
-    serialize(&s->skeletonGenerationId, out);
+void serialize(const XrBodyJointLocationsHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->combinedLocationFlags, ctx);
+    serialize(&s->confidenceLevel, ctx);
+    serialize(&s->jointLocationCount, ctx);
+    serialize_ptr(s->jointLocations, s->jointLocationCount, ctx);
+    serialize(&s->skeletonGenerationId, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodyJointsLocateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrBodyJointsLocateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrBodySkeletonHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->joints, s->jointCount, out);
+void serialize(const XrBodySkeletonHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->joints, s->jointCount, ctx);
 }
 
 
-void serialize(const XrBodySkeletonHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->jointCount, out);
-    serialize_ptr(s->joints, s->jointCount, out);
+void serialize(const XrBodySkeletonHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->jointCount, ctx);
+    serialize_ptr(s->joints, s->jointCount, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bodyJointSet, out);
+void serialize(const XrBodyTrackerCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bodyJointSet, ctx);
 }
 
 
-void serialize(const XrBodyTrackerCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bodyJointSet, out);
+void serialize(const XrBodyTrackerCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bodyJointSet, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 
-void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsBodyTracking, out);
+void serialize(const XrSystemBodyTrackingPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsBodyTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 
-void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->sampleTime, out);
-    serialize(&s->expressionCount, out);
-    serialize_ptr(s->expressionWeightings, 1, out);
+void serialize(const XrFacialExpressionsHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize_time(&s->sampleTime, ctx);
+    serialize(&s->expressionCount, ctx);
+    serialize_ptr(s->expressionWeightings, 1, ctx);
 }
 
 
-void serialize(const XrFacialExpressionsHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->sampleTime, out);
-    serialize(&s->expressionCount, out);
-    serialize_ptr(s->expressionWeightings, 1, out);
+void serialize(const XrFacialExpressionsHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize_time(&s->sampleTime, ctx);
+    serialize(&s->expressionCount, ctx);
+    serialize_ptr(s->expressionWeightings, 1, ctx);
 }
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->facialTrackingType, out);
+void serialize(const XrFacialTrackerCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->facialTrackingType, ctx);
 }
 
 
-void serialize(const XrFacialTrackerCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->facialTrackingType, out);
+void serialize(const XrFacialTrackerCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->facialTrackingType, ctx);
 }
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportEyeFacialTracking, out);
-    serialize(&s->supportLipFacialTracking, out);
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportEyeFacialTracking, ctx);
+    serialize(&s->supportLipFacialTracking, ctx);
 }
 
 
-void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportEyeFacialTracking, out);
-    serialize(&s->supportLipFacialTracking, out);
+void serialize(const XrSystemFacialTrackingPropertiesHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportEyeFacialTracking, ctx);
+    serialize(&s->supportLipFacialTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 
-void serialize(const XrFoveationApplyInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->mode, out);
-    serialize(&s->subImageCount, out);
-    serialize_ptr(s->subImages, s->subImageCount, out);
+void serialize(const XrFoveationApplyInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->mode, ctx);
+    serialize(&s->subImageCount, ctx);
+    serialize_ptr(s->subImages, s->subImageCount, ctx);
 }
 
 
-void serialize(const XrFoveationApplyInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->mode, out);
-    serialize(&s->subImageCount, out);
-    serialize_ptr(s->subImages, s->subImageCount, out);
+void serialize(const XrFoveationApplyInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->mode, ctx);
+    serialize(&s->subImageCount, ctx);
+    serialize_ptr(s->subImages, s->subImageCount, ctx);
 }
 
 
-void serialize(const XrFoveationConfigurationHTC* s, SyncWriteStream& out) {
-    serialize(&s->level, out);
-    serialize(&s->clearFovDegree, out);
-    serialize(&s->focalCenterOffset, out);
+void serialize(const XrFoveationConfigurationHTC* s, SerializeContext& ctx) {
+    serialize(&s->level, ctx);
+    serialize(&s->clearFovDegree, ctx);
+    serialize(&s->focalCenterOffset, ctx);
 }
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->configCount, out);
-    serialize_ptr(s->configs, s->configCount, out);
+void serialize(const XrFoveationCustomModeInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->configCount, ctx);
+    serialize_ptr(s->configs, s->configCount, ctx);
 }
 
 
-void serialize(const XrFoveationCustomModeInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->configCount, out);
-    serialize_ptr(s->configs, s->configCount, out);
+void serialize(const XrFoveationCustomModeInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->configCount, ctx);
+    serialize_ptr(s->configs, s->configCount, ctx);
 }
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->dynamicFlags, out);
+void serialize(const XrFoveationDynamicModeInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->dynamicFlags, ctx);
 }
 
 
-void serialize(const XrFoveationDynamicModeInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->dynamicFlags, out);
+void serialize(const XrFoveationDynamicModeInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->dynamicFlags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->passthrough, out);
-    serialize(&s->color, out);
+void serialize(const XrCompositionLayerPassthroughHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->passthrough, ctx);
+    serialize(&s->color, ctx);
 }
 
 
-void serialize(const XrCompositionLayerPassthroughHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->passthrough, out);
-    serialize(&s->color, out);
+void serialize(const XrCompositionLayerPassthroughHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->passthrough, ctx);
+    serialize(&s->color, ctx);
 }
 
 
-void serialize(const XrPassthroughColorHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->alpha, out);
+void serialize(const XrPassthroughColorHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->alpha, ctx);
 }
 
 
-void serialize(const XrPassthroughColorHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->alpha, out);
+void serialize(const XrPassthroughColorHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->alpha, ctx);
 }
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->form, out);
+void serialize(const XrPassthroughCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->form, ctx);
 }
 
 
-void serialize(const XrPassthroughCreateInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->form, out);
+void serialize(const XrPassthroughCreateInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->form, ctx);
 }
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertices, s->vertexCount, out);
-    serialize(&s->indexCount, out);
-    serialize_ptr(s->indices, s->indexCount, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertices, s->vertexCount, ctx);
+    serialize(&s->indexCount, ctx);
+    serialize_ptr(s->indices, s->indexCount, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrPassthroughMeshTransformInfoHTC* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertices, s->vertexCount, out);
-    serialize(&s->indexCount, out);
-    serialize_ptr(s->indices, s->indexCount, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->pose, out);
-    serialize(&s->scale, out);
+void serialize(const XrPassthroughMeshTransformInfoHTC* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertices, s->vertexCount, ctx);
+    serialize(&s->indexCount, ctx);
+    serialize_ptr(s->indices, s->indexCount, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->scale, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->device, 1, out);
+void serialize(const XrGraphicsBindingD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->device, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->device, 1, out);
+void serialize(const XrGraphicsBindingD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->device, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->adapterLuid, out);
-    serialize(&s->minFeatureLevel, out);
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->adapterLuid, ctx);
+    serialize(&s->minFeatureLevel, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->adapterLuid, out);
-    serialize(&s->minFeatureLevel, out);
+void serialize(const XrGraphicsRequirementsD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->adapterLuid, ctx);
+    serialize(&s->minFeatureLevel, ctx);
 }
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 
-void serialize(const XrSwapchainImageD3D11KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageD3D11KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->device, 1, out);
-    serialize_ptr(s->queue, 1, out);
+void serialize(const XrGraphicsBindingD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->device, 1, ctx);
+    serialize_ptr(s->queue, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->device, 1, out);
-    serialize_ptr(s->queue, 1, out);
+void serialize(const XrGraphicsBindingD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->device, 1, ctx);
+    serialize_ptr(s->queue, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->adapterLuid, out);
-    serialize(&s->minFeatureLevel, out);
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->adapterLuid, ctx);
+    serialize(&s->minFeatureLevel, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->adapterLuid, out);
-    serialize(&s->minFeatureLevel, out);
+void serialize(const XrGraphicsRequirementsD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->adapterLuid, ctx);
+    serialize(&s->minFeatureLevel, ctx);
 }
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 
-void serialize(const XrSwapchainImageD3D12KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageD3D12KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_create_instance
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->applicationVM, 1, out);
-    serialize_ptr(s->applicationActivity, 1, out);
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->applicationVM, 1, ctx);
+    serialize_ptr(s->applicationActivity, 1, ctx);
 }
 
 
-void serialize(const XrInstanceCreateInfoAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->applicationVM, 1, out);
-    serialize_ptr(s->applicationActivity, 1, out);
+void serialize(const XrInstanceCreateInfoAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->applicationVM, 1, ctx);
+    serialize_ptr(s->applicationActivity, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_create_instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_binding_modification
 
-void serialize(const XrBindingModificationBaseHeaderKHR* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrBindingModificationBaseHeaderKHR* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrBindingModificationsKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bindingModificationCount, out);
+void serialize(const XrBindingModificationsKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bindingModificationCount, ctx);
     #error "auto-generator doesn't support double pointers (s->bindingModifications)"None
 }
 
 
-void serialize(const XrBindingModificationsKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bindingModificationCount, out);
+void serialize(const XrBindingModificationsKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bindingModificationCount, ctx);
     #error "auto-generator doesn't support double pointers (s->bindingModifications)"None
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_binding_modification
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorScale, out);
-    serialize(&s->colorBias, out);
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorScale, ctx);
+    serialize(&s->colorBias, ctx);
 }
 
 
-void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorScale, out);
-    serialize(&s->colorBias, out);
+void serialize(const XrCompositionLayerColorScaleBiasKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorScale, ctx);
+    serialize(&s->colorBias, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_color_scale_bias
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 
-void serialize(const XrCompositionLayerCubeKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->swapchain, out);
-    serialize(&s->imageArrayIndex, out);
-    serialize(&s->orientation, out);
+void serialize(const XrCompositionLayerCubeKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->swapchain, ctx);
+    serialize(&s->imageArrayIndex, ctx);
+    serialize(&s->orientation, ctx);
 }
 
 
-void serialize(const XrCompositionLayerCubeKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->swapchain, out);
-    serialize(&s->imageArrayIndex, out);
-    serialize(&s->orientation, out);
+void serialize(const XrCompositionLayerCubeKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->swapchain, ctx);
+    serialize(&s->imageArrayIndex, ctx);
+    serialize(&s->orientation, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cube
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 
-void serialize(const XrCompositionLayerCylinderKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->centralAngle, out);
-    serialize(&s->aspectRatio, out);
+void serialize(const XrCompositionLayerCylinderKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->centralAngle, ctx);
+    serialize(&s->aspectRatio, ctx);
 }
 
 
-void serialize(const XrCompositionLayerCylinderKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->centralAngle, out);
-    serialize(&s->aspectRatio, out);
+void serialize(const XrCompositionLayerCylinderKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->centralAngle, ctx);
+    serialize(&s->aspectRatio, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_cylinder
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->subImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrCompositionLayerDepthInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 
-void serialize(const XrCompositionLayerDepthInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->subImage, out);
-    serialize(&s->minDepth, out);
-    serialize(&s->maxDepth, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrCompositionLayerDepthInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->minDepth, ctx);
+    serialize(&s->maxDepth, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_depth
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 
-void serialize(const XrCompositionLayerEquirectKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->scale, out);
-    serialize(&s->bias, out);
+void serialize(const XrCompositionLayerEquirectKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->scale, ctx);
+    serialize(&s->bias, ctx);
 }
 
 
-void serialize(const XrCompositionLayerEquirectKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->scale, out);
-    serialize(&s->bias, out);
+void serialize(const XrCompositionLayerEquirectKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->scale, ctx);
+    serialize(&s->bias, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect
 #ifdef XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->centralHorizontalAngle, out);
-    serialize(&s->upperVerticalAngle, out);
-    serialize(&s->lowerVerticalAngle, out);
+void serialize(const XrCompositionLayerEquirect2KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->centralHorizontalAngle, ctx);
+    serialize(&s->upperVerticalAngle, ctx);
+    serialize(&s->lowerVerticalAngle, ctx);
 }
 
 
-void serialize(const XrCompositionLayerEquirect2KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->radius, out);
-    serialize(&s->centralHorizontalAngle, out);
-    serialize(&s->upperVerticalAngle, out);
-    serialize(&s->lowerVerticalAngle, out);
+void serialize(const XrCompositionLayerEquirect2KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->radius, ctx);
+    serialize(&s->centralHorizontalAngle, ctx);
+    serialize(&s->upperVerticalAngle, ctx);
+    serialize(&s->lowerVerticalAngle, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_composition_layer_equirect2
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 
-void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrLoaderInitInfoBaseHeaderKHR* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init_android
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->applicationVM, 1, out);
-    serialize_ptr(s->applicationContext, 1, out);
+void serialize(const XrLoaderInitInfoAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->applicationVM, 1, ctx);
+    serialize_ptr(s->applicationContext, 1, ctx);
 }
 
 
-void serialize(const XrLoaderInitInfoAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->applicationVM, 1, out);
-    serialize_ptr(s->applicationContext, 1, out);
+void serialize(const XrLoaderInitInfoAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->applicationVM, 1, ctx);
+    serialize_ptr(s->applicationContext, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init_android
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 
-void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->commandQueue, 1, out);
+void serialize(const XrGraphicsBindingMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->commandQueue, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->commandQueue, 1, out);
+void serialize(const XrGraphicsBindingMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->commandQueue, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->metalDevice, 1, out);
+void serialize(const XrGraphicsRequirementsMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->metalDevice, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->metalDevice, 1, out);
+void serialize(const XrGraphicsRequirementsMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->metalDevice, 1, ctx);
 }
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 
-void serialize(const XrSwapchainImageMetalKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->texture, 1, out);
+void serialize(const XrSwapchainImageMetalKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->texture, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->display, 1, out);
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->display, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->display, 1, out);
+void serialize(const XrGraphicsBindingOpenGLWaylandKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->display, 1, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->hDC, out);
-    serialize(&s->hGLRC, out);
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->hDC, ctx);
+    serialize(&s->hGLRC, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->hDC, out);
-    serialize(&s->hGLRC, out);
+void serialize(const XrGraphicsBindingOpenGLWin32KHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->hDC, ctx);
+    serialize(&s->hGLRC, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->connection, 1, out);
-    serialize(&s->screenNumber, out);
-    serialize(&s->fbconfigid, out);
-    serialize(&s->visualid, out);
-    serialize(&s->glxDrawable, out);
-    serialize(&s->glxContext, out);
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->connection, 1, ctx);
+    serialize(&s->screenNumber, ctx);
+    serialize(&s->fbconfigid, ctx);
+    serialize(&s->visualid, ctx);
+    serialize(&s->glxDrawable, ctx);
+    serialize(&s->glxContext, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->connection, 1, out);
-    serialize(&s->screenNumber, out);
-    serialize(&s->fbconfigid, out);
-    serialize(&s->visualid, out);
-    serialize(&s->glxDrawable, out);
-    serialize(&s->glxContext, out);
+void serialize(const XrGraphicsBindingOpenGLXcbKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->connection, 1, ctx);
+    serialize(&s->screenNumber, ctx);
+    serialize(&s->fbconfigid, ctx);
+    serialize(&s->visualid, ctx);
+    serialize(&s->glxDrawable, ctx);
+    serialize(&s->glxContext, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->xDisplay, 1, out);
-    serialize(&s->visualid, out);
-    serialize(&s->glxFBConfig, out);
-    serialize(&s->glxDrawable, out);
-    serialize(&s->glxContext, out);
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->xDisplay, 1, ctx);
+    serialize(&s->visualid, ctx);
+    serialize(&s->glxFBConfig, ctx);
+    serialize(&s->glxDrawable, ctx);
+    serialize(&s->glxContext, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->xDisplay, 1, out);
-    serialize(&s->visualid, out);
-    serialize(&s->glxFBConfig, out);
-    serialize(&s->glxDrawable, out);
-    serialize(&s->glxContext, out);
+void serialize(const XrGraphicsBindingOpenGLXlibKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->xDisplay, 1, ctx);
+    serialize(&s->visualid, ctx);
+    serialize(&s->glxFBConfig, ctx);
+    serialize(&s->glxDrawable, ctx);
+    serialize(&s->glxContext, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsOpenGLKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageOpenGLKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 
-void serialize(const XrSwapchainImageOpenGLKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageOpenGLKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->display, out);
-    serialize(&s->config, out);
-    serialize(&s->context, out);
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->display, ctx);
+    serialize(&s->config, ctx);
+    serialize(&s->context, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->display, out);
-    serialize(&s->config, out);
-    serialize(&s->context, out);
+void serialize(const XrGraphicsBindingOpenGLESAndroidKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->display, ctx);
+    serialize(&s->config, ctx);
+    serialize(&s->context, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsOpenGLESKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageOpenGLESKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 
-void serialize(const XrSwapchainImageOpenGLESKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageOpenGLESKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->viewIndex, out);
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->viewIndex, ctx);
 }
 
 
-void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->viewIndex, out);
+void serialize(const XrEventDataVisibilityMaskChangedKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->viewIndex, ctx);
 }
 
 
-void serialize(const XrVisibilityMaskKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrVisibilityMaskKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrVisibilityMaskKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrVisibilityMaskKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->instance, out);
-    serialize(&s->physicalDevice, out);
-    serialize(&s->device, out);
-    serialize(&s->queueFamilyIndex, out);
-    serialize(&s->queueIndex, out);
+void serialize(const XrGraphicsBindingVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->instance, ctx);
+    serialize(&s->physicalDevice, ctx);
+    serialize(&s->device, ctx);
+    serialize(&s->queueFamilyIndex, ctx);
+    serialize(&s->queueIndex, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->instance, out);
-    serialize(&s->physicalDevice, out);
-    serialize(&s->device, out);
-    serialize(&s->queueFamilyIndex, out);
-    serialize(&s->queueIndex, out);
+void serialize(const XrGraphicsBindingVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->instance, ctx);
+    serialize(&s->physicalDevice, ctx);
+    serialize(&s->device, ctx);
+    serialize(&s->queueFamilyIndex, ctx);
+    serialize(&s->queueIndex, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrGraphicsRequirementsVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->minApiVersionSupported, out);
-    serialize(&s->maxApiVersionSupported, out);
+void serialize(const XrGraphicsRequirementsVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->minApiVersionSupported, ctx);
+    serialize(&s->maxApiVersionSupported, ctx);
 }
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 
-void serialize(const XrSwapchainImageVulkanKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->image, out);
+void serialize(const XrSwapchainImageVulkanKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->image, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->pfnGetInstanceProcAddr, out);
-    serialize(&s->vulkanPhysicalDevice, out);
-    serialize_ptr(s->vulkanCreateInfo, 1, out);
-    serialize_ptr(s->vulkanAllocator, 1, out);
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->pfnGetInstanceProcAddr, ctx);
+    serialize(&s->vulkanPhysicalDevice, ctx);
+    serialize_ptr(s->vulkanCreateInfo, 1, ctx);
+    serialize_ptr(s->vulkanAllocator, 1, ctx);
 }
 
 
-void serialize(const XrVulkanDeviceCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->pfnGetInstanceProcAddr, out);
-    serialize(&s->vulkanPhysicalDevice, out);
-    serialize_ptr(s->vulkanCreateInfo, 1, out);
-    serialize_ptr(s->vulkanAllocator, 1, out);
+void serialize(const XrVulkanDeviceCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->pfnGetInstanceProcAddr, ctx);
+    serialize(&s->vulkanPhysicalDevice, ctx);
+    serialize_ptr(s->vulkanCreateInfo, 1, ctx);
+    serialize_ptr(s->vulkanAllocator, 1, ctx);
 }
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->vulkanInstance, out);
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->vulkanInstance, ctx);
 }
 
 
-void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->vulkanInstance, out);
+void serialize(const XrVulkanGraphicsDeviceGetInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->vulkanInstance, ctx);
 }
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->pfnGetInstanceProcAddr, out);
-    serialize_ptr(s->vulkanCreateInfo, 1, out);
-    serialize_ptr(s->vulkanAllocator, 1, out);
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->pfnGetInstanceProcAddr, ctx);
+    serialize_ptr(s->vulkanCreateInfo, 1, ctx);
+    serialize_ptr(s->vulkanAllocator, 1, ctx);
 }
 
 
-void serialize(const XrVulkanInstanceCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->pfnGetInstanceProcAddr, out);
-    serialize_ptr(s->vulkanCreateInfo, 1, out);
-    serialize_ptr(s->vulkanAllocator, 1, out);
+void serialize(const XrVulkanInstanceCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->pfnGetInstanceProcAddr, ctx);
+    serialize_ptr(s->vulkanCreateInfo, 1, ctx);
+    serialize_ptr(s->vulkanAllocator, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewFormatCount, out);
-    serialize_ptr(s->viewFormats, s->viewFormatCount, out);
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewFormatCount, ctx);
+    serialize_ptr(s->viewFormats, s->viewFormatCount, ctx);
 }
 
 
-void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewFormatCount, out);
-    serialize_ptr(s->viewFormats, s->viewFormatCount, out);
+void serialize(const XrVulkanSwapchainFormatListCreateInfoKHR* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewFormatCount, ctx);
+    serialize_ptr(s->viewFormats, s->viewFormatCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_swapchain_format_list
 #ifdef XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFullBodyTracking, out);
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFullBodyTracking, ctx);
 }
 
 
-void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFullBodyTracking, out);
+void serialize(const XrSystemPropertiesBodyTrackingFullBodyMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFullBodyTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_body_tracking_full_body
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrColocationAdvertisementStartInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrColocationAdvertisementStartInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrColocationAdvertisementStopInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationAdvertisementStopInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrColocationDiscoveryStartInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationDiscoveryStartInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrColocationDiscoveryStopInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrColocationDiscoveryStopInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->advertisementRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->advertisementRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->advertisementRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->advertisementRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->advertisementUuid, out);
-    serialize(&s->bufferSize, out);
-    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, out);
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->advertisementUuid, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, ctx);
 }
 
 
-void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->advertisementUuid, out);
-    serialize(&s->bufferSize, out);
-    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, out);
+void serialize(const XrEventDataColocationDiscoveryResultMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->advertisementUuid, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_array(s->buffer, XR_MAX_COLOCATION_DISCOVERY_BUFFER_SIZE_META, ctx);
 }
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->advertisementRequestId, out);
-    serialize(&s->result, out);
-    serialize(&s->advertisementUuid, out);
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->advertisementRequestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->advertisementUuid, ctx);
 }
 
 
-void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->advertisementRequestId, out);
-    serialize(&s->result, out);
-    serialize(&s->advertisementUuid, out);
+void serialize(const XrEventDataStartColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->advertisementRequestId, ctx);
+    serialize(&s->result, ctx);
+    serialize(&s->advertisementUuid, ctx);
 }
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->discoveryRequestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStartColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->discoveryRequestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStopColocationAdvertisementCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataStopColocationDiscoveryCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsColocationDiscovery, out);
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsColocationDiscovery, ctx);
 }
 
 
-void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsColocationDiscovery, out);
+void serialize(const XrSystemColocationDiscoveryPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsColocationDiscovery, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrEnvironmentDepthHandRemovalSetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->displayTime, out);
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize_time(&s->displayTime, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->displayTime, out);
+void serialize(const XrEnvironmentDepthImageAcquireInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize_time(&s->displayTime, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->swapchainIndex, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
-    serialize_array(s->views, 2, out);
+void serialize(const XrEnvironmentDepthImageMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->swapchainIndex, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
+    serialize_array(s->views, 2, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->swapchainIndex, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
-    serialize_array(s->views, 2, out);
+void serialize(const XrEnvironmentDepthImageMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->swapchainIndex, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
+    serialize_array(s->views, 2, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fov, out);
-    serialize(&s->pose, out);
+void serialize(const XrEnvironmentDepthImageViewMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthImageViewMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fov, out);
-    serialize(&s->pose, out);
+void serialize(const XrEnvironmentDepthImageViewMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrEnvironmentDepthProviderCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
+void serialize(const XrEnvironmentDepthSwapchainCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrEnvironmentDepthSwapchainStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEnvironmentDepth, out);
-    serialize(&s->supportsHandRemoval, out);
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEnvironmentDepth, ctx);
+    serialize(&s->supportsHandRemoval, ctx);
 }
 
 
-void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsEnvironmentDepth, out);
-    serialize(&s->supportsHandRemoval, out);
+void serialize(const XrSystemEnvironmentDepthPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsEnvironmentDepth, ctx);
+    serialize(&s->supportsHandRemoval, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrFoveationEyeTrackedProfileCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, out);
-    serialize(&s->flags, out);
+void serialize(const XrFoveationEyeTrackedStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrFoveationEyeTrackedStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, out);
-    serialize(&s->flags, out);
+void serialize(const XrFoveationEyeTrackedStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->foveationCenter, XR_FOVEATION_CENTER_SIZE_META, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFoveationEyeTracked, out);
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFoveationEyeTracked, ctx);
 }
 
 
-void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFoveationEyeTracked, out);
+void serialize(const XrSystemFoveationEyeTrackedPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFoveationEyeTracked, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_headset_id
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->id, out);
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->id, ctx);
 }
 
 
-void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->id, out);
+void serialize(const XrSystemHeadsetIdPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->id, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_headset_id
 #ifdef XRTRANSPORT_EXT_XR_META_local_dimming
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->localDimmingMode, out);
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->localDimmingMode, ctx);
 }
 
 
-void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->localDimmingMode, out);
+void serialize(const XrLocalDimmingFrameEndInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->localDimmingMode, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_local_dimming
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->channels, out);
-    serialize(&s->resolution, out);
-    serialize(&s->data, out);
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->channels, ctx);
+    serialize(&s->resolution, ctx);
+    serialize(&s->data, ctx);
 }
 
 
-void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->channels, out);
-    serialize(&s->resolution, out);
-    serialize(&s->data, out);
+void serialize(const XrPassthroughColorLutCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->channels, ctx);
+    serialize(&s->resolution, ctx);
+    serialize(&s->data, ctx);
 }
 
 
-void serialize(const XrPassthroughColorLutDataMETA* s, SyncWriteStream& out) {
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrPassthroughColorLutDataMETA* s, SerializeContext& ctx) {
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->data, out);
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->data, ctx);
 }
 
 
-void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->data, out);
+void serialize(const XrPassthroughColorLutUpdateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->data, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sourceColorLut, out);
-    serialize(&s->targetColorLut, out);
-    serialize(&s->weight, out);
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sourceColorLut, ctx);
+    serialize(&s->targetColorLut, ctx);
+    serialize(&s->weight, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sourceColorLut, out);
-    serialize(&s->targetColorLut, out);
-    serialize(&s->weight, out);
+void serialize(const XrPassthroughColorMapInterpolatedLutMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sourceColorLut, ctx);
+    serialize(&s->targetColorLut, ctx);
+    serialize(&s->weight, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorLut, out);
-    serialize(&s->weight, out);
+void serialize(const XrPassthroughColorMapLutMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorLut, ctx);
+    serialize(&s->weight, ctx);
 }
 
 
-void serialize(const XrPassthroughColorMapLutMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->colorLut, out);
-    serialize(&s->weight, out);
+void serialize(const XrPassthroughColorMapLutMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->colorLut, ctx);
+    serialize(&s->weight, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->maxColorLutResolution, out);
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->maxColorLutResolution, ctx);
 }
 
 
-void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->maxColorLutResolution, out);
+void serialize(const XrSystemPassthroughColorLutPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->maxColorLutResolution, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layer, out);
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layer, ctx);
 }
 
 
-void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layer, out);
+void serialize(const XrEventDataPassthroughLayerResumedMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layer, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_layer_resumed_event
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 
-void serialize(const XrPassthroughPreferencesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPassthroughPreferencesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrPassthroughPreferencesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
+void serialize(const XrPassthroughPreferencesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->counterFlags, out);
-    serialize(&s->counterUnit, out);
-    serialize(&s->uintValue, out);
-    serialize(&s->floatValue, out);
+void serialize(const XrPerformanceMetricsCounterMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->counterFlags, ctx);
+    serialize(&s->counterUnit, ctx);
+    serialize(&s->uintValue, ctx);
+    serialize(&s->floatValue, ctx);
 }
 
 
-void serialize(const XrPerformanceMetricsCounterMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->counterFlags, out);
-    serialize(&s->counterUnit, out);
-    serialize(&s->uintValue, out);
-    serialize(&s->floatValue, out);
+void serialize(const XrPerformanceMetricsCounterMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->counterFlags, ctx);
+    serialize(&s->counterUnit, ctx);
+    serialize(&s->uintValue, ctx);
+    serialize(&s->floatValue, ctx);
 }
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrPerformanceMetricsStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrPerformanceMetricsStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrPerformanceMetricsStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_xr(s->layer, out);
-    serialize(&s->predictedDisplayTime, out);
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_xr(s->layer, ctx);
+    serialize_time(&s->predictedDisplayTime, ctx);
 }
 
 
-void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_xr(s->layer, out);
-    serialize(&s->predictedDisplayTime, out);
+void serialize(const XrRecommendedLayerResolutionGetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_xr(s->layer, ctx);
+    serialize_time(&s->predictedDisplayTime, ctx);
 }
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedImageDimensions, out);
-    serialize(&s->isValid, out);
+void serialize(const XrRecommendedLayerResolutionMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedImageDimensions, ctx);
+    serialize(&s->isValid, ctx);
 }
 
 
-void serialize(const XrRecommendedLayerResolutionMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedImageDimensions, out);
-    serialize(&s->isValid, out);
+void serialize(const XrRecommendedLayerResolutionMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedImageDimensions, ctx);
+    serialize(&s->isValid, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSimultaneousHandsAndControllers, out);
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSimultaneousHandsAndControllers, ctx);
 }
 
 
-void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSimultaneousHandsAndControllers, out);
+void serialize(const XrSystemSimultaneousHandsAndControllersPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSimultaneousHandsAndControllers, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->groupCount, out);
-    serialize_ptr(s->groups, s->groupCount, out);
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->groupCount, ctx);
+    serialize_ptr(s->groups, s->groupCount, ctx);
 }
 
 
-void serialize(const XrShareSpacesRecipientGroupsMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->groupCount, out);
-    serialize_ptr(s->groups, s->groupCount, out);
+void serialize(const XrShareSpacesRecipientGroupsMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->groupCount, ctx);
+    serialize_ptr(s->groups, s->groupCount, ctx);
 }
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->groupUuid, out);
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->groupUuid, ctx);
 }
 
 
-void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->groupUuid, out);
+void serialize(const XrSpaceGroupUuidFilterInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->groupUuid, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntityGroupSharing, out);
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntityGroupSharing, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntityGroupSharing, out);
+void serialize(const XrSystemSpatialEntityGroupSharingPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntityGroupSharing, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_group_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpaceTriangleMeshGetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSpaceTriangleMeshMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpaceTriangleMeshMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSpaceTriangleMeshMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrEventDataShareSpacesCompleteMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestId, out);
-    serialize(&s->result, out);
+void serialize(const XrEventDataShareSpacesCompleteMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestId, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize_xr(s->recipientInfo, out);
+void serialize(const XrShareSpacesInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize_xr(s->recipientInfo, ctx);
 }
 
 
-void serialize(const XrShareSpacesInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
-    serialize_xr(s->recipientInfo, out);
+void serialize(const XrShareSpacesInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
+    serialize_xr(s->recipientInfo, ctx);
 }
 
 
-void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrShareSpacesRecipientBaseHeaderMETA* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntitySharing, out);
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntitySharing, ctx);
 }
 
 
-void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsSpatialEntitySharing, out);
+void serialize(const XrSystemSpatialEntitySharingPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsSpatialEntitySharing, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardBackspaceMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
-    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, out);
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
+    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
-    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, out);
+void serialize(const XrEventDataVirtualKeyboardCommitTextMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
+    serialize_array(s->text, XR_MAX_VIRTUAL_KEYBOARD_COMMIT_TEXT_SIZE_META, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardEnterMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardHiddenMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->keyboard, out);
+void serialize(const XrEventDataVirtualKeyboardShownMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->keyboard, ctx);
 }
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsVirtualKeyboard, out);
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsVirtualKeyboard, ctx);
 }
 
 
-void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsVirtualKeyboard, out);
+void serialize(const XrSystemVirtualKeyboardPropertiesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsVirtualKeyboard, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->animationIndex, out);
-    serialize(&s->fraction, out);
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->animationIndex, ctx);
+    serialize(&s->fraction, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->animationIndex, out);
-    serialize(&s->fraction, out);
+void serialize(const XrVirtualKeyboardAnimationStateMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->animationIndex, ctx);
+    serialize(&s->fraction, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrVirtualKeyboardCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->inputSource, out);
-    serialize(&s->inputSpace, out);
-    serialize(&s->inputPoseInSpace, out);
-    serialize(&s->inputState, out);
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->inputSource, ctx);
+    serialize(&s->inputSpace, ctx);
+    serialize(&s->inputPoseInSpace, ctx);
+    serialize(&s->inputState, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardInputInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->inputSource, out);
-    serialize(&s->inputSpace, out);
-    serialize(&s->inputPoseInSpace, out);
-    serialize(&s->inputState, out);
+void serialize(const XrVirtualKeyboardInputInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->inputSource, ctx);
+    serialize(&s->inputSpace, ctx);
+    serialize(&s->inputPoseInSpace, ctx);
+    serialize(&s->inputState, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationType, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->scale, out);
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationType, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationType, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->scale, out);
+void serialize(const XrVirtualKeyboardLocationInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationType, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize(&s->scale, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->stateCapacityInput, out);
-    serialize(&s->stateCountOutput, out);
-    serialize_ptr(s->states, s->stateCapacityInput, out);
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->stateCapacityInput, ctx);
+    serialize(&s->stateCountOutput, ctx);
+    serialize_ptr(s->states, s->stateCapacityInput, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->stateCapacityInput, out);
-    serialize(&s->stateCountOutput, out);
-    serialize_ptr(s->states, s->stateCapacityInput, out);
+void serialize(const XrVirtualKeyboardModelAnimationStatesMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->stateCapacityInput, ctx);
+    serialize(&s->stateCountOutput, ctx);
+    serialize_ptr(s->states, s->stateCapacityInput, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->visible, out);
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->visible, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->visible, out);
+void serialize(const XrVirtualKeyboardModelVisibilitySetInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->visible, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationType, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationType, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationType, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
+void serialize(const XrVirtualKeyboardSpaceCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationType, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->textContext, count_null_terminated(s->textContext), out);
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->textContext, count_null_terminated(s->textContext), ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->textContext, count_null_terminated(s->textContext), out);
+void serialize(const XrVirtualKeyboardTextContextChangeInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->textContext, count_null_terminated(s->textContext), ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->textureWidth, out);
-    serialize(&s->textureHeight, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->textureWidth, ctx);
+    serialize(&s->textureHeight, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 
-void serialize(const XrVirtualKeyboardTextureDataMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->textureWidth, out);
-    serialize(&s->textureHeight, out);
-    serialize(&s->bufferCapacityInput, out);
-    serialize(&s->bufferCountOutput, out);
-    serialize_ptr(s->buffer, s->bufferCapacityInput, out);
+void serialize(const XrVirtualKeyboardTextureDataMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->textureWidth, ctx);
+    serialize(&s->textureHeight, ctx);
+    serialize(&s->bufferCapacityInput, ctx);
+    serialize(&s->bufferCountOutput, ctx);
+    serialize_ptr(s->buffer, s->bufferCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->additionalCreateFlags, out);
-    serialize(&s->additionalUsageFlags, out);
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->additionalCreateFlags, ctx);
+    serialize(&s->additionalUsageFlags, ctx);
 }
 
 
-void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->additionalCreateFlags, out);
-    serialize(&s->additionalUsageFlags, out);
+void serialize(const XrVulkanSwapchainCreateInfoMETA* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->additionalCreateFlags, ctx);
+    serialize(&s->additionalUsageFlags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_META_vulkan_swapchain_create_info
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 
-void serialize(const XrCoordinateSpaceCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->cfuid, out);
-    serialize(&s->poseInCoordinateSpace, out);
+void serialize(const XrCoordinateSpaceCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->cfuid, ctx);
+    serialize(&s->poseInCoordinateSpace, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFacialExpressionBlendShapeGetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedFacialBlendShape, out);
-    serialize(&s->weight, out);
-    serialize(&s->flags, out);
-    serialize(&s->time, out);
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedFacialBlendShape, ctx);
+    serialize(&s->weight, ctx);
+    serialize(&s->flags, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedFacialBlendShape, out);
-    serialize(&s->weight, out);
-    serialize(&s->flags, out);
-    serialize(&s->time, out);
+void serialize(const XrFacialExpressionBlendShapePropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedFacialBlendShape, ctx);
+    serialize(&s->weight, ctx);
+    serialize(&s->flags, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedCount, out);
-    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, out);
+void serialize(const XrFacialExpressionClientCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedCount, ctx);
+    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, ctx);
 }
 
 
-void serialize(const XrFacialExpressionClientCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedCount, out);
-    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, out);
+void serialize(const XrFacialExpressionClientCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedCount, ctx);
+    serialize_ptr(s->requestedFacialBlendShapes, s->requestedCount, ctx);
 }
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFacialExpression, out);
+void serialize(const XrSystemFacialExpressionPropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFacialExpression, ctx);
 }
 
 
-void serialize(const XrSystemFacialExpressionPropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFacialExpression, out);
+void serialize(const XrSystemFacialExpressionPropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFacialExpression, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_frame_end_info
 
-void serialize(const XrFrameEndInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->focusDistance, out);
-    serialize(&s->flags, out);
+void serialize(const XrFrameEndInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->focusDistance, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrFrameEndInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->focusDistance, out);
-    serialize(&s->flags, out);
+void serialize(const XrFrameEndInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->focusDistance, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_frame_end_info
 #ifdef XRTRANSPORT_EXT_XR_ML_global_dimmer
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->dimmerValue, out);
-    serialize(&s->flags, out);
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->dimmerValue, ctx);
+    serialize(&s->flags, ctx);
 }
 
 
-void serialize(const XrGlobalDimmerFrameEndInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->dimmerValue, out);
-    serialize(&s->flags, out);
+void serialize(const XrGlobalDimmerFrameEndInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->dimmerValue, ctx);
+    serialize(&s->flags, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_global_dimmer
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 
-void serialize(const XrEventDataLocalizationChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->state, out);
-    serialize(&s->map, out);
-    serialize(&s->confidence, out);
-    serialize(&s->errorFlags, out);
+void serialize(const XrEventDataLocalizationChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->state, ctx);
+    serialize(&s->map, ctx);
+    serialize(&s->confidence, ctx);
+    serialize(&s->errorFlags, ctx);
 }
 
 
-void serialize(const XrEventDataLocalizationChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->state, out);
-    serialize(&s->map, out);
-    serialize(&s->confidence, out);
-    serialize(&s->errorFlags, out);
+void serialize(const XrEventDataLocalizationChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->state, ctx);
+    serialize(&s->map, ctx);
+    serialize(&s->confidence, ctx);
+    serialize(&s->errorFlags, ctx);
 }
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrLocalizationEnableEventsInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrLocalizationEnableEventsInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrLocalizationEnableEventsInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->size, out);
-    serialize_ptr(s->data, s->size, out);
+void serialize(const XrLocalizationMapImportInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->size, ctx);
+    serialize_ptr(s->data, s->size, ctx);
 }
 
 
-void serialize(const XrLocalizationMapImportInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->size, out);
-    serialize_ptr(s->data, s->size, out);
+void serialize(const XrLocalizationMapImportInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->size, ctx);
+    serialize_ptr(s->data, s->size, ctx);
 }
 
 
-void serialize(const XrLocalizationMapML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, out);
-    serialize(&s->mapUuid, out);
-    serialize(&s->mapType, out);
+void serialize(const XrLocalizationMapML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, ctx);
+    serialize(&s->mapUuid, ctx);
+    serialize(&s->mapType, ctx);
 }
 
 
-void serialize(const XrLocalizationMapML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, out);
-    serialize(&s->mapUuid, out);
-    serialize(&s->mapType, out);
+void serialize(const XrLocalizationMapML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->name, XR_MAX_LOCALIZATION_MAP_NAME_LENGTH_ML, ctx);
+    serialize(&s->mapUuid, ctx);
+    serialize(&s->mapType, ctx);
 }
 
 
-void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrLocalizationMapQueryInfoBaseHeaderML* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->mapUuid, out);
+void serialize(const XrMapLocalizationRequestInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->mapUuid, ctx);
 }
 
 
-void serialize(const XrMapLocalizationRequestInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->mapUuid, out);
+void serialize(const XrMapLocalizationRequestInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->mapUuid, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->aprilTagDict, out);
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->aprilTagDict, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorAprilTagInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->aprilTagDict, out);
+void serialize(const XrMarkerDetectorAprilTagInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->aprilTagDict, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->arucoDict, out);
+void serialize(const XrMarkerDetectorArucoInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->arucoDict, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorArucoInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->arucoDict, out);
+void serialize(const XrMarkerDetectorArucoInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->arucoDict, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->profile, out);
-    serialize(&s->markerType, out);
+void serialize(const XrMarkerDetectorCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->profile, ctx);
+    serialize(&s->markerType, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->profile, out);
-    serialize(&s->markerType, out);
+void serialize(const XrMarkerDetectorCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->profile, ctx);
+    serialize(&s->markerType, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fpsHint, out);
-    serialize(&s->resolutionHint, out);
-    serialize(&s->cameraHint, out);
-    serialize(&s->cornerRefineMethod, out);
-    serialize(&s->useEdgeRefinement, out);
-    serialize(&s->fullAnalysisIntervalHint, out);
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fpsHint, ctx);
+    serialize(&s->resolutionHint, ctx);
+    serialize(&s->cameraHint, ctx);
+    serialize(&s->cornerRefineMethod, ctx);
+    serialize(&s->useEdgeRefinement, ctx);
+    serialize(&s->fullAnalysisIntervalHint, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fpsHint, out);
-    serialize(&s->resolutionHint, out);
-    serialize(&s->cameraHint, out);
-    serialize(&s->cornerRefineMethod, out);
-    serialize(&s->useEdgeRefinement, out);
-    serialize(&s->fullAnalysisIntervalHint, out);
+void serialize(const XrMarkerDetectorCustomProfileInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fpsHint, ctx);
+    serialize(&s->resolutionHint, ctx);
+    serialize(&s->cameraHint, ctx);
+    serialize(&s->cornerRefineMethod, ctx);
+    serialize(&s->useEdgeRefinement, ctx);
+    serialize(&s->fullAnalysisIntervalHint, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerLength, out);
+void serialize(const XrMarkerDetectorSizeInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerLength, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorSizeInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerLength, out);
+void serialize(const XrMarkerDetectorSizeInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerLength, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorSnapshotInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrMarkerDetectorSnapshotInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->state, out);
+void serialize(const XrMarkerDetectorStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->state, ctx);
 }
 
 
-void serialize(const XrMarkerDetectorStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->state, out);
+void serialize(const XrMarkerDetectorStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->state, ctx);
 }
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerDetector, out);
-    serialize(&s->marker, out);
-    serialize(&s->poseInMarkerSpace, out);
+void serialize(const XrMarkerSpaceCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerDetector, ctx);
+    serialize(&s->marker, ctx);
+    serialize(&s->poseInMarkerSpace, ctx);
 }
 
 
-void serialize(const XrMarkerSpaceCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerDetector, out);
-    serialize(&s->marker, out);
-    serialize(&s->poseInMarkerSpace, out);
+void serialize(const XrMarkerSpaceCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerDetector, ctx);
+    serialize(&s->marker, ctx);
+    serialize(&s->poseInMarkerSpace, ctx);
 }
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsMarkerUnderstanding, out);
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsMarkerUnderstanding, ctx);
 }
 
 
-void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsMarkerUnderstanding, out);
+void serialize(const XrSystemMarkerUnderstandingPropertiesML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsMarkerUnderstanding, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
 }
 
 
-void serialize(const XrCreateSpatialAnchorsCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
+void serialize(const XrCreateSpatialAnchorsCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->confidence, out);
+void serialize(const XrSpatialAnchorStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->confidence, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->confidence, out);
+void serialize(const XrSpatialAnchorStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->confidence, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSpatialAnchorsCreateInfoBaseHeaderML* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->poseInBaseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->poseInBaseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->poseInBaseSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorsCreateInfoFromPoseML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->poseInBaseSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 
-void serialize(const XrSpatialAnchorCompletionResultML* s, SyncWriteStream& out) {
-    serialize(&s->uuid, out);
-    serialize(&s->result, out);
+void serialize(const XrSpatialAnchorCompletionResultML* s, SerializeContext& ctx) {
+    serialize(&s->uuid, ctx);
+    serialize(&s->result, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->storage, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->storage, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->storage, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsCreateInfoFromUuidsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->storage, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpatialAnchorsCreateStorageInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsDeleteCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrSpatialAnchorsDeleteCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsDeleteInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsDeleteInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsPublishCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
+void serialize(const XrSpatialAnchorsPublishCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchorCount, out);
-    serialize_ptr(s->anchors, s->anchorCount, out);
-    serialize(&s->expiration, out);
+void serialize(const XrSpatialAnchorsPublishInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchorCount, ctx);
+    serialize_ptr(s->anchors, s->anchorCount, ctx);
+    serialize(&s->expiration, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsPublishInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchorCount, out);
-    serialize_ptr(s->anchors, s->anchorCount, out);
-    serialize(&s->expiration, out);
+void serialize(const XrSpatialAnchorsPublishInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchorCount, ctx);
+    serialize_ptr(s->anchors, s->anchorCount, ctx);
+    serialize(&s->expiration, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->uuidCapacityInput, out);
-    serialize(&s->uuidCountOutput, out);
-    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->uuidCapacityInput, ctx);
+    serialize(&s->uuidCountOutput, ctx);
+    serialize_ptr(s->uuids, s->uuidCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsQueryCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->uuidCapacityInput, out);
-    serialize(&s->uuidCountOutput, out);
-    serialize_ptr(s->uuids, s->uuidCapacityInput, out);
+void serialize(const XrSpatialAnchorsQueryCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->uuidCapacityInput, ctx);
+    serialize(&s->uuidCountOutput, ctx);
+    serialize_ptr(s->uuids, s->uuidCapacityInput, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSpatialAnchorsQueryInfoBaseHeaderML* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->center, out);
-    serialize(&s->time, out);
-    serialize(&s->radius, out);
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->center, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->radius, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->center, out);
-    serialize(&s->time, out);
-    serialize(&s->radius, out);
+void serialize(const XrSpatialAnchorsQueryInfoRadiusML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize(&s->center, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->radius, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->resultCount, out);
-    serialize_ptr(s->results, s->resultCount, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionDetailsML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->resultCount, ctx);
+    serialize_ptr(s->results, s->resultCount, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
-    serialize(&s->expiration, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
+    serialize(&s->expiration, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuidCount, out);
-    serialize_ptr(s->uuids, s->uuidCount, out);
-    serialize(&s->expiration, out);
+void serialize(const XrSpatialAnchorsUpdateExpirationInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuidCount, ctx);
+    serialize_ptr(s->uuids, s->uuidCount, ctx);
+    serialize(&s->expiration, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 
-void serialize(const XrSystemNotificationsSetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->suppressNotifications, out);
+void serialize(const XrSystemNotificationsSetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->suppressNotifications, ctx);
 }
 
 
-void serialize(const XrSystemNotificationsSetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->suppressNotifications, out);
+void serialize(const XrSystemNotificationsSetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->suppressNotifications, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
+void serialize(const XrEventDataEyeCalibrationChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
 }
 
 
-void serialize(const XrEventDataEyeCalibrationChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
+void serialize(const XrEventDataEyeCalibrationChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
 }
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
-    serialize(&s->time, out);
+void serialize(const XrEventDataHeadsetFitChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEventDataHeadsetFitChangedML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->status, out);
-    serialize(&s->time, out);
+void serialize(const XrEventDataHeadsetFitChangedML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->status, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 
-void serialize(const XrUserCalibrationEnableEventsInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->enabled, out);
+void serialize(const XrUserCalibrationEnableEventsInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->enabled, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 
-void serialize(const XrWorldMeshBlockML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->blockResult, out);
-    serialize(&s->lod, out);
-    serialize(&s->flags, out);
-    serialize(&s->indexCount, out);
-    serialize_ptr(s->indexBuffer, s->indexCount, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertexBuffer, s->vertexCount, out);
-    serialize(&s->normalCount, out);
-    serialize_ptr(s->normalBuffer, s->normalCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidenceBuffer, s->confidenceCount, out);
+void serialize(const XrWorldMeshBlockML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->blockResult, ctx);
+    serialize(&s->lod, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->indexCount, ctx);
+    serialize_ptr(s->indexBuffer, s->indexCount, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertexBuffer, s->vertexCount, ctx);
+    serialize(&s->normalCount, ctx);
+    serialize_ptr(s->normalBuffer, s->normalCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidenceBuffer, s->confidenceCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshBlockML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->blockResult, out);
-    serialize(&s->lod, out);
-    serialize(&s->flags, out);
-    serialize(&s->indexCount, out);
-    serialize_ptr(s->indexBuffer, s->indexCount, out);
-    serialize(&s->vertexCount, out);
-    serialize_ptr(s->vertexBuffer, s->vertexCount, out);
-    serialize(&s->normalCount, out);
-    serialize_ptr(s->normalBuffer, s->normalCount, out);
-    serialize(&s->confidenceCount, out);
-    serialize_ptr(s->confidenceBuffer, s->confidenceCount, out);
+void serialize(const XrWorldMeshBlockML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->blockResult, ctx);
+    serialize(&s->lod, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->indexCount, ctx);
+    serialize_ptr(s->indexBuffer, s->indexCount, ctx);
+    serialize(&s->vertexCount, ctx);
+    serialize_ptr(s->vertexBuffer, s->vertexCount, ctx);
+    serialize(&s->normalCount, ctx);
+    serialize_ptr(s->normalBuffer, s->normalCount, ctx);
+    serialize(&s->confidenceCount, ctx);
+    serialize_ptr(s->confidenceBuffer, s->confidenceCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->lod, out);
+void serialize(const XrWorldMeshBlockRequestML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->lod, ctx);
 }
 
 
-void serialize(const XrWorldMeshBlockRequestML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->lod, out);
+void serialize(const XrWorldMeshBlockRequestML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->lod, ctx);
 }
 
 
-void serialize(const XrWorldMeshBlockStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->meshBoundingBoxCenter, out);
-    serialize(&s->meshBoundingBoxExtents, out);
-    serialize(&s->lastUpdateTime, out);
-    serialize(&s->status, out);
+void serialize(const XrWorldMeshBlockStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->meshBoundingBoxCenter, ctx);
+    serialize(&s->meshBoundingBoxExtents, ctx);
+    serialize_time(&s->lastUpdateTime, ctx);
+    serialize(&s->status, ctx);
 }
 
 
-void serialize(const XrWorldMeshBlockStateML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->uuid, out);
-    serialize(&s->meshBoundingBoxCenter, out);
-    serialize(&s->meshBoundingBoxExtents, out);
-    serialize(&s->lastUpdateTime, out);
-    serialize(&s->status, out);
+void serialize(const XrWorldMeshBlockStateML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->uuid, ctx);
+    serialize(&s->meshBoundingBoxCenter, ctx);
+    serialize(&s->meshBoundingBoxExtents, ctx);
+    serialize_time(&s->lastUpdateTime, ctx);
+    serialize(&s->status, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrWorldMeshBufferML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrWorldMeshBufferML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->maxBlockCount, out);
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->maxBlockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->maxBlockCount, out);
+void serialize(const XrWorldMeshBufferRecommendedSizeInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->maxBlockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->size, out);
+void serialize(const XrWorldMeshBufferSizeML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->size, ctx);
 }
 
 
-void serialize(const XrWorldMeshBufferSizeML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->size, out);
+void serialize(const XrWorldMeshBufferSizeML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->size, ctx);
 }
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrWorldMeshDetectorCreateInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrWorldMeshDetectorCreateInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrWorldMeshGetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->fillHoleLength, out);
-    serialize(&s->disconnectedComponentArea, out);
-    serialize(&s->blockCount, out);
-    serialize_ptr(s->blocks, s->blockCount, out);
+void serialize(const XrWorldMeshGetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->fillHoleLength, ctx);
+    serialize(&s->disconnectedComponentArea, ctx);
+    serialize(&s->blockCount, ctx);
+    serialize_ptr(s->blocks, s->blockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshGetInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->flags, out);
-    serialize(&s->fillHoleLength, out);
-    serialize(&s->disconnectedComponentArea, out);
-    serialize(&s->blockCount, out);
-    serialize_ptr(s->blocks, s->blockCount, out);
+void serialize(const XrWorldMeshGetInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->flags, ctx);
+    serialize(&s->fillHoleLength, ctx);
+    serialize(&s->disconnectedComponentArea, ctx);
+    serialize(&s->blockCount, ctx);
+    serialize_ptr(s->blocks, s->blockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->meshSpace, out);
-    serialize(&s->meshSpaceLocateTime, out);
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->meshSpace, ctx);
+    serialize_time(&s->meshSpaceLocateTime, ctx);
 }
 
 
-void serialize(const XrWorldMeshRequestCompletionInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->meshSpace, out);
-    serialize(&s->meshSpaceLocateTime, out);
+void serialize(const XrWorldMeshRequestCompletionInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->meshSpace, ctx);
+    serialize_time(&s->meshSpaceLocateTime, ctx);
 }
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->blockCount, out);
-    serialize_ptr(s->blocks, s->blockCount, out);
+void serialize(const XrWorldMeshRequestCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->blockCount, ctx);
+    serialize_ptr(s->blocks, s->blockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshRequestCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->blockCount, out);
-    serialize_ptr(s->blocks, s->blockCount, out);
+void serialize(const XrWorldMeshRequestCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize(&s->blockCount, ctx);
+    serialize_ptr(s->blocks, s->blockCount, ctx);
 }
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->timestamp, out);
-    serialize(&s->meshBlockStateCapacityInput, out);
-    serialize(&s->meshBlockStateCountOutput, out);
-    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, out);
+void serialize(const XrWorldMeshStateRequestCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize_time(&s->timestamp, ctx);
+    serialize(&s->meshBlockStateCapacityInput, ctx);
+    serialize(&s->meshBlockStateCountOutput, ctx);
+    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, ctx);
 }
 
 
-void serialize(const XrWorldMeshStateRequestCompletionML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->futureResult, out);
-    serialize(&s->timestamp, out);
-    serialize(&s->meshBlockStateCapacityInput, out);
-    serialize(&s->meshBlockStateCountOutput, out);
-    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, out);
+void serialize(const XrWorldMeshStateRequestCompletionML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->futureResult, ctx);
+    serialize_time(&s->timestamp, ctx);
+    serialize(&s->meshBlockStateCapacityInput, ctx);
+    serialize(&s->meshBlockStateCountOutput, ctx);
+    serialize_ptr(s->meshBlockStates, s->meshBlockStateCapacityInput, ctx);
 }
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->boundingBoxCenter, out);
-    serialize(&s->boundingBoxExtents, out);
+void serialize(const XrWorldMeshStateRequestInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->boundingBoxCenter, ctx);
+    serialize(&s->boundingBoxExtents, ctx);
 }
 
 
-void serialize(const XrWorldMeshStateRequestInfoML* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->boundingBoxCenter, out);
-    serialize(&s->boundingBoxExtents, out);
+void serialize(const XrWorldMeshStateRequestInfoML* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->boundingBoxCenter, ctx);
+    serialize(&s->boundingBoxExtents, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_egl_enable
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->getProcAddress, out);
-    serialize(&s->display, out);
-    serialize(&s->config, out);
-    serialize(&s->context, out);
+void serialize(const XrGraphicsBindingEGLMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->getProcAddress, ctx);
+    serialize(&s->display, ctx);
+    serialize(&s->config, ctx);
+    serialize(&s->context, ctx);
 }
 
 
-void serialize(const XrGraphicsBindingEGLMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->getProcAddress, out);
-    serialize(&s->display, out);
-    serialize(&s->config, out);
-    serialize(&s->context, out);
+void serialize(const XrGraphicsBindingEGLMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->getProcAddress, ctx);
+    serialize(&s->display, ctx);
+    serialize(&s->config, ctx);
+    serialize(&s->context, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_egl_enable
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 
-void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, SyncWriteStream& out) {
-    serialize(&s->location, out);
-    serialize(&s->value, out);
+void serialize(const XrForceFeedbackCurlApplyLocationMNDX* s, SerializeContext& ctx) {
+    serialize(&s->location, ctx);
+    serialize(&s->value, ctx);
 }
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationCount, out);
-    serialize_ptr(s->locations, s->locationCount, out);
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationCount, ctx);
+    serialize_ptr(s->locations, s->locationCount, ctx);
 }
 
 
-void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationCount, out);
-    serialize_ptr(s->locations, s->locationCount, out);
+void serialize(const XrForceFeedbackCurlApplyLocationsMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationCount, ctx);
+    serialize_ptr(s->locations, s->locationCount, ctx);
 }
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsForceFeedbackCurl, out);
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsForceFeedbackCurl, ctx);
 }
 
 
-void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsForceFeedbackCurl, out);
+void serialize(const XrSystemForceFeedbackCurlPropertiesMNDX* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsForceFeedbackCurl, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->reprojectionMode, out);
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->reprojectionMode, ctx);
 }
 
 
-void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->reprojectionMode, out);
+void serialize(const XrCompositionLayerReprojectionInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->reprojectionMode, ctx);
 }
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->position, out);
-    serialize(&s->normal, out);
-    serialize(&s->velocity, out);
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->position, ctx);
+    serialize(&s->normal, ctx);
+    serialize(&s->velocity, ctx);
 }
 
 
-void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->position, out);
-    serialize(&s->normal, out);
-    serialize(&s->velocity, out);
+void serialize(const XrCompositionLayerReprojectionPlaneOverrideMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->position, ctx);
+    serialize(&s->normal, ctx);
+    serialize(&s->velocity, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 
-void serialize(const XrControllerModelKeyStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->modelKey, out);
+void serialize(const XrControllerModelKeyStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->modelKey, ctx);
 }
 
 
-void serialize(const XrControllerModelKeyStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->modelKey, out);
+void serialize(const XrControllerModelKeyStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->modelKey, ctx);
 }
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
-    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+void serialize(const XrControllerModelNodePropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, ctx);
+    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, ctx);
 }
 
 
-void serialize(const XrControllerModelNodePropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
-    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, out);
+void serialize(const XrControllerModelNodePropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->parentNodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, ctx);
+    serialize_array(s->nodeName, XR_MAX_CONTROLLER_MODEL_NODE_NAME_SIZE_MSFT, ctx);
 }
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodePose, out);
+void serialize(const XrControllerModelNodeStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodePose, ctx);
 }
 
 
-void serialize(const XrControllerModelNodeStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodePose, out);
+void serialize(const XrControllerModelNodeStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodePose, ctx);
 }
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeCapacityInput, out);
-    serialize(&s->nodeCountOutput, out);
-    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, out);
+void serialize(const XrControllerModelPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeCapacityInput, ctx);
+    serialize(&s->nodeCountOutput, ctx);
+    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, ctx);
 }
 
 
-void serialize(const XrControllerModelPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeCapacityInput, out);
-    serialize(&s->nodeCountOutput, out);
-    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, out);
+void serialize(const XrControllerModelPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeCapacityInput, ctx);
+    serialize(&s->nodeCountOutput, ctx);
+    serialize_ptr(s->nodeProperties, s->nodeCapacityInput, ctx);
 }
 
 
-void serialize(const XrControllerModelStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeCapacityInput, out);
-    serialize(&s->nodeCountOutput, out);
-    serialize_ptr(s->nodeStates, s->nodeCapacityInput, out);
+void serialize(const XrControllerModelStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeCapacityInput, ctx);
+    serialize(&s->nodeCountOutput, ctx);
+    serialize_ptr(s->nodeStates, s->nodeCapacityInput, ctx);
 }
 
 
-void serialize(const XrControllerModelStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeCapacityInput, out);
-    serialize(&s->nodeCountOutput, out);
-    serialize_ptr(s->nodeStates, s->nodeCapacityInput, out);
+void serialize(const XrControllerModelStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeCapacityInput, ctx);
+    serialize(&s->nodeCountOutput, ctx);
+    serialize_ptr(s->nodeStates, s->nodeCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 
-void serialize(const XrHandMeshIndexBufferMSFT* s, SyncWriteStream& out) {
-    serialize(&s->indexBufferKey, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrHandMeshIndexBufferMSFT* s, SerializeContext& ctx) {
+    serialize(&s->indexBufferKey, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrHandMeshMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->indexBufferChanged, out);
-    serialize(&s->vertexBufferChanged, out);
-    serialize(&s->indexBuffer, out);
-    serialize(&s->vertexBuffer, out);
+void serialize(const XrHandMeshMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->indexBufferChanged, ctx);
+    serialize(&s->vertexBufferChanged, ctx);
+    serialize(&s->indexBuffer, ctx);
+    serialize(&s->vertexBuffer, ctx);
 }
 
 
-void serialize(const XrHandMeshMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
-    serialize(&s->indexBufferChanged, out);
-    serialize(&s->vertexBufferChanged, out);
-    serialize(&s->indexBuffer, out);
-    serialize(&s->vertexBuffer, out);
+void serialize(const XrHandMeshMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->indexBufferChanged, ctx);
+    serialize(&s->vertexBufferChanged, ctx);
+    serialize(&s->indexBuffer, ctx);
+    serialize(&s->vertexBuffer, ctx);
 }
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handPoseType, out);
-    serialize(&s->poseInHandMeshSpace, out);
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handPoseType, ctx);
+    serialize(&s->poseInHandMeshSpace, ctx);
 }
 
 
-void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handPoseType, out);
-    serialize(&s->poseInHandMeshSpace, out);
+void serialize(const XrHandMeshSpaceCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handPoseType, ctx);
+    serialize(&s->poseInHandMeshSpace, ctx);
 }
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
-    serialize(&s->handPoseType, out);
+void serialize(const XrHandMeshUpdateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->handPoseType, ctx);
 }
 
 
-void serialize(const XrHandMeshUpdateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->time, out);
-    serialize(&s->handPoseType, out);
+void serialize(const XrHandMeshUpdateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->handPoseType, ctx);
 }
 
 
-void serialize(const XrHandMeshVertexBufferMSFT* s, SyncWriteStream& out) {
-    serialize(&s->vertexUpdateTime, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrHandMeshVertexBufferMSFT* s, SerializeContext& ctx) {
+    serialize_time(&s->vertexUpdateTime, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrHandMeshVertexMSFT* s, SyncWriteStream& out) {
-    serialize(&s->position, out);
-    serialize(&s->normal, out);
+void serialize(const XrHandMeshVertexMSFT* s, SerializeContext& ctx) {
+    serialize(&s->position, ctx);
+    serialize(&s->normal, ctx);
 }
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handPoseType, out);
+void serialize(const XrHandPoseTypeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handPoseType, ctx);
 }
 
 
-void serialize(const XrHandPoseTypeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->handPoseType, out);
+void serialize(const XrHandPoseTypeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->handPoseType, ctx);
 }
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsHandTrackingMesh, out);
-    serialize(&s->maxHandMeshIndexCount, out);
-    serialize(&s->maxHandMeshVertexCount, out);
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsHandTrackingMesh, ctx);
+    serialize(&s->maxHandMeshIndexCount, ctx);
+    serialize(&s->maxHandMeshVertexCount, ctx);
 }
 
 
-void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsHandTrackingMesh, out);
-    serialize(&s->maxHandMeshIndexCount, out);
-    serialize(&s->maxHandMeshVertexCount, out);
+void serialize(const XrSystemHandTrackingMeshPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsHandTrackingMesh, ctx);
+    serialize(&s->maxHandMeshIndexCount, ctx);
+    serialize(&s->maxHandMeshVertexCount, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->holographicSpace, 1, out);
-    serialize_ptr(s->coreWindow, 1, out);
+void serialize(const XrHolographicWindowAttachmentMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->holographicSpace, 1, ctx);
+    serialize_ptr(s->coreWindow, 1, ctx);
 }
 
 
-void serialize(const XrHolographicWindowAttachmentMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_ptr(s->holographicSpace, 1, out);
-    serialize_ptr(s->coreWindow, 1, out);
+void serialize(const XrHolographicWindowAttachmentMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_ptr(s->holographicSpace, 1, ctx);
+    serialize_ptr(s->coreWindow, 1, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_holographic_window_attachment
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 
-void serialize(const XrSceneMarkerMSFT* s, SyncWriteStream& out) {
-    serialize(&s->markerType, out);
-    serialize(&s->lastSeenTime, out);
-    serialize(&s->center, out);
-    serialize(&s->size, out);
+void serialize(const XrSceneMarkerMSFT* s, SerializeContext& ctx) {
+    serialize(&s->markerType, ctx);
+    serialize_time(&s->lastSeenTime, ctx);
+    serialize(&s->center, ctx);
+    serialize(&s->size, ctx);
 }
 
 
-void serialize(const XrSceneMarkerQRCodeMSFT* s, SyncWriteStream& out) {
-    serialize(&s->symbolType, out);
-    serialize(&s->version, out);
+void serialize(const XrSceneMarkerQRCodeMSFT* s, SerializeContext& ctx) {
+    serialize(&s->symbolType, ctx);
+    serialize(&s->version, ctx);
 }
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->qrCodeCapacityInput, out);
-    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, out);
+void serialize(const XrSceneMarkerQRCodesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->qrCodeCapacityInput, ctx);
+    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMarkerQRCodesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->qrCodeCapacityInput, out);
-    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, out);
+void serialize(const XrSceneMarkerQRCodesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->qrCodeCapacityInput, ctx);
+    serialize_ptr(s->qrCodes, s->qrCodeCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerTypeCount, out);
-    serialize_ptr(s->markerTypes, s->markerTypeCount, out);
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerTypeCount, ctx);
+    serialize_ptr(s->markerTypes, s->markerTypeCount, ctx);
 }
 
 
-void serialize(const XrSceneMarkerTypeFilterMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerTypeCount, out);
-    serialize_ptr(s->markerTypes, s->markerTypeCount, out);
+void serialize(const XrSceneMarkerTypeFilterMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerTypeCount, ctx);
+    serialize_ptr(s->markerTypes, s->markerTypeCount, ctx);
 }
 
 
-void serialize(const XrSceneMarkersMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneMarkerCapacityInput, out);
-    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, out);
+void serialize(const XrSceneMarkersMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneMarkerCapacityInput, ctx);
+    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMarkersMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneMarkerCapacityInput, out);
-    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, out);
+void serialize(const XrSceneMarkersMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneMarkerCapacityInput, ctx);
+    serialize_ptr(s->sceneMarkers, s->sceneMarkerCapacityInput, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedFeatureCount, out);
-    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, out);
-    serialize(&s->consistency, out);
-    serialize(&s->bounds, out);
+void serialize(const XrNewSceneComputeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedFeatureCount, ctx);
+    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, ctx);
+    serialize(&s->consistency, ctx);
+    serialize(&s->bounds, ctx);
 }
 
 
-void serialize(const XrNewSceneComputeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->requestedFeatureCount, out);
-    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, out);
-    serialize(&s->consistency, out);
-    serialize(&s->bounds, out);
+void serialize(const XrNewSceneComputeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->requestedFeatureCount, ctx);
+    serialize_ptr(s->requestedFeatures, s->requestedFeatureCount, ctx);
+    serialize(&s->consistency, ctx);
+    serialize(&s->bounds, ctx);
 }
 
 
-void serialize(const XrSceneBoundsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->space, out);
-    serialize(&s->time, out);
-    serialize(&s->sphereCount, out);
-    serialize_ptr(s->spheres, s->sphereCount, out);
-    serialize(&s->boxCount, out);
-    serialize_ptr(s->boxes, s->boxCount, out);
-    serialize(&s->frustumCount, out);
-    serialize_ptr(s->frustums, s->frustumCount, out);
+void serialize(const XrSceneBoundsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->space, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->sphereCount, ctx);
+    serialize_ptr(s->spheres, s->sphereCount, ctx);
+    serialize(&s->boxCount, ctx);
+    serialize_ptr(s->boxes, s->boxCount, ctx);
+    serialize(&s->frustumCount, ctx);
+    serialize_ptr(s->frustums, s->frustumCount, ctx);
 }
 
 
-void serialize(const XrSceneComponentLocationMSFT* s, SyncWriteStream& out) {
-    serialize(&s->flags, out);
-    serialize(&s->pose, out);
+void serialize(const XrSceneComponentLocationMSFT* s, SerializeContext& ctx) {
+    serialize(&s->flags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationCount, out);
-    serialize_ptr(s->locations, s->locationCount, out);
+void serialize(const XrSceneComponentLocationsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationCount, ctx);
+    serialize_ptr(s->locations, s->locationCount, ctx);
 }
 
 
-void serialize(const XrSceneComponentLocationsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationCount, out);
-    serialize_ptr(s->locations, s->locationCount, out);
+void serialize(const XrSceneComponentLocationsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationCount, ctx);
+    serialize_ptr(s->locations, s->locationCount, ctx);
 }
 
 
-void serialize(const XrSceneComponentMSFT* s, SyncWriteStream& out) {
-    serialize(&s->componentType, out);
-    serialize(&s->id, out);
-    serialize(&s->parentId, out);
-    serialize(&s->updateTime, out);
+void serialize(const XrSceneComponentMSFT* s, SerializeContext& ctx) {
+    serialize(&s->componentType, ctx);
+    serialize(&s->id, ctx);
+    serialize(&s->parentId, ctx);
+    serialize_time(&s->updateTime, ctx);
 }
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->parentId, out);
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->parentId, ctx);
 }
 
 
-void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->parentId, out);
+void serialize(const XrSceneComponentParentFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->parentId, ctx);
 }
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSceneComponentsGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSceneComponentsGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentType, out);
+void serialize(const XrSceneComponentsGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentType, ctx);
 }
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->componentIdCount, out);
-    serialize_ptr(s->componentIds, s->componentIdCount, out);
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->componentIdCount, ctx);
+    serialize_ptr(s->componentIds, s->componentIdCount, ctx);
 }
 
 
-void serialize(const XrSceneComponentsLocateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->componentIdCount, out);
-    serialize_ptr(s->componentIds, s->componentIdCount, out);
+void serialize(const XrSceneComponentsLocateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->componentIdCount, ctx);
+    serialize_ptr(s->componentIds, s->componentIdCount, ctx);
 }
 
 
-void serialize(const XrSceneComponentsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentCapacityInput, out);
-    serialize(&s->componentCountOutput, out);
-    serialize_ptr(s->components, s->componentCapacityInput, out);
+void serialize(const XrSceneComponentsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentCapacityInput, ctx);
+    serialize(&s->componentCountOutput, ctx);
+    serialize_ptr(s->components, s->componentCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneComponentsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->componentCapacityInput, out);
-    serialize(&s->componentCountOutput, out);
-    serialize_ptr(s->components, s->componentCapacityInput, out);
+void serialize(const XrSceneComponentsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->componentCapacityInput, ctx);
+    serialize(&s->componentCountOutput, ctx);
+    serialize_ptr(s->components, s->componentCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneFrustumBoundMSFT* s, SyncWriteStream& out) {
-    serialize(&s->pose, out);
-    serialize(&s->fov, out);
-    serialize(&s->farDistance, out);
+void serialize(const XrSceneFrustumBoundMSFT* s, SerializeContext& ctx) {
+    serialize(&s->pose, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->farDistance, ctx);
 }
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->meshBufferId, out);
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->meshBufferId, ctx);
 }
 
 
-void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->meshBufferId, out);
+void serialize(const XrSceneMeshBuffersGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->meshBufferId, ctx);
 }
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneMeshBuffersMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneMeshBuffersMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneMeshBuffersMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshIndicesUint16MSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSceneMeshIndicesUint16MSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshIndicesUint32MSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->indexCapacityInput, out);
-    serialize(&s->indexCountOutput, out);
-    serialize_ptr(s->indices, s->indexCapacityInput, out);
+void serialize(const XrSceneMeshIndicesUint32MSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->indexCapacityInput, ctx);
+    serialize(&s->indexCountOutput, ctx);
+    serialize_ptr(s->indices, s->indexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshMSFT* s, SyncWriteStream& out) {
-    serialize(&s->meshBufferId, out);
-    serialize(&s->supportsIndicesUint16, out);
+void serialize(const XrSceneMeshMSFT* s, SerializeContext& ctx) {
+    serialize(&s->meshBufferId, ctx);
+    serialize(&s->supportsIndicesUint16, ctx);
 }
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrSceneMeshVertexBufferMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshVertexBufferMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->vertexCapacityInput, out);
-    serialize(&s->vertexCountOutput, out);
-    serialize_ptr(s->vertices, s->vertexCapacityInput, out);
+void serialize(const XrSceneMeshVertexBufferMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->vertexCapacityInput, ctx);
+    serialize(&s->vertexCountOutput, ctx);
+    serialize_ptr(s->vertices, s->vertexCapacityInput, ctx);
 }
 
 
-void serialize(const XrSceneMeshesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneMeshCount, out);
-    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, out);
+void serialize(const XrSceneMeshesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneMeshCount, ctx);
+    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, ctx);
 }
 
 
-void serialize(const XrSceneMeshesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneMeshCount, out);
-    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, out);
+void serialize(const XrSceneMeshesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneMeshCount, ctx);
+    serialize_ptr(s->sceneMeshes, s->sceneMeshCount, ctx);
 }
 
 
-void serialize(const XrSceneObjectMSFT* s, SyncWriteStream& out) {
-    serialize(&s->objectType, out);
+void serialize(const XrSceneObjectMSFT* s, SerializeContext& ctx) {
+    serialize(&s->objectType, ctx);
 }
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->objectTypeCount, out);
-    serialize_ptr(s->objectTypes, s->objectTypeCount, out);
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->objectTypeCount, ctx);
+    serialize_ptr(s->objectTypes, s->objectTypeCount, ctx);
 }
 
 
-void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->objectTypeCount, out);
-    serialize_ptr(s->objectTypes, s->objectTypeCount, out);
+void serialize(const XrSceneObjectTypesFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->objectTypeCount, ctx);
+    serialize_ptr(s->objectTypes, s->objectTypeCount, ctx);
 }
 
 
-void serialize(const XrSceneObjectsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneObjectCount, out);
-    serialize_ptr(s->sceneObjects, s->sceneObjectCount, out);
+void serialize(const XrSceneObjectsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneObjectCount, ctx);
+    serialize_ptr(s->sceneObjects, s->sceneObjectCount, ctx);
 }
 
 
-void serialize(const XrSceneObjectsMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneObjectCount, out);
-    serialize_ptr(s->sceneObjects, s->sceneObjectCount, out);
+void serialize(const XrSceneObjectsMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneObjectCount, ctx);
+    serialize_ptr(s->sceneObjects, s->sceneObjectCount, ctx);
 }
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneObserverCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneObserverCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSceneObserverCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSceneOrientedBoxBoundMSFT* s, SyncWriteStream& out) {
-    serialize(&s->pose, out);
-    serialize(&s->extents, out);
+void serialize(const XrSceneOrientedBoxBoundMSFT* s, SerializeContext& ctx) {
+    serialize(&s->pose, ctx);
+    serialize(&s->extents, ctx);
 }
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->alignmentCount, out);
-    serialize_ptr(s->alignments, s->alignmentCount, out);
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->alignmentCount, ctx);
+    serialize_ptr(s->alignments, s->alignmentCount, ctx);
 }
 
 
-void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->alignmentCount, out);
-    serialize_ptr(s->alignments, s->alignmentCount, out);
+void serialize(const XrScenePlaneAlignmentFilterInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->alignmentCount, ctx);
+    serialize_ptr(s->alignments, s->alignmentCount, ctx);
 }
 
 
-void serialize(const XrScenePlaneMSFT* s, SyncWriteStream& out) {
-    serialize(&s->alignment, out);
-    serialize(&s->size, out);
-    serialize(&s->meshBufferId, out);
-    serialize(&s->supportsIndicesUint16, out);
+void serialize(const XrScenePlaneMSFT* s, SerializeContext& ctx) {
+    serialize(&s->alignment, ctx);
+    serialize(&s->size, ctx);
+    serialize(&s->meshBufferId, ctx);
+    serialize(&s->supportsIndicesUint16, ctx);
 }
 
 
-void serialize(const XrScenePlanesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->scenePlaneCount, out);
-    serialize_ptr(s->scenePlanes, s->scenePlaneCount, out);
+void serialize(const XrScenePlanesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->scenePlaneCount, ctx);
+    serialize_ptr(s->scenePlanes, s->scenePlaneCount, ctx);
 }
 
 
-void serialize(const XrScenePlanesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->scenePlaneCount, out);
-    serialize_ptr(s->scenePlanes, s->scenePlaneCount, out);
+void serialize(const XrScenePlanesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->scenePlaneCount, ctx);
+    serialize_ptr(s->scenePlanes, s->scenePlaneCount, ctx);
 }
 
 
-void serialize(const XrSceneSphereBoundMSFT* s, SyncWriteStream& out) {
-    serialize(&s->center, out);
-    serialize(&s->radius, out);
+void serialize(const XrSceneSphereBoundMSFT* s, SerializeContext& ctx) {
+    serialize(&s->center, ctx);
+    serialize(&s->radius, ctx);
 }
 
 
-void serialize(const XrUuidMSFT* s, SyncWriteStream& out) {
-    serialize_array(s->bytes, 16, out);
+void serialize(const XrUuidMSFT* s, SerializeContext& ctx) {
+    serialize_array(s->bytes, 16, ctx);
 }
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->lod, out);
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->lod, ctx);
 }
 
 
-void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->lod, out);
+void serialize(const XrVisualMeshComputeLodInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->lod, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 
-void serialize(const XrDeserializeSceneFragmentMSFT* s, SyncWriteStream& out) {
-    serialize(&s->bufferSize, out);
-    serialize_ptr(s->buffer, s->bufferSize, out);
+void serialize(const XrDeserializeSceneFragmentMSFT* s, SerializeContext& ctx) {
+    serialize(&s->bufferSize, ctx);
+    serialize_ptr(s->buffer, s->bufferSize, ctx);
 }
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fragmentCount, out);
-    serialize_ptr(s->fragments, s->fragmentCount, out);
+void serialize(const XrSceneDeserializeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fragmentCount, ctx);
+    serialize_ptr(s->fragments, s->fragmentCount, ctx);
 }
 
 
-void serialize(const XrSceneDeserializeInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->fragmentCount, out);
-    serialize_ptr(s->fragments, s->fragmentCount, out);
+void serialize(const XrSceneDeserializeInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->fragmentCount, ctx);
+    serialize_ptr(s->fragments, s->fragmentCount, ctx);
 }
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneFragmentId, out);
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneFragmentId, ctx);
 }
 
 
-void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sceneFragmentId, out);
+void serialize(const XrSerializedSceneFragmentDataGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sceneFragmentId, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationFrameEndInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->viewConfigurationLayersInfo, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationFrameStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->viewConfigurationStates, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->environmentBlendMode, out);
-    serialize(&s->layerCount, out);
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->environmentBlendMode, ctx);
+    serialize(&s->layerCount, ctx);
     #error "auto-generator doesn't support double pointers (s->layers)"None
 }
 
 
-void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->environmentBlendMode, out);
-    serialize(&s->layerCount, out);
+void serialize(const XrSecondaryViewConfigurationLayerInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->environmentBlendMode, ctx);
+    serialize(&s->layerCount, ctx);
     #error "auto-generator doesn't support double pointers (s->layers)"None
 }
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationCount, out);
-    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, out);
+void serialize(const XrSecondaryViewConfigurationSessionBeginInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationCount, ctx);
+    serialize_ptr(s->enabledViewConfigurationTypes, s->viewConfigurationCount, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->active, out);
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->active, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->active, out);
+void serialize(const XrSecondaryViewConfigurationStateMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->active, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
 }
 
 
-void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
+void serialize(const XrSecondaryViewConfigurationSwapchainCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_secondary_view_configuration
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 
-void serialize(const XrSpatialAnchorCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->pose, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialAnchorCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->pose, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->anchor, out);
-    serialize(&s->poseInAnchorSpace, out);
+void serialize(const XrSpatialAnchorSpaceCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->anchor, ctx);
+    serialize(&s->poseInAnchorSpace, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spatialAnchorStore, out);
-    serialize(&s->spatialAnchorPersistenceName, out);
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spatialAnchorStore, ctx);
+    serialize(&s->spatialAnchorPersistenceName, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spatialAnchorStore, out);
-    serialize(&s->spatialAnchorPersistenceName, out);
+void serialize(const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spatialAnchorStore, ctx);
+    serialize(&s->spatialAnchorPersistenceName, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spatialAnchorPersistenceName, out);
-    serialize(&s->spatialAnchor, out);
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spatialAnchorPersistenceName, ctx);
+    serialize(&s->spatialAnchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->spatialAnchorPersistenceName, out);
-    serialize(&s->spatialAnchor, out);
+void serialize(const XrSpatialAnchorPersistenceInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->spatialAnchorPersistenceName, ctx);
+    serialize(&s->spatialAnchor, ctx);
 }
 
 
-void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, SyncWriteStream& out) {
-    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, out);
+void serialize(const XrSpatialAnchorPersistenceNameMSFT* s, SerializeContext& ctx) {
+    serialize_array(s->name, XR_MAX_SPATIAL_ANCHOR_NAME_SIZE_MSFT, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
-    serialize(&s->poseInNodeSpace, out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, ctx);
+    serialize(&s->poseInNodeSpace, ctx);
 }
 
 
-void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
-    serialize(&s->poseInNodeSpace, out);
+void serialize(const XrSpatialGraphNodeBindingPropertiesMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, ctx);
+    serialize(&s->poseInNodeSpace, ctx);
 }
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeType, out);
-    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
-    serialize(&s->pose, out);
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeType, ctx);
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->nodeType, out);
-    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, out);
-    serialize(&s->pose, out);
+void serialize(const XrSpatialGraphNodeSpaceCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->nodeType, ctx);
+    serialize_array(s->nodeId, XR_GUID_SIZE_MSFT, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->space, out);
-    serialize(&s->poseInSpace, out);
-    serialize(&s->time, out);
+void serialize(const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->poseInSpace, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 
-void serialize(const XrExternalCameraExtrinsicsOCULUS* s, SyncWriteStream& out) {
-    serialize(&s->lastChangeTime, out);
-    serialize(&s->cameraStatusFlags, out);
-    serialize(&s->attachedToDevice, out);
-    serialize(&s->relativePose, out);
+void serialize(const XrExternalCameraExtrinsicsOCULUS* s, SerializeContext& ctx) {
+    serialize_time(&s->lastChangeTime, ctx);
+    serialize(&s->cameraStatusFlags, ctx);
+    serialize(&s->attachedToDevice, ctx);
+    serialize(&s->relativePose, ctx);
 }
 
 
-void serialize(const XrExternalCameraIntrinsicsOCULUS* s, SyncWriteStream& out) {
-    serialize(&s->lastChangeTime, out);
-    serialize(&s->fov, out);
-    serialize(&s->virtualNearPlaneDistance, out);
-    serialize(&s->virtualFarPlaneDistance, out);
-    serialize(&s->imageSensorPixelResolution, out);
+void serialize(const XrExternalCameraIntrinsicsOCULUS* s, SerializeContext& ctx) {
+    serialize_time(&s->lastChangeTime, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->virtualNearPlaneDistance, ctx);
+    serialize(&s->virtualFarPlaneDistance, ctx);
+    serialize(&s->imageSensorPixelResolution, ctx);
 }
 
 
-void serialize(const XrExternalCameraOCULUS* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, out);
-    serialize(&s->intrinsics, out);
-    serialize(&s->extrinsics, out);
+void serialize(const XrExternalCameraOCULUS* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, ctx);
+    serialize(&s->intrinsics, ctx);
+    serialize(&s->extrinsics, ctx);
 }
 
 
-void serialize(const XrExternalCameraOCULUS* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, out);
-    serialize(&s->intrinsics, out);
-    serialize(&s->extrinsics, out);
+void serialize(const XrExternalCameraOCULUS* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->name, XR_MAX_EXTERNAL_CAMERA_NAME_SIZE_OCULUS, ctx);
+    serialize(&s->intrinsics, ctx);
+    serialize(&s->extrinsics, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
-    serialize(&s->binding, out);
-    serialize(&s->onThreshold, out);
-    serialize(&s->offThreshold, out);
-    serialize_xr(s->onHaptic, out);
-    serialize_xr(s->offHaptic, out);
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
+    serialize(&s->binding, ctx);
+    serialize(&s->onThreshold, ctx);
+    serialize(&s->offThreshold, ctx);
+    serialize_xr(s->onHaptic, ctx);
+    serialize_xr(s->offHaptic, ctx);
 }
 
 
-void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
-    serialize(&s->binding, out);
-    serialize(&s->onThreshold, out);
-    serialize(&s->offThreshold, out);
-    serialize_xr(s->onHaptic, out);
-    serialize_xr(s->offHaptic, out);
+void serialize(const XrInteractionProfileAnalogThresholdVALVE* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
+    serialize(&s->binding, ctx);
+    serialize(&s->onThreshold, ctx);
+    serialize(&s->offThreshold, ctx);
+    serialize_xr(s->onHaptic, ctx);
+    serialize_xr(s->offHaptic, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_VALVE_analog_threshold
 #ifdef XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->depthTestRangeNearZ, out);
-    serialize(&s->depthTestRangeFarZ, out);
+void serialize(const XrCompositionLayerDepthTestVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->depthTestRangeNearZ, ctx);
+    serialize(&s->depthTestRangeFarZ, ctx);
 }
 
 
-void serialize(const XrCompositionLayerDepthTestVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->depthTestRangeNearZ, out);
-    serialize(&s->depthTestRangeFarZ, out);
+void serialize(const XrCompositionLayerDepthTestVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->depthTestRangeNearZ, ctx);
+    serialize(&s->depthTestRangeFarZ, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_composition_layer_depth_test
 #ifdef XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->foveatedRenderingActive, out);
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->foveatedRenderingActive, ctx);
 }
 
 
-void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->foveatedRenderingActive, out);
+void serialize(const XrFoveatedViewConfigurationViewVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->foveatedRenderingActive, ctx);
 }
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFoveatedRendering, out);
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFoveatedRendering, ctx);
 }
 
 
-void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsFoveatedRendering, out);
+void serialize(const XrSystemFoveatedRenderingPropertiesVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsFoveatedRendering, ctx);
 }
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->foveatedRenderingActive, out);
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->foveatedRenderingActive, ctx);
 }
 
 
-void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->foveatedRenderingActive, out);
+void serialize(const XrViewLocateFoveatedRenderingVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->foveatedRenderingActive, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_foveated_rendering
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerId, out);
-    serialize(&s->isActive, out);
-    serialize(&s->isPredicted, out);
-    serialize(&s->time, out);
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerId, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->isPredicted, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerId, out);
-    serialize(&s->isActive, out);
-    serialize(&s->isPredicted, out);
-    serialize(&s->time, out);
+void serialize(const XrEventDataMarkerTrackingUpdateVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerId, ctx);
+    serialize(&s->isActive, ctx);
+    serialize(&s->isPredicted, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerId, out);
-    serialize(&s->poseInMarkerSpace, out);
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerId, ctx);
+    serialize(&s->poseInMarkerSpace, ctx);
 }
 
 
-void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->markerId, out);
-    serialize(&s->poseInMarkerSpace, out);
+void serialize(const XrMarkerSpaceCreateInfoVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->markerId, ctx);
+    serialize(&s->poseInMarkerSpace, ctx);
 }
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsMarkerTracking, out);
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsMarkerTracking, ctx);
 }
 
 
-void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->supportsMarkerTracking, out);
+void serialize(const XrSystemMarkerTrackingPropertiesVARJO* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->supportsMarkerTracking, ctx);
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 
-void serialize(const XrActionCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->actionName, XR_MAX_ACTION_NAME_SIZE, out);
-    serialize(&s->actionType, out);
-    serialize(&s->countSubactionPaths, out);
-    serialize_ptr(s->subactionPaths, s->countSubactionPaths, out);
-    serialize_array(s->localizedActionName, XR_MAX_LOCALIZED_ACTION_NAME_SIZE, out);
+void serialize(const XrActionCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->actionName, XR_MAX_ACTION_NAME_SIZE, ctx);
+    serialize(&s->actionType, ctx);
+    serialize(&s->countSubactionPaths, ctx);
+    serialize_ptr(s->subactionPaths, s->countSubactionPaths, ctx);
+    serialize_array(s->localizedActionName, XR_MAX_LOCALIZED_ACTION_NAME_SIZE, ctx);
 }
 
 
-void serialize(const XrActionSetCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->actionSetName, XR_MAX_ACTION_SET_NAME_SIZE, out);
-    serialize_array(s->localizedActionSetName, XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE, out);
-    serialize(&s->priority, out);
+void serialize(const XrActionSetCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->actionSetName, XR_MAX_ACTION_SET_NAME_SIZE, ctx);
+    serialize_array(s->localizedActionSetName, XR_MAX_LOCALIZED_ACTION_SET_NAME_SIZE, ctx);
+    serialize(&s->priority, ctx);
 }
 
 
-void serialize(const XrActionSpaceCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
-    serialize(&s->subactionPath, out);
-    serialize(&s->poseInActionSpace, out);
+void serialize(const XrActionSpaceCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
+    serialize(&s->subactionPath, ctx);
+    serialize(&s->poseInActionSpace, ctx);
 }
 
 
-void serialize(const XrActionStateBoolean* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->currentState, out);
-    serialize(&s->changedSinceLastSync, out);
-    serialize(&s->lastChangeTime, out);
-    serialize(&s->isActive, out);
+void serialize(const XrActionStateBoolean* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->currentState, ctx);
+    serialize(&s->changedSinceLastSync, ctx);
+    serialize_time(&s->lastChangeTime, ctx);
+    serialize(&s->isActive, ctx);
 }
 
 
-void serialize(const XrActionStateFloat* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->currentState, out);
-    serialize(&s->changedSinceLastSync, out);
-    serialize(&s->lastChangeTime, out);
-    serialize(&s->isActive, out);
+void serialize(const XrActionStateFloat* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->currentState, ctx);
+    serialize(&s->changedSinceLastSync, ctx);
+    serialize_time(&s->lastChangeTime, ctx);
+    serialize(&s->isActive, ctx);
 }
 
 
-void serialize(const XrActionStateGetInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
-    serialize(&s->subactionPath, out);
+void serialize(const XrActionStateGetInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
+    serialize(&s->subactionPath, ctx);
 }
 
 
-void serialize(const XrActionStatePose* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->isActive, out);
+void serialize(const XrActionStatePose* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->isActive, ctx);
 }
 
 
-void serialize(const XrActionStateVector2f* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->currentState, out);
-    serialize(&s->changedSinceLastSync, out);
-    serialize(&s->lastChangeTime, out);
-    serialize(&s->isActive, out);
+void serialize(const XrActionStateVector2f* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->currentState, ctx);
+    serialize(&s->changedSinceLastSync, ctx);
+    serialize_time(&s->lastChangeTime, ctx);
+    serialize(&s->isActive, ctx);
 }
 
 
-void serialize(const XrActionSuggestedBinding* s, SyncWriteStream& out) {
-    serialize(&s->action, out);
-    serialize(&s->binding, out);
+void serialize(const XrActionSuggestedBinding* s, SerializeContext& ctx) {
+    serialize(&s->action, ctx);
+    serialize(&s->binding, ctx);
 }
 
 
-void serialize(const XrActionsSyncInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->countActiveActionSets, out);
-    serialize_ptr(s->activeActionSets, s->countActiveActionSets, out);
+void serialize(const XrActionsSyncInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->countActiveActionSets, ctx);
+    serialize_ptr(s->activeActionSets, s->countActiveActionSets, ctx);
 }
 
 
-void serialize(const XrActiveActionSet* s, SyncWriteStream& out) {
-    serialize(&s->actionSet, out);
-    serialize(&s->subactionPath, out);
+void serialize(const XrActiveActionSet* s, SerializeContext& ctx) {
+    serialize(&s->actionSet, ctx);
+    serialize(&s->subactionPath, ctx);
 }
 
 
-void serialize(const XrApiLayerProperties* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->layerName, XR_MAX_API_LAYER_NAME_SIZE, out);
-    serialize(&s->specVersion, out);
-    serialize(&s->layerVersion, out);
-    serialize_array(s->description, XR_MAX_API_LAYER_DESCRIPTION_SIZE, out);
+void serialize(const XrApiLayerProperties* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->layerName, XR_MAX_API_LAYER_NAME_SIZE, ctx);
+    serialize(&s->specVersion, ctx);
+    serialize(&s->layerVersion, ctx);
+    serialize_array(s->description, XR_MAX_API_LAYER_DESCRIPTION_SIZE, ctx);
 }
 
 
-void serialize(const XrApplicationInfo* s, SyncWriteStream& out) {
-    serialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, out);
-    serialize(&s->applicationVersion, out);
-    serialize_array(s->engineName, XR_MAX_ENGINE_NAME_SIZE, out);
-    serialize(&s->engineVersion, out);
-    serialize(&s->apiVersion, out);
+void serialize(const XrApplicationInfo* s, SerializeContext& ctx) {
+    serialize_array(s->applicationName, XR_MAX_APPLICATION_NAME_SIZE, ctx);
+    serialize(&s->applicationVersion, ctx);
+    serialize_array(s->engineName, XR_MAX_ENGINE_NAME_SIZE, ctx);
+    serialize(&s->engineVersion, ctx);
+    serialize(&s->apiVersion, ctx);
 }
 
 
-void serialize(const XrBodySkeletonJointHTC* s, SyncWriteStream& out) {
-    serialize(&s->pose, out);
+void serialize(const XrBodySkeletonJointHTC* s, SerializeContext& ctx) {
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrBoundSourcesForActionEnumerateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
+void serialize(const XrBoundSourcesForActionEnumerateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
 }
 
 
-void serialize(const XrBoxf* s, SyncWriteStream& out) {
-    serialize(&s->center, out);
-    serialize(&s->extents, out);
+void serialize(const XrBoxf* s, SerializeContext& ctx) {
+    serialize(&s->center, ctx);
+    serialize(&s->extents, ctx);
 }
 
 
-void serialize(const XrColor3f* s, SyncWriteStream& out) {
-    serialize(&s->r, out);
-    serialize(&s->g, out);
-    serialize(&s->b, out);
+void serialize(const XrColor3f* s, SerializeContext& ctx) {
+    serialize(&s->r, ctx);
+    serialize(&s->g, ctx);
+    serialize(&s->b, ctx);
 }
 
 
-void serialize(const XrColor4f* s, SyncWriteStream& out) {
-    serialize(&s->r, out);
-    serialize(&s->g, out);
-    serialize(&s->b, out);
-    serialize(&s->a, out);
+void serialize(const XrColor4f* s, SerializeContext& ctx) {
+    serialize(&s->r, ctx);
+    serialize(&s->g, ctx);
+    serialize(&s->b, ctx);
+    serialize(&s->a, ctx);
 }
 
 
-void serialize(const XrCompositionLayerBaseHeader* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrCompositionLayerBaseHeader* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrCompositionLayerProjection* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->viewCount, out);
-    serialize_ptr(s->views, s->viewCount, out);
+void serialize(const XrCompositionLayerProjection* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->viewCount, ctx);
+    serialize_ptr(s->views, s->viewCount, ctx);
 }
 
 
-void serialize(const XrCompositionLayerProjectionView* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->pose, out);
-    serialize(&s->fov, out);
-    serialize(&s->subImage, out);
+void serialize(const XrCompositionLayerProjectionView* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->subImage, ctx);
 }
 
 
-void serialize(const XrCompositionLayerQuad* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->layerFlags, out);
-    serialize(&s->space, out);
-    serialize(&s->eyeVisibility, out);
-    serialize(&s->subImage, out);
-    serialize(&s->pose, out);
-    serialize(&s->size, out);
+void serialize(const XrCompositionLayerQuad* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->layerFlags, ctx);
+    serialize(&s->space, ctx);
+    serialize(&s->eyeVisibility, ctx);
+    serialize(&s->subImage, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->size, ctx);
 }
 
 
-void serialize(const XrEventDataBaseHeader* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrEventDataBaseHeader* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrEventDataBuffer* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->varying, 4000, out);
+void serialize(const XrEventDataBuffer* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->varying, 4000, ctx);
 }
 
 
-void serialize(const XrEventDataEventsLost* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->lostEventCount, out);
+void serialize(const XrEventDataEventsLost* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->lostEventCount, ctx);
 }
 
 
-void serialize(const XrEventDataInstanceLossPending* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->lossTime, out);
+void serialize(const XrEventDataInstanceLossPending* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->lossTime, ctx);
 }
 
 
-void serialize(const XrEventDataInteractionProfileChanged* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
+void serialize(const XrEventDataInteractionProfileChanged* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
 }
 
 
-void serialize(const XrEventDataReferenceSpaceChangePending* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->referenceSpaceType, out);
-    serialize(&s->changeTime, out);
-    serialize(&s->poseValid, out);
-    serialize(&s->poseInPreviousSpace, out);
+void serialize(const XrEventDataReferenceSpaceChangePending* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->referenceSpaceType, ctx);
+    serialize_time(&s->changeTime, ctx);
+    serialize(&s->poseValid, ctx);
+    serialize(&s->poseInPreviousSpace, ctx);
 }
 
 
-void serialize(const XrEventDataSessionStateChanged* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->session, out);
-    serialize(&s->state, out);
-    serialize(&s->time, out);
+void serialize(const XrEventDataSessionStateChanged* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->session, ctx);
+    serialize(&s->state, ctx);
+    serialize_time(&s->time, ctx);
 }
 
 
-void serialize(const XrExtensionProperties* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize_array(s->extensionName, XR_MAX_EXTENSION_NAME_SIZE, out);
-    serialize(&s->extensionVersion, out);
+void serialize(const XrExtensionProperties* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_array(s->extensionName, XR_MAX_EXTENSION_NAME_SIZE, ctx);
+    serialize(&s->extensionVersion, ctx);
 }
 
 
-void serialize(const XrExtent2Df* s, SyncWriteStream& out) {
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrExtent2Df* s, SerializeContext& ctx) {
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrExtent2Di* s, SyncWriteStream& out) {
-    serialize(&s->width, out);
-    serialize(&s->height, out);
+void serialize(const XrExtent2Di* s, SerializeContext& ctx) {
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
 }
 
 
-void serialize(const XrExtent3Df* s, SyncWriteStream& out) {
-    serialize(&s->width, out);
-    serialize(&s->height, out);
-    serialize(&s->depth, out);
+void serialize(const XrExtent3Df* s, SerializeContext& ctx) {
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
+    serialize(&s->depth, ctx);
 }
 
 
-void serialize(const XrFovf* s, SyncWriteStream& out) {
-    serialize(&s->angleLeft, out);
-    serialize(&s->angleRight, out);
-    serialize(&s->angleUp, out);
-    serialize(&s->angleDown, out);
+void serialize(const XrFovf* s, SerializeContext& ctx) {
+    serialize(&s->angleLeft, ctx);
+    serialize(&s->angleRight, ctx);
+    serialize(&s->angleUp, ctx);
+    serialize(&s->angleDown, ctx);
 }
 
 
-void serialize(const XrFrameBeginInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFrameBeginInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrFrameState* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->predictedDisplayTime, out);
-    serialize(&s->predictedDisplayPeriod, out);
-    serialize(&s->shouldRender, out);
+void serialize(const XrFrameState* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize_time(&s->predictedDisplayTime, ctx);
+    serialize(&s->predictedDisplayPeriod, ctx);
+    serialize(&s->shouldRender, ctx);
 }
 
 
-void serialize(const XrFrameWaitInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrFrameWaitInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrFrustumf* s, SyncWriteStream& out) {
-    serialize(&s->pose, out);
-    serialize(&s->fov, out);
-    serialize(&s->nearZ, out);
-    serialize(&s->farZ, out);
+void serialize(const XrFrustumf* s, SerializeContext& ctx) {
+    serialize(&s->pose, ctx);
+    serialize(&s->fov, ctx);
+    serialize(&s->nearZ, ctx);
+    serialize(&s->farZ, ctx);
 }
 
 
-void serialize(const XrHapticActionInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->action, out);
-    serialize(&s->subactionPath, out);
+void serialize(const XrHapticActionInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->action, ctx);
+    serialize(&s->subactionPath, ctx);
 }
 
 
-void serialize(const XrHapticBaseHeader* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrHapticBaseHeader* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrHapticVibration* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->duration, out);
-    serialize(&s->frequency, out);
-    serialize(&s->amplitude, out);
+void serialize(const XrHapticVibration* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->duration, ctx);
+    serialize(&s->frequency, ctx);
+    serialize(&s->amplitude, ctx);
 }
 
 
-void serialize(const XrInputSourceLocalizedNameGetInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->sourcePath, out);
-    serialize(&s->whichComponents, out);
+void serialize(const XrInputSourceLocalizedNameGetInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->sourcePath, ctx);
+    serialize(&s->whichComponents, ctx);
 }
 
 
-void serialize(const XrInstanceProperties* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->runtimeVersion, out);
-    serialize_array(s->runtimeName, XR_MAX_RUNTIME_NAME_SIZE, out);
+void serialize(const XrInstanceProperties* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->runtimeVersion, ctx);
+    serialize_array(s->runtimeName, XR_MAX_RUNTIME_NAME_SIZE, ctx);
 }
 
 
-void serialize(const XrInteractionProfileState* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->interactionProfile, out);
+void serialize(const XrInteractionProfileState* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->interactionProfile, ctx);
 }
 
 
-void serialize(const XrInteractionProfileSuggestedBinding* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->interactionProfile, out);
-    serialize(&s->countSuggestedBindings, out);
-    serialize_ptr(s->suggestedBindings, s->countSuggestedBindings, out);
+void serialize(const XrInteractionProfileSuggestedBinding* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->interactionProfile, ctx);
+    serialize(&s->countSuggestedBindings, ctx);
+    serialize_ptr(s->suggestedBindings, s->countSuggestedBindings, ctx);
 }
 
 
-void serialize(const XrOffset2Df* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
+void serialize(const XrOffset2Df* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
 }
 
 
-void serialize(const XrOffset2Di* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
+void serialize(const XrOffset2Di* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
 }
 
 
-void serialize(const XrPosef* s, SyncWriteStream& out) {
-    serialize(&s->orientation, out);
-    serialize(&s->position, out);
+void serialize(const XrPosef* s, SerializeContext& ctx) {
+    serialize(&s->orientation, ctx);
+    serialize(&s->position, ctx);
 }
 
 
-void serialize(const XrQuaternionf* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
-    serialize(&s->z, out);
-    serialize(&s->w, out);
+void serialize(const XrQuaternionf* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
+    serialize(&s->z, ctx);
+    serialize(&s->w, ctx);
 }
 
 
-void serialize(const XrRect2Df* s, SyncWriteStream& out) {
-    serialize(&s->offset, out);
-    serialize(&s->extent, out);
+void serialize(const XrRect2Df* s, SerializeContext& ctx) {
+    serialize(&s->offset, ctx);
+    serialize(&s->extent, ctx);
 }
 
 
-void serialize(const XrRect2Di* s, SyncWriteStream& out) {
-    serialize(&s->offset, out);
-    serialize(&s->extent, out);
+void serialize(const XrRect2Di* s, SerializeContext& ctx) {
+    serialize(&s->offset, ctx);
+    serialize(&s->extent, ctx);
 }
 
 
-void serialize(const XrReferenceSpaceCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->referenceSpaceType, out);
-    serialize(&s->poseInReferenceSpace, out);
+void serialize(const XrReferenceSpaceCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->referenceSpaceType, ctx);
+    serialize(&s->poseInReferenceSpace, ctx);
 }
 
 
-void serialize(const XrSessionActionSetsAttachInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->countActionSets, out);
-    serialize_ptr(s->actionSets, s->countActionSets, out);
+void serialize(const XrSessionActionSetsAttachInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->countActionSets, ctx);
+    serialize_ptr(s->actionSets, s->countActionSets, ctx);
 }
 
 
-void serialize(const XrSessionBeginInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->primaryViewConfigurationType, out);
+void serialize(const XrSessionBeginInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->primaryViewConfigurationType, ctx);
 }
 
 
-void serialize(const XrSessionCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->systemId, out);
+void serialize(const XrSessionCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->systemId, ctx);
 }
 
 
-void serialize(const XrSpaceLocation* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
+void serialize(const XrSpaceLocation* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrSpaceLocationData* s, SyncWriteStream& out) {
-    serialize(&s->locationFlags, out);
-    serialize(&s->pose, out);
+void serialize(const XrSpaceLocationData* s, SerializeContext& ctx) {
+    serialize(&s->locationFlags, ctx);
+    serialize(&s->pose, ctx);
 }
 
 
-void serialize(const XrSpaceLocations* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->locationCount, out);
-    serialize_ptr(s->locations, s->locationCount, out);
+void serialize(const XrSpaceLocations* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->locationCount, ctx);
+    serialize_ptr(s->locations, s->locationCount, ctx);
 }
 
 
-void serialize(const XrSpaceVelocities* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->velocityCount, out);
-    serialize_ptr(s->velocities, s->velocityCount, out);
+void serialize(const XrSpaceVelocities* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->velocityCount, ctx);
+    serialize_ptr(s->velocities, s->velocityCount, ctx);
 }
 
 
-void serialize(const XrSpaceVelocity* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->velocityFlags, out);
-    serialize(&s->linearVelocity, out);
-    serialize(&s->angularVelocity, out);
+void serialize(const XrSpaceVelocity* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->velocityFlags, ctx);
+    serialize(&s->linearVelocity, ctx);
+    serialize(&s->angularVelocity, ctx);
 }
 
 
-void serialize(const XrSpaceVelocityData* s, SyncWriteStream& out) {
-    serialize(&s->velocityFlags, out);
-    serialize(&s->linearVelocity, out);
-    serialize(&s->angularVelocity, out);
+void serialize(const XrSpaceVelocityData* s, SerializeContext& ctx) {
+    serialize(&s->velocityFlags, ctx);
+    serialize(&s->linearVelocity, ctx);
+    serialize(&s->angularVelocity, ctx);
 }
 
 
-void serialize(const XrSpacesLocateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->baseSpace, out);
-    serialize(&s->time, out);
-    serialize(&s->spaceCount, out);
-    serialize_ptr(s->spaces, s->spaceCount, out);
+void serialize(const XrSpacesLocateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->baseSpace, ctx);
+    serialize_time(&s->time, ctx);
+    serialize(&s->spaceCount, ctx);
+    serialize_ptr(s->spaces, s->spaceCount, ctx);
 }
 
 
-void serialize(const XrSpheref* s, SyncWriteStream& out) {
-    serialize(&s->center, out);
-    serialize(&s->radius, out);
+void serialize(const XrSpheref* s, SerializeContext& ctx) {
+    serialize(&s->center, ctx);
+    serialize(&s->radius, ctx);
 }
 
 
-void serialize(const XrSwapchainCreateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->createFlags, out);
-    serialize(&s->usageFlags, out);
-    serialize(&s->format, out);
-    serialize(&s->sampleCount, out);
-    serialize(&s->width, out);
-    serialize(&s->height, out);
-    serialize(&s->faceCount, out);
-    serialize(&s->arraySize, out);
-    serialize(&s->mipCount, out);
+void serialize(const XrSwapchainCreateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->createFlags, ctx);
+    serialize(&s->usageFlags, ctx);
+    serialize(&s->format, ctx);
+    serialize(&s->sampleCount, ctx);
+    serialize(&s->width, ctx);
+    serialize(&s->height, ctx);
+    serialize(&s->faceCount, ctx);
+    serialize(&s->arraySize, ctx);
+    serialize(&s->mipCount, ctx);
 }
 
 
-void serialize(const XrSwapchainImageAcquireInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSwapchainImageAcquireInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSwapchainImageBaseHeader* s, SyncWriteStream& out) {
-    serialize_xr(s, out);
+void serialize(const XrSwapchainImageBaseHeader* s, SerializeContext& ctx) {
+    serialize_xr(s, ctx);
 }
 
 
-void serialize(const XrSwapchainImageReleaseInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
+void serialize(const XrSwapchainImageReleaseInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
 }
 
 
-void serialize(const XrSwapchainImageWaitInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->timeout, out);
+void serialize(const XrSwapchainImageWaitInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->timeout, ctx);
 }
 
 
-void serialize(const XrSwapchainSubImage* s, SyncWriteStream& out) {
-    serialize(&s->swapchain, out);
-    serialize(&s->imageRect, out);
-    serialize(&s->imageArrayIndex, out);
+void serialize(const XrSwapchainSubImage* s, SerializeContext& ctx) {
+    serialize(&s->swapchain, ctx);
+    serialize(&s->imageRect, ctx);
+    serialize(&s->imageArrayIndex, ctx);
 }
 
 
-void serialize(const XrSystemGetInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->formFactor, out);
+void serialize(const XrSystemGetInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->formFactor, ctx);
 }
 
 
-void serialize(const XrSystemGraphicsProperties* s, SyncWriteStream& out) {
-    serialize(&s->maxSwapchainImageHeight, out);
-    serialize(&s->maxSwapchainImageWidth, out);
-    serialize(&s->maxLayerCount, out);
+void serialize(const XrSystemGraphicsProperties* s, SerializeContext& ctx) {
+    serialize(&s->maxSwapchainImageHeight, ctx);
+    serialize(&s->maxSwapchainImageWidth, ctx);
+    serialize(&s->maxLayerCount, ctx);
 }
 
 
-void serialize(const XrSystemProperties* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->systemId, out);
-    serialize(&s->vendorId, out);
-    serialize_array(s->systemName, XR_MAX_SYSTEM_NAME_SIZE, out);
-    serialize(&s->graphicsProperties, out);
-    serialize(&s->trackingProperties, out);
+void serialize(const XrSystemProperties* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->systemId, ctx);
+    serialize(&s->vendorId, ctx);
+    serialize_array(s->systemName, XR_MAX_SYSTEM_NAME_SIZE, ctx);
+    serialize(&s->graphicsProperties, ctx);
+    serialize(&s->trackingProperties, ctx);
 }
 
 
-void serialize(const XrSystemTrackingProperties* s, SyncWriteStream& out) {
-    serialize(&s->orientationTracking, out);
-    serialize(&s->positionTracking, out);
+void serialize(const XrSystemTrackingProperties* s, SerializeContext& ctx) {
+    serialize(&s->orientationTracking, ctx);
+    serialize(&s->positionTracking, ctx);
 }
 
 
-void serialize(const XrUuid* s, SyncWriteStream& out) {
-    serialize_array(s->data, XR_UUID_SIZE, out);
+void serialize(const XrUuid* s, SerializeContext& ctx) {
+    serialize_array(s->data, XR_UUID_SIZE, ctx);
 }
 
 
-void serialize(const XrVector2f* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
+void serialize(const XrVector2f* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
 }
 
 
-void serialize(const XrVector3f* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
-    serialize(&s->z, out);
+void serialize(const XrVector3f* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
+    serialize(&s->z, ctx);
 }
 
 
-void serialize(const XrVector4f* s, SyncWriteStream& out) {
-    serialize(&s->x, out);
-    serialize(&s->y, out);
-    serialize(&s->z, out);
-    serialize(&s->w, out);
+void serialize(const XrVector4f* s, SerializeContext& ctx) {
+    serialize(&s->x, ctx);
+    serialize(&s->y, ctx);
+    serialize(&s->z, ctx);
+    serialize(&s->w, ctx);
 }
 
 
-void serialize(const XrView* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->pose, out);
-    serialize(&s->fov, out);
+void serialize(const XrView* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->pose, ctx);
+    serialize(&s->fov, ctx);
 }
 
 
-void serialize(const XrViewConfigurationProperties* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->fovMutable, out);
+void serialize(const XrViewConfigurationProperties* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize(&s->fovMutable, ctx);
 }
 
 
-void serialize(const XrViewConfigurationView* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->recommendedImageRectWidth, out);
-    serialize(&s->maxImageRectWidth, out);
-    serialize(&s->recommendedImageRectHeight, out);
-    serialize(&s->maxImageRectHeight, out);
-    serialize(&s->recommendedSwapchainSampleCount, out);
-    serialize(&s->maxSwapchainSampleCount, out);
+void serialize(const XrViewConfigurationView* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->recommendedImageRectWidth, ctx);
+    serialize(&s->maxImageRectWidth, ctx);
+    serialize(&s->recommendedImageRectHeight, ctx);
+    serialize(&s->maxImageRectHeight, ctx);
+    serialize(&s->recommendedSwapchainSampleCount, ctx);
+    serialize(&s->maxSwapchainSampleCount, ctx);
 }
 
 
-void serialize(const XrViewLocateInfo* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewConfigurationType, out);
-    serialize(&s->displayTime, out);
-    serialize(&s->space, out);
+void serialize(const XrViewLocateInfo* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewConfigurationType, ctx);
+    serialize_time(&s->displayTime, ctx);
+    serialize(&s->space, ctx);
 }
 
 
-void serialize(const XrViewState* s, SyncWriteStream& out) {
-    serialize(&s->type, out);
-    serialize_xr(s->next, out);
-    serialize(&s->viewStateFlags, out);
+void serialize(const XrViewState* s, SerializeContext& ctx) {
+    serialize(&s->type, ctx);
+    serialize_xr(s->next, ctx);
+    serialize(&s->viewStateFlags, ctx);
 }
 
 
+
+// takes a local time, converts it to remote time, and puts it on the stream
+void serialize_time(const XrTime* local_time, SerializeContext& ctx) {
+    // time_offset = local - remote => remote = local - offset
+    XrTime remote_time = *local_time - ctx.time_offset;
+    serialize(&remote_time, ctx);
+}
 
 } // namespace xrtransport

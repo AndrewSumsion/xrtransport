@@ -31,6 +31,8 @@ public:
 // Message type constants
 constexpr uint16_t FUNCTION_CALL = 1;
 constexpr uint16_t FUNCTION_RETURN = 2;
+constexpr uint16_t SYNCHRONIZATION_REQUEST = 3;
+constexpr uint16_t SYNCHRONIZATION_RESPONSE = 4;
 constexpr uint16_t CUSTOM_BASE = 100;
 
 class SendBuffer : public SyncWriteStream {

@@ -30,15 +30,17 @@ namespace xrtransport {
 void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDigitalLensControlALMALENCE", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetDigitalLensControlALMALENCE));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrDigitalLensControlALMALENCE* digitalLensControl{};
-    deserialize_ptr(&digitalLensControl, msg_in.stream, false);
+    deserialize_ptr(&digitalLensControl, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetDigitalLensControlALMALENCE(session, digitalLensControl);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -50,18 +52,20 @@ void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrBodyTrackerBD* bodyTracker{};
-    deserialize_ptr(&bodyTracker, msg_in.stream, false);
+    deserialize_ptr(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerBD(session, createInfo, bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -72,13 +76,15 @@ void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerBD bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerBD(bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -87,18 +93,20 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerBD bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoBD* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrBodyJointLocationsBD* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateBodyJointsBD(bodyTracker, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -111,18 +119,20 @@ void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSpatialAnchorCreateInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -133,18 +143,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSpatialAnchorCreateCompletionBD* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -155,18 +167,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPersistSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSpatialAnchorPersistInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -177,18 +191,20 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPersistSpatialAnchorCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -199,18 +215,20 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUnpersistSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSpatialAnchorUnpersistInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -221,18 +239,20 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUnpersistSpatialAnchorCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -245,18 +265,20 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn m
 void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDownloadSharedSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDownloadSharedSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSharedSpatialAnchorDownloadInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDownloadSharedSpatialAnchorAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -267,18 +289,20 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn
 void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDownloadSharedSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDownloadSharedSpatialAnchorCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDownloadSharedSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -289,18 +313,20 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLoc
 void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpatialAnchorAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSpatialAnchorShareInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrShareSpatialAnchorAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -311,18 +337,20 @@ void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpatialAnchorCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpatialAnchorCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrShareSpatialAnchorCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -335,18 +363,20 @@ void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_i
 void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCaptureSceneAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCaptureSceneAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSceneCaptureInfoBD* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCaptureSceneAsyncBD(provider, info, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -357,18 +387,20 @@ void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCaptureSceneCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCaptureSceneCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCaptureSceneCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -381,18 +413,20 @@ void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateAnchorSpaceBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateAnchorSpaceBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrAnchorSpaceCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateAnchorSpaceBD(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -403,18 +437,20 @@ void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSenseDataProviderBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSenseDataProviderCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSenseDataProviderBD* provider{};
-    deserialize_ptr(&provider, msg_in.stream, false);
+    deserialize_ptr(&provider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSenseDataProviderBD(session, createInfo, provider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(provider, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(provider, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -425,18 +461,20 @@ void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialEntityAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialEntityAnchorBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSpatialEntityAnchorCreateInfoBD* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrAnchorBD* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
+    deserialize_ptr(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -447,13 +485,15 @@ void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyAnchorBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyAnchorBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrAnchorBD anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyAnchorBD(anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -462,13 +502,15 @@ void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataProviderBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySenseDataProviderBD(provider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -477,13 +519,15 @@ void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySenseDataSnapshotBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySenseDataSnapshotBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
+    deserialize(&snapshot, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySenseDataSnapshotBD(snapshot);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -492,23 +536,25 @@ void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSpatialEntityComponentTypesBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
+    deserialize(&snapshot, d_ctx);
     XrSpatialEntityIdBD entityId{};
-    deserialize(&entityId, msg_in.stream, false);
+    deserialize(&entityId, d_ctx);
     uint32_t componentTypeCapacityInput{};
-    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
+    deserialize(&componentTypeCapacityInput, d_ctx);
     uint32_t* componentTypeCountOutput{};
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
+    deserialize_ptr(&componentTypeCountOutput, d_ctx);
     XrSpatialEntityComponentTypeBD* componentTypes{};
-    deserialize_ptr(&componentTypes, msg_in.stream, false);
+    deserialize_ptr(&componentTypes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(componentTypeCountOutput, 1, s_ctx);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -521,16 +567,18 @@ void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLo
 void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAnchorUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAnchorUuidBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrAnchorBD anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
     XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
+    deserialize_ptr(&uuid, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetAnchorUuidBD(anchor, uuid);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -540,19 +588,21 @@ void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetQueriedSenseDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetQueriedSenseDataBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
+    deserialize(&snapshot, d_ctx);
     XrQueriedSenseDataGetInfoBD* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrQueriedSenseDataBD* queriedSenseData{};
-    deserialize_ptr(&queriedSenseData, msg_in.stream, false);
+    deserialize_ptr(&queriedSenseData, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(queriedSenseData, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(getInfo, 1, s_ctx);
+    serialize_ptr(queriedSenseData, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -563,16 +613,18 @@ void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSenseDataProviderStateBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSenseDataProviderStateBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSenseDataProviderStateBD* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSenseDataProviderStateBD(provider, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -582,18 +634,20 @@ void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialEntityComponentDataBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityComponentDataBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
+    deserialize(&snapshot, d_ctx);
     XrSpatialEntityComponentGetInfoBD* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSpatialEntityComponentDataBaseHeaderBD* componentData{};
-    deserialize_xr(&componentData, msg_in.stream, false);
+    deserialize_xr(&componentData, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(componentData, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(componentData, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -604,18 +658,20 @@ void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn ms
 void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialEntityUuidBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialEntityUuidBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataSnapshotBD snapshot{};
-    deserialize(&snapshot, msg_in.stream, false);
+    deserialize(&snapshot, d_ctx);
     XrSpatialEntityIdBD entityId{};
-    deserialize(&entityId, msg_in.stream, false);
+    deserialize(&entityId, d_ctx);
     XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
+    deserialize_ptr(&uuid, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -626,18 +682,20 @@ void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySenseDataAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSenseDataQueryInfoBD* queryInfo{};
-    deserialize_ptr(&queryInfo, msg_in.stream, false);
+    deserialize_ptr(&queryInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySenseDataAsyncBD(provider, queryInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -648,18 +706,20 @@ void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySenseDataCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySenseDataCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSenseDataQueryCompletionBD* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySenseDataCompleteBD(provider, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -670,18 +730,20 @@ void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartSenseDataProviderAsyncBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderAsyncBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
     XrSenseDataProviderStartInfoBD* startInfo{};
-    deserialize_ptr(&startInfo, msg_in.stream, false);
+    deserialize_ptr(&startInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -692,18 +754,20 @@ void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartSenseDataProviderCompleteBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartSenseDataProviderCompleteBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrFutureCompletionEXT* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStartSenseDataProviderCompleteBD(session, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -714,13 +778,15 @@ void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn m
 void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopSenseDataProviderBD", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopSenseDataProviderBD));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSenseDataProviderBD provider{};
-    deserialize(&provider, msg_in.stream, false);
+    deserialize(&provider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStopSenseDataProviderBD(provider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -731,19 +797,21 @@ void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceActiveEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceActiveEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath interactionProfile{};
-    deserialize(&interactionProfile, msg_in.stream, false);
+    deserialize(&interactionProfile, d_ctx);
     XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
+    deserialize(&topLevelPath, d_ctx);
     XrBool32 isActive{};
-    deserialize(&isActive, msg_in.stream, false);
+    deserialize(&isActive, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -755,21 +823,23 @@ void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceLocationEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceLocationEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
+    deserialize(&topLevelPath, d_ctx);
     XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
+    deserialize(&inputSourcePath, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrPosef pose{};
-    deserialize(&pose, msg_in.stream, false);
+    deserialize(&pose, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -782,19 +852,21 @@ void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateBoolEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateBoolEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
+    deserialize(&topLevelPath, d_ctx);
     XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
+    deserialize(&inputSourcePath, d_ctx);
     XrBool32 state{};
-    deserialize(&state, msg_in.stream, false);
+    deserialize(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -806,19 +878,21 @@ void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateFloatEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateFloatEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
+    deserialize(&topLevelPath, d_ctx);
     XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
+    deserialize(&inputSourcePath, d_ctx);
     float state{};
-    deserialize(&state, msg_in.stream, false);
+    deserialize(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -830,19 +904,21 @@ void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateVector2fEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetInputDeviceStateVector2fEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelPath{};
-    deserialize(&topLevelPath, msg_in.stream, false);
+    deserialize(&topLevelPath, d_ctx);
     XrPath inputSourcePath{};
-    deserialize(&inputSourcePath, msg_in.stream, false);
+    deserialize(&inputSourcePath, d_ctx);
     XrVector2f state{};
-    deserialize(&state, msg_in.stream, false);
+    deserialize(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -856,19 +932,21 @@ void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateDebugUtilsMessengerEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrDebugUtilsMessengerCreateInfoEXT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrDebugUtilsMessengerEXT* messenger{};
-    deserialize_ptr(&messenger, msg_in.stream, false);
+    deserialize_ptr(&messenger, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(createInfo->userData, 1, msg_out.buffer);
-    serialize_ptr(messenger, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(createInfo->userData, 1, s_ctx);
+    serialize_ptr(messenger, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -879,13 +957,15 @@ void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_i
 void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyDebugUtilsMessengerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyDebugUtilsMessengerEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrDebugUtilsMessengerEXT messenger{};
-    deserialize(&messenger, msg_in.stream, false);
+    deserialize(&messenger, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyDebugUtilsMessengerEXT(messenger);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&messenger);
@@ -894,15 +974,17 @@ void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_
 void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionBeginDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrDebugUtilsLabelEXT* labelInfo{};
-    deserialize_ptr(&labelInfo, msg_in.stream, false);
+    deserialize_ptr(&labelInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -912,13 +994,15 @@ void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLock
 void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionEndDebugUtilsLabelRegionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT(session);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -927,15 +1011,17 @@ void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn
 void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionInsertDebugUtilsLabelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrDebugUtilsLabelEXT* labelInfo{};
-    deserialize_ptr(&labelInfo, msg_in.stream, false);
+    deserialize_ptr(&labelInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -945,15 +1031,17 @@ void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn ms
 void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDebugUtilsObjectNameEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetDebugUtilsObjectNameEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrDebugUtilsObjectNameInfoEXT* nameInfo{};
-    deserialize_ptr(&nameInfo, msg_in.stream, false);
+    deserialize_ptr(&nameInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -963,21 +1051,23 @@ void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSubmitDebugUtilsMessageEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSubmitDebugUtilsMessageEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrDebugUtilsMessageSeverityFlagsEXT messageSeverity{};
-    deserialize(&messageSeverity, msg_in.stream, false);
+    deserialize(&messageSeverity, d_ctx);
     XrDebugUtilsMessageTypeFlagsEXT messageTypes{};
-    deserialize(&messageTypes, msg_in.stream, false);
+    deserialize(&messageTypes, d_ctx);
     XrDebugUtilsMessengerCallbackDataEXT* callbackData{};
-    deserialize_ptr(&callbackData, msg_in.stream, false);
+    deserialize_ptr(&callbackData, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(callbackData->objects, callbackData->objectCount, msg_out.buffer);
-    serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(callbackData->objects, callbackData->objectCount, s_ctx);
+    serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -991,15 +1081,17 @@ void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCancelFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCancelFutureEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrFutureCancelInfoEXT* cancelInfo{};
-    deserialize_ptr(&cancelInfo, msg_in.stream, false);
+    deserialize_ptr(&cancelInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCancelFutureEXT(instance, cancelInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1009,18 +1101,20 @@ void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPollFutureEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPollFutureEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrFuturePollInfoEXT* pollInfo{};
-    deserialize_ptr(&pollInfo, msg_in.stream, false);
+    deserialize_ptr(&pollInfo, d_ctx);
     XrFuturePollResultEXT* pollResult{};
-    deserialize_ptr(&pollResult, msg_in.stream, false);
+    deserialize_ptr(&pollResult, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPollFutureEXT(instance, pollInfo, pollResult);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pollResult, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(pollResult, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1033,18 +1127,20 @@ void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandTrackerEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrHandTrackerCreateInfoEXT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrHandTrackerEXT* handTracker{};
-    deserialize_ptr(&handTracker, msg_in.stream, false);
+    deserialize_ptr(&handTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateHandTrackerEXT(session, createInfo, handTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(handTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(handTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1055,13 +1151,15 @@ void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyHandTrackerEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyHandTrackerEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyHandTrackerEXT(handTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -1070,18 +1168,20 @@ void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateHandJointsEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateHandJointsEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
     XrHandJointsLocateInfoEXT* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrHandJointLocationsEXT* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateHandJointsEXT(handTracker, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -1094,17 +1194,19 @@ void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPerfSettingsSetPerformanceLevelEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPerfSettingsDomainEXT domain{};
-    deserialize(&domain, msg_in.stream, false);
+    deserialize(&domain, d_ctx);
     XrPerfSettingsLevelEXT level{};
-    deserialize(&level, msg_in.stream, false);
+    deserialize(&level, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1117,15 +1219,17 @@ void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn
 void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginPlaneDetectionEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrBeginPlaneDetectionEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
+    deserialize(&planeDetector, d_ctx);
     XrPlaneDetectorBeginInfoEXT* beginInfo{};
-    deserialize_ptr(&beginInfo, msg_in.stream, false);
+    deserialize_ptr(&beginInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1135,18 +1239,20 @@ void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePlaneDetectorEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePlaneDetectorEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPlaneDetectorCreateInfoEXT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrPlaneDetectorEXT* planeDetector{};
-    deserialize_ptr(&planeDetector, msg_in.stream, false);
+    deserialize_ptr(&planeDetector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreatePlaneDetectorEXT(session, createInfo, planeDetector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(planeDetector, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(planeDetector, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1157,13 +1263,15 @@ void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPlaneDetectorEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPlaneDetectorEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
+    deserialize(&planeDetector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyPlaneDetectorEXT(planeDetector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1172,16 +1280,18 @@ void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlaneDetectionStateEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPlaneDetectionStateEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
+    deserialize(&planeDetector, d_ctx);
     XrPlaneDetectionStateEXT* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetPlaneDetectionStateEXT(planeDetector, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1191,18 +1301,20 @@ void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlaneDetectionsEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPlaneDetectionsEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
+    deserialize(&planeDetector, d_ctx);
     XrPlaneDetectorGetInfoEXT* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrPlaneDetectorLocationsEXT* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetPlaneDetectionsEXT(planeDetector, info, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1213,20 +1325,22 @@ void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlanePolygonBufferEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPlanePolygonBufferEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPlaneDetectorEXT planeDetector{};
-    deserialize(&planeDetector, msg_in.stream, false);
+    deserialize(&planeDetector, d_ctx);
     uint64_t planeId{};
-    deserialize(&planeId, msg_in.stream, false);
+    deserialize(&planeId, d_ctx);
     uint32_t polygonBufferIndex{};
-    deserialize(&polygonBufferIndex, msg_in.stream, false);
+    deserialize(&polygonBufferIndex, d_ctx);
     XrPlaneDetectorPolygonBufferEXT* polygonBuffer{};
-    deserialize_ptr(&polygonBuffer, msg_in.stream, false);
+    deserialize_ptr(&polygonBuffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetPlanePolygonBufferEXT(planeDetector, planeId, polygonBufferIndex, polygonBuffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(polygonBuffer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(polygonBuffer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1240,24 +1354,26 @@ void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrThermalGetTemperatureTrendEXT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrThermalGetTemperatureTrendEXT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPerfSettingsDomainEXT domain{};
-    deserialize(&domain, msg_in.stream, false);
+    deserialize(&domain, d_ctx);
     XrPerfSettingsNotificationLevelEXT* notificationLevel{};
-    deserialize_ptr(&notificationLevel, msg_in.stream, false);
+    deserialize_ptr(&notificationLevel, d_ctx);
     float* tempHeadroom{};
-    deserialize_ptr(&tempHeadroom, msg_in.stream, false);
+    deserialize_ptr(&tempHeadroom, d_ctx);
     float* tempSlope{};
-    deserialize_ptr(&tempSlope, msg_in.stream, false);
+    deserialize_ptr(&tempSlope, d_ctx);
 
     XrResult _result = function_loader.pfn_xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(notificationLevel, 1, msg_out.buffer);
-    serialize_ptr(tempHeadroom, 1, msg_out.buffer);
-    serialize_ptr(tempSlope, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(notificationLevel, 1, s_ctx);
+    serialize_ptr(tempHeadroom, 1, s_ctx);
+    serialize_ptr(tempSlope, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1272,18 +1388,20 @@ void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_
 void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrBodyTrackerFB* bodyTracker{};
-    deserialize_ptr(&bodyTracker, msg_in.stream, false);
+    deserialize_ptr(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1294,13 +1412,15 @@ void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerFB(bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -1309,16 +1429,18 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetBodySkeletonFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
     XrBodySkeletonFB* skeleton{};
-    deserialize_ptr(&skeleton, msg_in.stream, false);
+    deserialize_ptr(&skeleton, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetBodySkeletonFB(bodyTracker, skeleton);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(skeleton, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -1328,18 +1450,20 @@ void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerFB bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoFB* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrBodyJointLocationsFB* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -1352,21 +1476,23 @@ void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateColorSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateColorSpacesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t colorSpaceCapacityInput{};
-    deserialize(&colorSpaceCapacityInput, msg_in.stream, false);
+    deserialize(&colorSpaceCapacityInput, d_ctx);
     uint32_t* colorSpaceCountOutput{};
-    deserialize_ptr(&colorSpaceCountOutput, msg_in.stream, false);
+    deserialize_ptr(&colorSpaceCountOutput, d_ctx);
     XrColorSpaceFB* colorSpaces{};
-    deserialize_ptr(&colorSpaces, msg_in.stream, false);
+    deserialize_ptr(&colorSpaces, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(colorSpaceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(colorSpaceCountOutput, 1, s_ctx);
+    serialize_ptr(colorSpaces, colorSpaceCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1378,15 +1504,17 @@ void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetColorSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetColorSpaceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrColorSpaceFB colorSpace{};
-    deserialize(&colorSpace, msg_in.stream, false);
+    deserialize(&colorSpace, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetColorSpaceFB(session, colorSpace);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1398,21 +1526,23 @@ void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateDisplayRefreshRatesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateDisplayRefreshRatesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t displayRefreshRateCapacityInput{};
-    deserialize(&displayRefreshRateCapacityInput, msg_in.stream, false);
+    deserialize(&displayRefreshRateCapacityInput, d_ctx);
     uint32_t* displayRefreshRateCountOutput{};
-    deserialize_ptr(&displayRefreshRateCountOutput, msg_in.stream, false);
+    deserialize_ptr(&displayRefreshRateCountOutput, d_ctx);
     float* displayRefreshRates{};
-    deserialize_ptr(&displayRefreshRates, msg_in.stream, false);
+    deserialize_ptr(&displayRefreshRates, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.buffer);
-    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(displayRefreshRateCountOutput, 1, s_ctx);
+    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1424,16 +1554,18 @@ void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg
 void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDisplayRefreshRateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     float* displayRefreshRate{};
-    deserialize_ptr(&displayRefreshRate, msg_in.stream, false);
+    deserialize_ptr(&displayRefreshRate, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetDisplayRefreshRateFB(session, displayRefreshRate);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(displayRefreshRate, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1443,15 +1575,17 @@ void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestDisplayRefreshRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestDisplayRefreshRateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     float displayRefreshRate{};
-    deserialize(&displayRefreshRate, msg_in.stream, false);
+    deserialize(&displayRefreshRate, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1463,18 +1597,20 @@ void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEyeTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrEyeTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrEyeTrackerFB* eyeTracker{};
-    deserialize_ptr(&eyeTracker, msg_in.stream, false);
+    deserialize_ptr(&eyeTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(eyeTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(eyeTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1485,13 +1621,15 @@ void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEyeTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEyeTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEyeTrackerFB eyeTracker{};
-    deserialize(&eyeTracker, msg_in.stream, false);
+    deserialize(&eyeTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyEyeTrackerFB(eyeTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&eyeTracker);
@@ -1500,18 +1638,20 @@ void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetEyeGazesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEyeGazesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEyeTrackerFB eyeTracker{};
-    deserialize(&eyeTracker, msg_in.stream, false);
+    deserialize(&eyeTracker, d_ctx);
     XrEyeGazesInfoFB* gazeInfo{};
-    deserialize_ptr(&gazeInfo, msg_in.stream, false);
+    deserialize_ptr(&gazeInfo, d_ctx);
     XrEyeGazesFB* eyeGazes{};
-    deserialize_ptr(&eyeGazes, msg_in.stream, false);
+    deserialize_ptr(&eyeGazes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(eyeGazes, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(eyeGazes, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&eyeTracker);
@@ -1524,18 +1664,20 @@ void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFaceTrackerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrFaceTrackerFB* faceTracker{};
-    deserialize_ptr(&faceTracker, msg_in.stream, false);
+    deserialize_ptr(&faceTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateFaceTrackerFB(session, createInfo, faceTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(faceTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1546,13 +1688,15 @@ void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFaceTrackerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTrackerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFaceTrackerFB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
+    deserialize(&faceTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyFaceTrackerFB(faceTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1561,18 +1705,20 @@ void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFaceExpressionWeightsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeightsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFaceTrackerFB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
+    deserialize(&faceTracker, d_ctx);
     XrFaceExpressionInfoFB* expressionInfo{};
-    deserialize_ptr(&expressionInfo, msg_in.stream, false);
+    deserialize_ptr(&expressionInfo, d_ctx);
     XrFaceExpressionWeightsFB* expressionWeights{};
-    deserialize_ptr(&expressionWeights, msg_in.stream, false);
+    deserialize_ptr(&expressionWeights, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(expressionWeights, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1585,19 +1731,21 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFaceTracker2FB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFaceTrackerCreateInfo2FB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrFaceTracker2FB* faceTracker{};
-    deserialize_ptr(&faceTracker, msg_in.stream, false);
+    deserialize_ptr(&faceTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateFaceTracker2FB(session, createInfo, faceTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(createInfo->requestedDataSources, createInfo->requestedDataSourceCount, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(createInfo->requestedDataSources, createInfo->requestedDataSourceCount, s_ctx);
+    serialize_ptr(faceTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1608,13 +1756,15 @@ void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFaceTracker2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFaceTracker2FB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFaceTracker2FB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
+    deserialize(&faceTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyFaceTracker2FB(faceTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1623,18 +1773,20 @@ void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFaceExpressionWeights2FB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFaceExpressionWeights2FB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFaceTracker2FB faceTracker{};
-    deserialize(&faceTracker, msg_in.stream, false);
+    deserialize(&faceTracker, d_ctx);
     XrFaceExpressionInfo2FB* expressionInfo{};
-    deserialize_ptr(&expressionInfo, msg_in.stream, false);
+    deserialize_ptr(&expressionInfo, d_ctx);
     XrFaceExpressionWeights2FB* expressionWeights{};
-    deserialize_ptr(&expressionWeights, msg_in.stream, false);
+    deserialize_ptr(&expressionWeights, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(expressionWeights, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1647,19 +1799,21 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFoveationProfileFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFoveationProfileCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrFoveationProfileFB* profile{};
-    deserialize_ptr(&profile, msg_in.stream, false);
+    deserialize_ptr(&profile, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateFoveationProfileFB(session, createInfo, profile);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(createInfo->next, msg_out.buffer);
-    serialize_ptr(profile, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(createInfo->next, s_ctx);
+    serialize_ptr(profile, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1670,13 +1824,15 @@ void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFoveationProfileFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFoveationProfileFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFoveationProfileFB profile{};
-    deserialize(&profile, msg_in.stream, false);
+    deserialize(&profile, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyFoveationProfileFB(profile);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&profile);
@@ -1687,16 +1843,18 @@ void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetHandMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetHandMeshFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
     XrHandTrackingMeshFB* mesh{};
-    deserialize_ptr(&mesh, msg_in.stream, false);
+    deserialize_ptr(&mesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetHandMeshFB(handTracker, mesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(mesh, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(mesh, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -1708,18 +1866,20 @@ void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetDeviceSampleRateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetDeviceSampleRateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, false);
+    deserialize_ptr(&hapticActionInfo, d_ctx);
     XrDevicePcmSampleRateGetInfoFB* deviceSampleRate{};
-    deserialize_ptr(&deviceSampleRate, msg_in.stream, false);
+    deserialize_ptr(&deviceSampleRate, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(deviceSampleRate, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1732,19 +1892,21 @@ void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateKeyboardSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateKeyboardSpaceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrKeyboardSpaceCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* keyboardSpace{};
-    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
+    deserialize_ptr(&keyboardSpace, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(createInfo->next, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(createInfo->next, s_ctx);
+    serialize_ptr(keyboardSpace, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1755,19 +1917,21 @@ void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySystemTrackedKeyboardFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySystemTrackedKeyboardFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrKeyboardTrackingQueryFB* queryInfo{};
-    deserialize_ptr(&queryInfo, msg_in.stream, false);
+    deserialize_ptr(&queryInfo, d_ctx);
     XrKeyboardTrackingDescriptionFB* keyboard{};
-    deserialize_ptr(&keyboard, msg_in.stream, false);
+    deserialize_ptr(&keyboard, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(queryInfo->next, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(queryInfo->next, s_ctx);
+    serialize_ptr(keyboard, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1780,18 +1944,20 @@ void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_i
 void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateGeometryInstanceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrGeometryInstanceCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrGeometryInstanceFB* outGeometryInstance{};
-    deserialize_ptr(&outGeometryInstance, msg_in.stream, false);
+    deserialize_ptr(&outGeometryInstance, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outGeometryInstance, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1802,18 +1968,20 @@ void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPassthroughCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrPassthroughFB* outPassthrough{};
-    deserialize_ptr(&outPassthrough, msg_in.stream, false);
+    deserialize_ptr(&outPassthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreatePassthroughFB(session, createInfo, outPassthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outPassthrough, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outPassthrough, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1824,18 +1992,20 @@ void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughLayerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPassthroughLayerCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrPassthroughLayerFB* outLayer{};
-    deserialize_ptr(&outLayer, msg_in.stream, false);
+    deserialize_ptr(&outLayer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreatePassthroughLayerFB(session, createInfo, outLayer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outLayer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outLayer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1846,13 +2016,15 @@ void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyGeometryInstanceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyGeometryInstanceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrGeometryInstanceFB instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyGeometryInstanceFB(instance);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1861,13 +2033,15 @@ void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
+    deserialize(&passthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyPassthroughFB(passthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -1876,13 +2050,15 @@ void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughLayerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughLayerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
+    deserialize(&layer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyPassthroughLayerFB(layer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -1891,15 +2067,17 @@ void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGeometryInstanceSetTransformFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGeometryInstanceSetTransformFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrGeometryInstanceFB instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrGeometryInstanceTransformFB* transformation{};
-    deserialize_ptr(&transformation, msg_in.stream, false);
+    deserialize_ptr(&transformation, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGeometryInstanceSetTransformFB(instance, transformation);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1909,13 +2087,15 @@ void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg
 void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerPauseFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
+    deserialize(&layer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughLayerPauseFB(layer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -1924,13 +2104,15 @@ void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerResumeFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerResumeFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
+    deserialize(&layer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughLayerResumeFB(layer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -1939,15 +2121,17 @@ void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerSetStyleFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetStyleFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
+    deserialize(&layer, d_ctx);
     XrPassthroughStyleFB* style{};
-    deserialize_ptr(&style, msg_in.stream, false);
+    deserialize_ptr(&style, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughLayerSetStyleFB(layer, style);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -1957,13 +2141,15 @@ void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughPauseFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughPauseFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
+    deserialize(&passthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughPauseFB(passthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -1972,13 +2158,15 @@ void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughStartFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughStartFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
+    deserialize(&passthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughStartFB(passthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -1989,15 +2177,17 @@ void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerSetKeyboardHandsIntensityFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughLayerFB layer{};
-    deserialize(&layer, msg_in.stream, false);
+    deserialize(&layer, d_ctx);
     XrPassthroughKeyboardHandsIntensityFB* intensity{};
-    deserialize_ptr(&intensity, msg_in.stream, false);
+    deserialize_ptr(&intensity, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2009,21 +2199,23 @@ void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(Mess
 void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateRenderModelPathsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateRenderModelPathsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t pathCapacityInput{};
-    deserialize(&pathCapacityInput, msg_in.stream, false);
+    deserialize(&pathCapacityInput, d_ctx);
     uint32_t* pathCountOutput{};
-    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
+    deserialize_ptr(&pathCountOutput, d_ctx);
     XrRenderModelPathInfoFB* paths{};
-    deserialize_ptr(&paths, msg_in.stream, false);
+    deserialize_ptr(&paths, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(pathCountOutput, 1, s_ctx);
+    serialize_ptr(paths, pathCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2035,18 +2227,20 @@ void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetRenderModelPropertiesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRenderModelPropertiesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath path{};
-    deserialize(&path, msg_in.stream, false);
+    deserialize(&path, d_ctx);
     XrRenderModelPropertiesFB* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetRenderModelPropertiesFB(session, path, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2057,19 +2251,21 @@ void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLoadRenderModelFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadRenderModelFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrRenderModelLoadInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrRenderModelBufferFB* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLoadRenderModelFB(session, info, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(info->next, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(info->next, s_ctx);
+    serialize_ptr(buffer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2082,18 +2278,20 @@ void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundary2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundary2DFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrBoundary2DFB* boundary2DOutput{};
-    deserialize_ptr(&boundary2DOutput, msg_in.stream, false);
+    deserialize_ptr(&boundary2DOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(boundary2DOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2104,18 +2302,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundingBox2DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox2DFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrRect2Df* boundingBox2DOutput{};
-    deserialize_ptr(&boundingBox2DOutput, msg_in.stream, false);
+    deserialize_ptr(&boundingBox2DOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(boundingBox2DOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2126,18 +2326,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundingBox3DFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceBoundingBox3DFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrRect3DfFB* boundingBox3DOutput{};
-    deserialize_ptr(&boundingBox3DOutput, msg_in.stream, false);
+    deserialize_ptr(&boundingBox3DOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(boundingBox3DOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2148,18 +2350,20 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceRoomLayoutFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceRoomLayoutFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrRoomLayoutFB* roomLayoutOutput{};
-    deserialize_ptr(&roomLayoutOutput, msg_in.stream, false);
+    deserialize_ptr(&roomLayoutOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(roomLayoutOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2170,18 +2374,20 @@ void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceSemanticLabelsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceSemanticLabelsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSemanticLabelsFB* semanticLabelsOutput{};
-    deserialize_ptr(&semanticLabelsOutput, msg_in.stream, false);
+    deserialize_ptr(&semanticLabelsOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(semanticLabelsOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2194,18 +2400,20 @@ void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestSceneCaptureFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestSceneCaptureFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSceneCaptureRequestInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestSceneCaptureFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2218,18 +2426,20 @@ void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2240,21 +2450,23 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSpaceSupportedComponentsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     uint32_t componentTypeCapacityInput{};
-    deserialize(&componentTypeCapacityInput, msg_in.stream, false);
+    deserialize(&componentTypeCapacityInput, d_ctx);
     uint32_t* componentTypeCountOutput{};
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, false);
+    deserialize_ptr(&componentTypeCountOutput, d_ctx);
     XrSpaceComponentTypeFB* componentTypes{};
-    deserialize_ptr(&componentTypes, msg_in.stream, false);
+    deserialize_ptr(&componentTypes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(componentTypeCountOutput, 1, s_ctx);
+    serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -2266,18 +2478,20 @@ void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockI
 void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceComponentStatusFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSpaceComponentTypeFB componentType{};
-    deserialize(&componentType, msg_in.stream, false);
+    deserialize(&componentType, d_ctx);
     XrSpaceComponentStatusFB* status{};
-    deserialize_ptr(&status, msg_in.stream, false);
+    deserialize_ptr(&status, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceComponentStatusFB(space, componentType, status);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(status, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(status, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -2288,16 +2502,18 @@ void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceUuidFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUuidFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrUuidEXT* uuid{};
-    deserialize_ptr(&uuid, msg_in.stream, false);
+    deserialize_ptr(&uuid, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceUuidFB(space, uuid);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -2307,18 +2523,20 @@ void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetSpaceComponentStatusFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSpaceComponentStatusFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSpaceComponentStatusSetInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetSpaceComponentStatusFB(space, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -2331,18 +2549,20 @@ void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceContainerFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceContainerFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSpaceContainerFB* spaceContainerOutput{};
-    deserialize_ptr(&spaceContainerOutput, msg_in.stream, false);
+    deserialize_ptr(&spaceContainerOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceContainerFB(session, space, spaceContainerOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spaceContainerOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2355,18 +2575,20 @@ void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpacesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceQueryInfoBaseHeaderFB* info{};
-    deserialize_xr(&info, msg_in.stream, false);
+    deserialize_xr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySpacesFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2377,18 +2599,20 @@ void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRetrieveSpaceQueryResultsFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRetrieveSpaceQueryResultsFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrAsyncRequestIdFB requestId{};
-    deserialize(&requestId, msg_in.stream, false);
+    deserialize(&requestId, d_ctx);
     XrSpaceQueryResultsFB* results{};
-    deserialize_ptr(&results, msg_in.stream, false);
+    deserialize_ptr(&results, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRetrieveSpaceQueryResultsFB(session, requestId, results);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(results, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(results, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2401,20 +2625,22 @@ void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpacesFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceShareInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrShareSpacesFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(info->users, info->userCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(info->spaces, info->spaceCount, s_ctx);
+    serialize_ptr(info->users, info->userCount, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2427,18 +2653,20 @@ void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEraseSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEraseSpaceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceEraseInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEraseSpaceFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2449,18 +2677,20 @@ void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSaveSpaceFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceSaveInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSaveSpaceFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2473,19 +2703,21 @@ void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSaveSpaceListFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSaveSpaceListFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceListSaveInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSaveSpaceListFB(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(info->spaces, info->spaceCount, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2498,18 +2730,20 @@ void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceUserFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpaceUserCreateInfoFB* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrSpaceUserFB* user{};
-    deserialize_ptr(&user, msg_in.stream, false);
+    deserialize_ptr(&user, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpaceUserFB(session, info, user);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(user, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(user, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2520,13 +2754,15 @@ void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpaceUserFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpaceUserFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpaceUserFB user{};
-    deserialize(&user, msg_in.stream, false);
+    deserialize(&user, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpaceUserFB(user);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&user);
@@ -2535,16 +2771,18 @@ void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceUserIdFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceUserIdFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpaceUserFB user{};
-    deserialize(&user, msg_in.stream, false);
+    deserialize(&user, d_ctx);
     XrSpaceUserIdFB* userId{};
-    deserialize_ptr(&userId, msg_in.stream, false);
+    deserialize_ptr(&userId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceUserIdFB(user, userId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(userId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(userId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&user);
@@ -2556,16 +2794,18 @@ void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSwapchainStateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSwapchainStateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrSwapchainStateBaseHeaderFB* state{};
-    deserialize_xr(&state, msg_in.stream, false);
+    deserialize_xr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSwapchainStateFB(swapchain, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(state, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(state, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -2575,15 +2815,17 @@ void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSwapchainFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSwapchainFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrSwapchainStateBaseHeaderFB* state{};
-    deserialize_xr(&state, msg_in.stream, false);
+    deserialize_xr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUpdateSwapchainFB(swapchain, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -2595,18 +2837,20 @@ void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateTriangleMeshFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrTriangleMeshCreateInfoFB* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrTriangleMeshFB* outTriangleMesh{};
-    deserialize_ptr(&outTriangleMesh, msg_in.stream, false);
+    deserialize_ptr(&outTriangleMesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outTriangleMesh, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2617,13 +2861,15 @@ void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyTriangleMeshFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyTriangleMeshFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyTriangleMeshFB(mesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2632,13 +2878,15 @@ void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshBeginUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginUpdateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrTriangleMeshBeginUpdateFB(mesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2647,16 +2895,18 @@ void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshBeginVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
     uint32_t* outVertexCount{};
-    deserialize_ptr(&outVertexCount, msg_in.stream, false);
+    deserialize_ptr(&outVertexCount, d_ctx);
 
     XrResult _result = function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outVertexCount, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outVertexCount, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2666,17 +2916,19 @@ void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLoc
 void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshEndUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndUpdateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
     uint32_t vertexCount{};
-    deserialize(&vertexCount, msg_in.stream, false);
+    deserialize(&vertexCount, d_ctx);
     uint32_t triangleCount{};
-    deserialize(&triangleCount, msg_in.stream, false);
+    deserialize(&triangleCount, d_ctx);
 
     XrResult _result = function_loader.pfn_xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2687,13 +2939,15 @@ void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshEndVertexBufferUpdateFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB(mesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2702,16 +2956,18 @@ void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockI
 void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshGetIndexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetIndexBufferFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
     uint32_t** outIndexBuffer{};
     #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
 
     XrResult _result = function_loader.pfn_xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outIndexBuffer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outIndexBuffer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2721,16 +2977,18 @@ void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_i
 void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshGetVertexBufferFB", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTriangleMeshGetVertexBufferFB));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrTriangleMeshFB mesh{};
-    deserialize(&mesh, msg_in.stream, false);
+    deserialize(&mesh, d_ctx);
     XrVector3f** outVertexBuffer{};
     #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
 
     XrResult _result = function_loader.pfn_xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(outVertexBuffer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(outVertexBuffer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2742,21 +3000,23 @@ void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_
 void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViveTrackerPathsHTCX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateViveTrackerPathsHTCX));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     uint32_t pathCapacityInput{};
-    deserialize(&pathCapacityInput, msg_in.stream, false);
+    deserialize(&pathCapacityInput, d_ctx);
     uint32_t* pathCountOutput{};
-    deserialize_ptr(&pathCountOutput, msg_in.stream, false);
+    deserialize_ptr(&pathCountOutput, d_ctx);
     XrViveTrackerPathsHTCX* paths{};
-    deserialize_ptr(&paths, msg_in.stream, false);
+    deserialize_ptr(&paths, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(pathCountOutput, 1, s_ctx);
+    serialize_ptr(paths, pathCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -2770,18 +3030,20 @@ void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_
 void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
+    deserialize_ptr(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorHTC(session, createInfo, anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2792,16 +3054,18 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialAnchorNameHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorNameHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
     XrSpatialAnchorNameHTC* name{};
-    deserialize_ptr(&name, msg_in.stream, false);
+    deserialize_ptr(&name, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpatialAnchorNameHTC(anchor, name);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(name, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(name, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -2813,18 +3077,20 @@ void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateBodyTrackerHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrBodyTrackerHTC* bodyTracker{};
-    deserialize_ptr(&bodyTracker, msg_in.stream, false);
+    deserialize_ptr(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2835,13 +3101,15 @@ void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyBodyTrackerHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerHTC(bodyTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -2850,20 +3118,22 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetBodySkeletonHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetBodySkeletonHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
     XrSpace baseSpace{};
-    deserialize(&baseSpace, msg_in.stream, false);
+    deserialize(&baseSpace, d_ctx);
     uint32_t skeletonGenerationId{};
-    deserialize(&skeletonGenerationId, msg_in.stream, false);
+    deserialize(&skeletonGenerationId, d_ctx);
     XrBodySkeletonHTC* skeleton{};
-    deserialize_ptr(&skeleton, msg_in.stream, false);
+    deserialize_ptr(&skeleton, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(skeleton, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -2875,18 +3145,20 @@ void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateBodyJointsHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrBodyTrackerHTC bodyTracker{};
-    deserialize(&bodyTracker, msg_in.stream, false);
+    deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoHTC* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrBodyJointLocationsHTC* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -2899,18 +3171,20 @@ void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFacialTrackerHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFacialTrackerCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrFacialTrackerHTC* facialTracker{};
-    deserialize_ptr(&facialTracker, msg_in.stream, false);
+    deserialize_ptr(&facialTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(facialTracker, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(facialTracker, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2921,13 +3195,15 @@ void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFacialTrackerHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFacialTrackerHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFacialTrackerHTC facialTracker{};
-    deserialize(&facialTracker, msg_in.stream, false);
+    deserialize(&facialTracker, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyFacialTrackerHTC(facialTracker);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&facialTracker);
@@ -2936,16 +3212,18 @@ void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFacialExpressionsHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFacialExpressionsHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFacialTrackerHTC facialTracker{};
-    deserialize(&facialTracker, msg_in.stream, false);
+    deserialize(&facialTracker, d_ctx);
     XrFacialExpressionsHTC* facialExpressions{};
-    deserialize_ptr(&facialExpressions, msg_in.stream, false);
+    deserialize_ptr(&facialExpressions, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(facialExpressions, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(facialExpressions, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&facialTracker);
@@ -2957,16 +3235,18 @@ void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyFoveationHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyFoveationHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFoveationApplyInfoHTC* applyInfo{};
-    deserialize_ptr(&applyInfo, msg_in.stream, false);
+    deserialize_ptr(&applyInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrApplyFoveationHTC(session, applyInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -2978,18 +3258,20 @@ void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPassthroughCreateInfoHTC* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrPassthroughHTC* passthrough{};
-    deserialize_ptr(&passthrough, msg_in.stream, false);
+    deserialize_ptr(&passthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreatePassthroughHTC(session, createInfo, passthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(passthrough, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(passthrough, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3000,13 +3282,15 @@ void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughHTC", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughHTC));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughHTC passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
+    deserialize(&passthrough, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyPassthroughHTC(passthrough);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -3017,18 +3301,20 @@ void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetD3D11GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsD3D11KHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3041,18 +3327,20 @@ void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetD3D12GraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsD3D12KHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3065,21 +3353,23 @@ void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSwapchainAndroidSurfaceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSwapchainCreateInfo* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrSwapchain* swapchain{};
-    deserialize_ptr(&swapchain, msg_in.stream, false);
+    deserialize_ptr(&swapchain, d_ctx);
     jobject* surface{};
-    deserialize_ptr(&surface, msg_in.stream, false);
+    deserialize_ptr(&surface, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    serialize_ptr(surface, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(swapchain, 1, s_ctx);
+    serialize_ptr(surface, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3093,17 +3383,19 @@ void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn m
 void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetAndroidApplicationThreadKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetAndroidApplicationThreadKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrAndroidThreadTypeKHR threadType{};
-    deserialize(&threadType, msg_in.stream, false);
+    deserialize(&threadType, d_ctx);
     uint32_t threadId{};
-    deserialize(&threadId, msg_in.stream, false);
+    deserialize(&threadId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3116,18 +3408,20 @@ void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg
 void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimeToTimespecTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToTimespecTimeKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrTime time{};
-    deserialize(&time, msg_in.stream, false);
+    deserialize_time(&time, d_ctx);
     timespec* timespecTime{};
-    deserialize_ptr(&timespecTime, msg_in.stream, false);
+    deserialize_ptr(&timespecTime, d_ctx);
 
     XrResult _result = function_loader.pfn_xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(timespecTime, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3138,19 +3432,21 @@ void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimespecTimeToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimespecTimeToTimeKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     timespec* timespecTime{};
-    deserialize_ptr(&timespecTime, msg_in.stream, false);
+    deserialize_ptr(&timespecTime, d_ctx);
     XrTime* time{};
-    deserialize_ptr(&time, msg_in.stream, false);
+    deserialize_ptr(&time, d_ctx);
 
     XrResult _result = function_loader.pfn_xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(timespecTime, 1, s_ctx);
+    serialize_ptr(time, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3163,18 +3459,20 @@ void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStructureTypeToString2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStructureTypeToString2KHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrStructureType value{};
-    deserialize(&value, msg_in.stream, false);
+    deserialize(&value, d_ctx);
     char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]{};
-    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_in.stream, false);
+    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStructureTypeToString2KHR(instance, value, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3187,13 +3485,15 @@ void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrInitializeLoaderKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrInitializeLoaderKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo{};
-    deserialize_xr(&loaderInitInfo, msg_in.stream, false);
+    deserialize_xr(&loaderInitInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrInitializeLoaderKHR(loaderInitInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup_xr(loaderInitInfo);
@@ -3204,18 +3504,20 @@ void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMetalGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMetalGraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsMetalKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3228,18 +3530,20 @@ void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetOpenGLGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsOpenGLKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3252,18 +3556,20 @@ void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn m
 void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetOpenGLESGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3276,22 +3582,24 @@ void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn
 void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVisibilityMaskKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVisibilityMaskKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
+    deserialize(&viewConfigurationType, d_ctx);
     uint32_t viewIndex{};
-    deserialize(&viewIndex, msg_in.stream, false);
+    deserialize(&viewIndex, d_ctx);
     XrVisibilityMaskTypeKHR visibilityMaskType{};
-    deserialize(&visibilityMaskType, msg_in.stream, false);
+    deserialize(&visibilityMaskType, d_ctx);
     XrVisibilityMaskKHR* visibilityMask{};
-    deserialize_ptr(&visibilityMask, msg_in.stream, false);
+    deserialize_ptr(&visibilityMask, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(visibilityMask, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(visibilityMask, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3306,23 +3614,25 @@ void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanDeviceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanDeviceExtensionsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3335,20 +3645,22 @@ void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDeviceKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     VkInstance vkInstance{};
-    deserialize(&vkInstance, msg_in.stream, false);
+    deserialize(&vkInstance, d_ctx);
     VkPhysicalDevice* vkPhysicalDevice{};
-    deserialize_ptr(&vkPhysicalDevice, msg_in.stream, false);
+    deserialize_ptr(&vkPhysicalDevice, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(vkPhysicalDevice, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3360,18 +3672,20 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsRequirementsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrGraphicsRequirementsVulkanKHR* graphicsRequirements{};
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, false);
+    deserialize_ptr(&graphicsRequirements, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3382,23 +3696,25 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn m
 void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanInstanceExtensionsKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanInstanceExtensionsKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3413,21 +3729,23 @@ void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVulkanDeviceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanDeviceKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrVulkanDeviceCreateInfoKHR* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     VkDevice* vulkanDevice{};
-    deserialize_ptr(&vulkanDevice, msg_in.stream, false);
+    deserialize_ptr(&vulkanDevice, d_ctx);
     VkResult* vulkanResult{};
-    deserialize_ptr(&vulkanResult, msg_in.stream, false);
+    deserialize_ptr(&vulkanResult, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanDevice, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(vulkanDevice, 1, s_ctx);
+    serialize_ptr(vulkanResult, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3439,21 +3757,23 @@ void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVulkanInstanceKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVulkanInstanceKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrVulkanInstanceCreateInfoKHR* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     VkInstance* vulkanInstance{};
-    deserialize_ptr(&vulkanInstance, msg_in.stream, false);
+    deserialize_ptr(&vulkanInstance, d_ctx);
     VkResult* vulkanResult{};
-    deserialize_ptr(&vulkanResult, msg_in.stream, false);
+    deserialize_ptr(&vulkanResult, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanInstance, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(vulkanInstance, 1, s_ctx);
+    serialize_ptr(vulkanResult, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3465,18 +3785,20 @@ void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsDevice2KHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVulkanGraphicsDevice2KHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrVulkanGraphicsDeviceGetInfoKHR* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     VkPhysicalDevice* vulkanPhysicalDevice{};
-    deserialize_ptr(&vulkanPhysicalDevice, msg_in.stream, false);
+    deserialize_ptr(&vulkanPhysicalDevice, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(vulkanPhysicalDevice, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3489,18 +3811,20 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in
 void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimeToWin32PerformanceCounterKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrTime time{};
-    deserialize(&time, msg_in.stream, false);
+    deserialize_time(&time, d_ctx);
     LARGE_INTEGER* performanceCounter{};
-    deserialize_ptr(&performanceCounter, msg_in.stream, false);
+    deserialize_ptr(&performanceCounter, d_ctx);
 
     XrResult _result = function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(performanceCounter, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(performanceCounter, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3511,18 +3835,20 @@ void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageL
 void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertWin32PerformanceCounterToTimeKHR", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     LARGE_INTEGER* performanceCounter{};
-    deserialize_ptr(&performanceCounter, msg_in.stream, false);
+    deserialize_ptr(&performanceCounter, d_ctx);
     XrTime* time{};
-    deserialize_ptr(&time, msg_in.stream, false);
+    deserialize_ptr(&time, d_ctx);
 
     XrResult _result = function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(time, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3535,19 +3861,21 @@ void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageL
 void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationAdvertisementMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrColocationAdvertisementStartInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* advertisementRequestId{};
-    deserialize_ptr(&advertisementRequestId, msg_in.stream, false);
+    deserialize_ptr(&advertisementRequestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->buffer, info->bufferSize, msg_out.buffer);
-    serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(info->buffer, info->bufferSize, s_ctx);
+    serialize_ptr(advertisementRequestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3558,18 +3886,20 @@ void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn m
 void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartColocationDiscoveryMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrColocationDiscoveryStartInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* discoveryRequestId{};
-    deserialize_ptr(&discoveryRequestId, msg_in.stream, false);
+    deserialize_ptr(&discoveryRequestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(discoveryRequestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3580,18 +3910,20 @@ void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_i
 void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopColocationAdvertisementMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationAdvertisementMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrColocationAdvertisementStopInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStopColocationAdvertisementMETA(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3602,18 +3934,20 @@ void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn ms
 void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopColocationDiscoveryMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopColocationDiscoveryMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrColocationDiscoveryStopInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStopColocationDiscoveryMETA(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3626,18 +3960,20 @@ void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in
 void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAcquireEnvironmentDepthImageMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAcquireEnvironmentDepthImageMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo{};
-    deserialize_ptr(&acquireInfo, msg_in.stream, false);
+    deserialize_ptr(&acquireInfo, d_ctx);
     XrEnvironmentDepthImageMETA* environmentDepthImage{};
-    deserialize_ptr(&environmentDepthImage, msg_in.stream, false);
+    deserialize_ptr(&environmentDepthImage, d_ctx);
 
     XrResult _result = function_loader.pfn_xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(environmentDepthImage, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3648,18 +3984,20 @@ void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn m
 void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthProviderMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrEnvironmentDepthProviderCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrEnvironmentDepthProviderMETA* environmentDepthProvider{};
-    deserialize_ptr(&environmentDepthProvider, msg_in.stream, false);
+    deserialize_ptr(&environmentDepthProvider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(environmentDepthProvider, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3670,18 +4008,20 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn
 void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrEnvironmentDepthSwapchainMETA* swapchain{};
-    deserialize_ptr(&swapchain, msg_in.stream, false);
+    deserialize_ptr(&swapchain, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(swapchain, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3692,13 +4032,15 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockI
 void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3707,13 +4049,15 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockI
 void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthSwapchainMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -3722,21 +4066,23 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLock
 void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateEnvironmentDepthSwapchainImagesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     uint32_t imageCapacityInput{};
-    deserialize(&imageCapacityInput, msg_in.stream, false);
+    deserialize(&imageCapacityInput, d_ctx);
     uint32_t* imageCountOutput{};
-    deserialize_ptr(&imageCountOutput, msg_in.stream, false);
+    deserialize_ptr(&imageCountOutput, d_ctx);
     XrSwapchainImageBaseHeader* images{};
-    deserialize_xr_array(&images, msg_in.stream, false);
+    deserialize_xr_array(&images, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
-    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(imageCountOutput, 1, s_ctx);
+    serialize_xr_array(images, imageCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -3748,16 +4094,18 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(Mes
 void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetEnvironmentDepthSwapchainStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthSwapchainMETA swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrEnvironmentDepthSwapchainStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -3767,15 +4115,17 @@ void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLoc
 void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetEnvironmentDepthHandRemovalMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo{};
-    deserialize_ptr(&setInfo, msg_in.stream, false);
+    deserialize_ptr(&setInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3785,13 +4135,15 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn
 void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStartEnvironmentDepthProviderMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3800,13 +4152,15 @@ void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn 
 void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopEnvironmentDepthProviderMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopEnvironmentDepthProviderMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
-    deserialize(&environmentDepthProvider, msg_in.stream, false);
+    deserialize(&environmentDepthProvider, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -3817,16 +4171,18 @@ void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn m
 void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFoveationEyeTrackedStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFoveationEyeTrackedStateMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFoveationEyeTrackedStateMETA* foveationState{};
-    deserialize_ptr(&foveationState, msg_in.stream, false);
+    deserialize_ptr(&foveationState, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetFoveationEyeTrackedStateMETA(session, foveationState);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(foveationState, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(foveationState, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3838,18 +4194,20 @@ void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn ms
 void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreatePassthroughColorLutMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughFB passthrough{};
-    deserialize(&passthrough, msg_in.stream, false);
+    deserialize(&passthrough, d_ctx);
     XrPassthroughColorLutCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrPassthroughColorLutMETA* colorLut{};
-    deserialize_ptr(&colorLut, msg_in.stream, false);
+    deserialize_ptr(&colorLut, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(colorLut, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(colorLut, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -3860,13 +4218,15 @@ void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyPassthroughColorLutMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughColorLutMETA colorLut{};
-    deserialize(&colorLut, msg_in.stream, false);
+    deserialize(&colorLut, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyPassthroughColorLutMETA(colorLut);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&colorLut);
@@ -3875,15 +4235,17 @@ void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdatePassthroughColorLutMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdatePassthroughColorLutMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrPassthroughColorLutMETA colorLut{};
-    deserialize(&colorLut, msg_in.stream, false);
+    deserialize(&colorLut, d_ctx);
     XrPassthroughColorLutUpdateInfoMETA* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
+    deserialize_ptr(&updateInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&colorLut);
@@ -3895,16 +4257,18 @@ void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPassthroughPreferencesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPassthroughPreferencesMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPassthroughPreferencesMETA* preferences{};
-    deserialize_ptr(&preferences, msg_in.stream, false);
+    deserialize_ptr(&preferences, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetPassthroughPreferencesMETA(session, preferences);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(preferences, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(preferences, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3916,21 +4280,23 @@ void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumeratePerformanceMetricsCounterPathsMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     uint32_t counterPathCapacityInput{};
-    deserialize(&counterPathCapacityInput, msg_in.stream, false);
+    deserialize(&counterPathCapacityInput, d_ctx);
     uint32_t* counterPathCountOutput{};
-    deserialize_ptr(&counterPathCountOutput, msg_in.stream, false);
+    deserialize_ptr(&counterPathCountOutput, d_ctx);
     XrPath* counterPaths{};
-    deserialize_ptr(&counterPaths, msg_in.stream, false);
+    deserialize_ptr(&counterPaths, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(counterPathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(counterPathCountOutput, 1, s_ctx);
+    serialize_ptr(counterPaths, counterPathCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -3942,16 +4308,18 @@ void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(Mess
 void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetPerformanceMetricsStateMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPerformanceMetricsStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetPerformanceMetricsStateMETA(session, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3961,18 +4329,20 @@ void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQueryPerformanceMetricsCounterMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryPerformanceMetricsCounterMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath counterPath{};
-    deserialize(&counterPath, msg_in.stream, false);
+    deserialize(&counterPath, d_ctx);
     XrPerformanceMetricsCounterMETA* counter{};
-    deserialize_ptr(&counter, msg_in.stream, false);
+    deserialize_ptr(&counter, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(counter, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(counter, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3983,15 +4353,17 @@ void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn
 void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetPerformanceMetricsStateMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetPerformanceMetricsStateMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPerformanceMetricsStateMETA* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetPerformanceMetricsStateMETA(session, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4003,18 +4375,20 @@ void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetRecommendedLayerResolutionMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetRecommendedLayerResolutionMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrRecommendedLayerResolutionGetInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrRecommendedLayerResolutionMETA* resolution{};
-    deserialize_ptr(&resolution, msg_in.stream, false);
+    deserialize_ptr(&resolution, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetRecommendedLayerResolutionMETA(session, info, resolution);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(resolution, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(resolution, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4027,15 +4401,17 @@ void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn 
 void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPauseSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo{};
-    deserialize_ptr(&pauseInfo, msg_in.stream, false);
+    deserialize_ptr(&pauseInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4045,15 +4421,17 @@ void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA
 void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrResumeSimultaneousHandsAndControllersTrackingMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo{};
-    deserialize_ptr(&resumeInfo, msg_in.stream, false);
+    deserialize_ptr(&resumeInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4065,18 +4443,20 @@ void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMET
 void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceTriangleMeshMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpaceTriangleMeshMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSpaceTriangleMeshGetInfoMETA* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSpaceTriangleMeshMETA* triangleMeshOutput{};
-    deserialize_ptr(&triangleMeshOutput, msg_in.stream, false);
+    deserialize_ptr(&triangleMeshOutput, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(triangleMeshOutput, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -4089,19 +4469,21 @@ void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpacesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrShareSpacesMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrShareSpacesInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrAsyncRequestIdFB* requestId{};
-    deserialize_ptr(&requestId, msg_in.stream, false);
+    deserialize_ptr(&requestId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrShareSpacesMETA(session, info, requestId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(info->spaces, info->spaceCount, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(info->spaces, info->spaceCount, s_ctx);
+    serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4114,15 +4496,17 @@ void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrChangeVirtualKeyboardTextContextMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo{};
-    deserialize_ptr(&changeInfo, msg_in.stream, false);
+    deserialize_ptr(&changeInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4132,18 +4516,20 @@ void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLock
 void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrVirtualKeyboardCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrVirtualKeyboardMETA* keyboard{};
-    deserialize_ptr(&keyboard, msg_in.stream, false);
+    deserialize_ptr(&keyboard, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(keyboard, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4154,20 +4540,22 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVirtualKeyboardSpaceMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardSpaceCreateInfoMETA* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* keyboardSpace{};
-    deserialize_ptr(&keyboardSpace, msg_in.stream, false);
+    deserialize_ptr(&keyboardSpace, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(keyboardSpace, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4179,13 +4567,15 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyVirtualKeyboardMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyVirtualKeyboardMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyVirtualKeyboardMETA(keyboard);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4194,21 +4584,23 @@ void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardDirtyTexturesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     uint32_t textureIdCapacityInput{};
-    deserialize(&textureIdCapacityInput, msg_in.stream, false);
+    deserialize(&textureIdCapacityInput, d_ctx);
     uint32_t* textureIdCountOutput{};
-    deserialize_ptr(&textureIdCountOutput, msg_in.stream, false);
+    deserialize_ptr(&textureIdCountOutput, d_ctx);
     uint64_t* textureIds{};
-    deserialize_ptr(&textureIds, msg_in.stream, false);
+    deserialize_ptr(&textureIds, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(textureIdCountOutput, 1, msg_out.buffer);
-    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(textureIdCountOutput, 1, s_ctx);
+    serialize_ptr(textureIds, textureIdCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4220,16 +4612,18 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockI
 void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardModelAnimationStatesMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardModelAnimationStatesMETA* animationStates{};
-    deserialize_ptr(&animationStates, msg_in.stream, false);
+    deserialize_ptr(&animationStates, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(animationStates, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(animationStates, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4239,16 +4633,18 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(Messa
 void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardScaleMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardScaleMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     float* scale{};
-    deserialize_ptr(&scale, msg_in.stream, false);
+    deserialize_ptr(&scale, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardScaleMETA(keyboard, scale);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(scale, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(scale, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4258,18 +4654,20 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardTextureDataMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     uint64_t textureId{};
-    deserialize(&textureId, msg_in.stream, false);
+    deserialize(&textureId, d_ctx);
     XrVirtualKeyboardTextureDataMETA* textureData{};
-    deserialize_ptr(&textureData, msg_in.stream, false);
+    deserialize_ptr(&textureData, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(textureData, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(textureData, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4280,18 +4678,20 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn 
 void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSendVirtualKeyboardInputMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSendVirtualKeyboardInputMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardInputInfoMETA* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
     XrPosef* interactorRootPose{};
-    deserialize_ptr(&interactorRootPose, msg_in.stream, false);
+    deserialize_ptr(&interactorRootPose, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(interactorRootPose, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(interactorRootPose, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4302,15 +4702,17 @@ void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_i
 void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetVirtualKeyboardModelVisibilityMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility{};
-    deserialize_ptr(&modelVisibility, msg_in.stream, false);
+    deserialize_ptr(&modelVisibility, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4320,15 +4722,17 @@ void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLoc
 void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSuggestVirtualKeyboardLocationMETA", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrVirtualKeyboardMETA keyboard{};
-    deserialize(&keyboard, msg_in.stream, false);
+    deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardLocationInfoMETA* locationInfo{};
-    deserialize_ptr(&locationInfo, msg_in.stream, false);
+    deserialize_ptr(&locationInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4340,18 +4744,20 @@ void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn
 void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpaceFromCoordinateFrameUIDML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrCoordinateSpaceCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4364,18 +4770,20 @@ void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockI
 void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFacialExpressionClientML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateFacialExpressionClientML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFacialExpressionClientCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrFacialExpressionClientML* facialExpressionClient{};
-    deserialize_ptr(&facialExpressionClient, msg_in.stream, false);
+    deserialize_ptr(&facialExpressionClient, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateFacialExpressionClientML(session, createInfo, facialExpressionClient);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(facialExpressionClient, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(facialExpressionClient, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4386,13 +4794,15 @@ void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFacialExpressionClientML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyFacialExpressionClientML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFacialExpressionClientML facialExpressionClient{};
-    deserialize(&facialExpressionClient, msg_in.stream, false);
+    deserialize(&facialExpressionClient, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyFacialExpressionClientML(facialExpressionClient);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&facialExpressionClient);
@@ -4401,20 +4811,22 @@ void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn ms
 void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFacialExpressionBlendShapePropertiesML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetFacialExpressionBlendShapePropertiesML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrFacialExpressionClientML facialExpressionClient{};
-    deserialize(&facialExpressionClient, msg_in.stream, false);
+    deserialize(&facialExpressionClient, d_ctx);
     XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo{};
-    deserialize_ptr(&blendShapeGetInfo, msg_in.stream, false);
+    deserialize_ptr(&blendShapeGetInfo, d_ctx);
     uint32_t blendShapeCount{};
-    deserialize(&blendShapeCount, msg_in.stream, false);
+    deserialize(&blendShapeCount, d_ctx);
     XrFacialExpressionBlendShapePropertiesML* blendShapes{};
-    deserialize_ptr(&blendShapes, msg_in.stream, false);
+    deserialize_ptr(&blendShapes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetFacialExpressionBlendShapePropertiesML(facialExpressionClient, blendShapeGetInfo, blendShapeCount, blendShapes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(blendShapes, blendShapeCount, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(blendShapes, blendShapeCount, s_ctx);
     msg_out.flush();
 
     cleanup(&facialExpressionClient);
@@ -4428,18 +4840,20 @@ void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(Messag
 void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateExportedLocalizationMapML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrUuidEXT* mapUuid{};
-    deserialize_ptr(&mapUuid, msg_in.stream, false);
+    deserialize_ptr(&mapUuid, d_ctx);
     XrExportedLocalizationMapML* map{};
-    deserialize_ptr(&map, msg_in.stream, false);
+    deserialize_ptr(&map, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateExportedLocalizationMapML(session, mapUuid, map);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(map, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(map, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4450,13 +4864,15 @@ void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn ms
 void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyExportedLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyExportedLocalizationMapML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrExportedLocalizationMapML map{};
-    deserialize(&map, msg_in.stream, false);
+    deserialize(&map, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyExportedLocalizationMapML(map);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&map);
@@ -4465,15 +4881,17 @@ void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn m
 void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnableLocalizationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableLocalizationEventsML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrLocalizationEnableEventsInfoML* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnableLocalizationEventsML(session, info);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4483,21 +4901,23 @@ void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetExportedLocalizationMapDataML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetExportedLocalizationMapDataML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrExportedLocalizationMapML map{};
-    deserialize(&map, msg_in.stream, false);
+    deserialize(&map, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&map);
@@ -4509,19 +4929,21 @@ void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn m
 void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrImportLocalizationMapML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrImportLocalizationMapML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrLocalizationMapImportInfoML* importInfo{};
-    deserialize_ptr(&importInfo, msg_in.stream, false);
+    deserialize_ptr(&importInfo, d_ctx);
     XrUuidEXT* mapUuid{};
-    deserialize_ptr(&mapUuid, msg_in.stream, false);
+    deserialize_ptr(&mapUuid, d_ctx);
 
     XrResult _result = function_loader.pfn_xrImportLocalizationMapML(session, importInfo, mapUuid);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(importInfo->data, importInfo->size, msg_out.buffer);
-    serialize_ptr(mapUuid, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(importInfo->data, importInfo->size, s_ctx);
+    serialize_ptr(mapUuid, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4532,23 +4954,25 @@ void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQueryLocalizationMapsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQueryLocalizationMapsML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrLocalizationMapQueryInfoBaseHeaderML* queryInfo{};
-    deserialize_xr(&queryInfo, msg_in.stream, false);
+    deserialize_xr(&queryInfo, d_ctx);
     uint32_t mapCapacityInput{};
-    deserialize(&mapCapacityInput, msg_in.stream, false);
+    deserialize(&mapCapacityInput, d_ctx);
     uint32_t* mapCountOutput{};
-    deserialize_ptr(&mapCountOutput, msg_in.stream, false);
+    deserialize_ptr(&mapCountOutput, d_ctx);
     XrLocalizationMapML* maps{};
-    deserialize_ptr(&maps, msg_in.stream, false);
+    deserialize_ptr(&maps, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(mapCountOutput, 1, msg_out.buffer);
-    serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(mapCountOutput, 1, s_ctx);
+    serialize_ptr(maps, mapCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4561,15 +4985,17 @@ void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestMapLocalizationML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestMapLocalizationML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrMapLocalizationRequestInfoML* requestInfo{};
-    deserialize_ptr(&requestInfo, msg_in.stream, false);
+    deserialize_ptr(&requestInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestMapLocalizationML(session, requestInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4581,18 +5007,20 @@ void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerDetectorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrMarkerDetectorCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrMarkerDetectorML* markerDetector{};
-    deserialize_ptr(&markerDetector, msg_in.stream, false);
+    deserialize_ptr(&markerDetector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateMarkerDetectorML(session, createInfo, markerDetector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(markerDetector, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(markerDetector, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4603,18 +5031,20 @@ void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerSpaceML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrMarkerSpaceCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateMarkerSpaceML(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4625,13 +5055,15 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyMarkerDetectorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyMarkerDetectorML(markerDetector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4640,16 +5072,18 @@ void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerDetectorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerDetectorStateML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerDetectorStateML* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerDetectorStateML(markerDetector, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4659,18 +5093,20 @@ void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerLengthML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerLengthML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
+    deserialize(&marker, d_ctx);
     float* meters{};
-    deserialize_ptr(&meters, msg_in.stream, false);
+    deserialize_ptr(&meters, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerLengthML(markerDetector, marker, meters);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(meters, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(meters, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4681,18 +5117,20 @@ void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerNumberML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerNumberML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
+    deserialize(&marker, d_ctx);
     uint64_t* number{};
-    deserialize_ptr(&number, msg_in.stream, false);
+    deserialize_ptr(&number, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerNumberML(markerDetector, marker, number);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(number, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(number, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4703,18 +5141,20 @@ void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerReprojectionErrorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerReprojectionErrorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
+    deserialize(&marker, d_ctx);
     float* reprojectionErrorMeters{};
-    deserialize_ptr(&reprojectionErrorMeters, msg_in.stream, false);
+    deserialize_ptr(&reprojectionErrorMeters, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(reprojectionErrorMeters, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4725,23 +5165,25 @@ void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerStringML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerStringML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
-    deserialize(&marker, msg_in.stream, false);
+    deserialize(&marker, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4754,21 +5196,23 @@ void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkersML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkersML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     uint32_t markerCapacityInput{};
-    deserialize(&markerCapacityInput, msg_in.stream, false);
+    deserialize(&markerCapacityInput, d_ctx);
     uint32_t* markerCountOutput{};
-    deserialize_ptr(&markerCountOutput, msg_in.stream, false);
+    deserialize_ptr(&markerCountOutput, d_ctx);
     XrMarkerML* markers{};
-    deserialize_ptr(&markers, msg_in.stream, false);
+    deserialize_ptr(&markers, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(markerCountOutput, 1, msg_out.buffer);
-    serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(markerCountOutput, 1, s_ctx);
+    serialize_ptr(markers, markerCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4780,16 +5224,18 @@ void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSnapshotMarkerDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSnapshotMarkerDetectorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrMarkerDetectorML markerDetector{};
-    deserialize(&markerDetector, msg_in.stream, false);
+    deserialize(&markerDetector, d_ctx);
     XrMarkerDetectorSnapshotInfoML* snapshotInfo{};
-    deserialize_ptr(&snapshotInfo, msg_in.stream, false);
+    deserialize_ptr(&snapshotInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(snapshotInfo, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(snapshotInfo, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -4801,18 +5247,20 @@ void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo{};
-    deserialize_xr(&createInfo, msg_in.stream, false);
+    deserialize_xr(&createInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4823,18 +5271,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrCreateSpatialAnchorsCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsCompleteML(session, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4845,16 +5295,18 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg
 void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialAnchorStateML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialAnchorStateML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
     XrSpatialAnchorStateML* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpatialAnchorStateML(anchor, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -4866,18 +5318,20 @@ void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorsStorageML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorsCreateStorageInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpatialAnchorsStorageML* storage{};
-    deserialize_ptr(&storage, msg_in.stream, false);
+    deserialize_ptr(&storage, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(storage, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(storage, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4888,18 +5342,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_
 void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrSpatialAnchorsDeleteInfoML* deleteInfo{};
-    deserialize_ptr(&deleteInfo, msg_in.stream, false);
+    deserialize_ptr(&deleteInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -4910,18 +5366,20 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in
 void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeleteSpatialAnchorsCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSpatialAnchorsDeleteCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -4932,13 +5390,15 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorsStorageML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorsStorageML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorsStorageML(storage);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -4947,18 +5407,20 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg
 void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPublishSpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrSpatialAnchorsPublishInfoML* publishInfo{};
-    deserialize_ptr(&publishInfo, msg_in.stream, false);
+    deserialize_ptr(&publishInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -4969,18 +5431,20 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPublishSpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPublishSpatialAnchorsCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSpatialAnchorsPublishCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsCompleteML(storage, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -4991,18 +5455,20 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn ms
 void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpatialAnchorsAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo{};
-    deserialize_xr(&queryInfo, msg_in.stream, false);
+    deserialize_xr(&queryInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -5013,18 +5479,20 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpatialAnchorsCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrQuerySpatialAnchorsCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSpatialAnchorsQueryCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsCompleteML(storage, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -5035,18 +5503,20 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_
 void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrSpatialAnchorsUpdateExpirationInfoML* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
+    deserialize_ptr(&updateInfo, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -5057,18 +5527,20 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLoc
 void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorsStorageML storage{};
-    deserialize(&storage, msg_in.stream, false);
+    deserialize(&storage, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrSpatialAnchorsUpdateExpirationCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -5081,15 +5553,17 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(Message
 void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetSystemNotificationsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetSystemNotificationsML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemNotificationsSetInfoML* info{};
-    deserialize_ptr(&info, msg_in.stream, false);
+    deserialize_ptr(&info, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetSystemNotificationsML(instance, info);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5101,15 +5575,17 @@ void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnableUserCalibrationEventsML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnableUserCalibrationEventsML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrUserCalibrationEnableEventsInfoML* enableInfo{};
-    deserialize_ptr(&enableInfo, msg_in.stream, false);
+    deserialize_ptr(&enableInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnableUserCalibrationEventsML(instance, enableInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5121,19 +5597,21 @@ void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_
 void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAllocateWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAllocateWorldMeshBufferML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshBufferSizeML* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
+    deserialize_ptr(&size, d_ctx);
     XrWorldMeshBufferML* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrAllocateWorldMeshBufferML(detector, size, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(size->next, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(size->next, s_ctx);
+    serialize_ptr(buffer, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5144,18 +5622,20 @@ void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateWorldMeshDetectorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrWorldMeshDetectorCreateInfoML* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrWorldMeshDetectorML* detector{};
-    deserialize_ptr(&detector, msg_in.stream, false);
+    deserialize_ptr(&detector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateWorldMeshDetectorML(session, createInfo, detector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(detector, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(detector, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5166,13 +5646,15 @@ void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyWorldMeshDetectorML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyWorldMeshDetectorML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyWorldMeshDetectorML(detector);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5181,17 +5663,19 @@ void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrFreeWorldMeshBufferML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrFreeWorldMeshBufferML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshBufferML* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrFreeWorldMeshBufferML(detector, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_xr(buffer->next, msg_out.buffer);
-    serialize_ptr(buffer->buffer, buffer->bufferSize, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_xr(buffer->next, s_ctx);
+    serialize_ptr(buffer->buffer, buffer->bufferSize, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5201,18 +5685,20 @@ void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetWorldMeshBufferRecommendSizeML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo{};
-    deserialize_ptr(&sizeInfo, msg_in.stream, false);
+    deserialize_ptr(&sizeInfo, d_ctx);
     XrWorldMeshBufferSizeML* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
+    deserialize_ptr(&size, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(size, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5223,22 +5709,24 @@ void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn 
 void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshGetInfoML* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrWorldMeshBufferML* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(getInfo->blocks, getInfo->blockCount, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(getInfo->blocks, getInfo->blockCount, s_ctx);
+    serialize_ptr(buffer, 1, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5250,20 +5738,22 @@ void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshRequestCompletionInfoML* completionInfo{};
-    deserialize_ptr(&completionInfo, msg_in.stream, false);
+    deserialize_ptr(&completionInfo, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrWorldMeshRequestCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5275,18 +5765,20 @@ void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshStateAsyncML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateAsyncML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrWorldMeshStateRequestInfoML* stateRequest{};
-    deserialize_ptr(&stateRequest, msg_in.stream, false);
+    deserialize_ptr(&stateRequest, d_ctx);
     XrFutureEXT* future{};
-    deserialize_ptr(&future, msg_in.stream, false);
+    deserialize_ptr(&future, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5297,18 +5789,20 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshStateCompleteML", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestWorldMeshStateCompleteML));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrWorldMeshDetectorML detector{};
-    deserialize(&detector, msg_in.stream, false);
+    deserialize(&detector, d_ctx);
     XrFutureEXT future{};
-    deserialize(&future, msg_in.stream, false);
+    deserialize(&future, d_ctx);
     XrWorldMeshStateRequestCompletionML* completion{};
-    deserialize_ptr(&completion, msg_in.stream, false);
+    deserialize_ptr(&completion, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestWorldMeshStateCompleteML(detector, future, completion);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5321,16 +5815,18 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn ms
 void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyForceFeedbackCurlMNDX", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyForceFeedbackCurlMNDX));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
     XrForceFeedbackCurlApplyLocationsMNDX* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrApplyForceFeedbackCurlMNDX(handTracker, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations->locations, locations->locationCount, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations->locations, locations->locationCount, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -5342,25 +5838,27 @@ void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateReprojectionModesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateReprojectionModesMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
+    deserialize(&viewConfigurationType, d_ctx);
     uint32_t modeCapacityInput{};
-    deserialize(&modeCapacityInput, msg_in.stream, false);
+    deserialize(&modeCapacityInput, d_ctx);
     uint32_t* modeCountOutput{};
-    deserialize_ptr(&modeCountOutput, msg_in.stream, false);
+    deserialize_ptr(&modeCountOutput, d_ctx);
     XrReprojectionModeMSFT* modes{};
-    deserialize_ptr(&modes, msg_in.stream, false);
+    deserialize_ptr(&modes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(modeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(modeCountOutput, 1, s_ctx);
+    serialize_ptr(modes, modeCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5376,18 +5874,20 @@ void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg
 void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelKeyMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelKeyMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelUserPath{};
-    deserialize(&topLevelUserPath, msg_in.stream, false);
+    deserialize(&topLevelUserPath, d_ctx);
     XrControllerModelKeyStateMSFT* controllerModelKeyState{};
-    deserialize_ptr(&controllerModelKeyState, msg_in.stream, false);
+    deserialize_ptr(&controllerModelKeyState, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(controllerModelKeyState, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5398,18 +5898,20 @@ void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelPropertiesMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
+    deserialize(&modelKey, d_ctx);
     XrControllerModelPropertiesMSFT* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5420,18 +5922,20 @@ void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn m
 void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetControllerModelStateMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
+    deserialize(&modelKey, d_ctx);
     XrControllerModelStateMSFT* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetControllerModelStateMSFT(session, modelKey, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5442,23 +5946,25 @@ void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLoadControllerModelMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLoadControllerModelMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
-    deserialize(&modelKey, msg_in.stream, false);
+    deserialize(&modelKey, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5473,18 +5979,20 @@ void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateHandMeshSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateHandMeshSpaceMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
     XrHandMeshSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -5495,18 +6003,20 @@ void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateHandMeshMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUpdateHandMeshMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrHandTrackerEXT handTracker{};
-    deserialize(&handTracker, msg_in.stream, false);
+    deserialize(&handTracker, d_ctx);
     XrHandMeshUpdateInfoMSFT* updateInfo{};
-    deserialize_ptr(&updateInfo, msg_in.stream, false);
+    deserialize_ptr(&updateInfo, d_ctx);
     XrHandMeshMSFT* handMesh{};
-    deserialize_ptr(&handMesh, msg_in.stream, false);
+    deserialize_ptr(&handMesh, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(handMesh, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(handMesh, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -5519,19 +6029,21 @@ void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPerceptionAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     IUnknown* perceptionAnchor{};
-    deserialize_ptr(&perceptionAnchor, msg_in.stream, false);
+    deserialize_ptr(&perceptionAnchor, d_ctx);
     XrSpatialAnchorMSFT* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
+    deserialize_ptr(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(perceptionAnchor, 1, s_ctx);
+    serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5542,18 +6054,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(Mess
 void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorMSFT anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
     IUnknown** perceptionAnchor{};
     #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
 
     XrResult _result = function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(perceptionAnchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5566,23 +6080,25 @@ void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(Mess
 void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMarkerDecodedStringMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrUuidMSFT* markerId{};
-    deserialize_ptr(&markerId, msg_in.stream, false);
+    deserialize_ptr(&markerId, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5595,23 +6111,25 @@ void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn ms
 void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMarkerRawDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMarkerRawDataMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrUuidMSFT* markerId{};
-    deserialize_ptr(&markerId, msg_in.stream, false);
+    deserialize_ptr(&markerId, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5626,15 +6144,17 @@ void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrComputeNewSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrComputeNewSceneMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
+    deserialize(&sceneObserver, d_ctx);
     XrNewSceneComputeInfoMSFT* computeInfo{};
-    deserialize_ptr(&computeInfo, msg_in.stream, false);
+    deserialize_ptr(&computeInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrComputeNewSceneMSFT(sceneObserver, computeInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -5644,18 +6164,20 @@ void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
+    deserialize(&sceneObserver, d_ctx);
     XrSceneCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSceneMSFT* scene{};
-    deserialize_ptr(&scene, msg_in.stream, false);
+    deserialize_ptr(&scene, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSceneMSFT(sceneObserver, createInfo, scene);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(scene, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(scene, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -5666,18 +6188,20 @@ void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSceneObserverMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSceneObserverCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSceneObserverMSFT* sceneObserver{};
-    deserialize_ptr(&sceneObserver, msg_in.stream, false);
+    deserialize_ptr(&sceneObserver, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(sceneObserver, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(sceneObserver, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5688,13 +6212,15 @@ void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySceneMSFT(scene);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5703,13 +6229,15 @@ void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySceneObserverMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySceneObserverMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
+    deserialize(&sceneObserver, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySceneObserverMSFT(sceneObserver);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -5718,23 +6246,25 @@ void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSceneComputeFeaturesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     uint32_t featureCapacityInput{};
-    deserialize(&featureCapacityInput, msg_in.stream, false);
+    deserialize(&featureCapacityInput, d_ctx);
     uint32_t* featureCountOutput{};
-    deserialize_ptr(&featureCountOutput, msg_in.stream, false);
+    deserialize_ptr(&featureCountOutput, d_ctx);
     XrSceneComputeFeatureMSFT* features{};
-    deserialize_ptr(&features, msg_in.stream, false);
+    deserialize_ptr(&features, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(featureCountOutput, 1, msg_out.buffer);
-    serialize_ptr(features, featureCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(featureCountOutput, 1, s_ctx);
+    serialize_ptr(features, featureCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5747,18 +6277,20 @@ void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn 
 void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComponentsMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrSceneComponentsGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSceneComponentsMSFT* components{};
-    deserialize_ptr(&components, msg_in.stream, false);
+    deserialize_ptr(&components, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSceneComponentsMSFT(scene, getInfo, components);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(components, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(components, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5769,16 +6301,18 @@ void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneComputeStateMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneComputeStateMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
+    deserialize(&sceneObserver, d_ctx);
     XrSceneComputeStateMSFT* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSceneComputeStateMSFT(sceneObserver, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -5788,18 +6322,20 @@ void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMeshBuffersMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSceneMeshBuffersMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrSceneMeshBuffersGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSceneMeshBuffersMSFT* buffers{};
-    deserialize_ptr(&buffers, msg_in.stream, false);
+    deserialize_ptr(&buffers, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffers, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffers, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5810,18 +6346,20 @@ void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSceneComponentsMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateSceneComponentsMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrSceneComponentsLocateInfoMSFT* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrSceneComponentLocationsMSFT* locations{};
-    deserialize_ptr(&locations, msg_in.stream, false);
+    deserialize_ptr(&locations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5834,15 +6372,17 @@ void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeserializeSceneMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDeserializeSceneMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneObserverMSFT sceneObserver{};
-    deserialize(&sceneObserver, msg_in.stream, false);
+    deserialize(&sceneObserver, d_ctx);
     XrSceneDeserializeInfoMSFT* deserializeInfo{};
-    deserialize_ptr(&deserializeInfo, msg_in.stream, false);
+    deserialize_ptr(&deserializeInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -5852,23 +6392,25 @@ void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSerializedSceneFragmentDataMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSceneMSFT scene{};
-    deserialize(&scene, msg_in.stream, false);
+    deserialize(&scene, d_ctx);
     XrSerializedSceneFragmentDataGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     uint32_t countInput{};
-    deserialize(&countInput, msg_in.stream, false);
+    deserialize(&countInput, d_ctx);
     uint32_t* readOutput{};
-    deserialize_ptr(&readOutput, msg_in.stream, false);
+    deserialize_ptr(&readOutput, d_ctx);
     uint8_t* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(readOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, countInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(readOutput, 1, s_ctx);
+    serialize_ptr(buffer, countInput, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -5883,18 +6425,20 @@ void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn
 void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpatialAnchorMSFT* anchor{};
-    deserialize_ptr(&anchor, msg_in.stream, false);
+    deserialize_ptr(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5905,18 +6449,20 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5927,13 +6473,15 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_i
 void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorMSFT anchor{};
-    deserialize(&anchor, msg_in.stream, false);
+    deserialize(&anchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorMSFT(anchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -5944,13 +6492,15 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrClearSpatialAnchorStoreMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrClearSpatialAnchorStoreMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    deserialize(&spatialAnchorStore, d_ctx);
 
     XrResult _result = function_loader.pfn_xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -5959,18 +6509,20 @@ void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPersistedNameMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo{};
-    deserialize_ptr(&spatialAnchorCreateInfo, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorCreateInfo, d_ctx);
     XrSpatialAnchorMSFT* spatialAnchor{};
-    deserialize_ptr(&spatialAnchor, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchor, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchor, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spatialAnchor, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5981,16 +6533,18 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(Message
 void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore{};
-    deserialize_ptr(&spatialAnchorStore, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorStore, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spatialAnchorStore, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6000,13 +6554,15 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLo
 void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorStoreConnectionMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    deserialize(&spatialAnchorStore, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6015,21 +6571,23 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageL
 void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumeratePersistedSpatialAnchorNamesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    deserialize(&spatialAnchorStore, d_ctx);
     uint32_t spatialAnchorNameCapacityInput{};
-    deserialize(&spatialAnchorNameCapacityInput, msg_in.stream, false);
+    deserialize(&spatialAnchorNameCapacityInput, d_ctx);
     uint32_t* spatialAnchorNameCountOutput{};
-    deserialize_ptr(&spatialAnchorNameCountOutput, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorNameCountOutput, d_ctx);
     XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames{};
-    deserialize_ptr(&spatialAnchorNames, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorNames, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.buffer);
-    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spatialAnchorNameCountOutput, 1, s_ctx);
+    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6041,15 +6599,17 @@ void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(Message
 void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPersistSpatialAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    deserialize(&spatialAnchorStore, d_ctx);
     XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo{};
-    deserialize_ptr(&spatialAnchorPersistenceInfo, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorPersistenceInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6059,15 +6619,17 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrUnpersistSpatialAnchorMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
-    deserialize(&spatialAnchorStore, msg_in.stream, false);
+    deserialize(&spatialAnchorStore, d_ctx);
     XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName{};
-    deserialize_ptr(&spatialAnchorPersistenceName, msg_in.stream, false);
+    deserialize_ptr(&spatialAnchorPersistenceName, d_ctx);
 
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6079,18 +6641,20 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialGraphNodeSpaceMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6101,13 +6665,15 @@ void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn ms
 void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialGraphNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialGraphNodeBindingMSFT nodeBinding{};
-    deserialize(&nodeBinding, msg_in.stream, false);
+    deserialize(&nodeBinding, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&nodeBinding);
@@ -6116,18 +6682,20 @@ void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn
 void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialGraphNodeBindingPropertiesMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpatialGraphNodeBindingMSFT nodeBinding{};
-    deserialize(&nodeBinding, msg_in.stream, false);
+    deserialize(&nodeBinding, d_ctx);
     XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSpatialGraphNodeBindingPropertiesMSFT* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&nodeBinding);
@@ -6138,18 +6706,20 @@ void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(Message
 void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTryCreateSpatialGraphStaticNodeBindingMSFT", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpatialGraphNodeBindingMSFT* nodeBinding{};
-    deserialize_ptr(&nodeBinding, msg_in.stream, false);
+    deserialize_ptr(&nodeBinding, d_ctx);
 
     XrResult _result = function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(nodeBinding, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(nodeBinding, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6162,16 +6732,18 @@ void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(Messa
 void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAudioInputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioInputDeviceGuidOculus));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
+    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetAudioInputDeviceGuidOculus(instance, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6181,16 +6753,18 @@ void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_
 void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAudioOutputDeviceGuidOculus", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetAudioOutputDeviceGuidOculus));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
-    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_in.stream, false);
+    deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetAudioOutputDeviceGuidOculus(instance, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6202,21 +6776,23 @@ void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateExternalCamerasOCULUS", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateExternalCamerasOCULUS));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t cameraCapacityInput{};
-    deserialize(&cameraCapacityInput, msg_in.stream, false);
+    deserialize(&cameraCapacityInput, d_ctx);
     uint32_t* cameraCountOutput{};
-    deserialize_ptr(&cameraCountOutput, msg_in.stream, false);
+    deserialize_ptr(&cameraCountOutput, d_ctx);
     XrExternalCameraOCULUS* cameras{};
-    deserialize_ptr(&cameras, msg_in.stream, false);
+    deserialize_ptr(&cameras, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(cameraCountOutput, 1, msg_out.buffer);
-    serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(cameraCountOutput, 1, s_ctx);
+    serialize_ptr(cameras, cameraCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6230,17 +6806,19 @@ void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg
 void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetTrackingOptimizationSettingsHintQCOM", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrTrackingOptimizationSettingsDomainQCOM domain{};
-    deserialize(&domain, msg_in.stream, false);
+    deserialize(&domain, d_ctx);
     XrTrackingOptimizationSettingsHintQCOM hint{};
-    deserialize(&hint, msg_in.stream, false);
+    deserialize(&hint, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6253,15 +6831,17 @@ void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageL
 void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetEnvironmentDepthEstimationVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBool32 enabled{};
-    deserialize(&enabled, msg_in.stream, false);
+    deserialize(&enabled, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO(session, enabled);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6273,18 +6853,20 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn
 void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerSpaceVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateMarkerSpaceVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrMarkerSpaceCreateInfoVARJO* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateMarkerSpaceVARJO(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6295,18 +6877,20 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerSizeVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetMarkerSizeVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
+    deserialize(&markerId, d_ctx);
     XrExtent2Df* size{};
-    deserialize_ptr(&size, msg_in.stream, false);
+    deserialize_ptr(&size, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetMarkerSizeVARJO(session, markerId, size);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(size, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6317,17 +6901,19 @@ void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingPredictionVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingPredictionVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
+    deserialize(&markerId, d_ctx);
     XrBool32 enable{};
-    deserialize(&enable, msg_in.stream, false);
+    deserialize(&enable, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6338,17 +6924,19 @@ void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn m
 void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingTimeoutVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint64_t markerId{};
-    deserialize(&markerId, msg_in.stream, false);
+    deserialize(&markerId, d_ctx);
     XrDuration timeout{};
-    deserialize(&timeout, msg_in.stream, false);
+    deserialize(&timeout, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6359,15 +6947,17 @@ void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_
 void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetMarkerTrackingVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBool32 enabled{};
-    deserialize(&enabled, msg_in.stream, false);
+    deserialize(&enabled, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingVARJO(session, enabled);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6379,15 +6969,17 @@ void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetViewOffsetVARJO", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSetViewOffsetVARJO));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     float offset{};
-    deserialize(&offset, msg_in.stream, false);
+    deserialize(&offset, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSetViewOffsetVARJO(session, offset);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6398,18 +6990,20 @@ void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAcquireSwapchainImage", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAcquireSwapchainImage));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrSwapchainImageAcquireInfo* acquireInfo{};
-    deserialize_ptr(&acquireInfo, msg_in.stream, false);
+    deserialize_ptr(&acquireInfo, d_ctx);
     uint32_t* index{};
-    deserialize_ptr(&index, msg_in.stream, false);
+    deserialize_ptr(&index, d_ctx);
 
     XrResult _result = function_loader.pfn_xrAcquireSwapchainImage(swapchain, acquireInfo, index);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(index, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(index, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -6420,17 +7014,19 @@ void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyHapticFeedback", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrApplyHapticFeedback));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, false);
+    deserialize_ptr(&hapticActionInfo, d_ctx);
     XrHapticBaseHeader* hapticFeedback{};
-    deserialize_xr(&hapticFeedback, msg_in.stream, false);
+    deserialize_xr(&hapticFeedback, d_ctx);
 
     XrResult _result = function_loader.pfn_xrApplyHapticFeedback(session, hapticActionInfo, hapticFeedback);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6441,15 +7037,17 @@ void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAttachSessionActionSets", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrAttachSessionActionSets));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSessionActionSetsAttachInfo* attachInfo{};
-    deserialize_ptr(&attachInfo, msg_in.stream, false);
+    deserialize_ptr(&attachInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrAttachSessionActionSets(session, attachInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6459,15 +7057,17 @@ void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginFrame", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrBeginFrame));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFrameBeginInfo* frameBeginInfo{};
-    deserialize_ptr(&frameBeginInfo, msg_in.stream, false);
+    deserialize_ptr(&frameBeginInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrBeginFrame(session, frameBeginInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6477,15 +7077,17 @@ void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginSession", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrBeginSession));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSessionBeginInfo* beginInfo{};
-    deserialize_ptr(&beginInfo, msg_in.stream, false);
+    deserialize_ptr(&beginInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrBeginSession(session, beginInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6495,18 +7097,20 @@ void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateAction", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateAction));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrActionSet actionSet{};
-    deserialize(&actionSet, msg_in.stream, false);
+    deserialize(&actionSet, d_ctx);
     XrActionCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrAction* action{};
-    deserialize_ptr(&action, msg_in.stream, false);
+    deserialize_ptr(&action, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateAction(actionSet, createInfo, action);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(action, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(action, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&actionSet);
@@ -6517,18 +7121,20 @@ void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateActionSet", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateActionSet));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrActionSetCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrActionSet* actionSet{};
-    deserialize_ptr(&actionSet, msg_in.stream, false);
+    deserialize_ptr(&actionSet, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateActionSet(instance, createInfo, actionSet);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(actionSet, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(actionSet, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6539,18 +7145,20 @@ void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateActionSpace", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateActionSpace));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionSpaceCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateActionSpace(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6566,18 +7174,20 @@ void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateReferenceSpace", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateReferenceSpace));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrReferenceSpaceCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSpace* space{};
-    deserialize_ptr(&space, msg_in.stream, false);
+    deserialize_ptr(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateReferenceSpace(session, createInfo, space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6588,18 +7198,20 @@ void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSession", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSession));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSessionCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSession* session{};
-    deserialize_ptr(&session, msg_in.stream, false);
+    deserialize_ptr(&session, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSession(instance, createInfo, session);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(session, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(session, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6610,18 +7222,20 @@ void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSwapchain", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateSwapchain));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSwapchainCreateInfo* createInfo{};
-    deserialize_ptr(&createInfo, msg_in.stream, false);
+    deserialize_ptr(&createInfo, d_ctx);
     XrSwapchain* swapchain{};
-    deserialize_ptr(&swapchain, msg_in.stream, false);
+    deserialize_ptr(&swapchain, d_ctx);
 
     XrResult _result = function_loader.pfn_xrCreateSwapchain(session, createInfo, swapchain);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(swapchain, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6632,13 +7246,15 @@ void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyAction", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyAction));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrAction action{};
-    deserialize(&action, msg_in.stream, false);
+    deserialize(&action, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyAction(action);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&action);
@@ -6647,13 +7263,15 @@ void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyActionSet", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyActionSet));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrActionSet actionSet{};
-    deserialize(&actionSet, msg_in.stream, false);
+    deserialize(&actionSet, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyActionSet(actionSet);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&actionSet);
@@ -6662,13 +7280,15 @@ void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyInstance", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroyInstance));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroyInstance(instance);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6677,13 +7297,15 @@ void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySession", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySession));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySession(session);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6692,13 +7314,15 @@ void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpace", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySpace));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySpace(space);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -6707,13 +7331,15 @@ void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySwapchain", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrDestroySwapchain));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
 
     XrResult _result = function_loader.pfn_xrDestroySwapchain(swapchain);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -6722,15 +7348,17 @@ void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEndFrame", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEndFrame));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFrameEndInfo* frameEndInfo{};
-    deserialize_ptr(&frameEndInfo, msg_in.stream, false);
+    deserialize_ptr(&frameEndInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEndFrame(session, frameEndInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6740,13 +7368,15 @@ void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEndSession", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEndSession));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEndSession(session);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6755,19 +7385,21 @@ void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateApiLayerProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateApiLayerProperties));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     uint32_t propertyCapacityInput{};
-    deserialize(&propertyCapacityInput, msg_in.stream, false);
+    deserialize(&propertyCapacityInput, d_ctx);
     uint32_t* propertyCountOutput{};
-    deserialize_ptr(&propertyCountOutput, msg_in.stream, false);
+    deserialize_ptr(&propertyCountOutput, d_ctx);
     XrApiLayerProperties* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateApiLayerProperties(propertyCapacityInput, propertyCountOutput, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
-    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(propertyCountOutput, 1, s_ctx);
+    serialize_ptr(properties, propertyCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&propertyCapacityInput);
@@ -6778,23 +7410,25 @@ void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in
 void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateBoundSourcesForAction", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateBoundSourcesForAction));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrBoundSourcesForActionEnumerateInfo* enumerateInfo{};
-    deserialize_ptr(&enumerateInfo, msg_in.stream, false);
+    deserialize_ptr(&enumerateInfo, d_ctx);
     uint32_t sourceCapacityInput{};
-    deserialize(&sourceCapacityInput, msg_in.stream, false);
+    deserialize(&sourceCapacityInput, d_ctx);
     uint32_t* sourceCountOutput{};
-    deserialize_ptr(&sourceCountOutput, msg_in.stream, false);
+    deserialize_ptr(&sourceCountOutput, d_ctx);
     XrPath* sources{};
-    deserialize_ptr(&sources, msg_in.stream, false);
+    deserialize_ptr(&sources, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateBoundSourcesForAction(session, enumerateInfo, sourceCapacityInput, sourceCountOutput, sources);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(sourceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(sources, sourceCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(sourceCountOutput, 1, s_ctx);
+    serialize_ptr(sources, sourceCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6807,25 +7441,27 @@ void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateEnvironmentBlendModes", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateEnvironmentBlendModes));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
+    deserialize(&viewConfigurationType, d_ctx);
     uint32_t environmentBlendModeCapacityInput{};
-    deserialize(&environmentBlendModeCapacityInput, msg_in.stream, false);
+    deserialize(&environmentBlendModeCapacityInput, d_ctx);
     uint32_t* environmentBlendModeCountOutput{};
-    deserialize_ptr(&environmentBlendModeCountOutput, msg_in.stream, false);
+    deserialize_ptr(&environmentBlendModeCountOutput, d_ctx);
     XrEnvironmentBlendMode* environmentBlendModes{};
-    deserialize_ptr(&environmentBlendModes, msg_in.stream, false);
+    deserialize_ptr(&environmentBlendModes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateEnvironmentBlendModes(instance, systemId, viewConfigurationType, environmentBlendModeCapacityInput, environmentBlendModeCountOutput, environmentBlendModes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(environmentBlendModeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(environmentBlendModeCountOutput, 1, s_ctx);
+    serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6839,21 +7475,23 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateInstanceExtensionProperties));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     char* layerName{};
-    deserialize_ptr(&layerName, msg_in.stream, false);
+    deserialize_ptr(&layerName, d_ctx);
     uint32_t propertyCapacityInput{};
-    deserialize(&propertyCapacityInput, msg_in.stream, false);
+    deserialize(&propertyCapacityInput, d_ctx);
     uint32_t* propertyCountOutput{};
-    deserialize_ptr(&propertyCountOutput, msg_in.stream, false);
+    deserialize_ptr(&propertyCountOutput, d_ctx);
     XrExtensionProperties* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateInstanceExtensionProperties(layerName, propertyCapacityInput, propertyCountOutput, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
-    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(propertyCountOutput, 1, s_ctx);
+    serialize_ptr(properties, propertyCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup_ptr(layerName, count_null_terminated(layerName));
@@ -6865,21 +7503,23 @@ void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLock
 void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateReferenceSpaces", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateReferenceSpaces));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t spaceCapacityInput{};
-    deserialize(&spaceCapacityInput, msg_in.stream, false);
+    deserialize(&spaceCapacityInput, d_ctx);
     uint32_t* spaceCountOutput{};
-    deserialize_ptr(&spaceCountOutput, msg_in.stream, false);
+    deserialize_ptr(&spaceCountOutput, d_ctx);
     XrReferenceSpaceType* spaces{};
-    deserialize_ptr(&spaces, msg_in.stream, false);
+    deserialize_ptr(&spaces, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateReferenceSpaces(session, spaceCapacityInput, spaceCountOutput, spaces);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spaceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(spaces, spaceCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spaceCountOutput, 1, s_ctx);
+    serialize_ptr(spaces, spaceCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6891,21 +7531,23 @@ void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSwapchainFormats", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSwapchainFormats));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     uint32_t formatCapacityInput{};
-    deserialize(&formatCapacityInput, msg_in.stream, false);
+    deserialize(&formatCapacityInput, d_ctx);
     uint32_t* formatCountOutput{};
-    deserialize_ptr(&formatCountOutput, msg_in.stream, false);
+    deserialize_ptr(&formatCountOutput, d_ctx);
     int64_t* formats{};
-    deserialize_ptr(&formats, msg_in.stream, false);
+    deserialize_ptr(&formats, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateSwapchainFormats(session, formatCapacityInput, formatCountOutput, formats);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(formatCountOutput, 1, msg_out.buffer);
-    serialize_ptr(formats, formatCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(formatCountOutput, 1, s_ctx);
+    serialize_ptr(formats, formatCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6917,21 +7559,23 @@ void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSwapchainImages", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateSwapchainImages));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     uint32_t imageCapacityInput{};
-    deserialize(&imageCapacityInput, msg_in.stream, false);
+    deserialize(&imageCapacityInput, d_ctx);
     uint32_t* imageCountOutput{};
-    deserialize_ptr(&imageCountOutput, msg_in.stream, false);
+    deserialize_ptr(&imageCountOutput, d_ctx);
     XrSwapchainImageBaseHeader* images{};
-    deserialize_xr_array(&images, msg_in.stream, false);
+    deserialize_xr_array(&images, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateSwapchainImages(swapchain, imageCapacityInput, imageCountOutput, images);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
-    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(imageCountOutput, 1, s_ctx);
+    serialize_xr_array(images, imageCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -6943,25 +7587,27 @@ void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViewConfigurationViews", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateViewConfigurationViews));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
+    deserialize(&viewConfigurationType, d_ctx);
     uint32_t viewCapacityInput{};
-    deserialize(&viewCapacityInput, msg_in.stream, false);
+    deserialize(&viewCapacityInput, d_ctx);
     uint32_t* viewCountOutput{};
-    deserialize_ptr(&viewCountOutput, msg_in.stream, false);
+    deserialize_ptr(&viewCountOutput, d_ctx);
     XrViewConfigurationView* views{};
-    deserialize_ptr(&views, msg_in.stream, false);
+    deserialize_ptr(&views, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateViewConfigurationViews(instance, systemId, viewConfigurationType, viewCapacityInput, viewCountOutput, views);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
-    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(viewCountOutput, 1, s_ctx);
+    serialize_ptr(views, viewCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -6975,23 +7621,25 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn ms
 void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViewConfigurations", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateViewConfigurations));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     uint32_t viewConfigurationTypeCapacityInput{};
-    deserialize(&viewConfigurationTypeCapacityInput, msg_in.stream, false);
+    deserialize(&viewConfigurationTypeCapacityInput, d_ctx);
     uint32_t* viewConfigurationTypeCountOutput{};
-    deserialize_ptr(&viewConfigurationTypeCountOutput, msg_in.stream, false);
+    deserialize_ptr(&viewConfigurationTypeCountOutput, d_ctx);
     XrViewConfigurationType* viewConfigurationTypes{};
-    deserialize_ptr(&viewConfigurationTypes, msg_in.stream, false);
+    deserialize_ptr(&viewConfigurationTypes, d_ctx);
 
     XrResult _result = function_loader.pfn_xrEnumerateViewConfigurations(instance, systemId, viewConfigurationTypeCapacityInput, viewConfigurationTypeCountOutput, viewConfigurationTypes);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(viewConfigurationTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(viewConfigurationTypeCountOutput, 1, s_ctx);
+    serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7004,18 +7652,20 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateBoolean", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetActionStateBoolean));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrActionStateBoolean* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetActionStateBoolean(session, getInfo, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7026,18 +7676,20 @@ void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateFloat", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetActionStateFloat));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrActionStateFloat* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetActionStateFloat(session, getInfo, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7048,18 +7700,20 @@ void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStatePose", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetActionStatePose));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrActionStatePose* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetActionStatePose(session, getInfo, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7070,18 +7724,20 @@ void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateVector2f", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetActionStateVector2f));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrActionStateVector2f* state{};
-    deserialize_ptr(&state, msg_in.stream, false);
+    deserialize_ptr(&state, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetActionStateVector2f(session, getInfo, state);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7092,18 +7748,20 @@ void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetCurrentInteractionProfile", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetCurrentInteractionProfile));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrPath topLevelUserPath{};
-    deserialize(&topLevelUserPath, msg_in.stream, false);
+    deserialize(&topLevelUserPath, d_ctx);
     XrInteractionProfileState* interactionProfile{};
-    deserialize_ptr(&interactionProfile, msg_in.stream, false);
+    deserialize_ptr(&interactionProfile, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetCurrentInteractionProfile(session, topLevelUserPath, interactionProfile);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(interactionProfile, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(interactionProfile, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7114,23 +7772,25 @@ void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetInputSourceLocalizedName", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetInputSourceLocalizedName));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrInputSourceLocalizedNameGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetInputSourceLocalizedName(session, getInfo, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7143,16 +7803,18 @@ void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetInstanceProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetInstanceProperties));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrInstanceProperties* instanceProperties{};
-    deserialize_ptr(&instanceProperties, msg_in.stream, false);
+    deserialize_ptr(&instanceProperties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetInstanceProperties(instance, instanceProperties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(instanceProperties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(instanceProperties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7162,18 +7824,20 @@ void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetReferenceSpaceBoundsRect", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetReferenceSpaceBoundsRect));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrReferenceSpaceType referenceSpaceType{};
-    deserialize(&referenceSpaceType, msg_in.stream, false);
+    deserialize(&referenceSpaceType, d_ctx);
     XrExtent2Df* bounds{};
-    deserialize_ptr(&bounds, msg_in.stream, false);
+    deserialize_ptr(&bounds, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetReferenceSpaceBoundsRect(session, referenceSpaceType, bounds);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bounds, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bounds, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7184,18 +7848,20 @@ void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSystem", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSystem));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemGetInfo* getInfo{};
-    deserialize_ptr(&getInfo, msg_in.stream, false);
+    deserialize_ptr(&getInfo, d_ctx);
     XrSystemId* systemId{};
-    deserialize_ptr(&systemId, msg_in.stream, false);
+    deserialize_ptr(&systemId, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSystem(instance, getInfo, systemId);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(systemId, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(systemId, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7206,18 +7872,20 @@ void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSystemProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetSystemProperties));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrSystemProperties* properties{};
-    deserialize_ptr(&properties, msg_in.stream, false);
+    deserialize_ptr(&properties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetSystemProperties(instance, systemId, properties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7228,20 +7896,22 @@ void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetViewConfigurationProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrGetViewConfigurationProperties));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrSystemId systemId{};
-    deserialize(&systemId, msg_in.stream, false);
+    deserialize(&systemId, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
-    deserialize(&viewConfigurationType, msg_in.stream, false);
+    deserialize(&viewConfigurationType, d_ctx);
     XrViewConfigurationProperties* configurationProperties{};
-    deserialize_ptr(&configurationProperties, msg_in.stream, false);
+    deserialize_ptr(&configurationProperties, d_ctx);
 
     XrResult _result = function_loader.pfn_xrGetViewConfigurationProperties(instance, systemId, viewConfigurationType, configurationProperties);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(configurationProperties, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(configurationProperties, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7253,20 +7923,22 @@ void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg
 void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSpace", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateSpace));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSpace space{};
-    deserialize(&space, msg_in.stream, false);
+    deserialize(&space, d_ctx);
     XrSpace baseSpace{};
-    deserialize(&baseSpace, msg_in.stream, false);
+    deserialize(&baseSpace, d_ctx);
     XrTime time{};
-    deserialize(&time, msg_in.stream, false);
+    deserialize_time(&time, d_ctx);
     XrSpaceLocation* location{};
-    deserialize_ptr(&location, msg_in.stream, false);
+    deserialize_ptr(&location, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateSpace(space, baseSpace, time, location);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(location, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(location, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -7278,18 +7950,20 @@ void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSpaces", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateSpaces));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrSpacesLocateInfo* locateInfo{};
-    deserialize_ptr(&locateInfo, msg_in.stream, false);
+    deserialize_ptr(&locateInfo, d_ctx);
     XrSpaceLocations* spaceLocations{};
-    deserialize_ptr(&spaceLocations, msg_in.stream, false);
+    deserialize_ptr(&spaceLocations, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateSpaces(session, locateInfo, spaceLocations);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(spaceLocations, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(spaceLocations, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7300,26 +7974,28 @@ void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateViews", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrLocateViews));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrViewLocateInfo* viewLocateInfo{};
-    deserialize_ptr(&viewLocateInfo, msg_in.stream, false);
+    deserialize_ptr(&viewLocateInfo, d_ctx);
     XrViewState* viewState{};
-    deserialize_ptr(&viewState, msg_in.stream, false);
+    deserialize_ptr(&viewState, d_ctx);
     uint32_t viewCapacityInput{};
-    deserialize(&viewCapacityInput, msg_in.stream, false);
+    deserialize(&viewCapacityInput, d_ctx);
     uint32_t* viewCountOutput{};
-    deserialize_ptr(&viewCountOutput, msg_in.stream, false);
+    deserialize_ptr(&viewCountOutput, d_ctx);
     XrView* views{};
-    deserialize_ptr(&views, msg_in.stream, false);
+    deserialize_ptr(&views, d_ctx);
 
     XrResult _result = function_loader.pfn_xrLocateViews(session, viewLocateInfo, viewState, viewCapacityInput, viewCountOutput, views);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(viewState, 1, msg_out.buffer);
-    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
-    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(viewState, 1, s_ctx);
+    serialize_ptr(viewCountOutput, 1, s_ctx);
+    serialize_ptr(views, viewCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7333,23 +8009,25 @@ void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPathToString", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPathToString));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrPath path{};
-    deserialize(&path, msg_in.stream, false);
+    deserialize(&path, d_ctx);
     uint32_t bufferCapacityInput{};
-    deserialize(&bufferCapacityInput, msg_in.stream, false);
+    deserialize(&bufferCapacityInput, d_ctx);
     uint32_t* bufferCountOutput{};
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, false);
+    deserialize_ptr(&bufferCountOutput, d_ctx);
     char* buffer{};
-    deserialize_ptr(&buffer, msg_in.stream, false);
+    deserialize_ptr(&buffer, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPathToString(instance, path, bufferCapacityInput, bufferCountOutput, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(bufferCountOutput, 1, s_ctx);
+    serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7362,16 +8040,18 @@ void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPollEvent", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrPollEvent));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrEventDataBuffer* eventData{};
-    deserialize_ptr(&eventData, msg_in.stream, false);
+    deserialize_ptr(&eventData, d_ctx);
 
     XrResult _result = function_loader.pfn_xrPollEvent(instance, eventData);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(eventData, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(eventData, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7381,15 +8061,17 @@ void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrReleaseSwapchainImage", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrReleaseSwapchainImage));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrSwapchainImageReleaseInfo* releaseInfo{};
-    deserialize_ptr(&releaseInfo, msg_in.stream, false);
+    deserialize_ptr(&releaseInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrReleaseSwapchainImage(swapchain, releaseInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -7399,13 +8081,15 @@ void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestExitSession", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrRequestExitSession));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
 
     XrResult _result = function_loader.pfn_xrRequestExitSession(session);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7414,18 +8098,20 @@ void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrResultToString", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrResultToString));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrResult value{};
-    deserialize(&value, msg_in.stream, false);
+    deserialize(&value, d_ctx);
     char buffer[XR_MAX_RESULT_STRING_SIZE]{};
-    deserialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, msg_in.stream, false);
+    deserialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, d_ctx);
 
     XrResult _result = function_loader.pfn_xrResultToString(instance, value, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_RESULT_STRING_SIZE, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffer, XR_MAX_RESULT_STRING_SIZE, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7436,15 +8122,17 @@ void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopHapticFeedback", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStopHapticFeedback));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
-    deserialize_ptr(&hapticActionInfo, msg_in.stream, false);
+    deserialize_ptr(&hapticActionInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStopHapticFeedback(session, hapticActionInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7454,18 +8142,20 @@ void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStringToPath", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStringToPath));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     char* pathString{};
-    deserialize_ptr(&pathString, msg_in.stream, false);
+    deserialize_ptr(&pathString, d_ctx);
     XrPath* path{};
-    deserialize_ptr(&path, msg_in.stream, false);
+    deserialize_ptr(&path, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStringToPath(instance, pathString, path);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(path, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(path, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7476,18 +8166,20 @@ void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStructureTypeToString", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrStructureTypeToString));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrStructureType value{};
-    deserialize(&value, msg_in.stream, false);
+    deserialize(&value, d_ctx);
     char buffer[XR_MAX_STRUCTURE_NAME_SIZE]{};
-    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_in.stream, false);
+    deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, d_ctx);
 
     XrResult _result = function_loader.pfn_xrStructureTypeToString(instance, value, buffer);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7498,15 +8190,17 @@ void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSuggestInteractionProfileBindings", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSuggestInteractionProfileBindings));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrInstance instance{};
-    deserialize(&instance, msg_in.stream, false);
+    deserialize(&instance, d_ctx);
     XrInteractionProfileSuggestedBinding* suggestedBindings{};
-    deserialize_ptr(&suggestedBindings, msg_in.stream, false);
+    deserialize_ptr(&suggestedBindings, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSuggestInteractionProfileBindings(instance, suggestedBindings);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7516,15 +8210,17 @@ void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn 
 void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSyncActions", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrSyncActions));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrActionsSyncInfo* syncInfo{};
-    deserialize_ptr(&syncInfo, msg_in.stream, false);
+    deserialize_ptr(&syncInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrSyncActions(session, syncInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7534,18 +8230,20 @@ void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrWaitFrame", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrWaitFrame));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSession session{};
-    deserialize(&session, msg_in.stream, false);
+    deserialize(&session, d_ctx);
     XrFrameWaitInfo* frameWaitInfo{};
-    deserialize_ptr(&frameWaitInfo, msg_in.stream, false);
+    deserialize_ptr(&frameWaitInfo, d_ctx);
     XrFrameState* frameState{};
-    deserialize_ptr(&frameState, msg_in.stream, false);
+    deserialize_ptr(&frameState, d_ctx);
 
     XrResult _result = function_loader.pfn_xrWaitFrame(session, frameWaitInfo, frameState);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
-    serialize_ptr(frameState, 1, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(frameState, 1, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7556,15 +8254,17 @@ void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrWaitSwapchainImage", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrWaitSwapchainImage));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     XrSwapchain swapchain{};
-    deserialize(&swapchain, msg_in.stream, false);
+    deserialize(&swapchain, d_ctx);
     XrSwapchainImageWaitInfo* waitInfo{};
-    deserialize_ptr(&waitInfo, msg_in.stream, false);
+    deserialize_ptr(&waitInfo, d_ctx);
 
     XrResult _result = function_loader.pfn_xrWaitSwapchainImage(swapchain, waitInfo);
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);

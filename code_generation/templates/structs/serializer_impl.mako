@@ -1,8 +1,8 @@
 <%namespace name="utils" file="utils.mako"/>\
 <%def name="serializer(struct)">
-void serialize(const ${struct.name}* s, SyncWriteStream& out) {
+void serialize(const ${struct.name}* s, SerializeContext& ctx) {
 % if struct.header:
-    serialize_xr(s, out);
+    serialize_xr(s, ctx);
 % else:
 % for member in struct.members:
     ${utils.serialize_member(member)}
@@ -37,5 +37,12 @@ ${serializer(struct)}
 
 % endif
 </%utils:for_grouped_structs>
+
+// takes a local time, converts it to remote time, and puts it on the stream
+void serialize_time(const XrTime* local_time, SerializeContext& ctx) {
+    // time_offset = local - remote => remote = local - offset
+    XrTime remote_time = *local_time - ctx.time_offset;
+    serialize(&remote_time, ctx);
+}
 
 } // namespace xrtransport

@@ -1,6 +1,6 @@
 <%namespace name="utils" file="utils.mako"/>\
 <%def name="deserializer(struct)">\
-void deserialize(${struct.name}* s, SyncReadStream& in, bool in_place) {
+void deserialize(${struct.name}* s, DeserializeContext& ctx) {
 % for member in struct.members:
     ${utils.deserialize_member(member)}
 % endfor
@@ -54,6 +54,14 @@ ${deserializer(struct)}
 
 % endif
 </%utils:for_grouped_structs>
+
+// reads a remote time, converts it to local time, and applies it
+void deserialize_time(XrTime* time, DeserializeContext& ctx) {
+    // time_offset = local - remote => local = remote + time_offset
+    XrTime remote_time{};
+    deserialize(&remote_time, ctx);
+    *time = remote_time + ctx.time_offset;
+}
 
 // Cleaners
 <%utils:for_grouped_structs args="struct">\

@@ -9,6 +9,7 @@
  */
 #include "runtime.h"
 #include "transport_manager.h"
+#include "synchronization.h"
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
@@ -27,19 +28,27 @@ namespace runtime {
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 197001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(digitalLensControl, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 197001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(digitalLensControl, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetDigitalLensControlALMALENCE: {}", e.what());
@@ -51,21 +60,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const XrBodyTrackerCreateInfoBD* createInfo, XrBodyTrackerBD* bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 386001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bodyTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 386001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(bodyTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bodyTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerBD: {}", e.what());
@@ -75,18 +92,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 386002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 386002;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerBD: {}", e.what());
@@ -96,21 +121,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker, const XrBodyJointsLocateInfoBD* locateInfo, XrBodyJointLocationsBD* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 386003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 386003;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsBD: {}", e.what());
@@ -122,21 +155,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorCreateInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391001;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorAsyncBD: {}", e.what());
@@ -146,21 +187,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSpatialAnchorCreateCompletionBD* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391002;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorCompleteBD: {}", e.what());
@@ -170,21 +219,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorPersistInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391003;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorAsyncBD: {}", e.what());
@@ -194,21 +251,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391004;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorCompleteBD: {}", e.what());
@@ -218,21 +283,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorUnpersistInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391005;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorAsyncBD: {}", e.what());
@@ -242,21 +315,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 391006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 391006;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorCompleteBD: {}", e.what());
@@ -268,21 +349,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSharedSpatialAnchorDownloadInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 392001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 392001;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDownloadSharedSpatialAnchorAsyncBD: {}", e.what());
@@ -292,21 +381,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 392002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 392002;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDownloadSharedSpatialAnchorCompleteBD: {}", e.what());
@@ -316,21 +413,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
 
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorShareInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 392003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 392003;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpatialAnchorAsyncBD: {}", e.what());
@@ -340,21 +445,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
 
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 392004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 392004;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpatialAnchorCompleteBD: {}", e.what());
@@ -366,21 +479,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provider, const XrSceneCaptureInfoBD* info, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 393001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 393001;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCaptureSceneAsyncBD: {}", e.what());
@@ -390,21 +511,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 393002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 393002;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCaptureSceneCompleteBD: {}", e.what());
@@ -416,21 +545,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const XrAnchorSpaceCreateInfoBD* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateAnchorSpaceBD: {}", e.what());
@@ -440,21 +577,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, const XrSenseDataProviderCreateInfoBD* createInfo, XrSenseDataProviderBD* provider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(provider, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&provider, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(provider, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&provider, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSenseDataProviderBD: {}", e.what());
@@ -464,21 +609,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProviderBD provider, const XrSpatialEntityAnchorCreateInfoBD* createInfo, XrAnchorBD* anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&anchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390003;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(anchor, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&anchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialEntityAnchorBD: {}", e.what());
@@ -488,18 +641,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390004;
+        serialize(&function_id, s_ctx);
+        serialize(&anchor, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyAnchorBD: {}", e.what());
@@ -509,18 +670,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderBD provider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390005;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySenseDataProviderBD: {}", e.what());
@@ -530,18 +699,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotBD snapshot) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&snapshot, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390006;
+        serialize(&function_id, s_ctx);
+        serialize(&snapshot, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySenseDataSnapshotBD: {}", e.what());
@@ -551,24 +728,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpatialEntityComponentTypeBD* componentTypes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&snapshot, msg_out.buffer);
-    serialize(&entityId, msg_out.buffer);
-    serialize(&componentTypeCapacityInput, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, true);
-    deserialize_ptr(&componentTypes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390007;
+        serialize(&function_id, s_ctx);
+        serialize(&snapshot, s_ctx);
+        serialize(&entityId, s_ctx);
+        serialize(&componentTypeCapacityInput, s_ctx);
+        serialize_ptr(componentTypeCountOutput, 1, s_ctx);
+        serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&componentTypeCountOutput, d_ctx);
+        deserialize_ptr(&componentTypes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSpatialEntityComponentTypesBD: {}", e.what());
@@ -578,20 +763,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* uuid) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&uuid, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390008;
+        serialize(&function_id, s_ctx);
+        serialize(&anchor, s_ctx);
+        serialize_ptr(uuid, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&uuid, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAnchorUuidBD: {}", e.what());
@@ -601,22 +794,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD snapshot, XrQueriedSenseDataGetInfoBD* getInfo, XrQueriedSenseDataBD* queriedSenseData) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&snapshot, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(queriedSenseData, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&getInfo, msg_in.stream, true);
-    deserialize_ptr(&queriedSenseData, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390009;
+        serialize(&function_id, s_ctx);
+        serialize(&snapshot, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(queriedSenseData, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&getInfo, d_ctx);
+        deserialize_ptr(&queriedSenseData, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetQueriedSenseDataBD: {}", e.what());
@@ -626,20 +827,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProviderBD provider, XrSenseDataProviderStateBD* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390010;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSenseDataProviderStateBD: {}", e.what());
@@ -649,21 +858,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnapshotBD snapshot, const XrSpatialEntityComponentGetInfoBD* getInfo, XrSpatialEntityComponentDataBaseHeaderBD* componentData) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390011;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&snapshot, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_xr(componentData, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&componentData, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390011;
+        serialize(&function_id, s_ctx);
+        serialize(&snapshot, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_xr(componentData, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&componentData, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialEntityComponentDataBD: {}", e.what());
@@ -673,21 +890,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, XrUuidEXT* uuid) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390012;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&snapshot, msg_out.buffer);
-    serialize(&entityId, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&uuid, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390012;
+        serialize(&function_id, s_ctx);
+        serialize(&snapshot, s_ctx);
+        serialize(&entityId, s_ctx);
+        serialize_ptr(uuid, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&uuid, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialEntityUuidBD: {}", e.what());
@@ -697,21 +922,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataQueryInfoBD* queryInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390013;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(queryInfo, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390013;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(queryInfo, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySenseDataAsyncBD: {}", e.what());
@@ -721,21 +954,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSenseDataQueryCompletionBD* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390014;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390014;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySenseDataCompleteBD: {}", e.what());
@@ -745,21 +986,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataProviderStartInfoBD* startInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390015;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    serialize_ptr(startInfo, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390015;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        serialize_ptr(startInfo, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartSenseDataProviderAsyncBD: {}", e.what());
@@ -769,21 +1018,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession session, XrFutureEXT future, XrFutureCompletionEXT* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390016;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390016;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartSenseDataProviderCompleteBD: {}", e.what());
@@ -793,18 +1050,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD provider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 390017;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&provider, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 390017;
+        serialize(&function_id, s_ctx);
+        serialize(&provider, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopSenseDataProviderBD: {}", e.what());
@@ -816,21 +1081,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&interactionProfile, msg_out.buffer);
-    serialize(&topLevelPath, msg_out.buffer);
-    serialize(&isActive, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&interactionProfile, s_ctx);
+        serialize(&topLevelPath, s_ctx);
+        serialize(&isActive, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceActiveEXT: {}", e.what());
@@ -840,22 +1113,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelPath, msg_out.buffer);
-    serialize(&inputSourcePath, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize(&pose, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelPath, s_ctx);
+        serialize(&inputSourcePath, s_ctx);
+        serialize(&space, s_ctx);
+        serialize(&pose, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceLocationEXT: {}", e.what());
@@ -865,21 +1146,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelPath, msg_out.buffer);
-    serialize(&inputSourcePath, msg_out.buffer);
-    serialize(&state, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelPath, s_ctx);
+        serialize(&inputSourcePath, s_ctx);
+        serialize(&state, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateBoolEXT: {}", e.what());
@@ -889,21 +1178,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelPath, msg_out.buffer);
-    serialize(&inputSourcePath, msg_out.buffer);
-    serialize(&state, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelPath, s_ctx);
+        serialize(&inputSourcePath, s_ctx);
+        serialize(&state, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateFloatEXT: {}", e.what());
@@ -913,21 +1210,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelPath, msg_out.buffer);
-    serialize(&inputSourcePath, msg_out.buffer);
-    serialize(&state, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48005;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelPath, s_ctx);
+        serialize(&inputSourcePath, s_ctx);
+        serialize(&state, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateVector2fEXT: {}", e.what());
@@ -939,22 +1244,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instance, const XrDebugUtilsMessengerCreateInfoEXT* createInfo, XrDebugUtilsMessengerEXT* messenger) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(messenger, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&createInfo->userData, msg_in.stream, true);
-    deserialize_ptr(&messenger, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(messenger, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&createInfo->userData, d_ctx);
+        deserialize_ptr(&messenger, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateDebugUtilsMessengerEXT: {}", e.what());
@@ -964,18 +1277,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMessengerEXT messenger) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&messenger, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20002;
+        serialize(&function_id, s_ctx);
+        serialize(&messenger, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyDebugUtilsMessengerEXT: {}", e.what());
@@ -985,19 +1306,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(labelInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(labelInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionBeginDebugUtilsLabelRegionEXT: {}", e.what());
@@ -1007,18 +1336,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession session) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionEndDebugUtilsLabelRegionEXT: {}", e.what());
@@ -1028,19 +1365,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(labelInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20005;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(labelInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionInsertDebugUtilsLabelEXT: {}", e.what());
@@ -1050,19 +1395,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance, const XrDebugUtilsObjectNameInfoEXT* nameInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(nameInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20006;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(nameInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetDebugUtilsObjectNameEXT: {}", e.what());
@@ -1072,23 +1425,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance, XrDebugUtilsMessageSeverityFlagsEXT messageSeverity, XrDebugUtilsMessageTypeFlagsEXT messageTypes, const XrDebugUtilsMessengerCallbackDataEXT* callbackData) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&messageSeverity, msg_out.buffer);
-    serialize(&messageTypes, msg_out.buffer);
-    serialize_ptr(callbackData, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&callbackData->objects, msg_in.stream, true);
-    deserialize_ptr(&callbackData->sessionLabels, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20007;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&messageSeverity, s_ctx);
+        serialize(&messageTypes, s_ctx);
+        serialize_ptr(callbackData, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&callbackData->objects, d_ctx);
+        deserialize_ptr(&callbackData->sessionLabels, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSubmitDebugUtilsMessageEXT: {}", e.what());
@@ -1100,19 +1461,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFutureCancelInfoEXT* cancelInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 470001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(cancelInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 470001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(cancelInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCancelFutureEXT: {}", e.what());
@@ -1122,21 +1491,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFuturePollInfoEXT* pollInfo, XrFuturePollResultEXT* pollResult) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 470002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(pollInfo, 1, msg_out.buffer);
-    serialize_ptr(pollResult, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&pollResult, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 470002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(pollInfo, 1, s_ctx);
+        serialize_ptr(pollResult, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&pollResult, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPollFutureEXT: {}", e.what());
@@ -1148,21 +1525,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const XrHandTrackerCreateInfoEXT* createInfo, XrHandTrackerEXT* handTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 52001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(handTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&handTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 52001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(handTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&handTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateHandTrackerEXT: {}", e.what());
@@ -1172,18 +1557,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 52002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 52002;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyHandTrackerEXT: {}", e.what());
@@ -1193,21 +1586,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracker, const XrHandJointsLocateInfoEXT* locateInfo, XrHandJointLocationsEXT* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 52003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 52003;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateHandJointsEXT: {}", e.what());
@@ -1219,20 +1620,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsLevelEXT level) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 16001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&domain, msg_out.buffer);
-    serialize(&level, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 16001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&domain, s_ctx);
+        serialize(&level, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPerfSettingsSetPerformanceLevelEXT: {}", e.what());
@@ -1244,19 +1653,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorBeginInfoEXT* beginInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&planeDetector, msg_out.buffer);
-    serialize_ptr(beginInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430001;
+        serialize(&function_id, s_ctx);
+        serialize(&planeDetector, s_ctx);
+        serialize_ptr(beginInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginPlaneDetectionEXT: {}", e.what());
@@ -1266,21 +1683,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const XrPlaneDetectorCreateInfoEXT* createInfo, XrPlaneDetectorEXT* planeDetector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(planeDetector, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&planeDetector, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(planeDetector, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&planeDetector, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePlaneDetectorEXT: {}", e.what());
@@ -1290,18 +1715,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT planeDetector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&planeDetector, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430003;
+        serialize(&function_id, s_ctx);
+        serialize(&planeDetector, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPlaneDetectorEXT: {}", e.what());
@@ -1311,20 +1744,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT planeDetector, XrPlaneDetectionStateEXT* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&planeDetector, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430004;
+        serialize(&function_id, s_ctx);
+        serialize(&planeDetector, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlaneDetectionStateEXT: {}", e.what());
@@ -1334,21 +1775,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorGetInfoEXT* info, XrPlaneDetectorLocationsEXT* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&planeDetector, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430005;
+        serialize(&function_id, s_ctx);
+        serialize(&planeDetector, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlaneDetectionsEXT: {}", e.what());
@@ -1358,22 +1807,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT planeDetector, uint64_t planeId, uint32_t polygonBufferIndex, XrPlaneDetectorPolygonBufferEXT* polygonBuffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 430006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&planeDetector, msg_out.buffer);
-    serialize(&planeId, msg_out.buffer);
-    serialize(&polygonBufferIndex, msg_out.buffer);
-    serialize_ptr(polygonBuffer, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&polygonBuffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 430006;
+        serialize(&function_id, s_ctx);
+        serialize(&planeDetector, s_ctx);
+        serialize(&planeId, s_ctx);
+        serialize(&polygonBufferIndex, s_ctx);
+        serialize_ptr(polygonBuffer, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&polygonBuffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlanePolygonBufferEXT: {}", e.what());
@@ -1385,25 +1842,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
 XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsNotificationLevelEXT* notificationLevel, float* tempHeadroom, float* tempSlope) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 17001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&domain, msg_out.buffer);
-    serialize_ptr(notificationLevel, 1, msg_out.buffer);
-    serialize_ptr(tempHeadroom, 1, msg_out.buffer);
-    serialize_ptr(tempSlope, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&notificationLevel, msg_in.stream, true);
-    deserialize_ptr(&tempHeadroom, msg_in.stream, true);
-    deserialize_ptr(&tempSlope, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 17001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&domain, s_ctx);
+        serialize_ptr(notificationLevel, 1, s_ctx);
+        serialize_ptr(tempHeadroom, 1, s_ctx);
+        serialize_ptr(tempSlope, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&notificationLevel, d_ctx);
+        deserialize_ptr(&tempHeadroom, d_ctx);
+        deserialize_ptr(&tempSlope, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrThermalGetTemperatureTrendEXT: {}", e.what());
@@ -1415,21 +1880,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const XrBodyTrackerCreateInfoFB* createInfo, XrBodyTrackerFB* bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 77001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bodyTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 77001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(bodyTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bodyTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerFB: {}", e.what());
@@ -1439,18 +1912,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 77002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 77002;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerFB: {}", e.what());
@@ -1460,20 +1941,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, XrBodySkeletonFB* skeleton) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 77003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&skeleton, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 77003;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        serialize_ptr(skeleton, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&skeleton, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetBodySkeletonFB: {}", e.what());
@@ -1483,21 +1972,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker, const XrBodyJointsLocateInfoFB* locateInfo, XrBodyJointLocationsFB* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 77004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 77004;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsFB: {}", e.what());
@@ -1509,23 +2006,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint32_t colorSpaceCapacityInput, uint32_t* colorSpaceCountOutput, XrColorSpaceFB* colorSpaces) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 109001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&colorSpaceCapacityInput, msg_out.buffer);
-    serialize_ptr(colorSpaceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(colorSpaces, colorSpaceCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&colorSpaceCountOutput, msg_in.stream, true);
-    deserialize_ptr(&colorSpaces, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 109001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&colorSpaceCapacityInput, s_ctx);
+        serialize_ptr(colorSpaceCountOutput, 1, s_ctx);
+        serialize_ptr(colorSpaces, colorSpaceCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&colorSpaceCountOutput, d_ctx);
+        deserialize_ptr(&colorSpaces, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateColorSpacesFB: {}", e.what());
@@ -1535,19 +2040,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColorSpaceFB colorSpace) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 109002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&colorSpace, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 109002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&colorSpace, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetColorSpaceFB: {}", e.what());
@@ -1559,23 +2072,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession session, uint32_t displayRefreshRateCapacityInput, uint32_t* displayRefreshRateCountOutput, float* displayRefreshRates) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 102001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&displayRefreshRateCapacityInput, msg_out.buffer);
-    serialize_ptr(displayRefreshRateCountOutput, 1, msg_out.buffer);
-    serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&displayRefreshRateCountOutput, msg_in.stream, true);
-    deserialize_ptr(&displayRefreshRates, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 102001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&displayRefreshRateCapacityInput, s_ctx);
+        serialize_ptr(displayRefreshRateCountOutput, 1, s_ctx);
+        serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&displayRefreshRateCountOutput, d_ctx);
+        deserialize_ptr(&displayRefreshRates, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateDisplayRefreshRatesFB: {}", e.what());
@@ -1585,20 +2106,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, float* displayRefreshRate) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 102002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(displayRefreshRate, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&displayRefreshRate, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 102002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(displayRefreshRate, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&displayRefreshRate, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetDisplayRefreshRateFB: {}", e.what());
@@ -1608,19 +2137,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, float displayRefreshRate) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 102003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&displayRefreshRate, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 102003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&displayRefreshRate, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestDisplayRefreshRateFB: {}", e.what());
@@ -1632,21 +2169,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrEyeTrackerCreateInfoFB* createInfo, XrEyeTrackerFB* eyeTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 203001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(eyeTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&eyeTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 203001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(eyeTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&eyeTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEyeTrackerFB: {}", e.what());
@@ -1656,18 +2201,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 203002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&eyeTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 203002;
+        serialize(&function_id, s_ctx);
+        serialize(&eyeTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEyeTrackerFB: {}", e.what());
@@ -1677,21 +2230,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const XrEyeGazesInfoFB* gazeInfo, XrEyeGazesFB* eyeGazes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 203003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&eyeTracker, msg_out.buffer);
-    serialize_ptr(gazeInfo, 1, msg_out.buffer);
-    serialize_ptr(eyeGazes, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&eyeGazes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 203003;
+        serialize(&function_id, s_ctx);
+        serialize(&eyeTracker, s_ctx);
+        serialize_ptr(gazeInfo, 1, s_ctx);
+        serialize_ptr(eyeGazes, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&eyeGazes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetEyeGazesFB: {}", e.what());
@@ -1703,21 +2264,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const XrFaceTrackerCreateInfoFB* createInfo, XrFaceTrackerFB* faceTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 202001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&faceTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 202001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(faceTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&faceTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFaceTrackerFB: {}", e.what());
@@ -1727,18 +2296,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 202002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&faceTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 202002;
+        serialize(&function_id, s_ctx);
+        serialize(&faceTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFaceTrackerFB: {}", e.what());
@@ -1748,21 +2325,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB faceTracker, const XrFaceExpressionInfoFB* expressionInfo, XrFaceExpressionWeightsFB* expressionWeights) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 202003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&faceTracker, msg_out.buffer);
-    serialize_ptr(expressionInfo, 1, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&expressionWeights, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 202003;
+        serialize(&function_id, s_ctx);
+        serialize(&faceTracker, s_ctx);
+        serialize_ptr(expressionInfo, 1, s_ctx);
+        serialize_ptr(expressionWeights, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&expressionWeights, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFaceExpressionWeightsFB: {}", e.what());
@@ -1774,22 +2359,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const XrFaceTrackerCreateInfo2FB* createInfo, XrFaceTracker2FB* faceTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 288001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(faceTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&createInfo->requestedDataSources, msg_in.stream, true);
-    deserialize_ptr(&faceTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 288001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(faceTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&createInfo->requestedDataSources, d_ctx);
+        deserialize_ptr(&faceTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFaceTracker2FB: {}", e.what());
@@ -1799,18 +2392,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 288002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&faceTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 288002;
+        serialize(&function_id, s_ctx);
+        serialize(&faceTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFaceTracker2FB: {}", e.what());
@@ -1820,21 +2421,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB faceTracker, const XrFaceExpressionInfo2FB* expressionInfo, XrFaceExpressionWeights2FB* expressionWeights) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 288003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&faceTracker, msg_out.buffer);
-    serialize_ptr(expressionInfo, 1, msg_out.buffer);
-    serialize_ptr(expressionWeights, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&expressionWeights, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 288003;
+        serialize(&function_id, s_ctx);
+        serialize(&faceTracker, s_ctx);
+        serialize_ptr(expressionInfo, 1, s_ctx);
+        serialize_ptr(expressionWeights, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&expressionWeights, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFaceExpressionWeights2FB: {}", e.what());
@@ -1846,22 +2455,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, const XrFoveationProfileCreateInfoFB* createInfo, XrFoveationProfileFB* profile) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 115001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(profile, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&createInfo->next, msg_in.stream, true);
-    deserialize_ptr(&profile, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 115001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(profile, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&createInfo->next, d_ctx);
+        deserialize_ptr(&profile, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFoveationProfileFB: {}", e.what());
@@ -1871,18 +2488,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB profile) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 115002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&profile, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 115002;
+        serialize(&function_id, s_ctx);
+        serialize(&profile, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFoveationProfileFB: {}", e.what());
@@ -1894,20 +2519,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrHandTrackingMeshFB* mesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 111001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    serialize_ptr(mesh, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&mesh, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 111001;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        serialize_ptr(mesh, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&mesh, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetHandMeshFB: {}", e.what());
@@ -1919,21 +2552,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const XrHapticActionInfo* hapticActionInfo, XrDevicePcmSampleRateGetInfoFB* deviceSampleRate) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 210001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
-    serialize_ptr(deviceSampleRate, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&deviceSampleRate, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 210001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(hapticActionInfo, 1, s_ctx);
+        serialize_ptr(deviceSampleRate, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&deviceSampleRate, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetDeviceSampleRateFB: {}", e.what());
@@ -1945,22 +2586,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const XrKeyboardSpaceCreateInfoFB* createInfo, XrSpace* keyboardSpace) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 117001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&createInfo->next, msg_in.stream, true);
-    deserialize_ptr(&keyboardSpace, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 117001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(keyboardSpace, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&createInfo->next, d_ctx);
+        deserialize_ptr(&keyboardSpace, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateKeyboardSpaceFB: {}", e.what());
@@ -1970,22 +2619,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session, const XrKeyboardTrackingQueryFB* queryInfo, XrKeyboardTrackingDescriptionFB* keyboard) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 117002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(queryInfo, 1, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&queryInfo->next, msg_in.stream, true);
-    deserialize_ptr(&keyboard, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 117002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(queryInfo, 1, s_ctx);
+        serialize_ptr(keyboard, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&queryInfo->next, d_ctx);
+        deserialize_ptr(&keyboard, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySystemTrackedKeyboardFB: {}", e.what());
@@ -1997,21 +2654,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, const XrGeometryInstanceCreateInfoFB* createInfo, XrGeometryInstanceFB* outGeometryInstance) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(outGeometryInstance, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outGeometryInstance, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(outGeometryInstance, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outGeometryInstance, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateGeometryInstanceFB: {}", e.what());
@@ -2021,21 +2686,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const XrPassthroughCreateInfoFB* createInfo, XrPassthroughFB* outPassthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(outPassthrough, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outPassthrough, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(outPassthrough, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outPassthrough, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughFB: {}", e.what());
@@ -2045,21 +2718,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, const XrPassthroughLayerCreateInfoFB* createInfo, XrPassthroughLayerFB* outLayer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(outLayer, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outLayer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(outLayer, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outLayer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughLayerFB: {}", e.what());
@@ -2069,18 +2750,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119004;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyGeometryInstanceFB: {}", e.what());
@@ -2090,18 +2779,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&passthrough, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119005;
+        serialize(&function_id, s_ctx);
+        serialize(&passthrough, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughFB: {}", e.what());
@@ -2111,18 +2808,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB layer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&layer, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119006;
+        serialize(&function_id, s_ctx);
+        serialize(&layer, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughLayerFB: {}", e.what());
@@ -2132,19 +2837,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, const XrGeometryInstanceTransformFB* transformation) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(transformation, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119007;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(transformation, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGeometryInstanceSetTransformFB: {}", e.what());
@@ -2154,18 +2867,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB layer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&layer, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119008;
+        serialize(&function_id, s_ctx);
+        serialize(&layer, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerPauseFB: {}", e.what());
@@ -2175,18 +2896,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB layer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&layer, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119009;
+        serialize(&function_id, s_ctx);
+        serialize(&layer, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerResumeFB: {}", e.what());
@@ -2196,19 +2925,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB layer, const XrPassthroughStyleFB* style) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&layer, msg_out.buffer);
-    serialize_ptr(style, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119010;
+        serialize(&function_id, s_ctx);
+        serialize(&layer, s_ctx);
+        serialize_ptr(style, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerSetStyleFB: {}", e.what());
@@ -2218,18 +2955,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119011;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&passthrough, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119011;
+        serialize(&function_id, s_ctx);
+        serialize(&passthrough, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughPauseFB: {}", e.what());
@@ -2239,18 +2984,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 119012;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&passthrough, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 119012;
+        serialize(&function_id, s_ctx);
+        serialize(&passthrough, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughStartFB: {}", e.what());
@@ -2262,19 +3015,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrPassthroughLayerFB layer, const XrPassthroughKeyboardHandsIntensityFB* intensity) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 204001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&layer, msg_out.buffer);
-    serialize_ptr(intensity, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 204001;
+        serialize(&function_id, s_ctx);
+        serialize(&layer, s_ctx);
+        serialize_ptr(intensity, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerSetKeyboardHandsIntensityFB: {}", e.what());
@@ -2286,23 +3047,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrRenderModelPathInfoFB* paths) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 120001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&pathCapacityInput, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&pathCountOutput, msg_in.stream, true);
-    deserialize_ptr(&paths, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 120001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&pathCapacityInput, s_ctx);
+        serialize_ptr(pathCountOutput, 1, s_ctx);
+        serialize_ptr(paths, pathCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&pathCountOutput, d_ctx);
+        deserialize_ptr(&paths, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateRenderModelPathsFB: {}", e.what());
@@ -2312,21 +3081,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, XrPath path, XrRenderModelPropertiesFB* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 120002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&path, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 120002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&path, s_ctx);
+        serialize_ptr(properties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetRenderModelPropertiesFB: {}", e.what());
@@ -2336,22 +3113,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRenderModelLoadInfoFB* info, XrRenderModelBufferFB* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 120003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&info->next, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 120003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(buffer, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&info->next, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLoadRenderModelFB: {}", e.what());
@@ -2363,21 +3148,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace space, XrBoundary2DFB* boundary2DOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 176001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(boundary2DOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&boundary2DOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 176001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(boundary2DOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&boundary2DOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundary2DFB: {}", e.what());
@@ -2387,21 +3180,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSpace space, XrRect2Df* boundingBox2DOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 176002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(boundingBox2DOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&boundingBox2DOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 176002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(boundingBox2DOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&boundingBox2DOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundingBox2DFB: {}", e.what());
@@ -2411,21 +3212,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSpace space, XrRect3DfFB* boundingBox3DOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 176003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(boundingBox3DOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&boundingBox3DOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 176003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(boundingBox3DOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&boundingBox3DOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundingBox3DFB: {}", e.what());
@@ -2435,21 +3244,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace space, XrRoomLayoutFB* roomLayoutOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 176004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(roomLayoutOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&roomLayoutOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 176004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(roomLayoutOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&roomLayoutOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceRoomLayoutFB: {}", e.what());
@@ -2459,21 +3276,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrSpace space, XrSemanticLabelsFB* semanticLabelsOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 176005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(semanticLabelsOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&semanticLabelsOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 176005;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(semanticLabelsOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&semanticLabelsOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceSemanticLabelsFB: {}", e.what());
@@ -2485,21 +3310,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const XrSceneCaptureRequestInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 199001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 199001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestSceneCaptureFB: {}", e.what());
@@ -2511,21 +3344,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const XrSpatialAnchorCreateInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 114001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 114001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFB: {}", e.what());
@@ -2535,23 +3376,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace space, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpaceComponentTypeFB* componentTypes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 114002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize(&componentTypeCapacityInput, msg_out.buffer);
-    serialize_ptr(componentTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(componentTypes, componentTypeCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&componentTypeCountOutput, msg_in.stream, true);
-    deserialize_ptr(&componentTypes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 114002;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize(&componentTypeCapacityInput, s_ctx);
+        serialize_ptr(componentTypeCountOutput, 1, s_ctx);
+        serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&componentTypeCountOutput, d_ctx);
+        deserialize_ptr(&componentTypes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSpaceSupportedComponentsFB: {}", e.what());
@@ -2561,21 +3410,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpaceComponentTypeFB componentType, XrSpaceComponentStatusFB* status) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 114003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize(&componentType, msg_out.buffer);
-    serialize_ptr(status, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&status, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 114003;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize(&componentType, s_ctx);
+        serialize_ptr(status, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&status, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceComponentStatusFB: {}", e.what());
@@ -2585,20 +3442,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 114004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(uuid, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&uuid, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 114004;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(uuid, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&uuid, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceUuidFB: {}", e.what());
@@ -2608,21 +3473,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const XrSpaceComponentStatusSetInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 114005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 114005;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetSpaceComponentStatusFB: {}", e.what());
@@ -2634,21 +3507,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace space, XrSpaceContainerFB* spaceContainerOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 200001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(spaceContainerOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spaceContainerOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 200001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(spaceContainerOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spaceContainerOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceContainerFB: {}", e.what());
@@ -2660,21 +3541,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQueryInfoBaseHeaderFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 157001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_xr(info, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 157001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_xr(info, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpacesFB: {}", e.what());
@@ -2684,21 +3573,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, XrAsyncRequestIdFB requestId, XrSpaceQueryResultsFB* results) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 157002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&requestId, msg_out.buffer);
-    serialize_ptr(results, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&results, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 157002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&requestId, s_ctx);
+        serialize_ptr(results, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&results, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRetrieveSpaceQueryResultsFB: {}", e.what());
@@ -2710,23 +3607,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceShareInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 170001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&info->spaces, msg_in.stream, true);
-    deserialize_ptr(&info->users, msg_in.stream, true);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 170001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&info->spaces, d_ctx);
+        deserialize_ptr(&info->users, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpacesFB: {}", e.what());
@@ -2738,21 +3643,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEraseInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 159001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 159001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEraseSpaceFB: {}", e.what());
@@ -2762,21 +3675,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 159002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 159002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSaveSpaceFB: {}", e.what());
@@ -2788,22 +3709,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpaceListSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 239001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&info->spaces, msg_in.stream, true);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 239001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&info->spaces, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSaveSpaceListFB: {}", e.what());
@@ -2815,21 +3744,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSpaceUserCreateInfoFB* info, XrSpaceUserFB* user) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 242001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(user, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&user, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 242001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(user, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&user, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpaceUserFB: {}", e.what());
@@ -2839,18 +3776,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 242002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&user, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 242002;
+        serialize(&function_id, s_ctx);
+        serialize(&user, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpaceUserFB: {}", e.what());
@@ -2860,20 +3805,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUserIdFB* userId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 242003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&user, msg_out.buffer);
-    serialize_ptr(userId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&userId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 242003;
+        serialize(&function_id, s_ctx);
+        serialize(&user, s_ctx);
+        serialize_ptr(userId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&userId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceUserIdFB: {}", e.what());
@@ -2885,20 +3838,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSwapchainStateBaseHeaderFB* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 72001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_xr(state, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 72001;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_xr(state, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSwapchainStateFB: {}", e.what());
@@ -2908,19 +3869,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const XrSwapchainStateBaseHeaderFB* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 72002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_xr(state, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 72002;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_xr(state, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSwapchainFB: {}", e.what());
@@ -2932,21 +3901,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const XrTriangleMeshCreateInfoFB* createInfo, XrTriangleMeshFB* outTriangleMesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(outTriangleMesh, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outTriangleMesh, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(outTriangleMesh, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outTriangleMesh, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateTriangleMeshFB: {}", e.what());
@@ -2956,18 +3933,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118002;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyTriangleMeshFB: {}", e.what());
@@ -2977,18 +3962,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118003;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshBeginUpdateFB: {}", e.what());
@@ -2998,20 +3991,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangleMeshFB mesh, uint32_t* outVertexCount) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    serialize_ptr(outVertexCount, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outVertexCount, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118004;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        serialize_ptr(outVertexCount, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outVertexCount, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshBeginVertexBufferUpdateFB: {}", e.what());
@@ -3021,20 +4022,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, uint32_t vertexCount, uint32_t triangleCount) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    serialize(&vertexCount, msg_out.buffer);
-    serialize(&triangleCount, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118005;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        serialize(&vertexCount, s_ctx);
+        serialize(&triangleCount, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshEndUpdateFB: {}", e.what());
@@ -3044,18 +4053,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleMeshFB mesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118006;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshEndVertexBufferUpdateFB: {}", e.what());
@@ -3065,20 +4082,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB mesh, uint32_t** outIndexBuffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outIndexBuffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118007;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outIndexBuffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshGetIndexBufferFB: {}", e.what());
@@ -3088,20 +4113,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB mesh, XrVector3f** outVertexBuffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 118008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&mesh, msg_out.buffer);
-    #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&outVertexBuffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 118008;
+        serialize(&function_id, s_ctx);
+        serialize(&mesh, s_ctx);
+        #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&outVertexBuffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshGetVertexBufferFB: {}", e.what());
@@ -3113,23 +4146,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instance, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrViveTrackerPathsHTCX* paths) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 104001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&pathCapacityInput, msg_out.buffer);
-    serialize_ptr(pathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(paths, pathCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&pathCountOutput, msg_in.stream, true);
-    deserialize_ptr(&paths, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 104001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&pathCapacityInput, s_ctx);
+        serialize_ptr(pathCountOutput, 1, s_ctx);
+        serialize_ptr(paths, pathCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&pathCountOutput, d_ctx);
+        deserialize_ptr(&paths, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViveTrackerPathsHTCX: {}", e.what());
@@ -3141,21 +4182,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const XrSpatialAnchorCreateInfoHTC* createInfo, XrSpace* anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 320001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&anchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 320001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(anchor, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&anchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorHTC: {}", e.what());
@@ -3165,20 +4214,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpatialAnchorNameHTC* name) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 320002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    serialize_ptr(name, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&name, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 320002;
+        serialize(&function_id, s_ctx);
+        serialize(&anchor, s_ctx);
+        serialize_ptr(name, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&name, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialAnchorNameHTC: {}", e.what());
@@ -3190,21 +4247,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const XrBodyTrackerCreateInfoHTC* createInfo, XrBodyTrackerHTC* bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 321001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(bodyTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bodyTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 321001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(bodyTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bodyTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerHTC: {}", e.what());
@@ -3214,18 +4279,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 321002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 321002;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerHTC: {}", e.what());
@@ -3235,22 +4308,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker, XrSpace baseSpace, uint32_t skeletonGenerationId, XrBodySkeletonHTC* skeleton) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 321003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    serialize(&baseSpace, msg_out.buffer);
-    serialize(&skeletonGenerationId, msg_out.buffer);
-    serialize_ptr(skeleton, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&skeleton, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 321003;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        serialize(&baseSpace, s_ctx);
+        serialize(&skeletonGenerationId, s_ctx);
+        serialize_ptr(skeleton, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&skeleton, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetBodySkeletonHTC: {}", e.what());
@@ -3260,21 +4341,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracker, const XrBodyJointsLocateInfoHTC* locateInfo, XrBodyJointLocationsHTC* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 321004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&bodyTracker, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 321004;
+        serialize(&function_id, s_ctx);
+        serialize(&bodyTracker, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsHTC: {}", e.what());
@@ -3286,21 +4375,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const XrFacialTrackerCreateInfoHTC* createInfo, XrFacialTrackerHTC* facialTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 105001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(facialTracker, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&facialTracker, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 105001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(facialTracker, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&facialTracker, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFacialTrackerHTC: {}", e.what());
@@ -3310,18 +4407,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC facialTracker) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 105002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&facialTracker, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 105002;
+        serialize(&function_id, s_ctx);
+        serialize(&facialTracker, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFacialTrackerHTC: {}", e.what());
@@ -3331,20 +4436,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC facialTracker, XrFacialExpressionsHTC* facialExpressions) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 105003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&facialTracker, msg_out.buffer);
-    serialize_ptr(facialExpressions, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&facialExpressions, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 105003;
+        serialize(&function_id, s_ctx);
+        serialize(&facialTracker, s_ctx);
+        serialize_ptr(facialExpressions, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&facialExpressions, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFacialExpressionsHTC: {}", e.what());
@@ -3356,20 +4469,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFoveationApplyInfoHTC* applyInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 319001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(applyInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&applyInfo->subImages, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 319001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(applyInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&applyInfo->subImages, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyFoveationHTC: {}", e.what());
@@ -3381,21 +4502,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const XrPassthroughCreateInfoHTC* createInfo, XrPassthroughHTC* passthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 318001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(passthrough, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&passthrough, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 318001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(passthrough, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&passthrough, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughHTC: {}", e.what());
@@ -3405,18 +4534,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthrough) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 318002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&passthrough, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 318002;
+        serialize(&function_id, s_ctx);
+        serialize(&passthrough, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughHTC: {}", e.what());
@@ -3428,21 +4565,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D11KHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 28001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 28001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetD3D11GraphicsRequirementsKHR: {}", e.what());
@@ -3454,21 +4599,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D12KHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 29001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 29001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetD3D12GraphicsRequirementsKHR: {}", e.what());
@@ -3480,23 +4633,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession session, const XrSwapchainCreateInfo* info, XrSwapchain* swapchain, jobject* surface) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 5001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    serialize_ptr(surface, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&swapchain, msg_in.stream, true);
-    deserialize_ptr(&surface, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 5001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(swapchain, 1, s_ctx);
+        serialize_ptr(surface, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&swapchain, d_ctx);
+        deserialize_ptr(&surface, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSwapchainAndroidSurfaceKHR: {}", e.what());
@@ -3508,20 +4669,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession session, XrAndroidThreadTypeKHR threadType, uint32_t threadId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 4001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&threadType, msg_out.buffer);
-    serialize(&threadId, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 4001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&threadType, s_ctx);
+        serialize(&threadId, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetAndroidApplicationThreadKHR: {}", e.what());
@@ -3533,21 +4702,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instance, XrTime time, struct timespec* timespecTime) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 37001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&time, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&timespecTime, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 37001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_time(&time, s_ctx);
+        serialize_ptr(timespecTime, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&timespecTime, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimeToTimespecTimeKHR: {}", e.what());
@@ -3557,22 +4734,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instance, const struct timespec* timespecTime, XrTime* time) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 37002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(timespecTime, 1, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&timespecTime, msg_in.stream, true);
-    deserialize_ptr(&time, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 37002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(timespecTime, 1, s_ctx);
+        serialize_ptr(time, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&timespecTime, d_ctx);
+        deserialize_ptr(&time, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimespecTimeToTimeKHR: {}", e.what());
@@ -3584,21 +4769,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 149001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&value, msg_out.buffer);
-    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 149001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&value, s_ctx);
+        serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStructureTypeToString2KHR: {}", e.what());
@@ -3610,18 +4803,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 89001;
-    serialize(&function_id, msg_out.buffer);
-    serialize_xr(loaderInitInfo, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 89001;
+        serialize(&function_id, s_ctx);
+        serialize_xr(loaderInitInfo, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrInitializeLoaderKHR: {}", e.what());
@@ -3633,21 +4834,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsMetalKHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 30001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 30001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMetalGraphicsRequirementsKHR: {}", e.what());
@@ -3659,21 +4868,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLKHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 24001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 24001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetOpenGLGraphicsRequirementsKHR: {}", e.what());
@@ -3685,21 +4902,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 25001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 25001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetOpenGLESGraphicsRequirementsKHR: {}", e.what());
@@ -3711,23 +4936,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewConfigurationType viewConfigurationType, uint32_t viewIndex, XrVisibilityMaskTypeKHR visibilityMaskType, XrVisibilityMaskKHR* visibilityMask) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 32001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&viewConfigurationType, msg_out.buffer);
-    serialize(&viewIndex, msg_out.buffer);
-    serialize(&visibilityMaskType, msg_out.buffer);
-    serialize_ptr(visibilityMask, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&visibilityMask, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 32001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&viewConfigurationType, s_ctx);
+        serialize(&viewIndex, s_ctx);
+        serialize(&visibilityMaskType, s_ctx);
+        serialize_ptr(visibilityMask, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&visibilityMask, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVisibilityMaskKHR: {}", e.what());
@@ -3739,24 +4972,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 26001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 26001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanDeviceExtensionsKHR: {}", e.what());
@@ -3766,22 +5007,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance, XrSystemId systemId, VkInstance vkInstance, VkPhysicalDevice* vkPhysicalDevice) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 26002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&vkInstance, msg_out.buffer);
-    serialize_ptr(vkPhysicalDevice, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&vkPhysicalDevice, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 26002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&vkInstance, s_ctx);
+        serialize_ptr(vkPhysicalDevice, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&vkPhysicalDevice, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsDeviceKHR: {}", e.what());
@@ -3791,21 +5040,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsVulkanKHR* graphicsRequirements) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 26003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(graphicsRequirements, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&graphicsRequirements, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 26003;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(graphicsRequirements, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&graphicsRequirements, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsRequirementsKHR: {}", e.what());
@@ -3815,24 +5072,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 26004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 26004;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanInstanceExtensionsKHR: {}", e.what());
@@ -3844,23 +5109,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, const XrVulkanDeviceCreateInfoKHR* createInfo, VkDevice* vulkanDevice, VkResult* vulkanResult) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 91001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(vulkanDevice, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&vulkanDevice, msg_in.stream, true);
-    deserialize_ptr(&vulkanResult, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 91001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(vulkanDevice, 1, s_ctx);
+        serialize_ptr(vulkanResult, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&vulkanDevice, d_ctx);
+        deserialize_ptr(&vulkanResult, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVulkanDeviceKHR: {}", e.what());
@@ -3870,23 +5143,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, const XrVulkanInstanceCreateInfoKHR* createInfo, VkInstance* vulkanInstance, VkResult* vulkanResult) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 91002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(vulkanInstance, 1, msg_out.buffer);
-    serialize_ptr(vulkanResult, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&vulkanInstance, msg_in.stream, true);
-    deserialize_ptr(&vulkanResult, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 91002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(vulkanInstance, 1, s_ctx);
+        serialize_ptr(vulkanResult, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&vulkanInstance, d_ctx);
+        deserialize_ptr(&vulkanResult, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVulkanInstanceKHR: {}", e.what());
@@ -3896,21 +5177,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance, const XrVulkanGraphicsDeviceGetInfoKHR* getInfo, VkPhysicalDevice* vulkanPhysicalDevice) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 91003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(vulkanPhysicalDevice, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&vulkanPhysicalDevice, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 91003;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(vulkanPhysicalDevice, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&vulkanPhysicalDevice, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsDevice2KHR: {}", e.what());
@@ -3922,21 +5211,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, XrTime time, LARGE_INTEGER* performanceCounter) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 36001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&time, msg_out.buffer);
-    serialize_ptr(performanceCounter, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&performanceCounter, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 36001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_time(&time, s_ctx);
+        serialize_ptr(performanceCounter, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&performanceCounter, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimeToWin32PerformanceCounterKHR: {}", e.what());
@@ -3946,21 +5243,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
 
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, const LARGE_INTEGER* performanceCounter, XrTime* time) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 36002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(performanceCounter, 1, msg_out.buffer);
-    serialize_ptr(time, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&time, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 36002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(performanceCounter, 1, s_ctx);
+        serialize_ptr(time, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&time, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertWin32PerformanceCounterToTimeKHR: {}", e.what());
@@ -3972,22 +5277,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStartInfoMETA* info, XrAsyncRequestIdFB* advertisementRequestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 572001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(advertisementRequestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&info->buffer, msg_in.stream, true);
-    deserialize_ptr(&advertisementRequestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 572001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(advertisementRequestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&info->buffer, d_ctx);
+        deserialize_ptr(&advertisementRequestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartColocationAdvertisementMETA: {}", e.what());
@@ -3997,21 +5310,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStartInfoMETA* info, XrAsyncRequestIdFB* discoveryRequestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 572002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(discoveryRequestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&discoveryRequestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 572002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(discoveryRequestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&discoveryRequestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartColocationDiscoveryMETA: {}", e.what());
@@ -4021,21 +5342,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 572003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 572003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopColocationAdvertisementMETA: {}", e.what());
@@ -4045,21 +5374,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 572004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 572004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopColocationDiscoveryMETA: {}", e.what());
@@ -4071,21 +5408,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo, XrEnvironmentDepthImageMETA* environmentDepthImage) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    serialize_ptr(acquireInfo, 1, msg_out.buffer);
-    serialize_ptr(environmentDepthImage, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&environmentDepthImage, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292001;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        serialize_ptr(acquireInfo, 1, s_ctx);
+        serialize_ptr(environmentDepthImage, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&environmentDepthImage, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAcquireEnvironmentDepthImageMETA: {}", e.what());
@@ -4095,21 +5440,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession session, const XrEnvironmentDepthProviderCreateInfoMETA* createInfo, XrEnvironmentDepthProviderMETA* environmentDepthProvider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(environmentDepthProvider, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&environmentDepthProvider, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(environmentDepthProvider, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&environmentDepthProvider, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEnvironmentDepthProviderMETA: {}", e.what());
@@ -4119,21 +5472,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo, XrEnvironmentDepthSwapchainMETA* swapchain) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&swapchain, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292003;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(swapchain, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&swapchain, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEnvironmentDepthSwapchainMETA: {}", e.what());
@@ -4143,18 +5504,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292004;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEnvironmentDepthProviderMETA: {}", e.what());
@@ -4164,18 +5533,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironmentDepthSwapchainMETA swapchain) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292005;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEnvironmentDepthSwapchainMETA: {}", e.what());
@@ -4185,23 +5562,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize(&imageCapacityInput, msg_out.buffer);
-    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
-    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&imageCountOutput, msg_in.stream, true);
-    deserialize_xr_array(&images, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292006;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize(&imageCapacityInput, s_ctx);
+        serialize_ptr(imageCountOutput, 1, s_ctx);
+        serialize_xr_array(images, imageCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&imageCountOutput, d_ctx);
+        deserialize_xr_array(&images, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateEnvironmentDepthSwapchainImagesMETA: {}", e.what());
@@ -4211,20 +5596,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnvironmentDepthSwapchainMETA swapchain, XrEnvironmentDepthSwapchainStateMETA* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292007;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetEnvironmentDepthSwapchainStateMETA: {}", e.what());
@@ -4234,19 +5627,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    serialize_ptr(setInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292008;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        serialize_ptr(setInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetEnvironmentDepthHandRemovalMETA: {}", e.what());
@@ -4256,18 +5657,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292009;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartEnvironmentDepthProviderMETA: {}", e.what());
@@ -4277,18 +5686,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 292010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&environmentDepthProvider, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 292010;
+        serialize(&function_id, s_ctx);
+        serialize(&environmentDepthProvider, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopEnvironmentDepthProviderMETA: {}", e.what());
@@ -4300,20 +5717,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession session, XrFoveationEyeTrackedStateMETA* foveationState) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 201001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(foveationState, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&foveationState, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 201001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(foveationState, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&foveationState, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFoveationEyeTrackedStateMETA: {}", e.what());
@@ -4325,21 +5750,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB passthrough, const XrPassthroughColorLutCreateInfoMETA* createInfo, XrPassthroughColorLutMETA* colorLut) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 267001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&passthrough, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(colorLut, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&colorLut, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 267001;
+        serialize(&function_id, s_ctx);
+        serialize(&passthrough, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(colorLut, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&colorLut, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughColorLutMETA: {}", e.what());
@@ -4349,18 +5782,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 267002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&colorLut, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 267002;
+        serialize(&function_id, s_ctx);
+        serialize(&colorLut, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughColorLutMETA: {}", e.what());
@@ -4370,19 +5811,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut, const XrPassthroughColorLutUpdateInfoMETA* updateInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 267003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&colorLut, msg_out.buffer);
-    serialize_ptr(updateInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 267003;
+        serialize(&function_id, s_ctx);
+        serialize(&colorLut, s_ctx);
+        serialize_ptr(updateInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdatePassthroughColorLutMETA: {}", e.what());
@@ -4394,20 +5843,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session, XrPassthroughPreferencesMETA* preferences) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 218001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(preferences, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&preferences, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 218001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(preferences, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&preferences, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPassthroughPreferencesMETA: {}", e.what());
@@ -4419,23 +5876,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, uint32_t counterPathCapacityInput, uint32_t* counterPathCountOutput, XrPath* counterPaths) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 233001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&counterPathCapacityInput, msg_out.buffer);
-    serialize_ptr(counterPathCountOutput, 1, msg_out.buffer);
-    serialize_ptr(counterPaths, counterPathCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&counterPathCountOutput, msg_in.stream, true);
-    deserialize_ptr(&counterPaths, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 233001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&counterPathCapacityInput, s_ctx);
+        serialize_ptr(counterPathCountOutput, 1, s_ctx);
+        serialize_ptr(counterPaths, counterPathCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&counterPathCountOutput, d_ctx);
+        deserialize_ptr(&counterPaths, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumeratePerformanceMetricsCounterPathsMETA: {}", e.what());
@@ -4445,20 +5910,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession session, XrPerformanceMetricsStateMETA* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 233002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 233002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPerformanceMetricsStateMETA: {}", e.what());
@@ -4468,21 +5941,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession session, XrPath counterPath, XrPerformanceMetricsCounterMETA* counter) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 233003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&counterPath, msg_out.buffer);
-    serialize_ptr(counter, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&counter, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 233003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&counterPath, s_ctx);
+        serialize_ptr(counter, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&counter, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQueryPerformanceMetricsCounterMETA: {}", e.what());
@@ -4492,19 +5973,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession session, const XrPerformanceMetricsStateMETA* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 233004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 233004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetPerformanceMetricsStateMETA: {}", e.what());
@@ -4516,21 +6005,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession session, const XrRecommendedLayerResolutionGetInfoMETA* info, XrRecommendedLayerResolutionMETA* resolution) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 255001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(resolution, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&resolution, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 255001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(resolution, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&resolution, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetRecommendedLayerResolutionMETA: {}", e.what());
@@ -4542,19 +6039,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 533001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(pauseInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 533001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(pauseInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPauseSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
@@ -4564,19 +6069,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
 
 XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 533002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(resumeInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 533002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(resumeInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrResumeSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
@@ -4588,21 +6101,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const XrSpaceTriangleMeshGetInfoMETA* getInfo, XrSpaceTriangleMeshMETA* triangleMeshOutput) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 270001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(triangleMeshOutput, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&triangleMeshOutput, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 270001;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(triangleMeshOutput, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&triangleMeshOutput, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceTriangleMeshMETA: {}", e.what());
@@ -4614,22 +6135,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShareSpacesInfoMETA* info, XrAsyncRequestIdFB* requestId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 291001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(requestId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&info->spaces, msg_in.stream, true);
-    deserialize_ptr(&requestId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 291001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(requestId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&info->spaces, d_ctx);
+        deserialize_ptr(&requestId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpacesMETA: {}", e.what());
@@ -4641,19 +6170,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(changeInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220001;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(changeInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrChangeVirtualKeyboardTextContextMETA: {}", e.what());
@@ -4663,21 +6200,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, const XrVirtualKeyboardCreateInfoMETA* createInfo, XrVirtualKeyboardMETA* keyboard) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(keyboard, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&keyboard, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(keyboard, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&keyboard, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVirtualKeyboardMETA: {}", e.what());
@@ -4687,22 +6232,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession session, XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardSpaceCreateInfoMETA* createInfo, XrSpace* keyboardSpace) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(keyboardSpace, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&keyboardSpace, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(keyboardSpace, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&keyboardSpace, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVirtualKeyboardSpaceMETA: {}", e.what());
@@ -4712,18 +6265,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMETA keyboard) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220004;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyVirtualKeyboardMETA: {}", e.what());
@@ -4733,23 +6294,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, uint32_t textureIdCapacityInput, uint32_t* textureIdCountOutput, uint64_t* textureIds) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize(&textureIdCapacityInput, msg_out.buffer);
-    serialize_ptr(textureIdCountOutput, 1, msg_out.buffer);
-    serialize_ptr(textureIds, textureIdCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&textureIdCountOutput, msg_in.stream, true);
-    deserialize_ptr(&textureIds, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220005;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize(&textureIdCapacityInput, s_ctx);
+        serialize_ptr(textureIdCountOutput, 1, s_ctx);
+        serialize_ptr(textureIds, textureIdCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&textureIdCountOutput, d_ctx);
+        deserialize_ptr(&textureIds, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardDirtyTexturesMETA: {}", e.what());
@@ -4759,20 +6328,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVirtualKeyboardMETA keyboard, XrVirtualKeyboardModelAnimationStatesMETA* animationStates) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(animationStates, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&animationStates, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220006;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(animationStates, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&animationStates, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardModelAnimationStatesMETA: {}", e.what());
@@ -4782,20 +6359,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardMETA keyboard, float* scale) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(scale, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&scale, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220007;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(scale, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&scale, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardScaleMETA: {}", e.what());
@@ -4805,21 +6390,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyboardMETA keyboard, uint64_t textureId, XrVirtualKeyboardTextureDataMETA* textureData) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize(&textureId, msg_out.buffer);
-    serialize_ptr(textureData, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&textureData, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220008;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize(&textureId, s_ctx);
+        serialize_ptr(textureData, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&textureData, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardTextureDataMETA: {}", e.what());
@@ -4829,21 +6422,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardInputInfoMETA* info, XrPosef* interactorRootPose) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    serialize_ptr(interactorRootPose, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&interactorRootPose, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220009;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        serialize_ptr(interactorRootPose, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&interactorRootPose, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSendVirtualKeyboardInputMETA: {}", e.what());
@@ -4853,19 +6454,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(modelVisibility, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220010;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(modelVisibility, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetVirtualKeyboardModelVisibilityMETA: {}", e.what());
@@ -4875,19 +6484,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardLocationInfoMETA* locationInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 220011;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&keyboard, msg_out.buffer);
-    serialize_ptr(locationInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 220011;
+        serialize(&function_id, s_ctx);
+        serialize(&keyboard, s_ctx);
+        serialize_ptr(locationInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSuggestVirtualKeyboardLocationMETA: {}", e.what());
@@ -4899,21 +6516,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession session, const XrCoordinateSpaceCreateInfoML* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 138001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 138001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpaceFromCoordinateFrameUIDML: {}", e.what());
@@ -4925,21 +6550,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession session, const XrFacialExpressionClientCreateInfoML* createInfo, XrFacialExpressionClientML* facialExpressionClient) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 483001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(facialExpressionClient, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&facialExpressionClient, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 483001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(facialExpressionClient, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&facialExpressionClient, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFacialExpressionClientML: {}", e.what());
@@ -4949,18 +6582,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpressionClientML facialExpressionClient) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 483002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&facialExpressionClient, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 483002;
+        serialize(&function_id, s_ctx);
+        serialize(&facialExpressionClient, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFacialExpressionClientML: {}", e.what());
@@ -4970,22 +6611,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFacialExpressionClientML facialExpressionClient, const XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo, uint32_t blendShapeCount, XrFacialExpressionBlendShapePropertiesML* blendShapes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 483003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&facialExpressionClient, msg_out.buffer);
-    serialize_ptr(blendShapeGetInfo, 1, msg_out.buffer);
-    serialize(&blendShapeCount, msg_out.buffer);
-    serialize_ptr(blendShapes, blendShapeCount, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&blendShapes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 483003;
+        serialize(&function_id, s_ctx);
+        serialize(&facialExpressionClient, s_ctx);
+        serialize_ptr(blendShapeGetInfo, 1, s_ctx);
+        serialize(&blendShapeCount, s_ctx);
+        serialize_ptr(blendShapes, blendShapeCount, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&blendShapes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFacialExpressionBlendShapePropertiesML: {}", e.what());
@@ -4997,21 +6646,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession session, const XrUuidEXT* mapUuid, XrExportedLocalizationMapML* map) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(mapUuid, 1, msg_out.buffer);
-    serialize_ptr(map, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&map, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(mapUuid, 1, s_ctx);
+        serialize_ptr(map, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&map, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateExportedLocalizationMapML: {}", e.what());
@@ -5021,18 +6678,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLocalizationMapML map) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&map, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140002;
+        serialize(&function_id, s_ctx);
+        serialize(&map, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyExportedLocalizationMapML: {}", e.what());
@@ -5042,19 +6707,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, const XrLocalizationEnableEventsInfoML* info) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnableLocalizationEventsML: {}", e.what());
@@ -5064,23 +6737,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&map, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140004;
+        serialize(&function_id, s_ctx);
+        serialize(&map, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetExportedLocalizationMapDataML: {}", e.what());
@@ -5090,22 +6771,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
 
 XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, const XrLocalizationMapImportInfoML* importInfo, XrUuidEXT* mapUuid) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(importInfo, 1, msg_out.buffer);
-    serialize_ptr(mapUuid, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&importInfo->data, msg_in.stream, true);
-    deserialize_ptr(&mapUuid, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140005;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(importInfo, 1, s_ctx);
+        serialize_ptr(mapUuid, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&importInfo->data, d_ctx);
+        deserialize_ptr(&mapUuid, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrImportLocalizationMapML: {}", e.what());
@@ -5115,24 +6804,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, const XrLocalizationMapQueryInfoBaseHeaderML* queryInfo, uint32_t mapCapacityInput, uint32_t* mapCountOutput, XrLocalizationMapML* maps) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_xr(queryInfo, msg_out.buffer);
-    serialize(&mapCapacityInput, msg_out.buffer);
-    serialize_ptr(mapCountOutput, 1, msg_out.buffer);
-    serialize_ptr(maps, mapCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&mapCountOutput, msg_in.stream, true);
-    deserialize_ptr(&maps, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140006;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_xr(queryInfo, s_ctx);
+        serialize(&mapCapacityInput, s_ctx);
+        serialize_ptr(mapCountOutput, 1, s_ctx);
+        serialize_ptr(maps, mapCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&mapCountOutput, d_ctx);
+        deserialize_ptr(&maps, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQueryLocalizationMapsML: {}", e.what());
@@ -5142,19 +6839,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, const XrMapLocalizationRequestInfoML* requestInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 140007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(requestInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 140007;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(requestInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestMapLocalizationML: {}", e.what());
@@ -5166,21 +6871,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const XrMarkerDetectorCreateInfoML* createInfo, XrMarkerDetectorML* markerDetector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(markerDetector, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&markerDetector, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(markerDetector, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&markerDetector, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerDetectorML: {}", e.what());
@@ -5190,21 +6903,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const XrMarkerSpaceCreateInfoML* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerSpaceML: {}", e.what());
@@ -5214,18 +6935,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML markerDetector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139003;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyMarkerDetectorML: {}", e.what());
@@ -5235,20 +6964,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML markerDetector, XrMarkerDetectorStateML* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139004;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerDetectorStateML: {}", e.what());
@@ -5258,21 +6995,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* meters) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize(&marker, msg_out.buffer);
-    serialize_ptr(meters, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&meters, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139005;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize(&marker, s_ctx);
+        serialize_ptr(meters, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&meters, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerLengthML: {}", e.what());
@@ -5282,21 +7027,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint64_t* number) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize(&marker, msg_out.buffer);
-    serialize_ptr(number, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&number, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139006;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize(&marker, s_ctx);
+        serialize_ptr(number, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&number, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerNumberML: {}", e.what());
@@ -5306,21 +7059,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* reprojectionErrorMeters) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize(&marker, msg_out.buffer);
-    serialize_ptr(reprojectionErrorMeters, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&reprojectionErrorMeters, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139007;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize(&marker, s_ctx);
+        serialize_ptr(reprojectionErrorMeters, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&reprojectionErrorMeters, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerReprojectionErrorML: {}", e.what());
@@ -5330,24 +7091,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize(&marker, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139008;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize(&marker, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerStringML: {}", e.what());
@@ -5357,23 +7126,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector, uint32_t markerCapacityInput, uint32_t* markerCountOutput, XrMarkerML* markers) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize(&markerCapacityInput, msg_out.buffer);
-    serialize_ptr(markerCountOutput, 1, msg_out.buffer);
-    serialize_ptr(markers, markerCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&markerCountOutput, msg_in.stream, true);
-    deserialize_ptr(&markers, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139009;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize(&markerCapacityInput, s_ctx);
+        serialize_ptr(markerCountOutput, 1, s_ctx);
+        serialize_ptr(markers, markerCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&markerCountOutput, d_ctx);
+        deserialize_ptr(&markers, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkersML: {}", e.what());
@@ -5383,20 +7160,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML markerDetector, XrMarkerDetectorSnapshotInfoML* snapshotInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 139010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&markerDetector, msg_out.buffer);
-    serialize_ptr(snapshotInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&snapshotInfo, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 139010;
+        serialize(&function_id, s_ctx);
+        serialize(&markerDetector, s_ctx);
+        serialize_ptr(snapshotInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&snapshotInfo, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSnapshotMarkerDetectorML: {}", e.what());
@@ -5408,21 +7193,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, const XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 141001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_xr(createInfo, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 141001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_xr(createInfo, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsAsyncML: {}", e.what());
@@ -5432,21 +7225,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession session, XrFutureEXT future, XrCreateSpatialAnchorsCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 141002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 141002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsCompleteML: {}", e.what());
@@ -5456,20 +7257,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpatialAnchorStateML* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 141003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 141003;
+        serialize(&function_id, s_ctx);
+        serialize(&anchor, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialAnchorStateML: {}", e.what());
@@ -5481,21 +7290,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session, const XrSpatialAnchorsCreateStorageInfoML* createInfo, XrSpatialAnchorsStorageML* storage) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(storage, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&storage, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(storage, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&storage, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsStorageML: {}", e.what());
@@ -5505,21 +7322,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsDeleteInfoML* deleteInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize_ptr(deleteInfo, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142002;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize_ptr(deleteInfo, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeleteSpatialAnchorsAsyncML: {}", e.what());
@@ -5529,21 +7354,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsDeleteCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142003;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeleteSpatialAnchorsCompleteML: {}", e.what());
@@ -5553,18 +7386,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchorsStorageML storage) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142004;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorsStorageML: {}", e.what());
@@ -5574,21 +7415,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsPublishInfoML* publishInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize_ptr(publishInfo, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142005;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize_ptr(publishInfo, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPublishSpatialAnchorsAsyncML: {}", e.what());
@@ -5598,21 +7447,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsPublishCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142006;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPublishSpatialAnchorsCompleteML: {}", e.what());
@@ -5622,21 +7479,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize_xr(queryInfo, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142007;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize_xr(queryInfo, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpatialAnchorsAsyncML: {}", e.what());
@@ -5646,21 +7511,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsQueryCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142008;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpatialAnchorsCompleteML: {}", e.what());
@@ -5670,21 +7543,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsUpdateExpirationInfoML* updateInfo, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize_ptr(updateInfo, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142009;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize_ptr(updateInfo, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationAsyncML: {}", e.what());
@@ -5694,21 +7575,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsUpdateExpirationCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 142010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&storage, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 142010;
+        serialize(&function_id, s_ctx);
+        serialize(&storage, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationCompleteML: {}", e.what());
@@ -5720,19 +7609,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, const XrSystemNotificationsSetInfoML* info) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 474001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(info, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 474001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(info, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetSystemNotificationsML: {}", e.what());
@@ -5744,19 +7641,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instance, const XrUserCalibrationEnableEventsInfoML* enableInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 473001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(enableInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 473001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(enableInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnableUserCalibrationEventsML: {}", e.what());
@@ -5768,22 +7673,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferSizeML* size, XrWorldMeshBufferML* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&size->next, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475001;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(size, 1, s_ctx);
+        serialize_ptr(buffer, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&size->next, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAllocateWorldMeshBufferML: {}", e.what());
@@ -5793,21 +7706,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, const XrWorldMeshDetectorCreateInfoML* createInfo, XrWorldMeshDetectorML* detector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(detector, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&detector, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(detector, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&detector, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateWorldMeshDetectorML: {}", e.what());
@@ -5817,18 +7738,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorML detector) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475003;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyWorldMeshDetectorML: {}", e.what());
@@ -5838,21 +7767,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
 
 XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferML* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_xr(&buffer->next, msg_in.stream, true);
-    deserialize_ptr(&buffer->buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475004;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(buffer, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_xr(&buffer->next, d_ctx);
+        deserialize_ptr(&buffer->buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrFreeWorldMeshBufferML: {}", e.what());
@@ -5862,21 +7799,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo, XrWorldMeshBufferSizeML* size) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(sizeInfo, 1, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&size, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475005;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(sizeInfo, 1, s_ctx);
+        serialize_ptr(size, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&size, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetWorldMeshBufferRecommendSizeML: {}", e.what());
@@ -5886,24 +7831,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshGetInfoML* getInfo, XrWorldMeshBufferML* buffer, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(buffer, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&getInfo->blocks, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475006;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(buffer, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&getInfo->blocks, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshAsyncML: {}", e.what());
@@ -5913,22 +7866,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorML detector, const XrWorldMeshRequestCompletionInfoML* completionInfo, XrFutureEXT future, XrWorldMeshRequestCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(completionInfo, 1, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475007;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(completionInfo, 1, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshCompleteML: {}", e.what());
@@ -5938,21 +7899,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshStateRequestInfoML* stateRequest, XrFutureEXT* future) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize_ptr(stateRequest, 1, msg_out.buffer);
-    serialize_ptr(future, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&future, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475008;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize_ptr(stateRequest, 1, s_ctx);
+        serialize_ptr(future, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&future, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshStateAsyncML: {}", e.what());
@@ -5962,21 +7931,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDetectorML detector, XrFutureEXT future, XrWorldMeshStateRequestCompletionML* completion) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 475009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&detector, msg_out.buffer);
-    serialize(&future, msg_out.buffer);
-    serialize_ptr(completion, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&completion, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 475009;
+        serialize(&function_id, s_ctx);
+        serialize(&detector, s_ctx);
+        serialize(&future, s_ctx);
+        serialize_ptr(completion, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&completion, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshStateCompleteML: {}", e.what());
@@ -5988,20 +7965,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT handTracker, const XrForceFeedbackCurlApplyLocationsMNDX* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 376001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations->locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 376001;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations->locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyForceFeedbackCurlMNDX: {}", e.what());
@@ -6013,25 +7998,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t modeCapacityInput, uint32_t* modeCountOutput, XrReprojectionModeMSFT* modes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 67001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&viewConfigurationType, msg_out.buffer);
-    serialize(&modeCapacityInput, msg_out.buffer);
-    serialize_ptr(modeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(modes, modeCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&modeCountOutput, msg_in.stream, true);
-    deserialize_ptr(&modes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 67001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&viewConfigurationType, s_ctx);
+        serialize(&modeCapacityInput, s_ctx);
+        serialize_ptr(modeCountOutput, 1, s_ctx);
+        serialize_ptr(modes, modeCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&modeCountOutput, d_ctx);
+        deserialize_ptr(&modes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateReprojectionModesMSFT: {}", e.what());
@@ -6043,21 +8036,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, XrPath topLevelUserPath, XrControllerModelKeyStateMSFT* controllerModelKeyState) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 56001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelUserPath, msg_out.buffer);
-    serialize_ptr(controllerModelKeyState, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&controllerModelKeyState, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 56001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelUserPath, s_ctx);
+        serialize_ptr(controllerModelKeyState, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&controllerModelKeyState, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelKeyMSFT: {}", e.what());
@@ -6067,21 +8068,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelPropertiesMSFT* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 56002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&modelKey, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 56002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&modelKey, s_ctx);
+        serialize_ptr(properties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelPropertiesMSFT: {}", e.what());
@@ -6091,21 +8100,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelStateMSFT* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 56003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&modelKey, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 56003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&modelKey, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelStateMSFT: {}", e.what());
@@ -6115,24 +8132,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 56004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&modelKey, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 56004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&modelKey, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLoadControllerModelMSFT: {}", e.what());
@@ -6144,21 +8169,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTracker, const XrHandMeshSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 53001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 53001;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateHandMeshSpaceMSFT: {}", e.what());
@@ -6168,21 +8201,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker, const XrHandMeshUpdateInfoMSFT* updateInfo, XrHandMeshMSFT* handMesh) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 53002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&handTracker, msg_out.buffer);
-    serialize_ptr(updateInfo, 1, msg_out.buffer);
-    serialize_ptr(handMesh, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&handMesh, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 53002;
+        serialize(&function_id, s_ctx);
+        serialize(&handTracker, s_ctx);
+        serialize_ptr(updateInfo, 1, s_ctx);
+        serialize_ptr(handMesh, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&handMesh, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateHandMeshMSFT: {}", e.what());
@@ -6194,22 +8235,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrSession session, IUnknown* perceptionAnchor, XrSpatialAnchorMSFT* anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 57001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(perceptionAnchor, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&perceptionAnchor, msg_in.stream, true);
-    deserialize_ptr(&anchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 57001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(perceptionAnchor, 1, s_ctx);
+        serialize_ptr(anchor, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&perceptionAnchor, d_ctx);
+        deserialize_ptr(&anchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFromPerceptionAnchorMSFT: {}", e.what());
@@ -6219,21 +8268,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrSession session, XrSpatialAnchorMSFT anchor, IUnknown** perceptionAnchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 57002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&perceptionAnchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 57002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&anchor, s_ctx);
+        #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&perceptionAnchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTryGetPerceptionAnchorFromSpatialAnchorMSFT: {}", e.what());
@@ -6245,24 +8302,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 148001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(markerId, 1, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 148001;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(markerId, 1, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMarkerDecodedStringMSFT: {}", e.what());
@@ -6272,24 +8337,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 148002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(markerId, 1, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 148002;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(markerId, 1, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMarkerRawDataMSFT: {}", e.what());
@@ -6301,19 +8374,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrNewSceneComputeInfoMSFT* computeInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&sceneObserver, msg_out.buffer);
-    serialize_ptr(computeInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98001;
+        serialize(&function_id, s_ctx);
+        serialize(&sceneObserver, s_ctx);
+        serialize_ptr(computeInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrComputeNewSceneMSFT: {}", e.what());
@@ -6323,21 +8404,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneCreateInfoMSFT* createInfo, XrSceneMSFT* scene) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&sceneObserver, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(scene, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&scene, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98002;
+        serialize(&function_id, s_ctx);
+        serialize(&sceneObserver, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(scene, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&scene, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSceneMSFT: {}", e.what());
@@ -6347,21 +8436,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, const XrSceneObserverCreateInfoMSFT* createInfo, XrSceneObserverMSFT* sceneObserver) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(sceneObserver, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&sceneObserver, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(sceneObserver, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&sceneObserver, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSceneObserverMSFT: {}", e.what());
@@ -6371,18 +8468,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98004;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySceneMSFT: {}", e.what());
@@ -6392,18 +8497,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sceneObserver) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&sceneObserver, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98005;
+        serialize(&function_id, s_ctx);
+        serialize(&sceneObserver, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySceneObserverMSFT: {}", e.what());
@@ -6413,24 +8526,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, XrSystemId systemId, uint32_t featureCapacityInput, uint32_t* featureCountOutput, XrSceneComputeFeatureMSFT* features) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&featureCapacityInput, msg_out.buffer);
-    serialize_ptr(featureCountOutput, 1, msg_out.buffer);
-    serialize_ptr(features, featureCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&featureCountOutput, msg_in.stream, true);
-    deserialize_ptr(&features, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98006;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&featureCapacityInput, s_ctx);
+        serialize_ptr(featureCountOutput, 1, s_ctx);
+        serialize_ptr(features, featureCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&featureCountOutput, d_ctx);
+        deserialize_ptr(&features, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSceneComputeFeaturesMSFT: {}", e.what());
@@ -6440,21 +8561,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsGetInfoMSFT* getInfo, XrSceneComponentsMSFT* components) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(components, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&components, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98007;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(components, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&components, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneComponentsMSFT: {}", e.what());
@@ -6464,20 +8593,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sceneObserver, XrSceneComputeStateMSFT* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98008;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&sceneObserver, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98008;
+        serialize(&function_id, s_ctx);
+        serialize(&sceneObserver, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneComputeStateMSFT: {}", e.what());
@@ -6487,21 +8624,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, const XrSceneMeshBuffersGetInfoMSFT* getInfo, XrSceneMeshBuffersMSFT* buffers) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98009;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(buffers, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffers, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98009;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(buffers, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffers, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMeshBuffersMSFT: {}", e.what());
@@ -6511,21 +8656,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsLocateInfoMSFT* locateInfo, XrSceneComponentLocationsMSFT* locations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 98010;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(locations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&locations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 98010;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(locations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&locations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSceneComponentsMSFT: {}", e.what());
@@ -6537,19 +8690,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneDeserializeInfoMSFT* deserializeInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 99001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&sceneObserver, msg_out.buffer);
-    serialize_ptr(deserializeInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 99001;
+        serialize(&function_id, s_ctx);
+        serialize(&sceneObserver, s_ctx);
+        serialize_ptr(deserializeInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeserializeSceneMSFT: {}", e.what());
@@ -6559,24 +8720,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, const XrSerializedSceneFragmentDataGetInfoMSFT* getInfo, uint32_t countInput, uint32_t* readOutput, uint8_t* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 99002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&scene, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize(&countInput, msg_out.buffer);
-    serialize_ptr(readOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, countInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&readOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 99002;
+        serialize(&function_id, s_ctx);
+        serialize(&scene, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize(&countInput, s_ctx);
+        serialize_ptr(readOutput, 1, s_ctx);
+        serialize_ptr(buffer, countInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&readOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSerializedSceneFragmentDataMSFT: {}", e.what());
@@ -6588,21 +8757,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, const XrSpatialAnchorCreateInfoMSFT* createInfo, XrSpatialAnchorMSFT* anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 40001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(anchor, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&anchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 40001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(anchor, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&anchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorMSFT: {}", e.what());
@@ -6612,21 +8789,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session, const XrSpatialAnchorSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 40002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 40002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorSpaceMSFT: {}", e.what());
@@ -6636,18 +8821,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT anchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 40003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&anchor, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 40003;
+        serialize(&function_id, s_ctx);
+        serialize(&anchor, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorMSFT: {}", e.what());
@@ -6659,18 +8852,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&spatialAnchorStore, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143001;
+        serialize(&function_id, s_ctx);
+        serialize(&spatialAnchorStore, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrClearSpatialAnchorStoreMSFT: {}", e.what());
@@ -6680,21 +8881,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, XrSpatialAnchorMSFT* spatialAnchor) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(spatialAnchorCreateInfo, 1, msg_out.buffer);
-    serialize_ptr(spatialAnchor, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spatialAnchor, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(spatialAnchorCreateInfo, 1, s_ctx);
+        serialize_ptr(spatialAnchor, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spatialAnchor, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFromPersistedNameMSFT: {}", e.what());
@@ -6704,20 +8913,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(spatialAnchorStore, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spatialAnchorStore, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(spatialAnchorStore, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spatialAnchorStore, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorStoreConnectionMSFT: {}", e.what());
@@ -6727,18 +8944,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&spatialAnchorStore, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143004;
+        serialize(&function_id, s_ctx);
+        serialize(&spatialAnchorStore, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorStoreConnectionMSFT: {}", e.what());
@@ -6748,23 +8973,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t* spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&spatialAnchorStore, msg_out.buffer);
-    serialize(&spatialAnchorNameCapacityInput, msg_out.buffer);
-    serialize_ptr(spatialAnchorNameCountOutput, 1, msg_out.buffer);
-    serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spatialAnchorNameCountOutput, msg_in.stream, true);
-    deserialize_ptr(&spatialAnchorNames, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143005;
+        serialize(&function_id, s_ctx);
+        serialize(&spatialAnchorStore, s_ctx);
+        serialize(&spatialAnchorNameCapacityInput, s_ctx);
+        serialize_ptr(spatialAnchorNameCountOutput, 1, s_ctx);
+        serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spatialAnchorNameCountOutput, d_ctx);
+        deserialize_ptr(&spatialAnchorNames, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumeratePersistedSpatialAnchorNamesMSFT: {}", e.what());
@@ -6774,19 +9007,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143006;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&spatialAnchorStore, msg_out.buffer);
-    serialize_ptr(spatialAnchorPersistenceInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143006;
+        serialize(&function_id, s_ctx);
+        serialize(&spatialAnchorStore, s_ctx);
+        serialize_ptr(spatialAnchorPersistenceInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorMSFT: {}", e.what());
@@ -6796,19 +9037,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 143007;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&spatialAnchorStore, msg_out.buffer);
-    serialize_ptr(spatialAnchorPersistenceName, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 143007;
+        serialize(&function_id, s_ctx);
+        serialize(&spatialAnchorStore, s_ctx);
+        serialize_ptr(spatialAnchorPersistenceName, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorMSFT: {}", e.what());
@@ -6820,21 +9069,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession session, const XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 50001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 50001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialGraphNodeSpaceMSFT: {}", e.what());
@@ -6844,18 +9101,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 50002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&nodeBinding, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 50002;
+        serialize(&function_id, s_ctx);
+        serialize(&nodeBinding, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialGraphNodeBindingMSFT: {}", e.what());
@@ -6865,21 +9130,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo, XrSpatialGraphNodeBindingPropertiesMSFT* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 50003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&nodeBinding, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 50003;
+        serialize(&function_id, s_ctx);
+        serialize(&nodeBinding, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(properties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialGraphNodeBindingPropertiesMSFT: {}", e.what());
@@ -6889,21 +9162,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSession session, const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo, XrSpatialGraphNodeBindingMSFT* nodeBinding) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 50004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(nodeBinding, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&nodeBinding, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 50004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(nodeBinding, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&nodeBinding, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTryCreateSpatialGraphStaticNodeBindingMSFT: {}", e.what());
@@ -6915,20 +9196,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 160001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 160001;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAudioInputDeviceGuidOculus: {}", e.what());
@@ -6938,20 +9227,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 160002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 160002;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAudioOutputDeviceGuidOculus: {}", e.what());
@@ -6963,23 +9260,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession session, uint32_t cameraCapacityInput, uint32_t* cameraCountOutput, XrExternalCameraOCULUS* cameras) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 227001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&cameraCapacityInput, msg_out.buffer);
-    serialize_ptr(cameraCountOutput, 1, msg_out.buffer);
-    serialize_ptr(cameras, cameraCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&cameraCountOutput, msg_in.stream, true);
-    deserialize_ptr(&cameras, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 227001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&cameraCapacityInput, s_ctx);
+        serialize_ptr(cameraCountOutput, 1, s_ctx);
+        serialize_ptr(cameras, cameraCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&cameraCountOutput, d_ctx);
+        deserialize_ptr(&cameras, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateExternalCamerasOCULUS: {}", e.what());
@@ -6991,20 +9296,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSession session, XrTrackingOptimizationSettingsDomainQCOM domain, XrTrackingOptimizationSettingsHintQCOM hint) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 307001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&domain, msg_out.buffer);
-    serialize(&hint, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 307001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&domain, s_ctx);
+        serialize(&hint, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetTrackingOptimizationSettingsHintQCOM: {}", e.what());
@@ -7016,19 +9329,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession session, XrBool32 enabled) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 124001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&enabled, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 124001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&enabled, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetEnvironmentDepthEstimationVARJO: {}", e.what());
@@ -7040,21 +9361,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const XrMarkerSpaceCreateInfoVARJO* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 125001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 125001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerSpaceVARJO: {}", e.what());
@@ -7064,21 +9393,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t markerId, XrExtent2Df* size) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 125002;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&markerId, msg_out.buffer);
-    serialize_ptr(size, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&size, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 125002;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&markerId, s_ctx);
+        serialize_ptr(size, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&size, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerSizeVARJO: {}", e.what());
@@ -7088,20 +9425,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession session, uint64_t markerId, XrBool32 enable) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 125003;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&markerId, msg_out.buffer);
-    serialize(&enable, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 125003;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&markerId, s_ctx);
+        serialize(&enable, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingPredictionVARJO: {}", e.what());
@@ -7111,20 +9456,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session, uint64_t markerId, XrDuration timeout) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 125004;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&markerId, msg_out.buffer);
-    serialize(&timeout, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 125004;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&markerId, s_ctx);
+        serialize(&timeout, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingTimeoutVARJO: {}", e.what());
@@ -7134,19 +9487,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBool32 enabled) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 125005;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&enabled, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 125005;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&enabled, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingVARJO: {}", e.what());
@@ -7158,19 +9519,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
 XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float offset) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 126001;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&offset, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 126001;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&offset, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetViewOffsetVARJO: {}", e.what());
@@ -7181,21 +9550,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageAcquireInfo* acquireInfo, uint32_t* index) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 1;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_ptr(acquireInfo, 1, msg_out.buffer);
-    serialize_ptr(index, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&index, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 1;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_ptr(acquireInfo, 1, s_ctx);
+        serialize_ptr(index, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&index, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAcquireSwapchainImage: {}", e.what());
@@ -7205,20 +9582,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo, const XrHapticBaseHeader* hapticFeedback) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 2;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
-    serialize_xr(hapticFeedback, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 2;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(hapticActionInfo, 1, s_ctx);
+        serialize_xr(hapticFeedback, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyHapticFeedback: {}", e.what());
@@ -7228,19 +9613,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, const XrSessionActionSetsAttachInfo* attachInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 3;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(attachInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 3;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(attachInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAttachSessionActionSets: {}", e.what());
@@ -7250,19 +9643,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
 
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBeginInfo* frameBeginInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 4;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(frameBeginInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 4;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(frameBeginInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginFrame: {}", e.what());
@@ -7272,19 +9673,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
 
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSessionBeginInfo* beginInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 5;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(beginInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 5;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(beginInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginSession: {}", e.what());
@@ -7294,21 +9703,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrActionCreateInfo* createInfo, XrAction* action) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 6;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&actionSet, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(action, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&action, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 6;
+        serialize(&function_id, s_ctx);
+        serialize(&actionSet, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(action, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&action, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateAction: {}", e.what());
@@ -7318,21 +9735,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrActionSetCreateInfo* createInfo, XrActionSet* actionSet) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 7;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(actionSet, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&actionSet, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 7;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(actionSet, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&actionSet, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateActionSet: {}", e.what());
@@ -7342,21 +9767,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrActionSpaceCreateInfo* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 8;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 8;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateActionSpace: {}", e.what());
@@ -7366,20 +9799,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* createInfo, XrInstance* instance) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 9;
-    serialize(&function_id, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(instance, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&instance, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 9;
+        serialize(&function_id, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(instance, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&instance, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateInstance: {}", e.what());
@@ -7389,21 +9830,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const XrReferenceSpaceCreateInfo* createInfo, XrSpace* space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 10;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(space, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&space, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 10;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(space, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&space, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateReferenceSpace: {}", e.what());
@@ -7413,21 +9862,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSessionCreateInfo* createInfo, XrSession* session) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 11;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(session, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&session, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 11;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(session, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&session, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSession: {}", e.what());
@@ -7437,21 +9894,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwapchainCreateInfo* createInfo, XrSwapchain* swapchain) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 12;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(createInfo, 1, msg_out.buffer);
-    serialize_ptr(swapchain, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&swapchain, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 12;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(createInfo, 1, s_ctx);
+        serialize_ptr(swapchain, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&swapchain, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSwapchain: {}", e.what());
@@ -7461,18 +9926,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 13;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&action, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 13;
+        serialize(&function_id, s_ctx);
+        serialize(&action, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyAction: {}", e.what());
@@ -7482,18 +9955,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 14;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&actionSet, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 14;
+        serialize(&function_id, s_ctx);
+        serialize(&actionSet, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyActionSet: {}", e.what());
@@ -7503,18 +9984,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 15;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 15;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyInstance: {}", e.what());
@@ -7524,18 +10013,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 16;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 16;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySession: {}", e.what());
@@ -7545,18 +10042,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 17;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 17;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpace: {}", e.what());
@@ -7566,18 +10071,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 18;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 18;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySwapchain: {}", e.what());
@@ -7587,19 +10100,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInfo* frameEndInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 19;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(frameEndInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 19;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(frameEndInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEndFrame: {}", e.what());
@@ -7609,18 +10130,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 20;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 20;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEndSession: {}", e.what());
@@ -7630,22 +10159,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrApiLayerProperties* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 21;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&propertyCapacityInput, msg_out.buffer);
-    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
-    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&propertyCountOutput, msg_in.stream, true);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 21;
+        serialize(&function_id, s_ctx);
+        serialize(&propertyCapacityInput, s_ctx);
+        serialize_ptr(propertyCountOutput, 1, s_ctx);
+        serialize_ptr(properties, propertyCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&propertyCountOutput, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateApiLayerProperties: {}", e.what());
@@ -7655,24 +10192,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession session, const XrBoundSourcesForActionEnumerateInfo* enumerateInfo, uint32_t sourceCapacityInput, uint32_t* sourceCountOutput, XrPath* sources) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 22;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(enumerateInfo, 1, msg_out.buffer);
-    serialize(&sourceCapacityInput, msg_out.buffer);
-    serialize_ptr(sourceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(sources, sourceCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&sourceCountOutput, msg_in.stream, true);
-    deserialize_ptr(&sources, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 22;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(enumerateInfo, 1, s_ctx);
+        serialize(&sourceCapacityInput, s_ctx);
+        serialize_ptr(sourceCountOutput, 1, s_ctx);
+        serialize_ptr(sources, sourceCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&sourceCountOutput, d_ctx);
+        deserialize_ptr(&sources, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateBoundSourcesForAction: {}", e.what());
@@ -7682,25 +10227,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t environmentBlendModeCapacityInput, uint32_t* environmentBlendModeCountOutput, XrEnvironmentBlendMode* environmentBlendModes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 23;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&viewConfigurationType, msg_out.buffer);
-    serialize(&environmentBlendModeCapacityInput, msg_out.buffer);
-    serialize_ptr(environmentBlendModeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&environmentBlendModeCountOutput, msg_in.stream, true);
-    deserialize_ptr(&environmentBlendModes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 23;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&viewConfigurationType, s_ctx);
+        serialize(&environmentBlendModeCapacityInput, s_ctx);
+        serialize_ptr(environmentBlendModeCountOutput, 1, s_ctx);
+        serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&environmentBlendModeCountOutput, d_ctx);
+        deserialize_ptr(&environmentBlendModes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateEnvironmentBlendModes: {}", e.what());
@@ -7710,23 +10263,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 24;
-    serialize(&function_id, msg_out.buffer);
-    serialize_ptr(layerName, count_null_terminated(layerName), msg_out.buffer);
-    serialize(&propertyCapacityInput, msg_out.buffer);
-    serialize_ptr(propertyCountOutput, 1, msg_out.buffer);
-    serialize_ptr(properties, propertyCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&propertyCountOutput, msg_in.stream, true);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 24;
+        serialize(&function_id, s_ctx);
+        serialize_ptr(layerName, count_null_terminated(layerName), s_ctx);
+        serialize(&propertyCapacityInput, s_ctx);
+        serialize_ptr(propertyCountOutput, 1, s_ctx);
+        serialize_ptr(properties, propertyCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&propertyCountOutput, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateInstanceExtensionProperties: {}", e.what());
@@ -7736,23 +10297,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uint32_t spaceCapacityInput, uint32_t* spaceCountOutput, XrReferenceSpaceType* spaces) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 25;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&spaceCapacityInput, msg_out.buffer);
-    serialize_ptr(spaceCountOutput, 1, msg_out.buffer);
-    serialize_ptr(spaces, spaceCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spaceCountOutput, msg_in.stream, true);
-    deserialize_ptr(&spaces, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 25;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&spaceCapacityInput, s_ctx);
+        serialize_ptr(spaceCountOutput, 1, s_ctx);
+        serialize_ptr(spaces, spaceCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spaceCountOutput, d_ctx);
+        deserialize_ptr(&spaces, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateReferenceSpaces: {}", e.what());
@@ -7762,23 +10331,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, uint32_t formatCapacityInput, uint32_t* formatCountOutput, int64_t* formats) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 26;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&formatCapacityInput, msg_out.buffer);
-    serialize_ptr(formatCountOutput, 1, msg_out.buffer);
-    serialize_ptr(formats, formatCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&formatCountOutput, msg_in.stream, true);
-    deserialize_ptr(&formats, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 26;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&formatCapacityInput, s_ctx);
+        serialize_ptr(formatCountOutput, 1, s_ctx);
+        serialize_ptr(formats, formatCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&formatCountOutput, d_ctx);
+        deserialize_ptr(&formats, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSwapchainFormats: {}", e.what());
@@ -7788,23 +10365,31 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 27;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize(&imageCapacityInput, msg_out.buffer);
-    serialize_ptr(imageCountOutput, 1, msg_out.buffer);
-    serialize_xr_array(images, imageCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&imageCountOutput, msg_in.stream, true);
-    deserialize_xr_array(&images, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 27;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize(&imageCapacityInput, s_ctx);
+        serialize_ptr(imageCountOutput, 1, s_ctx);
+        serialize_xr_array(images, imageCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&imageCountOutput, d_ctx);
+        deserialize_xr_array(&images, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSwapchainImages: {}", e.what());
@@ -7814,25 +10399,33 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrViewConfigurationView* views) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 28;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&viewConfigurationType, msg_out.buffer);
-    serialize(&viewCapacityInput, msg_out.buffer);
-    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
-    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&viewCountOutput, msg_in.stream, true);
-    deserialize_ptr(&views, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 28;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&viewConfigurationType, s_ctx);
+        serialize(&viewCapacityInput, s_ctx);
+        serialize_ptr(viewCountOutput, 1, s_ctx);
+        serialize_ptr(views, viewCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&viewCountOutput, d_ctx);
+        deserialize_ptr(&views, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViewConfigurationViews: {}", e.what());
@@ -7842,24 +10435,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance, XrSystemId systemId, uint32_t viewConfigurationTypeCapacityInput, uint32_t* viewConfigurationTypeCountOutput, XrViewConfigurationType* viewConfigurationTypes) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 29;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&viewConfigurationTypeCapacityInput, msg_out.buffer);
-    serialize_ptr(viewConfigurationTypeCountOutput, 1, msg_out.buffer);
-    serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&viewConfigurationTypeCountOutput, msg_in.stream, true);
-    deserialize_ptr(&viewConfigurationTypes, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 29;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&viewConfigurationTypeCapacityInput, s_ctx);
+        serialize_ptr(viewConfigurationTypeCountOutput, 1, s_ctx);
+        serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&viewConfigurationTypeCountOutput, d_ctx);
+        deserialize_ptr(&viewConfigurationTypes, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViewConfigurations: {}", e.what());
@@ -7869,21 +10470,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateBoolean* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 30;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 30;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateBoolean: {}", e.what());
@@ -7893,21 +10502,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateFloat* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 31;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 31;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateFloat: {}", e.what());
@@ -7917,21 +10534,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStatePose* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 32;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 32;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStatePose: {}", e.what());
@@ -7941,21 +10566,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateVector2f* state) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 33;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(state, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&state, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 33;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(state, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&state, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateVector2f: {}", e.what());
@@ -7965,21 +10598,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session, XrPath topLevelUserPath, XrInteractionProfileState* interactionProfile) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 34;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&topLevelUserPath, msg_out.buffer);
-    serialize_ptr(interactionProfile, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&interactionProfile, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 34;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&topLevelUserPath, s_ctx);
+        serialize_ptr(interactionProfile, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&interactionProfile, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetCurrentInteractionProfile: {}", e.what());
@@ -7989,24 +10630,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, const XrInputSourceLocalizedNameGetInfo* getInfo, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 35;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 35;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetInputSourceLocalizedName: {}", e.what());
@@ -8016,20 +10665,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrInstanceProperties* instanceProperties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 36;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(instanceProperties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&instanceProperties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 36;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(instanceProperties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&instanceProperties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetInstanceProperties: {}", e.what());
@@ -8039,21 +10696,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, XrReferenceSpaceType referenceSpaceType, XrExtent2Df* bounds) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 37;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize(&referenceSpaceType, msg_out.buffer);
-    serialize_ptr(bounds, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bounds, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 37;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize(&referenceSpaceType, s_ctx);
+        serialize_ptr(bounds, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bounds, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetReferenceSpaceBoundsRect: {}", e.what());
@@ -8063,21 +10728,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGetInfo* getInfo, XrSystemId* systemId) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 38;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(getInfo, 1, msg_out.buffer);
-    serialize_ptr(systemId, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&systemId, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 38;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(getInfo, 1, s_ctx);
+        serialize_ptr(systemId, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&systemId, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSystem: {}", e.what());
@@ -8087,21 +10760,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSystemId systemId, XrSystemProperties* properties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 39;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize_ptr(properties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&properties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 39;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize_ptr(properties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&properties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSystemProperties: {}", e.what());
@@ -8111,22 +10792,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, XrViewConfigurationProperties* configurationProperties) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 40;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&systemId, msg_out.buffer);
-    serialize(&viewConfigurationType, msg_out.buffer);
-    serialize_ptr(configurationProperties, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&configurationProperties, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 40;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&systemId, s_ctx);
+        serialize(&viewConfigurationType, s_ctx);
+        serialize_ptr(configurationProperties, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&configurationProperties, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetViewConfigurationProperties: {}", e.what());
@@ -8136,22 +10825,30 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, XrTime time, XrSpaceLocation* location) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 41;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&space, msg_out.buffer);
-    serialize(&baseSpace, msg_out.buffer);
-    serialize(&time, msg_out.buffer);
-    serialize_ptr(location, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&location, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 41;
+        serialize(&function_id, s_ctx);
+        serialize(&space, s_ctx);
+        serialize(&baseSpace, s_ctx);
+        serialize_time(&time, s_ctx);
+        serialize_ptr(location, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&location, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSpace: {}", e.what());
@@ -8161,21 +10858,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesLocateInfo* locateInfo, XrSpaceLocations* spaceLocations) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 42;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(locateInfo, 1, msg_out.buffer);
-    serialize_ptr(spaceLocations, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&spaceLocations, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 42;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(locateInfo, 1, s_ctx);
+        serialize_ptr(spaceLocations, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&spaceLocations, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSpaces: {}", e.what());
@@ -8185,26 +10890,34 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLocateInfo* viewLocateInfo, XrViewState* viewState, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrView* views) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 43;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(viewLocateInfo, 1, msg_out.buffer);
-    serialize_ptr(viewState, 1, msg_out.buffer);
-    serialize(&viewCapacityInput, msg_out.buffer);
-    serialize_ptr(viewCountOutput, 1, msg_out.buffer);
-    serialize_ptr(views, viewCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&viewState, msg_in.stream, true);
-    deserialize_ptr(&viewCountOutput, msg_in.stream, true);
-    deserialize_ptr(&views, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 43;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(viewLocateInfo, 1, s_ctx);
+        serialize_ptr(viewState, 1, s_ctx);
+        serialize(&viewCapacityInput, s_ctx);
+        serialize_ptr(viewCountOutput, 1, s_ctx);
+        serialize_ptr(views, viewCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&viewState, d_ctx);
+        deserialize_ptr(&viewCountOutput, d_ctx);
+        deserialize_ptr(&views, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateViews: {}", e.what());
@@ -8214,24 +10927,32 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 44;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&path, msg_out.buffer);
-    serialize(&bufferCapacityInput, msg_out.buffer);
-    serialize_ptr(bufferCountOutput, 1, msg_out.buffer);
-    serialize_ptr(buffer, bufferCapacityInput, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&bufferCountOutput, msg_in.stream, true);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 44;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&path, s_ctx);
+        serialize(&bufferCapacityInput, s_ctx);
+        serialize_ptr(bufferCountOutput, 1, s_ctx);
+        serialize_ptr(buffer, bufferCapacityInput, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&bufferCountOutput, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPathToString: {}", e.what());
@@ -8241,20 +10962,28 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffer* eventData) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 45;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(eventData, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&eventData, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 45;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(eventData, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&eventData, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPollEvent: {}", e.what());
@@ -8264,19 +10993,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
 
 XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageReleaseInfo* releaseInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 46;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_ptr(releaseInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 46;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_ptr(releaseInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrReleaseSwapchainImage: {}", e.what());
@@ -8286,18 +11023,26 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 47;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 47;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestExitSession: {}", e.what());
@@ -8307,21 +11052,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
 
 XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult value, char buffer[XR_MAX_RESULT_STRING_SIZE]) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 48;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&value, msg_out.buffer);
-    serialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 48;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&value, s_ctx);
+        serialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrResultToString: {}", e.what());
@@ -8331,19 +11084,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 49;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(hapticActionInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 49;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(hapticActionInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopHapticFeedback: {}", e.what());
@@ -8353,21 +11114,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* pathString, XrPath* path) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 50;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(pathString, count_null_terminated(pathString), msg_out.buffer);
-    serialize_ptr(path, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&path, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 50;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(pathString, count_null_terminated(pathString), s_ctx);
+        serialize_ptr(path, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&path, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStringToPath: {}", e.what());
@@ -8377,21 +11146,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE]) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 51;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize(&value, msg_out.buffer);
-    serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&buffer, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 51;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize(&value, s_ctx);
+        serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&buffer, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStructureTypeToString: {}", e.what());
@@ -8401,19 +11178,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance instance, const XrInteractionProfileSuggestedBinding* suggestedBindings) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 52;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&instance, msg_out.buffer);
-    serialize_ptr(suggestedBindings, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 52;
+        serialize(&function_id, s_ctx);
+        serialize(&instance, s_ctx);
+        serialize_ptr(suggestedBindings, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSuggestInteractionProfileBindings: {}", e.what());
@@ -8423,19 +11208,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsSyncInfo* syncInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 53;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(syncInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 53;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(syncInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSyncActions: {}", e.what());
@@ -8445,21 +11238,29 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
 
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 54;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&session, msg_out.buffer);
-    serialize_ptr(frameWaitInfo, 1, msg_out.buffer);
-    serialize_ptr(frameState, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
-    deserialize_ptr(&frameState, msg_in.stream, true);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 54;
+        serialize(&function_id, s_ctx);
+        serialize(&session, s_ctx);
+        serialize_ptr(frameWaitInfo, 1, s_ctx);
+        serialize_ptr(frameState, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+        deserialize_ptr(&frameState, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrWaitFrame: {}", e.what());
@@ -8469,19 +11270,27 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
 
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo) {
     try {
-    auto& transport = get_transport();
-    auto msg_out = transport.start_message(FUNCTION_CALL);
-    uint32_t function_id = 55;
-    serialize(&function_id, msg_out.buffer);
-    serialize(&swapchain, msg_out.buffer);
-    serialize_ptr(waitInfo, 1, msg_out.buffer);
-    msg_out.flush();
+        auto& transport = get_transport();
 
-    auto msg_in = transport.await_message(FUNCTION_RETURN);
-    XrResult result;
-    deserialize(&result, msg_in.stream);
+        // synchronize if needed and get time offset
+        XrDuration time_offset = get_time_offset(true);
 
-    return result;
+        auto msg_out = transport.start_message(FUNCTION_CALL);
+        SerializeContext s_ctx(msg_out.buffer, time_offset);
+
+        uint32_t function_id = 55;
+        serialize(&function_id, s_ctx);
+        serialize(&swapchain, s_ctx);
+        serialize_ptr(waitInfo, 1, s_ctx);
+        msg_out.flush();
+
+        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+
+        XrResult result;
+        deserialize(&result, d_ctx);
+
+        return result;
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrWaitSwapchainImage: {}", e.what());

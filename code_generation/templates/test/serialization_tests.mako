@@ -123,19 +123,21 @@ ${struct_generator.init_struct(plan, f"item{i}", "    ")}
     // Serialize all structs
     //
     TestStreamBuffer buffer;
+    SerializeContext s_ctx(buffer);
 
 % for i, plan in enumerate(plans):
-    serialize(&item${i}, buffer);
+    serialize(&item${i}, s_ctx);
 % endfor
 
     //
     // Deserialize all structs
     //
     buffer.reset_read();
+    DeserializeContext d_ctx(buffer);
 
 % for i, plan in enumerate(plans):
     ${plan.type_name} new_item${i}{};
-    deserialize(&new_item${i}, buffer);
+    deserialize(&new_item${i}, d_ctx);
 % endfor
 
     //
@@ -165,9 +167,10 @@ ${struct_generator.init_struct(plan, f"item{i}", "    ")}
     // Serialize all structs
     //
     TestStreamBuffer buffer;
+    SerializeContext s_ctx(buffer);
 
 % for i, plan in enumerate(plans):
-    serialize(&item${i}, buffer);
+    serialize(&item${i}, s_ctx);
 % endfor
 
     //
@@ -181,9 +184,10 @@ ${struct_generator.zero_struct(plan, f"item{i}", "    ")}
     // Deserialize all structs in-place
     //
     buffer.reset_read();
+    DeserializeContext d_ctx(buffer, true, 0);
 
 % for i, plan in enumerate(plans):
-    deserialize(&item${i}, buffer, true);
+    deserialize(&item${i}, d_ctx);
 % endfor
 
     //

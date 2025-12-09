@@ -23,17 +23,19 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
     function_loader.ensure_function_loaded("${function.name}", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_${function.name}));
     // by this point, the function id has already been read, now read the params
+    DeserializeContext d_ctx(msg_in.stream);
     % for param in function.params:
     ${param.declaration(with_qualifier=False, value_initialize=True)};
-    ${utils.deserialize_member(param, binding_prefix='', stream_var='msg_in.stream', in_place_var='false')}
+    ${utils.deserialize_member(param, binding_prefix='', ctx_var='d_ctx')}
     % endfor
 
     XrResult _result = function_loader.pfn_${function.name}(${', '.join(param.name for param in function.params)});
     
     auto msg_out = transport.start_message(FUNCTION_RETURN);
-    serialize(&_result, msg_out.buffer);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
     % for binding in function.modifiable_bindings:
-    ${utils.serialize_binding(binding, stream_var="msg_out.buffer")}
+    ${utils.serialize_binding(binding, ctx_var='s_ctx')}
     % endfor
     msg_out.flush();
 
