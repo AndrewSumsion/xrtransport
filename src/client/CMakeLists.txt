@@ -26,13 +26,10 @@ target_include_directories(xrtransport_client PUBLIC
     ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
-# C++ standard
-set_target_properties(xrtransport_client PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
+file(GENERATE
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/xrtransport_client_manifest-dev.json
+    INPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xrtransport_client_manifest-dev.json.in
 )
-
-target_compile_features(xrtransport_client PUBLIC cxx_std_17)
 
 # setup install directory
 install(TARGETS xrtransport_client LIBRARY DESTINATION client)

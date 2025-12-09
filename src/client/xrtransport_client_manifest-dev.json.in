@@ -1,0 +1,7 @@
+{
+    "file_format_version": "1.0.0",
+    "runtime": {
+        "name": "xrtransport_client",
+        "library_path": "$<TARGET_FILE:xrtransport_client>"
+    }
+}
