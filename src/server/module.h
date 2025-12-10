@@ -24,9 +24,9 @@
 namespace xrtransport {
 
 // Module function signatures
-typedef void (*PFN_module_on_init)(Transport* transport, FunctionLoader* function_loader);
+typedef void (*PFN_module_on_init)(xrtp_Transport transport, FunctionLoader* function_loader);
 typedef void (*PFN_module_get_required_extensions)(std::uint32_t* num_extensions_out, const char** extensions_out);
-typedef void (*PFN_module_on_instance)(Transport* transport, FunctionLoader* function_loader, XrInstance instance);
+typedef void (*PFN_module_on_instance)(xrtp_Transport transport, FunctionLoader* function_loader, XrInstance instance);
 typedef void (*PFN_module_on_shutdown)();
 
 class Module {
@@ -85,9 +85,9 @@ public:
         return *this;
     }
 
-    inline void on_init(Transport* transport, FunctionLoader* function_loader) { return pfn_on_init(transport, function_loader); }
+    inline void on_init(xrtp_Transport transport, FunctionLoader* function_loader) { return pfn_on_init(transport, function_loader); }
     inline void get_required_extensions(std::uint32_t* num_extensions_out, const char** extensions_out) { return pfn_get_required_extensions(num_extensions_out, extensions_out); }
-    inline void on_instance(Transport* transport, FunctionLoader* function_loader, XrInstance instance) { return pfn_on_instance(transport, function_loader, instance); }
+    inline void on_instance(xrtp_Transport transport, FunctionLoader* function_loader, XrInstance instance) { return pfn_on_instance(transport, function_loader, instance); }
     inline void on_shutdown() { return pfn_on_shutdown(); }
 };
 

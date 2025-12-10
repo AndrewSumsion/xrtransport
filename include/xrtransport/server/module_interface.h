@@ -20,7 +20,7 @@ extern "C" {
  * Called immediately after module is loaded, before connection handshake.
  * Can be used to register handlers on the transport or proactively load XR functions.
  */
-XRTP_MODULE_API void on_init(xrtransport::Transport* transport, xrtransport::FunctionLoader* function_loader);
+XRTP_MODULE_API void on_init(xrtp_Transport transport, xrtransport::FunctionLoader* function_loader);
 
 /**
  * Mechanism used by the server to know what extensions to request when creating the runtime.
@@ -35,7 +35,7 @@ XRTP_MODULE_API void get_required_extensions(std::uint32_t* num_extensions_out, 
  * Called immediately after the xrCreateInstance call completes.
  * Can be used to load functions that require an XrInstance to be loaded.
  */
-XRTP_MODULE_API void on_instance(xrtransport::Transport* transport, xrtransport::FunctionLoader* function_loader, XrInstance instance);
+XRTP_MODULE_API void on_instance(xrtp_Transport transport, xrtransport::FunctionLoader* function_loader, XrInstance instance);
 
 /**
  * Called immediately before module is unloaded.

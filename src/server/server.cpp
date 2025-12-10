@@ -94,7 +94,7 @@ void Server::run() {
 
     // initialize all modules (which may add handlers)
     for (auto& module : modules) {
-        module.on_init(&transport, &function_loader);
+        module.on_init(transport.get_handle(), &function_loader);
     }
 
     // queue up first iteration of worker loop
@@ -155,7 +155,7 @@ void Server::instance_handler(MessageLockIn msg_in) {
 
         // Notify modules that XrInstance was created
         for (auto& module : modules) {
-            module.on_instance(&transport, &function_loader, *instance);
+            module.on_instance(transport.get_handle(), &function_loader, *instance);
         }
     }
 
