@@ -41,6 +41,17 @@ static void fill_available_extensions() {
         available_extensions.emplace(extension_name, available_version);
     }
 
+    // extensions built into the runtime
+#ifdef _WIN32
+    available_extensions.emplace("XR_KHR_win32_convert_performance_counter_time", 1);
+#else
+    available_extensions.emplace("XR_KHR_convert_timespec_time", 1);
+#endif
+#ifdef __ANDROID__
+    available_extensions.emplace("XR_KHR_android_create_instance", 3);
+#endif
+    available_extensions.emplace("XR_EXT_debug_utils", 5);
+
     available_extensions_filled = true;
 }
 

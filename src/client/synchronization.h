@@ -16,6 +16,9 @@ namespace xrtransport {
  */
 XrDuration get_time_offset(bool try_synchronize = false);
 
+void enable_synchronization();
+void disable_synchronization();
+
 } // namespace xrtransport
 
 #endif // XRTRANSPORT_CLIENT_SYNCHRONIZATION

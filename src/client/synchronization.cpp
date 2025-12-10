@@ -11,6 +11,7 @@ static XrTime last_sync = INT64_MIN;
 static XrDuration sync_interval = 200'000'000; // 200ms
 static int sync_iterations = 20;
 
+static bool synchronization_enabled = false;
 static XrDuration time_offset = 0;
 
 static void do_synchronize() {
@@ -50,7 +51,7 @@ static void do_synchronize() {
 }
 
 XrDuration get_time_offset(bool try_synchronize) {
-    if (try_synchronize) {
+    if (try_synchronize && synchronization_enabled) {
         XrTime time = get_time();
         if (time > last_sync + sync_interval) {
             do_synchronize();
@@ -58,6 +59,14 @@ XrDuration get_time_offset(bool try_synchronize) {
     }
 
     return time_offset;
+}
+
+void enable_synchronization() {
+    synchronization_enabled = true;
+}
+
+void disable_synchronization() {
+    synchronization_enabled = false;
 }
 
 } // namespace xrtransport

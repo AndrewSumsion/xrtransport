@@ -2,8 +2,10 @@
 #include "runtime.h"
 #include "available_extensions.h"
 #include "transport_manager.h"
+#include "synchronization.h"
 
 #include "xrtransport/extensions/extension_functions.h"
+#include "xrtransport/time.h"
 
 #define XR_EXTENSION_PROTOTYPES
 #include "openxr/openxr_loader_negotiation.h"
@@ -35,18 +37,77 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(
     const XrInstanceCreateInfo*                 createInfo,
     XrInstance*                                 instance);
 
+// built-in extension functions
+#ifdef _WIN32
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHRImpl(
+    XrInstance                                  instance,
+    const LARGE_INTEGER*                        performanceCounter,
+    XrTime*                                     time);
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHRImpl(
+    XrInstance                                  instance,
+    XrTime                                      time,
+    LARGE_INTEGER*                              performanceCounter);
+#else
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHRImpl(
+    XrInstance                                  instance,
+    const struct timespec*                      timespecTime,
+    XrTime*                                     time);
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
+    XrInstance                                  instance,
+    XrTime                                      time,
+    struct timespec*                            timespecTime);
+#endif
+
 // custom xrtransport functions for API layers
-static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(Transport** transport_out);
+static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out);
 
 static const std::unordered_map<std::string, PFN_xrVoidFunction> function_table = {
 <%utils:for_grouped_functions args="function">\
-% if not function.name in ["xrEnumerateInstanceExtensionProperties", "xrCreateInstance"]:
+<%
+overridden_functions = [
+    "xrGetInstanceProcAddr",
+    "xrEnumerateInstanceExtensionProperties",
+    "xrCreateInstance",
+    "xrConvertTimespecTimeToTimeKHR",
+    "xrConvertTimeToTimespecTimeKHR",
+    "xrConvertWin32PerformanceCounterToTimeKHR",
+    "xrConvertTimeToWin32PerformanceCounterKHR"
+]
+%>\
+% if not function.name in overridden_functions:
     {"${function.name}", (PFN_xrVoidFunction)runtime::${function.name}},
 % endif
 </%utils:for_grouped_functions>
+};
+
+static const std::unordered_map<std::string, std::vector<std::string>> built_in_extensions = {
+#ifdef _WIN32
+    {"XR_KHR_win32_convert_performance_counter_time", {
+        "xrConvertWin32PerformanceCounterToTimeKHR",
+        "xrConvertTimeToWin32PerformanceCounterKHR",
+    }},
+#else
+    {"XR_KHR_convert_timespec_time", {
+        "xrConvertTimespecTimeToTimeKHR",
+        "xrConvertTimeToTimespecTimeKHR",
+    }},
+#endif
+};
+
+static const std::unordered_map<std::string, PFN_xrVoidFunction> built_in_functions = {
     {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl},
     {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrEnumerateInstanceExtensionPropertiesImpl},
-    {"xrCreateInstance", (PFN_xrVoidFunction)xrCreateInstanceImpl}
+    {"xrCreateInstance", (PFN_xrVoidFunction)xrCreateInstanceImpl},
+    {"xrtransportGetTransport", (PFN_xrVoidFunction)xrtransportGetTransport},
+#ifdef _WIN32
+    {"xrConvertWin32PerformanceCounterToTimeKHR", (PFN_xrVoidFunction)xrConvertWin32PerformanceCounterToTimeKHRImpl},
+    {"xrConvertTimeToWin32PerformanceCounterKHR", (PFN_xrVoidFunction)xrConvertTimeToWin32PerformanceCounterKHRImpl},
+#else
+    {"xrConvertTimespecTimeToTimeKHR", (PFN_xrVoidFunction)xrConvertTimespecTimeToTimeKHRImpl},
+    {"xrConvertTimeToTimespecTimeKHR", (PFN_xrVoidFunction)xrConvertTimeToTimespecTimeKHRImpl},
+#endif
 };
 
 static XrInstance saved_instance = XR_NULL_HANDLE;
@@ -57,14 +118,17 @@ static std::unordered_set<std::string> available_functions = {
 };
 
 static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance instance, const char* name, PFN_xrVoidFunction* function) {
+    if (!function) {
+        return XR_ERROR_HANDLE_INVALID;
+    }
+
     if (name == nullptr) {
-        if (function) *function = nullptr;
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
 
     std::string name_str(name);
 
-    // allow API layers to access transport
+    // allow API layers to access transport (allowed will null instance handle)
     if (name_str == "xrtransportGetTransport") {
         *function = reinterpret_cast<PFN_xrVoidFunction>(xrtransportGetTransport);
         return XR_SUCCESS;
@@ -84,16 +148,21 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
 
-    // double-check to be sure that function is in dispatch table
-    if (function_table.find(name_str) == function_table.end()) {
+    if (built_in_functions.find(name_str) != built_in_functions.end()) {
+        // function found in built-in functions
+        *function = built_in_functions.at(name_str);
+        return XR_SUCCESS;
+    }
+    else if (function_table.find(name_str) != function_table.end()) {
+        // function found in dispatch table
+        *function = function_table.at(name_str);
+        return XR_SUCCESS;
+    }
+    else {
+        // somehow the function was not in either table, but *was* in available_functions.
+        // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
-    
-    if (!function) {
-        return XR_ERROR_HANDLE_INVALID;
-    }
-    *function = function_table.at(name_str);
-    return XR_SUCCESS;
 }
 
 static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
@@ -175,8 +244,18 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     // now populate available functions
     for (int i = 0; i < create_info->enabledExtensionCount; i++) {
         std::string extension_name = create_info->enabledExtensionNames[i];
-        for (auto& function_name : extension_functions.at(extension_name)) {
-            available_functions.emplace(function_name);
+
+        // handle built-in extensions
+        if (built_in_extensions.find(extension_name) != built_in_extensions.end()) {
+            for (auto& function_name : built_in_extensions.at(extension_name)) {
+                available_functions.emplace(function_name);
+            }
+        }
+        // handle other extensions
+        else if (extension_functions.find(extension_name) != extension_functions.end()) {
+            for (auto& function_name : extension_functions.at(extension_name)) {
+                available_functions.emplace(function_name);
+            }
         }
     }
 
@@ -210,6 +289,8 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     XrResult result = runtime::xrCreateInstance(create_info, instance);
     if (XR_SUCCEEDED(result)) {
         saved_instance = *instance;
+        // now that instance has been created, synchronization can start
+        enable_synchronization();
     }
     else {
         // If instance creation failed, no functions are available
@@ -241,8 +322,56 @@ extern "C" XRAPI_ATTR XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(cons
     return XR_SUCCESS;
 }
 
-static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(Transport** transport_out) {
+static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out) {
     Transport& transport = get_transport();
-    *transport_out = &transport;
+    *transport_out = transport.get_handle();
     return XR_SUCCESS;
 }
+
+#ifdef _WIN32
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHRImpl(
+    XrInstance                                  instance,
+    const LARGE_INTEGER*                        performanceCounter,
+    XrTime*                                     time)
+{
+    if (instance != saved_instance) {
+        return XR_ERROR_HANDLE_INVALID;
+    }
+    convert_from_platform_time(performanceCounter, time);
+    return XR_SUCCESS;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHRImpl(
+    XrInstance                                  instance,
+    XrTime                                      time,
+    LARGE_INTEGER*                              performanceCounter)
+{
+    if (instance != saved_instance) {
+        return XR_ERROR_HANDLE_INVALID;
+    }
+    convert_to_platform_time(time, performanceCounter);
+}
+#else
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHRImpl(
+    XrInstance                                  instance,
+    const struct timespec*                      timespecTime,
+    XrTime*                                     time)
+{
+    if (instance != saved_instance) {
+        return XR_ERROR_HANDLE_INVALID;
+    }
+    convert_from_platform_time(timespecTime, time);
+    return XR_SUCCESS;
+}
+
+static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
+    XrInstance                                  instance,
+    XrTime                                      time,
+    struct timespec*                            timespecTime)
+{
+    if (instance != saved_instance) {
+        return XR_ERROR_HANDLE_INVALID;
+    }
+    convert_to_platform_time(time, timespecTime);
+}
+#endif

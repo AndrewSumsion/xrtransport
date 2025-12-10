@@ -316,6 +316,7 @@ public:
 
 class Transport {
 private:
+    bool owns_transport;
     xrtp_Transport wrapped;
 
     // pointer-stable storage of passed in std::functions so that the handler
@@ -323,9 +324,13 @@ private:
     std::unordered_map<xrtp_MessageHeader, std::unique_ptr<std::function<void(MessageLockIn)>>> handlers;
 
 public:
-    explicit Transport(std::unique_ptr<DuplexStream> stream) {
+    explicit Transport(std::unique_ptr<DuplexStream> stream) : owns_transport(true) {
         xrtp_create_transport(stream.release(), &wrapped);
     }
+
+    explicit Transport(xrtp_Transport wrapped)
+         : wrapped(wrapped), owns_transport(false)
+    {}
 
     // don't allow copying or moving
     Transport(const Transport&) = delete;
@@ -395,8 +400,14 @@ public:
         CHK_XRTP(xrtp_close(wrapped));
     }
 
+    xrtp_Transport get_handle() const {
+        return wrapped;
+    }
+
     ~Transport() {
-        CHK_XRTP(xrtp_release_transport(wrapped));
+        if (owns_transport) {
+            CHK_XRTP(xrtp_release_transport(wrapped));
+        }
     }
 };
 
