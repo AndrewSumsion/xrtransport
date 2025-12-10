@@ -76,17 +76,17 @@ bool Server::do_handshake() {
 }
 
 void Server::run() {
-    transport.register_handler(FUNCTION_CALL, [this](Transport& transport, MessageLockIn msg_in){
+    transport.register_handler(XRTP_MSG_FUNCTION_CALL, [this](MessageLockIn msg_in){
         uint32_t function_id{};
         asio::read(msg_in.stream, asio::buffer(&function_id, sizeof(uint32_t)));
         function_dispatch.handle_function(function_id, std::move(msg_in));
     });
 
-    transport.register_handler(SYNCHRONIZATION_REQUEST, [this](Transport& transport, MessageLockIn msg_in) {
+    transport.register_handler(XRTP_MSG_SYNCHRONIZATION_REQUEST, [this](MessageLockIn msg_in) {
         XrTime client_time{};
         asio::read(msg_in.stream, asio::buffer(&client_time, sizeof(XrTime)));
 
-        auto msg_out = transport.start_message(SYNCHRONIZATION_RESPONSE);
+        auto msg_out = transport.start_message(XRTP_MSG_SYNCHRONIZATION_RESPONSE);
         XrTime server_time = get_time();
         asio::write(msg_out.buffer, asio::buffer(&server_time, sizeof(XrTime)));
         msg_out.flush();
@@ -144,7 +144,7 @@ void Server::instance_handler(MessageLockIn msg_in) {
     XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
 
     // Send response to client
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
     serialize_ptr(instance, 1, s_ctx);

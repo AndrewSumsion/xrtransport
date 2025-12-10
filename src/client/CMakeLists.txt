@@ -28,8 +28,8 @@ target_include_directories(xrtransport_client PUBLIC
 )
 
 file(GENERATE
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/xrtransport_client_manifest-dev.json
-    INPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xrtransport_client_manifest-dev.json.in
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/xrtransport_client_manifest-$<CONFIG>.json
+    INPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xrtransport_client_manifest.json.in
 )
 
 # setup install directory

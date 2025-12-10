@@ -33,7 +33,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 197001;
@@ -42,7 +42,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
         serialize_ptr(digitalLensControl, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -65,7 +65,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 386001;
@@ -75,7 +75,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
         serialize_ptr(bodyTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -97,7 +97,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 386002;
@@ -105,7 +105,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
         serialize(&bodyTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -126,7 +126,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 386003;
@@ -136,7 +136,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -160,7 +160,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391001;
@@ -170,7 +170,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -192,7 +192,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391002;
@@ -202,7 +202,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -224,7 +224,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391003;
@@ -234,7 +234,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -256,7 +256,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391004;
@@ -266,7 +266,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -288,7 +288,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391005;
@@ -298,7 +298,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -320,7 +320,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 391006;
@@ -330,7 +330,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -354,7 +354,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 392001;
@@ -364,7 +364,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -386,7 +386,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 392002;
@@ -396,7 +396,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -418,7 +418,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 392003;
@@ -428,7 +428,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -450,7 +450,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 392004;
@@ -460,7 +460,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -484,7 +484,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 393001;
@@ -494,7 +494,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -516,7 +516,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 393002;
@@ -526,7 +526,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -550,7 +550,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390001;
@@ -560,7 +560,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -582,7 +582,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390002;
@@ -592,7 +592,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
         serialize_ptr(provider, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -614,7 +614,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390003;
@@ -624,7 +624,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
         serialize_ptr(anchor, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -646,7 +646,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390004;
@@ -654,7 +654,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
         serialize(&anchor, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -675,7 +675,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390005;
@@ -683,7 +683,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
         serialize(&provider, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -704,7 +704,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390006;
@@ -712,7 +712,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
         serialize(&snapshot, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -733,7 +733,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390007;
@@ -745,7 +745,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
         serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -768,7 +768,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390008;
@@ -777,7 +777,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
         serialize_ptr(uuid, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -799,7 +799,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390009;
@@ -809,7 +809,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
         serialize_ptr(queriedSenseData, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -832,7 +832,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390010;
@@ -841,7 +841,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -863,7 +863,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390011;
@@ -873,7 +873,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
         serialize_xr(componentData, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -895,7 +895,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390012;
@@ -905,7 +905,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
         serialize_ptr(uuid, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -927,7 +927,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390013;
@@ -937,7 +937,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -959,7 +959,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390014;
@@ -969,7 +969,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -991,7 +991,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390015;
@@ -1001,7 +1001,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1023,7 +1023,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390016;
@@ -1033,7 +1033,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1055,7 +1055,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 390017;
@@ -1063,7 +1063,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
         serialize(&provider, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1086,7 +1086,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48001;
@@ -1097,7 +1097,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
         serialize(&isActive, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1118,7 +1118,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48002;
@@ -1130,7 +1130,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
         serialize(&pose, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1151,7 +1151,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48003;
@@ -1162,7 +1162,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
         serialize(&state, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1183,7 +1183,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48004;
@@ -1194,7 +1194,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
         serialize(&state, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1215,7 +1215,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48005;
@@ -1226,7 +1226,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
         serialize(&state, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1249,7 +1249,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20001;
@@ -1259,7 +1259,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
         serialize_ptr(messenger, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1282,7 +1282,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20002;
@@ -1290,7 +1290,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
         serialize(&messenger, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1311,7 +1311,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20003;
@@ -1320,7 +1320,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
         serialize_ptr(labelInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1341,7 +1341,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20004;
@@ -1349,7 +1349,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
         serialize(&session, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1370,7 +1370,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20005;
@@ -1379,7 +1379,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
         serialize_ptr(labelInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1400,7 +1400,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20006;
@@ -1409,7 +1409,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
         serialize_ptr(nameInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1430,7 +1430,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20007;
@@ -1441,7 +1441,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
         serialize_ptr(callbackData, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1466,7 +1466,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 470001;
@@ -1475,7 +1475,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
         serialize_ptr(cancelInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1496,7 +1496,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 470002;
@@ -1506,7 +1506,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
         serialize_ptr(pollResult, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1530,7 +1530,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 52001;
@@ -1540,7 +1540,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
         serialize_ptr(handTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1562,7 +1562,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 52002;
@@ -1570,7 +1570,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
         serialize(&handTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1591,7 +1591,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 52003;
@@ -1601,7 +1601,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1625,7 +1625,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 16001;
@@ -1635,7 +1635,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
         serialize(&level, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1658,7 +1658,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430001;
@@ -1667,7 +1667,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
         serialize_ptr(beginInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1688,7 +1688,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430002;
@@ -1698,7 +1698,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
         serialize_ptr(planeDetector, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1720,7 +1720,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430003;
@@ -1728,7 +1728,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
         serialize(&planeDetector, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1749,7 +1749,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430004;
@@ -1758,7 +1758,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1780,7 +1780,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430005;
@@ -1790,7 +1790,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1812,7 +1812,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 430006;
@@ -1823,7 +1823,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
         serialize_ptr(polygonBuffer, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1847,7 +1847,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 17001;
@@ -1859,7 +1859,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
         serialize_ptr(tempSlope, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1885,7 +1885,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 77001;
@@ -1895,7 +1895,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
         serialize_ptr(bodyTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1917,7 +1917,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 77002;
@@ -1925,7 +1925,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
         serialize(&bodyTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1946,7 +1946,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 77003;
@@ -1955,7 +1955,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
         serialize_ptr(skeleton, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -1977,7 +1977,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 77004;
@@ -1987,7 +1987,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2011,7 +2011,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 109001;
@@ -2022,7 +2022,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
         serialize_ptr(colorSpaces, colorSpaceCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2045,7 +2045,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 109002;
@@ -2054,7 +2054,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
         serialize(&colorSpace, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2077,7 +2077,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 102001;
@@ -2088,7 +2088,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
         serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2111,7 +2111,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 102002;
@@ -2120,7 +2120,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
         serialize_ptr(displayRefreshRate, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2142,7 +2142,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 102003;
@@ -2151,7 +2151,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
         serialize(&displayRefreshRate, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2174,7 +2174,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 203001;
@@ -2184,7 +2184,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
         serialize_ptr(eyeTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2206,7 +2206,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 203002;
@@ -2214,7 +2214,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
         serialize(&eyeTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2235,7 +2235,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 203003;
@@ -2245,7 +2245,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
         serialize_ptr(eyeGazes, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2269,7 +2269,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 202001;
@@ -2279,7 +2279,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
         serialize_ptr(faceTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2301,7 +2301,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 202002;
@@ -2309,7 +2309,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
         serialize(&faceTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2330,7 +2330,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 202003;
@@ -2340,7 +2340,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
         serialize_ptr(expressionWeights, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2364,7 +2364,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 288001;
@@ -2374,7 +2374,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
         serialize_ptr(faceTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2397,7 +2397,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 288002;
@@ -2405,7 +2405,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
         serialize(&faceTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2426,7 +2426,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 288003;
@@ -2436,7 +2436,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
         serialize_ptr(expressionWeights, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2460,7 +2460,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 115001;
@@ -2470,7 +2470,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
         serialize_ptr(profile, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2493,7 +2493,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 115002;
@@ -2501,7 +2501,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
         serialize(&profile, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2524,7 +2524,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 111001;
@@ -2533,7 +2533,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
         serialize_ptr(mesh, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2557,7 +2557,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 210001;
@@ -2567,7 +2567,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
         serialize_ptr(deviceSampleRate, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2591,7 +2591,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 117001;
@@ -2601,7 +2601,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
         serialize_ptr(keyboardSpace, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2624,7 +2624,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 117002;
@@ -2634,7 +2634,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
         serialize_ptr(keyboard, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2659,7 +2659,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119001;
@@ -2669,7 +2669,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
         serialize_ptr(outGeometryInstance, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2691,7 +2691,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119002;
@@ -2701,7 +2701,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
         serialize_ptr(outPassthrough, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2723,7 +2723,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119003;
@@ -2733,7 +2733,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
         serialize_ptr(outLayer, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2755,7 +2755,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119004;
@@ -2763,7 +2763,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
         serialize(&instance, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2784,7 +2784,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119005;
@@ -2792,7 +2792,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
         serialize(&passthrough, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2813,7 +2813,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119006;
@@ -2821,7 +2821,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
         serialize(&layer, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2842,7 +2842,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119007;
@@ -2851,7 +2851,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
         serialize_ptr(transformation, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2872,7 +2872,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119008;
@@ -2880,7 +2880,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
         serialize(&layer, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2901,7 +2901,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119009;
@@ -2909,7 +2909,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
         serialize(&layer, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2930,7 +2930,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119010;
@@ -2939,7 +2939,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
         serialize_ptr(style, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2960,7 +2960,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119011;
@@ -2968,7 +2968,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
         serialize(&passthrough, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -2989,7 +2989,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 119012;
@@ -2997,7 +2997,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
         serialize(&passthrough, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3020,7 +3020,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 204001;
@@ -3029,7 +3029,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
         serialize_ptr(intensity, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3052,7 +3052,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 120001;
@@ -3063,7 +3063,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
         serialize_ptr(paths, pathCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3086,7 +3086,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 120002;
@@ -3096,7 +3096,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
         serialize_ptr(properties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3118,7 +3118,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 120003;
@@ -3128,7 +3128,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
         serialize_ptr(buffer, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3153,7 +3153,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 176001;
@@ -3163,7 +3163,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
         serialize_ptr(boundary2DOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3185,7 +3185,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 176002;
@@ -3195,7 +3195,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
         serialize_ptr(boundingBox2DOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3217,7 +3217,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 176003;
@@ -3227,7 +3227,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
         serialize_ptr(boundingBox3DOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3249,7 +3249,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 176004;
@@ -3259,7 +3259,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
         serialize_ptr(roomLayoutOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3281,7 +3281,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 176005;
@@ -3291,7 +3291,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
         serialize_ptr(semanticLabelsOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3315,7 +3315,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 199001;
@@ -3325,7 +3325,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3349,7 +3349,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 114001;
@@ -3359,7 +3359,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3381,7 +3381,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 114002;
@@ -3392,7 +3392,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
         serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3415,7 +3415,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 114003;
@@ -3425,7 +3425,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
         serialize_ptr(status, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3447,7 +3447,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 114004;
@@ -3456,7 +3456,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
         serialize_ptr(uuid, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3478,7 +3478,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 114005;
@@ -3488,7 +3488,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3512,7 +3512,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 200001;
@@ -3522,7 +3522,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
         serialize_ptr(spaceContainerOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3546,7 +3546,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 157001;
@@ -3556,7 +3556,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3578,7 +3578,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 157002;
@@ -3588,7 +3588,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
         serialize_ptr(results, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3612,7 +3612,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 170001;
@@ -3622,7 +3622,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3648,7 +3648,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 159001;
@@ -3658,7 +3658,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3680,7 +3680,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 159002;
@@ -3690,7 +3690,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3714,7 +3714,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 239001;
@@ -3724,7 +3724,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3749,7 +3749,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 242001;
@@ -3759,7 +3759,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
         serialize_ptr(user, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3781,7 +3781,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 242002;
@@ -3789,7 +3789,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
         serialize(&user, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3810,7 +3810,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 242003;
@@ -3819,7 +3819,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
         serialize_ptr(userId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3843,7 +3843,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 72001;
@@ -3852,7 +3852,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
         serialize_xr(state, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3874,7 +3874,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 72002;
@@ -3883,7 +3883,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
         serialize_xr(state, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3906,7 +3906,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118001;
@@ -3916,7 +3916,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
         serialize_ptr(outTriangleMesh, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3938,7 +3938,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118002;
@@ -3946,7 +3946,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
         serialize(&mesh, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3967,7 +3967,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118003;
@@ -3975,7 +3975,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
         serialize(&mesh, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -3996,7 +3996,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118004;
@@ -4005,7 +4005,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
         serialize_ptr(outVertexCount, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4027,7 +4027,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118005;
@@ -4037,7 +4037,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
         serialize(&triangleCount, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4058,7 +4058,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118006;
@@ -4066,7 +4066,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
         serialize(&mesh, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4087,7 +4087,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118007;
@@ -4096,7 +4096,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
         #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4118,7 +4118,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 118008;
@@ -4127,7 +4127,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
         #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4151,7 +4151,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 104001;
@@ -4162,7 +4162,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
         serialize_ptr(paths, pathCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4187,7 +4187,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 320001;
@@ -4197,7 +4197,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
         serialize_ptr(anchor, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4219,7 +4219,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 320002;
@@ -4228,7 +4228,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
         serialize_ptr(name, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4252,7 +4252,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 321001;
@@ -4262,7 +4262,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
         serialize_ptr(bodyTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4284,7 +4284,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 321002;
@@ -4292,7 +4292,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
         serialize(&bodyTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4313,7 +4313,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 321003;
@@ -4324,7 +4324,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
         serialize_ptr(skeleton, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4346,7 +4346,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 321004;
@@ -4356,7 +4356,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4380,7 +4380,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 105001;
@@ -4390,7 +4390,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
         serialize_ptr(facialTracker, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4412,7 +4412,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 105002;
@@ -4420,7 +4420,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
         serialize(&facialTracker, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4441,7 +4441,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 105003;
@@ -4450,7 +4450,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
         serialize_ptr(facialExpressions, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4474,7 +4474,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 319001;
@@ -4483,7 +4483,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
         serialize_ptr(applyInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4507,7 +4507,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 318001;
@@ -4517,7 +4517,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
         serialize_ptr(passthrough, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4539,7 +4539,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 318002;
@@ -4547,7 +4547,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
         serialize(&passthrough, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4570,7 +4570,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 28001;
@@ -4580,7 +4580,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4604,7 +4604,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 29001;
@@ -4614,7 +4614,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4638,7 +4638,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 5001;
@@ -4649,7 +4649,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
         serialize_ptr(surface, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4674,7 +4674,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 4001;
@@ -4684,7 +4684,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
         serialize(&threadId, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4707,7 +4707,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 37001;
@@ -4717,7 +4717,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
         serialize_ptr(timespecTime, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4739,7 +4739,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 37002;
@@ -4749,7 +4749,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
         serialize_ptr(time, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4774,7 +4774,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 149001;
@@ -4784,7 +4784,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
         serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4808,7 +4808,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 89001;
@@ -4816,7 +4816,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
         serialize_xr(loaderInitInfo, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4839,7 +4839,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 30001;
@@ -4849,7 +4849,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4873,7 +4873,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 24001;
@@ -4883,7 +4883,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4907,7 +4907,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 25001;
@@ -4917,7 +4917,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4941,7 +4941,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 32001;
@@ -4953,7 +4953,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
         serialize_ptr(visibilityMask, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -4977,7 +4977,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 26001;
@@ -4989,7 +4989,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5012,7 +5012,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 26002;
@@ -5023,7 +5023,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
         serialize_ptr(vkPhysicalDevice, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5045,7 +5045,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 26003;
@@ -5055,7 +5055,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
         serialize_ptr(graphicsRequirements, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5077,7 +5077,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 26004;
@@ -5089,7 +5089,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5114,7 +5114,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 91001;
@@ -5125,7 +5125,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
         serialize_ptr(vulkanResult, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5148,7 +5148,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 91002;
@@ -5159,7 +5159,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
         serialize_ptr(vulkanResult, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5182,7 +5182,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 91003;
@@ -5192,7 +5192,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
         serialize_ptr(vulkanPhysicalDevice, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5216,7 +5216,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 36001;
@@ -5226,7 +5226,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
         serialize_ptr(performanceCounter, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5248,7 +5248,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 36002;
@@ -5258,7 +5258,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
         serialize_ptr(time, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5282,7 +5282,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 572001;
@@ -5292,7 +5292,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
         serialize_ptr(advertisementRequestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5315,7 +5315,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 572002;
@@ -5325,7 +5325,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
         serialize_ptr(discoveryRequestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5347,7 +5347,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 572003;
@@ -5357,7 +5357,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5379,7 +5379,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 572004;
@@ -5389,7 +5389,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5413,7 +5413,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292001;
@@ -5423,7 +5423,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
         serialize_ptr(environmentDepthImage, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5445,7 +5445,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292002;
@@ -5455,7 +5455,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
         serialize_ptr(environmentDepthProvider, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5477,7 +5477,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292003;
@@ -5487,7 +5487,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
         serialize_ptr(swapchain, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5509,7 +5509,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292004;
@@ -5517,7 +5517,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
         serialize(&environmentDepthProvider, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5538,7 +5538,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292005;
@@ -5546,7 +5546,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
         serialize(&swapchain, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5567,7 +5567,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292006;
@@ -5578,7 +5578,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
         serialize_xr_array(images, imageCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5601,7 +5601,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292007;
@@ -5610,7 +5610,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5632,7 +5632,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292008;
@@ -5641,7 +5641,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
         serialize_ptr(setInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5662,7 +5662,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292009;
@@ -5670,7 +5670,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
         serialize(&environmentDepthProvider, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5691,7 +5691,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 292010;
@@ -5699,7 +5699,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
         serialize(&environmentDepthProvider, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5722,7 +5722,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 201001;
@@ -5731,7 +5731,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
         serialize_ptr(foveationState, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5755,7 +5755,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 267001;
@@ -5765,7 +5765,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
         serialize_ptr(colorLut, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5787,7 +5787,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 267002;
@@ -5795,7 +5795,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
         serialize(&colorLut, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5816,7 +5816,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 267003;
@@ -5825,7 +5825,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
         serialize_ptr(updateInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5848,7 +5848,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 218001;
@@ -5857,7 +5857,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
         serialize_ptr(preferences, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5881,7 +5881,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 233001;
@@ -5892,7 +5892,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
         serialize_ptr(counterPaths, counterPathCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5915,7 +5915,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 233002;
@@ -5924,7 +5924,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5946,7 +5946,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 233003;
@@ -5956,7 +5956,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
         serialize_ptr(counter, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -5978,7 +5978,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 233004;
@@ -5987,7 +5987,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6010,7 +6010,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 255001;
@@ -6020,7 +6020,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
         serialize_ptr(resolution, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6044,7 +6044,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 533001;
@@ -6053,7 +6053,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
         serialize_ptr(pauseInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6074,7 +6074,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 533002;
@@ -6083,7 +6083,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
         serialize_ptr(resumeInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6106,7 +6106,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 270001;
@@ -6116,7 +6116,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
         serialize_ptr(triangleMeshOutput, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6140,7 +6140,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 291001;
@@ -6150,7 +6150,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
         serialize_ptr(requestId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6175,7 +6175,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220001;
@@ -6184,7 +6184,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
         serialize_ptr(changeInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6205,7 +6205,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220002;
@@ -6215,7 +6215,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
         serialize_ptr(keyboard, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6237,7 +6237,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220003;
@@ -6248,7 +6248,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
         serialize_ptr(keyboardSpace, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6270,7 +6270,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220004;
@@ -6278,7 +6278,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
         serialize(&keyboard, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6299,7 +6299,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220005;
@@ -6310,7 +6310,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
         serialize_ptr(textureIds, textureIdCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6333,7 +6333,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220006;
@@ -6342,7 +6342,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
         serialize_ptr(animationStates, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6364,7 +6364,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220007;
@@ -6373,7 +6373,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
         serialize_ptr(scale, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6395,7 +6395,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220008;
@@ -6405,7 +6405,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
         serialize_ptr(textureData, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6427,7 +6427,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220009;
@@ -6437,7 +6437,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
         serialize_ptr(interactorRootPose, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6459,7 +6459,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220010;
@@ -6468,7 +6468,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
         serialize_ptr(modelVisibility, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6489,7 +6489,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 220011;
@@ -6498,7 +6498,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
         serialize_ptr(locationInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6521,7 +6521,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 138001;
@@ -6531,7 +6531,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6555,7 +6555,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 483001;
@@ -6565,7 +6565,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
         serialize_ptr(facialExpressionClient, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6587,7 +6587,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 483002;
@@ -6595,7 +6595,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
         serialize(&facialExpressionClient, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6616,7 +6616,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 483003;
@@ -6627,7 +6627,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
         serialize_ptr(blendShapes, blendShapeCount, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6651,7 +6651,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140001;
@@ -6661,7 +6661,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
         serialize_ptr(map, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6683,7 +6683,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140002;
@@ -6691,7 +6691,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
         serialize(&map, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6712,7 +6712,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140003;
@@ -6721,7 +6721,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
         serialize_ptr(info, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6742,7 +6742,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140004;
@@ -6753,7 +6753,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6776,7 +6776,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140005;
@@ -6786,7 +6786,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
         serialize_ptr(mapUuid, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6809,7 +6809,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140006;
@@ -6821,7 +6821,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
         serialize_ptr(maps, mapCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6844,7 +6844,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 140007;
@@ -6853,7 +6853,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
         serialize_ptr(requestInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6876,7 +6876,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139001;
@@ -6886,7 +6886,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
         serialize_ptr(markerDetector, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6908,7 +6908,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139002;
@@ -6918,7 +6918,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6940,7 +6940,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139003;
@@ -6948,7 +6948,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
         serialize(&markerDetector, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -6969,7 +6969,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139004;
@@ -6978,7 +6978,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7000,7 +7000,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139005;
@@ -7010,7 +7010,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
         serialize_ptr(meters, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7032,7 +7032,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139006;
@@ -7042,7 +7042,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
         serialize_ptr(number, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7064,7 +7064,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139007;
@@ -7074,7 +7074,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
         serialize_ptr(reprojectionErrorMeters, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7096,7 +7096,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139008;
@@ -7108,7 +7108,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7131,7 +7131,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139009;
@@ -7142,7 +7142,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
         serialize_ptr(markers, markerCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7165,7 +7165,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 139010;
@@ -7174,7 +7174,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
         serialize_ptr(snapshotInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7198,7 +7198,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 141001;
@@ -7208,7 +7208,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7230,7 +7230,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 141002;
@@ -7240,7 +7240,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7262,7 +7262,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 141003;
@@ -7271,7 +7271,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7295,7 +7295,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142001;
@@ -7305,7 +7305,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
         serialize_ptr(storage, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7327,7 +7327,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142002;
@@ -7337,7 +7337,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7359,7 +7359,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142003;
@@ -7369,7 +7369,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7391,7 +7391,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142004;
@@ -7399,7 +7399,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
         serialize(&storage, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7420,7 +7420,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142005;
@@ -7430,7 +7430,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7452,7 +7452,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142006;
@@ -7462,7 +7462,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7484,7 +7484,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142007;
@@ -7494,7 +7494,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7516,7 +7516,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142008;
@@ -7526,7 +7526,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7548,7 +7548,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142009;
@@ -7558,7 +7558,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7580,7 +7580,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 142010;
@@ -7590,7 +7590,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7614,7 +7614,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 474001;
@@ -7623,7 +7623,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
         serialize_ptr(info, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7646,7 +7646,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 473001;
@@ -7655,7 +7655,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
         serialize_ptr(enableInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7678,7 +7678,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475001;
@@ -7688,7 +7688,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
         serialize_ptr(buffer, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7711,7 +7711,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475002;
@@ -7721,7 +7721,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
         serialize_ptr(detector, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7743,7 +7743,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475003;
@@ -7751,7 +7751,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
         serialize(&detector, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7772,7 +7772,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475004;
@@ -7781,7 +7781,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
         serialize_ptr(buffer, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7804,7 +7804,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475005;
@@ -7814,7 +7814,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
         serialize_ptr(size, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7836,7 +7836,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475006;
@@ -7847,7 +7847,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7871,7 +7871,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475007;
@@ -7882,7 +7882,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7904,7 +7904,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475008;
@@ -7914,7 +7914,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
         serialize_ptr(future, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7936,7 +7936,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 475009;
@@ -7946,7 +7946,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
         serialize_ptr(completion, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -7970,7 +7970,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 376001;
@@ -7979,7 +7979,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8003,7 +8003,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 67001;
@@ -8016,7 +8016,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
         serialize_ptr(modes, modeCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8041,7 +8041,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 56001;
@@ -8051,7 +8051,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
         serialize_ptr(controllerModelKeyState, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8073,7 +8073,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 56002;
@@ -8083,7 +8083,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
         serialize_ptr(properties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8105,7 +8105,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 56003;
@@ -8115,7 +8115,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8137,7 +8137,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 56004;
@@ -8149,7 +8149,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8174,7 +8174,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 53001;
@@ -8184,7 +8184,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8206,7 +8206,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 53002;
@@ -8216,7 +8216,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
         serialize_ptr(handMesh, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8240,7 +8240,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 57001;
@@ -8250,7 +8250,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
         serialize_ptr(anchor, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8273,7 +8273,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 57002;
@@ -8283,7 +8283,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
         #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8307,7 +8307,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 148001;
@@ -8319,7 +8319,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8342,7 +8342,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 148002;
@@ -8354,7 +8354,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8379,7 +8379,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98001;
@@ -8388,7 +8388,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
         serialize_ptr(computeInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8409,7 +8409,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98002;
@@ -8419,7 +8419,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
         serialize_ptr(scene, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8441,7 +8441,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98003;
@@ -8451,7 +8451,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
         serialize_ptr(sceneObserver, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8473,7 +8473,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98004;
@@ -8481,7 +8481,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
         serialize(&scene, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8502,7 +8502,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98005;
@@ -8510,7 +8510,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
         serialize(&sceneObserver, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8531,7 +8531,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98006;
@@ -8543,7 +8543,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
         serialize_ptr(features, featureCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8566,7 +8566,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98007;
@@ -8576,7 +8576,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
         serialize_ptr(components, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8598,7 +8598,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98008;
@@ -8607,7 +8607,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8629,7 +8629,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98009;
@@ -8639,7 +8639,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
         serialize_ptr(buffers, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8661,7 +8661,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 98010;
@@ -8671,7 +8671,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
         serialize_ptr(locations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8695,7 +8695,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 99001;
@@ -8704,7 +8704,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
         serialize_ptr(deserializeInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8725,7 +8725,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 99002;
@@ -8737,7 +8737,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
         serialize_ptr(buffer, countInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8762,7 +8762,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 40001;
@@ -8772,7 +8772,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
         serialize_ptr(anchor, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8794,7 +8794,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 40002;
@@ -8804,7 +8804,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8826,7 +8826,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 40003;
@@ -8834,7 +8834,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
         serialize(&anchor, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8857,7 +8857,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143001;
@@ -8865,7 +8865,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
         serialize(&spatialAnchorStore, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8886,7 +8886,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143002;
@@ -8896,7 +8896,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
         serialize_ptr(spatialAnchor, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8918,7 +8918,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143003;
@@ -8927,7 +8927,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
         serialize_ptr(spatialAnchorStore, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8949,7 +8949,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143004;
@@ -8957,7 +8957,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
         serialize(&spatialAnchorStore, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -8978,7 +8978,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143005;
@@ -8989,7 +8989,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
         serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9012,7 +9012,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143006;
@@ -9021,7 +9021,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
         serialize_ptr(spatialAnchorPersistenceInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9042,7 +9042,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 143007;
@@ -9051,7 +9051,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
         serialize_ptr(spatialAnchorPersistenceName, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9074,7 +9074,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 50001;
@@ -9084,7 +9084,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9106,7 +9106,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 50002;
@@ -9114,7 +9114,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
         serialize(&nodeBinding, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9135,7 +9135,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 50003;
@@ -9145,7 +9145,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
         serialize_ptr(properties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9167,7 +9167,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 50004;
@@ -9177,7 +9177,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
         serialize_ptr(nodeBinding, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9201,7 +9201,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 160001;
@@ -9210,7 +9210,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
         serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9232,7 +9232,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 160002;
@@ -9241,7 +9241,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
         serialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9265,7 +9265,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 227001;
@@ -9276,7 +9276,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
         serialize_ptr(cameras, cameraCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9301,7 +9301,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 307001;
@@ -9311,7 +9311,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
         serialize(&hint, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9334,7 +9334,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 124001;
@@ -9343,7 +9343,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
         serialize(&enabled, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9366,7 +9366,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 125001;
@@ -9376,7 +9376,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9398,7 +9398,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 125002;
@@ -9408,7 +9408,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
         serialize_ptr(size, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9430,7 +9430,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 125003;
@@ -9440,7 +9440,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
         serialize(&enable, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9461,7 +9461,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 125004;
@@ -9471,7 +9471,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
         serialize(&timeout, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9492,7 +9492,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 125005;
@@ -9501,7 +9501,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
         serialize(&enabled, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9524,7 +9524,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 126001;
@@ -9533,7 +9533,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
         serialize(&offset, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9555,7 +9555,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 1;
@@ -9565,7 +9565,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
         serialize_ptr(index, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9587,7 +9587,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 2;
@@ -9597,7 +9597,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
         serialize_xr(hapticFeedback, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9618,7 +9618,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 3;
@@ -9627,7 +9627,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
         serialize_ptr(attachInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9648,7 +9648,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 4;
@@ -9657,7 +9657,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
         serialize_ptr(frameBeginInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9678,7 +9678,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 5;
@@ -9687,7 +9687,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
         serialize_ptr(beginInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9708,7 +9708,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 6;
@@ -9718,7 +9718,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
         serialize_ptr(action, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9740,7 +9740,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 7;
@@ -9750,7 +9750,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
         serialize_ptr(actionSet, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9772,7 +9772,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 8;
@@ -9782,7 +9782,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9804,7 +9804,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 9;
@@ -9813,7 +9813,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
         serialize_ptr(instance, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9835,7 +9835,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 10;
@@ -9845,7 +9845,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
         serialize_ptr(space, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9867,7 +9867,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 11;
@@ -9877,7 +9877,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
         serialize_ptr(session, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9899,7 +9899,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 12;
@@ -9909,7 +9909,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
         serialize_ptr(swapchain, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9931,7 +9931,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 13;
@@ -9939,7 +9939,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
         serialize(&action, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9960,7 +9960,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 14;
@@ -9968,7 +9968,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
         serialize(&actionSet, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -9989,7 +9989,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 15;
@@ -9997,7 +9997,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
         serialize(&instance, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10018,7 +10018,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 16;
@@ -10026,7 +10026,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
         serialize(&session, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10047,7 +10047,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 17;
@@ -10055,7 +10055,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
         serialize(&space, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10076,7 +10076,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 18;
@@ -10084,7 +10084,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
         serialize(&swapchain, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10105,7 +10105,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 19;
@@ -10114,7 +10114,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
         serialize_ptr(frameEndInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10135,7 +10135,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 20;
@@ -10143,7 +10143,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
         serialize(&session, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10164,7 +10164,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 21;
@@ -10174,7 +10174,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
         serialize_ptr(properties, propertyCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10197,7 +10197,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 22;
@@ -10209,7 +10209,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
         serialize_ptr(sources, sourceCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10232,7 +10232,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 23;
@@ -10245,7 +10245,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
         serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10268,7 +10268,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 24;
@@ -10279,7 +10279,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
         serialize_ptr(properties, propertyCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10302,7 +10302,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 25;
@@ -10313,7 +10313,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
         serialize_ptr(spaces, spaceCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10336,7 +10336,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 26;
@@ -10347,7 +10347,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
         serialize_ptr(formats, formatCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10370,7 +10370,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 27;
@@ -10381,7 +10381,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
         serialize_xr_array(images, imageCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10404,7 +10404,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 28;
@@ -10417,7 +10417,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
         serialize_ptr(views, viewCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10440,7 +10440,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 29;
@@ -10452,7 +10452,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
         serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10475,7 +10475,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 30;
@@ -10485,7 +10485,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10507,7 +10507,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 31;
@@ -10517,7 +10517,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10539,7 +10539,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 32;
@@ -10549,7 +10549,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10571,7 +10571,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 33;
@@ -10581,7 +10581,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
         serialize_ptr(state, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10603,7 +10603,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 34;
@@ -10613,7 +10613,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
         serialize_ptr(interactionProfile, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10635,7 +10635,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 35;
@@ -10647,7 +10647,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10670,7 +10670,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 36;
@@ -10679,7 +10679,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
         serialize_ptr(instanceProperties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10701,7 +10701,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 37;
@@ -10711,7 +10711,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
         serialize_ptr(bounds, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10733,7 +10733,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 38;
@@ -10743,7 +10743,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
         serialize_ptr(systemId, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10765,7 +10765,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 39;
@@ -10775,7 +10775,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
         serialize_ptr(properties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10797,7 +10797,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 40;
@@ -10808,7 +10808,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
         serialize_ptr(configurationProperties, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10830,7 +10830,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 41;
@@ -10841,7 +10841,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
         serialize_ptr(location, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10863,7 +10863,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 42;
@@ -10873,7 +10873,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
         serialize_ptr(spaceLocations, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10895,7 +10895,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 43;
@@ -10908,7 +10908,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
         serialize_ptr(views, viewCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10932,7 +10932,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 44;
@@ -10944,7 +10944,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
         serialize_ptr(buffer, bufferCapacityInput, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10967,7 +10967,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 45;
@@ -10976,7 +10976,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
         serialize_ptr(eventData, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -10998,7 +10998,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 46;
@@ -11007,7 +11007,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
         serialize_ptr(releaseInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11028,7 +11028,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 47;
@@ -11036,7 +11036,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
         serialize(&session, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11057,7 +11057,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 48;
@@ -11067,7 +11067,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
         serialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11089,7 +11089,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 49;
@@ -11098,7 +11098,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
         serialize_ptr(hapticActionInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11119,7 +11119,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 50;
@@ -11129,7 +11129,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
         serialize_ptr(path, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11151,7 +11151,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 51;
@@ -11161,7 +11161,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
         serialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11183,7 +11183,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 52;
@@ -11192,7 +11192,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
         serialize_ptr(suggestedBindings, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11213,7 +11213,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 53;
@@ -11222,7 +11222,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
         serialize_ptr(syncInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11243,7 +11243,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 54;
@@ -11253,7 +11253,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
         serialize_ptr(frameState, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;
@@ -11275,7 +11275,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = 55;
@@ -11284,7 +11284,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
         serialize_ptr(waitInfo, 1, s_ctx);
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;

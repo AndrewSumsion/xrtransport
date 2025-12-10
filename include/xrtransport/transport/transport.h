@@ -1,272 +1,403 @@
 #ifndef XRTRANSPORT_TRANSPORT_H
 #define XRTRANSPORT_TRANSPORT_H
 
+#include "transport_c_api.h"
+#include "error.h"
+
 #include "xrtransport/asio_compat.h"
 
-#include "asio/write.hpp"
-#include "asio/read.hpp"
-
-#include <mutex>
-#include <thread>
-#include <functional>
-#include <unordered_map>
 #include <cstdint>
+#include <unordered_map>
+#include <functional>
 #include <memory>
-#include <atomic>
-#include <stdexcept>
-#include <vector>
-
-#define XRTRANSPORT_PROTOCOL_VERSION 1
-// "XRTP" as a little-endian uint32_t
-#define XRTRANSPORT_MAGIC 0x50545258
 
 namespace xrtransport {
 
-// Exception for Transport-specific errors
-class TransportException : public std::runtime_error {
-public:
-    explicit TransportException(const std::string& message) : std::runtime_error(message) {}
-};
-
-// Message type constants
-constexpr uint16_t FUNCTION_CALL = 1;
-constexpr uint16_t FUNCTION_RETURN = 2;
-constexpr uint16_t SYNCHRONIZATION_REQUEST = 3;
-constexpr uint16_t SYNCHRONIZATION_RESPONSE = 4;
-constexpr uint16_t CUSTOM_BASE = 100;
-
-class SendBuffer : public SyncWriteStream {
-public:
-    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) {
-        ec.clear();
-        std::size_t total = 0;
-        const std::uint8_t* data = static_cast<const std::uint8_t*>(buffer.data());
-        std::size_t size = buffer.size();
-        buffer_.insert(buffer_.end(), data, data + size);
-        total += size;
-        return total;
+namespace {
+    void check_for_transport_exception(xrtp_Result result) {
+        if (result == -1) { // special marker for TransportException
+            throw TransportException("non-IO exception happened in Transport implementation; see logs");
+        }
     }
 
-    std::size_t write_some(const asio::const_buffer& buffer) {
+    void check_xrtp_result(xrtp_Result result) {
+        check_for_transport_exception(result);
+        if (result) {
+            throw asio::system_error(result, asio::system_category());
+        }
+    }
+}
+#define CHK_XRTP(expr) \
+do { \
+    xrtp_Result _result = expr; \
+    check_xrtp_result(_result); \
+} while (0)
+
+struct MessageLockInStream : public SyncReadStream {
+private:
+    xrtp_MessageLockIn wrapped;
+
+public:
+    MessageLockInStream(xrtp_MessageLockIn wrapped)
+        : wrapped(wrapped)
+    {}
+
+    // don't allow copying or moving. the parent MessageLockIn can be moved
+    MessageLockInStream(const MessageLockInStream&) = delete;
+    MessageLockInStream& operator=(const MessageLockInStream&) = delete;
+    MessageLockInStream(MessageLockInStream&&) = delete;
+    MessageLockInStream& operator=(MessageLockInStream&&) = delete;
+
+    std::size_t read_some(const asio::mutable_buffer& buffer, asio::error_code& ec) override {
+        std::uint64_t size_read{};
+        xrtp_Result result = xrtp_msg_in_read_some(wrapped, buffer.data(), buffer.size(), &size_read);
+        check_for_transport_exception(result);
+        ec = asio::error_code(result, asio::system_category());
+        return size_read;
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffer) override {
         asio::error_code ec;
-        auto n = write_some(buffer, ec);
-        if (ec) throw asio::system_error(ec);
-        return n;
+        std::size_t size_read = read_some(buffer, ec);
+        if (ec) {
+            throw asio::system_error(ec);
+        }
+        return size_read;
     }
 
-    // No-ops
-    void non_blocking(bool mode) {}
-    bool non_blocking() const { return false; }
-    bool is_open() const { return true; }
-    void close() {}
-    void close(asio::error_code& ec) { ec.clear(); }
+    std::size_t available() override { throw InvalidOperationException(); }
+    std::size_t available(asio::error_code& ec) override { throw InvalidOperationException(); }
+    void non_blocking(bool mode) override { throw InvalidOperationException(); }
+    bool non_blocking() const override { throw InvalidOperationException(); }
+    bool is_open() const override { throw InvalidOperationException(); }
+    void close() override { throw InvalidOperationException(); }
+    void close(asio::error_code& ec) override { throw InvalidOperationException(); }
 
-    const std::vector<std::uint8_t>& data() const { return buffer_; }
-    std::vector<std::uint8_t>& data() { return buffer_; }
-
-    void clear() { buffer_.clear(); }
-
-private:
-    std::vector<std::uint8_t> buffer_;
+    friend struct MessageLockIn;
 };
 
-// Wrapper for SyncReadStream* to be used like a reference
-// Mainly used so that MessageLockIn can be moveable and have the same syntax as
-// MessageLockOut because OCD :)
-class SyncReadStreamPointerWrapper : public SyncReadStream {
-private:
-    SyncReadStream* p_stream;
-
-public:
-    SyncReadStreamPointerWrapper(SyncReadStream* p_stream)
-        : p_stream(p_stream) {}
-    
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-};
-
-// Wrapper class for SyncDuplexStream* that can be used like a reference
-class SyncDuplexStreamPointerWrapper : public SyncDuplexStream {
-private:
-    SyncDuplexStream* p_stream;
-
-public:
-    SyncDuplexStreamPointerWrapper(SyncDuplexStream* p_stream)
-         : p_stream(p_stream) {}
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers) override {
-        return p_stream->write_some(buffers);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->write_some(buffers, ec);
-    }
-};
-
-// RAII stream lock classes
 struct [[nodiscard]] MessageLockIn {
-    std::unique_lock<std::recursive_mutex> lock;
-    SyncReadStreamPointerWrapper stream;
+private:
+    xrtp_MessageLockIn wrapped;
 
-    MessageLockIn(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
-        : lock(std::move(lock)), stream(&stream) {}
+public:
+    MessageLockInStream stream;
 
+    MessageLockIn(xrtp_MessageLockIn wrapped)
+        : wrapped(wrapped), stream(wrapped)
+    {}
+
+    // delete copy constructors
     MessageLockIn(const MessageLockIn&) = delete;
     MessageLockIn& operator=(const MessageLockIn&) = delete;
-    MessageLockIn(MessageLockIn&&) = default;
-    MessageLockIn& operator=(MessageLockIn&&) = default;
+
+    // move constructors
+    MessageLockIn(MessageLockIn&& other)
+        : wrapped(other.wrapped), stream(other.wrapped)
+    {
+        other.wrapped = nullptr;
+        other.stream.wrapped = nullptr;
+    };
+
+    MessageLockIn& operator=(MessageLockIn&& other) {
+        if (this != &other) {
+            if (wrapped) {
+                CHK_XRTP(xrtp_msg_in_release(wrapped));
+            }
+            wrapped = other.wrapped;
+            stream.wrapped = other.wrapped;
+            other.wrapped = nullptr;
+            other.stream.wrapped = nullptr;
+        }
+
+        return *this;
+    };
+
+    ~MessageLockIn() {
+        if (wrapped) {
+            CHK_XRTP(xrtp_msg_in_release(wrapped));
+        }
+    }
+};
+
+struct MessageLockOutStream : public SyncWriteStream {
+private:
+    xrtp_MessageLockOut wrapped;
+
+public:
+    MessageLockOutStream(xrtp_MessageLockOut wrapped)
+        : wrapped(wrapped)
+    {}
+
+    // don't allow copying or moving. the parent MessageLockOut can be moved
+    MessageLockOutStream(const MessageLockOutStream&) = delete;
+    MessageLockOutStream& operator=(const MessageLockOutStream&) = delete;
+    MessageLockOutStream(MessageLockOutStream&&) = delete;
+    MessageLockOutStream& operator=(MessageLockOutStream&&) = delete;
+
+    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) override {
+        std::uint64_t size_written{};
+        xrtp_Result result = xrtp_msg_out_write_some(wrapped, buffer.data(), buffer.size(), &size_written);
+        check_for_transport_exception(result);
+        ec = asio::error_code(result, asio::system_category());
+        return size_written;
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffer) override {
+        asio::error_code ec;
+        std::size_t size_written = write_some(buffer, ec);
+        if (ec) {
+            throw asio::system_error(ec);
+        }
+        return size_written;
+    }
+
+    void non_blocking(bool mode) override { throw InvalidOperationException(); }
+    bool non_blocking() const override { throw InvalidOperationException(); }
+    bool is_open() const override { throw InvalidOperationException(); }
+    void close() override { throw InvalidOperationException(); }
+    void close(asio::error_code& ec) override { throw InvalidOperationException(); }
+
+    friend struct MessageLockOut;
 };
 
 struct [[nodiscard]] MessageLockOut {
 private:
-    SyncWriteStream* p_stream;
+    xrtp_MessageLockOut wrapped;
+
 public:
-    std::unique_lock<std::recursive_mutex> lock;
-    SendBuffer buffer;
+    MessageLockOutStream buffer;
 
-    MessageLockOut(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), p_stream(&stream), buffer() {
-        // write header to buffer
-        asio::write(stream, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
-    }
+    MessageLockOut(xrtp_MessageLockOut wrapped)
+        : wrapped(wrapped), buffer(wrapped)
+    {}
 
+    // delete copy constructors
     MessageLockOut(const MessageLockOut&) = delete;
     MessageLockOut& operator=(const MessageLockOut&) = delete;
-    MessageLockOut(MessageLockOut&&) = default;
-    MessageLockOut& operator=(MessageLockOut&&) = default;
+
+    // move constructors
+    MessageLockOut(MessageLockOut&& other)
+        : wrapped(other.wrapped), buffer(other.wrapped)
+    {
+        other.wrapped = nullptr;
+        other.buffer.wrapped = nullptr;
+    };
+
+    MessageLockOut& operator=(MessageLockOut&& other) {
+        if (this != &other) {
+            if (wrapped) {
+                CHK_XRTP(xrtp_msg_out_release(wrapped));
+            }
+            wrapped = other.wrapped;
+            buffer.wrapped = other.wrapped;
+            other.wrapped = nullptr;
+            other.buffer.wrapped = nullptr;
+        }
+
+        return *this;
+    };
 
     void flush() {
-        asio::write(*p_stream, asio::buffer(buffer.data()));
-        buffer.clear();
+        CHK_XRTP(xrtp_msg_out_flush(wrapped));
     }
 
     ~MessageLockOut() {
-        flush();
+        if (wrapped) {
+            flush();
+            CHK_XRTP(xrtp_msg_out_release(wrapped));
+        }
     }
 };
 
-// Lock class for raw stream access
-struct [[nodiscard]] StreamLock {
-    std::unique_lock<std::recursive_mutex> lock;
-    SyncDuplexStreamPointerWrapper stream;
-
-    StreamLock(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
-        : lock(std::move(lock)), stream(&stream) {}
-
-    StreamLock(const StreamLock&) = delete;
-    StreamLock& operator=(const StreamLock&) = delete;
-    StreamLock(StreamLock&&) = default;
-    StreamLock& operator=(StreamLock&&) = default;
-};
-
-// Transport class for message-based communication
-class Transport {
+struct StreamLockStream : public SyncDuplexStream {
 private:
-    std::unique_ptr<DuplexStream> stream;
-    mutable std::recursive_mutex stream_mutex;
-    std::atomic<bool> should_stop;
-    std::unordered_map<uint16_t, std::function<void(Transport&, MessageLockIn)>> handlers;
-
-    // Internal helper to dispatch messages to handlers
-    void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
-
-    // Async worker cycle function
-    void worker_cycle();
+    xrtp_StreamLock wrapped;
 
 public:
-    explicit Transport(std::unique_ptr<DuplexStream> stream);
-    ~Transport();
+    StreamLockStream(xrtp_StreamLock wrapped)
+        : wrapped(wrapped)
+    {}
 
-    // Disable copy/assignment
+    // don't allow copying or moving. the parent StreamLock can be moved
+    StreamLockStream(const StreamLockStream&) = delete;
+    StreamLockStream& operator=(const StreamLockStream&) = delete;
+    StreamLockStream(StreamLockStream&&) = delete;
+    StreamLockStream& operator=(StreamLockStream&&) = delete;
+
+    std::size_t read_some(const asio::mutable_buffer& buffer, asio::error_code& ec) override {
+        std::uint64_t size_read{};
+        xrtp_Result result = xrtp_stream_lock_read_some(wrapped, buffer.data(), buffer.size(), &size_read);
+        check_for_transport_exception(result);
+        ec = asio::error_code(result, asio::system_category());
+        return size_read;
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffer) override {
+        asio::error_code ec;
+        std::size_t size_read = read_some(buffer, ec);
+        if (ec) {
+            throw asio::system_error(ec);
+        }
+        return size_read;
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) override {
+        std::uint64_t size_written{};
+        xrtp_Result result = xrtp_stream_lock_write_some(wrapped, buffer.data(), buffer.size(), &size_written);
+        check_for_transport_exception(result);
+        ec = asio::error_code(result, asio::system_category());
+        return size_written;
+    }
+
+    std::size_t write_some(const asio::const_buffer& buffer) override {
+        asio::error_code ec;
+        std::size_t size_written = write_some(buffer, ec);
+        if (ec) {
+            throw asio::system_error(ec);
+        }
+        return size_written;
+    }
+
+    std::size_t available() override { throw InvalidOperationException(); }
+    std::size_t available(asio::error_code& ec) override { throw InvalidOperationException(); }
+    void non_blocking(bool mode) override { throw InvalidOperationException(); }
+    bool non_blocking() const override { throw InvalidOperationException(); }
+    bool is_open() const override { throw InvalidOperationException(); }
+    void close() override { throw InvalidOperationException(); }
+    void close(asio::error_code& ec) override { throw InvalidOperationException(); }
+
+    friend struct StreamLock;
+};
+
+struct [[nodiscard]] StreamLock {
+private:
+    xrtp_StreamLock wrapped;
+
+public:
+    StreamLockStream stream;
+
+    StreamLock(xrtp_StreamLock wrapped)
+        : wrapped(wrapped), stream(wrapped)
+    {}
+
+    // delete copy constructors
+    StreamLock(const StreamLock&) = delete;
+    StreamLock& operator=(const StreamLock&) = delete;
+
+    // move constructors
+    StreamLock(StreamLock&& other)
+        : wrapped(other.wrapped), stream(other.wrapped)
+    {
+        other.wrapped = nullptr;
+        other.stream.wrapped = nullptr;
+    };
+
+    StreamLock& operator=(StreamLock&& other) {
+        if (this != &other) {
+            if (wrapped) {
+                CHK_XRTP(xrtp_stream_lock_release(wrapped));
+            }
+            wrapped = other.wrapped;
+            stream.wrapped = other.wrapped;
+            other.wrapped = nullptr;
+            other.stream.wrapped = nullptr;
+        }
+
+        return *this;
+    };
+
+    ~StreamLock() {
+        if (wrapped) {
+            CHK_XRTP(xrtp_stream_lock_release(wrapped));
+        }
+    }
+};
+
+class Transport {
+private:
+    xrtp_Transport wrapped;
+
+    // pointer-stable storage of passed in std::functions so that the handler
+    // we pass to the C API can reference whatever might be captured by the function
+    std::unordered_map<xrtp_MessageHeader, std::unique_ptr<std::function<void(MessageLockIn)>>> handlers;
+
+public:
+    explicit Transport(std::unique_ptr<DuplexStream> stream) {
+        xrtp_create_transport(stream.release(), &wrapped);
+    }
+
+    // don't allow copying or moving
     Transport(const Transport&) = delete;
     Transport& operator=(const Transport&) = delete;
+    Transport(Transport&&) = delete;
+    Transport& operator=(Transport&&) = delete;
 
-    // Message operations
-    MessageLockOut start_message(uint16_t header);
-    void register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler);
-    void unregister_handler(uint16_t header);
-    void clear_handlers();
-    MessageLockIn await_message(uint16_t header);
+    MessageLockOut start_message(xrtp_MessageHeader header) {
+        xrtp_MessageLockOut raw_msg_out{};
+        CHK_XRTP(xrtp_start_message(wrapped, header, &raw_msg_out));
+        return MessageLockOut(raw_msg_out);
+    }
 
-    // Raw stream access
-    StreamLock lock_stream();
+    MessageLockIn await_message(xrtp_MessageHeader header) {
+        xrtp_MessageLockIn raw_msg_in{};
+        CHK_XRTP(xrtp_await_message(wrapped, header, &raw_msg_in));
+        return MessageLockIn(raw_msg_in);
+    }
 
-    // Worker management
-    void start_worker();
-    void stop_worker();
+    StreamLock lock_stream() {
+        xrtp_StreamLock raw_lock{};
+        CHK_XRTP(xrtp_lock_stream(wrapped, &raw_lock));
+        return StreamLock(raw_lock);
+    }
 
-    // Stream status
-    bool is_open() const;
-    void close();
+    void register_handler(xrtp_MessageHeader header, std::function<void(MessageLockIn)> handler) {
+        // This is a bit of a mess because we need to make sure that the raw handler, which cannot
+        // use lambda captures because it is a function pointer, can call this std::function so we'll
+        // store the std::function somewhere stable and use its address as the handler_data parameter.
+        handlers[header] = std::make_unique<std::function<void(MessageLockIn)>>(std::move(handler));
+        void* stored_handler_data = handlers[header].get();
+
+        static void (*raw_handler)(xrtp_MessageLockIn, void*) = [](xrtp_MessageLockIn msg_in_raw, void* handler_data) {
+            auto handler_function = reinterpret_cast<std::function<void(MessageLockIn)>*>(handler_data);
+            (*handler_function)(MessageLockIn(msg_in_raw));
+            // ~MessageLockIn() called xrtp_msg_in_release
+        };
+
+        CHK_XRTP(xrtp_register_handler(wrapped, header, raw_handler, stored_handler_data));
+    }
+
+    void unregister_handler(xrtp_MessageHeader header) {
+        CHK_XRTP(xrtp_unregister_handler(wrapped, header));
+        handlers.erase(header);
+    }
+
+    void clear_handlers() {
+        CHK_XRTP(xrtp_clear_handlers(wrapped));
+        handlers.clear();
+    }
+
+    void start_worker() {
+        CHK_XRTP(xrtp_start_worker(wrapped));
+    }
+
+    void stop_worker() {
+        CHK_XRTP(xrtp_stop_worker(wrapped));
+    }
+
+    bool is_open() const {
+        bool result{};
+        CHK_XRTP(xrtp_is_open(wrapped, &result));
+        return result;
+    }
+
+    void close() {
+        CHK_XRTP(xrtp_close(wrapped));
+    }
+
+    ~Transport() {
+        CHK_XRTP(xrtp_release_transport(wrapped));
+    }
 };
 
 } // namespace xrtransport

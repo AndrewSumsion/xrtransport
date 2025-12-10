@@ -25,7 +25,7 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
         // synchronize if needed and get time offset
         XrDuration time_offset = get_time_offset(true);
 
-        auto msg_out = transport.start_message(FUNCTION_CALL);
+        auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_CALL);
         SerializeContext s_ctx(msg_out.buffer, time_offset);
 
         uint32_t function_id = ${function.id};
@@ -35,7 +35,7 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
         % endfor
         msg_out.flush();
 
-        auto msg_in = transport.await_message(FUNCTION_RETURN);
+        auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
         DeserializeContext d_ctx(msg_in.stream, true, time_offset);
 
         XrResult result;

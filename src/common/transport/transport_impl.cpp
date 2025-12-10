@@ -1,4 +1,6 @@
-#include "xrtransport/transport/transport.h"
+#include "transport_impl.h"
+
+#include "xrtransport/transport/error.h" // for TransportException
 
 #include <spdlog/spdlog.h>
 #include <chrono>
@@ -6,37 +8,37 @@
 
 namespace xrtransport {
 
-// Transport implementation
-Transport::Transport(std::unique_ptr<DuplexStream> stream)
+// TransportImpl implementation
+TransportImpl::TransportImpl(std::unique_ptr<DuplexStream> stream)
     : stream(std::move(stream)), should_stop(false) {
 }
 
-Transport::~Transport() {
+TransportImpl::~TransportImpl() {
     stop_worker();
 }
 
-MessageLockOut Transport::start_message(uint16_t header) {
+MessageLockOutImpl TransportImpl::start_message(uint16_t header) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-    return MessageLockOut(header, std::move(lock), *stream);
+    return MessageLockOutImpl(header, std::move(lock), *stream);
 }
 
-void Transport::register_handler(uint16_t header, std::function<void(Transport&, MessageLockIn)> handler) {
+void TransportImpl::register_handler(uint16_t header, std::function<void(MessageLockInImpl)> handler) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
     handlers[header] = std::move(handler);
 }
 
-void Transport::unregister_handler(uint16_t header) {
+void TransportImpl::unregister_handler(uint16_t header) {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
     handlers.erase(header);
 }
 
-void Transport::clear_handlers() {
+void TransportImpl::clear_handlers() {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
     handlers.clear();
 }
 
-MessageLockIn Transport::await_message(uint16_t header) {
+MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
@@ -51,7 +53,7 @@ MessageLockIn Transport::await_message(uint16_t header) {
 
             if (received_header == header) {
                 // This is our message
-                return MessageLockIn(std::move(lock), *stream);
+                return MessageLockInImpl(std::move(lock), *stream);
             } else {
                 // Dispatch to handler for this message type
                 dispatch_to_handler(received_header, std::move(lock));
@@ -67,17 +69,17 @@ MessageLockIn Transport::await_message(uint16_t header) {
     }
 }
 
-StreamLock Transport::lock_stream() {
+StreamLockImpl TransportImpl::lock_stream() {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
-    return StreamLock(std::move(lock), *stream);
+    return StreamLockImpl(std::move(lock), *stream);
 }
 
-void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
+void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
     auto it = handlers.find(header);
     if (it != handlers.end()) {
-        // Create MessageLockIn and call handler with Transport reference
-        MessageLockIn message_lock(std::move(lock), *stream);
-        it->second(*this, std::move(message_lock));
+        // Create MessageLockInImpl and call handler
+        MessageLockInImpl message_lock(std::move(lock), *stream);
+        it->second(std::move(message_lock));
     } else {
         // No handler for this message type - stream is corrupted
         // We don't know how many bytes to read, so stream is permanently out of sync
@@ -85,16 +87,16 @@ void Transport::dispatch_to_handler(uint16_t header, std::unique_lock<std::recur
     }
 }
 
-void Transport::start_worker() {
+void TransportImpl::start_worker() {
     should_stop = false;
     worker_cycle();
 }
 
-void Transport::stop_worker() {
+void TransportImpl::stop_worker() {
     should_stop = true;
 }
 
-void Transport::worker_cycle() {
+void TransportImpl::worker_cycle() {
     // Guard clause to stop the async cycle
     if (should_stop) {
         return;
@@ -138,11 +140,11 @@ void Transport::worker_cycle() {
     });
 }
 
-bool Transport::is_open() const {
+bool TransportImpl::is_open() const {
     return stream->is_open();
 }
 
-void Transport::close() {
+void TransportImpl::close() {
     stream->close();
 }
 

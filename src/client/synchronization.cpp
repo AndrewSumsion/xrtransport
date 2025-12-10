@@ -3,6 +3,8 @@
 
 #include "xrtransport/time.h"
 
+#include <asio.hpp>
+
 namespace xrtransport {
 
 static XrTime last_sync = INT64_MIN;
@@ -23,12 +25,12 @@ static void do_synchronize() {
     XrDuration min_rtt = INT64_MAX;
 
     for (int i = 0; i < sync_iterations; i++) {
-        auto msg_out = transport.start_message(SYNCHRONIZATION_REQUEST);
+        auto msg_out = transport.start_message(XRTP_MSG_SYNCHRONIZATION_REQUEST);
         XrTime t1 = get_time();
         asio::write(msg_out.buffer, asio::buffer(&t1, sizeof(XrTime)));
         msg_out.flush();
 
-        auto msg_in = transport.await_message(SYNCHRONIZATION_RESPONSE);
+        auto msg_in = transport.await_message(XRTP_MSG_SYNCHRONIZATION_RESPONSE);
         XrTime t2{};
         asio::read(msg_in.stream, asio::buffer(&t2, sizeof(XrTime)));
 

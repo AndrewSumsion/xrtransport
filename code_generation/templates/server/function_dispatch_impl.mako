@@ -31,7 +31,7 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 
     XrResult _result = function_loader.pfn_${function.name}(${', '.join(param.name for param in function.params)});
     
-    auto msg_out = transport.start_message(FUNCTION_RETURN);
+    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
     % for binding in function.modifiable_bindings:
