@@ -3,6 +3,7 @@
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/server/function_loader.h"
+#include "xrtransport/time.h"
 
 #include "module.h"
 #include "function_dispatch.h"
@@ -25,6 +26,11 @@ private:
 
     // Custom handler of xrCreateInstance provided to FunctionDispatch via dependency injection
     void instance_handler(MessageLockIn msg_in);
+
+    // function pointers to runtime's timer functions
+    // this works because the functions have the same signature on both platforms
+    XrResult (*from_platform_time)(XrInstance instance, const XRTRANSPORT_PLATFORM_TIME* platform_time, XrTime* time);
+    XrResult (*to_platform_time)(XrInstance instance, XrTime time, XRTRANSPORT_PLATFORM_TIME* platform_time);
 
 public:
     explicit Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);

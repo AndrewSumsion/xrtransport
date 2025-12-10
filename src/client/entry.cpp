@@ -876,6 +876,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHRI
         return XR_ERROR_HANDLE_INVALID;
     }
     convert_to_platform_time(time, performanceCounter);
+    return XR_SUCCESS;
 }
 #else
 static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHRImpl(
@@ -899,5 +900,6 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
         return XR_ERROR_HANDLE_INVALID;
     }
     convert_to_platform_time(time, timespecTime);
+    return XR_SUCCESS;
 }
 #endif

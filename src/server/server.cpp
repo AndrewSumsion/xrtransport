@@ -83,11 +83,34 @@ void Server::run() {
     });
 
     transport.register_handler(XRTP_MSG_SYNCHRONIZATION_REQUEST, [this](MessageLockIn msg_in) {
+        // load timer functions
+#ifdef _WIN32
+        function_loader.ensure_function_loaded(
+            "xrConvertWin32PerformanceCounterToTimeKHR",
+            reinterpret_cast<PFN_xrVoidFunction*>(&from_platform_time));
+        function_loader.ensure_function_loaded(
+            "xrConvertTimeToWin32PerformanceCounterKHR",
+            reinterpret_cast<PFN_xrVoidFunction*>(&to_platform_time));
+#else
+        function_loader.ensure_function_loaded(
+            "xrConvertTimespecTimeToTimeKHR",
+            reinterpret_cast<PFN_xrVoidFunction*>(&from_platform_time));
+        function_loader.ensure_function_loaded(
+            "xrConvertTimeToTimespecTimeKHR",
+            reinterpret_cast<PFN_xrVoidFunction*>(&to_platform_time));
+#endif
+
+        // read incoming time
         XrTime client_time{};
         asio::read(msg_in.stream, asio::buffer(&client_time, sizeof(XrTime)));
 
+        // get server time
+        XRTRANSPORT_PLATFORM_TIME server_platform_time{};
+        get_platform_time(&server_platform_time);
+        XrTime server_time{};
+        from_platform_time(function_loader.loader_instance, &server_platform_time, &server_time);
+
         auto msg_out = transport.start_message(XRTP_MSG_SYNCHRONIZATION_RESPONSE);
-        XrTime server_time = get_time();
         asio::write(msg_out.buffer, asio::buffer(&server_time, sizeof(XrTime)));
         msg_out.flush();
     });
@@ -135,6 +158,13 @@ void Server::instance_handler(MessageLockIn msg_in) {
         // Fill in new slots
         module.get_required_extensions(&num_extensions, end);
     }
+
+    // Request timer extension
+#ifdef _WIN32
+    enabled_extensions.push_back("XR_KHR_win32_convert_performance_counter_time");
+#else
+    enabled_extensions.push_back("XR_KHR_convert_timespec_time");
+#endif
 
     // Update createInfo
     createInfo->enabledExtensionCount = enabled_extensions.size();
