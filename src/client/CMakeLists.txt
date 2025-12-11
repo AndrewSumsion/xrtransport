@@ -8,6 +8,7 @@ message(STATUS "Building xrtransport client components")
 # Client library
 add_library(xrtransport_client SHARED
     runtime.cpp
+    exports.cpp
     transport_manager.cpp
     entry.cpp
     available_extensions.cpp
