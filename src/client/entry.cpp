@@ -14,8 +14,8 @@
 
 #include "xrtransport/extensions/extension_functions.h"
 #include "xrtransport/time.h"
+#include "xrtransport/api.h"
 
-#define XR_EXTENSION_PROTOTYPES
 #include "openxr/openxr_loader_negotiation.h"
 #ifdef __ANDROID__
 #define XR_USE_PLATFORM_ANDROID
@@ -825,7 +825,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     return result;
 }
 
-extern "C" XRAPI_ATTR XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {
+extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {
     if (!loaderInfo ||
         !runtimeRequest ||
         loaderInfo->structType != XR_LOADER_INTERFACE_STRUCT_LOADER_INFO ||

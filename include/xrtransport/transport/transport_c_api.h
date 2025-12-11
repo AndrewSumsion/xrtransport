@@ -1,18 +1,10 @@
 #ifndef XRTRANSPORT_TRANSPORT_C_API_H
 #define XRTRANSPORT_TRANSPORT_C_API_H
 
+#include "xrtransport/api.h"
+
 #include <stdint.h>
 #include <stdbool.h>
-
-#ifdef _WIN32
-#ifdef XRTRANSPORT_EXPORT_API
-#define XRTP_API __declspec(dllexport)
-#else
-#define XRTP_API __declspec(dllimport)
-#endif
-#else
-#define XRTP_API
-#endif
 
 #ifdef __cplusplus
 extern "C" {
