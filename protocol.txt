@@ -1,5 +1,8 @@
 The protocol starts out with a simple handshake:
-- The client connects and sends version information
+- The client connects and sends protocol magic
+  - 0x50545258 (or "XRTP")
+- The server responds with the same magic
+- The client sends its version information
   - XR_CURRENT_API_VERSION (uint64_t)
   - xrtransport protocol version (uint32_t)
 - The server responds with its version information in the same format
@@ -10,16 +13,39 @@ This spec doesn't define what makes a version difference unacceptable.
 It is up to the developer to determine if any breaking changes between the protocol versions exist
 When either side sends a QUIT, they are free to close the connection immediately.
 
-After this, the protocol enters the running state. This consists of the client sending function requests, and the server responding.
+After this, the protocol enters the running state. This consists of the back-and-forth sending of messages.
+A message is defined as follows:
+- header (uint16_t)
+- contents (context-dependent)
 
-The actual structure of this protocol is dynamic based on the types being sent. It is extremely stateful, i.e., minimal extra metadata
-is sent along with the data, and both client and server rely on context to know what to deserialize.
+There are a few pre-defined message types, but this protocol is meant to be extensible.
+Predefined message types:
+- XRTP_MSG_FUNCTION_CALL (header: 1):
+  - function_id (uint32_t)
+  - serialized contents of arguments (variable length)
+    - see note below
+- XRTP_MSG_FUNCTION_RETURN (header: 2):
+  - result (XrResult)
+  - serialized contents of modifiable bindings (variable length)
+    - see note below
+- XRTP_MSG_SYNCHRONIZATION_REQUEST (header: 3)
+  - client_time (XrTime)
+- XRTP_MSG_SYNCHRONIZATION_RESPONSE (header: 4)
+  - server_time (XrTime)
 
-Generally speaking, the protocol can be thought of as the client sending the result of a DFS of its arguments, and the server
-responding with the result of the function call along with any arguments that may have changed. There are a few special markers
-that are sent that are not data. These include:
-- Function request header: uint32_t function index
+Stateful protocol note:
+This protocol is very tightly coupled, and is very stateful. It is basically required that server and client are compiled from the
+exact same commit of this repository. The shape of the messages is unpredictable at compile time because array arguments have variable
+sizes, and OpenXR pNext chains can be arbitrarily long. Additionally, when applying the results of a function call, only non-const parts
+of the input are sent-back and applied, and figuring out which parts can be changed is non-trivial (see code_generation/bindings.py)
+
+The actual structure of this protocol is dynamic based on the types being sent. There is minimal extra metadata sent along with the
+data, and both client and server rely on context to know what to deserialize.
+
+Generally speaking, the contents of XRTP_MSG_FUNCTION_CALL and XRTP_MSG_FUNCTION_RETURN can be thought of as the client sending the
+result of a DFS of its arguments, and the server responding with the result of the function call along with any arguments that may have
+changed. There are a few special markers that are sent that are not data. These include:
 - XR struct next type: The XrStructureType of the next struct in the chain, or XR_TYPE_UNKNOWN to indicate the end of the chain (nullptr)
 - Pointer marker: All other pointer members are preceded by a uint8_t: 1 to indicate the pointer has a value, 0 to indicate nullptr
 
-For a full understanding of how the protocol works, see the code generators.
+For a full understanding of how the protocol works, see the code generators, particularly the serializer/deserializer.

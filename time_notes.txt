@@ -1,5 +1,0 @@
-Time values need to be translated. Applications use system timers like PerformanceCounter. A synchronization step should exist at the beginning that queries the local timer, and uses a synchronization algorithm to find the offset between the local timer (converted to XrTime) and the host timer (converted to XrTime).
-
-Timer conversions to XrTime like XR_KHR_convert_timespec_time should be implemented locally on the client, and the client will convert times before sending them to the server.
-
-Actually, this whole thing could be a layer on the client. Think NAT, but for time values
