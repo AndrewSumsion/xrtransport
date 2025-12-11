@@ -87,8 +87,8 @@ static std::vector<std::string> collect_module_paths() {
 }
 
 int main(int argc, char** argv) {
-    try {
-        while (true) {
+    while (true) {
+        try {
             asio::io_context io_context;
 
             tcp::acceptor acceptor(
@@ -118,7 +118,8 @@ int main(int argc, char** argv) {
             // Run server event loop synchronously until it stops
             server.run();
         }
-    } catch (std::exception& e) {
-        std::cerr << "Error: " << e.what() << "\n";
+        catch (std::exception& e) {
+            std::cerr << "Error: " << e.what() << "\n";
+        }
     }
 }

@@ -7,6 +7,8 @@ namespace xrtransport {
 
 template <typename T>
 std::size_t count_null_terminated(T* x) {
+    if (x == nullptr)
+        return 0;
     std::size_t count = 0;
     while (*(x++) != T{}) ++count;
     return count;
