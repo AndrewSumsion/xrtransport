@@ -15,8 +15,74 @@
 #include <atomic>
 #include <stdexcept>
 #include <vector>
+#include <queue>
 
 namespace xrtransport {
+
+/**
+ * Mutex wrapper with a mechanism for explicit handoff between threads
+ * 
+ * If the owning thread wants to make sure that another thread gets the lock when it releases, it should do this:
+ * mutex.transfer(other_thread_id);
+ * mutex.unlock();
+ * 
+ * No other thread will be able to lock the mutex until the target thread locks it and implicitly resets the target thread id.
+ */
+template <typename _Mutex>
+class TransferrableMutex {
+private:
+    _Mutex mutex;
+    std::thread::id dest;
+    std::mutex dest_mutex;
+    std::condition_variable dest_changed;
+
+    // dest_mutex must be locked before calling
+    bool lockable() noexcept {
+        return dest == std::thread::id() || dest == std::this_thread::get_id();
+    }
+
+public:
+    void lock() {
+        {
+            std::unique_lock<std::mutex> lock(dest_mutex);
+            if (!lockable()) {
+                dest_changed.wait(lock, [&]{ return lockable(); });
+            }
+            mutex.lock();
+            // lock was acquired, so reset the transfer destination
+            dest = std::thread::id();
+        }
+        // notify other threads that dest changed
+        dest_changed.notify_all();
+    }
+
+    bool try_lock() noexcept {
+        {
+            std::lock_guard<std::mutex> lock(dest_mutex);
+            if (!lockable()) return false;
+            if (!mutex.try_lock()) return false;
+            // lock was acquired, so reset the transfer destination
+            dest = std::thread::id();
+        }
+        // notify other threads that dest changed
+        dest_changed.notify_all();
+        return true;
+    }
+
+    void unlock() {
+        mutex.unlock();
+    }
+
+    void transfer(std::thread::id destination) {
+        {
+            std::lock_guard<std::mutex> lock(dest_mutex);
+            dest = destination;
+        }
+        dest_changed.notify_all();
+    }
+};
+
+using TransportMutex = TransferrableMutex<std::recursive_mutex>;
 
 class SendBuffer : public SyncWriteStream {
 public:
@@ -53,114 +119,12 @@ private:
     std::vector<std::uint8_t> buffer_;
 };
 
-// Wrapper for SyncReadStream* to be used like a reference
-// Mainly used so that MessageLockInImpl can be moveable and have the same syntax as
-// MessageLockOutImpl because OCD :)
-class SyncReadStreamPointerWrapper : public SyncReadStream {
-private:
-    SyncReadStream* p_stream;
-
-public:
-    SyncReadStreamPointerWrapper(SyncReadStream* p_stream)
-        : p_stream(p_stream) {}
-    
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-};
-
-// Wrapper class for SyncDuplexStream* that can be used like a reference
-class SyncDuplexStreamPointerWrapper : public SyncDuplexStream {
-private:
-    SyncDuplexStream* p_stream;
-
-public:
-    SyncDuplexStreamPointerWrapper(SyncDuplexStream* p_stream)
-         : p_stream(p_stream) {}
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers) override {
-        return p_stream->write_some(buffers);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->write_some(buffers, ec);
-    }
-};
-
 // RAII stream lock classes
 struct [[nodiscard]] MessageLockInImpl {
-    std::unique_lock<std::recursive_mutex> lock;
-    SyncReadStreamPointerWrapper stream;
+    std::unique_lock<TransportMutex> lock;
+    SyncReadStream* stream;
 
-    MessageLockInImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
+    MessageLockInImpl(std::unique_lock<TransportMutex> lock, SyncReadStream& stream)
         : lock(std::move(lock)), stream(&stream) {}
 
     MessageLockInImpl(const MessageLockInImpl&) = delete;
@@ -171,15 +135,15 @@ struct [[nodiscard]] MessageLockInImpl {
 
 struct [[nodiscard]] MessageLockOutImpl {
 private:
-    SyncWriteStream* p_stream;
+    SyncWriteStream* stream;
 public:
-    std::unique_lock<std::recursive_mutex> lock;
+    std::unique_lock<TransportMutex> lock;
     SendBuffer buffer;
 
-    MessageLockOutImpl(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), p_stream(&stream), buffer() {
+    MessageLockOutImpl(std::uint16_t header, std::unique_lock<TransportMutex> lock, SyncWriteStream& stream)
+        : lock(std::move(lock)), stream(&stream), buffer() {
         // write header to buffer
-        asio::write(stream, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
+        asio::write(stream, asio::buffer(&header, sizeof(std::uint16_t)));
     }
 
     MessageLockOutImpl(const MessageLockOutImpl&) = delete;
@@ -188,7 +152,7 @@ public:
     MessageLockOutImpl& operator=(MessageLockOutImpl&&) = default;
 
     void flush() {
-        asio::write(*p_stream, asio::buffer(buffer.data()));
+        asio::write(*stream, asio::buffer(buffer.data()));
         buffer.clear();
     }
 
@@ -199,10 +163,10 @@ public:
 
 // Lock class for raw stream access
 struct [[nodiscard]] StreamLockImpl {
-    std::unique_lock<std::recursive_mutex> lock;
-    SyncDuplexStreamPointerWrapper stream;
+    std::unique_lock<TransportMutex> lock;
+    SyncDuplexStream* stream;
 
-    StreamLockImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
+    StreamLockImpl(std::unique_lock<TransportMutex> lock, SyncDuplexStream& stream)
         : lock(std::move(lock)), stream(&stream) {}
 
     StreamLockImpl(const StreamLockImpl&) = delete;
@@ -215,15 +179,12 @@ struct [[nodiscard]] StreamLockImpl {
 class TransportImpl {
 private:
     std::unique_ptr<DuplexStream> stream;
-    mutable std::recursive_mutex stream_mutex;
+    mutable TransportMutex stream_mutex;
+    std::thread worker_thread;
     std::atomic<bool> should_stop;
+    std::atomic<bool> worker_running;
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
-
-    // Internal helper to dispatch messages to handlers
-    void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
-
-    // Async worker cycle function
-    void worker_cycle();
+    std::unordered_map<uint16_t, std::queue<std::pair<std::thread::id, std::promise<MessageLockInImpl>>>> awaiters;
 
 public:
     explicit TransportImpl(std::unique_ptr<DuplexStream> stream);
@@ -244,8 +205,8 @@ public:
     StreamLockImpl lock_stream();
 
     // Worker management
-    void start_worker();
-    void stop_worker();
+    void run(bool synchronous);
+    void stop();
 
     // Stream status
     bool is_open() const;

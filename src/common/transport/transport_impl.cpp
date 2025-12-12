@@ -14,33 +14,33 @@ TransportImpl::TransportImpl(std::unique_ptr<DuplexStream> stream)
 }
 
 TransportImpl::~TransportImpl() {
-    stop_worker();
+    stop();
 }
 
 MessageLockOutImpl TransportImpl::start_message(uint16_t header) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<Mutex> lock(stream_mutex);
 
     return MessageLockOutImpl(header, std::move(lock), *stream);
 }
 
 void TransportImpl::register_handler(uint16_t header, std::function<void(MessageLockInImpl)> handler) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<Mutex> lock(stream_mutex);
     handlers[header] = std::move(handler);
 }
 
 void TransportImpl::unregister_handler(uint16_t header) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<Mutex> lock(stream_mutex);
     handlers.erase(header);
 }
 
 void TransportImpl::clear_handlers() {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<Mutex> lock(stream_mutex);
     handlers.clear();
 }
 
 MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     while (true) {
-        std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+        std::unique_lock<Mutex> lock(stream_mutex);
 
         if (stream->available() >= sizeof(header)) {
             uint16_t received_header;
@@ -70,11 +70,11 @@ MessageLockInImpl TransportImpl::await_message(uint16_t header) {
 }
 
 StreamLockImpl TransportImpl::lock_stream() {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<Mutex> lock(stream_mutex);
     return StreamLockImpl(std::move(lock), *stream);
 }
 
-void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
+void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<Mutex> lock) {
     auto it = handlers.find(header);
     if (it != handlers.end()) {
         // Create MessageLockInImpl and call handler
@@ -87,9 +87,41 @@ void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<std::r
     }
 }
 
-void TransportImpl::start_worker() {
+void TransportImpl::run(bool synchronous) {
+    if (worker_running) {
+        throw TransportException("Worker is already running");
+    }
+    worker_running = true;
     should_stop = false;
-    worker_cycle();
+    if (!synchronous) {
+        worker_thread = std::thread([&](){
+            // run synchronously on the worker thread
+            run(true);
+        });
+    }
+
+    while (!should_stop) {
+        std::unique_lock<TransportMutex> lock(stream_mutex);
+
+        uint16_t header{};
+        asio::read(*stream, asio::buffer(&header, sizeof(uint16_t)));
+
+        if (awaiters.find(header) != awaiters.end()) {
+            // some thread is awaiting this message, get the promise and thread ID
+            auto& awaiter_queue = awaiters.at(header);
+            auto& [thread_id, promise] = awaiter_queue.front();
+            awaiter_queue.pop();
+
+            // note: we could check if the queue for this message is empty and delete it
+            // but that's a big performance penalty for no point. There won't be very many
+            // different message types, and we can just leave the queue empty
+
+            // guarantee that the target thread will get the lock
+            stream_mutex.transfer(thread_id);
+
+            promise.set_value(stream);
+        }
+    }
 }
 
 void TransportImpl::stop_worker() {
