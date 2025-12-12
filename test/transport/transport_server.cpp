@@ -17,30 +17,15 @@ using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
 class TransportServer {
 private:
     asio::io_context io_context_;
-    asio::executor_work_guard<asio::io_context::executor_type> work_guard_;
     tcp::acceptor acceptor_;
     std::mt19937 rng_;
     std::thread io_thread_;
 
 public:
     TransportServer(uint16_t port)
-        : work_guard_(asio::make_work_guard(io_context_))
-        , acceptor_(io_context_, tcp::endpoint(tcp::v4(), port))
+        : acceptor_(io_context_, tcp::endpoint(tcp::v4(), port))
         , rng_(std::random_device{}()) {
         std::cout << "Transport server listening on port " << port << std::endl;
-
-        // Start io_context on background thread
-        io_thread_ = std::thread([this]() {
-            io_context_.run();
-        });
-    }
-
-    ~TransportServer() {
-        work_guard_.reset();
-        io_context_.stop();
-        if (io_thread_.joinable()) {
-            io_thread_.join();
-        }
     }
 
     void run() {
@@ -74,7 +59,7 @@ private:
             register_handlers(transport);
 
             // Start async worker
-            transport.start_worker();
+            transport.run(false);
 
             // Keep connection alive until socket closes
             while (transport.is_open()) {

@@ -53,25 +53,13 @@ public:
 
         // Create Transport
         transport_ = std::make_unique<Transport>(std::make_unique<TcpDuplexStream>(std::move(client_socket_)));
-
-        // Start async worker
-        transport_->start_worker();
-
-        // Start io_context in background thread to handle async operations
-        io_thread_ = std::thread([]() {
-            try {
-                io_context_->run();
-            } catch (const std::exception& e) {
-                std::cerr << "IO context error: " << e.what() << std::endl;
-            }
-        });
     }
 
     static void TearDownTestSuite() {
         std::cout << "Cleaning up integration test..." << std::endl;
 
         transport_->clear_handlers();
-        transport_->stop_worker();
+        transport_->stop();
         transport_->close();
         io_context_->stop();
 

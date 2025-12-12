@@ -53,112 +53,10 @@ private:
     std::vector<std::uint8_t> buffer_;
 };
 
-// Wrapper for SyncReadStream* to be used like a reference
-// Mainly used so that MessageLockInImpl can be moveable and have the same syntax as
-// MessageLockOutImpl because OCD :)
-class SyncReadStreamPointerWrapper : public SyncReadStream {
-private:
-    SyncReadStream* p_stream;
-
-public:
-    SyncReadStreamPointerWrapper(SyncReadStream* p_stream)
-        : p_stream(p_stream) {}
-    
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-};
-
-// Wrapper class for SyncDuplexStream* that can be used like a reference
-class SyncDuplexStreamPointerWrapper : public SyncDuplexStream {
-private:
-    SyncDuplexStream* p_stream;
-
-public:
-    SyncDuplexStreamPointerWrapper(SyncDuplexStream* p_stream)
-         : p_stream(p_stream) {}
-
-    bool is_open() const override {
-        return p_stream->is_open();
-    }
-
-    void close() override {
-        return p_stream->close();
-    }
-
-    void close(asio::error_code& ec) override {
-        return p_stream->close(ec);
-    }
-
-    void non_blocking(bool mode) override {
-        return p_stream->non_blocking(mode);
-    }
-
-    bool non_blocking() const override {
-        return p_stream->non_blocking();
-    }
-
-    std::size_t available() override {
-        return p_stream->available();
-    }
-
-    std::size_t available(asio::error_code& ec) override {
-        return p_stream->available(ec);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers) override {
-        return p_stream->read_some(buffers);
-    }
-
-    std::size_t read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->read_some(buffers, ec);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers) override {
-        return p_stream->write_some(buffers);
-    }
-
-    std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override {
-        return p_stream->write_some(buffers, ec);
-    }
-};
-
 // RAII stream lock classes
 struct [[nodiscard]] MessageLockInImpl {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncReadStreamPointerWrapper stream;
+    SyncReadStream* stream;
 
     MessageLockInImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
         : lock(std::move(lock)), stream(&stream) {}
@@ -171,13 +69,13 @@ struct [[nodiscard]] MessageLockInImpl {
 
 struct [[nodiscard]] MessageLockOutImpl {
 private:
-    SyncWriteStream* p_stream;
+    SyncWriteStream* stream;
 public:
     std::unique_lock<std::recursive_mutex> lock;
     SendBuffer buffer;
 
     MessageLockOutImpl(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), p_stream(&stream), buffer() {
+        : lock(std::move(lock)), stream(&stream), buffer() {
         // write header to buffer
         asio::write(stream, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
     }
@@ -188,7 +86,7 @@ public:
     MessageLockOutImpl& operator=(MessageLockOutImpl&&) = default;
 
     void flush() {
-        asio::write(*p_stream, asio::buffer(buffer.data()));
+        asio::write(*stream, asio::buffer(buffer.data()));
         buffer.clear();
     }
 
@@ -200,7 +98,7 @@ public:
 // Lock class for raw stream access
 struct [[nodiscard]] StreamLockImpl {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncDuplexStreamPointerWrapper stream;
+    SyncDuplexStream* stream;
 
     StreamLockImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
         : lock(std::move(lock)), stream(&stream) {}
@@ -214,19 +112,22 @@ struct [[nodiscard]] StreamLockImpl {
 // Transport class for message-based communication
 class TransportImpl {
 private:
-    std::unique_ptr<DuplexStream> stream;
+    std::unique_ptr<SyncDuplexStream> stream;
     mutable std::recursive_mutex stream_mutex;
     std::atomic<bool> should_stop;
+    std::atomic<bool> worker_running;
+    std::thread worker_thread;
+
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
 
     // Internal helper to dispatch messages to handlers
     void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
 
-    // Async worker cycle function
-    void worker_cycle();
+    // throwing helper method
+    void run_once_internal();
 
 public:
-    explicit TransportImpl(std::unique_ptr<DuplexStream> stream);
+    explicit TransportImpl(std::unique_ptr<SyncDuplexStream> stream);
     ~TransportImpl();
 
     // Disable copy/assignment
@@ -244,8 +145,9 @@ public:
     StreamLockImpl lock_stream();
 
     // Worker management
-    void start_worker();
-    void stop_worker();
+    void run(bool synchronous);
+    void run_once();
+    void stop();
 
     // Stream status
     bool is_open() const;

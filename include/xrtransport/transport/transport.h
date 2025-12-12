@@ -324,7 +324,7 @@ private:
     std::unordered_map<xrtp_MessageHeader, std::unique_ptr<std::function<void(MessageLockIn)>>> handlers;
 
 public:
-    explicit Transport(std::unique_ptr<DuplexStream> stream) : owns_transport(true) {
+    explicit Transport(std::unique_ptr<SyncDuplexStream> stream) : owns_transport(true) {
         xrtp_create_transport(stream.release(), &wrapped);
     }
 
@@ -382,12 +382,16 @@ public:
         handlers.clear();
     }
 
-    void start_worker() {
-        CHK_XRTP(xrtp_start_worker(wrapped));
+    void run(bool synchronous) {
+        CHK_XRTP(xrtp_run(wrapped, synchronous));
     }
 
-    void stop_worker() {
-        CHK_XRTP(xrtp_stop_worker(wrapped));
+    void run_once() {
+        CHK_XRTP(xrtp_run_once(wrapped));
+    }
+
+    void stop() {
+        CHK_XRTP(xrtp_stop(wrapped));
     }
 
     bool is_open() const {

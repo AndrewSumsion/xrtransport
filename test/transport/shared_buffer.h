@@ -31,6 +31,8 @@ private:
     size_t read_pos_a_to_b_ = 0;
     size_t read_pos_b_to_a_ = 0;
 
+    bool closed = false;
+
 public:
     SharedBuffer() = default;
     ~SharedBuffer() = default;
@@ -59,12 +61,22 @@ public:
     /**
      * Wait for data to become available for reading by the specified side
      */
-    void wait_for_data(Side side) const;
+    bool wait_for_data(Side side) const;
 
     /**
      * Clear all buffers (for test cleanup)
      */
     void clear();
+
+    /**
+     * Interrupt any waiting operation
+     */
+    void close();
+
+    /**
+     * Whether the buffer has been closed
+     */
+    bool is_open() const;
 
 private:
     std::vector<uint8_t>& get_write_buffer(Side side);

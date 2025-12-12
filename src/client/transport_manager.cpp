@@ -15,8 +15,6 @@ using std::uint32_t;
 namespace xrtransport {
 
 static asio::io_context io_context;
-static std::unique_ptr<asio::executor_work_guard<asio::io_context::executor_type>> work_guard;
-static std::thread io_thread;
 static std::unique_ptr<Transport> transport;
 
 static bool do_handshake(Transport& transport) {
@@ -67,12 +65,8 @@ static bool do_handshake(Transport& transport) {
 Transport& get_transport() {
     // Lazy initialization
     if (!transport) {
-        try {
-            // Create the Transport instance
-            transport = std::make_unique<Transport>(std::move(create_connection()));
-        } catch (const std::exception& e) {
-            throw std::runtime_error("Failed to initialize transport: " + std::string(e.what()));
-        }
+        // Create the Transport instance
+        transport = std::make_unique<Transport>(std::move(create_connection()));
 
         // Do the initial handshake
         if (!do_handshake(*transport)) {
@@ -83,21 +77,11 @@ Transport& get_transport() {
     return *transport;
 }
 
-std::unique_ptr<DuplexStream> create_connection() {
+std::unique_ptr<SyncDuplexStream> create_connection() {
     // Error if connection already exists
     if (transport) {
         throw std::runtime_error("Connection already exists - call close_connection() first");
     }
-
-    // Set up work guard to keep io_context alive
-    work_guard = std::make_unique<asio::executor_work_guard<asio::io_context::executor_type>>(
-        asio::make_work_guard(io_context)
-    );
-
-    // Start io_context thread if not already running
-    io_thread = std::thread([&]() {
-        io_context.run();
-    });
 
     tcp::socket socket(io_context);
 
@@ -115,16 +99,13 @@ std::unique_ptr<DuplexStream> create_connection() {
     }
 
     // Wrap the socket in a DuplexStream
-    return std::make_unique<DuplexStreamImpl<tcp::socket>>(std::move(socket));
+    return std::make_unique<SyncDuplexStreamImpl<tcp::socket>>(std::move(socket));
 }
 
 void close_connection() {
     transport->clear_handlers();
-    transport->stop_worker();
+    transport->stop();
     transport->close();
-    work_guard.reset();
-    io_context.stop();
-    io_thread.join();
     transport.reset();
 }
 

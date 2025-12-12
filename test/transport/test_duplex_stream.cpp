@@ -11,16 +11,16 @@ TestDuplexStream::TestDuplexStream(std::shared_ptr<SharedBuffer> buffer,
 }
 
 bool TestDuplexStream::is_open() const {
-    return true;  // Test streams are always considered open
+    return buffer_->is_open();
 }
 
 void TestDuplexStream::close() {
-    // No-op for test streams
+    buffer_->close();
 }
 
 void TestDuplexStream::close(asio::error_code& ec) {
     ec.clear();
-    // No-op for test streams
+    buffer_->close();
 }
 
 void TestDuplexStream::non_blocking(bool mode) {
@@ -52,6 +52,12 @@ std::size_t TestDuplexStream::read_some(const asio::mutable_buffer& buffers) {
 
 std::size_t TestDuplexStream::read_some(const asio::mutable_buffer& buffers, asio::error_code& ec) {
     ec.clear();
+
+    if (!is_open()) {
+        ec = asio::error::bad_descriptor;
+        return 0;
+    }
+
     apply_delays();
 
     // Simulate partial reads by limiting read size
@@ -60,7 +66,11 @@ std::size_t TestDuplexStream::read_some(const asio::mutable_buffer& buffers, asi
     if (!non_blocking_) {
         // In blocking mode, wait for data if none available
         while (buffer_->available(side_) == 0) {
-            buffer_->wait_for_data(side_);
+            bool wait_result = buffer_->wait_for_data(side_);
+            if (!wait_result) {
+                ec = asio::error::operation_aborted;
+                return 0;
+            }
         }
     }
 
@@ -79,6 +89,12 @@ std::size_t TestDuplexStream::write_some(const asio::const_buffer& buffers) {
 
 std::size_t TestDuplexStream::write_some(const asio::const_buffer& buffers, asio::error_code& ec) {
     ec.clear();
+
+    if (!is_open()) {
+        ec = asio::error::bad_descriptor;
+        return 0;
+    }
+
     apply_delays();
 
     size_t bytes_written = buffer_->write(side_, buffers.data(), buffers.size());

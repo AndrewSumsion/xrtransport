@@ -44,22 +44,33 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_start_worker(
-    xrtp_Transport transport)
+xrtp_Result xrtp_run(
+    xrtp_Transport transport,
+    bool synchronous)
 XRTP_TRY
 {
     auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    transport_impl->start_worker();
+    transport_impl->run(synchronous);
     return 0;
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_stop_worker(
+xrtp_Result xrtp_run_once(
     xrtp_Transport transport)
 XRTP_TRY
 {
     auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    transport_impl->stop_worker();
+    transport_impl->run_once();
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
+xrtp_Result xrtp_stop(
+    xrtp_Transport transport)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    transport_impl->stop();
     return 0;
 }
 XRTP_CATCH_HANDLER
@@ -186,7 +197,7 @@ xrtp_Result xrtp_msg_in_read_some(
 XRTP_TRY
 {
     auto msg_in_impl = reinterpret_cast<MessageLockInImpl*>(msg_in);
-    *size_read = msg_in_impl->stream.read_some(asio::buffer(dst, size));
+    *size_read = msg_in_impl->stream->read_some(asio::buffer(dst, size));
     return 0;
 }
 XRTP_CATCH_HANDLER
@@ -242,7 +253,7 @@ xrtp_Result xrtp_stream_lock_write_some(
 XRTP_TRY
 {
     auto stream_lock_impl = reinterpret_cast<StreamLockImpl*>(stream_lock);
-    *size_written = stream_lock_impl->stream.write_some(asio::buffer(src, size));
+    *size_written = stream_lock_impl->stream->write_some(asio::buffer(src, size));
     return 0;
 }
 XRTP_CATCH_HANDLER
@@ -255,7 +266,7 @@ xrtp_Result xrtp_stream_lock_read_some(
 XRTP_TRY
 {
     auto stream_lock_impl = reinterpret_cast<StreamLockImpl*>(stream_lock);
-    *size_read = stream_lock_impl->stream.read_some(asio::buffer(src, size));
+    *size_read = stream_lock_impl->stream->read_some(asio::buffer(src, size));
     return 0;
 }
 XRTP_CATCH_HANDLER

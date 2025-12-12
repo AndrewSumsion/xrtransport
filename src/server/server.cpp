@@ -120,13 +120,10 @@ void Server::run() {
         module.on_init(transport.get_handle(), &function_loader);
     }
 
-    // queue up first iteration of worker loop
-    transport.start_worker();
+    // run transport worker loop synchronously
+    transport.run(true);
 
-    // run worker loop synchronously
-    transport_io_context.run();
-
-    // Once handler loop terminates or io_context is stopped, close the connection
+    // Once handler loop terminates, close the connection
     transport.close();
 }
 

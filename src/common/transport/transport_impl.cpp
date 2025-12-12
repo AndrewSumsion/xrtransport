@@ -9,12 +9,13 @@
 namespace xrtransport {
 
 // TransportImpl implementation
-TransportImpl::TransportImpl(std::unique_ptr<DuplexStream> stream)
+TransportImpl::TransportImpl(std::unique_ptr<SyncDuplexStream> stream)
     : stream(std::move(stream)), should_stop(false) {
 }
 
 TransportImpl::~TransportImpl() {
-    stop_worker();
+    close();
+    stop();
 }
 
 MessageLockOutImpl TransportImpl::start_message(uint16_t header) {
@@ -42,30 +43,16 @@ MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-        if (stream->available() >= sizeof(header)) {
-            uint16_t received_header;
-            try {
-                asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
-            } catch (const std::exception& e) {
-                spdlog::error("Failed to read message header in await_message: {}", e.what());
-                throw;
-            }
+        uint16_t received_header{};
+        asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(uint16_t)));
 
-            if (received_header == header) {
-                // This is our message
-                return MessageLockInImpl(std::move(lock), *stream);
-            } else {
-                // Dispatch to handler for this message type
-                dispatch_to_handler(received_header, std::move(lock));
-            }
-            // lock is now invalid, continue loop to try again
-        } else {
-            // No data available or incomplete read, release lock and try again
-            lock.unlock();
+        // keep reading and handling messages synchronously until we find the one we want
+        if (received_header == header) {
+            return MessageLockInImpl(std::move(lock), *stream);
         }
-
-        // Yield at each iteration
-        std::this_thread::yield();
+        else {
+            dispatch_to_handler(received_header, std::move(lock));
+        }
     }
 }
 
@@ -87,57 +74,57 @@ void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<std::r
     }
 }
 
-void TransportImpl::start_worker() {
-    should_stop = false;
-    worker_cycle();
-}
-
-void TransportImpl::stop_worker() {
+void TransportImpl::stop() {
     should_stop = true;
+    if (worker_thread.joinable()) {
+        worker_thread.join();
+    }
 }
 
-void TransportImpl::worker_cycle() {
-    // Guard clause to stop the async cycle
-    if (should_stop) {
+void TransportImpl::run(bool synchronous) {
+    if (worker_running) {
+        throw TransportException("Transport already running");
+    }
+    if (!synchronous) {
+        worker_thread = std::thread([&]{
+            // run synchronously on another thread
+            run(true);
+        });
         return;
     }
 
-    // Async wait for read availability
-    stream->async_wait(asio::socket_base::wait_read, [this](asio::error_code ec) {
-        if (should_stop) {
-            return;
+    worker_running = true;
+    try {
+        while (!should_stop) {
+            run_once_internal();
         }
-        if (ec) {
-            spdlog::error("Async wait error in worker_cycle: {}", ec.message());
-            return;
-        }
+    }
+    catch (const asio::system_error& e) {
+        // don't propagate stream errors, just let the stream close
+        spdlog::error("Transport worker exiting due to exception: {}", e.what());
+    }
+    worker_running = false;
+}
 
-        // Acquire lock for synchronous operations
-        std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+void TransportImpl::run_once() {
+    try {
+        run_once_internal();
+    }
+    catch (const asio::system_error& e) {
+        // don't propagate stream errors, just let the stream close
+        spdlog::error("Transport worker exiting due to exception: {}", e.what());
+    }
+}
 
-        // Check if enough bytes are available for the header
-        if (stream->available() >= sizeof(uint16_t)) {
-            // Enough data available, read the header synchronously
-            uint16_t header;
-            try {
-                asio::read(*stream, asio::mutable_buffer(&header, sizeof(header)));
-            } catch (const std::exception& e) {
-                spdlog::error("Failed to read message header in worker_cycle: {}", e.what());
-                lock.unlock();
-                return; // Stop worker on read error
-            }
+void TransportImpl::run_once_internal() {
+    // Acquire lock for synchronous operations
+    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-            // Dispatch to handler (will fatal_error if unknown message type)
-            dispatch_to_handler(header, std::move(lock));
-        } else {
-            // Release lock since we're not reading
-            // Note: lock is released in other branch at the end of the handler
-            lock.unlock();
-        }
+    uint16_t header;
+    asio::read(*stream, asio::buffer(&header, sizeof(uint16_t)));
 
-        // Continue the async cycle
-        worker_cycle();
-    });
+    // Dispatch to handler (will throw TransportException if unknown message type)
+    dispatch_to_handler(header, std::move(lock));
 }
 
 bool TransportImpl::is_open() const {

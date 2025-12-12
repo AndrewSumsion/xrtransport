@@ -47,12 +47,14 @@ size_t SharedBuffer::available(Side side) const {
     return read_buffer.size() - read_pos;
 }
 
-void SharedBuffer::wait_for_data(Side side) const {
+bool SharedBuffer::wait_for_data(Side side) const {
     std::unique_lock<std::mutex> lock(mutex_);
 
     cv_.wait(lock, [this, side] {
-        return get_read_buffer(side).size() > get_read_pos(side);
+        return get_read_buffer(side).size() > get_read_pos(side) || closed;
     });
+
+    return !closed;
 }
 
 void SharedBuffer::clear() {
@@ -64,6 +66,16 @@ void SharedBuffer::clear() {
     read_pos_b_to_a_ = 0;
 
     cv_.notify_all();
+}
+
+void SharedBuffer::close() {
+    std::lock_guard<std::mutex> lock(mutex_);
+    closed = true;
+    cv_.notify_all();
+}
+
+bool SharedBuffer::is_open() const {
+    return !closed;
 }
 
 std::vector<uint8_t>& SharedBuffer::get_write_buffer(Side side) {

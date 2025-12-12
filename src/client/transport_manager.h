@@ -18,7 +18,7 @@ Transport& get_transport();
  * Create a new TCP connection to the xrtransport server.
  * @return Unique pointer to DuplexStream wrapping the TCP connection
  */
-std::unique_ptr<DuplexStream> create_connection();
+std::unique_ptr<SyncDuplexStream> create_connection();
 
 /**
  * Close the current connection and stop the io_context thread.

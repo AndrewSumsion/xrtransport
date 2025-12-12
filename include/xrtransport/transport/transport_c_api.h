@@ -36,26 +36,32 @@ typedef uint16_t xrtp_MessageHeader;
 typedef int32_t xrtp_Result;
 
 /**
- * Must be called with a class that implements DuplexStream from asio_compat.h
- * This function takes memory ownership of the DuplexStream.
+ * Must be called with a class that implements SyncDuplexStream from asio_compat.h
+ * This function takes memory ownership of the SyncDuplexStream.
  */
 XRTP_API xrtp_Result xrtp_create_transport(
-    void* duplex_stream,
+    void* sync_duplex_stream,
     xrtp_Transport* transport_out);
 
 /**
  * Starts the worker loop of the Transport that handles incoming messages when
- * no one is awaiting a message. It is an async loop that operates by scheduling
- * itself with the duplex stream's io_context. This function returns immediately.
+ * no one is awaiting a message. If synchronous is false, it will start the loop
+ * in another thread and return immediately.
  */
-XRTP_API xrtp_Result xrtp_start_worker(
+XRTP_API xrtp_Result xrtp_run(
+    xrtp_Transport transport,
+    bool synchronous);
+
+/**
+ * Runs one single iteration of the worker loop, i.e. handles one incoming message
+ */
+XRTP_API xrtp_Result xrtp_run_once(
     xrtp_Transport transport);
 
 /**
- * Sets a flag inside the Transport to stop handling messages and stop queuing
- * work on the io_context.
+ * Sets a flag inside the Transport to stop handling messages.
  */
-XRTP_API xrtp_Result xrtp_stop_worker(
+XRTP_API xrtp_Result xrtp_stop(
     xrtp_Transport transport);
 
 /**
