@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(xrtransport_client)
-
 # Client-side OpenXR transport implementation
 message(STATUS "Building xrtransport client components")
 
@@ -28,10 +26,7 @@ target_include_directories(xrtransport_client PUBLIC
     ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
-file(GENERATE
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/xrtransport_client_manifest-$<CONFIG>.json
-    INPUT  ${CMAKE_CURRENT_SOURCE_DIR}/xrtransport_client_manifest.json.in
-)
+add_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client>)
 
 # setup install directory
 install(TARGETS xrtransport_client

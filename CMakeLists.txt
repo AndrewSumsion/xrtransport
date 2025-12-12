@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 project(xrtransport)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -31,6 +31,35 @@ include_directories(
 
 # Build with PIC so that static libraries can be linked into shared libraries
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+function(add_openxr_manifest filename library_path)
+    if(WIN32)
+        get_filename_component(target_name ${filename} NAME_WE)
+        add_custom_command(
+            OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${filename}"
+            COMMAND ${CMAKE_COMMAND}
+                -DINPUT_PATH=${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+                -DOUTPUT_PATH=${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${filename}
+                -DLIBRARY_PATH=${library_path}
+                -P ${PROJECT_SOURCE_DIR}/create_openxr_manifest.cmake
+            COMMAND_EXPAND_LISTS
+        )
+        add_custom_target(${target_name} ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${filename}")
+    else()
+        get_filename_component(target_name ${filename} NAME_WE)
+        add_custom_command(
+            OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${filename}"
+            COMMAND ${CMAKE_COMMAND}
+                -DINPUT_PATH=${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+                -DOUTPUT_PATH=${CMAKE_CURRENT_BINARY_DIR}/${filename}
+                -DLIBRARY_PATH=${library_path}
+                -P ${PROJECT_SOURCE_DIR}/create_openxr_manifest.cmake
+            COMMAND_EXPAND_LISTS
+        )
+        add_custom_target(${target_name} ALL DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${filename}")
+    endif()
+    
+endfunction()
 
 # Build xrtransport
 add_subdirectory(src)

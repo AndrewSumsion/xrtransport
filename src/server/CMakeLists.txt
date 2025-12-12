@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(xrtransport_server)
-
 # Server-side OpenXR transport implementation
 message(STATUS "Building xrtransport server components")
 

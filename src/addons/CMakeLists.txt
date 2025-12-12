@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.10)
+
+if(XRTRANSPORT_BUILD_ADDON_VULKAN2)
+    if(XRTRANSPORT_BUILD_CLIENT)
+        add_subdirectory(vulkan2/apilayer)
+    endif()
+    if(XRTRANSPORT_BUILD_SERVER)
+        add_subdirectory(vulkan2/module)
+    endif()
+endif()
