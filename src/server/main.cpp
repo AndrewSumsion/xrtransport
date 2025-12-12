@@ -87,15 +87,15 @@ static std::vector<std::string> collect_module_paths() {
 }
 
 int main(int argc, char** argv) {
+    asio::io_context io_context;
+
+    tcp::acceptor acceptor(
+        io_context,
+        tcp::endpoint(asio::ip::address_v4::loopback(), 5892)
+    );
+
     while (true) {
         try {
-            asio::io_context io_context;
-
-            tcp::acceptor acceptor(
-                io_context,
-                tcp::endpoint(asio::ip::address_v4::loopback(), 5892)
-            );
-
             std::cout << "Waiting for a client...\n";
 
             tcp::socket socket(io_context);
