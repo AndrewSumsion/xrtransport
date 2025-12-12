@@ -34,8 +34,14 @@ file(GENERATE
 )
 
 # setup install directory
-install(TARGETS xrtransport_client LIBRARY DESTINATION client)
-install(TARGETS xrtransport_transport LIBRARY DESTINATION client)
+install(TARGETS xrtransport_client
+    LIBRARY DESTINATION client
+    RUNTIME DESTINATION client # needed for Windows, for some reason it's not considered a LIBRARY target on Windows
+)
+install(TARGETS xrtransport_transport
+    LIBRARY DESTINATION client
+    RUNTIME DESTINATION client
+)
 
 if(UNIX)
     set_target_properties(xrtransport_client PROPERTIES

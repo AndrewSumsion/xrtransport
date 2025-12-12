@@ -38,7 +38,10 @@ target_link_libraries(xrtransport_server_main
 
 # setup install directory
 install(TARGETS xrtransport_server_main RUNTIME DESTINATION server)
-install(TARGETS xrtransport_transport LIBRARY DESTINATION server)
+install(TARGETS xrtransport_transport
+    LIBRARY DESTINATION server
+    RUNTIME DESTINATION server
+)
 
 if(UNIX)
     set_target_properties(xrtransport_server_main PROPERTIES
