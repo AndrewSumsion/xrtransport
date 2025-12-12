@@ -23,7 +23,7 @@ static void fill_available_extensions() {
     uint32_t extension_count{};
     // TODO: handle potential errors on these XR calls
     runtime::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
-    std::vector<XrExtensionProperties> extension_properties_vector(extension_count);
+    std::vector<XrExtensionProperties> extension_properties_vector(extension_count, {XR_TYPE_EXTENSION_PROPERTIES});
     runtime::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
 
     for (auto& extension_properties : extension_properties_vector) {
