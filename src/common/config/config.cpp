@@ -14,6 +14,7 @@
 #include <fstream>
 #include <cstring>
 #include <limits>
+#include <sstream>
 
 using nlohmann::json;
 

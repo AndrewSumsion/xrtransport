@@ -10,6 +10,7 @@
 
 #include "openxr/openxr_loader_negotiation.h"
 #ifdef __ANDROID__
+#include <jni.h>
 #define XR_USE_PLATFORM_ANDROID
 #include "openxr/openxr_platform.h"
 #endif

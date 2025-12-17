@@ -17,6 +17,7 @@ add_library(xrtransport_client SHARED
 target_link_libraries(xrtransport_client
     xrtransport_transport
     xrtransport_serialization
+    xrtransport_config
 )
 
 # Include directories
