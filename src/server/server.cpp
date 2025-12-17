@@ -115,10 +115,24 @@ void Server::run() {
         msg_out.flush();
     });
 
+    // gather supported extensions so modules can decide whether to enable
+    function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateInstanceExtensionProperties));
+    uint32_t num_extensions{};
+    function_loader.pfn_xrEnumerateInstanceExtensionProperties(nullptr, 0, &num_extensions, nullptr);
+    std::vector<XrExtensionProperties> extensions(num_extensions, {XR_TYPE_EXTENSION_PROPERTIES});
+    function_loader.pfn_xrEnumerateInstanceExtensionProperties(nullptr, num_extensions, &num_extensions, extensions.data());
+
     // initialize all modules (which may add handlers)
+    std::vector<Module> enabled_modules;
     for (auto& module : modules) {
-        module.on_init(transport.get_handle(), &function_loader);
+        if (module.on_init(transport.get_handle(), &function_loader, num_extensions, extensions.data())) {
+            // move module into new enabled vector
+            enabled_modules.emplace_back(std::move(module));
+        }
     }
+
+    // update set of enabled extensions
+    modules = std::move(enabled_modules);
 
     // run transport worker loop synchronously
     transport.run(true);
