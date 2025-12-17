@@ -33,7 +33,7 @@ private:
     XrResult (*to_platform_time)(XrInstance instance, XrTime time, XRTRANSPORT_PLATFORM_TIME* platform_time);
 
 public:
-    explicit Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);
+    explicit Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);
 
     bool do_handshake();
     void run();

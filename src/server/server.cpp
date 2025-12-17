@@ -19,7 +19,7 @@ using std::uint64_t;
 
 namespace xrtransport {
 
-Server::Server(std::unique_ptr<DuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths) :
+Server::Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths) :
     transport(std::move(stream)),
     function_loader(xrGetInstanceProcAddr),
     function_dispatch(transport, function_loader, [this](MessageLockIn msg_in){instance_handler(std::move(msg_in));}),

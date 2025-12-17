@@ -156,6 +156,12 @@ public:
     virtual ~DuplexStream() = default;
 };
 
+struct Acceptor {
+    virtual ~Acceptor() = default;
+
+    virtual std::unique_ptr<SyncDuplexStream> accept() = 0;
+};
+
 // Concrete templated implementations
 
 // Concrete implementation of SyncStream
@@ -530,6 +536,24 @@ protected:
 
     void async_write_some_impl(const asio::const_buffer& buffers, std::function<void(asio::error_code, std::size_t)> handler) override {
         stream_.async_write_some(buffers, std::move(handler));
+    }
+};
+
+template <typename AcceptorType, typename SocketType>
+struct AcceptorImpl : public Acceptor {
+private:
+    std::reference_wrapper<asio::io_context> io_context;
+    AcceptorType acceptor;
+
+public:
+    AcceptorImpl(asio::io_context& io_context, AcceptorType acceptor)
+         : io_context(io_context), acceptor(std::move(acceptor))
+    {}
+
+    std::unique_ptr<SyncDuplexStream> accept() override {
+        SocketType socket(io_context.get());
+        acceptor.accept(socket);
+        return std::make_unique<SyncDuplexStreamImpl<SocketType>>(std::move(socket));
     }
 };
 

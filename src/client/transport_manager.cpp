@@ -1,5 +1,7 @@
 #include "transport_manager.h"
 
+#include "xrtransport/config/config.h"
+
 #include "asio.hpp"
 #include "openxr/openxr.h"
 
@@ -9,13 +11,17 @@
 #include <cstdint>
 
 using asio::ip::tcp;
+using asio::local::stream_protocol;
 using std::uint64_t;
 using std::uint32_t;
+
+using namespace xrtransport::configuration;
 
 namespace xrtransport {
 
 static asio::io_context io_context;
 static std::unique_ptr<Transport> transport;
+static std::unique_ptr<Config> config;
 
 static bool do_handshake(Transport& transport) {
     auto lock = transport.lock_stream();
@@ -66,7 +72,7 @@ Transport& get_transport() {
     // Lazy initialization
     if (!transport) {
         // Create the Transport instance
-        transport = std::make_unique<Transport>(std::move(create_connection()));
+        transport = std::make_unique<Transport>(create_connection());
 
         // Do the initial handshake
         if (!do_handshake(*transport)) {
@@ -77,29 +83,51 @@ Transport& get_transport() {
     return *transport;
 }
 
+static std::unique_ptr<SyncDuplexStream> create_tcp_connection(std::string ip, uint16_t port) {
+    tcp::socket socket(io_context);
+
+    // Resolve the server address
+    tcp::resolver resolver(io_context);
+    auto endpoints = resolver.resolve(ip, std::to_string(port));
+
+    // Connect to the server
+    asio::connect(socket, endpoints);
+    socket.set_option(tcp::no_delay(true));
+
+    // Wrap the socket in a DuplexStream
+    return std::make_unique<SyncDuplexStreamImpl<tcp::socket>>(std::move(socket));
+}
+
+static std::unique_ptr<SyncDuplexStream> create_unix_connection(std::string path) {
+#ifdef ASIO_HAS_LOCAL_SOCKETS
+    stream_protocol::socket socket(io_context);
+    socket.connect(stream_protocol::endpoint(path));
+
+    return std::make_unique<SyncDuplexStreamImpl<stream_protocol::socket>>(std::move(socket));
+#else
+    throw std::runtime_error("Unix sockets not supported");
+#endif
+}
+
 std::unique_ptr<SyncDuplexStream> create_connection() {
     // Error if connection already exists
     if (transport) {
         throw std::runtime_error("Connection already exists - call close_connection() first");
     }
 
-    tcp::socket socket(io_context);
-
-    try {
-        // Resolve the server address
-        tcp::resolver resolver(io_context);
-        auto endpoints = resolver.resolve("127.0.0.1", "5892");
-
-        // Connect to the server
-        asio::connect(socket, endpoints);
-        socket.set_option(tcp::no_delay(true));
-
-    } catch (const std::exception& e) {
-        throw std::runtime_error("Failed to connect to server at 127.0.0.1:5892: " + std::string(e.what()));
+    if (!config) {
+        config = std::make_unique<Config>(load_config());
     }
 
-    // Wrap the socket in a DuplexStream
-    return std::make_unique<SyncDuplexStreamImpl<tcp::socket>>(std::move(socket));
+    if (config->transport_type == TransportType::TCP) {
+        return create_tcp_connection(config->ip_address, config->port);
+    }
+    else if (config->transport_type == TransportType::UNIX) {
+        return create_unix_connection(config->unix_path);
+    }
+    else {
+        throw std::runtime_error("Invalid transport type");
+    }
 }
 
 void close_connection() {
