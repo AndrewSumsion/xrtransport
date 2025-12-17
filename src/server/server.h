@@ -23,6 +23,7 @@ private:
     FunctionDispatch function_dispatch;
     std::vector<Module> modules;
     asio::io_context& transport_io_context;
+    XrInstance saved_instance;
 
     // Custom handler of xrCreateInstance provided to FunctionDispatch via dependency injection
     void instance_handler(MessageLockIn msg_in);

@@ -108,7 +108,7 @@ void Server::run() {
         XRTRANSPORT_PLATFORM_TIME server_platform_time{};
         get_platform_time(&server_platform_time);
         XrTime server_time{};
-        from_platform_time(function_loader.loader_instance, &server_platform_time, &server_time);
+        from_platform_time(saved_instance, &server_platform_time, &server_time);
 
         auto msg_out = transport.start_message(XRTP_MSG_SYNCHRONIZATION_RESPONSE);
         asio::write(msg_out.buffer, asio::buffer(&server_time, sizeof(XrTime)));
@@ -192,7 +192,8 @@ void Server::instance_handler(MessageLockIn msg_in) {
     msg_out.flush();
 
     if (XR_SUCCEEDED(_result)) {
-        function_loader.loader_instance = *instance;
+        saved_instance = *instance;
+        function_loader.loader_instance = saved_instance;
 
         // Notify modules that XrInstance was created
         for (auto& module : modules) {
