@@ -1,0 +1,152 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "default-debug",
+            "displayName": "Default (Debug)",
+            "binaryDir": "build/default/debug",
+            "installDir": "build/default/debug/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "waydroid-x86_64-debug",
+            "displayName": "Waydroid x86_64 (Debug)",
+            "binaryDir": "build/waydroid/x86_64/debug",
+            "installDir": "build/waydroid/x86_64/debug/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "x86_64",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-x86-debug",
+            "displayName": "Waydroid x86 (Debug)",
+            "binaryDir": "build/waydroid/x86/debug",
+            "installDir": "build/waydroid/x86/debug/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "x86",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-arm64-v8a-debug",
+            "displayName": "Waydroid arm64-v8a (Debug)",
+            "binaryDir": "build/waydroid/arm64-v8a/debug",
+            "installDir": "build/waydroid/arm64-v8a/debug/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "arm64-v8a",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-armeabi-v7a-debug",
+            "displayName": "Waydroid armeabi-v7a (Debug)",
+            "binaryDir": "build/waydroid/armeabi-v7a/debug",
+            "installDir": "build/waydroid/armeabi-v7a/debug/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "armeabi-v7a",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-x86_64-release",
+            "displayName": "Waydroid x86_64 (Release)",
+            "binaryDir": "build/waydroid/x86_64/release",
+            "installDir": "build/waydroid/x86_64/release/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "x86_64",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-x86-release",
+            "displayName": "Waydroid x86 (Release)",
+            "binaryDir": "build/waydroid/x86/release",
+            "installDir": "build/waydroid/x86/release/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "x86",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-arm64-v8a-release",
+            "displayName": "Waydroid arm64-v8a (Release)",
+            "binaryDir": "build/waydroid/arm64-v8a/release",
+            "installDir": "build/waydroid/arm64-v8a/release/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "arm64-v8a",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        },
+        {
+            "name": "waydroid-armeabi-v7a-release",
+            "displayName": "Waydroid armeabi-v7a (Release)",
+            "binaryDir": "build/waydroid/armeabi-v7a/release",
+            "installDir": "build/waydroid/armeabi-v7a/release/install",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
+                "ANDROID_ABI": "armeabi-v7a",
+                "ANDROID_PLATFORM": "android-33",
+                "XRTRANSPORT_BUILD_SERVER": "OFF"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "waydroid-x86_64-debug-build",
+            "configurePreset": "waydroid-x86_64-debug"
+        },
+        {
+            "name": "waydroid-x86-debug-build",
+            "configurePreset": "waydroid-x86-debug"
+        },
+        {
+            "name": "waydroid-arm64-v8a-debug-build",
+            "configurePreset": "waydroid-arm64-v8a-debug"
+        },
+        {
+            "name": "waydroid-armeabi-v7a-debug-build",
+            "configurePreset": "waydroid-armeabi-v7a-debug"
+        },
+                {
+            "name": "waydroid-x86_64-release-build",
+            "configurePreset": "waydroid-x86_64-release"
+        },
+        {
+            "name": "waydroid-x86-release-build",
+            "configurePreset": "waydroid-x86-release"
+        },
+        {
+            "name": "waydroid-arm64-v8a-release-build",
+            "configurePreset": "waydroid-arm64-v8a-release"
+        },
+        {
+            "name": "waydroid-armeabi-v7a-release-build",
+            "configurePreset": "waydroid-armeabi-v7a-release"
+        }
+    ]
+}
