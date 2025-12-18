@@ -5,6 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(XRTRANSPORT_BUILD_CLIENT "Build client" ON)
 option(XRTRANSPORT_BUILD_SERVER "Build server" ON)
+option(XRTRANSPORT_BUILD_TESTS "Build tests" ON)
 
 if (XRTRANSPORT_BUILD_SERVER)
     # Server needs OpenXR loader to be built
@@ -65,4 +66,6 @@ endfunction()
 add_subdirectory(src)
 
 # Build the test executables
-add_subdirectory(test)
+if(XRTRANSPORT_BUILD_TESTS)
+    add_subdirectory(test)
+endif()
