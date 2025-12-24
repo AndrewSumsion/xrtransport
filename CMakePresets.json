@@ -125,6 +125,10 @@
     ],
     "buildPresets": [
         {
+            "name": "default-debug-build",
+            "configurePreset": "default-debug"
+        },
+        {
             "name": "waydroid-x86_64-debug-build",
             "configurePreset": "waydroid-x86_64-debug"
         },

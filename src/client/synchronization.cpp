@@ -1,5 +1,5 @@
 #include "synchronization.h"
-#include "transport_manager.h"
+#include "runtime.h"
 
 #include "xrtransport/time.h"
 
@@ -15,7 +15,7 @@ static bool synchronization_enabled = false;
 static XrDuration time_offset = 0;
 
 static void do_synchronize() {
-    Transport& transport = get_transport();
+    Transport& transport = get_runtime().get_transport();
 
     // keep stream locked while in between messages
     auto lock = transport.lock_stream();

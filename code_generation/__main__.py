@@ -53,10 +53,11 @@ apply_function_ids(spec, function_ids)
 apply_modifiable_bindings(spec)
 
 template_config = [
-    ("client/runtime_header.mako", "src/client/runtime.h"),
-    ("client/runtime_impl.mako", "src/client/runtime.cpp"),
+    ("client/rpc_header.mako", "src/client/rpc.h"),
+    ("client/rpc_impl.mako", "src/client/rpc.cpp"),
     ("client/exports_header.mako", "src/client/exports.h"),
     ("client/exports_impl.mako", "src/client/exports.cpp"),
+    ("client/function_table_impl.mako", "src/client/function_table.cpp"),
     ("server/function_dispatch_header.mako", "src/server/function_dispatch.h"),
     ("server/function_dispatch_impl.mako", "src/server/function_dispatch.cpp"),
     ("server/function_loader.mako", "include/xrtransport/server/function_loader.h"),

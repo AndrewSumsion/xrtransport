@@ -2,7 +2,7 @@
 
 #include "xrtransport/extensions/enabled_extensions.h"
 
-#include "runtime.h"
+#include "exports.h"
 
 #include "openxr/openxr.h"
 
@@ -22,9 +22,9 @@ static std::unordered_map<std::string, uint32_t> available_extensions;
 static void fill_available_extensions() {
     uint32_t extension_count{};
     // TODO: handle potential errors on these XR calls
-    runtime::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
+    exports::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
     std::vector<XrExtensionProperties> extension_properties_vector(extension_count, {XR_TYPE_EXTENSION_PROPERTIES});
-    runtime::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
+    exports::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
 
     for (auto& extension_properties : extension_properties_vector) {
         std::string extension_name(extension_properties.extensionName);

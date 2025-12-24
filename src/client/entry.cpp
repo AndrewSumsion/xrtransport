@@ -1,7 +1,7 @@
-#include "runtime.h"
+#include "rpc.h"
 #include "exports.h"
 #include "available_extensions.h"
-#include "transport_manager.h"
+#include "runtime.h"
 #include "synchronization.h"
 
 #include "xrtransport/extensions/extension_functions.h"
@@ -110,7 +110,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
 
     std::string name_str(name);
 
-    // allow API layers to access transport (allowed will null instance handle)
+    // allow API layers to access transport (allowed with null instance handle)
     if (name_str == "xrtransportGetTransport") {
         *function = reinterpret_cast<PFN_xrVoidFunction>(xrtransportGetTransport);
         return XR_SUCCESS;
@@ -268,7 +268,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
 #endif
 
     // Do the instance creation
-    XrResult result = runtime::xrCreateInstance(create_info, instance);
+    XrResult result = rpc::xrCreateInstance(create_info, instance);
     if (XR_SUCCEEDED(result)) {
         saved_instance = *instance;
         // now that instance has been created, synchronization can start
@@ -297,6 +297,10 @@ extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface
         return XR_ERROR_INITIALIZATION_FAILED;
     }
     
+    // Initialize function table
+    auto& function_table = get_runtime().get_function_table();
+    function_table.init_with_rpc_functions();
+
     runtimeRequest->getInstanceProcAddr = xrGetInstanceProcAddrImpl;
     runtimeRequest->runtimeInterfaceVersion = XR_CURRENT_LOADER_API_LAYER_VERSION;
     runtimeRequest->runtimeApiVersion = XR_CURRENT_API_VERSION;
@@ -305,8 +309,7 @@ extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface
 }
 
 static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out) {
-    Transport& transport = get_transport();
-    *transport_out = transport.get_handle();
+    *transport_out = get_runtime().get_transport().get_handle();
     return XR_SUCCESS;
 }
 

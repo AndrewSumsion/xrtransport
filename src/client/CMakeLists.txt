@@ -5,12 +5,13 @@ message(STATUS "Building xrtransport client components")
 
 # Client library
 add_library(xrtransport_client SHARED
-    runtime.cpp
+    rpc.cpp
     exports.cpp
-    transport_manager.cpp
+    runtime.cpp
     entry.cpp
     available_extensions.cpp
     synchronization.cpp
+    function_table.cpp
 )
 
 # Dependencies

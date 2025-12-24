@@ -1,6 +1,6 @@
 <%namespace name="utils" file="utils.mako"/>\
+#include "rpc.h"
 #include "runtime.h"
-#include "transport_manager.h"
 #include "synchronization.h"
 
 #include "xrtransport/transport/transport.h"
@@ -15,11 +15,11 @@
 
 namespace xrtransport {
 
-namespace runtime {
+namespace rpc {
 
 <%utils:for_grouped_functions args="function">\
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
-    auto& transport = get_transport();
+    auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
     XrDuration time_offset = get_time_offset(true);
@@ -48,6 +48,6 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
 
 </%utils:for_grouped_functions>
 
-} // namespace runtime
+} // namespace rpc
 
 } // namespace xrtransport

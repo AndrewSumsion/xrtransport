@@ -1,18 +1,12 @@
-#ifndef XRTRANSPORT_MODULE_INTERFACE_H
-#define XRTRANSPORT_MODULE_INTERFACE_H
+#ifndef XRTRANSPORT_SERVER_MODULE_INTERFACE_H
+#define XRTRANSPORT_SERVER_MODULE_INTERFACE_H
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/server/function_loader.h"
+#include "xrtransport/api.h"
 #include "openxr/openxr.h"
 
 #include <cstdint>
-
-#ifdef _WIN32
-// this header is only used by modules exporting the symbols
-#define XRTP_MODULE_API __declspec(dllexport)
-#else
-#define XRTP_MODULE_API
-#endif
 
 extern "C" {
 
@@ -21,7 +15,7 @@ extern "C" {
  * Can be used to register handlers on the transport or proactively load XR functions.
  * Return false to disable the module, usually if a necessary extension isn't present.
  */
-XRTP_MODULE_API bool on_init(
+XRTP_API_EXPORT bool on_init(
     xrtp_Transport transport,
     const xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
@@ -34,7 +28,7 @@ XRTP_MODULE_API bool on_init(
  * Call first will null extensions_out to know how much space to allocate via num_extensions_out.
  * Then call again to populate strings via extensions_out.
  */
-XRTP_MODULE_API void get_required_extensions(
+XRTP_API_EXPORT void get_required_extensions(
     std::uint32_t* num_extensions_out,
     const char** extensions_out);
 
@@ -42,7 +36,7 @@ XRTP_MODULE_API void get_required_extensions(
  * Called immediately after the xrCreateInstance call completes.
  * Can be used to load functions that require an XrInstance to be loaded.
  */
-XRTP_MODULE_API void on_instance(
+XRTP_API_EXPORT void on_instance(
     xrtp_Transport transport,
     const xrtransport::FunctionLoader* function_loader,
     XrInstance instance);
@@ -50,8 +44,8 @@ XRTP_MODULE_API void on_instance(
 /**
  * Called immediately before module is unloaded.
  */
-XRTP_MODULE_API void on_shutdown();
+XRTP_API_EXPORT void on_shutdown();
 
 }
 
-#endif // XRTRANSPORT_MODULE_INTERFACE_H
+#endif // XRTRANSPORT_SERVER_MODULE_INTERFACE_H

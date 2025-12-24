@@ -20,9 +20,16 @@ namespace xrtransport {
 namespace exports {
 
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
+static PFN_xrSetDigitalLensControlALMALENCE pfn_xrSetDigitalLensControlALMALENCE = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) {
+    if (!pfn_xrSetDigitalLensControlALMALENCE) {
+        get_runtime().get_function_table().get_function("xrSetDigitalLensControlALMALENCE", pfn_xrSetDigitalLensControlALMALENCE);
+        if (!pfn_xrSetDigitalLensControlALMALENCE) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetDigitalLensControlALMALENCE(session, digitalLensControl);
+        return pfn_xrSetDigitalLensControlALMALENCE(session, digitalLensControl);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetDigitalLensControlALMALENCE: {}", e.what());
@@ -32,9 +39,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
+static PFN_xrCreateBodyTrackerBD pfn_xrCreateBodyTrackerBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const XrBodyTrackerCreateInfoBD* createInfo, XrBodyTrackerBD* bodyTracker) {
+    if (!pfn_xrCreateBodyTrackerBD) {
+        get_runtime().get_function_table().get_function("xrCreateBodyTrackerBD", pfn_xrCreateBodyTrackerBD);
+        if (!pfn_xrCreateBodyTrackerBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateBodyTrackerBD(session, createInfo, bodyTracker);
+        return pfn_xrCreateBodyTrackerBD(session, createInfo, bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerBD: {}", e.what());
@@ -42,9 +56,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
     }
 }
 
+static PFN_xrDestroyBodyTrackerBD pfn_xrDestroyBodyTrackerBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracker) {
+    if (!pfn_xrDestroyBodyTrackerBD) {
+        get_runtime().get_function_table().get_function("xrDestroyBodyTrackerBD", pfn_xrDestroyBodyTrackerBD);
+        if (!pfn_xrDestroyBodyTrackerBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyBodyTrackerBD(bodyTracker);
+        return pfn_xrDestroyBodyTrackerBD(bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerBD: {}", e.what());
@@ -52,9 +73,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
     }
 }
 
+static PFN_xrLocateBodyJointsBD pfn_xrLocateBodyJointsBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker, const XrBodyJointsLocateInfoBD* locateInfo, XrBodyJointLocationsBD* locations) {
+    if (!pfn_xrLocateBodyJointsBD) {
+        get_runtime().get_function_table().get_function("xrLocateBodyJointsBD", pfn_xrLocateBodyJointsBD);
+        if (!pfn_xrLocateBodyJointsBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateBodyJointsBD(bodyTracker, locateInfo, locations);
+        return pfn_xrLocateBodyJointsBD(bodyTracker, locateInfo, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsBD: {}", e.what());
@@ -64,9 +92,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
+static PFN_xrCreateSpatialAnchorAsyncBD pfn_xrCreateSpatialAnchorAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorCreateInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrCreateSpatialAnchorAsyncBD) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorAsyncBD", pfn_xrCreateSpatialAnchorAsyncBD);
+        if (!pfn_xrCreateSpatialAnchorAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorAsyncBD(provider, info, future);
+        return pfn_xrCreateSpatialAnchorAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorAsyncBD: {}", e.what());
@@ -74,9 +109,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
     }
 }
 
+static PFN_xrCreateSpatialAnchorCompleteBD pfn_xrCreateSpatialAnchorCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSpatialAnchorCreateCompletionBD* completion) {
+    if (!pfn_xrCreateSpatialAnchorCompleteBD) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorCompleteBD", pfn_xrCreateSpatialAnchorCompleteBD);
+        if (!pfn_xrCreateSpatialAnchorCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorCompleteBD(provider, future, completion);
+        return pfn_xrCreateSpatialAnchorCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorCompleteBD: {}", e.what());
@@ -84,9 +126,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
     }
 }
 
+static PFN_xrPersistSpatialAnchorAsyncBD pfn_xrPersistSpatialAnchorAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorPersistInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrPersistSpatialAnchorAsyncBD) {
+        get_runtime().get_function_table().get_function("xrPersistSpatialAnchorAsyncBD", pfn_xrPersistSpatialAnchorAsyncBD);
+        if (!pfn_xrPersistSpatialAnchorAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPersistSpatialAnchorAsyncBD(provider, info, future);
+        return pfn_xrPersistSpatialAnchorAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorAsyncBD: {}", e.what());
@@ -94,9 +143,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
     }
 }
 
+static PFN_xrPersistSpatialAnchorCompleteBD pfn_xrPersistSpatialAnchorCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrPersistSpatialAnchorCompleteBD) {
+        get_runtime().get_function_table().get_function("xrPersistSpatialAnchorCompleteBD", pfn_xrPersistSpatialAnchorCompleteBD);
+        if (!pfn_xrPersistSpatialAnchorCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPersistSpatialAnchorCompleteBD(provider, future, completion);
+        return pfn_xrPersistSpatialAnchorCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorCompleteBD: {}", e.what());
@@ -104,9 +160,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
     }
 }
 
+static PFN_xrUnpersistSpatialAnchorAsyncBD pfn_xrUnpersistSpatialAnchorAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorUnpersistInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrUnpersistSpatialAnchorAsyncBD) {
+        get_runtime().get_function_table().get_function("xrUnpersistSpatialAnchorAsyncBD", pfn_xrUnpersistSpatialAnchorAsyncBD);
+        if (!pfn_xrUnpersistSpatialAnchorAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUnpersistSpatialAnchorAsyncBD(provider, info, future);
+        return pfn_xrUnpersistSpatialAnchorAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorAsyncBD: {}", e.what());
@@ -114,9 +177,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
     }
 }
 
+static PFN_xrUnpersistSpatialAnchorCompleteBD pfn_xrUnpersistSpatialAnchorCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrUnpersistSpatialAnchorCompleteBD) {
+        get_runtime().get_function_table().get_function("xrUnpersistSpatialAnchorCompleteBD", pfn_xrUnpersistSpatialAnchorCompleteBD);
+        if (!pfn_xrUnpersistSpatialAnchorCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUnpersistSpatialAnchorCompleteBD(provider, future, completion);
+        return pfn_xrUnpersistSpatialAnchorCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorCompleteBD: {}", e.what());
@@ -126,9 +196,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
+static PFN_xrDownloadSharedSpatialAnchorAsyncBD pfn_xrDownloadSharedSpatialAnchorAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSharedSpatialAnchorDownloadInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrDownloadSharedSpatialAnchorAsyncBD) {
+        get_runtime().get_function_table().get_function("xrDownloadSharedSpatialAnchorAsyncBD", pfn_xrDownloadSharedSpatialAnchorAsyncBD);
+        if (!pfn_xrDownloadSharedSpatialAnchorAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDownloadSharedSpatialAnchorAsyncBD(provider, info, future);
+        return pfn_xrDownloadSharedSpatialAnchorAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDownloadSharedSpatialAnchorAsyncBD: {}", e.what());
@@ -136,9 +213,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
     }
 }
 
+static PFN_xrDownloadSharedSpatialAnchorCompleteBD pfn_xrDownloadSharedSpatialAnchorCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrDownloadSharedSpatialAnchorCompleteBD) {
+        get_runtime().get_function_table().get_function("xrDownloadSharedSpatialAnchorCompleteBD", pfn_xrDownloadSharedSpatialAnchorCompleteBD);
+        if (!pfn_xrDownloadSharedSpatialAnchorCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDownloadSharedSpatialAnchorCompleteBD(provider, future, completion);
+        return pfn_xrDownloadSharedSpatialAnchorCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDownloadSharedSpatialAnchorCompleteBD: {}", e.what());
@@ -146,9 +230,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
     }
 }
 
+static PFN_xrShareSpatialAnchorAsyncBD pfn_xrShareSpatialAnchorAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorShareInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrShareSpatialAnchorAsyncBD) {
+        get_runtime().get_function_table().get_function("xrShareSpatialAnchorAsyncBD", pfn_xrShareSpatialAnchorAsyncBD);
+        if (!pfn_xrShareSpatialAnchorAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrShareSpatialAnchorAsyncBD(provider, info, future);
+        return pfn_xrShareSpatialAnchorAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpatialAnchorAsyncBD: {}", e.what());
@@ -156,9 +247,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
     }
 }
 
+static PFN_xrShareSpatialAnchorCompleteBD pfn_xrShareSpatialAnchorCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrShareSpatialAnchorCompleteBD) {
+        get_runtime().get_function_table().get_function("xrShareSpatialAnchorCompleteBD", pfn_xrShareSpatialAnchorCompleteBD);
+        if (!pfn_xrShareSpatialAnchorCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrShareSpatialAnchorCompleteBD(provider, future, completion);
+        return pfn_xrShareSpatialAnchorCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpatialAnchorCompleteBD: {}", e.what());
@@ -168,9 +266,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
+static PFN_xrCaptureSceneAsyncBD pfn_xrCaptureSceneAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provider, const XrSceneCaptureInfoBD* info, XrFutureEXT* future) {
+    if (!pfn_xrCaptureSceneAsyncBD) {
+        get_runtime().get_function_table().get_function("xrCaptureSceneAsyncBD", pfn_xrCaptureSceneAsyncBD);
+        if (!pfn_xrCaptureSceneAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCaptureSceneAsyncBD(provider, info, future);
+        return pfn_xrCaptureSceneAsyncBD(provider, info, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCaptureSceneAsyncBD: {}", e.what());
@@ -178,9 +283,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
     }
 }
 
+static PFN_xrCaptureSceneCompleteBD pfn_xrCaptureSceneCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrCaptureSceneCompleteBD) {
+        get_runtime().get_function_table().get_function("xrCaptureSceneCompleteBD", pfn_xrCaptureSceneCompleteBD);
+        if (!pfn_xrCaptureSceneCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCaptureSceneCompleteBD(provider, future, completion);
+        return pfn_xrCaptureSceneCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCaptureSceneCompleteBD: {}", e.what());
@@ -190,9 +302,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
+static PFN_xrCreateAnchorSpaceBD pfn_xrCreateAnchorSpaceBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const XrAnchorSpaceCreateInfoBD* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateAnchorSpaceBD) {
+        get_runtime().get_function_table().get_function("xrCreateAnchorSpaceBD", pfn_xrCreateAnchorSpaceBD);
+        if (!pfn_xrCreateAnchorSpaceBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateAnchorSpaceBD(session, createInfo, space);
+        return pfn_xrCreateAnchorSpaceBD(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateAnchorSpaceBD: {}", e.what());
@@ -200,9 +319,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
     }
 }
 
+static PFN_xrCreateSenseDataProviderBD pfn_xrCreateSenseDataProviderBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, const XrSenseDataProviderCreateInfoBD* createInfo, XrSenseDataProviderBD* provider) {
+    if (!pfn_xrCreateSenseDataProviderBD) {
+        get_runtime().get_function_table().get_function("xrCreateSenseDataProviderBD", pfn_xrCreateSenseDataProviderBD);
+        if (!pfn_xrCreateSenseDataProviderBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSenseDataProviderBD(session, createInfo, provider);
+        return pfn_xrCreateSenseDataProviderBD(session, createInfo, provider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSenseDataProviderBD: {}", e.what());
@@ -210,9 +336,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
     }
 }
 
+static PFN_xrCreateSpatialEntityAnchorBD pfn_xrCreateSpatialEntityAnchorBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProviderBD provider, const XrSpatialEntityAnchorCreateInfoBD* createInfo, XrAnchorBD* anchor) {
+    if (!pfn_xrCreateSpatialEntityAnchorBD) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialEntityAnchorBD", pfn_xrCreateSpatialEntityAnchorBD);
+        if (!pfn_xrCreateSpatialEntityAnchorBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
+        return pfn_xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialEntityAnchorBD: {}", e.what());
@@ -220,9 +353,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
     }
 }
 
+static PFN_xrDestroyAnchorBD pfn_xrDestroyAnchorBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
+    if (!pfn_xrDestroyAnchorBD) {
+        get_runtime().get_function_table().get_function("xrDestroyAnchorBD", pfn_xrDestroyAnchorBD);
+        if (!pfn_xrDestroyAnchorBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyAnchorBD(anchor);
+        return pfn_xrDestroyAnchorBD(anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyAnchorBD: {}", e.what());
@@ -230,9 +370,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
     }
 }
 
+static PFN_xrDestroySenseDataProviderBD pfn_xrDestroySenseDataProviderBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderBD provider) {
+    if (!pfn_xrDestroySenseDataProviderBD) {
+        get_runtime().get_function_table().get_function("xrDestroySenseDataProviderBD", pfn_xrDestroySenseDataProviderBD);
+        if (!pfn_xrDestroySenseDataProviderBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySenseDataProviderBD(provider);
+        return pfn_xrDestroySenseDataProviderBD(provider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySenseDataProviderBD: {}", e.what());
@@ -240,9 +387,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
     }
 }
 
+static PFN_xrDestroySenseDataSnapshotBD pfn_xrDestroySenseDataSnapshotBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotBD snapshot) {
+    if (!pfn_xrDestroySenseDataSnapshotBD) {
+        get_runtime().get_function_table().get_function("xrDestroySenseDataSnapshotBD", pfn_xrDestroySenseDataSnapshotBD);
+        if (!pfn_xrDestroySenseDataSnapshotBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySenseDataSnapshotBD(snapshot);
+        return pfn_xrDestroySenseDataSnapshotBD(snapshot);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySenseDataSnapshotBD: {}", e.what());
@@ -250,9 +404,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
     }
 }
 
+static PFN_xrEnumerateSpatialEntityComponentTypesBD pfn_xrEnumerateSpatialEntityComponentTypesBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpatialEntityComponentTypeBD* componentTypes) {
+    if (!pfn_xrEnumerateSpatialEntityComponentTypesBD) {
+        get_runtime().get_function_table().get_function("xrEnumerateSpatialEntityComponentTypesBD", pfn_xrEnumerateSpatialEntityComponentTypesBD);
+        if (!pfn_xrEnumerateSpatialEntityComponentTypesBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+        return pfn_xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSpatialEntityComponentTypesBD: {}", e.what());
@@ -260,9 +421,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
     }
 }
 
+static PFN_xrGetAnchorUuidBD pfn_xrGetAnchorUuidBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* uuid) {
+    if (!pfn_xrGetAnchorUuidBD) {
+        get_runtime().get_function_table().get_function("xrGetAnchorUuidBD", pfn_xrGetAnchorUuidBD);
+        if (!pfn_xrGetAnchorUuidBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetAnchorUuidBD(anchor, uuid);
+        return pfn_xrGetAnchorUuidBD(anchor, uuid);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAnchorUuidBD: {}", e.what());
@@ -270,9 +438,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
     }
 }
 
+static PFN_xrGetQueriedSenseDataBD pfn_xrGetQueriedSenseDataBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD snapshot, XrQueriedSenseDataGetInfoBD* getInfo, XrQueriedSenseDataBD* queriedSenseData) {
+    if (!pfn_xrGetQueriedSenseDataBD) {
+        get_runtime().get_function_table().get_function("xrGetQueriedSenseDataBD", pfn_xrGetQueriedSenseDataBD);
+        if (!pfn_xrGetQueriedSenseDataBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
+        return pfn_xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetQueriedSenseDataBD: {}", e.what());
@@ -280,9 +455,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
     }
 }
 
+static PFN_xrGetSenseDataProviderStateBD pfn_xrGetSenseDataProviderStateBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProviderBD provider, XrSenseDataProviderStateBD* state) {
+    if (!pfn_xrGetSenseDataProviderStateBD) {
+        get_runtime().get_function_table().get_function("xrGetSenseDataProviderStateBD", pfn_xrGetSenseDataProviderStateBD);
+        if (!pfn_xrGetSenseDataProviderStateBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSenseDataProviderStateBD(provider, state);
+        return pfn_xrGetSenseDataProviderStateBD(provider, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSenseDataProviderStateBD: {}", e.what());
@@ -290,9 +472,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
     }
 }
 
+static PFN_xrGetSpatialEntityComponentDataBD pfn_xrGetSpatialEntityComponentDataBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnapshotBD snapshot, const XrSpatialEntityComponentGetInfoBD* getInfo, XrSpatialEntityComponentDataBaseHeaderBD* componentData) {
+    if (!pfn_xrGetSpatialEntityComponentDataBD) {
+        get_runtime().get_function_table().get_function("xrGetSpatialEntityComponentDataBD", pfn_xrGetSpatialEntityComponentDataBD);
+        if (!pfn_xrGetSpatialEntityComponentDataBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
+        return pfn_xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialEntityComponentDataBD: {}", e.what());
@@ -300,9 +489,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
     }
 }
 
+static PFN_xrGetSpatialEntityUuidBD pfn_xrGetSpatialEntityUuidBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, XrUuidEXT* uuid) {
+    if (!pfn_xrGetSpatialEntityUuidBD) {
+        get_runtime().get_function_table().get_function("xrGetSpatialEntityUuidBD", pfn_xrGetSpatialEntityUuidBD);
+        if (!pfn_xrGetSpatialEntityUuidBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
+        return pfn_xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialEntityUuidBD: {}", e.what());
@@ -310,9 +506,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
     }
 }
 
+static PFN_xrQuerySenseDataAsyncBD pfn_xrQuerySenseDataAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataQueryInfoBD* queryInfo, XrFutureEXT* future) {
+    if (!pfn_xrQuerySenseDataAsyncBD) {
+        get_runtime().get_function_table().get_function("xrQuerySenseDataAsyncBD", pfn_xrQuerySenseDataAsyncBD);
+        if (!pfn_xrQuerySenseDataAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySenseDataAsyncBD(provider, queryInfo, future);
+        return pfn_xrQuerySenseDataAsyncBD(provider, queryInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySenseDataAsyncBD: {}", e.what());
@@ -320,9 +523,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
     }
 }
 
+static PFN_xrQuerySenseDataCompleteBD pfn_xrQuerySenseDataCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSenseDataQueryCompletionBD* completion) {
+    if (!pfn_xrQuerySenseDataCompleteBD) {
+        get_runtime().get_function_table().get_function("xrQuerySenseDataCompleteBD", pfn_xrQuerySenseDataCompleteBD);
+        if (!pfn_xrQuerySenseDataCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySenseDataCompleteBD(provider, future, completion);
+        return pfn_xrQuerySenseDataCompleteBD(provider, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySenseDataCompleteBD: {}", e.what());
@@ -330,9 +540,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
     }
 }
 
+static PFN_xrStartSenseDataProviderAsyncBD pfn_xrStartSenseDataProviderAsyncBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataProviderStartInfoBD* startInfo, XrFutureEXT* future) {
+    if (!pfn_xrStartSenseDataProviderAsyncBD) {
+        get_runtime().get_function_table().get_function("xrStartSenseDataProviderAsyncBD", pfn_xrStartSenseDataProviderAsyncBD);
+        if (!pfn_xrStartSenseDataProviderAsyncBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
+        return pfn_xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartSenseDataProviderAsyncBD: {}", e.what());
@@ -340,9 +557,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
     }
 }
 
+static PFN_xrStartSenseDataProviderCompleteBD pfn_xrStartSenseDataProviderCompleteBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession session, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+    if (!pfn_xrStartSenseDataProviderCompleteBD) {
+        get_runtime().get_function_table().get_function("xrStartSenseDataProviderCompleteBD", pfn_xrStartSenseDataProviderCompleteBD);
+        if (!pfn_xrStartSenseDataProviderCompleteBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStartSenseDataProviderCompleteBD(session, future, completion);
+        return pfn_xrStartSenseDataProviderCompleteBD(session, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartSenseDataProviderCompleteBD: {}", e.what());
@@ -350,9 +574,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
     }
 }
 
+static PFN_xrStopSenseDataProviderBD pfn_xrStopSenseDataProviderBD = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD provider) {
+    if (!pfn_xrStopSenseDataProviderBD) {
+        get_runtime().get_function_table().get_function("xrStopSenseDataProviderBD", pfn_xrStopSenseDataProviderBD);
+        if (!pfn_xrStopSenseDataProviderBD) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStopSenseDataProviderBD(provider);
+        return pfn_xrStopSenseDataProviderBD(provider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopSenseDataProviderBD: {}", e.what());
@@ -362,9 +593,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
+static PFN_xrSetInputDeviceActiveEXT pfn_xrSetInputDeviceActiveEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive) {
+    if (!pfn_xrSetInputDeviceActiveEXT) {
+        get_runtime().get_function_table().get_function("xrSetInputDeviceActiveEXT", pfn_xrSetInputDeviceActiveEXT);
+        if (!pfn_xrSetInputDeviceActiveEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
+        return pfn_xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceActiveEXT: {}", e.what());
@@ -372,9 +610,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
     }
 }
 
+static PFN_xrSetInputDeviceLocationEXT pfn_xrSetInputDeviceLocationEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose) {
+    if (!pfn_xrSetInputDeviceLocationEXT) {
+        get_runtime().get_function_table().get_function("xrSetInputDeviceLocationEXT", pfn_xrSetInputDeviceLocationEXT);
+        if (!pfn_xrSetInputDeviceLocationEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
+        return pfn_xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceLocationEXT: {}", e.what());
@@ -382,9 +627,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
     }
 }
 
+static PFN_xrSetInputDeviceStateBoolEXT pfn_xrSetInputDeviceStateBoolEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state) {
+    if (!pfn_xrSetInputDeviceStateBoolEXT) {
+        get_runtime().get_function_table().get_function("xrSetInputDeviceStateBoolEXT", pfn_xrSetInputDeviceStateBoolEXT);
+        if (!pfn_xrSetInputDeviceStateBoolEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
+        return pfn_xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateBoolEXT: {}", e.what());
@@ -392,9 +644,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
     }
 }
 
+static PFN_xrSetInputDeviceStateFloatEXT pfn_xrSetInputDeviceStateFloatEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state) {
+    if (!pfn_xrSetInputDeviceStateFloatEXT) {
+        get_runtime().get_function_table().get_function("xrSetInputDeviceStateFloatEXT", pfn_xrSetInputDeviceStateFloatEXT);
+        if (!pfn_xrSetInputDeviceStateFloatEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
+        return pfn_xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateFloatEXT: {}", e.what());
@@ -402,9 +661,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
     }
 }
 
+static PFN_xrSetInputDeviceStateVector2fEXT pfn_xrSetInputDeviceStateVector2fEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state) {
+    if (!pfn_xrSetInputDeviceStateVector2fEXT) {
+        get_runtime().get_function_table().get_function("xrSetInputDeviceStateVector2fEXT", pfn_xrSetInputDeviceStateVector2fEXT);
+        if (!pfn_xrSetInputDeviceStateVector2fEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
+        return pfn_xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetInputDeviceStateVector2fEXT: {}", e.what());
@@ -414,9 +680,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
 
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
+static PFN_xrCreateDebugUtilsMessengerEXT pfn_xrCreateDebugUtilsMessengerEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instance, const XrDebugUtilsMessengerCreateInfoEXT* createInfo, XrDebugUtilsMessengerEXT* messenger) {
+    if (!pfn_xrCreateDebugUtilsMessengerEXT) {
+        get_runtime().get_function_table().get_function("xrCreateDebugUtilsMessengerEXT", pfn_xrCreateDebugUtilsMessengerEXT);
+        if (!pfn_xrCreateDebugUtilsMessengerEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
+        return pfn_xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateDebugUtilsMessengerEXT: {}", e.what());
@@ -424,9 +697,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
     }
 }
 
+static PFN_xrDestroyDebugUtilsMessengerEXT pfn_xrDestroyDebugUtilsMessengerEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMessengerEXT messenger) {
+    if (!pfn_xrDestroyDebugUtilsMessengerEXT) {
+        get_runtime().get_function_table().get_function("xrDestroyDebugUtilsMessengerEXT", pfn_xrDestroyDebugUtilsMessengerEXT);
+        if (!pfn_xrDestroyDebugUtilsMessengerEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyDebugUtilsMessengerEXT(messenger);
+        return pfn_xrDestroyDebugUtilsMessengerEXT(messenger);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyDebugUtilsMessengerEXT: {}", e.what());
@@ -434,9 +714,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
     }
 }
 
+static PFN_xrSessionBeginDebugUtilsLabelRegionEXT pfn_xrSessionBeginDebugUtilsLabelRegionEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
+    if (!pfn_xrSessionBeginDebugUtilsLabelRegionEXT) {
+        get_runtime().get_function_table().get_function("xrSessionBeginDebugUtilsLabelRegionEXT", pfn_xrSessionBeginDebugUtilsLabelRegionEXT);
+        if (!pfn_xrSessionBeginDebugUtilsLabelRegionEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
+        return pfn_xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionBeginDebugUtilsLabelRegionEXT: {}", e.what());
@@ -444,9 +731,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
     }
 }
 
+static PFN_xrSessionEndDebugUtilsLabelRegionEXT pfn_xrSessionEndDebugUtilsLabelRegionEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession session) {
+    if (!pfn_xrSessionEndDebugUtilsLabelRegionEXT) {
+        get_runtime().get_function_table().get_function("xrSessionEndDebugUtilsLabelRegionEXT", pfn_xrSessionEndDebugUtilsLabelRegionEXT);
+        if (!pfn_xrSessionEndDebugUtilsLabelRegionEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSessionEndDebugUtilsLabelRegionEXT(session);
+        return pfn_xrSessionEndDebugUtilsLabelRegionEXT(session);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionEndDebugUtilsLabelRegionEXT: {}", e.what());
@@ -454,9 +748,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
     }
 }
 
+static PFN_xrSessionInsertDebugUtilsLabelEXT pfn_xrSessionInsertDebugUtilsLabelEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
+    if (!pfn_xrSessionInsertDebugUtilsLabelEXT) {
+        get_runtime().get_function_table().get_function("xrSessionInsertDebugUtilsLabelEXT", pfn_xrSessionInsertDebugUtilsLabelEXT);
+        if (!pfn_xrSessionInsertDebugUtilsLabelEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
+        return pfn_xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSessionInsertDebugUtilsLabelEXT: {}", e.what());
@@ -464,9 +765,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
     }
 }
 
+static PFN_xrSetDebugUtilsObjectNameEXT pfn_xrSetDebugUtilsObjectNameEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance, const XrDebugUtilsObjectNameInfoEXT* nameInfo) {
+    if (!pfn_xrSetDebugUtilsObjectNameEXT) {
+        get_runtime().get_function_table().get_function("xrSetDebugUtilsObjectNameEXT", pfn_xrSetDebugUtilsObjectNameEXT);
+        if (!pfn_xrSetDebugUtilsObjectNameEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
+        return pfn_xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetDebugUtilsObjectNameEXT: {}", e.what());
@@ -474,9 +782,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
     }
 }
 
+static PFN_xrSubmitDebugUtilsMessageEXT pfn_xrSubmitDebugUtilsMessageEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance, XrDebugUtilsMessageSeverityFlagsEXT messageSeverity, XrDebugUtilsMessageTypeFlagsEXT messageTypes, const XrDebugUtilsMessengerCallbackDataEXT* callbackData) {
+    if (!pfn_xrSubmitDebugUtilsMessageEXT) {
+        get_runtime().get_function_table().get_function("xrSubmitDebugUtilsMessageEXT", pfn_xrSubmitDebugUtilsMessageEXT);
+        if (!pfn_xrSubmitDebugUtilsMessageEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
+        return pfn_xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSubmitDebugUtilsMessageEXT: {}", e.what());
@@ -486,9 +801,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
+static PFN_xrCancelFutureEXT pfn_xrCancelFutureEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFutureCancelInfoEXT* cancelInfo) {
+    if (!pfn_xrCancelFutureEXT) {
+        get_runtime().get_function_table().get_function("xrCancelFutureEXT", pfn_xrCancelFutureEXT);
+        if (!pfn_xrCancelFutureEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCancelFutureEXT(instance, cancelInfo);
+        return pfn_xrCancelFutureEXT(instance, cancelInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCancelFutureEXT: {}", e.what());
@@ -496,9 +818,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
     }
 }
 
+static PFN_xrPollFutureEXT pfn_xrPollFutureEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFuturePollInfoEXT* pollInfo, XrFuturePollResultEXT* pollResult) {
+    if (!pfn_xrPollFutureEXT) {
+        get_runtime().get_function_table().get_function("xrPollFutureEXT", pfn_xrPollFutureEXT);
+        if (!pfn_xrPollFutureEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPollFutureEXT(instance, pollInfo, pollResult);
+        return pfn_xrPollFutureEXT(instance, pollInfo, pollResult);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPollFutureEXT: {}", e.what());
@@ -508,9 +837,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
+static PFN_xrCreateHandTrackerEXT pfn_xrCreateHandTrackerEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const XrHandTrackerCreateInfoEXT* createInfo, XrHandTrackerEXT* handTracker) {
+    if (!pfn_xrCreateHandTrackerEXT) {
+        get_runtime().get_function_table().get_function("xrCreateHandTrackerEXT", pfn_xrCreateHandTrackerEXT);
+        if (!pfn_xrCreateHandTrackerEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateHandTrackerEXT(session, createInfo, handTracker);
+        return pfn_xrCreateHandTrackerEXT(session, createInfo, handTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateHandTrackerEXT: {}", e.what());
@@ -518,9 +854,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
     }
 }
 
+static PFN_xrDestroyHandTrackerEXT pfn_xrDestroyHandTrackerEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTracker) {
+    if (!pfn_xrDestroyHandTrackerEXT) {
+        get_runtime().get_function_table().get_function("xrDestroyHandTrackerEXT", pfn_xrDestroyHandTrackerEXT);
+        if (!pfn_xrDestroyHandTrackerEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyHandTrackerEXT(handTracker);
+        return pfn_xrDestroyHandTrackerEXT(handTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyHandTrackerEXT: {}", e.what());
@@ -528,9 +871,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
     }
 }
 
+static PFN_xrLocateHandJointsEXT pfn_xrLocateHandJointsEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracker, const XrHandJointsLocateInfoEXT* locateInfo, XrHandJointLocationsEXT* locations) {
+    if (!pfn_xrLocateHandJointsEXT) {
+        get_runtime().get_function_table().get_function("xrLocateHandJointsEXT", pfn_xrLocateHandJointsEXT);
+        if (!pfn_xrLocateHandJointsEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateHandJointsEXT(handTracker, locateInfo, locations);
+        return pfn_xrLocateHandJointsEXT(handTracker, locateInfo, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateHandJointsEXT: {}", e.what());
@@ -540,9 +890,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
+static PFN_xrPerfSettingsSetPerformanceLevelEXT pfn_xrPerfSettingsSetPerformanceLevelEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsLevelEXT level) {
+    if (!pfn_xrPerfSettingsSetPerformanceLevelEXT) {
+        get_runtime().get_function_table().get_function("xrPerfSettingsSetPerformanceLevelEXT", pfn_xrPerfSettingsSetPerformanceLevelEXT);
+        if (!pfn_xrPerfSettingsSetPerformanceLevelEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
+        return pfn_xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPerfSettingsSetPerformanceLevelEXT: {}", e.what());
@@ -552,9 +909,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
+static PFN_xrBeginPlaneDetectionEXT pfn_xrBeginPlaneDetectionEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorBeginInfoEXT* beginInfo) {
+    if (!pfn_xrBeginPlaneDetectionEXT) {
+        get_runtime().get_function_table().get_function("xrBeginPlaneDetectionEXT", pfn_xrBeginPlaneDetectionEXT);
+        if (!pfn_xrBeginPlaneDetectionEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
+        return pfn_xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginPlaneDetectionEXT: {}", e.what());
@@ -562,9 +926,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
     }
 }
 
+static PFN_xrCreatePlaneDetectorEXT pfn_xrCreatePlaneDetectorEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const XrPlaneDetectorCreateInfoEXT* createInfo, XrPlaneDetectorEXT* planeDetector) {
+    if (!pfn_xrCreatePlaneDetectorEXT) {
+        get_runtime().get_function_table().get_function("xrCreatePlaneDetectorEXT", pfn_xrCreatePlaneDetectorEXT);
+        if (!pfn_xrCreatePlaneDetectorEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreatePlaneDetectorEXT(session, createInfo, planeDetector);
+        return pfn_xrCreatePlaneDetectorEXT(session, createInfo, planeDetector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePlaneDetectorEXT: {}", e.what());
@@ -572,9 +943,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
     }
 }
 
+static PFN_xrDestroyPlaneDetectorEXT pfn_xrDestroyPlaneDetectorEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT planeDetector) {
+    if (!pfn_xrDestroyPlaneDetectorEXT) {
+        get_runtime().get_function_table().get_function("xrDestroyPlaneDetectorEXT", pfn_xrDestroyPlaneDetectorEXT);
+        if (!pfn_xrDestroyPlaneDetectorEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyPlaneDetectorEXT(planeDetector);
+        return pfn_xrDestroyPlaneDetectorEXT(planeDetector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPlaneDetectorEXT: {}", e.what());
@@ -582,9 +960,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
     }
 }
 
+static PFN_xrGetPlaneDetectionStateEXT pfn_xrGetPlaneDetectionStateEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT planeDetector, XrPlaneDetectionStateEXT* state) {
+    if (!pfn_xrGetPlaneDetectionStateEXT) {
+        get_runtime().get_function_table().get_function("xrGetPlaneDetectionStateEXT", pfn_xrGetPlaneDetectionStateEXT);
+        if (!pfn_xrGetPlaneDetectionStateEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetPlaneDetectionStateEXT(planeDetector, state);
+        return pfn_xrGetPlaneDetectionStateEXT(planeDetector, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlaneDetectionStateEXT: {}", e.what());
@@ -592,9 +977,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
     }
 }
 
+static PFN_xrGetPlaneDetectionsEXT pfn_xrGetPlaneDetectionsEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorGetInfoEXT* info, XrPlaneDetectorLocationsEXT* locations) {
+    if (!pfn_xrGetPlaneDetectionsEXT) {
+        get_runtime().get_function_table().get_function("xrGetPlaneDetectionsEXT", pfn_xrGetPlaneDetectionsEXT);
+        if (!pfn_xrGetPlaneDetectionsEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetPlaneDetectionsEXT(planeDetector, info, locations);
+        return pfn_xrGetPlaneDetectionsEXT(planeDetector, info, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlaneDetectionsEXT: {}", e.what());
@@ -602,9 +994,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
     }
 }
 
+static PFN_xrGetPlanePolygonBufferEXT pfn_xrGetPlanePolygonBufferEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT planeDetector, uint64_t planeId, uint32_t polygonBufferIndex, XrPlaneDetectorPolygonBufferEXT* polygonBuffer) {
+    if (!pfn_xrGetPlanePolygonBufferEXT) {
+        get_runtime().get_function_table().get_function("xrGetPlanePolygonBufferEXT", pfn_xrGetPlanePolygonBufferEXT);
+        if (!pfn_xrGetPlanePolygonBufferEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetPlanePolygonBufferEXT(planeDetector, planeId, polygonBufferIndex, polygonBuffer);
+        return pfn_xrGetPlanePolygonBufferEXT(planeDetector, planeId, polygonBufferIndex, polygonBuffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPlanePolygonBufferEXT: {}", e.what());
@@ -614,9 +1013,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
+static PFN_xrThermalGetTemperatureTrendEXT pfn_xrThermalGetTemperatureTrendEXT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsNotificationLevelEXT* notificationLevel, float* tempHeadroom, float* tempSlope) {
+    if (!pfn_xrThermalGetTemperatureTrendEXT) {
+        get_runtime().get_function_table().get_function("xrThermalGetTemperatureTrendEXT", pfn_xrThermalGetTemperatureTrendEXT);
+        if (!pfn_xrThermalGetTemperatureTrendEXT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
+        return pfn_xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrThermalGetTemperatureTrendEXT: {}", e.what());
@@ -626,9 +1032,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
 
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
+static PFN_xrCreateBodyTrackerFB pfn_xrCreateBodyTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const XrBodyTrackerCreateInfoFB* createInfo, XrBodyTrackerFB* bodyTracker) {
+    if (!pfn_xrCreateBodyTrackerFB) {
+        get_runtime().get_function_table().get_function("xrCreateBodyTrackerFB", pfn_xrCreateBodyTrackerFB);
+        if (!pfn_xrCreateBodyTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
+        return pfn_xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerFB: {}", e.what());
@@ -636,9 +1049,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
     }
 }
 
+static PFN_xrDestroyBodyTrackerFB pfn_xrDestroyBodyTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracker) {
+    if (!pfn_xrDestroyBodyTrackerFB) {
+        get_runtime().get_function_table().get_function("xrDestroyBodyTrackerFB", pfn_xrDestroyBodyTrackerFB);
+        if (!pfn_xrDestroyBodyTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyBodyTrackerFB(bodyTracker);
+        return pfn_xrDestroyBodyTrackerFB(bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerFB: {}", e.what());
@@ -646,9 +1066,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
     }
 }
 
+static PFN_xrGetBodySkeletonFB pfn_xrGetBodySkeletonFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, XrBodySkeletonFB* skeleton) {
+    if (!pfn_xrGetBodySkeletonFB) {
+        get_runtime().get_function_table().get_function("xrGetBodySkeletonFB", pfn_xrGetBodySkeletonFB);
+        if (!pfn_xrGetBodySkeletonFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetBodySkeletonFB(bodyTracker, skeleton);
+        return pfn_xrGetBodySkeletonFB(bodyTracker, skeleton);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetBodySkeletonFB: {}", e.what());
@@ -656,9 +1083,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
     }
 }
 
+static PFN_xrLocateBodyJointsFB pfn_xrLocateBodyJointsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker, const XrBodyJointsLocateInfoFB* locateInfo, XrBodyJointLocationsFB* locations) {
+    if (!pfn_xrLocateBodyJointsFB) {
+        get_runtime().get_function_table().get_function("xrLocateBodyJointsFB", pfn_xrLocateBodyJointsFB);
+        if (!pfn_xrLocateBodyJointsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
+        return pfn_xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsFB: {}", e.what());
@@ -668,9 +1102,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
 
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
+static PFN_xrEnumerateColorSpacesFB pfn_xrEnumerateColorSpacesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint32_t colorSpaceCapacityInput, uint32_t* colorSpaceCountOutput, XrColorSpaceFB* colorSpaces) {
+    if (!pfn_xrEnumerateColorSpacesFB) {
+        get_runtime().get_function_table().get_function("xrEnumerateColorSpacesFB", pfn_xrEnumerateColorSpacesFB);
+        if (!pfn_xrEnumerateColorSpacesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
+        return pfn_xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateColorSpacesFB: {}", e.what());
@@ -678,9 +1119,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
     }
 }
 
+static PFN_xrSetColorSpaceFB pfn_xrSetColorSpaceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColorSpaceFB colorSpace) {
+    if (!pfn_xrSetColorSpaceFB) {
+        get_runtime().get_function_table().get_function("xrSetColorSpaceFB", pfn_xrSetColorSpaceFB);
+        if (!pfn_xrSetColorSpaceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetColorSpaceFB(session, colorSpace);
+        return pfn_xrSetColorSpaceFB(session, colorSpace);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetColorSpaceFB: {}", e.what());
@@ -690,9 +1138,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
+static PFN_xrEnumerateDisplayRefreshRatesFB pfn_xrEnumerateDisplayRefreshRatesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession session, uint32_t displayRefreshRateCapacityInput, uint32_t* displayRefreshRateCountOutput, float* displayRefreshRates) {
+    if (!pfn_xrEnumerateDisplayRefreshRatesFB) {
+        get_runtime().get_function_table().get_function("xrEnumerateDisplayRefreshRatesFB", pfn_xrEnumerateDisplayRefreshRatesFB);
+        if (!pfn_xrEnumerateDisplayRefreshRatesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
+        return pfn_xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateDisplayRefreshRatesFB: {}", e.what());
@@ -700,9 +1155,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
     }
 }
 
+static PFN_xrGetDisplayRefreshRateFB pfn_xrGetDisplayRefreshRateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, float* displayRefreshRate) {
+    if (!pfn_xrGetDisplayRefreshRateFB) {
+        get_runtime().get_function_table().get_function("xrGetDisplayRefreshRateFB", pfn_xrGetDisplayRefreshRateFB);
+        if (!pfn_xrGetDisplayRefreshRateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetDisplayRefreshRateFB(session, displayRefreshRate);
+        return pfn_xrGetDisplayRefreshRateFB(session, displayRefreshRate);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetDisplayRefreshRateFB: {}", e.what());
@@ -710,9 +1172,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
     }
 }
 
+static PFN_xrRequestDisplayRefreshRateFB pfn_xrRequestDisplayRefreshRateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, float displayRefreshRate) {
+    if (!pfn_xrRequestDisplayRefreshRateFB) {
+        get_runtime().get_function_table().get_function("xrRequestDisplayRefreshRateFB", pfn_xrRequestDisplayRefreshRateFB);
+        if (!pfn_xrRequestDisplayRefreshRateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
+        return pfn_xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestDisplayRefreshRateFB: {}", e.what());
@@ -722,9 +1191,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
+static PFN_xrCreateEyeTrackerFB pfn_xrCreateEyeTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrEyeTrackerCreateInfoFB* createInfo, XrEyeTrackerFB* eyeTracker) {
+    if (!pfn_xrCreateEyeTrackerFB) {
+        get_runtime().get_function_table().get_function("xrCreateEyeTrackerFB", pfn_xrCreateEyeTrackerFB);
+        if (!pfn_xrCreateEyeTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
+        return pfn_xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEyeTrackerFB: {}", e.what());
@@ -732,9 +1208,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
     }
 }
 
+static PFN_xrDestroyEyeTrackerFB pfn_xrDestroyEyeTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) {
+    if (!pfn_xrDestroyEyeTrackerFB) {
+        get_runtime().get_function_table().get_function("xrDestroyEyeTrackerFB", pfn_xrDestroyEyeTrackerFB);
+        if (!pfn_xrDestroyEyeTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyEyeTrackerFB(eyeTracker);
+        return pfn_xrDestroyEyeTrackerFB(eyeTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEyeTrackerFB: {}", e.what());
@@ -742,9 +1225,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
     }
 }
 
+static PFN_xrGetEyeGazesFB pfn_xrGetEyeGazesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const XrEyeGazesInfoFB* gazeInfo, XrEyeGazesFB* eyeGazes) {
+    if (!pfn_xrGetEyeGazesFB) {
+        get_runtime().get_function_table().get_function("xrGetEyeGazesFB", pfn_xrGetEyeGazesFB);
+        if (!pfn_xrGetEyeGazesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
+        return pfn_xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetEyeGazesFB: {}", e.what());
@@ -754,9 +1244,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
+static PFN_xrCreateFaceTrackerFB pfn_xrCreateFaceTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const XrFaceTrackerCreateInfoFB* createInfo, XrFaceTrackerFB* faceTracker) {
+    if (!pfn_xrCreateFaceTrackerFB) {
+        get_runtime().get_function_table().get_function("xrCreateFaceTrackerFB", pfn_xrCreateFaceTrackerFB);
+        if (!pfn_xrCreateFaceTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateFaceTrackerFB(session, createInfo, faceTracker);
+        return pfn_xrCreateFaceTrackerFB(session, createInfo, faceTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFaceTrackerFB: {}", e.what());
@@ -764,9 +1261,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
     }
 }
 
+static PFN_xrDestroyFaceTrackerFB pfn_xrDestroyFaceTrackerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracker) {
+    if (!pfn_xrDestroyFaceTrackerFB) {
+        get_runtime().get_function_table().get_function("xrDestroyFaceTrackerFB", pfn_xrDestroyFaceTrackerFB);
+        if (!pfn_xrDestroyFaceTrackerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyFaceTrackerFB(faceTracker);
+        return pfn_xrDestroyFaceTrackerFB(faceTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFaceTrackerFB: {}", e.what());
@@ -774,9 +1278,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
     }
 }
 
+static PFN_xrGetFaceExpressionWeightsFB pfn_xrGetFaceExpressionWeightsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB faceTracker, const XrFaceExpressionInfoFB* expressionInfo, XrFaceExpressionWeightsFB* expressionWeights) {
+    if (!pfn_xrGetFaceExpressionWeightsFB) {
+        get_runtime().get_function_table().get_function("xrGetFaceExpressionWeightsFB", pfn_xrGetFaceExpressionWeightsFB);
+        if (!pfn_xrGetFaceExpressionWeightsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
+        return pfn_xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFaceExpressionWeightsFB: {}", e.what());
@@ -786,9 +1297,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
+static PFN_xrCreateFaceTracker2FB pfn_xrCreateFaceTracker2FB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const XrFaceTrackerCreateInfo2FB* createInfo, XrFaceTracker2FB* faceTracker) {
+    if (!pfn_xrCreateFaceTracker2FB) {
+        get_runtime().get_function_table().get_function("xrCreateFaceTracker2FB", pfn_xrCreateFaceTracker2FB);
+        if (!pfn_xrCreateFaceTracker2FB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateFaceTracker2FB(session, createInfo, faceTracker);
+        return pfn_xrCreateFaceTracker2FB(session, createInfo, faceTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFaceTracker2FB: {}", e.what());
@@ -796,9 +1314,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
     }
 }
 
+static PFN_xrDestroyFaceTracker2FB pfn_xrDestroyFaceTracker2FB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTracker) {
+    if (!pfn_xrDestroyFaceTracker2FB) {
+        get_runtime().get_function_table().get_function("xrDestroyFaceTracker2FB", pfn_xrDestroyFaceTracker2FB);
+        if (!pfn_xrDestroyFaceTracker2FB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyFaceTracker2FB(faceTracker);
+        return pfn_xrDestroyFaceTracker2FB(faceTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFaceTracker2FB: {}", e.what());
@@ -806,9 +1331,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
     }
 }
 
+static PFN_xrGetFaceExpressionWeights2FB pfn_xrGetFaceExpressionWeights2FB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB faceTracker, const XrFaceExpressionInfo2FB* expressionInfo, XrFaceExpressionWeights2FB* expressionWeights) {
+    if (!pfn_xrGetFaceExpressionWeights2FB) {
+        get_runtime().get_function_table().get_function("xrGetFaceExpressionWeights2FB", pfn_xrGetFaceExpressionWeights2FB);
+        if (!pfn_xrGetFaceExpressionWeights2FB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
+        return pfn_xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFaceExpressionWeights2FB: {}", e.what());
@@ -818,9 +1350,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
+static PFN_xrCreateFoveationProfileFB pfn_xrCreateFoveationProfileFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, const XrFoveationProfileCreateInfoFB* createInfo, XrFoveationProfileFB* profile) {
+    if (!pfn_xrCreateFoveationProfileFB) {
+        get_runtime().get_function_table().get_function("xrCreateFoveationProfileFB", pfn_xrCreateFoveationProfileFB);
+        if (!pfn_xrCreateFoveationProfileFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateFoveationProfileFB(session, createInfo, profile);
+        return pfn_xrCreateFoveationProfileFB(session, createInfo, profile);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFoveationProfileFB: {}", e.what());
@@ -828,9 +1367,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
     }
 }
 
+static PFN_xrDestroyFoveationProfileFB pfn_xrDestroyFoveationProfileFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB profile) {
+    if (!pfn_xrDestroyFoveationProfileFB) {
+        get_runtime().get_function_table().get_function("xrDestroyFoveationProfileFB", pfn_xrDestroyFoveationProfileFB);
+        if (!pfn_xrDestroyFoveationProfileFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyFoveationProfileFB(profile);
+        return pfn_xrDestroyFoveationProfileFB(profile);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFoveationProfileFB: {}", e.what());
@@ -840,9 +1386,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
+static PFN_xrGetHandMeshFB pfn_xrGetHandMeshFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrHandTrackingMeshFB* mesh) {
+    if (!pfn_xrGetHandMeshFB) {
+        get_runtime().get_function_table().get_function("xrGetHandMeshFB", pfn_xrGetHandMeshFB);
+        if (!pfn_xrGetHandMeshFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetHandMeshFB(handTracker, mesh);
+        return pfn_xrGetHandMeshFB(handTracker, mesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetHandMeshFB: {}", e.what());
@@ -852,9 +1405,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
+static PFN_xrGetDeviceSampleRateFB pfn_xrGetDeviceSampleRateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const XrHapticActionInfo* hapticActionInfo, XrDevicePcmSampleRateGetInfoFB* deviceSampleRate) {
+    if (!pfn_xrGetDeviceSampleRateFB) {
+        get_runtime().get_function_table().get_function("xrGetDeviceSampleRateFB", pfn_xrGetDeviceSampleRateFB);
+        if (!pfn_xrGetDeviceSampleRateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
+        return pfn_xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetDeviceSampleRateFB: {}", e.what());
@@ -864,9 +1424,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
+static PFN_xrCreateKeyboardSpaceFB pfn_xrCreateKeyboardSpaceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const XrKeyboardSpaceCreateInfoFB* createInfo, XrSpace* keyboardSpace) {
+    if (!pfn_xrCreateKeyboardSpaceFB) {
+        get_runtime().get_function_table().get_function("xrCreateKeyboardSpaceFB", pfn_xrCreateKeyboardSpaceFB);
+        if (!pfn_xrCreateKeyboardSpaceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
+        return pfn_xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateKeyboardSpaceFB: {}", e.what());
@@ -874,9 +1441,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
     }
 }
 
+static PFN_xrQuerySystemTrackedKeyboardFB pfn_xrQuerySystemTrackedKeyboardFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session, const XrKeyboardTrackingQueryFB* queryInfo, XrKeyboardTrackingDescriptionFB* keyboard) {
+    if (!pfn_xrQuerySystemTrackedKeyboardFB) {
+        get_runtime().get_function_table().get_function("xrQuerySystemTrackedKeyboardFB", pfn_xrQuerySystemTrackedKeyboardFB);
+        if (!pfn_xrQuerySystemTrackedKeyboardFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
+        return pfn_xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySystemTrackedKeyboardFB: {}", e.what());
@@ -886,9 +1460,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
+static PFN_xrCreateGeometryInstanceFB pfn_xrCreateGeometryInstanceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, const XrGeometryInstanceCreateInfoFB* createInfo, XrGeometryInstanceFB* outGeometryInstance) {
+    if (!pfn_xrCreateGeometryInstanceFB) {
+        get_runtime().get_function_table().get_function("xrCreateGeometryInstanceFB", pfn_xrCreateGeometryInstanceFB);
+        if (!pfn_xrCreateGeometryInstanceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
+        return pfn_xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateGeometryInstanceFB: {}", e.what());
@@ -896,9 +1477,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
     }
 }
 
+static PFN_xrCreatePassthroughFB pfn_xrCreatePassthroughFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const XrPassthroughCreateInfoFB* createInfo, XrPassthroughFB* outPassthrough) {
+    if (!pfn_xrCreatePassthroughFB) {
+        get_runtime().get_function_table().get_function("xrCreatePassthroughFB", pfn_xrCreatePassthroughFB);
+        if (!pfn_xrCreatePassthroughFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreatePassthroughFB(session, createInfo, outPassthrough);
+        return pfn_xrCreatePassthroughFB(session, createInfo, outPassthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughFB: {}", e.what());
@@ -906,9 +1494,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
     }
 }
 
+static PFN_xrCreatePassthroughLayerFB pfn_xrCreatePassthroughLayerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, const XrPassthroughLayerCreateInfoFB* createInfo, XrPassthroughLayerFB* outLayer) {
+    if (!pfn_xrCreatePassthroughLayerFB) {
+        get_runtime().get_function_table().get_function("xrCreatePassthroughLayerFB", pfn_xrCreatePassthroughLayerFB);
+        if (!pfn_xrCreatePassthroughLayerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreatePassthroughLayerFB(session, createInfo, outLayer);
+        return pfn_xrCreatePassthroughLayerFB(session, createInfo, outLayer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughLayerFB: {}", e.what());
@@ -916,9 +1511,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
     }
 }
 
+static PFN_xrDestroyGeometryInstanceFB pfn_xrDestroyGeometryInstanceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) {
+    if (!pfn_xrDestroyGeometryInstanceFB) {
+        get_runtime().get_function_table().get_function("xrDestroyGeometryInstanceFB", pfn_xrDestroyGeometryInstanceFB);
+        if (!pfn_xrDestroyGeometryInstanceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyGeometryInstanceFB(instance);
+        return pfn_xrDestroyGeometryInstanceFB(instance);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyGeometryInstanceFB: {}", e.what());
@@ -926,9 +1528,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
     }
 }
 
+static PFN_xrDestroyPassthroughFB pfn_xrDestroyPassthroughFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthrough) {
+    if (!pfn_xrDestroyPassthroughFB) {
+        get_runtime().get_function_table().get_function("xrDestroyPassthroughFB", pfn_xrDestroyPassthroughFB);
+        if (!pfn_xrDestroyPassthroughFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyPassthroughFB(passthrough);
+        return pfn_xrDestroyPassthroughFB(passthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughFB: {}", e.what());
@@ -936,9 +1545,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
     }
 }
 
+static PFN_xrDestroyPassthroughLayerFB pfn_xrDestroyPassthroughLayerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB layer) {
+    if (!pfn_xrDestroyPassthroughLayerFB) {
+        get_runtime().get_function_table().get_function("xrDestroyPassthroughLayerFB", pfn_xrDestroyPassthroughLayerFB);
+        if (!pfn_xrDestroyPassthroughLayerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyPassthroughLayerFB(layer);
+        return pfn_xrDestroyPassthroughLayerFB(layer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughLayerFB: {}", e.what());
@@ -946,9 +1562,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
     }
 }
 
+static PFN_xrGeometryInstanceSetTransformFB pfn_xrGeometryInstanceSetTransformFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, const XrGeometryInstanceTransformFB* transformation) {
+    if (!pfn_xrGeometryInstanceSetTransformFB) {
+        get_runtime().get_function_table().get_function("xrGeometryInstanceSetTransformFB", pfn_xrGeometryInstanceSetTransformFB);
+        if (!pfn_xrGeometryInstanceSetTransformFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGeometryInstanceSetTransformFB(instance, transformation);
+        return pfn_xrGeometryInstanceSetTransformFB(instance, transformation);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGeometryInstanceSetTransformFB: {}", e.what());
@@ -956,9 +1579,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
     }
 }
 
+static PFN_xrPassthroughLayerPauseFB pfn_xrPassthroughLayerPauseFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB layer) {
+    if (!pfn_xrPassthroughLayerPauseFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughLayerPauseFB", pfn_xrPassthroughLayerPauseFB);
+        if (!pfn_xrPassthroughLayerPauseFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughLayerPauseFB(layer);
+        return pfn_xrPassthroughLayerPauseFB(layer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerPauseFB: {}", e.what());
@@ -966,9 +1596,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
     }
 }
 
+static PFN_xrPassthroughLayerResumeFB pfn_xrPassthroughLayerResumeFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB layer) {
+    if (!pfn_xrPassthroughLayerResumeFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughLayerResumeFB", pfn_xrPassthroughLayerResumeFB);
+        if (!pfn_xrPassthroughLayerResumeFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughLayerResumeFB(layer);
+        return pfn_xrPassthroughLayerResumeFB(layer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerResumeFB: {}", e.what());
@@ -976,9 +1613,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
     }
 }
 
+static PFN_xrPassthroughLayerSetStyleFB pfn_xrPassthroughLayerSetStyleFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB layer, const XrPassthroughStyleFB* style) {
+    if (!pfn_xrPassthroughLayerSetStyleFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughLayerSetStyleFB", pfn_xrPassthroughLayerSetStyleFB);
+        if (!pfn_xrPassthroughLayerSetStyleFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughLayerSetStyleFB(layer, style);
+        return pfn_xrPassthroughLayerSetStyleFB(layer, style);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerSetStyleFB: {}", e.what());
@@ -986,9 +1630,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
     }
 }
 
+static PFN_xrPassthroughPauseFB pfn_xrPassthroughPauseFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough) {
+    if (!pfn_xrPassthroughPauseFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughPauseFB", pfn_xrPassthroughPauseFB);
+        if (!pfn_xrPassthroughPauseFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughPauseFB(passthrough);
+        return pfn_xrPassthroughPauseFB(passthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughPauseFB: {}", e.what());
@@ -996,9 +1647,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
     }
 }
 
+static PFN_xrPassthroughStartFB pfn_xrPassthroughStartFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough) {
+    if (!pfn_xrPassthroughStartFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughStartFB", pfn_xrPassthroughStartFB);
+        if (!pfn_xrPassthroughStartFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughStartFB(passthrough);
+        return pfn_xrPassthroughStartFB(passthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughStartFB: {}", e.what());
@@ -1008,9 +1666,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
+static PFN_xrPassthroughLayerSetKeyboardHandsIntensityFB pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrPassthroughLayerFB layer, const XrPassthroughKeyboardHandsIntensityFB* intensity) {
+    if (!pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB) {
+        get_runtime().get_function_table().get_function("xrPassthroughLayerSetKeyboardHandsIntensityFB", pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB);
+        if (!pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
+        return pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPassthroughLayerSetKeyboardHandsIntensityFB: {}", e.what());
@@ -1020,9 +1685,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
+static PFN_xrEnumerateRenderModelPathsFB pfn_xrEnumerateRenderModelPathsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrRenderModelPathInfoFB* paths) {
+    if (!pfn_xrEnumerateRenderModelPathsFB) {
+        get_runtime().get_function_table().get_function("xrEnumerateRenderModelPathsFB", pfn_xrEnumerateRenderModelPathsFB);
+        if (!pfn_xrEnumerateRenderModelPathsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
+        return pfn_xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateRenderModelPathsFB: {}", e.what());
@@ -1030,9 +1702,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
     }
 }
 
+static PFN_xrGetRenderModelPropertiesFB pfn_xrGetRenderModelPropertiesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, XrPath path, XrRenderModelPropertiesFB* properties) {
+    if (!pfn_xrGetRenderModelPropertiesFB) {
+        get_runtime().get_function_table().get_function("xrGetRenderModelPropertiesFB", pfn_xrGetRenderModelPropertiesFB);
+        if (!pfn_xrGetRenderModelPropertiesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetRenderModelPropertiesFB(session, path, properties);
+        return pfn_xrGetRenderModelPropertiesFB(session, path, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetRenderModelPropertiesFB: {}", e.what());
@@ -1040,9 +1719,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
     }
 }
 
+static PFN_xrLoadRenderModelFB pfn_xrLoadRenderModelFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRenderModelLoadInfoFB* info, XrRenderModelBufferFB* buffer) {
+    if (!pfn_xrLoadRenderModelFB) {
+        get_runtime().get_function_table().get_function("xrLoadRenderModelFB", pfn_xrLoadRenderModelFB);
+        if (!pfn_xrLoadRenderModelFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLoadRenderModelFB(session, info, buffer);
+        return pfn_xrLoadRenderModelFB(session, info, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLoadRenderModelFB: {}", e.what());
@@ -1052,9 +1738,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
+static PFN_xrGetSpaceBoundary2DFB pfn_xrGetSpaceBoundary2DFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace space, XrBoundary2DFB* boundary2DOutput) {
+    if (!pfn_xrGetSpaceBoundary2DFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceBoundary2DFB", pfn_xrGetSpaceBoundary2DFB);
+        if (!pfn_xrGetSpaceBoundary2DFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
+        return pfn_xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundary2DFB: {}", e.what());
@@ -1062,9 +1755,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
     }
 }
 
+static PFN_xrGetSpaceBoundingBox2DFB pfn_xrGetSpaceBoundingBox2DFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSpace space, XrRect2Df* boundingBox2DOutput) {
+    if (!pfn_xrGetSpaceBoundingBox2DFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceBoundingBox2DFB", pfn_xrGetSpaceBoundingBox2DFB);
+        if (!pfn_xrGetSpaceBoundingBox2DFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
+        return pfn_xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundingBox2DFB: {}", e.what());
@@ -1072,9 +1772,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
     }
 }
 
+static PFN_xrGetSpaceBoundingBox3DFB pfn_xrGetSpaceBoundingBox3DFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSpace space, XrRect3DfFB* boundingBox3DOutput) {
+    if (!pfn_xrGetSpaceBoundingBox3DFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceBoundingBox3DFB", pfn_xrGetSpaceBoundingBox3DFB);
+        if (!pfn_xrGetSpaceBoundingBox3DFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
+        return pfn_xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceBoundingBox3DFB: {}", e.what());
@@ -1082,9 +1789,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
     }
 }
 
+static PFN_xrGetSpaceRoomLayoutFB pfn_xrGetSpaceRoomLayoutFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace space, XrRoomLayoutFB* roomLayoutOutput) {
+    if (!pfn_xrGetSpaceRoomLayoutFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceRoomLayoutFB", pfn_xrGetSpaceRoomLayoutFB);
+        if (!pfn_xrGetSpaceRoomLayoutFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
+        return pfn_xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceRoomLayoutFB: {}", e.what());
@@ -1092,9 +1806,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
     }
 }
 
+static PFN_xrGetSpaceSemanticLabelsFB pfn_xrGetSpaceSemanticLabelsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrSpace space, XrSemanticLabelsFB* semanticLabelsOutput) {
+    if (!pfn_xrGetSpaceSemanticLabelsFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceSemanticLabelsFB", pfn_xrGetSpaceSemanticLabelsFB);
+        if (!pfn_xrGetSpaceSemanticLabelsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
+        return pfn_xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceSemanticLabelsFB: {}", e.what());
@@ -1104,9 +1825,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
+static PFN_xrRequestSceneCaptureFB pfn_xrRequestSceneCaptureFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const XrSceneCaptureRequestInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrRequestSceneCaptureFB) {
+        get_runtime().get_function_table().get_function("xrRequestSceneCaptureFB", pfn_xrRequestSceneCaptureFB);
+        if (!pfn_xrRequestSceneCaptureFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestSceneCaptureFB(session, info, requestId);
+        return pfn_xrRequestSceneCaptureFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestSceneCaptureFB: {}", e.what());
@@ -1116,9 +1844,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
+static PFN_xrCreateSpatialAnchorFB pfn_xrCreateSpatialAnchorFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const XrSpatialAnchorCreateInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrCreateSpatialAnchorFB) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorFB", pfn_xrCreateSpatialAnchorFB);
+        if (!pfn_xrCreateSpatialAnchorFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorFB(session, info, requestId);
+        return pfn_xrCreateSpatialAnchorFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFB: {}", e.what());
@@ -1126,9 +1861,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
     }
 }
 
+static PFN_xrEnumerateSpaceSupportedComponentsFB pfn_xrEnumerateSpaceSupportedComponentsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace space, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpaceComponentTypeFB* componentTypes) {
+    if (!pfn_xrEnumerateSpaceSupportedComponentsFB) {
+        get_runtime().get_function_table().get_function("xrEnumerateSpaceSupportedComponentsFB", pfn_xrEnumerateSpaceSupportedComponentsFB);
+        if (!pfn_xrEnumerateSpaceSupportedComponentsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+        return pfn_xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSpaceSupportedComponentsFB: {}", e.what());
@@ -1136,9 +1878,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
     }
 }
 
+static PFN_xrGetSpaceComponentStatusFB pfn_xrGetSpaceComponentStatusFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpaceComponentTypeFB componentType, XrSpaceComponentStatusFB* status) {
+    if (!pfn_xrGetSpaceComponentStatusFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceComponentStatusFB", pfn_xrGetSpaceComponentStatusFB);
+        if (!pfn_xrGetSpaceComponentStatusFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceComponentStatusFB(space, componentType, status);
+        return pfn_xrGetSpaceComponentStatusFB(space, componentType, status);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceComponentStatusFB: {}", e.what());
@@ -1146,9 +1895,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
     }
 }
 
+static PFN_xrGetSpaceUuidFB pfn_xrGetSpaceUuidFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) {
+    if (!pfn_xrGetSpaceUuidFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceUuidFB", pfn_xrGetSpaceUuidFB);
+        if (!pfn_xrGetSpaceUuidFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceUuidFB(space, uuid);
+        return pfn_xrGetSpaceUuidFB(space, uuid);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceUuidFB: {}", e.what());
@@ -1156,9 +1912,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
     }
 }
 
+static PFN_xrSetSpaceComponentStatusFB pfn_xrSetSpaceComponentStatusFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const XrSpaceComponentStatusSetInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrSetSpaceComponentStatusFB) {
+        get_runtime().get_function_table().get_function("xrSetSpaceComponentStatusFB", pfn_xrSetSpaceComponentStatusFB);
+        if (!pfn_xrSetSpaceComponentStatusFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetSpaceComponentStatusFB(space, info, requestId);
+        return pfn_xrSetSpaceComponentStatusFB(space, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetSpaceComponentStatusFB: {}", e.what());
@@ -1168,9 +1931,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
+static PFN_xrGetSpaceContainerFB pfn_xrGetSpaceContainerFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace space, XrSpaceContainerFB* spaceContainerOutput) {
+    if (!pfn_xrGetSpaceContainerFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceContainerFB", pfn_xrGetSpaceContainerFB);
+        if (!pfn_xrGetSpaceContainerFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceContainerFB(session, space, spaceContainerOutput);
+        return pfn_xrGetSpaceContainerFB(session, space, spaceContainerOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceContainerFB: {}", e.what());
@@ -1180,9 +1950,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
+static PFN_xrQuerySpacesFB pfn_xrQuerySpacesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQueryInfoBaseHeaderFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrQuerySpacesFB) {
+        get_runtime().get_function_table().get_function("xrQuerySpacesFB", pfn_xrQuerySpacesFB);
+        if (!pfn_xrQuerySpacesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySpacesFB(session, info, requestId);
+        return pfn_xrQuerySpacesFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpacesFB: {}", e.what());
@@ -1190,9 +1967,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
     }
 }
 
+static PFN_xrRetrieveSpaceQueryResultsFB pfn_xrRetrieveSpaceQueryResultsFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, XrAsyncRequestIdFB requestId, XrSpaceQueryResultsFB* results) {
+    if (!pfn_xrRetrieveSpaceQueryResultsFB) {
+        get_runtime().get_function_table().get_function("xrRetrieveSpaceQueryResultsFB", pfn_xrRetrieveSpaceQueryResultsFB);
+        if (!pfn_xrRetrieveSpaceQueryResultsFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRetrieveSpaceQueryResultsFB(session, requestId, results);
+        return pfn_xrRetrieveSpaceQueryResultsFB(session, requestId, results);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRetrieveSpaceQueryResultsFB: {}", e.what());
@@ -1202,9 +1986,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
+static PFN_xrShareSpacesFB pfn_xrShareSpacesFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceShareInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrShareSpacesFB) {
+        get_runtime().get_function_table().get_function("xrShareSpacesFB", pfn_xrShareSpacesFB);
+        if (!pfn_xrShareSpacesFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrShareSpacesFB(session, info, requestId);
+        return pfn_xrShareSpacesFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpacesFB: {}", e.what());
@@ -1214,9 +2005,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
+static PFN_xrEraseSpaceFB pfn_xrEraseSpaceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEraseInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrEraseSpaceFB) {
+        get_runtime().get_function_table().get_function("xrEraseSpaceFB", pfn_xrEraseSpaceFB);
+        if (!pfn_xrEraseSpaceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEraseSpaceFB(session, info, requestId);
+        return pfn_xrEraseSpaceFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEraseSpaceFB: {}", e.what());
@@ -1224,9 +2022,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
     }
 }
 
+static PFN_xrSaveSpaceFB pfn_xrSaveSpaceFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrSaveSpaceFB) {
+        get_runtime().get_function_table().get_function("xrSaveSpaceFB", pfn_xrSaveSpaceFB);
+        if (!pfn_xrSaveSpaceFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSaveSpaceFB(session, info, requestId);
+        return pfn_xrSaveSpaceFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSaveSpaceFB: {}", e.what());
@@ -1236,9 +2041,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
+static PFN_xrSaveSpaceListFB pfn_xrSaveSpaceListFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpaceListSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrSaveSpaceListFB) {
+        get_runtime().get_function_table().get_function("xrSaveSpaceListFB", pfn_xrSaveSpaceListFB);
+        if (!pfn_xrSaveSpaceListFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSaveSpaceListFB(session, info, requestId);
+        return pfn_xrSaveSpaceListFB(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSaveSpaceListFB: {}", e.what());
@@ -1248,9 +2060,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
+static PFN_xrCreateSpaceUserFB pfn_xrCreateSpaceUserFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSpaceUserCreateInfoFB* info, XrSpaceUserFB* user) {
+    if (!pfn_xrCreateSpaceUserFB) {
+        get_runtime().get_function_table().get_function("xrCreateSpaceUserFB", pfn_xrCreateSpaceUserFB);
+        if (!pfn_xrCreateSpaceUserFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpaceUserFB(session, info, user);
+        return pfn_xrCreateSpaceUserFB(session, info, user);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpaceUserFB: {}", e.what());
@@ -1258,9 +2077,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
     }
 }
 
+static PFN_xrDestroySpaceUserFB pfn_xrDestroySpaceUserFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
+    if (!pfn_xrDestroySpaceUserFB) {
+        get_runtime().get_function_table().get_function("xrDestroySpaceUserFB", pfn_xrDestroySpaceUserFB);
+        if (!pfn_xrDestroySpaceUserFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpaceUserFB(user);
+        return pfn_xrDestroySpaceUserFB(user);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpaceUserFB: {}", e.what());
@@ -1268,9 +2094,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
     }
 }
 
+static PFN_xrGetSpaceUserIdFB pfn_xrGetSpaceUserIdFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUserIdFB* userId) {
+    if (!pfn_xrGetSpaceUserIdFB) {
+        get_runtime().get_function_table().get_function("xrGetSpaceUserIdFB", pfn_xrGetSpaceUserIdFB);
+        if (!pfn_xrGetSpaceUserIdFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceUserIdFB(user, userId);
+        return pfn_xrGetSpaceUserIdFB(user, userId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceUserIdFB: {}", e.what());
@@ -1280,9 +2113,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
+static PFN_xrGetSwapchainStateFB pfn_xrGetSwapchainStateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSwapchainStateBaseHeaderFB* state) {
+    if (!pfn_xrGetSwapchainStateFB) {
+        get_runtime().get_function_table().get_function("xrGetSwapchainStateFB", pfn_xrGetSwapchainStateFB);
+        if (!pfn_xrGetSwapchainStateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSwapchainStateFB(swapchain, state);
+        return pfn_xrGetSwapchainStateFB(swapchain, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSwapchainStateFB: {}", e.what());
@@ -1290,9 +2130,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
     }
 }
 
+static PFN_xrUpdateSwapchainFB pfn_xrUpdateSwapchainFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const XrSwapchainStateBaseHeaderFB* state) {
+    if (!pfn_xrUpdateSwapchainFB) {
+        get_runtime().get_function_table().get_function("xrUpdateSwapchainFB", pfn_xrUpdateSwapchainFB);
+        if (!pfn_xrUpdateSwapchainFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUpdateSwapchainFB(swapchain, state);
+        return pfn_xrUpdateSwapchainFB(swapchain, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSwapchainFB: {}", e.what());
@@ -1302,9 +2149,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
+static PFN_xrCreateTriangleMeshFB pfn_xrCreateTriangleMeshFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const XrTriangleMeshCreateInfoFB* createInfo, XrTriangleMeshFB* outTriangleMesh) {
+    if (!pfn_xrCreateTriangleMeshFB) {
+        get_runtime().get_function_table().get_function("xrCreateTriangleMeshFB", pfn_xrCreateTriangleMeshFB);
+        if (!pfn_xrCreateTriangleMeshFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
+        return pfn_xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateTriangleMeshFB: {}", e.what());
@@ -1312,9 +2166,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
     }
 }
 
+static PFN_xrDestroyTriangleMeshFB pfn_xrDestroyTriangleMeshFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
+    if (!pfn_xrDestroyTriangleMeshFB) {
+        get_runtime().get_function_table().get_function("xrDestroyTriangleMeshFB", pfn_xrDestroyTriangleMeshFB);
+        if (!pfn_xrDestroyTriangleMeshFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyTriangleMeshFB(mesh);
+        return pfn_xrDestroyTriangleMeshFB(mesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyTriangleMeshFB: {}", e.what());
@@ -1322,9 +2183,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
     }
 }
 
+static PFN_xrTriangleMeshBeginUpdateFB pfn_xrTriangleMeshBeginUpdateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh) {
+    if (!pfn_xrTriangleMeshBeginUpdateFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshBeginUpdateFB", pfn_xrTriangleMeshBeginUpdateFB);
+        if (!pfn_xrTriangleMeshBeginUpdateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshBeginUpdateFB(mesh);
+        return pfn_xrTriangleMeshBeginUpdateFB(mesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshBeginUpdateFB: {}", e.what());
@@ -1332,9 +2200,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
     }
 }
 
+static PFN_xrTriangleMeshBeginVertexBufferUpdateFB pfn_xrTriangleMeshBeginVertexBufferUpdateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangleMeshFB mesh, uint32_t* outVertexCount) {
+    if (!pfn_xrTriangleMeshBeginVertexBufferUpdateFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshBeginVertexBufferUpdateFB", pfn_xrTriangleMeshBeginVertexBufferUpdateFB);
+        if (!pfn_xrTriangleMeshBeginVertexBufferUpdateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
+        return pfn_xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshBeginVertexBufferUpdateFB: {}", e.what());
@@ -1342,9 +2217,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
     }
 }
 
+static PFN_xrTriangleMeshEndUpdateFB pfn_xrTriangleMeshEndUpdateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, uint32_t vertexCount, uint32_t triangleCount) {
+    if (!pfn_xrTriangleMeshEndUpdateFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshEndUpdateFB", pfn_xrTriangleMeshEndUpdateFB);
+        if (!pfn_xrTriangleMeshEndUpdateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
+        return pfn_xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshEndUpdateFB: {}", e.what());
@@ -1352,9 +2234,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
     }
 }
 
+static PFN_xrTriangleMeshEndVertexBufferUpdateFB pfn_xrTriangleMeshEndVertexBufferUpdateFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleMeshFB mesh) {
+    if (!pfn_xrTriangleMeshEndVertexBufferUpdateFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshEndVertexBufferUpdateFB", pfn_xrTriangleMeshEndVertexBufferUpdateFB);
+        if (!pfn_xrTriangleMeshEndVertexBufferUpdateFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshEndVertexBufferUpdateFB(mesh);
+        return pfn_xrTriangleMeshEndVertexBufferUpdateFB(mesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshEndVertexBufferUpdateFB: {}", e.what());
@@ -1362,9 +2251,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
     }
 }
 
+static PFN_xrTriangleMeshGetIndexBufferFB pfn_xrTriangleMeshGetIndexBufferFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB mesh, uint32_t** outIndexBuffer) {
+    if (!pfn_xrTriangleMeshGetIndexBufferFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshGetIndexBufferFB", pfn_xrTriangleMeshGetIndexBufferFB);
+        if (!pfn_xrTriangleMeshGetIndexBufferFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
+        return pfn_xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshGetIndexBufferFB: {}", e.what());
@@ -1372,9 +2268,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
     }
 }
 
+static PFN_xrTriangleMeshGetVertexBufferFB pfn_xrTriangleMeshGetVertexBufferFB = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB mesh, XrVector3f** outVertexBuffer) {
+    if (!pfn_xrTriangleMeshGetVertexBufferFB) {
+        get_runtime().get_function_table().get_function("xrTriangleMeshGetVertexBufferFB", pfn_xrTriangleMeshGetVertexBufferFB);
+        if (!pfn_xrTriangleMeshGetVertexBufferFB) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
+        return pfn_xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTriangleMeshGetVertexBufferFB: {}", e.what());
@@ -1384,9 +2287,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
+static PFN_xrEnumerateViveTrackerPathsHTCX pfn_xrEnumerateViveTrackerPathsHTCX = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instance, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrViveTrackerPathsHTCX* paths) {
+    if (!pfn_xrEnumerateViveTrackerPathsHTCX) {
+        get_runtime().get_function_table().get_function("xrEnumerateViveTrackerPathsHTCX", pfn_xrEnumerateViveTrackerPathsHTCX);
+        if (!pfn_xrEnumerateViveTrackerPathsHTCX) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
+        return pfn_xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViveTrackerPathsHTCX: {}", e.what());
@@ -1396,9 +2306,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
+static PFN_xrCreateSpatialAnchorHTC pfn_xrCreateSpatialAnchorHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const XrSpatialAnchorCreateInfoHTC* createInfo, XrSpace* anchor) {
+    if (!pfn_xrCreateSpatialAnchorHTC) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorHTC", pfn_xrCreateSpatialAnchorHTC);
+        if (!pfn_xrCreateSpatialAnchorHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorHTC(session, createInfo, anchor);
+        return pfn_xrCreateSpatialAnchorHTC(session, createInfo, anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorHTC: {}", e.what());
@@ -1406,9 +2323,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
     }
 }
 
+static PFN_xrGetSpatialAnchorNameHTC pfn_xrGetSpatialAnchorNameHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpatialAnchorNameHTC* name) {
+    if (!pfn_xrGetSpatialAnchorNameHTC) {
+        get_runtime().get_function_table().get_function("xrGetSpatialAnchorNameHTC", pfn_xrGetSpatialAnchorNameHTC);
+        if (!pfn_xrGetSpatialAnchorNameHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpatialAnchorNameHTC(anchor, name);
+        return pfn_xrGetSpatialAnchorNameHTC(anchor, name);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialAnchorNameHTC: {}", e.what());
@@ -1418,9 +2342,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
 
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
+static PFN_xrCreateBodyTrackerHTC pfn_xrCreateBodyTrackerHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const XrBodyTrackerCreateInfoHTC* createInfo, XrBodyTrackerHTC* bodyTracker) {
+    if (!pfn_xrCreateBodyTrackerHTC) {
+        get_runtime().get_function_table().get_function("xrCreateBodyTrackerHTC", pfn_xrCreateBodyTrackerHTC);
+        if (!pfn_xrCreateBodyTrackerHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
+        return pfn_xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateBodyTrackerHTC: {}", e.what());
@@ -1428,9 +2359,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
     }
 }
 
+static PFN_xrDestroyBodyTrackerHTC pfn_xrDestroyBodyTrackerHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTracker) {
+    if (!pfn_xrDestroyBodyTrackerHTC) {
+        get_runtime().get_function_table().get_function("xrDestroyBodyTrackerHTC", pfn_xrDestroyBodyTrackerHTC);
+        if (!pfn_xrDestroyBodyTrackerHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyBodyTrackerHTC(bodyTracker);
+        return pfn_xrDestroyBodyTrackerHTC(bodyTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyBodyTrackerHTC: {}", e.what());
@@ -1438,9 +2376,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
     }
 }
 
+static PFN_xrGetBodySkeletonHTC pfn_xrGetBodySkeletonHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker, XrSpace baseSpace, uint32_t skeletonGenerationId, XrBodySkeletonHTC* skeleton) {
+    if (!pfn_xrGetBodySkeletonHTC) {
+        get_runtime().get_function_table().get_function("xrGetBodySkeletonHTC", pfn_xrGetBodySkeletonHTC);
+        if (!pfn_xrGetBodySkeletonHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
+        return pfn_xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetBodySkeletonHTC: {}", e.what());
@@ -1448,9 +2393,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
     }
 }
 
+static PFN_xrLocateBodyJointsHTC pfn_xrLocateBodyJointsHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracker, const XrBodyJointsLocateInfoHTC* locateInfo, XrBodyJointLocationsHTC* locations) {
+    if (!pfn_xrLocateBodyJointsHTC) {
+        get_runtime().get_function_table().get_function("xrLocateBodyJointsHTC", pfn_xrLocateBodyJointsHTC);
+        if (!pfn_xrLocateBodyJointsHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
+        return pfn_xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateBodyJointsHTC: {}", e.what());
@@ -1460,9 +2412,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
+static PFN_xrCreateFacialTrackerHTC pfn_xrCreateFacialTrackerHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const XrFacialTrackerCreateInfoHTC* createInfo, XrFacialTrackerHTC* facialTracker) {
+    if (!pfn_xrCreateFacialTrackerHTC) {
+        get_runtime().get_function_table().get_function("xrCreateFacialTrackerHTC", pfn_xrCreateFacialTrackerHTC);
+        if (!pfn_xrCreateFacialTrackerHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
+        return pfn_xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFacialTrackerHTC: {}", e.what());
@@ -1470,9 +2429,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
     }
 }
 
+static PFN_xrDestroyFacialTrackerHTC pfn_xrDestroyFacialTrackerHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC facialTracker) {
+    if (!pfn_xrDestroyFacialTrackerHTC) {
+        get_runtime().get_function_table().get_function("xrDestroyFacialTrackerHTC", pfn_xrDestroyFacialTrackerHTC);
+        if (!pfn_xrDestroyFacialTrackerHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyFacialTrackerHTC(facialTracker);
+        return pfn_xrDestroyFacialTrackerHTC(facialTracker);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFacialTrackerHTC: {}", e.what());
@@ -1480,9 +2446,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
     }
 }
 
+static PFN_xrGetFacialExpressionsHTC pfn_xrGetFacialExpressionsHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC facialTracker, XrFacialExpressionsHTC* facialExpressions) {
+    if (!pfn_xrGetFacialExpressionsHTC) {
+        get_runtime().get_function_table().get_function("xrGetFacialExpressionsHTC", pfn_xrGetFacialExpressionsHTC);
+        if (!pfn_xrGetFacialExpressionsHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
+        return pfn_xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFacialExpressionsHTC: {}", e.what());
@@ -1492,9 +2465,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
 
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
+static PFN_xrApplyFoveationHTC pfn_xrApplyFoveationHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFoveationApplyInfoHTC* applyInfo) {
+    if (!pfn_xrApplyFoveationHTC) {
+        get_runtime().get_function_table().get_function("xrApplyFoveationHTC", pfn_xrApplyFoveationHTC);
+        if (!pfn_xrApplyFoveationHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrApplyFoveationHTC(session, applyInfo);
+        return pfn_xrApplyFoveationHTC(session, applyInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyFoveationHTC: {}", e.what());
@@ -1504,9 +2484,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
 
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
+static PFN_xrCreatePassthroughHTC pfn_xrCreatePassthroughHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const XrPassthroughCreateInfoHTC* createInfo, XrPassthroughHTC* passthrough) {
+    if (!pfn_xrCreatePassthroughHTC) {
+        get_runtime().get_function_table().get_function("xrCreatePassthroughHTC", pfn_xrCreatePassthroughHTC);
+        if (!pfn_xrCreatePassthroughHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreatePassthroughHTC(session, createInfo, passthrough);
+        return pfn_xrCreatePassthroughHTC(session, createInfo, passthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughHTC: {}", e.what());
@@ -1514,9 +2501,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
     }
 }
 
+static PFN_xrDestroyPassthroughHTC pfn_xrDestroyPassthroughHTC = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthrough) {
+    if (!pfn_xrDestroyPassthroughHTC) {
+        get_runtime().get_function_table().get_function("xrDestroyPassthroughHTC", pfn_xrDestroyPassthroughHTC);
+        if (!pfn_xrDestroyPassthroughHTC) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyPassthroughHTC(passthrough);
+        return pfn_xrDestroyPassthroughHTC(passthrough);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughHTC: {}", e.what());
@@ -1526,9 +2520,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
+static PFN_xrGetD3D11GraphicsRequirementsKHR pfn_xrGetD3D11GraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D11KHR* graphicsRequirements) {
+    if (!pfn_xrGetD3D11GraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetD3D11GraphicsRequirementsKHR", pfn_xrGetD3D11GraphicsRequirementsKHR);
+        if (!pfn_xrGetD3D11GraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetD3D11GraphicsRequirementsKHR: {}", e.what());
@@ -1538,9 +2539,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
+static PFN_xrGetD3D12GraphicsRequirementsKHR pfn_xrGetD3D12GraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D12KHR* graphicsRequirements) {
+    if (!pfn_xrGetD3D12GraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetD3D12GraphicsRequirementsKHR", pfn_xrGetD3D12GraphicsRequirementsKHR);
+        if (!pfn_xrGetD3D12GraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetD3D12GraphicsRequirementsKHR: {}", e.what());
@@ -1550,9 +2558,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
+static PFN_xrCreateSwapchainAndroidSurfaceKHR pfn_xrCreateSwapchainAndroidSurfaceKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession session, const XrSwapchainCreateInfo* info, XrSwapchain* swapchain, jobject* surface) {
+    if (!pfn_xrCreateSwapchainAndroidSurfaceKHR) {
+        get_runtime().get_function_table().get_function("xrCreateSwapchainAndroidSurfaceKHR", pfn_xrCreateSwapchainAndroidSurfaceKHR);
+        if (!pfn_xrCreateSwapchainAndroidSurfaceKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
+        return pfn_xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSwapchainAndroidSurfaceKHR: {}", e.what());
@@ -1562,9 +2577,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
+static PFN_xrSetAndroidApplicationThreadKHR pfn_xrSetAndroidApplicationThreadKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession session, XrAndroidThreadTypeKHR threadType, uint32_t threadId) {
+    if (!pfn_xrSetAndroidApplicationThreadKHR) {
+        get_runtime().get_function_table().get_function("xrSetAndroidApplicationThreadKHR", pfn_xrSetAndroidApplicationThreadKHR);
+        if (!pfn_xrSetAndroidApplicationThreadKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
+        return pfn_xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetAndroidApplicationThreadKHR: {}", e.what());
@@ -1574,9 +2596,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
+static PFN_xrConvertTimeToTimespecTimeKHR pfn_xrConvertTimeToTimespecTimeKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instance, XrTime time, struct timespec* timespecTime) {
+    if (!pfn_xrConvertTimeToTimespecTimeKHR) {
+        get_runtime().get_function_table().get_function("xrConvertTimeToTimespecTimeKHR", pfn_xrConvertTimeToTimespecTimeKHR);
+        if (!pfn_xrConvertTimeToTimespecTimeKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
+        return pfn_xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimeToTimespecTimeKHR: {}", e.what());
@@ -1584,9 +2613,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
     }
 }
 
+static PFN_xrConvertTimespecTimeToTimeKHR pfn_xrConvertTimespecTimeToTimeKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instance, const struct timespec* timespecTime, XrTime* time) {
+    if (!pfn_xrConvertTimespecTimeToTimeKHR) {
+        get_runtime().get_function_table().get_function("xrConvertTimespecTimeToTimeKHR", pfn_xrConvertTimespecTimeToTimeKHR);
+        if (!pfn_xrConvertTimespecTimeToTimeKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
+        return pfn_xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimespecTimeToTimeKHR: {}", e.what());
@@ -1596,9 +2632,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
 
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
+static PFN_xrStructureTypeToString2KHR pfn_xrStructureTypeToString2KHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]) {
+    if (!pfn_xrStructureTypeToString2KHR) {
+        get_runtime().get_function_table().get_function("xrStructureTypeToString2KHR", pfn_xrStructureTypeToString2KHR);
+        if (!pfn_xrStructureTypeToString2KHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStructureTypeToString2KHR(instance, value, buffer);
+        return pfn_xrStructureTypeToString2KHR(instance, value, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStructureTypeToString2KHR: {}", e.what());
@@ -1608,9 +2651,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
 
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
+static PFN_xrInitializeLoaderKHR pfn_xrInitializeLoaderKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo) {
+    if (!pfn_xrInitializeLoaderKHR) {
+        get_runtime().get_function_table().get_function("xrInitializeLoaderKHR", pfn_xrInitializeLoaderKHR);
+        if (!pfn_xrInitializeLoaderKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrInitializeLoaderKHR(loaderInitInfo);
+        return pfn_xrInitializeLoaderKHR(loaderInitInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrInitializeLoaderKHR: {}", e.what());
@@ -1620,9 +2670,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
+static PFN_xrGetMetalGraphicsRequirementsKHR pfn_xrGetMetalGraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsMetalKHR* graphicsRequirements) {
+    if (!pfn_xrGetMetalGraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetMetalGraphicsRequirementsKHR", pfn_xrGetMetalGraphicsRequirementsKHR);
+        if (!pfn_xrGetMetalGraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMetalGraphicsRequirementsKHR: {}", e.what());
@@ -1632,9 +2689,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
 
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
+static PFN_xrGetOpenGLGraphicsRequirementsKHR pfn_xrGetOpenGLGraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLKHR* graphicsRequirements) {
+    if (!pfn_xrGetOpenGLGraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetOpenGLGraphicsRequirementsKHR", pfn_xrGetOpenGLGraphicsRequirementsKHR);
+        if (!pfn_xrGetOpenGLGraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetOpenGLGraphicsRequirementsKHR: {}", e.what());
@@ -1644,9 +2708,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
+static PFN_xrGetOpenGLESGraphicsRequirementsKHR pfn_xrGetOpenGLESGraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements) {
+    if (!pfn_xrGetOpenGLESGraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetOpenGLESGraphicsRequirementsKHR", pfn_xrGetOpenGLESGraphicsRequirementsKHR);
+        if (!pfn_xrGetOpenGLESGraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetOpenGLESGraphicsRequirementsKHR: {}", e.what());
@@ -1656,9 +2727,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
+static PFN_xrGetVisibilityMaskKHR pfn_xrGetVisibilityMaskKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewConfigurationType viewConfigurationType, uint32_t viewIndex, XrVisibilityMaskTypeKHR visibilityMaskType, XrVisibilityMaskKHR* visibilityMask) {
+    if (!pfn_xrGetVisibilityMaskKHR) {
+        get_runtime().get_function_table().get_function("xrGetVisibilityMaskKHR", pfn_xrGetVisibilityMaskKHR);
+        if (!pfn_xrGetVisibilityMaskKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
+        return pfn_xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVisibilityMaskKHR: {}", e.what());
@@ -1668,9 +2746,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
+static PFN_xrGetVulkanDeviceExtensionsKHR pfn_xrGetVulkanDeviceExtensionsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetVulkanDeviceExtensionsKHR) {
+        get_runtime().get_function_table().get_function("xrGetVulkanDeviceExtensionsKHR", pfn_xrGetVulkanDeviceExtensionsKHR);
+        if (!pfn_xrGetVulkanDeviceExtensionsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanDeviceExtensionsKHR: {}", e.what());
@@ -1678,9 +2763,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
     }
 }
 
+static PFN_xrGetVulkanGraphicsDeviceKHR pfn_xrGetVulkanGraphicsDeviceKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance, XrSystemId systemId, VkInstance vkInstance, VkPhysicalDevice* vkPhysicalDevice) {
+    if (!pfn_xrGetVulkanGraphicsDeviceKHR) {
+        get_runtime().get_function_table().get_function("xrGetVulkanGraphicsDeviceKHR", pfn_xrGetVulkanGraphicsDeviceKHR);
+        if (!pfn_xrGetVulkanGraphicsDeviceKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
+        return pfn_xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsDeviceKHR: {}", e.what());
@@ -1688,9 +2780,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
     }
 }
 
+static PFN_xrGetVulkanGraphicsRequirementsKHR pfn_xrGetVulkanGraphicsRequirementsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsVulkanKHR* graphicsRequirements) {
+    if (!pfn_xrGetVulkanGraphicsRequirementsKHR) {
+        get_runtime().get_function_table().get_function("xrGetVulkanGraphicsRequirementsKHR", pfn_xrGetVulkanGraphicsRequirementsKHR);
+        if (!pfn_xrGetVulkanGraphicsRequirementsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+        return pfn_xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsRequirementsKHR: {}", e.what());
@@ -1698,9 +2797,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
     }
 }
 
+static PFN_xrGetVulkanInstanceExtensionsKHR pfn_xrGetVulkanInstanceExtensionsKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetVulkanInstanceExtensionsKHR) {
+        get_runtime().get_function_table().get_function("xrGetVulkanInstanceExtensionsKHR", pfn_xrGetVulkanInstanceExtensionsKHR);
+        if (!pfn_xrGetVulkanInstanceExtensionsKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanInstanceExtensionsKHR: {}", e.what());
@@ -1710,9 +2816,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
+static PFN_xrCreateVulkanDeviceKHR pfn_xrCreateVulkanDeviceKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, const XrVulkanDeviceCreateInfoKHR* createInfo, VkDevice* vulkanDevice, VkResult* vulkanResult) {
+    if (!pfn_xrCreateVulkanDeviceKHR) {
+        get_runtime().get_function_table().get_function("xrCreateVulkanDeviceKHR", pfn_xrCreateVulkanDeviceKHR);
+        if (!pfn_xrCreateVulkanDeviceKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
+        return pfn_xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVulkanDeviceKHR: {}", e.what());
@@ -1720,9 +2833,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
     }
 }
 
+static PFN_xrCreateVulkanInstanceKHR pfn_xrCreateVulkanInstanceKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, const XrVulkanInstanceCreateInfoKHR* createInfo, VkInstance* vulkanInstance, VkResult* vulkanResult) {
+    if (!pfn_xrCreateVulkanInstanceKHR) {
+        get_runtime().get_function_table().get_function("xrCreateVulkanInstanceKHR", pfn_xrCreateVulkanInstanceKHR);
+        if (!pfn_xrCreateVulkanInstanceKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
+        return pfn_xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVulkanInstanceKHR: {}", e.what());
@@ -1730,9 +2850,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
     }
 }
 
+static PFN_xrGetVulkanGraphicsDevice2KHR pfn_xrGetVulkanGraphicsDevice2KHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance, const XrVulkanGraphicsDeviceGetInfoKHR* getInfo, VkPhysicalDevice* vulkanPhysicalDevice) {
+    if (!pfn_xrGetVulkanGraphicsDevice2KHR) {
+        get_runtime().get_function_table().get_function("xrGetVulkanGraphicsDevice2KHR", pfn_xrGetVulkanGraphicsDevice2KHR);
+        if (!pfn_xrGetVulkanGraphicsDevice2KHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
+        return pfn_xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVulkanGraphicsDevice2KHR: {}", e.what());
@@ -1742,9 +2869,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
+static PFN_xrConvertTimeToWin32PerformanceCounterKHR pfn_xrConvertTimeToWin32PerformanceCounterKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, XrTime time, LARGE_INTEGER* performanceCounter) {
+    if (!pfn_xrConvertTimeToWin32PerformanceCounterKHR) {
+        get_runtime().get_function_table().get_function("xrConvertTimeToWin32PerformanceCounterKHR", pfn_xrConvertTimeToWin32PerformanceCounterKHR);
+        if (!pfn_xrConvertTimeToWin32PerformanceCounterKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
+        return pfn_xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertTimeToWin32PerformanceCounterKHR: {}", e.what());
@@ -1752,9 +2886,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
     }
 }
 
+static PFN_xrConvertWin32PerformanceCounterToTimeKHR pfn_xrConvertWin32PerformanceCounterToTimeKHR = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, const LARGE_INTEGER* performanceCounter, XrTime* time) {
+    if (!pfn_xrConvertWin32PerformanceCounterToTimeKHR) {
+        get_runtime().get_function_table().get_function("xrConvertWin32PerformanceCounterToTimeKHR", pfn_xrConvertWin32PerformanceCounterToTimeKHR);
+        if (!pfn_xrConvertWin32PerformanceCounterToTimeKHR) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
+        return pfn_xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrConvertWin32PerformanceCounterToTimeKHR: {}", e.what());
@@ -1764,9 +2905,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
 
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
+static PFN_xrStartColocationAdvertisementMETA pfn_xrStartColocationAdvertisementMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStartInfoMETA* info, XrAsyncRequestIdFB* advertisementRequestId) {
+    if (!pfn_xrStartColocationAdvertisementMETA) {
+        get_runtime().get_function_table().get_function("xrStartColocationAdvertisementMETA", pfn_xrStartColocationAdvertisementMETA);
+        if (!pfn_xrStartColocationAdvertisementMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
+        return pfn_xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartColocationAdvertisementMETA: {}", e.what());
@@ -1774,9 +2922,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
     }
 }
 
+static PFN_xrStartColocationDiscoveryMETA pfn_xrStartColocationDiscoveryMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStartInfoMETA* info, XrAsyncRequestIdFB* discoveryRequestId) {
+    if (!pfn_xrStartColocationDiscoveryMETA) {
+        get_runtime().get_function_table().get_function("xrStartColocationDiscoveryMETA", pfn_xrStartColocationDiscoveryMETA);
+        if (!pfn_xrStartColocationDiscoveryMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
+        return pfn_xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartColocationDiscoveryMETA: {}", e.what());
@@ -1784,9 +2939,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
     }
 }
 
+static PFN_xrStopColocationAdvertisementMETA pfn_xrStopColocationAdvertisementMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrStopColocationAdvertisementMETA) {
+        get_runtime().get_function_table().get_function("xrStopColocationAdvertisementMETA", pfn_xrStopColocationAdvertisementMETA);
+        if (!pfn_xrStopColocationAdvertisementMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStopColocationAdvertisementMETA(session, info, requestId);
+        return pfn_xrStopColocationAdvertisementMETA(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopColocationAdvertisementMETA: {}", e.what());
@@ -1794,9 +2956,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
     }
 }
 
+static PFN_xrStopColocationDiscoveryMETA pfn_xrStopColocationDiscoveryMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrStopColocationDiscoveryMETA) {
+        get_runtime().get_function_table().get_function("xrStopColocationDiscoveryMETA", pfn_xrStopColocationDiscoveryMETA);
+        if (!pfn_xrStopColocationDiscoveryMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStopColocationDiscoveryMETA(session, info, requestId);
+        return pfn_xrStopColocationDiscoveryMETA(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopColocationDiscoveryMETA: {}", e.what());
@@ -1806,9 +2975,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
 
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
+static PFN_xrAcquireEnvironmentDepthImageMETA pfn_xrAcquireEnvironmentDepthImageMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo, XrEnvironmentDepthImageMETA* environmentDepthImage) {
+    if (!pfn_xrAcquireEnvironmentDepthImageMETA) {
+        get_runtime().get_function_table().get_function("xrAcquireEnvironmentDepthImageMETA", pfn_xrAcquireEnvironmentDepthImageMETA);
+        if (!pfn_xrAcquireEnvironmentDepthImageMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
+        return pfn_xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAcquireEnvironmentDepthImageMETA: {}", e.what());
@@ -1816,9 +2992,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
     }
 }
 
+static PFN_xrCreateEnvironmentDepthProviderMETA pfn_xrCreateEnvironmentDepthProviderMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession session, const XrEnvironmentDepthProviderCreateInfoMETA* createInfo, XrEnvironmentDepthProviderMETA* environmentDepthProvider) {
+    if (!pfn_xrCreateEnvironmentDepthProviderMETA) {
+        get_runtime().get_function_table().get_function("xrCreateEnvironmentDepthProviderMETA", pfn_xrCreateEnvironmentDepthProviderMETA);
+        if (!pfn_xrCreateEnvironmentDepthProviderMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
+        return pfn_xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEnvironmentDepthProviderMETA: {}", e.what());
@@ -1826,9 +3009,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
     }
 }
 
+static PFN_xrCreateEnvironmentDepthSwapchainMETA pfn_xrCreateEnvironmentDepthSwapchainMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo, XrEnvironmentDepthSwapchainMETA* swapchain) {
+    if (!pfn_xrCreateEnvironmentDepthSwapchainMETA) {
+        get_runtime().get_function_table().get_function("xrCreateEnvironmentDepthSwapchainMETA", pfn_xrCreateEnvironmentDepthSwapchainMETA);
+        if (!pfn_xrCreateEnvironmentDepthSwapchainMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
+        return pfn_xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateEnvironmentDepthSwapchainMETA: {}", e.what());
@@ -1836,9 +3026,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
     }
 }
 
+static PFN_xrDestroyEnvironmentDepthProviderMETA pfn_xrDestroyEnvironmentDepthProviderMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+    if (!pfn_xrDestroyEnvironmentDepthProviderMETA) {
+        get_runtime().get_function_table().get_function("xrDestroyEnvironmentDepthProviderMETA", pfn_xrDestroyEnvironmentDepthProviderMETA);
+        if (!pfn_xrDestroyEnvironmentDepthProviderMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
+        return pfn_xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEnvironmentDepthProviderMETA: {}", e.what());
@@ -1846,9 +3043,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
     }
 }
 
+static PFN_xrDestroyEnvironmentDepthSwapchainMETA pfn_xrDestroyEnvironmentDepthSwapchainMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironmentDepthSwapchainMETA swapchain) {
+    if (!pfn_xrDestroyEnvironmentDepthSwapchainMETA) {
+        get_runtime().get_function_table().get_function("xrDestroyEnvironmentDepthSwapchainMETA", pfn_xrDestroyEnvironmentDepthSwapchainMETA);
+        if (!pfn_xrDestroyEnvironmentDepthSwapchainMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
+        return pfn_xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyEnvironmentDepthSwapchainMETA: {}", e.what());
@@ -1856,9 +3060,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
     }
 }
 
+static PFN_xrEnumerateEnvironmentDepthSwapchainImagesMETA pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
+    if (!pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA) {
+        get_runtime().get_function_table().get_function("xrEnumerateEnvironmentDepthSwapchainImagesMETA", pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA);
+        if (!pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
+        return pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateEnvironmentDepthSwapchainImagesMETA: {}", e.what());
@@ -1866,9 +3077,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
     }
 }
 
+static PFN_xrGetEnvironmentDepthSwapchainStateMETA pfn_xrGetEnvironmentDepthSwapchainStateMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnvironmentDepthSwapchainMETA swapchain, XrEnvironmentDepthSwapchainStateMETA* state) {
+    if (!pfn_xrGetEnvironmentDepthSwapchainStateMETA) {
+        get_runtime().get_function_table().get_function("xrGetEnvironmentDepthSwapchainStateMETA", pfn_xrGetEnvironmentDepthSwapchainStateMETA);
+        if (!pfn_xrGetEnvironmentDepthSwapchainStateMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
+        return pfn_xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetEnvironmentDepthSwapchainStateMETA: {}", e.what());
@@ -1876,9 +3094,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
     }
 }
 
+static PFN_xrSetEnvironmentDepthHandRemovalMETA pfn_xrSetEnvironmentDepthHandRemovalMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo) {
+    if (!pfn_xrSetEnvironmentDepthHandRemovalMETA) {
+        get_runtime().get_function_table().get_function("xrSetEnvironmentDepthHandRemovalMETA", pfn_xrSetEnvironmentDepthHandRemovalMETA);
+        if (!pfn_xrSetEnvironmentDepthHandRemovalMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
+        return pfn_xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetEnvironmentDepthHandRemovalMETA: {}", e.what());
@@ -1886,9 +3111,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
     }
 }
 
+static PFN_xrStartEnvironmentDepthProviderMETA pfn_xrStartEnvironmentDepthProviderMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+    if (!pfn_xrStartEnvironmentDepthProviderMETA) {
+        get_runtime().get_function_table().get_function("xrStartEnvironmentDepthProviderMETA", pfn_xrStartEnvironmentDepthProviderMETA);
+        if (!pfn_xrStartEnvironmentDepthProviderMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
+        return pfn_xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStartEnvironmentDepthProviderMETA: {}", e.what());
@@ -1896,9 +3128,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
     }
 }
 
+static PFN_xrStopEnvironmentDepthProviderMETA pfn_xrStopEnvironmentDepthProviderMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+    if (!pfn_xrStopEnvironmentDepthProviderMETA) {
+        get_runtime().get_function_table().get_function("xrStopEnvironmentDepthProviderMETA", pfn_xrStopEnvironmentDepthProviderMETA);
+        if (!pfn_xrStopEnvironmentDepthProviderMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
+        return pfn_xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopEnvironmentDepthProviderMETA: {}", e.what());
@@ -1908,9 +3147,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
+static PFN_xrGetFoveationEyeTrackedStateMETA pfn_xrGetFoveationEyeTrackedStateMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession session, XrFoveationEyeTrackedStateMETA* foveationState) {
+    if (!pfn_xrGetFoveationEyeTrackedStateMETA) {
+        get_runtime().get_function_table().get_function("xrGetFoveationEyeTrackedStateMETA", pfn_xrGetFoveationEyeTrackedStateMETA);
+        if (!pfn_xrGetFoveationEyeTrackedStateMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetFoveationEyeTrackedStateMETA(session, foveationState);
+        return pfn_xrGetFoveationEyeTrackedStateMETA(session, foveationState);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFoveationEyeTrackedStateMETA: {}", e.what());
@@ -1920,9 +3166,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
 
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
+static PFN_xrCreatePassthroughColorLutMETA pfn_xrCreatePassthroughColorLutMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB passthrough, const XrPassthroughColorLutCreateInfoMETA* createInfo, XrPassthroughColorLutMETA* colorLut) {
+    if (!pfn_xrCreatePassthroughColorLutMETA) {
+        get_runtime().get_function_table().get_function("xrCreatePassthroughColorLutMETA", pfn_xrCreatePassthroughColorLutMETA);
+        if (!pfn_xrCreatePassthroughColorLutMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
+        return pfn_xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreatePassthroughColorLutMETA: {}", e.what());
@@ -1930,9 +3183,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
     }
 }
 
+static PFN_xrDestroyPassthroughColorLutMETA pfn_xrDestroyPassthroughColorLutMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut) {
+    if (!pfn_xrDestroyPassthroughColorLutMETA) {
+        get_runtime().get_function_table().get_function("xrDestroyPassthroughColorLutMETA", pfn_xrDestroyPassthroughColorLutMETA);
+        if (!pfn_xrDestroyPassthroughColorLutMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyPassthroughColorLutMETA(colorLut);
+        return pfn_xrDestroyPassthroughColorLutMETA(colorLut);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyPassthroughColorLutMETA: {}", e.what());
@@ -1940,9 +3200,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
     }
 }
 
+static PFN_xrUpdatePassthroughColorLutMETA pfn_xrUpdatePassthroughColorLutMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut, const XrPassthroughColorLutUpdateInfoMETA* updateInfo) {
+    if (!pfn_xrUpdatePassthroughColorLutMETA) {
+        get_runtime().get_function_table().get_function("xrUpdatePassthroughColorLutMETA", pfn_xrUpdatePassthroughColorLutMETA);
+        if (!pfn_xrUpdatePassthroughColorLutMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
+        return pfn_xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdatePassthroughColorLutMETA: {}", e.what());
@@ -1952,9 +3219,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
+static PFN_xrGetPassthroughPreferencesMETA pfn_xrGetPassthroughPreferencesMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session, XrPassthroughPreferencesMETA* preferences) {
+    if (!pfn_xrGetPassthroughPreferencesMETA) {
+        get_runtime().get_function_table().get_function("xrGetPassthroughPreferencesMETA", pfn_xrGetPassthroughPreferencesMETA);
+        if (!pfn_xrGetPassthroughPreferencesMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetPassthroughPreferencesMETA(session, preferences);
+        return pfn_xrGetPassthroughPreferencesMETA(session, preferences);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPassthroughPreferencesMETA: {}", e.what());
@@ -1964,9 +3238,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
+static PFN_xrEnumeratePerformanceMetricsCounterPathsMETA pfn_xrEnumeratePerformanceMetricsCounterPathsMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, uint32_t counterPathCapacityInput, uint32_t* counterPathCountOutput, XrPath* counterPaths) {
+    if (!pfn_xrEnumeratePerformanceMetricsCounterPathsMETA) {
+        get_runtime().get_function_table().get_function("xrEnumeratePerformanceMetricsCounterPathsMETA", pfn_xrEnumeratePerformanceMetricsCounterPathsMETA);
+        if (!pfn_xrEnumeratePerformanceMetricsCounterPathsMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
+        return pfn_xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumeratePerformanceMetricsCounterPathsMETA: {}", e.what());
@@ -1974,9 +3255,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
     }
 }
 
+static PFN_xrGetPerformanceMetricsStateMETA pfn_xrGetPerformanceMetricsStateMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession session, XrPerformanceMetricsStateMETA* state) {
+    if (!pfn_xrGetPerformanceMetricsStateMETA) {
+        get_runtime().get_function_table().get_function("xrGetPerformanceMetricsStateMETA", pfn_xrGetPerformanceMetricsStateMETA);
+        if (!pfn_xrGetPerformanceMetricsStateMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetPerformanceMetricsStateMETA(session, state);
+        return pfn_xrGetPerformanceMetricsStateMETA(session, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetPerformanceMetricsStateMETA: {}", e.what());
@@ -1984,9 +3272,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
     }
 }
 
+static PFN_xrQueryPerformanceMetricsCounterMETA pfn_xrQueryPerformanceMetricsCounterMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession session, XrPath counterPath, XrPerformanceMetricsCounterMETA* counter) {
+    if (!pfn_xrQueryPerformanceMetricsCounterMETA) {
+        get_runtime().get_function_table().get_function("xrQueryPerformanceMetricsCounterMETA", pfn_xrQueryPerformanceMetricsCounterMETA);
+        if (!pfn_xrQueryPerformanceMetricsCounterMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
+        return pfn_xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQueryPerformanceMetricsCounterMETA: {}", e.what());
@@ -1994,9 +3289,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
     }
 }
 
+static PFN_xrSetPerformanceMetricsStateMETA pfn_xrSetPerformanceMetricsStateMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession session, const XrPerformanceMetricsStateMETA* state) {
+    if (!pfn_xrSetPerformanceMetricsStateMETA) {
+        get_runtime().get_function_table().get_function("xrSetPerformanceMetricsStateMETA", pfn_xrSetPerformanceMetricsStateMETA);
+        if (!pfn_xrSetPerformanceMetricsStateMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetPerformanceMetricsStateMETA(session, state);
+        return pfn_xrSetPerformanceMetricsStateMETA(session, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetPerformanceMetricsStateMETA: {}", e.what());
@@ -2006,9 +3308,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
 
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
+static PFN_xrGetRecommendedLayerResolutionMETA pfn_xrGetRecommendedLayerResolutionMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession session, const XrRecommendedLayerResolutionGetInfoMETA* info, XrRecommendedLayerResolutionMETA* resolution) {
+    if (!pfn_xrGetRecommendedLayerResolutionMETA) {
+        get_runtime().get_function_table().get_function("xrGetRecommendedLayerResolutionMETA", pfn_xrGetRecommendedLayerResolutionMETA);
+        if (!pfn_xrGetRecommendedLayerResolutionMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetRecommendedLayerResolutionMETA(session, info, resolution);
+        return pfn_xrGetRecommendedLayerResolutionMETA(session, info, resolution);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetRecommendedLayerResolutionMETA: {}", e.what());
@@ -2018,9 +3327,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
+static PFN_xrPauseSimultaneousHandsAndControllersTrackingMETA pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo) {
+    if (!pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA) {
+        get_runtime().get_function_table().get_function("xrPauseSimultaneousHandsAndControllersTrackingMETA", pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA);
+        if (!pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
+        return pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPauseSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
@@ -2028,9 +3344,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
     }
 }
 
+static PFN_xrResumeSimultaneousHandsAndControllersTrackingMETA pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo) {
+    if (!pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA) {
+        get_runtime().get_function_table().get_function("xrResumeSimultaneousHandsAndControllersTrackingMETA", pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA);
+        if (!pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
+        return pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrResumeSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
@@ -2040,9 +3363,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
+static PFN_xrGetSpaceTriangleMeshMETA pfn_xrGetSpaceTriangleMeshMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const XrSpaceTriangleMeshGetInfoMETA* getInfo, XrSpaceTriangleMeshMETA* triangleMeshOutput) {
+    if (!pfn_xrGetSpaceTriangleMeshMETA) {
+        get_runtime().get_function_table().get_function("xrGetSpaceTriangleMeshMETA", pfn_xrGetSpaceTriangleMeshMETA);
+        if (!pfn_xrGetSpaceTriangleMeshMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
+        return pfn_xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpaceTriangleMeshMETA: {}", e.what());
@@ -2052,9 +3382,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
+static PFN_xrShareSpacesMETA pfn_xrShareSpacesMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShareSpacesInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+    if (!pfn_xrShareSpacesMETA) {
+        get_runtime().get_function_table().get_function("xrShareSpacesMETA", pfn_xrShareSpacesMETA);
+        if (!pfn_xrShareSpacesMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrShareSpacesMETA(session, info, requestId);
+        return pfn_xrShareSpacesMETA(session, info, requestId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrShareSpacesMETA: {}", e.what());
@@ -2064,9 +3401,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
+static PFN_xrChangeVirtualKeyboardTextContextMETA pfn_xrChangeVirtualKeyboardTextContextMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo) {
+    if (!pfn_xrChangeVirtualKeyboardTextContextMETA) {
+        get_runtime().get_function_table().get_function("xrChangeVirtualKeyboardTextContextMETA", pfn_xrChangeVirtualKeyboardTextContextMETA);
+        if (!pfn_xrChangeVirtualKeyboardTextContextMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
+        return pfn_xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrChangeVirtualKeyboardTextContextMETA: {}", e.what());
@@ -2074,9 +3418,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
     }
 }
 
+static PFN_xrCreateVirtualKeyboardMETA pfn_xrCreateVirtualKeyboardMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, const XrVirtualKeyboardCreateInfoMETA* createInfo, XrVirtualKeyboardMETA* keyboard) {
+    if (!pfn_xrCreateVirtualKeyboardMETA) {
+        get_runtime().get_function_table().get_function("xrCreateVirtualKeyboardMETA", pfn_xrCreateVirtualKeyboardMETA);
+        if (!pfn_xrCreateVirtualKeyboardMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
+        return pfn_xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVirtualKeyboardMETA: {}", e.what());
@@ -2084,9 +3435,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
     }
 }
 
+static PFN_xrCreateVirtualKeyboardSpaceMETA pfn_xrCreateVirtualKeyboardSpaceMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession session, XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardSpaceCreateInfoMETA* createInfo, XrSpace* keyboardSpace) {
+    if (!pfn_xrCreateVirtualKeyboardSpaceMETA) {
+        get_runtime().get_function_table().get_function("xrCreateVirtualKeyboardSpaceMETA", pfn_xrCreateVirtualKeyboardSpaceMETA);
+        if (!pfn_xrCreateVirtualKeyboardSpaceMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
+        return pfn_xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateVirtualKeyboardSpaceMETA: {}", e.what());
@@ -2094,9 +3452,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
     }
 }
 
+static PFN_xrDestroyVirtualKeyboardMETA pfn_xrDestroyVirtualKeyboardMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMETA keyboard) {
+    if (!pfn_xrDestroyVirtualKeyboardMETA) {
+        get_runtime().get_function_table().get_function("xrDestroyVirtualKeyboardMETA", pfn_xrDestroyVirtualKeyboardMETA);
+        if (!pfn_xrDestroyVirtualKeyboardMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyVirtualKeyboardMETA(keyboard);
+        return pfn_xrDestroyVirtualKeyboardMETA(keyboard);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyVirtualKeyboardMETA: {}", e.what());
@@ -2104,9 +3469,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
     }
 }
 
+static PFN_xrGetVirtualKeyboardDirtyTexturesMETA pfn_xrGetVirtualKeyboardDirtyTexturesMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, uint32_t textureIdCapacityInput, uint32_t* textureIdCountOutput, uint64_t* textureIds) {
+    if (!pfn_xrGetVirtualKeyboardDirtyTexturesMETA) {
+        get_runtime().get_function_table().get_function("xrGetVirtualKeyboardDirtyTexturesMETA", pfn_xrGetVirtualKeyboardDirtyTexturesMETA);
+        if (!pfn_xrGetVirtualKeyboardDirtyTexturesMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
+        return pfn_xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardDirtyTexturesMETA: {}", e.what());
@@ -2114,9 +3486,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
     }
 }
 
+static PFN_xrGetVirtualKeyboardModelAnimationStatesMETA pfn_xrGetVirtualKeyboardModelAnimationStatesMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVirtualKeyboardMETA keyboard, XrVirtualKeyboardModelAnimationStatesMETA* animationStates) {
+    if (!pfn_xrGetVirtualKeyboardModelAnimationStatesMETA) {
+        get_runtime().get_function_table().get_function("xrGetVirtualKeyboardModelAnimationStatesMETA", pfn_xrGetVirtualKeyboardModelAnimationStatesMETA);
+        if (!pfn_xrGetVirtualKeyboardModelAnimationStatesMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
+        return pfn_xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardModelAnimationStatesMETA: {}", e.what());
@@ -2124,9 +3503,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
     }
 }
 
+static PFN_xrGetVirtualKeyboardScaleMETA pfn_xrGetVirtualKeyboardScaleMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardMETA keyboard, float* scale) {
+    if (!pfn_xrGetVirtualKeyboardScaleMETA) {
+        get_runtime().get_function_table().get_function("xrGetVirtualKeyboardScaleMETA", pfn_xrGetVirtualKeyboardScaleMETA);
+        if (!pfn_xrGetVirtualKeyboardScaleMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVirtualKeyboardScaleMETA(keyboard, scale);
+        return pfn_xrGetVirtualKeyboardScaleMETA(keyboard, scale);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardScaleMETA: {}", e.what());
@@ -2134,9 +3520,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
     }
 }
 
+static PFN_xrGetVirtualKeyboardTextureDataMETA pfn_xrGetVirtualKeyboardTextureDataMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyboardMETA keyboard, uint64_t textureId, XrVirtualKeyboardTextureDataMETA* textureData) {
+    if (!pfn_xrGetVirtualKeyboardTextureDataMETA) {
+        get_runtime().get_function_table().get_function("xrGetVirtualKeyboardTextureDataMETA", pfn_xrGetVirtualKeyboardTextureDataMETA);
+        if (!pfn_xrGetVirtualKeyboardTextureDataMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
+        return pfn_xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetVirtualKeyboardTextureDataMETA: {}", e.what());
@@ -2144,9 +3537,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
     }
 }
 
+static PFN_xrSendVirtualKeyboardInputMETA pfn_xrSendVirtualKeyboardInputMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardInputInfoMETA* info, XrPosef* interactorRootPose) {
+    if (!pfn_xrSendVirtualKeyboardInputMETA) {
+        get_runtime().get_function_table().get_function("xrSendVirtualKeyboardInputMETA", pfn_xrSendVirtualKeyboardInputMETA);
+        if (!pfn_xrSendVirtualKeyboardInputMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
+        return pfn_xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSendVirtualKeyboardInputMETA: {}", e.what());
@@ -2154,9 +3554,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
     }
 }
 
+static PFN_xrSetVirtualKeyboardModelVisibilityMETA pfn_xrSetVirtualKeyboardModelVisibilityMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility) {
+    if (!pfn_xrSetVirtualKeyboardModelVisibilityMETA) {
+        get_runtime().get_function_table().get_function("xrSetVirtualKeyboardModelVisibilityMETA", pfn_xrSetVirtualKeyboardModelVisibilityMETA);
+        if (!pfn_xrSetVirtualKeyboardModelVisibilityMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
+        return pfn_xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetVirtualKeyboardModelVisibilityMETA: {}", e.what());
@@ -2164,9 +3571,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
     }
 }
 
+static PFN_xrSuggestVirtualKeyboardLocationMETA pfn_xrSuggestVirtualKeyboardLocationMETA = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardLocationInfoMETA* locationInfo) {
+    if (!pfn_xrSuggestVirtualKeyboardLocationMETA) {
+        get_runtime().get_function_table().get_function("xrSuggestVirtualKeyboardLocationMETA", pfn_xrSuggestVirtualKeyboardLocationMETA);
+        if (!pfn_xrSuggestVirtualKeyboardLocationMETA) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
+        return pfn_xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSuggestVirtualKeyboardLocationMETA: {}", e.what());
@@ -2176,9 +3590,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
+static PFN_xrCreateSpaceFromCoordinateFrameUIDML pfn_xrCreateSpaceFromCoordinateFrameUIDML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession session, const XrCoordinateSpaceCreateInfoML* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateSpaceFromCoordinateFrameUIDML) {
+        get_runtime().get_function_table().get_function("xrCreateSpaceFromCoordinateFrameUIDML", pfn_xrCreateSpaceFromCoordinateFrameUIDML);
+        if (!pfn_xrCreateSpaceFromCoordinateFrameUIDML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
+        return pfn_xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpaceFromCoordinateFrameUIDML: {}", e.what());
@@ -2188,9 +3609,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
+static PFN_xrCreateFacialExpressionClientML pfn_xrCreateFacialExpressionClientML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession session, const XrFacialExpressionClientCreateInfoML* createInfo, XrFacialExpressionClientML* facialExpressionClient) {
+    if (!pfn_xrCreateFacialExpressionClientML) {
+        get_runtime().get_function_table().get_function("xrCreateFacialExpressionClientML", pfn_xrCreateFacialExpressionClientML);
+        if (!pfn_xrCreateFacialExpressionClientML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateFacialExpressionClientML(session, createInfo, facialExpressionClient);
+        return pfn_xrCreateFacialExpressionClientML(session, createInfo, facialExpressionClient);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateFacialExpressionClientML: {}", e.what());
@@ -2198,9 +3626,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
     }
 }
 
+static PFN_xrDestroyFacialExpressionClientML pfn_xrDestroyFacialExpressionClientML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpressionClientML facialExpressionClient) {
+    if (!pfn_xrDestroyFacialExpressionClientML) {
+        get_runtime().get_function_table().get_function("xrDestroyFacialExpressionClientML", pfn_xrDestroyFacialExpressionClientML);
+        if (!pfn_xrDestroyFacialExpressionClientML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyFacialExpressionClientML(facialExpressionClient);
+        return pfn_xrDestroyFacialExpressionClientML(facialExpressionClient);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyFacialExpressionClientML: {}", e.what());
@@ -2208,9 +3643,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
     }
 }
 
+static PFN_xrGetFacialExpressionBlendShapePropertiesML pfn_xrGetFacialExpressionBlendShapePropertiesML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFacialExpressionClientML facialExpressionClient, const XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo, uint32_t blendShapeCount, XrFacialExpressionBlendShapePropertiesML* blendShapes) {
+    if (!pfn_xrGetFacialExpressionBlendShapePropertiesML) {
+        get_runtime().get_function_table().get_function("xrGetFacialExpressionBlendShapePropertiesML", pfn_xrGetFacialExpressionBlendShapePropertiesML);
+        if (!pfn_xrGetFacialExpressionBlendShapePropertiesML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetFacialExpressionBlendShapePropertiesML(facialExpressionClient, blendShapeGetInfo, blendShapeCount, blendShapes);
+        return pfn_xrGetFacialExpressionBlendShapePropertiesML(facialExpressionClient, blendShapeGetInfo, blendShapeCount, blendShapes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetFacialExpressionBlendShapePropertiesML: {}", e.what());
@@ -2220,9 +3662,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
+static PFN_xrCreateExportedLocalizationMapML pfn_xrCreateExportedLocalizationMapML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession session, const XrUuidEXT* mapUuid, XrExportedLocalizationMapML* map) {
+    if (!pfn_xrCreateExportedLocalizationMapML) {
+        get_runtime().get_function_table().get_function("xrCreateExportedLocalizationMapML", pfn_xrCreateExportedLocalizationMapML);
+        if (!pfn_xrCreateExportedLocalizationMapML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateExportedLocalizationMapML(session, mapUuid, map);
+        return pfn_xrCreateExportedLocalizationMapML(session, mapUuid, map);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateExportedLocalizationMapML: {}", e.what());
@@ -2230,9 +3679,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
     }
 }
 
+static PFN_xrDestroyExportedLocalizationMapML pfn_xrDestroyExportedLocalizationMapML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLocalizationMapML map) {
+    if (!pfn_xrDestroyExportedLocalizationMapML) {
+        get_runtime().get_function_table().get_function("xrDestroyExportedLocalizationMapML", pfn_xrDestroyExportedLocalizationMapML);
+        if (!pfn_xrDestroyExportedLocalizationMapML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyExportedLocalizationMapML(map);
+        return pfn_xrDestroyExportedLocalizationMapML(map);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyExportedLocalizationMapML: {}", e.what());
@@ -2240,9 +3696,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
     }
 }
 
+static PFN_xrEnableLocalizationEventsML pfn_xrEnableLocalizationEventsML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, const XrLocalizationEnableEventsInfoML* info) {
+    if (!pfn_xrEnableLocalizationEventsML) {
+        get_runtime().get_function_table().get_function("xrEnableLocalizationEventsML", pfn_xrEnableLocalizationEventsML);
+        if (!pfn_xrEnableLocalizationEventsML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnableLocalizationEventsML(session, info);
+        return pfn_xrEnableLocalizationEventsML(session, info);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnableLocalizationEventsML: {}", e.what());
@@ -2250,9 +3713,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
     }
 }
 
+static PFN_xrGetExportedLocalizationMapDataML pfn_xrGetExportedLocalizationMapDataML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetExportedLocalizationMapDataML) {
+        get_runtime().get_function_table().get_function("xrGetExportedLocalizationMapDataML", pfn_xrGetExportedLocalizationMapDataML);
+        if (!pfn_xrGetExportedLocalizationMapDataML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetExportedLocalizationMapDataML: {}", e.what());
@@ -2260,9 +3730,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
     }
 }
 
+static PFN_xrImportLocalizationMapML pfn_xrImportLocalizationMapML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, const XrLocalizationMapImportInfoML* importInfo, XrUuidEXT* mapUuid) {
+    if (!pfn_xrImportLocalizationMapML) {
+        get_runtime().get_function_table().get_function("xrImportLocalizationMapML", pfn_xrImportLocalizationMapML);
+        if (!pfn_xrImportLocalizationMapML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrImportLocalizationMapML(session, importInfo, mapUuid);
+        return pfn_xrImportLocalizationMapML(session, importInfo, mapUuid);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrImportLocalizationMapML: {}", e.what());
@@ -2270,9 +3747,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
     }
 }
 
+static PFN_xrQueryLocalizationMapsML pfn_xrQueryLocalizationMapsML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, const XrLocalizationMapQueryInfoBaseHeaderML* queryInfo, uint32_t mapCapacityInput, uint32_t* mapCountOutput, XrLocalizationMapML* maps) {
+    if (!pfn_xrQueryLocalizationMapsML) {
+        get_runtime().get_function_table().get_function("xrQueryLocalizationMapsML", pfn_xrQueryLocalizationMapsML);
+        if (!pfn_xrQueryLocalizationMapsML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
+        return pfn_xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQueryLocalizationMapsML: {}", e.what());
@@ -2280,9 +3764,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
     }
 }
 
+static PFN_xrRequestMapLocalizationML pfn_xrRequestMapLocalizationML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, const XrMapLocalizationRequestInfoML* requestInfo) {
+    if (!pfn_xrRequestMapLocalizationML) {
+        get_runtime().get_function_table().get_function("xrRequestMapLocalizationML", pfn_xrRequestMapLocalizationML);
+        if (!pfn_xrRequestMapLocalizationML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestMapLocalizationML(session, requestInfo);
+        return pfn_xrRequestMapLocalizationML(session, requestInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestMapLocalizationML: {}", e.what());
@@ -2292,9 +3783,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
+static PFN_xrCreateMarkerDetectorML pfn_xrCreateMarkerDetectorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const XrMarkerDetectorCreateInfoML* createInfo, XrMarkerDetectorML* markerDetector) {
+    if (!pfn_xrCreateMarkerDetectorML) {
+        get_runtime().get_function_table().get_function("xrCreateMarkerDetectorML", pfn_xrCreateMarkerDetectorML);
+        if (!pfn_xrCreateMarkerDetectorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateMarkerDetectorML(session, createInfo, markerDetector);
+        return pfn_xrCreateMarkerDetectorML(session, createInfo, markerDetector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerDetectorML: {}", e.what());
@@ -2302,9 +3800,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
     }
 }
 
+static PFN_xrCreateMarkerSpaceML pfn_xrCreateMarkerSpaceML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const XrMarkerSpaceCreateInfoML* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateMarkerSpaceML) {
+        get_runtime().get_function_table().get_function("xrCreateMarkerSpaceML", pfn_xrCreateMarkerSpaceML);
+        if (!pfn_xrCreateMarkerSpaceML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateMarkerSpaceML(session, createInfo, space);
+        return pfn_xrCreateMarkerSpaceML(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerSpaceML: {}", e.what());
@@ -2312,9 +3817,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
     }
 }
 
+static PFN_xrDestroyMarkerDetectorML pfn_xrDestroyMarkerDetectorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML markerDetector) {
+    if (!pfn_xrDestroyMarkerDetectorML) {
+        get_runtime().get_function_table().get_function("xrDestroyMarkerDetectorML", pfn_xrDestroyMarkerDetectorML);
+        if (!pfn_xrDestroyMarkerDetectorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyMarkerDetectorML(markerDetector);
+        return pfn_xrDestroyMarkerDetectorML(markerDetector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyMarkerDetectorML: {}", e.what());
@@ -2322,9 +3834,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
     }
 }
 
+static PFN_xrGetMarkerDetectorStateML pfn_xrGetMarkerDetectorStateML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML markerDetector, XrMarkerDetectorStateML* state) {
+    if (!pfn_xrGetMarkerDetectorStateML) {
+        get_runtime().get_function_table().get_function("xrGetMarkerDetectorStateML", pfn_xrGetMarkerDetectorStateML);
+        if (!pfn_xrGetMarkerDetectorStateML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerDetectorStateML(markerDetector, state);
+        return pfn_xrGetMarkerDetectorStateML(markerDetector, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerDetectorStateML: {}", e.what());
@@ -2332,9 +3851,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
     }
 }
 
+static PFN_xrGetMarkerLengthML pfn_xrGetMarkerLengthML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* meters) {
+    if (!pfn_xrGetMarkerLengthML) {
+        get_runtime().get_function_table().get_function("xrGetMarkerLengthML", pfn_xrGetMarkerLengthML);
+        if (!pfn_xrGetMarkerLengthML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerLengthML(markerDetector, marker, meters);
+        return pfn_xrGetMarkerLengthML(markerDetector, marker, meters);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerLengthML: {}", e.what());
@@ -2342,9 +3868,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
     }
 }
 
+static PFN_xrGetMarkerNumberML pfn_xrGetMarkerNumberML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint64_t* number) {
+    if (!pfn_xrGetMarkerNumberML) {
+        get_runtime().get_function_table().get_function("xrGetMarkerNumberML", pfn_xrGetMarkerNumberML);
+        if (!pfn_xrGetMarkerNumberML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerNumberML(markerDetector, marker, number);
+        return pfn_xrGetMarkerNumberML(markerDetector, marker, number);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerNumberML: {}", e.what());
@@ -2352,9 +3885,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
     }
 }
 
+static PFN_xrGetMarkerReprojectionErrorML pfn_xrGetMarkerReprojectionErrorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* reprojectionErrorMeters) {
+    if (!pfn_xrGetMarkerReprojectionErrorML) {
+        get_runtime().get_function_table().get_function("xrGetMarkerReprojectionErrorML", pfn_xrGetMarkerReprojectionErrorML);
+        if (!pfn_xrGetMarkerReprojectionErrorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
+        return pfn_xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerReprojectionErrorML: {}", e.what());
@@ -2362,9 +3902,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
     }
 }
 
+static PFN_xrGetMarkerStringML pfn_xrGetMarkerStringML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetMarkerStringML) {
+        get_runtime().get_function_table().get_function("xrGetMarkerStringML", pfn_xrGetMarkerStringML);
+        if (!pfn_xrGetMarkerStringML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerStringML: {}", e.what());
@@ -2372,9 +3919,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
     }
 }
 
+static PFN_xrGetMarkersML pfn_xrGetMarkersML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector, uint32_t markerCapacityInput, uint32_t* markerCountOutput, XrMarkerML* markers) {
+    if (!pfn_xrGetMarkersML) {
+        get_runtime().get_function_table().get_function("xrGetMarkersML", pfn_xrGetMarkersML);
+        if (!pfn_xrGetMarkersML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
+        return pfn_xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkersML: {}", e.what());
@@ -2382,9 +3936,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
     }
 }
 
+static PFN_xrSnapshotMarkerDetectorML pfn_xrSnapshotMarkerDetectorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML markerDetector, XrMarkerDetectorSnapshotInfoML* snapshotInfo) {
+    if (!pfn_xrSnapshotMarkerDetectorML) {
+        get_runtime().get_function_table().get_function("xrSnapshotMarkerDetectorML", pfn_xrSnapshotMarkerDetectorML);
+        if (!pfn_xrSnapshotMarkerDetectorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
+        return pfn_xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSnapshotMarkerDetectorML: {}", e.what());
@@ -2394,9 +3955,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
+static PFN_xrCreateSpatialAnchorsAsyncML pfn_xrCreateSpatialAnchorsAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, const XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo, XrFutureEXT* future) {
+    if (!pfn_xrCreateSpatialAnchorsAsyncML) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorsAsyncML", pfn_xrCreateSpatialAnchorsAsyncML);
+        if (!pfn_xrCreateSpatialAnchorsAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
+        return pfn_xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsAsyncML: {}", e.what());
@@ -2404,9 +3972,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
     }
 }
 
+static PFN_xrCreateSpatialAnchorsCompleteML pfn_xrCreateSpatialAnchorsCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession session, XrFutureEXT future, XrCreateSpatialAnchorsCompletionML* completion) {
+    if (!pfn_xrCreateSpatialAnchorsCompleteML) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorsCompleteML", pfn_xrCreateSpatialAnchorsCompleteML);
+        if (!pfn_xrCreateSpatialAnchorsCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorsCompleteML(session, future, completion);
+        return pfn_xrCreateSpatialAnchorsCompleteML(session, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsCompleteML: {}", e.what());
@@ -2414,9 +3989,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
     }
 }
 
+static PFN_xrGetSpatialAnchorStateML pfn_xrGetSpatialAnchorStateML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpatialAnchorStateML* state) {
+    if (!pfn_xrGetSpatialAnchorStateML) {
+        get_runtime().get_function_table().get_function("xrGetSpatialAnchorStateML", pfn_xrGetSpatialAnchorStateML);
+        if (!pfn_xrGetSpatialAnchorStateML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpatialAnchorStateML(anchor, state);
+        return pfn_xrGetSpatialAnchorStateML(anchor, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialAnchorStateML: {}", e.what());
@@ -2426,9 +4008,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
+static PFN_xrCreateSpatialAnchorsStorageML pfn_xrCreateSpatialAnchorsStorageML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session, const XrSpatialAnchorsCreateStorageInfoML* createInfo, XrSpatialAnchorsStorageML* storage) {
+    if (!pfn_xrCreateSpatialAnchorsStorageML) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorsStorageML", pfn_xrCreateSpatialAnchorsStorageML);
+        if (!pfn_xrCreateSpatialAnchorsStorageML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
+        return pfn_xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorsStorageML: {}", e.what());
@@ -2436,9 +4025,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
     }
 }
 
+static PFN_xrDeleteSpatialAnchorsAsyncML pfn_xrDeleteSpatialAnchorsAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsDeleteInfoML* deleteInfo, XrFutureEXT* future) {
+    if (!pfn_xrDeleteSpatialAnchorsAsyncML) {
+        get_runtime().get_function_table().get_function("xrDeleteSpatialAnchorsAsyncML", pfn_xrDeleteSpatialAnchorsAsyncML);
+        if (!pfn_xrDeleteSpatialAnchorsAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
+        return pfn_xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeleteSpatialAnchorsAsyncML: {}", e.what());
@@ -2446,9 +4042,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
     }
 }
 
+static PFN_xrDeleteSpatialAnchorsCompleteML pfn_xrDeleteSpatialAnchorsCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsDeleteCompletionML* completion) {
+    if (!pfn_xrDeleteSpatialAnchorsCompleteML) {
+        get_runtime().get_function_table().get_function("xrDeleteSpatialAnchorsCompleteML", pfn_xrDeleteSpatialAnchorsCompleteML);
+        if (!pfn_xrDeleteSpatialAnchorsCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
+        return pfn_xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeleteSpatialAnchorsCompleteML: {}", e.what());
@@ -2456,9 +4059,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
     }
 }
 
+static PFN_xrDestroySpatialAnchorsStorageML pfn_xrDestroySpatialAnchorsStorageML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchorsStorageML storage) {
+    if (!pfn_xrDestroySpatialAnchorsStorageML) {
+        get_runtime().get_function_table().get_function("xrDestroySpatialAnchorsStorageML", pfn_xrDestroySpatialAnchorsStorageML);
+        if (!pfn_xrDestroySpatialAnchorsStorageML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpatialAnchorsStorageML(storage);
+        return pfn_xrDestroySpatialAnchorsStorageML(storage);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorsStorageML: {}", e.what());
@@ -2466,9 +4076,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
     }
 }
 
+static PFN_xrPublishSpatialAnchorsAsyncML pfn_xrPublishSpatialAnchorsAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsPublishInfoML* publishInfo, XrFutureEXT* future) {
+    if (!pfn_xrPublishSpatialAnchorsAsyncML) {
+        get_runtime().get_function_table().get_function("xrPublishSpatialAnchorsAsyncML", pfn_xrPublishSpatialAnchorsAsyncML);
+        if (!pfn_xrPublishSpatialAnchorsAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
+        return pfn_xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPublishSpatialAnchorsAsyncML: {}", e.what());
@@ -2476,9 +4093,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
     }
 }
 
+static PFN_xrPublishSpatialAnchorsCompleteML pfn_xrPublishSpatialAnchorsCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsPublishCompletionML* completion) {
+    if (!pfn_xrPublishSpatialAnchorsCompleteML) {
+        get_runtime().get_function_table().get_function("xrPublishSpatialAnchorsCompleteML", pfn_xrPublishSpatialAnchorsCompleteML);
+        if (!pfn_xrPublishSpatialAnchorsCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPublishSpatialAnchorsCompleteML(storage, future, completion);
+        return pfn_xrPublishSpatialAnchorsCompleteML(storage, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPublishSpatialAnchorsCompleteML: {}", e.what());
@@ -2486,9 +4110,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
     }
 }
 
+static PFN_xrQuerySpatialAnchorsAsyncML pfn_xrQuerySpatialAnchorsAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo, XrFutureEXT* future) {
+    if (!pfn_xrQuerySpatialAnchorsAsyncML) {
+        get_runtime().get_function_table().get_function("xrQuerySpatialAnchorsAsyncML", pfn_xrQuerySpatialAnchorsAsyncML);
+        if (!pfn_xrQuerySpatialAnchorsAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
+        return pfn_xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpatialAnchorsAsyncML: {}", e.what());
@@ -2496,9 +4127,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
     }
 }
 
+static PFN_xrQuerySpatialAnchorsCompleteML pfn_xrQuerySpatialAnchorsCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsQueryCompletionML* completion) {
+    if (!pfn_xrQuerySpatialAnchorsCompleteML) {
+        get_runtime().get_function_table().get_function("xrQuerySpatialAnchorsCompleteML", pfn_xrQuerySpatialAnchorsCompleteML);
+        if (!pfn_xrQuerySpatialAnchorsCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrQuerySpatialAnchorsCompleteML(storage, future, completion);
+        return pfn_xrQuerySpatialAnchorsCompleteML(storage, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrQuerySpatialAnchorsCompleteML: {}", e.what());
@@ -2506,9 +4144,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
     }
 }
 
+static PFN_xrUpdateSpatialAnchorsExpirationAsyncML pfn_xrUpdateSpatialAnchorsExpirationAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsUpdateExpirationInfoML* updateInfo, XrFutureEXT* future) {
+    if (!pfn_xrUpdateSpatialAnchorsExpirationAsyncML) {
+        get_runtime().get_function_table().get_function("xrUpdateSpatialAnchorsExpirationAsyncML", pfn_xrUpdateSpatialAnchorsExpirationAsyncML);
+        if (!pfn_xrUpdateSpatialAnchorsExpirationAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
+        return pfn_xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationAsyncML: {}", e.what());
@@ -2516,9 +4161,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
     }
 }
 
+static PFN_xrUpdateSpatialAnchorsExpirationCompleteML pfn_xrUpdateSpatialAnchorsExpirationCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsUpdateExpirationCompletionML* completion) {
+    if (!pfn_xrUpdateSpatialAnchorsExpirationCompleteML) {
+        get_runtime().get_function_table().get_function("xrUpdateSpatialAnchorsExpirationCompleteML", pfn_xrUpdateSpatialAnchorsExpirationCompleteML);
+        if (!pfn_xrUpdateSpatialAnchorsExpirationCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
+        return pfn_xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationCompleteML: {}", e.what());
@@ -2528,9 +4180,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
+static PFN_xrSetSystemNotificationsML pfn_xrSetSystemNotificationsML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, const XrSystemNotificationsSetInfoML* info) {
+    if (!pfn_xrSetSystemNotificationsML) {
+        get_runtime().get_function_table().get_function("xrSetSystemNotificationsML", pfn_xrSetSystemNotificationsML);
+        if (!pfn_xrSetSystemNotificationsML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetSystemNotificationsML(instance, info);
+        return pfn_xrSetSystemNotificationsML(instance, info);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetSystemNotificationsML: {}", e.what());
@@ -2540,9 +4199,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
+static PFN_xrEnableUserCalibrationEventsML pfn_xrEnableUserCalibrationEventsML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instance, const XrUserCalibrationEnableEventsInfoML* enableInfo) {
+    if (!pfn_xrEnableUserCalibrationEventsML) {
+        get_runtime().get_function_table().get_function("xrEnableUserCalibrationEventsML", pfn_xrEnableUserCalibrationEventsML);
+        if (!pfn_xrEnableUserCalibrationEventsML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnableUserCalibrationEventsML(instance, enableInfo);
+        return pfn_xrEnableUserCalibrationEventsML(instance, enableInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnableUserCalibrationEventsML: {}", e.what());
@@ -2552,9 +4218,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
+static PFN_xrAllocateWorldMeshBufferML pfn_xrAllocateWorldMeshBufferML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferSizeML* size, XrWorldMeshBufferML* buffer) {
+    if (!pfn_xrAllocateWorldMeshBufferML) {
+        get_runtime().get_function_table().get_function("xrAllocateWorldMeshBufferML", pfn_xrAllocateWorldMeshBufferML);
+        if (!pfn_xrAllocateWorldMeshBufferML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrAllocateWorldMeshBufferML(detector, size, buffer);
+        return pfn_xrAllocateWorldMeshBufferML(detector, size, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAllocateWorldMeshBufferML: {}", e.what());
@@ -2562,9 +4235,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
     }
 }
 
+static PFN_xrCreateWorldMeshDetectorML pfn_xrCreateWorldMeshDetectorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, const XrWorldMeshDetectorCreateInfoML* createInfo, XrWorldMeshDetectorML* detector) {
+    if (!pfn_xrCreateWorldMeshDetectorML) {
+        get_runtime().get_function_table().get_function("xrCreateWorldMeshDetectorML", pfn_xrCreateWorldMeshDetectorML);
+        if (!pfn_xrCreateWorldMeshDetectorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateWorldMeshDetectorML(session, createInfo, detector);
+        return pfn_xrCreateWorldMeshDetectorML(session, createInfo, detector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateWorldMeshDetectorML: {}", e.what());
@@ -2572,9 +4252,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
     }
 }
 
+static PFN_xrDestroyWorldMeshDetectorML pfn_xrDestroyWorldMeshDetectorML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorML detector) {
+    if (!pfn_xrDestroyWorldMeshDetectorML) {
+        get_runtime().get_function_table().get_function("xrDestroyWorldMeshDetectorML", pfn_xrDestroyWorldMeshDetectorML);
+        if (!pfn_xrDestroyWorldMeshDetectorML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyWorldMeshDetectorML(detector);
+        return pfn_xrDestroyWorldMeshDetectorML(detector);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyWorldMeshDetectorML: {}", e.what());
@@ -2582,9 +4269,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
     }
 }
 
+static PFN_xrFreeWorldMeshBufferML pfn_xrFreeWorldMeshBufferML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferML* buffer) {
+    if (!pfn_xrFreeWorldMeshBufferML) {
+        get_runtime().get_function_table().get_function("xrFreeWorldMeshBufferML", pfn_xrFreeWorldMeshBufferML);
+        if (!pfn_xrFreeWorldMeshBufferML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrFreeWorldMeshBufferML(detector, buffer);
+        return pfn_xrFreeWorldMeshBufferML(detector, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrFreeWorldMeshBufferML: {}", e.what());
@@ -2592,9 +4286,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
     }
 }
 
+static PFN_xrGetWorldMeshBufferRecommendSizeML pfn_xrGetWorldMeshBufferRecommendSizeML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo, XrWorldMeshBufferSizeML* size) {
+    if (!pfn_xrGetWorldMeshBufferRecommendSizeML) {
+        get_runtime().get_function_table().get_function("xrGetWorldMeshBufferRecommendSizeML", pfn_xrGetWorldMeshBufferRecommendSizeML);
+        if (!pfn_xrGetWorldMeshBufferRecommendSizeML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
+        return pfn_xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetWorldMeshBufferRecommendSizeML: {}", e.what());
@@ -2602,9 +4303,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
     }
 }
 
+static PFN_xrRequestWorldMeshAsyncML pfn_xrRequestWorldMeshAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshGetInfoML* getInfo, XrWorldMeshBufferML* buffer, XrFutureEXT* future) {
+    if (!pfn_xrRequestWorldMeshAsyncML) {
+        get_runtime().get_function_table().get_function("xrRequestWorldMeshAsyncML", pfn_xrRequestWorldMeshAsyncML);
+        if (!pfn_xrRequestWorldMeshAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
+        return pfn_xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshAsyncML: {}", e.what());
@@ -2612,9 +4320,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
     }
 }
 
+static PFN_xrRequestWorldMeshCompleteML pfn_xrRequestWorldMeshCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorML detector, const XrWorldMeshRequestCompletionInfoML* completionInfo, XrFutureEXT future, XrWorldMeshRequestCompletionML* completion) {
+    if (!pfn_xrRequestWorldMeshCompleteML) {
+        get_runtime().get_function_table().get_function("xrRequestWorldMeshCompleteML", pfn_xrRequestWorldMeshCompleteML);
+        if (!pfn_xrRequestWorldMeshCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
+        return pfn_xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshCompleteML: {}", e.what());
@@ -2622,9 +4337,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
     }
 }
 
+static PFN_xrRequestWorldMeshStateAsyncML pfn_xrRequestWorldMeshStateAsyncML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshStateRequestInfoML* stateRequest, XrFutureEXT* future) {
+    if (!pfn_xrRequestWorldMeshStateAsyncML) {
+        get_runtime().get_function_table().get_function("xrRequestWorldMeshStateAsyncML", pfn_xrRequestWorldMeshStateAsyncML);
+        if (!pfn_xrRequestWorldMeshStateAsyncML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
+        return pfn_xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshStateAsyncML: {}", e.what());
@@ -2632,9 +4354,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
     }
 }
 
+static PFN_xrRequestWorldMeshStateCompleteML pfn_xrRequestWorldMeshStateCompleteML = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDetectorML detector, XrFutureEXT future, XrWorldMeshStateRequestCompletionML* completion) {
+    if (!pfn_xrRequestWorldMeshStateCompleteML) {
+        get_runtime().get_function_table().get_function("xrRequestWorldMeshStateCompleteML", pfn_xrRequestWorldMeshStateCompleteML);
+        if (!pfn_xrRequestWorldMeshStateCompleteML) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestWorldMeshStateCompleteML(detector, future, completion);
+        return pfn_xrRequestWorldMeshStateCompleteML(detector, future, completion);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestWorldMeshStateCompleteML: {}", e.what());
@@ -2644,9 +4373,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
+static PFN_xrApplyForceFeedbackCurlMNDX pfn_xrApplyForceFeedbackCurlMNDX = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT handTracker, const XrForceFeedbackCurlApplyLocationsMNDX* locations) {
+    if (!pfn_xrApplyForceFeedbackCurlMNDX) {
+        get_runtime().get_function_table().get_function("xrApplyForceFeedbackCurlMNDX", pfn_xrApplyForceFeedbackCurlMNDX);
+        if (!pfn_xrApplyForceFeedbackCurlMNDX) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrApplyForceFeedbackCurlMNDX(handTracker, locations);
+        return pfn_xrApplyForceFeedbackCurlMNDX(handTracker, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyForceFeedbackCurlMNDX: {}", e.what());
@@ -2656,9 +4392,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
+static PFN_xrEnumerateReprojectionModesMSFT pfn_xrEnumerateReprojectionModesMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t modeCapacityInput, uint32_t* modeCountOutput, XrReprojectionModeMSFT* modes) {
+    if (!pfn_xrEnumerateReprojectionModesMSFT) {
+        get_runtime().get_function_table().get_function("xrEnumerateReprojectionModesMSFT", pfn_xrEnumerateReprojectionModesMSFT);
+        if (!pfn_xrEnumerateReprojectionModesMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
+        return pfn_xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateReprojectionModesMSFT: {}", e.what());
@@ -2668,9 +4411,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
+static PFN_xrGetControllerModelKeyMSFT pfn_xrGetControllerModelKeyMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, XrPath topLevelUserPath, XrControllerModelKeyStateMSFT* controllerModelKeyState) {
+    if (!pfn_xrGetControllerModelKeyMSFT) {
+        get_runtime().get_function_table().get_function("xrGetControllerModelKeyMSFT", pfn_xrGetControllerModelKeyMSFT);
+        if (!pfn_xrGetControllerModelKeyMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
+        return pfn_xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelKeyMSFT: {}", e.what());
@@ -2678,9 +4428,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
     }
 }
 
+static PFN_xrGetControllerModelPropertiesMSFT pfn_xrGetControllerModelPropertiesMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelPropertiesMSFT* properties) {
+    if (!pfn_xrGetControllerModelPropertiesMSFT) {
+        get_runtime().get_function_table().get_function("xrGetControllerModelPropertiesMSFT", pfn_xrGetControllerModelPropertiesMSFT);
+        if (!pfn_xrGetControllerModelPropertiesMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
+        return pfn_xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelPropertiesMSFT: {}", e.what());
@@ -2688,9 +4445,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
     }
 }
 
+static PFN_xrGetControllerModelStateMSFT pfn_xrGetControllerModelStateMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelStateMSFT* state) {
+    if (!pfn_xrGetControllerModelStateMSFT) {
+        get_runtime().get_function_table().get_function("xrGetControllerModelStateMSFT", pfn_xrGetControllerModelStateMSFT);
+        if (!pfn_xrGetControllerModelStateMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetControllerModelStateMSFT(session, modelKey, state);
+        return pfn_xrGetControllerModelStateMSFT(session, modelKey, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetControllerModelStateMSFT: {}", e.what());
@@ -2698,9 +4462,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
     }
 }
 
+static PFN_xrLoadControllerModelMSFT pfn_xrLoadControllerModelMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
+    if (!pfn_xrLoadControllerModelMSFT) {
+        get_runtime().get_function_table().get_function("xrLoadControllerModelMSFT", pfn_xrLoadControllerModelMSFT);
+        if (!pfn_xrLoadControllerModelMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLoadControllerModelMSFT: {}", e.what());
@@ -2710,9 +4481,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
+static PFN_xrCreateHandMeshSpaceMSFT pfn_xrCreateHandMeshSpaceMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTracker, const XrHandMeshSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateHandMeshSpaceMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateHandMeshSpaceMSFT", pfn_xrCreateHandMeshSpaceMSFT);
+        if (!pfn_xrCreateHandMeshSpaceMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
+        return pfn_xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateHandMeshSpaceMSFT: {}", e.what());
@@ -2720,9 +4498,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
     }
 }
 
+static PFN_xrUpdateHandMeshMSFT pfn_xrUpdateHandMeshMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker, const XrHandMeshUpdateInfoMSFT* updateInfo, XrHandMeshMSFT* handMesh) {
+    if (!pfn_xrUpdateHandMeshMSFT) {
+        get_runtime().get_function_table().get_function("xrUpdateHandMeshMSFT", pfn_xrUpdateHandMeshMSFT);
+        if (!pfn_xrUpdateHandMeshMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
+        return pfn_xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUpdateHandMeshMSFT: {}", e.what());
@@ -2732,9 +4517,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
+static PFN_xrCreateSpatialAnchorFromPerceptionAnchorMSFT pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrSession session, IUnknown* perceptionAnchor, XrSpatialAnchorMSFT* anchor) {
+    if (!pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorFromPerceptionAnchorMSFT", pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT);
+        if (!pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
+        return pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFromPerceptionAnchorMSFT: {}", e.what());
@@ -2742,9 +4534,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
     }
 }
 
+static PFN_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrSession session, XrSpatialAnchorMSFT anchor, IUnknown** perceptionAnchor) {
+    if (!pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT);
+        if (!pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
+        return pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTryGetPerceptionAnchorFromSpatialAnchorMSFT: {}", e.what());
@@ -2754,9 +4553,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
+static PFN_xrGetSceneMarkerDecodedStringMSFT pfn_xrGetSceneMarkerDecodedStringMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetSceneMarkerDecodedStringMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSceneMarkerDecodedStringMSFT", pfn_xrGetSceneMarkerDecodedStringMSFT);
+        if (!pfn_xrGetSceneMarkerDecodedStringMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMarkerDecodedStringMSFT: {}", e.what());
@@ -2764,9 +4570,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
     }
 }
 
+static PFN_xrGetSceneMarkerRawDataMSFT pfn_xrGetSceneMarkerRawDataMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
+    if (!pfn_xrGetSceneMarkerRawDataMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSceneMarkerRawDataMSFT", pfn_xrGetSceneMarkerRawDataMSFT);
+        if (!pfn_xrGetSceneMarkerRawDataMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMarkerRawDataMSFT: {}", e.what());
@@ -2776,9 +4589,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
+static PFN_xrComputeNewSceneMSFT pfn_xrComputeNewSceneMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrNewSceneComputeInfoMSFT* computeInfo) {
+    if (!pfn_xrComputeNewSceneMSFT) {
+        get_runtime().get_function_table().get_function("xrComputeNewSceneMSFT", pfn_xrComputeNewSceneMSFT);
+        if (!pfn_xrComputeNewSceneMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrComputeNewSceneMSFT(sceneObserver, computeInfo);
+        return pfn_xrComputeNewSceneMSFT(sceneObserver, computeInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrComputeNewSceneMSFT: {}", e.what());
@@ -2786,9 +4606,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
     }
 }
 
+static PFN_xrCreateSceneMSFT pfn_xrCreateSceneMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneCreateInfoMSFT* createInfo, XrSceneMSFT* scene) {
+    if (!pfn_xrCreateSceneMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSceneMSFT", pfn_xrCreateSceneMSFT);
+        if (!pfn_xrCreateSceneMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSceneMSFT(sceneObserver, createInfo, scene);
+        return pfn_xrCreateSceneMSFT(sceneObserver, createInfo, scene);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSceneMSFT: {}", e.what());
@@ -2796,9 +4623,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
     }
 }
 
+static PFN_xrCreateSceneObserverMSFT pfn_xrCreateSceneObserverMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, const XrSceneObserverCreateInfoMSFT* createInfo, XrSceneObserverMSFT* sceneObserver) {
+    if (!pfn_xrCreateSceneObserverMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSceneObserverMSFT", pfn_xrCreateSceneObserverMSFT);
+        if (!pfn_xrCreateSceneObserverMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
+        return pfn_xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSceneObserverMSFT: {}", e.what());
@@ -2806,9 +4640,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
     }
 }
 
+static PFN_xrDestroySceneMSFT pfn_xrDestroySceneMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
+    if (!pfn_xrDestroySceneMSFT) {
+        get_runtime().get_function_table().get_function("xrDestroySceneMSFT", pfn_xrDestroySceneMSFT);
+        if (!pfn_xrDestroySceneMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySceneMSFT(scene);
+        return pfn_xrDestroySceneMSFT(scene);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySceneMSFT: {}", e.what());
@@ -2816,9 +4657,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
     }
 }
 
+static PFN_xrDestroySceneObserverMSFT pfn_xrDestroySceneObserverMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sceneObserver) {
+    if (!pfn_xrDestroySceneObserverMSFT) {
+        get_runtime().get_function_table().get_function("xrDestroySceneObserverMSFT", pfn_xrDestroySceneObserverMSFT);
+        if (!pfn_xrDestroySceneObserverMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySceneObserverMSFT(sceneObserver);
+        return pfn_xrDestroySceneObserverMSFT(sceneObserver);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySceneObserverMSFT: {}", e.what());
@@ -2826,9 +4674,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
     }
 }
 
+static PFN_xrEnumerateSceneComputeFeaturesMSFT pfn_xrEnumerateSceneComputeFeaturesMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, XrSystemId systemId, uint32_t featureCapacityInput, uint32_t* featureCountOutput, XrSceneComputeFeatureMSFT* features) {
+    if (!pfn_xrEnumerateSceneComputeFeaturesMSFT) {
+        get_runtime().get_function_table().get_function("xrEnumerateSceneComputeFeaturesMSFT", pfn_xrEnumerateSceneComputeFeaturesMSFT);
+        if (!pfn_xrEnumerateSceneComputeFeaturesMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
+        return pfn_xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSceneComputeFeaturesMSFT: {}", e.what());
@@ -2836,9 +4691,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
     }
 }
 
+static PFN_xrGetSceneComponentsMSFT pfn_xrGetSceneComponentsMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsGetInfoMSFT* getInfo, XrSceneComponentsMSFT* components) {
+    if (!pfn_xrGetSceneComponentsMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSceneComponentsMSFT", pfn_xrGetSceneComponentsMSFT);
+        if (!pfn_xrGetSceneComponentsMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSceneComponentsMSFT(scene, getInfo, components);
+        return pfn_xrGetSceneComponentsMSFT(scene, getInfo, components);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneComponentsMSFT: {}", e.what());
@@ -2846,9 +4708,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
     }
 }
 
+static PFN_xrGetSceneComputeStateMSFT pfn_xrGetSceneComputeStateMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sceneObserver, XrSceneComputeStateMSFT* state) {
+    if (!pfn_xrGetSceneComputeStateMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSceneComputeStateMSFT", pfn_xrGetSceneComputeStateMSFT);
+        if (!pfn_xrGetSceneComputeStateMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSceneComputeStateMSFT(sceneObserver, state);
+        return pfn_xrGetSceneComputeStateMSFT(sceneObserver, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneComputeStateMSFT: {}", e.what());
@@ -2856,9 +4725,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
     }
 }
 
+static PFN_xrGetSceneMeshBuffersMSFT pfn_xrGetSceneMeshBuffersMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, const XrSceneMeshBuffersGetInfoMSFT* getInfo, XrSceneMeshBuffersMSFT* buffers) {
+    if (!pfn_xrGetSceneMeshBuffersMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSceneMeshBuffersMSFT", pfn_xrGetSceneMeshBuffersMSFT);
+        if (!pfn_xrGetSceneMeshBuffersMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
+        return pfn_xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSceneMeshBuffersMSFT: {}", e.what());
@@ -2866,9 +4742,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
     }
 }
 
+static PFN_xrLocateSceneComponentsMSFT pfn_xrLocateSceneComponentsMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsLocateInfoMSFT* locateInfo, XrSceneComponentLocationsMSFT* locations) {
+    if (!pfn_xrLocateSceneComponentsMSFT) {
+        get_runtime().get_function_table().get_function("xrLocateSceneComponentsMSFT", pfn_xrLocateSceneComponentsMSFT);
+        if (!pfn_xrLocateSceneComponentsMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
+        return pfn_xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSceneComponentsMSFT: {}", e.what());
@@ -2878,9 +4761,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
+static PFN_xrDeserializeSceneMSFT pfn_xrDeserializeSceneMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneDeserializeInfoMSFT* deserializeInfo) {
+    if (!pfn_xrDeserializeSceneMSFT) {
+        get_runtime().get_function_table().get_function("xrDeserializeSceneMSFT", pfn_xrDeserializeSceneMSFT);
+        if (!pfn_xrDeserializeSceneMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
+        return pfn_xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDeserializeSceneMSFT: {}", e.what());
@@ -2888,9 +4778,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
     }
 }
 
+static PFN_xrGetSerializedSceneFragmentDataMSFT pfn_xrGetSerializedSceneFragmentDataMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, const XrSerializedSceneFragmentDataGetInfoMSFT* getInfo, uint32_t countInput, uint32_t* readOutput, uint8_t* buffer) {
+    if (!pfn_xrGetSerializedSceneFragmentDataMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSerializedSceneFragmentDataMSFT", pfn_xrGetSerializedSceneFragmentDataMSFT);
+        if (!pfn_xrGetSerializedSceneFragmentDataMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
+        return pfn_xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSerializedSceneFragmentDataMSFT: {}", e.what());
@@ -2900,9 +4797,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
+static PFN_xrCreateSpatialAnchorMSFT pfn_xrCreateSpatialAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, const XrSpatialAnchorCreateInfoMSFT* createInfo, XrSpatialAnchorMSFT* anchor) {
+    if (!pfn_xrCreateSpatialAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorMSFT", pfn_xrCreateSpatialAnchorMSFT);
+        if (!pfn_xrCreateSpatialAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
+        return pfn_xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorMSFT: {}", e.what());
@@ -2910,9 +4814,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
     }
 }
 
+static PFN_xrCreateSpatialAnchorSpaceMSFT pfn_xrCreateSpatialAnchorSpaceMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session, const XrSpatialAnchorSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateSpatialAnchorSpaceMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorSpaceMSFT", pfn_xrCreateSpatialAnchorSpaceMSFT);
+        if (!pfn_xrCreateSpatialAnchorSpaceMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
+        return pfn_xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorSpaceMSFT: {}", e.what());
@@ -2920,9 +4831,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
     }
 }
 
+static PFN_xrDestroySpatialAnchorMSFT pfn_xrDestroySpatialAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT anchor) {
+    if (!pfn_xrDestroySpatialAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrDestroySpatialAnchorMSFT", pfn_xrDestroySpatialAnchorMSFT);
+        if (!pfn_xrDestroySpatialAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpatialAnchorMSFT(anchor);
+        return pfn_xrDestroySpatialAnchorMSFT(anchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorMSFT: {}", e.what());
@@ -2932,9 +4850,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
+static PFN_xrClearSpatialAnchorStoreMSFT pfn_xrClearSpatialAnchorStoreMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
+    if (!pfn_xrClearSpatialAnchorStoreMSFT) {
+        get_runtime().get_function_table().get_function("xrClearSpatialAnchorStoreMSFT", pfn_xrClearSpatialAnchorStoreMSFT);
+        if (!pfn_xrClearSpatialAnchorStoreMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
+        return pfn_xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrClearSpatialAnchorStoreMSFT: {}", e.what());
@@ -2942,9 +4867,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
     }
 }
 
+static PFN_xrCreateSpatialAnchorFromPersistedNameMSFT pfn_xrCreateSpatialAnchorFromPersistedNameMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, XrSpatialAnchorMSFT* spatialAnchor) {
+    if (!pfn_xrCreateSpatialAnchorFromPersistedNameMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorFromPersistedNameMSFT", pfn_xrCreateSpatialAnchorFromPersistedNameMSFT);
+        if (!pfn_xrCreateSpatialAnchorFromPersistedNameMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
+        return pfn_xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorFromPersistedNameMSFT: {}", e.what());
@@ -2952,9 +4884,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
     }
 }
 
+static PFN_xrCreateSpatialAnchorStoreConnectionMSFT pfn_xrCreateSpatialAnchorStoreConnectionMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore) {
+    if (!pfn_xrCreateSpatialAnchorStoreConnectionMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialAnchorStoreConnectionMSFT", pfn_xrCreateSpatialAnchorStoreConnectionMSFT);
+        if (!pfn_xrCreateSpatialAnchorStoreConnectionMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
+        return pfn_xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialAnchorStoreConnectionMSFT: {}", e.what());
@@ -2962,9 +4901,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
     }
 }
 
+static PFN_xrDestroySpatialAnchorStoreConnectionMSFT pfn_xrDestroySpatialAnchorStoreConnectionMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
+    if (!pfn_xrDestroySpatialAnchorStoreConnectionMSFT) {
+        get_runtime().get_function_table().get_function("xrDestroySpatialAnchorStoreConnectionMSFT", pfn_xrDestroySpatialAnchorStoreConnectionMSFT);
+        if (!pfn_xrDestroySpatialAnchorStoreConnectionMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
+        return pfn_xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialAnchorStoreConnectionMSFT: {}", e.what());
@@ -2972,9 +4918,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
     }
 }
 
+static PFN_xrEnumeratePersistedSpatialAnchorNamesMSFT pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t* spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames) {
+    if (!pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT) {
+        get_runtime().get_function_table().get_function("xrEnumeratePersistedSpatialAnchorNamesMSFT", pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT);
+        if (!pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
+        return pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumeratePersistedSpatialAnchorNamesMSFT: {}", e.what());
@@ -2982,9 +4935,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
     }
 }
 
+static PFN_xrPersistSpatialAnchorMSFT pfn_xrPersistSpatialAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo) {
+    if (!pfn_xrPersistSpatialAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrPersistSpatialAnchorMSFT", pfn_xrPersistSpatialAnchorMSFT);
+        if (!pfn_xrPersistSpatialAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
+        return pfn_xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPersistSpatialAnchorMSFT: {}", e.what());
@@ -2992,9 +4952,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
     }
 }
 
+static PFN_xrUnpersistSpatialAnchorMSFT pfn_xrUnpersistSpatialAnchorMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName) {
+    if (!pfn_xrUnpersistSpatialAnchorMSFT) {
+        get_runtime().get_function_table().get_function("xrUnpersistSpatialAnchorMSFT", pfn_xrUnpersistSpatialAnchorMSFT);
+        if (!pfn_xrUnpersistSpatialAnchorMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
+        return pfn_xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrUnpersistSpatialAnchorMSFT: {}", e.what());
@@ -3004,9 +4971,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
+static PFN_xrCreateSpatialGraphNodeSpaceMSFT pfn_xrCreateSpatialGraphNodeSpaceMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession session, const XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateSpatialGraphNodeSpaceMSFT) {
+        get_runtime().get_function_table().get_function("xrCreateSpatialGraphNodeSpaceMSFT", pfn_xrCreateSpatialGraphNodeSpaceMSFT);
+        if (!pfn_xrCreateSpatialGraphNodeSpaceMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
+        return pfn_xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSpatialGraphNodeSpaceMSFT: {}", e.what());
@@ -3014,9 +4988,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
     }
 }
 
+static PFN_xrDestroySpatialGraphNodeBindingMSFT pfn_xrDestroySpatialGraphNodeBindingMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding) {
+    if (!pfn_xrDestroySpatialGraphNodeBindingMSFT) {
+        get_runtime().get_function_table().get_function("xrDestroySpatialGraphNodeBindingMSFT", pfn_xrDestroySpatialGraphNodeBindingMSFT);
+        if (!pfn_xrDestroySpatialGraphNodeBindingMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
+        return pfn_xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpatialGraphNodeBindingMSFT: {}", e.what());
@@ -3024,9 +5005,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
     }
 }
 
+static PFN_xrGetSpatialGraphNodeBindingPropertiesMSFT pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo, XrSpatialGraphNodeBindingPropertiesMSFT* properties) {
+    if (!pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT) {
+        get_runtime().get_function_table().get_function("xrGetSpatialGraphNodeBindingPropertiesMSFT", pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT);
+        if (!pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
+        return pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSpatialGraphNodeBindingPropertiesMSFT: {}", e.what());
@@ -3034,9 +5022,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
     }
 }
 
+static PFN_xrTryCreateSpatialGraphStaticNodeBindingMSFT pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSession session, const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo, XrSpatialGraphNodeBindingMSFT* nodeBinding) {
+    if (!pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT) {
+        get_runtime().get_function_table().get_function("xrTryCreateSpatialGraphStaticNodeBindingMSFT", pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT);
+        if (!pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
+        return pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrTryCreateSpatialGraphStaticNodeBindingMSFT: {}", e.what());
@@ -3046,9 +5041,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
+static PFN_xrGetAudioInputDeviceGuidOculus pfn_xrGetAudioInputDeviceGuidOculus = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
+    if (!pfn_xrGetAudioInputDeviceGuidOculus) {
+        get_runtime().get_function_table().get_function("xrGetAudioInputDeviceGuidOculus", pfn_xrGetAudioInputDeviceGuidOculus);
+        if (!pfn_xrGetAudioInputDeviceGuidOculus) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetAudioInputDeviceGuidOculus(instance, buffer);
+        return pfn_xrGetAudioInputDeviceGuidOculus(instance, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAudioInputDeviceGuidOculus: {}", e.what());
@@ -3056,9 +5058,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
     }
 }
 
+static PFN_xrGetAudioOutputDeviceGuidOculus pfn_xrGetAudioOutputDeviceGuidOculus = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
+    if (!pfn_xrGetAudioOutputDeviceGuidOculus) {
+        get_runtime().get_function_table().get_function("xrGetAudioOutputDeviceGuidOculus", pfn_xrGetAudioOutputDeviceGuidOculus);
+        if (!pfn_xrGetAudioOutputDeviceGuidOculus) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetAudioOutputDeviceGuidOculus(instance, buffer);
+        return pfn_xrGetAudioOutputDeviceGuidOculus(instance, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetAudioOutputDeviceGuidOculus: {}", e.what());
@@ -3068,9 +5077,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
+static PFN_xrEnumerateExternalCamerasOCULUS pfn_xrEnumerateExternalCamerasOCULUS = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession session, uint32_t cameraCapacityInput, uint32_t* cameraCountOutput, XrExternalCameraOCULUS* cameras) {
+    if (!pfn_xrEnumerateExternalCamerasOCULUS) {
+        get_runtime().get_function_table().get_function("xrEnumerateExternalCamerasOCULUS", pfn_xrEnumerateExternalCamerasOCULUS);
+        if (!pfn_xrEnumerateExternalCamerasOCULUS) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
+        return pfn_xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateExternalCamerasOCULUS: {}", e.what());
@@ -3080,9 +5096,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
+static PFN_xrSetTrackingOptimizationSettingsHintQCOM pfn_xrSetTrackingOptimizationSettingsHintQCOM = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSession session, XrTrackingOptimizationSettingsDomainQCOM domain, XrTrackingOptimizationSettingsHintQCOM hint) {
+    if (!pfn_xrSetTrackingOptimizationSettingsHintQCOM) {
+        get_runtime().get_function_table().get_function("xrSetTrackingOptimizationSettingsHintQCOM", pfn_xrSetTrackingOptimizationSettingsHintQCOM);
+        if (!pfn_xrSetTrackingOptimizationSettingsHintQCOM) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
+        return pfn_xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetTrackingOptimizationSettingsHintQCOM: {}", e.what());
@@ -3092,9 +5115,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
 
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
+static PFN_xrSetEnvironmentDepthEstimationVARJO pfn_xrSetEnvironmentDepthEstimationVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession session, XrBool32 enabled) {
+    if (!pfn_xrSetEnvironmentDepthEstimationVARJO) {
+        get_runtime().get_function_table().get_function("xrSetEnvironmentDepthEstimationVARJO", pfn_xrSetEnvironmentDepthEstimationVARJO);
+        if (!pfn_xrSetEnvironmentDepthEstimationVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetEnvironmentDepthEstimationVARJO(session, enabled);
+        return pfn_xrSetEnvironmentDepthEstimationVARJO(session, enabled);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetEnvironmentDepthEstimationVARJO: {}", e.what());
@@ -3104,9 +5134,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
+static PFN_xrCreateMarkerSpaceVARJO pfn_xrCreateMarkerSpaceVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const XrMarkerSpaceCreateInfoVARJO* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateMarkerSpaceVARJO) {
+        get_runtime().get_function_table().get_function("xrCreateMarkerSpaceVARJO", pfn_xrCreateMarkerSpaceVARJO);
+        if (!pfn_xrCreateMarkerSpaceVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateMarkerSpaceVARJO(session, createInfo, space);
+        return pfn_xrCreateMarkerSpaceVARJO(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateMarkerSpaceVARJO: {}", e.what());
@@ -3114,9 +5151,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
     }
 }
 
+static PFN_xrGetMarkerSizeVARJO pfn_xrGetMarkerSizeVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t markerId, XrExtent2Df* size) {
+    if (!pfn_xrGetMarkerSizeVARJO) {
+        get_runtime().get_function_table().get_function("xrGetMarkerSizeVARJO", pfn_xrGetMarkerSizeVARJO);
+        if (!pfn_xrGetMarkerSizeVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetMarkerSizeVARJO(session, markerId, size);
+        return pfn_xrGetMarkerSizeVARJO(session, markerId, size);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetMarkerSizeVARJO: {}", e.what());
@@ -3124,9 +5168,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
     }
 }
 
+static PFN_xrSetMarkerTrackingPredictionVARJO pfn_xrSetMarkerTrackingPredictionVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession session, uint64_t markerId, XrBool32 enable) {
+    if (!pfn_xrSetMarkerTrackingPredictionVARJO) {
+        get_runtime().get_function_table().get_function("xrSetMarkerTrackingPredictionVARJO", pfn_xrSetMarkerTrackingPredictionVARJO);
+        if (!pfn_xrSetMarkerTrackingPredictionVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
+        return pfn_xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingPredictionVARJO: {}", e.what());
@@ -3134,9 +5185,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
     }
 }
 
+static PFN_xrSetMarkerTrackingTimeoutVARJO pfn_xrSetMarkerTrackingTimeoutVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session, uint64_t markerId, XrDuration timeout) {
+    if (!pfn_xrSetMarkerTrackingTimeoutVARJO) {
+        get_runtime().get_function_table().get_function("xrSetMarkerTrackingTimeoutVARJO", pfn_xrSetMarkerTrackingTimeoutVARJO);
+        if (!pfn_xrSetMarkerTrackingTimeoutVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
+        return pfn_xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingTimeoutVARJO: {}", e.what());
@@ -3144,9 +5202,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
     }
 }
 
+static PFN_xrSetMarkerTrackingVARJO pfn_xrSetMarkerTrackingVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBool32 enabled) {
+    if (!pfn_xrSetMarkerTrackingVARJO) {
+        get_runtime().get_function_table().get_function("xrSetMarkerTrackingVARJO", pfn_xrSetMarkerTrackingVARJO);
+        if (!pfn_xrSetMarkerTrackingVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetMarkerTrackingVARJO(session, enabled);
+        return pfn_xrSetMarkerTrackingVARJO(session, enabled);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetMarkerTrackingVARJO: {}", e.what());
@@ -3156,9 +5221,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
+static PFN_xrSetViewOffsetVARJO pfn_xrSetViewOffsetVARJO = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float offset) {
+    if (!pfn_xrSetViewOffsetVARJO) {
+        get_runtime().get_function_table().get_function("xrSetViewOffsetVARJO", pfn_xrSetViewOffsetVARJO);
+        if (!pfn_xrSetViewOffsetVARJO) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSetViewOffsetVARJO(session, offset);
+        return pfn_xrSetViewOffsetVARJO(session, offset);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSetViewOffsetVARJO: {}", e.what());
@@ -3167,9 +5239,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
 }
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
+static PFN_xrAcquireSwapchainImage pfn_xrAcquireSwapchainImage = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageAcquireInfo* acquireInfo, uint32_t* index) {
+    if (!pfn_xrAcquireSwapchainImage) {
+        get_runtime().get_function_table().get_function("xrAcquireSwapchainImage", pfn_xrAcquireSwapchainImage);
+        if (!pfn_xrAcquireSwapchainImage) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrAcquireSwapchainImage(swapchain, acquireInfo, index);
+        return pfn_xrAcquireSwapchainImage(swapchain, acquireInfo, index);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAcquireSwapchainImage: {}", e.what());
@@ -3177,9 +5256,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
     }
 }
 
+static PFN_xrApplyHapticFeedback pfn_xrApplyHapticFeedback = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo, const XrHapticBaseHeader* hapticFeedback) {
+    if (!pfn_xrApplyHapticFeedback) {
+        get_runtime().get_function_table().get_function("xrApplyHapticFeedback", pfn_xrApplyHapticFeedback);
+        if (!pfn_xrApplyHapticFeedback) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrApplyHapticFeedback(session, hapticActionInfo, hapticFeedback);
+        return pfn_xrApplyHapticFeedback(session, hapticActionInfo, hapticFeedback);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrApplyHapticFeedback: {}", e.what());
@@ -3187,9 +5273,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
     }
 }
 
+static PFN_xrAttachSessionActionSets pfn_xrAttachSessionActionSets = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, const XrSessionActionSetsAttachInfo* attachInfo) {
+    if (!pfn_xrAttachSessionActionSets) {
+        get_runtime().get_function_table().get_function("xrAttachSessionActionSets", pfn_xrAttachSessionActionSets);
+        if (!pfn_xrAttachSessionActionSets) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrAttachSessionActionSets(session, attachInfo);
+        return pfn_xrAttachSessionActionSets(session, attachInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrAttachSessionActionSets: {}", e.what());
@@ -3197,9 +5290,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
     }
 }
 
+static PFN_xrBeginFrame pfn_xrBeginFrame = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBeginInfo* frameBeginInfo) {
+    if (!pfn_xrBeginFrame) {
+        get_runtime().get_function_table().get_function("xrBeginFrame", pfn_xrBeginFrame);
+        if (!pfn_xrBeginFrame) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrBeginFrame(session, frameBeginInfo);
+        return pfn_xrBeginFrame(session, frameBeginInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginFrame: {}", e.what());
@@ -3207,9 +5307,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
     }
 }
 
+static PFN_xrBeginSession pfn_xrBeginSession = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSessionBeginInfo* beginInfo) {
+    if (!pfn_xrBeginSession) {
+        get_runtime().get_function_table().get_function("xrBeginSession", pfn_xrBeginSession);
+        if (!pfn_xrBeginSession) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrBeginSession(session, beginInfo);
+        return pfn_xrBeginSession(session, beginInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrBeginSession: {}", e.what());
@@ -3217,9 +5324,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
     }
 }
 
+static PFN_xrCreateAction pfn_xrCreateAction = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrActionCreateInfo* createInfo, XrAction* action) {
+    if (!pfn_xrCreateAction) {
+        get_runtime().get_function_table().get_function("xrCreateAction", pfn_xrCreateAction);
+        if (!pfn_xrCreateAction) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateAction(actionSet, createInfo, action);
+        return pfn_xrCreateAction(actionSet, createInfo, action);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateAction: {}", e.what());
@@ -3227,9 +5341,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
     }
 }
 
+static PFN_xrCreateActionSet pfn_xrCreateActionSet = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrActionSetCreateInfo* createInfo, XrActionSet* actionSet) {
+    if (!pfn_xrCreateActionSet) {
+        get_runtime().get_function_table().get_function("xrCreateActionSet", pfn_xrCreateActionSet);
+        if (!pfn_xrCreateActionSet) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateActionSet(instance, createInfo, actionSet);
+        return pfn_xrCreateActionSet(instance, createInfo, actionSet);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateActionSet: {}", e.what());
@@ -3237,9 +5358,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
     }
 }
 
+static PFN_xrCreateActionSpace pfn_xrCreateActionSpace = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrActionSpaceCreateInfo* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateActionSpace) {
+        get_runtime().get_function_table().get_function("xrCreateActionSpace", pfn_xrCreateActionSpace);
+        if (!pfn_xrCreateActionSpace) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateActionSpace(session, createInfo, space);
+        return pfn_xrCreateActionSpace(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateActionSpace: {}", e.what());
@@ -3247,9 +5375,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
     }
 }
 
+static PFN_xrCreateInstance pfn_xrCreateInstance = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* createInfo, XrInstance* instance) {
+    if (!pfn_xrCreateInstance) {
+        get_runtime().get_function_table().get_function("xrCreateInstance", pfn_xrCreateInstance);
+        if (!pfn_xrCreateInstance) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateInstance(createInfo, instance);
+        return pfn_xrCreateInstance(createInfo, instance);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateInstance: {}", e.what());
@@ -3257,9 +5392,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     }
 }
 
+static PFN_xrCreateReferenceSpace pfn_xrCreateReferenceSpace = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const XrReferenceSpaceCreateInfo* createInfo, XrSpace* space) {
+    if (!pfn_xrCreateReferenceSpace) {
+        get_runtime().get_function_table().get_function("xrCreateReferenceSpace", pfn_xrCreateReferenceSpace);
+        if (!pfn_xrCreateReferenceSpace) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateReferenceSpace(session, createInfo, space);
+        return pfn_xrCreateReferenceSpace(session, createInfo, space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateReferenceSpace: {}", e.what());
@@ -3267,9 +5409,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
     }
 }
 
+static PFN_xrCreateSession pfn_xrCreateSession = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSessionCreateInfo* createInfo, XrSession* session) {
+    if (!pfn_xrCreateSession) {
+        get_runtime().get_function_table().get_function("xrCreateSession", pfn_xrCreateSession);
+        if (!pfn_xrCreateSession) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSession(instance, createInfo, session);
+        return pfn_xrCreateSession(instance, createInfo, session);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSession: {}", e.what());
@@ -3277,9 +5426,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
     }
 }
 
+static PFN_xrCreateSwapchain pfn_xrCreateSwapchain = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwapchainCreateInfo* createInfo, XrSwapchain* swapchain) {
+    if (!pfn_xrCreateSwapchain) {
+        get_runtime().get_function_table().get_function("xrCreateSwapchain", pfn_xrCreateSwapchain);
+        if (!pfn_xrCreateSwapchain) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrCreateSwapchain(session, createInfo, swapchain);
+        return pfn_xrCreateSwapchain(session, createInfo, swapchain);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrCreateSwapchain: {}", e.what());
@@ -3287,9 +5443,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
     }
 }
 
+static PFN_xrDestroyAction pfn_xrDestroyAction = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
+    if (!pfn_xrDestroyAction) {
+        get_runtime().get_function_table().get_function("xrDestroyAction", pfn_xrDestroyAction);
+        if (!pfn_xrDestroyAction) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyAction(action);
+        return pfn_xrDestroyAction(action);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyAction: {}", e.what());
@@ -3297,9 +5460,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
     }
 }
 
+static PFN_xrDestroyActionSet pfn_xrDestroyActionSet = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
+    if (!pfn_xrDestroyActionSet) {
+        get_runtime().get_function_table().get_function("xrDestroyActionSet", pfn_xrDestroyActionSet);
+        if (!pfn_xrDestroyActionSet) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyActionSet(actionSet);
+        return pfn_xrDestroyActionSet(actionSet);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyActionSet: {}", e.what());
@@ -3307,9 +5477,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
     }
 }
 
+static PFN_xrDestroyInstance pfn_xrDestroyInstance = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
+    if (!pfn_xrDestroyInstance) {
+        get_runtime().get_function_table().get_function("xrDestroyInstance", pfn_xrDestroyInstance);
+        if (!pfn_xrDestroyInstance) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroyInstance(instance);
+        return pfn_xrDestroyInstance(instance);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroyInstance: {}", e.what());
@@ -3317,9 +5494,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
     }
 }
 
+static PFN_xrDestroySession pfn_xrDestroySession = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
+    if (!pfn_xrDestroySession) {
+        get_runtime().get_function_table().get_function("xrDestroySession", pfn_xrDestroySession);
+        if (!pfn_xrDestroySession) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySession(session);
+        return pfn_xrDestroySession(session);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySession: {}", e.what());
@@ -3327,9 +5511,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
     }
 }
 
+static PFN_xrDestroySpace pfn_xrDestroySpace = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
+    if (!pfn_xrDestroySpace) {
+        get_runtime().get_function_table().get_function("xrDestroySpace", pfn_xrDestroySpace);
+        if (!pfn_xrDestroySpace) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySpace(space);
+        return pfn_xrDestroySpace(space);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySpace: {}", e.what());
@@ -3337,9 +5528,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
     }
 }
 
+static PFN_xrDestroySwapchain pfn_xrDestroySwapchain = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
+    if (!pfn_xrDestroySwapchain) {
+        get_runtime().get_function_table().get_function("xrDestroySwapchain", pfn_xrDestroySwapchain);
+        if (!pfn_xrDestroySwapchain) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrDestroySwapchain(swapchain);
+        return pfn_xrDestroySwapchain(swapchain);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrDestroySwapchain: {}", e.what());
@@ -3347,9 +5545,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
     }
 }
 
+static PFN_xrEndFrame pfn_xrEndFrame = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInfo* frameEndInfo) {
+    if (!pfn_xrEndFrame) {
+        get_runtime().get_function_table().get_function("xrEndFrame", pfn_xrEndFrame);
+        if (!pfn_xrEndFrame) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEndFrame(session, frameEndInfo);
+        return pfn_xrEndFrame(session, frameEndInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEndFrame: {}", e.what());
@@ -3357,9 +5562,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
     }
 }
 
+static PFN_xrEndSession pfn_xrEndSession = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
+    if (!pfn_xrEndSession) {
+        get_runtime().get_function_table().get_function("xrEndSession", pfn_xrEndSession);
+        if (!pfn_xrEndSession) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEndSession(session);
+        return pfn_xrEndSession(session);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEndSession: {}", e.what());
@@ -3367,9 +5579,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
     }
 }
 
+static PFN_xrEnumerateApiLayerProperties pfn_xrEnumerateApiLayerProperties = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrApiLayerProperties* properties) {
+    if (!pfn_xrEnumerateApiLayerProperties) {
+        get_runtime().get_function_table().get_function("xrEnumerateApiLayerProperties", pfn_xrEnumerateApiLayerProperties);
+        if (!pfn_xrEnumerateApiLayerProperties) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateApiLayerProperties(propertyCapacityInput, propertyCountOutput, properties);
+        return pfn_xrEnumerateApiLayerProperties(propertyCapacityInput, propertyCountOutput, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateApiLayerProperties: {}", e.what());
@@ -3377,9 +5596,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
     }
 }
 
+static PFN_xrEnumerateBoundSourcesForAction pfn_xrEnumerateBoundSourcesForAction = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession session, const XrBoundSourcesForActionEnumerateInfo* enumerateInfo, uint32_t sourceCapacityInput, uint32_t* sourceCountOutput, XrPath* sources) {
+    if (!pfn_xrEnumerateBoundSourcesForAction) {
+        get_runtime().get_function_table().get_function("xrEnumerateBoundSourcesForAction", pfn_xrEnumerateBoundSourcesForAction);
+        if (!pfn_xrEnumerateBoundSourcesForAction) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateBoundSourcesForAction(session, enumerateInfo, sourceCapacityInput, sourceCountOutput, sources);
+        return pfn_xrEnumerateBoundSourcesForAction(session, enumerateInfo, sourceCapacityInput, sourceCountOutput, sources);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateBoundSourcesForAction: {}", e.what());
@@ -3387,9 +5613,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
     }
 }
 
+static PFN_xrEnumerateEnvironmentBlendModes pfn_xrEnumerateEnvironmentBlendModes = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t environmentBlendModeCapacityInput, uint32_t* environmentBlendModeCountOutput, XrEnvironmentBlendMode* environmentBlendModes) {
+    if (!pfn_xrEnumerateEnvironmentBlendModes) {
+        get_runtime().get_function_table().get_function("xrEnumerateEnvironmentBlendModes", pfn_xrEnumerateEnvironmentBlendModes);
+        if (!pfn_xrEnumerateEnvironmentBlendModes) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateEnvironmentBlendModes(instance, systemId, viewConfigurationType, environmentBlendModeCapacityInput, environmentBlendModeCountOutput, environmentBlendModes);
+        return pfn_xrEnumerateEnvironmentBlendModes(instance, systemId, viewConfigurationType, environmentBlendModeCapacityInput, environmentBlendModeCountOutput, environmentBlendModes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateEnvironmentBlendModes: {}", e.what());
@@ -3397,9 +5630,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
     }
 }
 
+static PFN_xrEnumerateInstanceExtensionProperties pfn_xrEnumerateInstanceExtensionProperties = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
+    if (!pfn_xrEnumerateInstanceExtensionProperties) {
+        get_runtime().get_function_table().get_function("xrEnumerateInstanceExtensionProperties", pfn_xrEnumerateInstanceExtensionProperties);
+        if (!pfn_xrEnumerateInstanceExtensionProperties) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateInstanceExtensionProperties(layerName, propertyCapacityInput, propertyCountOutput, properties);
+        return pfn_xrEnumerateInstanceExtensionProperties(layerName, propertyCapacityInput, propertyCountOutput, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateInstanceExtensionProperties: {}", e.what());
@@ -3407,9 +5647,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
     }
 }
 
+static PFN_xrEnumerateReferenceSpaces pfn_xrEnumerateReferenceSpaces = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uint32_t spaceCapacityInput, uint32_t* spaceCountOutput, XrReferenceSpaceType* spaces) {
+    if (!pfn_xrEnumerateReferenceSpaces) {
+        get_runtime().get_function_table().get_function("xrEnumerateReferenceSpaces", pfn_xrEnumerateReferenceSpaces);
+        if (!pfn_xrEnumerateReferenceSpaces) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateReferenceSpaces(session, spaceCapacityInput, spaceCountOutput, spaces);
+        return pfn_xrEnumerateReferenceSpaces(session, spaceCapacityInput, spaceCountOutput, spaces);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateReferenceSpaces: {}", e.what());
@@ -3417,9 +5664,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
     }
 }
 
+static PFN_xrEnumerateSwapchainFormats pfn_xrEnumerateSwapchainFormats = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, uint32_t formatCapacityInput, uint32_t* formatCountOutput, int64_t* formats) {
+    if (!pfn_xrEnumerateSwapchainFormats) {
+        get_runtime().get_function_table().get_function("xrEnumerateSwapchainFormats", pfn_xrEnumerateSwapchainFormats);
+        if (!pfn_xrEnumerateSwapchainFormats) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateSwapchainFormats(session, formatCapacityInput, formatCountOutput, formats);
+        return pfn_xrEnumerateSwapchainFormats(session, formatCapacityInput, formatCountOutput, formats);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSwapchainFormats: {}", e.what());
@@ -3427,9 +5681,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
     }
 }
 
+static PFN_xrEnumerateSwapchainImages pfn_xrEnumerateSwapchainImages = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
+    if (!pfn_xrEnumerateSwapchainImages) {
+        get_runtime().get_function_table().get_function("xrEnumerateSwapchainImages", pfn_xrEnumerateSwapchainImages);
+        if (!pfn_xrEnumerateSwapchainImages) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateSwapchainImages(swapchain, imageCapacityInput, imageCountOutput, images);
+        return pfn_xrEnumerateSwapchainImages(swapchain, imageCapacityInput, imageCountOutput, images);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateSwapchainImages: {}", e.what());
@@ -3437,9 +5698,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
     }
 }
 
+static PFN_xrEnumerateViewConfigurationViews pfn_xrEnumerateViewConfigurationViews = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrViewConfigurationView* views) {
+    if (!pfn_xrEnumerateViewConfigurationViews) {
+        get_runtime().get_function_table().get_function("xrEnumerateViewConfigurationViews", pfn_xrEnumerateViewConfigurationViews);
+        if (!pfn_xrEnumerateViewConfigurationViews) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateViewConfigurationViews(instance, systemId, viewConfigurationType, viewCapacityInput, viewCountOutput, views);
+        return pfn_xrEnumerateViewConfigurationViews(instance, systemId, viewConfigurationType, viewCapacityInput, viewCountOutput, views);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViewConfigurationViews: {}", e.what());
@@ -3447,9 +5715,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
     }
 }
 
+static PFN_xrEnumerateViewConfigurations pfn_xrEnumerateViewConfigurations = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance, XrSystemId systemId, uint32_t viewConfigurationTypeCapacityInput, uint32_t* viewConfigurationTypeCountOutput, XrViewConfigurationType* viewConfigurationTypes) {
+    if (!pfn_xrEnumerateViewConfigurations) {
+        get_runtime().get_function_table().get_function("xrEnumerateViewConfigurations", pfn_xrEnumerateViewConfigurations);
+        if (!pfn_xrEnumerateViewConfigurations) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrEnumerateViewConfigurations(instance, systemId, viewConfigurationTypeCapacityInput, viewConfigurationTypeCountOutput, viewConfigurationTypes);
+        return pfn_xrEnumerateViewConfigurations(instance, systemId, viewConfigurationTypeCapacityInput, viewConfigurationTypeCountOutput, viewConfigurationTypes);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrEnumerateViewConfigurations: {}", e.what());
@@ -3457,9 +5732,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
     }
 }
 
+static PFN_xrGetActionStateBoolean pfn_xrGetActionStateBoolean = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateBoolean* state) {
+    if (!pfn_xrGetActionStateBoolean) {
+        get_runtime().get_function_table().get_function("xrGetActionStateBoolean", pfn_xrGetActionStateBoolean);
+        if (!pfn_xrGetActionStateBoolean) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetActionStateBoolean(session, getInfo, state);
+        return pfn_xrGetActionStateBoolean(session, getInfo, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateBoolean: {}", e.what());
@@ -3467,9 +5749,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
     }
 }
 
+static PFN_xrGetActionStateFloat pfn_xrGetActionStateFloat = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateFloat* state) {
+    if (!pfn_xrGetActionStateFloat) {
+        get_runtime().get_function_table().get_function("xrGetActionStateFloat", pfn_xrGetActionStateFloat);
+        if (!pfn_xrGetActionStateFloat) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetActionStateFloat(session, getInfo, state);
+        return pfn_xrGetActionStateFloat(session, getInfo, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateFloat: {}", e.what());
@@ -3477,9 +5766,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
     }
 }
 
+static PFN_xrGetActionStatePose pfn_xrGetActionStatePose = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStatePose* state) {
+    if (!pfn_xrGetActionStatePose) {
+        get_runtime().get_function_table().get_function("xrGetActionStatePose", pfn_xrGetActionStatePose);
+        if (!pfn_xrGetActionStatePose) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetActionStatePose(session, getInfo, state);
+        return pfn_xrGetActionStatePose(session, getInfo, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStatePose: {}", e.what());
@@ -3487,9 +5783,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
     }
 }
 
+static PFN_xrGetActionStateVector2f pfn_xrGetActionStateVector2f = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateVector2f* state) {
+    if (!pfn_xrGetActionStateVector2f) {
+        get_runtime().get_function_table().get_function("xrGetActionStateVector2f", pfn_xrGetActionStateVector2f);
+        if (!pfn_xrGetActionStateVector2f) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetActionStateVector2f(session, getInfo, state);
+        return pfn_xrGetActionStateVector2f(session, getInfo, state);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetActionStateVector2f: {}", e.what());
@@ -3497,9 +5800,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
     }
 }
 
+static PFN_xrGetCurrentInteractionProfile pfn_xrGetCurrentInteractionProfile = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session, XrPath topLevelUserPath, XrInteractionProfileState* interactionProfile) {
+    if (!pfn_xrGetCurrentInteractionProfile) {
+        get_runtime().get_function_table().get_function("xrGetCurrentInteractionProfile", pfn_xrGetCurrentInteractionProfile);
+        if (!pfn_xrGetCurrentInteractionProfile) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetCurrentInteractionProfile(session, topLevelUserPath, interactionProfile);
+        return pfn_xrGetCurrentInteractionProfile(session, topLevelUserPath, interactionProfile);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetCurrentInteractionProfile: {}", e.what());
@@ -3507,9 +5817,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
     }
 }
 
+static PFN_xrGetInputSourceLocalizedName pfn_xrGetInputSourceLocalizedName = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, const XrInputSourceLocalizedNameGetInfo* getInfo, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrGetInputSourceLocalizedName) {
+        get_runtime().get_function_table().get_function("xrGetInputSourceLocalizedName", pfn_xrGetInputSourceLocalizedName);
+        if (!pfn_xrGetInputSourceLocalizedName) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetInputSourceLocalizedName(session, getInfo, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrGetInputSourceLocalizedName(session, getInfo, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetInputSourceLocalizedName: {}", e.what());
@@ -3517,9 +5834,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
     }
 }
 
+static PFN_xrGetInstanceProperties pfn_xrGetInstanceProperties = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrInstanceProperties* instanceProperties) {
+    if (!pfn_xrGetInstanceProperties) {
+        get_runtime().get_function_table().get_function("xrGetInstanceProperties", pfn_xrGetInstanceProperties);
+        if (!pfn_xrGetInstanceProperties) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetInstanceProperties(instance, instanceProperties);
+        return pfn_xrGetInstanceProperties(instance, instanceProperties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetInstanceProperties: {}", e.what());
@@ -3527,9 +5851,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
     }
 }
 
+static PFN_xrGetReferenceSpaceBoundsRect pfn_xrGetReferenceSpaceBoundsRect = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, XrReferenceSpaceType referenceSpaceType, XrExtent2Df* bounds) {
+    if (!pfn_xrGetReferenceSpaceBoundsRect) {
+        get_runtime().get_function_table().get_function("xrGetReferenceSpaceBoundsRect", pfn_xrGetReferenceSpaceBoundsRect);
+        if (!pfn_xrGetReferenceSpaceBoundsRect) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetReferenceSpaceBoundsRect(session, referenceSpaceType, bounds);
+        return pfn_xrGetReferenceSpaceBoundsRect(session, referenceSpaceType, bounds);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetReferenceSpaceBoundsRect: {}", e.what());
@@ -3537,9 +5868,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
     }
 }
 
+static PFN_xrGetSystem pfn_xrGetSystem = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGetInfo* getInfo, XrSystemId* systemId) {
+    if (!pfn_xrGetSystem) {
+        get_runtime().get_function_table().get_function("xrGetSystem", pfn_xrGetSystem);
+        if (!pfn_xrGetSystem) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSystem(instance, getInfo, systemId);
+        return pfn_xrGetSystem(instance, getInfo, systemId);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSystem: {}", e.what());
@@ -3547,9 +5885,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
     }
 }
 
+static PFN_xrGetSystemProperties pfn_xrGetSystemProperties = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSystemId systemId, XrSystemProperties* properties) {
+    if (!pfn_xrGetSystemProperties) {
+        get_runtime().get_function_table().get_function("xrGetSystemProperties", pfn_xrGetSystemProperties);
+        if (!pfn_xrGetSystemProperties) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetSystemProperties(instance, systemId, properties);
+        return pfn_xrGetSystemProperties(instance, systemId, properties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetSystemProperties: {}", e.what());
@@ -3557,9 +5902,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
     }
 }
 
+static PFN_xrGetViewConfigurationProperties pfn_xrGetViewConfigurationProperties = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, XrViewConfigurationProperties* configurationProperties) {
+    if (!pfn_xrGetViewConfigurationProperties) {
+        get_runtime().get_function_table().get_function("xrGetViewConfigurationProperties", pfn_xrGetViewConfigurationProperties);
+        if (!pfn_xrGetViewConfigurationProperties) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrGetViewConfigurationProperties(instance, systemId, viewConfigurationType, configurationProperties);
+        return pfn_xrGetViewConfigurationProperties(instance, systemId, viewConfigurationType, configurationProperties);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrGetViewConfigurationProperties: {}", e.what());
@@ -3567,9 +5919,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
     }
 }
 
+static PFN_xrLocateSpace pfn_xrLocateSpace = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, XrTime time, XrSpaceLocation* location) {
+    if (!pfn_xrLocateSpace) {
+        get_runtime().get_function_table().get_function("xrLocateSpace", pfn_xrLocateSpace);
+        if (!pfn_xrLocateSpace) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateSpace(space, baseSpace, time, location);
+        return pfn_xrLocateSpace(space, baseSpace, time, location);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSpace: {}", e.what());
@@ -3577,9 +5936,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
     }
 }
 
+static PFN_xrLocateSpaces pfn_xrLocateSpaces = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesLocateInfo* locateInfo, XrSpaceLocations* spaceLocations) {
+    if (!pfn_xrLocateSpaces) {
+        get_runtime().get_function_table().get_function("xrLocateSpaces", pfn_xrLocateSpaces);
+        if (!pfn_xrLocateSpaces) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateSpaces(session, locateInfo, spaceLocations);
+        return pfn_xrLocateSpaces(session, locateInfo, spaceLocations);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateSpaces: {}", e.what());
@@ -3587,9 +5953,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
     }
 }
 
+static PFN_xrLocateViews pfn_xrLocateViews = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLocateInfo* viewLocateInfo, XrViewState* viewState, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrView* views) {
+    if (!pfn_xrLocateViews) {
+        get_runtime().get_function_table().get_function("xrLocateViews", pfn_xrLocateViews);
+        if (!pfn_xrLocateViews) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrLocateViews(session, viewLocateInfo, viewState, viewCapacityInput, viewCountOutput, views);
+        return pfn_xrLocateViews(session, viewLocateInfo, viewState, viewCapacityInput, viewCountOutput, views);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrLocateViews: {}", e.what());
@@ -3597,9 +5970,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
     }
 }
 
+static PFN_xrPathToString pfn_xrPathToString = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+    if (!pfn_xrPathToString) {
+        get_runtime().get_function_table().get_function("xrPathToString", pfn_xrPathToString);
+        if (!pfn_xrPathToString) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPathToString(instance, path, bufferCapacityInput, bufferCountOutput, buffer);
+        return pfn_xrPathToString(instance, path, bufferCapacityInput, bufferCountOutput, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPathToString: {}", e.what());
@@ -3607,9 +5987,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
     }
 }
 
+static PFN_xrPollEvent pfn_xrPollEvent = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffer* eventData) {
+    if (!pfn_xrPollEvent) {
+        get_runtime().get_function_table().get_function("xrPollEvent", pfn_xrPollEvent);
+        if (!pfn_xrPollEvent) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrPollEvent(instance, eventData);
+        return pfn_xrPollEvent(instance, eventData);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrPollEvent: {}", e.what());
@@ -3617,9 +6004,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
     }
 }
 
+static PFN_xrReleaseSwapchainImage pfn_xrReleaseSwapchainImage = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageReleaseInfo* releaseInfo) {
+    if (!pfn_xrReleaseSwapchainImage) {
+        get_runtime().get_function_table().get_function("xrReleaseSwapchainImage", pfn_xrReleaseSwapchainImage);
+        if (!pfn_xrReleaseSwapchainImage) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrReleaseSwapchainImage(swapchain, releaseInfo);
+        return pfn_xrReleaseSwapchainImage(swapchain, releaseInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrReleaseSwapchainImage: {}", e.what());
@@ -3627,9 +6021,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
     }
 }
 
+static PFN_xrRequestExitSession pfn_xrRequestExitSession = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
+    if (!pfn_xrRequestExitSession) {
+        get_runtime().get_function_table().get_function("xrRequestExitSession", pfn_xrRequestExitSession);
+        if (!pfn_xrRequestExitSession) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrRequestExitSession(session);
+        return pfn_xrRequestExitSession(session);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrRequestExitSession: {}", e.what());
@@ -3637,9 +6038,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
     }
 }
 
+static PFN_xrResultToString pfn_xrResultToString = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult value, char buffer[XR_MAX_RESULT_STRING_SIZE]) {
+    if (!pfn_xrResultToString) {
+        get_runtime().get_function_table().get_function("xrResultToString", pfn_xrResultToString);
+        if (!pfn_xrResultToString) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrResultToString(instance, value, buffer);
+        return pfn_xrResultToString(instance, value, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrResultToString: {}", e.what());
@@ -3647,9 +6055,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
     }
 }
 
+static PFN_xrStopHapticFeedback pfn_xrStopHapticFeedback = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo) {
+    if (!pfn_xrStopHapticFeedback) {
+        get_runtime().get_function_table().get_function("xrStopHapticFeedback", pfn_xrStopHapticFeedback);
+        if (!pfn_xrStopHapticFeedback) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStopHapticFeedback(session, hapticActionInfo);
+        return pfn_xrStopHapticFeedback(session, hapticActionInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStopHapticFeedback: {}", e.what());
@@ -3657,9 +6072,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
     }
 }
 
+static PFN_xrStringToPath pfn_xrStringToPath = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* pathString, XrPath* path) {
+    if (!pfn_xrStringToPath) {
+        get_runtime().get_function_table().get_function("xrStringToPath", pfn_xrStringToPath);
+        if (!pfn_xrStringToPath) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStringToPath(instance, pathString, path);
+        return pfn_xrStringToPath(instance, pathString, path);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStringToPath: {}", e.what());
@@ -3667,9 +6089,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
     }
 }
 
+static PFN_xrStructureTypeToString pfn_xrStructureTypeToString = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE]) {
+    if (!pfn_xrStructureTypeToString) {
+        get_runtime().get_function_table().get_function("xrStructureTypeToString", pfn_xrStructureTypeToString);
+        if (!pfn_xrStructureTypeToString) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrStructureTypeToString(instance, value, buffer);
+        return pfn_xrStructureTypeToString(instance, value, buffer);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrStructureTypeToString: {}", e.what());
@@ -3677,9 +6106,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
     }
 }
 
+static PFN_xrSuggestInteractionProfileBindings pfn_xrSuggestInteractionProfileBindings = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance instance, const XrInteractionProfileSuggestedBinding* suggestedBindings) {
+    if (!pfn_xrSuggestInteractionProfileBindings) {
+        get_runtime().get_function_table().get_function("xrSuggestInteractionProfileBindings", pfn_xrSuggestInteractionProfileBindings);
+        if (!pfn_xrSuggestInteractionProfileBindings) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSuggestInteractionProfileBindings(instance, suggestedBindings);
+        return pfn_xrSuggestInteractionProfileBindings(instance, suggestedBindings);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSuggestInteractionProfileBindings: {}", e.what());
@@ -3687,9 +6123,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
     }
 }
 
+static PFN_xrSyncActions pfn_xrSyncActions = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsSyncInfo* syncInfo) {
+    if (!pfn_xrSyncActions) {
+        get_runtime().get_function_table().get_function("xrSyncActions", pfn_xrSyncActions);
+        if (!pfn_xrSyncActions) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrSyncActions(session, syncInfo);
+        return pfn_xrSyncActions(session, syncInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrSyncActions: {}", e.what());
@@ -3697,9 +6140,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
     }
 }
 
+static PFN_xrWaitFrame pfn_xrWaitFrame = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState) {
+    if (!pfn_xrWaitFrame) {
+        get_runtime().get_function_table().get_function("xrWaitFrame", pfn_xrWaitFrame);
+        if (!pfn_xrWaitFrame) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrWaitFrame(session, frameWaitInfo, frameState);
+        return pfn_xrWaitFrame(session, frameWaitInfo, frameState);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrWaitFrame: {}", e.what());
@@ -3707,9 +6157,16 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
     }
 }
 
+static PFN_xrWaitSwapchainImage pfn_xrWaitSwapchainImage = nullptr;
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo) {
+    if (!pfn_xrWaitSwapchainImage) {
+        get_runtime().get_function_table().get_function("xrWaitSwapchainImage", pfn_xrWaitSwapchainImage);
+        if (!pfn_xrWaitSwapchainImage) {
+            return XR_ERROR_RUNTIME_FAILURE; // function not in table
+        }
+    }
     try {
-        return runtime::xrWaitSwapchainImage(swapchain, waitInfo);
+        return pfn_xrWaitSwapchainImage(swapchain, waitInfo);
     }
     catch (const std::exception& e) {
         spdlog::error("Exception in xrWaitSwapchainImage: {}", e.what());

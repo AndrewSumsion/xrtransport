@@ -1,6 +1,6 @@
 <%namespace name="utils" file="utils.mako"/>\
-#ifndef XRTRANSPORT_CLIENT_DISPATCH_H
-#define XRTRANSPORT_CLIENT_DISPATCH_H
+#ifndef XRTRANSPORT_CLIENT_RPC_H
+#define XRTRANSPORT_CLIENT_RPC_H
 
 #include "xrtransport/transport/transport.h"
 
@@ -8,14 +8,14 @@
 
 namespace xrtransport {
 
-namespace runtime {
+namespace rpc {
 
 <%utils:for_grouped_functions args="function">\
 XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()};
 </%utils:for_grouped_functions>
 
-} // namespace runtime
+} // namespace rpc
 
 } // namespace xrtransport
 
-#endif // XRTRANSPORT_CLIENT_DISPATCH_H
+#endif // XRTRANSPORT_CLIENT_RPC_H
