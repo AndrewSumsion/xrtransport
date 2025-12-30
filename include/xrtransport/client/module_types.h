@@ -28,6 +28,8 @@ struct ModuleExtension {
     const char* const* function_names;
 };
 
+typedef void (*ModuleInstanceCallback)(XrInstance instance, PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr);
+
 /**
  * Used to return all the necessary data for a module in a single operation.
  */
@@ -36,6 +38,7 @@ struct ModuleInfo {
     const ModuleExtension* extensions;
     uint32_t num_functions;
     const ModuleLayerFunction* functions;
+    ModuleInstanceCallback instance_callback;
 };
 
 #endif // XRTRANSPORT_CLIENT_MODULE_TYPES_H

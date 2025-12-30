@@ -3,6 +3,7 @@
 
 #include "module_types.h"
 
+#include "xrtransport/transport/transport_c_api.h"
 #include "xrtransport/api.h"
 
 #include <openxr/openxr.h>
@@ -24,7 +25,9 @@ extern "C" {
  * This function must return a pointer to a ModuleInfo struct that contains all of this. The ModuleInfo and
  * all data it references must have a static storage lifetime -- no attempt to clean it up will be made.
  */
-XRTP_API_EXPORT void module_get_info(const ModuleInfo** info_out);
+XRTP_API_EXPORT void module_get_info(
+    xrtp_Transport transport,
+    const ModuleInfo** info_out);
 
 } // extern "C"
 

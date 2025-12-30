@@ -11,11 +11,19 @@
 #include "xrtransport/api.h"
 
 #include "openxr/openxr_loader_negotiation.h"
-#ifdef __ANDROID__
+
+#if defined(__ANDROID__)
 #include <jni.h>
 #define XR_USE_PLATFORM_ANDROID
-#include "openxr/openxr_platform.h"
 #endif
+
+#if defined(__linux__)
+#define XR_USE_TIMESPEC
+#elif defined(_WIN32)
+#define XR_USE_PLATFORM_WIN32
+#endif
+
+#include "openxr/openxr_platform.h"
 #include "openxr/openxr.h"
 
 #include <spdlog/spdlog.h>
@@ -29,36 +37,45 @@
 using namespace xrtransport;
 
 // different name to allow static, this symbol must not be exported per spec
+static PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr_next; // unused next layer
 static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(
     XrInstance                                  instance,
     const char*                                 name,
     PFN_xrVoidFunction*                         function);
+
+static PFN_xrEnumerateInstanceExtensionProperties pfn_xrEnumerateInstanceExtensionProperties_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl(
     const char*                                 layerName,
     uint32_t                                    propertyCapacityInput,
     uint32_t*                                   propertyCountOutput,
     XrExtensionProperties*                      properties);
+
+static PFN_xrCreateInstance pfn_xrCreateInstance_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(
     const XrInstanceCreateInfo*                 createInfo,
     XrInstance*                                 instance);
 
 // built-in extension functions
 #ifdef _WIN32
+static PFN_xrConvertWin32PerformanceCounterToTimeKHR pfn_xrConvertWin32PerformanceCounterToTimeKHR_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHRImpl(
     XrInstance                                  instance,
     const LARGE_INTEGER*                        performanceCounter,
     XrTime*                                     time);
 
+static PFN_xrConvertTimeToWin32PerformanceCounterKHR pfn_xrConvertTimeToWin32PerformanceCounterKHR_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHRImpl(
     XrInstance                                  instance,
     XrTime                                      time,
     LARGE_INTEGER*                              performanceCounter);
 #else
+static PFN_xrConvertTimespecTimeToTimeKHR pfn_xrConvertTimespecTimeToTimeKHR_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHRImpl(
     XrInstance                                  instance,
     const struct timespec*                      timespecTime,
     XrTime*                                     time);
 
+static PFN_xrConvertTimeToTimespecTimeKHR pfn_xrConvertTimeToTimespecTimeKHR_next;
 static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
     XrInstance                                  instance,
     XrTime                                      time,
@@ -68,20 +85,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
 // custom xrtransport functions for API layers
 static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out);
 
-static const std::unordered_map<std::string, PFN_xrVoidFunction> built_in_functions = {
-    {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl},
-    {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrEnumerateInstanceExtensionPropertiesImpl},
-    {"xrCreateInstance", (PFN_xrVoidFunction)xrCreateInstanceImpl},
-    {"xrtransportGetTransport", (PFN_xrVoidFunction)xrtransportGetTransport},
-#ifdef _WIN32
-    {"xrConvertWin32PerformanceCounterToTimeKHR", (PFN_xrVoidFunction)xrConvertWin32PerformanceCounterToTimeKHRImpl},
-    {"xrConvertTimeToWin32PerformanceCounterKHR", (PFN_xrVoidFunction)xrConvertTimeToWin32PerformanceCounterKHRImpl},
-#else
-    {"xrConvertTimespecTimeToTimeKHR", (PFN_xrVoidFunction)xrConvertTimespecTimeToTimeKHRImpl},
-    {"xrConvertTimeToTimespecTimeKHR", (PFN_xrVoidFunction)xrConvertTimeToTimespecTimeKHRImpl},
-#endif
-};
-
+static std::vector<ModuleInfo> modules_info;
 static std::unordered_map<std::string, ExtensionInfo> available_extensions;
 
 static XrInstance saved_instance = XR_NULL_HANDLE;
@@ -122,24 +126,17 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
 
-    if (built_in_functions.find(name_str) != built_in_functions.end()) {
-        // function found in built-in functions
-        *function = built_in_functions.at(name_str);
+    PFN_xrVoidFunction from_function_table{};
+    get_runtime().get_function_table().get_function(name_str, from_function_table);
+    if (from_function_table) {
+        *function = from_function_table;
         return XR_SUCCESS;
     }
     else {
-        PFN_xrVoidFunction from_function_table{};
-        get_runtime().get_function_table().get_function(name_str, from_function_table);
-        if (from_function_table) {
-            *function = from_function_table;
-            return XR_SUCCESS;
-        }
-        else {
-            // somehow the function was not in either table, but *was* in available_functions.
-            // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
-            spdlog::warn("Function was marked available, but is not in function table");
-            return XR_ERROR_FUNCTION_UNSUPPORTED;
-        }
+        // somehow the function was not in either table, but *was* in available_functions.
+        // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
+        spdlog::warn("Function was marked available, but is not in function table");
+        return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
 }
 
@@ -257,14 +254,35 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     XrResult result = rpc::xrCreateInstance(create_info, instance);
     if (XR_SUCCEEDED(result)) {
         saved_instance = *instance;
+
         // now that instance has been created, synchronization can start
         enable_synchronization();
+
+        // run instance callback on all modules
+        for (const auto& module_info : modules_info) {
+            module_info.instance_callback(saved_instance, xrGetInstanceProcAddrImpl);
+        }
     }
     else {
         // If instance creation failed, no functions are available
         available_functions.clear();
     }
     return result;
+}
+
+static void layer_built_in_functions(FunctionTable& function_table) {
+    function_table.add_function_layer("xrGetInstanceProcAddr", xrGetInstanceProcAddrImpl, pfn_xrGetInstanceProcAddr_next);
+    function_table.add_function_layer("xrEnumerateInstanceExtensionProperties", xrEnumerateInstanceExtensionPropertiesImpl, pfn_xrEnumerateInstanceExtensionProperties_next);
+    function_table.add_function_layer("xrCreateInstance", xrCreateInstanceImpl, pfn_xrCreateInstance_next);
+#ifdef _WIN32
+    function_table.add_function_layer("xrConvertWin32PerformanceCounterToTimeKHR", xrConvertWin32PerformanceCounterToTimeKHRImpl, pfn_xrConvertWin32PerformanceCounterToTimeKHR_next);
+    function_table.add_function_layer("xrConvertTimeToWin32PerformanceCounterKHR", xrConvertTimeToWin32PerformanceCounterKHRImpl, pfn_xrConvertTimeToWin32PerformanceCounterKHR_next);
+#else
+    function_table.add_function_layer("xrConvertTimespecTimeToTimeKHR", xrConvertTimespecTimeToTimeKHRImpl, pfn_xrConvertTimespecTimeToTimeKHR_next);
+    function_table.add_function_layer("xrConvertTimeToTimespecTimeKHR", xrConvertTimeToTimespecTimeKHRImpl, pfn_xrConvertTimeToTimespecTimeKHR_next);
+#endif
+    XrResult (XRAPI_PTR *dummy_next)(xrtp_Transport*);
+    function_table.add_function_layer("xrtransportGetTransport", xrtransportGetTransport, dummy_next);
 }
 
 static void layer_module_functions(FunctionTable& function_table, const std::vector<ModuleInfo>& modules_info) {
@@ -295,9 +313,10 @@ extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface
     // Initialize function table
     auto& function_table = get_runtime().get_function_table();
     function_table.init_with_rpc_functions();
+    layer_built_in_functions(function_table);
 
     // Load modules
-    std::vector<ModuleInfo> modules_info = load_modules();
+    modules_info = load_modules(get_runtime().get_transport().get_handle());
 
     // Collect available extensions
     available_extensions = collect_available_extensions(modules_info);

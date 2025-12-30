@@ -2,6 +2,7 @@
 #define XRTRANSPORT_CLIENT_MODULE_LOADER_H
 
 #include "xrtransport/client/module_types.h"
+#include "xrtransport/transport/transport_c_api.h"
 
 #include "function_table.h"
 
@@ -11,7 +12,7 @@
 
 namespace xrtransport {
 
-std::vector<ModuleInfo> load_modules();
+std::vector<ModuleInfo> load_modules(xrtp_Transport transport);
 
 } // namespace xrtransport
 

@@ -1,5 +1,7 @@
 #include "module_loader.h"
 
+#include "xrtransport/transport/transport_c_api.h"
+
 #include <spdlog/spdlog.h>
 
 // dll loading
@@ -22,7 +24,7 @@ namespace fs = std::filesystem;
 
 namespace xrtransport {
 
-typedef void (*PFN_module_get_info)(const ModuleInfo** info_out);
+typedef void (*PFN_module_get_info)(xrtp_Transport transport, const ModuleInfo** info_out);
 
 static std::optional<fs::path> get_runtime_folder() {
 #if defined(_WIN32)
@@ -81,7 +83,7 @@ static PFN_module_get_info load_module(fs::path module_path) {
 
 static bool modules_loaded = false;
 
-std::vector<ModuleInfo> load_modules() {
+std::vector<ModuleInfo> load_modules(xrtp_Transport transport) {
     if (modules_loaded) {
         throw std::runtime_error("Attempted to load modules twice");
     }
@@ -104,7 +106,7 @@ std::vector<ModuleInfo> load_modules() {
         auto pfn_module_get_info = load_module(entry.path());
 
         const ModuleInfo* p_module_info{};
-        pfn_module_get_info(&p_module_info);
+        pfn_module_get_info(transport, &p_module_info);
         if (!p_module_info) {
             spdlog::error("Module at {} returned null ModuleInfo", entry.path().c_str());
         }
