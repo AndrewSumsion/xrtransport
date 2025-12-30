@@ -18,6 +18,9 @@
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <cassert>
+#include <algorithm>
+#include <string_view>
 
 using asio::ip::tcp;
 using asio::local::stream_protocol;
@@ -63,25 +66,34 @@ std::string exe_path() {
 #endif
 }
 
+static inline bool is_filename_module(std::string_view filename) {
+#ifdef _WIN32
+    constexpr std::string_view module_prefix = "module_";
+    constexpr std::string_view module_ext = ".dll";
+#elif __linux__
+    constexpr std::string_view module_prefix = "libmodule_";
+    constexpr std::string_view module_ext = ".so";
+#endif
+    bool prefix_matches = filename.size() >= module_prefix.size()
+        && std::equal(module_prefix.begin(), module_prefix.end(), filename.begin());
+    bool ext_matches = filename.size() >= module_ext.size()
+        && std::equal(module_ext.rbegin(), module_ext.rend(), filename.rbegin());
+    
+    return prefix_matches && ext_matches;
+}
+
 static std::vector<std::string> collect_module_paths() {
     namespace fs = std::filesystem;
-    fs::path modules_dir = fs::path(exe_path()) / "modules";
-#ifdef _WIN32
-    fs::path module_ext = fs::path(".dll");
-#elif __linux__
-    fs::path module_ext = fs::path(".so");
-#endif
+    fs::path exe_dir = fs::path(exe_path());
 
     std::vector<std::string> results;
 
-    if (!fs::exists(modules_dir) || !fs::is_directory(modules_dir)) {
-        return results; // empty
-    }
+    assert(fs::exists(exe_dir) && fs::is_directory(exe_dir));
 
-    for (const auto& entry : fs::directory_iterator(modules_dir)) {
+    for (const auto& entry : fs::directory_iterator(exe_dir)) {
         if (!entry.is_regular_file()) continue;
         const fs::path& p = entry.path();
-        if (p.extension() != module_ext) continue;
+        if (!is_filename_module(entry.path().filename().string())) continue;
         results.push_back(p.string());
     }
 

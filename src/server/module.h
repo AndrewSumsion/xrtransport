@@ -1,5 +1,5 @@
-#ifndef XRTRANSPORT_MODULE_H
-#define XRTRANSPORT_MODULE_H
+#ifndef XRTRANSPORT_SERVER_MODULE_H
+#define XRTRANSPORT_SERVER_MODULE_H
 
 #ifdef _WIN32
     #include <windows.h>
@@ -126,4 +126,4 @@ public:
 
 } // namespace xrtransport
 
-#endif // XRTRANSPORT_MODULE_H
+#endif // XRTRANSPORT_SERVER_MODULE_H

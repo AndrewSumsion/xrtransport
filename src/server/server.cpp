@@ -163,11 +163,11 @@ void Server::instance_handler(MessageLockIn msg_in) {
         module.get_required_extensions(&num_extensions, nullptr);
 
         // Get pointer to end of vector and resize
-        const char** end = enabled_extensions.data() + enabled_extensions.size();
-        enabled_extensions.resize(enabled_extensions.size() + num_extensions);
+        auto old_size = enabled_extensions.size();
+        enabled_extensions.resize(old_size + num_extensions);
 
         // Fill in new slots
-        module.get_required_extensions(&num_extensions, end);
+        module.get_required_extensions(&num_extensions, enabled_extensions.data() + old_size);
     }
 
     // Request timer extension

@@ -1,3 +1,42 @@
+#error
+/**
+ * Functions are not layered onto the function table until the instance is created because there
+ * can be some extensions that only add layer functionality and don't expose their own functions,
+ * and the application needs to be able to pick and choose. (I think)
+ * 
+ * What is done:
+ * Helper that xrCreateInstance can call to layer on extension functions
+ * 
+ * What needs to be done:
+ * - Make the entry point (xrNegotiateLoaderRuntimeInterface) load the modules and save the LayerExtensions
+ * - Make xrCreateInstance apply the layers
+ * - Make xrCreateInstance add these extension's functions to the available functions set
+ * - Make xrEnumerateInstanceExtensionProperties return extensions from the list of LayerExtensions
+ * 
+ * Major rethink needed about xrGetInstanceProcAddr. If an extension provides a function that xrtransport
+ * was not compiled for, adding it to the function table won't make it magically work. It needs to be
+ * returned from xrGetInstanceProcAddr. That also means it can't throw exceptions because there is no catcher
+ * for it. Honestly I might just want to make the RPC functions catch their own exceptions, get rid of the
+ * extra catcher functions, and have xrGetInstanceProcAddr return functions straight from the function table.
+ * It is only a little bit of extra dilligence to rethrow errors when using rpc functions internally if needed.
+ * 
+ * Actually, the whole module thing needs a rethink because modules need to be able to layer on top of core
+ * functions like xrEnumerateSwapchainFormats, which are not part of an extension. I think it should just return
+ * a list of extensions to show up in xrEnumerate... and a set of layer functions which are applied immediately.
+ * Sigh... I really should have properly thought this through before working on it.
+ * 
+ * So to be explicit, new design:
+ * - Get rid of separate rpc/catcher generated functions, rpcs catch their own exceptions.
+ * - Make xrGetInstanceProcAddr return directly from the function table
+ * - Make modules provide extensions and functions that are separate from each other
+ *   - Functions are layered onto the dispatch table on xrNegotiateLoaderRuntimeInterface
+ *   - Extensions are exposed by xrEnumerate... and used to update available functions by xrCreateInstance
+ *     - This means the extensions still need to contain a list of function names to put into available
+ *       functions, but this is separate from the list of layered functions. In fact, the names of the
+ *       layered functions must be a superset of the per-extension list of functions.
+ * - Add error handling anywhere I use the rpcs internally
+ */
+
 #include "rpc.h"
 #include "exports.h"
 #include "available_extensions.h"
@@ -15,6 +54,8 @@
 #include "openxr/openxr_platform.h"
 #endif
 #include "openxr/openxr.h"
+
+#include <spdlog/spdlog.h>
 
 #include <unordered_map>
 #include <unordered_set>
@@ -143,6 +184,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
     else {
         // somehow the function was not in either table, but *was* in available_functions.
         // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
+        spdlog::warn("Function was marked available, but is not in exports table");
         return XR_ERROR_FUNCTION_UNSUPPORTED;
     }
 }
@@ -233,6 +275,8 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
                 available_functions.emplace(function_name);
             }
         }
+        // handle extensions provided by modules
+
         // handle other extensions
         else if (extension_functions.find(extension_name) != extension_functions.end()) {
             for (auto& function_name : extension_functions.at(extension_name)) {
