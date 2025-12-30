@@ -22,7 +22,7 @@ namespace fs = std::filesystem;
 
 namespace xrtransport {
 
-typedef void (*PFN_module_get_extensions)(uint32_t* capacity_out, LayerExtension* extensions_out);
+typedef void (*PFN_module_get_info)(const ModuleInfo** info_out);
 
 static std::optional<fs::path> get_runtime_folder() {
 #if defined(_WIN32)
@@ -64,7 +64,7 @@ static inline bool is_filename_module(std::string_view filename) {
     return prefix_matches && ext_matches;
 }
 
-static PFN_module_get_extensions load_module(fs::path module_path) {
+static PFN_module_get_info load_module(fs::path module_path) {
     // Note: this function intentionally doesn't provide any way to unload the modules.
     // they should be loaded for the duration of the program.
 
@@ -74,14 +74,14 @@ static PFN_module_get_extensions load_module(fs::path module_path) {
     #error TODO: implement
 #elif defined(__linux__)
     void* module = dlopen(module_path.c_str(), RTLD_LAZY);
-    auto result = reinterpret_cast<PFN_module_get_extensions>(dlsym(module, "module_get_extensions"));
+    auto result = reinterpret_cast<PFN_module_get_info>(dlsym(module, "module_get_info"));
     return result;
 #endif
 }
 
 static bool modules_loaded = false;
 
-std::vector<LayerExtension> load_modules() {
+std::vector<ModuleInfo> load_modules() {
     if (modules_loaded) {
         throw std::runtime_error("Attempted to load modules twice");
     }
@@ -95,42 +95,24 @@ std::vector<LayerExtension> load_modules() {
     fs::path runtime_folder = opt_runtime_folder.value();
     assert(fs::exists(runtime_folder) && fs::is_directory(runtime_folder));
 
-    std::vector<LayerExtension> result;
+    std::vector<ModuleInfo> result;
 
     for (const auto& entry : fs::directory_iterator(runtime_folder)) {
         if (!entry.is_regular_file()) continue;
         if (!is_filename_module(entry.path().filename().string())) continue;
 
-        auto pfn_module_get_extensions = load_module(entry.path());
+        auto pfn_module_get_info = load_module(entry.path());
 
-        uint32_t num_extensions{};
-        pfn_module_get_extensions(&num_extensions, nullptr);
-        auto old_size = result.size();
-        result.resize(old_size + num_extensions);
-        pfn_module_get_extensions(&num_extensions, result.data() + old_size);
+        const ModuleInfo* p_module_info{};
+        pfn_module_get_info(&p_module_info);
+        if (!p_module_info) {
+            spdlog::error("Module at {} returned null ModuleInfo", entry.path().c_str());
+        }
+        result.emplace_back(*p_module_info);
     }
 
     modules_loaded = true;
     return result;
-}
-
-static void apply_extension(FunctionTable& function_table, const LayerExtension& extension) {
-    for (uint32_t i = 0; i < extension.num_functions; i++) {
-        const auto& function = extension.functions[i];
-        function_table.add_function_layer(function.function_name, function.new_function, *function.old_function);
-    }
-}
-
-void apply_modules(FunctionTable& function_table, const XrInstanceCreateInfo& create_info, const std::vector<LayerExtension>& layer_extensions) {
-    for (uint32_t i = 0; i < create_info.enabledExtensionCount; i++) {
-        const char* extension_name = create_info.enabledExtensionNames[i];
-        // find all module extensions with this name and apply them in order
-        for (const auto& layer_extension : layer_extensions) {
-            if (strncmp(layer_extension.extension_name, extension_name, XR_MAX_EXTENSION_NAME_SIZE) != 0)
-                continue;
-            apply_extension(function_table, layer_extension);
-        }
-    }
 }
 
 } // namespace xrtransport

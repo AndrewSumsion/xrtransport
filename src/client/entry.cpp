@@ -1,49 +1,12 @@
-#error
-/**
- * Functions are not layered onto the function table until the instance is created because there
- * can be some extensions that only add layer functionality and don't expose their own functions,
- * and the application needs to be able to pick and choose. (I think)
- * 
- * What is done:
- * Helper that xrCreateInstance can call to layer on extension functions
- * 
- * What needs to be done:
- * - Make the entry point (xrNegotiateLoaderRuntimeInterface) load the modules and save the LayerExtensions
- * - Make xrCreateInstance apply the layers
- * - Make xrCreateInstance add these extension's functions to the available functions set
- * - Make xrEnumerateInstanceExtensionProperties return extensions from the list of LayerExtensions
- * 
- * Major rethink needed about xrGetInstanceProcAddr. If an extension provides a function that xrtransport
- * was not compiled for, adding it to the function table won't make it magically work. It needs to be
- * returned from xrGetInstanceProcAddr. That also means it can't throw exceptions because there is no catcher
- * for it. Honestly I might just want to make the RPC functions catch their own exceptions, get rid of the
- * extra catcher functions, and have xrGetInstanceProcAddr return functions straight from the function table.
- * It is only a little bit of extra dilligence to rethrow errors when using rpc functions internally if needed.
- * 
- * Actually, the whole module thing needs a rethink because modules need to be able to layer on top of core
- * functions like xrEnumerateSwapchainFormats, which are not part of an extension. I think it should just return
- * a list of extensions to show up in xrEnumerate... and a set of layer functions which are applied immediately.
- * Sigh... I really should have properly thought this through before working on it.
- * 
- * So to be explicit, new design:
- * - Get rid of separate rpc/catcher generated functions, rpcs catch their own exceptions.
- * - Make xrGetInstanceProcAddr return directly from the function table
- * - Make modules provide extensions and functions that are separate from each other
- *   - Functions are layered onto the dispatch table on xrNegotiateLoaderRuntimeInterface
- *   - Extensions are exposed by xrEnumerate... and used to update available functions by xrCreateInstance
- *     - This means the extensions still need to contain a list of function names to put into available
- *       functions, but this is separate from the list of layered functions. In fact, the names of the
- *       layered functions must be a superset of the per-extension list of functions.
- * - Add error handling anywhere I use the rpcs internally
- */
-
 #include "rpc.h"
-#include "exports.h"
+#include "function_table.h"
 #include "available_extensions.h"
 #include "runtime.h"
 #include "synchronization.h"
+#include "module_loader.h"
 
 #include "xrtransport/extensions/extension_functions.h"
+#include "xrtransport/client/module_types.h"
 #include "xrtransport/time.h"
 #include "xrtransport/api.h"
 
@@ -105,20 +68,6 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
 // custom xrtransport functions for API layers
 static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out);
 
-static const std::unordered_map<std::string, std::vector<std::string>> built_in_extensions = {
-#ifdef _WIN32
-    {"XR_KHR_win32_convert_performance_counter_time", {
-        "xrConvertWin32PerformanceCounterToTimeKHR",
-        "xrConvertTimeToWin32PerformanceCounterKHR",
-    }},
-#else
-    {"XR_KHR_convert_timespec_time", {
-        "xrConvertTimespecTimeToTimeKHR",
-        "xrConvertTimeToTimespecTimeKHR",
-    }},
-#endif
-};
-
 static const std::unordered_map<std::string, PFN_xrVoidFunction> built_in_functions = {
     {"xrGetInstanceProcAddr", (PFN_xrVoidFunction)xrGetInstanceProcAddrImpl},
     {"xrEnumerateInstanceExtensionProperties", (PFN_xrVoidFunction)xrEnumerateInstanceExtensionPropertiesImpl},
@@ -132,6 +81,8 @@ static const std::unordered_map<std::string, PFN_xrVoidFunction> built_in_functi
     {"xrConvertTimeToTimespecTimeKHR", (PFN_xrVoidFunction)xrConvertTimeToTimespecTimeKHRImpl},
 #endif
 };
+
+static std::unordered_map<std::string, ExtensionInfo> available_extensions;
 
 static XrInstance saved_instance = XR_NULL_HANDLE;
 static std::unordered_set<std::string> available_functions = {
@@ -176,16 +127,19 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProcAddrImpl(XrInstance insta
         *function = built_in_functions.at(name_str);
         return XR_SUCCESS;
     }
-    else if (function_exports_table.find(name_str) != function_exports_table.end()) {
-        // function found in dispatch table
-        *function = function_exports_table.at(name_str);
-        return XR_SUCCESS;
-    }
     else {
-        // somehow the function was not in either table, but *was* in available_functions.
-        // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
-        spdlog::warn("Function was marked available, but is not in exports table");
-        return XR_ERROR_FUNCTION_UNSUPPORTED;
+        PFN_xrVoidFunction from_function_table{};
+        get_runtime().get_function_table().get_function(name_str, from_function_table);
+        if (from_function_table) {
+            *function = from_function_table;
+            return XR_SUCCESS;
+        }
+        else {
+            // somehow the function was not in either table, but *was* in available_functions.
+            // this should never happen, but just return XR_ERROR_FUNCTION_UNSUPPORTED
+            spdlog::warn("Function was marked available, but is not in function table");
+            return XR_ERROR_FUNCTION_UNSUPPORTED;
+        }
     }
 }
 
@@ -196,8 +150,6 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl
         *propertyCountOutput = 0;
         return XR_SUCCESS;
     }
-
-    auto& available_extensions = get_available_extensions();
 
     uint32_t extension_count = available_extensions.size();
 
@@ -212,10 +164,10 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionPropertiesImpl
     }
 
     int i = 0;
-    for (const auto& [extension_name, extension_version] : available_extensions) {
+    for (const auto& [extension_name, extension_info] : available_extensions) {
         XrExtensionProperties& ext_out = properties[i++];
         std::memcpy(ext_out.extensionName, extension_name.c_str(), extension_name.size() + 1);
-        ext_out.extensionVersion = extension_version;
+        ext_out.extensionVersion = extension_info.version;
     }
 
     return XR_SUCCESS;
@@ -255,7 +207,6 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     }
 
     // check available extensions and populate available functions
-    auto& available_extensions = get_available_extensions();
 
     // first make sure all extensions are available
     for (int i = 0; i < create_info->enabledExtensionCount; i++) {
@@ -269,17 +220,8 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     for (int i = 0; i < create_info->enabledExtensionCount; i++) {
         std::string extension_name = create_info->enabledExtensionNames[i];
 
-        // handle built-in extensions
-        if (built_in_extensions.find(extension_name) != built_in_extensions.end()) {
-            for (auto& function_name : built_in_extensions.at(extension_name)) {
-                available_functions.emplace(function_name);
-            }
-        }
-        // handle extensions provided by modules
-
-        // handle other extensions
-        else if (extension_functions.find(extension_name) != extension_functions.end()) {
-            for (auto& function_name : extension_functions.at(extension_name)) {
+        if (available_extensions.find(extension_name) != available_extensions.end()) {
+            for (auto& function_name : available_extensions.at(extension_name).function_names) {
                 available_functions.emplace(function_name);
             }
         }
@@ -325,6 +267,15 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     return result;
 }
 
+static void layer_module_functions(FunctionTable& function_table, const std::vector<ModuleInfo>& modules_info) {
+    for (const auto& module_info : modules_info) {
+        for (uint32_t i = 0; i < module_info.num_functions; i++) {
+            const auto& function = module_info.functions[i];
+            function_table.add_function_layer(function.function_name, function.new_function, *function.old_function);
+        }
+    }
+}
+
 extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {
     if (!loaderInfo ||
         !runtimeRequest ||
@@ -344,6 +295,15 @@ extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface
     // Initialize function table
     auto& function_table = get_runtime().get_function_table();
     function_table.init_with_rpc_functions();
+
+    // Load modules
+    std::vector<ModuleInfo> modules_info = load_modules();
+
+    // Collect available extensions
+    available_extensions = collect_available_extensions(modules_info);
+
+    // Layer module functions onto function table
+    layer_module_functions(function_table, modules_info);
 
     runtimeRequest->getInstanceProcAddr = xrGetInstanceProcAddrImpl;
     runtimeRequest->runtimeInterfaceVersion = XR_CURRENT_LOADER_API_LAYER_VERSION;

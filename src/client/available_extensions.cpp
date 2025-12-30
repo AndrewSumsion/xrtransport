@@ -1,10 +1,12 @@
 #include "available_extensions.h"
 
 #include "xrtransport/extensions/enabled_extensions.h"
+#include "xrtransport/extensions/extension_functions.h"
 
-#include "exports.h"
+#include "rpc.h"
 
-#include "openxr/openxr.h"
+#include <openxr/openxr.h>
+#include <spdlog/spdlog.h>
 
 #include <unordered_map>
 #include <string>
@@ -16,15 +18,22 @@ using std::uint32_t;
 
 namespace xrtransport {
 
-static bool available_extensions_filled = false;
-static std::unordered_map<std::string, uint32_t> available_extensions;
+static std::unordered_map<std::string, ExtensionInfo> collect_rpc_available_extensions() {
+    std::unordered_map<std::string, ExtensionInfo> rpc_available_extensions;
 
-static void fill_available_extensions() {
+    XrResult result;
     uint32_t extension_count{};
-    // TODO: handle potential errors on these XR calls
-    exports::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
+    result = rpc::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
+    if (!XR_SUCCEEDED(result)) {
+        spdlog::error("Failed to enumerate server extensions: {}", result);
+        return rpc_available_extensions; // empty
+    }
     std::vector<XrExtensionProperties> extension_properties_vector(extension_count, {XR_TYPE_EXTENSION_PROPERTIES});
-    exports::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
+    result = rpc::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
+    if (!XR_SUCCEEDED(result)) {
+        spdlog::error("Failed to enumerate server extensions: {}", result);
+        return rpc_available_extensions; // empty
+    }
 
     for (auto& extension_properties : extension_properties_vector) {
         std::string extension_name(extension_properties.extensionName);
@@ -38,28 +47,67 @@ static void fill_available_extensions() {
         // OpenXR extensions are backwards-compatible, so choose the lowest common version
         uint32_t available_version = std::min(transport_version, server_version);
 
-        available_extensions.emplace(extension_name, available_version);
+        ExtensionInfo ext_info{available_version, extension_functions.at(extension_name)};
+
+        rpc_available_extensions.emplace(extension_name, std::move(ext_info));
     }
 
     // extensions built into the runtime
 #ifdef _WIN32
-    available_extensions.emplace("XR_KHR_win32_convert_performance_counter_time", 1);
+    rpc_available_extensions.emplace("XR_KHR_win32_convert_performance_counter_time", ExtensionInfo{
+        1,
+        {
+            "xrConvertWin32PerformanceCounterToTimeKHR",
+            "xrConvertTimeToWin32PerformanceCounterKHR",
+        }
+    });
 #else
-    available_extensions.emplace("XR_KHR_convert_timespec_time", 1);
+    ExtensionInfo asdf;
+    rpc_available_extensions.emplace("XR_KHR_convert_timespec_time", ExtensionInfo{
+        1,
+        {
+            "xrConvertTimespecTimeToTimeKHR",
+            "xrConvertTimeToTimespecTimeKHR",
+        }
+    });
 #endif
 #ifdef __ANDROID__
-    available_extensions.emplace("XR_KHR_android_create_instance", 3);
+    rpc_available_extensions.emplace("XR_KHR_android_create_instance", ExtensionInfo{3, {}});
 #endif
-    available_extensions.emplace("XR_EXT_debug_utils", 5);
-
-    available_extensions_filled = true;
+    rpc_available_extensions.emplace("XR_EXT_debug_utils", ExtensionInfo{
+        5,
+        {
+            // TODO: these need to be stubbed out. They are marked available here but not implemented
+            // yet, so attempting to get them will just return XR_ERROR_FUNCTION_UNSUPPORTED
+            "xrSetDebugUtilsObjectNameEXT",
+            "xrCreateDebugUtilsMessengerEXT",
+            "xrDestroyDebugUtilsMessengerEXT",
+            "xrSubmitDebugUtilsMessageEXT",
+            "xrSessionBeginDebugUtilsLabelRegionEXT",
+            "xrSessionEndDebugUtilsLabelRegionEXT",
+            "xrSessionInsertDebugUtilsLabelEXT"
+        }
+    });
 }
 
-std::unordered_map<std::string, std::uint32_t>& get_available_extensions() {
-    if (!available_extensions_filled) {
-        fill_available_extensions();
+std::unordered_map<std::string, ExtensionInfo> collect_available_extensions(std::vector<ModuleInfo> modules_info) {
+    // gather (runtime) available extensions and add extensions provided by modules.
+    // module extensions override ones provided by the runtime. If multiple modules define the same
+    // extension, the last one will overwrite the others, but this should be fine if they all define the
+    // same functions.
+    auto result = collect_rpc_available_extensions();
+    for (const auto& module_info : modules_info) {
+        for (uint32_t i = 0; i < module_info.num_extensions; i++) {
+            const ModuleExtension& extension = module_info.extensions[i];
+            std::vector<std::string> extension_functions;
+            for (uint32_t j = 0; j < extension.num_functions; j++) {
+                extension_functions.emplace_back(extension.function_names[j]);
+            }
+            result[extension.extension_name] = {extension.extension_version, extension_functions};
+        }
     }
-    return available_extensions;
+
+    return result;
 }
 
 } // namespace xrtransport

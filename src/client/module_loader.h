@@ -11,8 +11,7 @@
 
 namespace xrtransport {
 
-std::vector<LayerExtension> load_modules();
-void apply_modules(FunctionTable& function_table, const XrInstanceCreateInfo& create_info, const std::vector<LayerExtension>& layer_extensions);
+std::vector<ModuleInfo> load_modules();
 
 } // namespace xrtransport
 

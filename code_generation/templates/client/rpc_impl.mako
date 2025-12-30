@@ -18,7 +18,7 @@ namespace xrtransport {
 namespace rpc {
 
 <%utils:for_grouped_functions args="function">\
-XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
+XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -44,6 +44,10 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} {
     % endfor
 
     return result;
+}
+catch (const std::exception& e) {
+    spdlog::error("Exception in ${function.name}: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
 }
 
 </%utils:for_grouped_functions>

@@ -26,7 +26,7 @@ namespace xrtransport {
 namespace rpc {
 
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -49,10 +49,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetDigitalLensControlALMALENCE: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const XrBodyTrackerCreateInfoBD* createInfo, XrBodyTrackerBD* bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const XrBodyTrackerCreateInfoBD* createInfo, XrBodyTrackerBD* bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -77,8 +81,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateBodyTrackerBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -100,8 +108,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyBodyTrackerBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker, const XrBodyJointsLocateInfoBD* locateInfo, XrBodyJointLocationsBD* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker, const XrBodyJointsLocateInfoBD* locateInfo, XrBodyJointLocationsBD* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -126,10 +138,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateBodyJointsBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorCreateInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorCreateInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -154,8 +170,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSpatialAnchorCreateCompletionBD* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSpatialAnchorCreateCompletionBD* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -180,8 +200,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorPersistInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorPersistInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -206,8 +230,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPersistSpatialAnchorAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -232,8 +260,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPersistSpatialAnchorCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorUnpersistInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorUnpersistInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -258,8 +290,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUnpersistSpatialAnchorAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -284,10 +320,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUnpersistSpatialAnchorCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSharedSpatialAnchorDownloadInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSharedSpatialAnchorDownloadInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -312,8 +352,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDownloadSharedSpatialAnchorAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -338,8 +382,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDownloadSharedSpatialAnchorCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorShareInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorShareInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -364,8 +412,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrShareSpatialAnchorAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -390,10 +442,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrShareSpatialAnchorCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provider, const XrSceneCaptureInfoBD* info, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provider, const XrSceneCaptureInfoBD* info, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -418,8 +474,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCaptureSceneAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -444,10 +504,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCaptureSceneCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const XrAnchorSpaceCreateInfoBD* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const XrAnchorSpaceCreateInfoBD* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -472,8 +536,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateAnchorSpaceBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, const XrSenseDataProviderCreateInfoBD* createInfo, XrSenseDataProviderBD* provider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, const XrSenseDataProviderCreateInfoBD* createInfo, XrSenseDataProviderBD* provider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -498,8 +566,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSenseDataProviderBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProviderBD provider, const XrSpatialEntityAnchorCreateInfoBD* createInfo, XrAnchorBD* anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProviderBD provider, const XrSpatialEntityAnchorCreateInfoBD* createInfo, XrAnchorBD* anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -524,8 +596,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialEntityAnchorBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -547,8 +623,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyAnchorBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderBD provider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderBD provider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -570,8 +650,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySenseDataProviderBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotBD snapshot) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotBD snapshot) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -593,8 +677,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySenseDataSnapshotBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpatialEntityComponentTypeBD* componentTypes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpatialEntityComponentTypeBD* componentTypes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -622,8 +710,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateSpatialEntityComponentTypesBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* uuid) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* uuid) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -647,8 +739,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetAnchorUuidBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD snapshot, XrQueriedSenseDataGetInfoBD* getInfo, XrQueriedSenseDataBD* queriedSenseData) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD snapshot, XrQueriedSenseDataGetInfoBD* getInfo, XrQueriedSenseDataBD* queriedSenseData) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -674,8 +770,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetQueriedSenseDataBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProviderBD provider, XrSenseDataProviderStateBD* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProviderBD provider, XrSenseDataProviderStateBD* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -699,8 +799,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSenseDataProviderStateBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnapshotBD snapshot, const XrSpatialEntityComponentGetInfoBD* getInfo, XrSpatialEntityComponentDataBaseHeaderBD* componentData) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnapshotBD snapshot, const XrSpatialEntityComponentGetInfoBD* getInfo, XrSpatialEntityComponentDataBaseHeaderBD* componentData) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -725,8 +829,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpatialEntityComponentDataBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, XrUuidEXT* uuid) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, XrUuidEXT* uuid) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -751,8 +859,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpatialEntityUuidBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataQueryInfoBD* queryInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataQueryInfoBD* queryInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -777,8 +889,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySenseDataAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSenseDataQueryCompletionBD* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSenseDataQueryCompletionBD* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -803,8 +919,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySenseDataCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataProviderStartInfoBD* startInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataProviderStartInfoBD* startInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -829,8 +949,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStartSenseDataProviderAsyncBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession session, XrFutureEXT future, XrFutureCompletionEXT* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession session, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -855,8 +979,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStartSenseDataProviderCompleteBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD provider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD provider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -878,10 +1006,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStopSenseDataProviderBD: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -906,8 +1038,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetInputDeviceActiveEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -933,8 +1069,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetInputDeviceLocationEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -959,8 +1099,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetInputDeviceStateBoolEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -985,8 +1129,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetInputDeviceStateFloatEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1011,10 +1159,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetInputDeviceStateVector2fEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instance, const XrDebugUtilsMessengerCreateInfoEXT* createInfo, XrDebugUtilsMessengerEXT* messenger) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instance, const XrDebugUtilsMessengerCreateInfoEXT* createInfo, XrDebugUtilsMessengerEXT* messenger) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1040,8 +1192,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateDebugUtilsMessengerEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMessengerEXT messenger) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMessengerEXT messenger) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1063,8 +1219,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyDebugUtilsMessengerEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1087,8 +1247,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSessionBeginDebugUtilsLabelRegionEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession session) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession session) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1110,8 +1274,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSessionEndDebugUtilsLabelRegionEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1134,8 +1302,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSessionInsertDebugUtilsLabelEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance, const XrDebugUtilsObjectNameInfoEXT* nameInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance, const XrDebugUtilsObjectNameInfoEXT* nameInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1158,8 +1330,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetDebugUtilsObjectNameEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance, XrDebugUtilsMessageSeverityFlagsEXT messageSeverity, XrDebugUtilsMessageTypeFlagsEXT messageTypes, const XrDebugUtilsMessengerCallbackDataEXT* callbackData) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance, XrDebugUtilsMessageSeverityFlagsEXT messageSeverity, XrDebugUtilsMessageTypeFlagsEXT messageTypes, const XrDebugUtilsMessengerCallbackDataEXT* callbackData) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1186,10 +1362,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSubmitDebugUtilsMessageEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFutureCancelInfoEXT* cancelInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFutureCancelInfoEXT* cancelInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1212,8 +1392,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCancelFutureEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFuturePollInfoEXT* pollInfo, XrFuturePollResultEXT* pollResult) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFuturePollInfoEXT* pollInfo, XrFuturePollResultEXT* pollResult) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1238,10 +1422,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPollFutureEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const XrHandTrackerCreateInfoEXT* createInfo, XrHandTrackerEXT* handTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const XrHandTrackerCreateInfoEXT* createInfo, XrHandTrackerEXT* handTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1266,8 +1454,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateHandTrackerEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1289,8 +1481,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyHandTrackerEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracker, const XrHandJointsLocateInfoEXT* locateInfo, XrHandJointLocationsEXT* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracker, const XrHandJointsLocateInfoEXT* locateInfo, XrHandJointLocationsEXT* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1315,10 +1511,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateHandJointsEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsLevelEXT level) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsLevelEXT level) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1342,10 +1542,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPerfSettingsSetPerformanceLevelEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorBeginInfoEXT* beginInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorBeginInfoEXT* beginInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1368,8 +1572,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrBeginPlaneDetectionEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const XrPlaneDetectorCreateInfoEXT* createInfo, XrPlaneDetectorEXT* planeDetector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const XrPlaneDetectorCreateInfoEXT* createInfo, XrPlaneDetectorEXT* planeDetector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1394,8 +1602,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreatePlaneDetectorEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT planeDetector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT planeDetector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1417,8 +1629,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyPlaneDetectorEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT planeDetector, XrPlaneDetectionStateEXT* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT planeDetector, XrPlaneDetectionStateEXT* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1442,8 +1658,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetPlaneDetectionStateEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorGetInfoEXT* info, XrPlaneDetectorLocationsEXT* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorGetInfoEXT* info, XrPlaneDetectorLocationsEXT* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1468,8 +1688,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetPlaneDetectionsEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT planeDetector, uint64_t planeId, uint32_t polygonBufferIndex, XrPlaneDetectorPolygonBufferEXT* polygonBuffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT planeDetector, uint64_t planeId, uint32_t polygonBufferIndex, XrPlaneDetectorPolygonBufferEXT* polygonBuffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1495,10 +1719,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetPlanePolygonBufferEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsNotificationLevelEXT* notificationLevel, float* tempHeadroom, float* tempSlope) {
+XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsNotificationLevelEXT* notificationLevel, float* tempHeadroom, float* tempSlope) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1527,10 +1755,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrThermalGetTemperatureTrendEXT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const XrBodyTrackerCreateInfoFB* createInfo, XrBodyTrackerFB* bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const XrBodyTrackerCreateInfoFB* createInfo, XrBodyTrackerFB* bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1555,8 +1787,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateBodyTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1578,8 +1814,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyBodyTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, XrBodySkeletonFB* skeleton) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, XrBodySkeletonFB* skeleton) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1603,8 +1843,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetBodySkeletonFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker, const XrBodyJointsLocateInfoFB* locateInfo, XrBodyJointLocationsFB* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker, const XrBodyJointsLocateInfoFB* locateInfo, XrBodyJointLocationsFB* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1629,10 +1873,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateBodyJointsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint32_t colorSpaceCapacityInput, uint32_t* colorSpaceCountOutput, XrColorSpaceFB* colorSpaces) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint32_t colorSpaceCapacityInput, uint32_t* colorSpaceCountOutput, XrColorSpaceFB* colorSpaces) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1659,8 +1907,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateColorSpacesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColorSpaceFB colorSpace) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColorSpaceFB colorSpace) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1683,10 +1935,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetColorSpaceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession session, uint32_t displayRefreshRateCapacityInput, uint32_t* displayRefreshRateCountOutput, float* displayRefreshRates) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession session, uint32_t displayRefreshRateCapacityInput, uint32_t* displayRefreshRateCountOutput, float* displayRefreshRates) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1713,8 +1969,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateDisplayRefreshRatesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, float* displayRefreshRate) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, float* displayRefreshRate) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1738,8 +1998,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetDisplayRefreshRateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, float displayRefreshRate) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, float displayRefreshRate) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1762,10 +2026,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestDisplayRefreshRateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrEyeTrackerCreateInfoFB* createInfo, XrEyeTrackerFB* eyeTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrEyeTrackerCreateInfoFB* createInfo, XrEyeTrackerFB* eyeTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1790,8 +2058,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateEyeTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1813,8 +2085,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyEyeTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const XrEyeGazesInfoFB* gazeInfo, XrEyeGazesFB* eyeGazes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const XrEyeGazesInfoFB* gazeInfo, XrEyeGazesFB* eyeGazes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1839,10 +2115,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetEyeGazesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const XrFaceTrackerCreateInfoFB* createInfo, XrFaceTrackerFB* faceTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const XrFaceTrackerCreateInfoFB* createInfo, XrFaceTrackerFB* faceTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1867,8 +2147,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateFaceTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1890,8 +2174,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyFaceTrackerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB faceTracker, const XrFaceExpressionInfoFB* expressionInfo, XrFaceExpressionWeightsFB* expressionWeights) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB faceTracker, const XrFaceExpressionInfoFB* expressionInfo, XrFaceExpressionWeightsFB* expressionWeights) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1916,10 +2204,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetFaceExpressionWeightsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const XrFaceTrackerCreateInfo2FB* createInfo, XrFaceTracker2FB* faceTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const XrFaceTrackerCreateInfo2FB* createInfo, XrFaceTracker2FB* faceTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1945,8 +2237,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateFaceTracker2FB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1968,8 +2264,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyFaceTracker2FB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB faceTracker, const XrFaceExpressionInfo2FB* expressionInfo, XrFaceExpressionWeights2FB* expressionWeights) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB faceTracker, const XrFaceExpressionInfo2FB* expressionInfo, XrFaceExpressionWeights2FB* expressionWeights) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1994,10 +2294,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetFaceExpressionWeights2FB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, const XrFoveationProfileCreateInfoFB* createInfo, XrFoveationProfileFB* profile) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, const XrFoveationProfileCreateInfoFB* createInfo, XrFoveationProfileFB* profile) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2023,8 +2327,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateFoveationProfileFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB profile) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB profile) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2046,10 +2354,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyFoveationProfileFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrHandTrackingMeshFB* mesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrHandTrackingMeshFB* mesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2073,10 +2385,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetHandMeshFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const XrHapticActionInfo* hapticActionInfo, XrDevicePcmSampleRateGetInfoFB* deviceSampleRate) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const XrHapticActionInfo* hapticActionInfo, XrDevicePcmSampleRateGetInfoFB* deviceSampleRate) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2101,10 +2417,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetDeviceSampleRateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const XrKeyboardSpaceCreateInfoFB* createInfo, XrSpace* keyboardSpace) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const XrKeyboardSpaceCreateInfoFB* createInfo, XrSpace* keyboardSpace) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2130,8 +2450,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateKeyboardSpaceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session, const XrKeyboardTrackingQueryFB* queryInfo, XrKeyboardTrackingDescriptionFB* keyboard) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session, const XrKeyboardTrackingQueryFB* queryInfo, XrKeyboardTrackingDescriptionFB* keyboard) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2157,10 +2481,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySystemTrackedKeyboardFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, const XrGeometryInstanceCreateInfoFB* createInfo, XrGeometryInstanceFB* outGeometryInstance) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, const XrGeometryInstanceCreateInfoFB* createInfo, XrGeometryInstanceFB* outGeometryInstance) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2185,8 +2513,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateGeometryInstanceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const XrPassthroughCreateInfoFB* createInfo, XrPassthroughFB* outPassthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const XrPassthroughCreateInfoFB* createInfo, XrPassthroughFB* outPassthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2211,8 +2543,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreatePassthroughFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, const XrPassthroughLayerCreateInfoFB* createInfo, XrPassthroughLayerFB* outLayer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, const XrPassthroughLayerCreateInfoFB* createInfo, XrPassthroughLayerFB* outLayer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2237,8 +2573,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreatePassthroughLayerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2260,8 +2600,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyGeometryInstanceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2283,8 +2627,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyPassthroughFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB layer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB layer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2306,8 +2654,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyPassthroughLayerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, const XrGeometryInstanceTransformFB* transformation) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, const XrGeometryInstanceTransformFB* transformation) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2330,8 +2682,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGeometryInstanceSetTransformFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB layer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB layer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2353,8 +2709,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughLayerPauseFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB layer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB layer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2376,8 +2736,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughLayerResumeFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB layer, const XrPassthroughStyleFB* style) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB layer, const XrPassthroughStyleFB* style) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2400,8 +2764,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughLayerSetStyleFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2423,8 +2791,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughPauseFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2446,10 +2818,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughStartFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrPassthroughLayerFB layer, const XrPassthroughKeyboardHandsIntensityFB* intensity) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrPassthroughLayerFB layer, const XrPassthroughKeyboardHandsIntensityFB* intensity) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2472,10 +2848,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPassthroughLayerSetKeyboardHandsIntensityFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrRenderModelPathInfoFB* paths) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrRenderModelPathInfoFB* paths) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2502,8 +2882,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateRenderModelPathsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, XrPath path, XrRenderModelPropertiesFB* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, XrPath path, XrRenderModelPropertiesFB* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2528,8 +2912,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetRenderModelPropertiesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRenderModelLoadInfoFB* info, XrRenderModelBufferFB* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRenderModelLoadInfoFB* info, XrRenderModelBufferFB* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2555,10 +2943,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLoadRenderModelFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace space, XrBoundary2DFB* boundary2DOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace space, XrBoundary2DFB* boundary2DOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2583,8 +2975,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceBoundary2DFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSpace space, XrRect2Df* boundingBox2DOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSpace space, XrRect2Df* boundingBox2DOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2609,8 +3005,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceBoundingBox2DFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSpace space, XrRect3DfFB* boundingBox3DOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSpace space, XrRect3DfFB* boundingBox3DOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2635,8 +3035,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceBoundingBox3DFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace space, XrRoomLayoutFB* roomLayoutOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace space, XrRoomLayoutFB* roomLayoutOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2661,8 +3065,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceRoomLayoutFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrSpace space, XrSemanticLabelsFB* semanticLabelsOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrSpace space, XrSemanticLabelsFB* semanticLabelsOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2687,10 +3095,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceSemanticLabelsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const XrSceneCaptureRequestInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const XrSceneCaptureRequestInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2715,10 +3127,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestSceneCaptureFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const XrSpatialAnchorCreateInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const XrSpatialAnchorCreateInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2743,8 +3159,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace space, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpaceComponentTypeFB* componentTypes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace space, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpaceComponentTypeFB* componentTypes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2771,8 +3191,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateSpaceSupportedComponentsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpaceComponentTypeFB componentType, XrSpaceComponentStatusFB* status) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpaceComponentTypeFB componentType, XrSpaceComponentStatusFB* status) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2797,8 +3221,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceComponentStatusFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2822,8 +3250,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceUuidFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const XrSpaceComponentStatusSetInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const XrSpaceComponentStatusSetInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2848,10 +3280,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetSpaceComponentStatusFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace space, XrSpaceContainerFB* spaceContainerOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace space, XrSpaceContainerFB* spaceContainerOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2876,10 +3312,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceContainerFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQueryInfoBaseHeaderFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQueryInfoBaseHeaderFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2904,8 +3344,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySpacesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, XrAsyncRequestIdFB requestId, XrSpaceQueryResultsFB* results) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, XrAsyncRequestIdFB requestId, XrSpaceQueryResultsFB* results) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2930,10 +3374,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRetrieveSpaceQueryResultsFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceShareInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceShareInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2960,10 +3408,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrShareSpacesFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEraseInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEraseInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2988,8 +3440,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEraseSpaceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSaveInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3014,10 +3470,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSaveSpaceFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpaceListSaveInfoFB* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpaceListSaveInfoFB* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3043,10 +3503,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSaveSpaceListFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSpaceUserCreateInfoFB* info, XrSpaceUserFB* user) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSpaceUserCreateInfoFB* info, XrSpaceUserFB* user) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3071,8 +3535,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpaceUserFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3094,8 +3562,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpaceUserFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUserIdFB* userId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUserIdFB* userId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3119,10 +3591,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceUserIdFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSwapchainStateBaseHeaderFB* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSwapchainStateBaseHeaderFB* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3146,8 +3622,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSwapchainStateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const XrSwapchainStateBaseHeaderFB* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const XrSwapchainStateBaseHeaderFB* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3170,10 +3650,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUpdateSwapchainFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const XrTriangleMeshCreateInfoFB* createInfo, XrTriangleMeshFB* outTriangleMesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const XrTriangleMeshCreateInfoFB* createInfo, XrTriangleMeshFB* outTriangleMesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3198,8 +3682,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateTriangleMeshFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3221,8 +3709,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyTriangleMeshFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3244,8 +3736,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshBeginUpdateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangleMeshFB mesh, uint32_t* outVertexCount) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangleMeshFB mesh, uint32_t* outVertexCount) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3269,8 +3765,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshBeginVertexBufferUpdateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, uint32_t vertexCount, uint32_t triangleCount) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, uint32_t vertexCount, uint32_t triangleCount) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3294,8 +3794,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshEndUpdateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleMeshFB mesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleMeshFB mesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3317,8 +3821,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshEndVertexBufferUpdateFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB mesh, uint32_t** outIndexBuffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB mesh, uint32_t** outIndexBuffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3342,8 +3850,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshGetIndexBufferFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB mesh, XrVector3f** outVertexBuffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB mesh, XrVector3f** outVertexBuffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3367,10 +3879,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTriangleMeshGetVertexBufferFB: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instance, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrViveTrackerPathsHTCX* paths) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instance, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrViveTrackerPathsHTCX* paths) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3397,10 +3913,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateViveTrackerPathsHTCX: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const XrSpatialAnchorCreateInfoHTC* createInfo, XrSpace* anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const XrSpatialAnchorCreateInfoHTC* createInfo, XrSpace* anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3425,8 +3945,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpatialAnchorNameHTC* name) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpatialAnchorNameHTC* name) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3450,10 +3974,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpatialAnchorNameHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const XrBodyTrackerCreateInfoHTC* createInfo, XrBodyTrackerHTC* bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const XrBodyTrackerCreateInfoHTC* createInfo, XrBodyTrackerHTC* bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3478,8 +4006,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateBodyTrackerHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3501,8 +4033,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyBodyTrackerHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker, XrSpace baseSpace, uint32_t skeletonGenerationId, XrBodySkeletonHTC* skeleton) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker, XrSpace baseSpace, uint32_t skeletonGenerationId, XrBodySkeletonHTC* skeleton) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3528,8 +4064,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetBodySkeletonHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracker, const XrBodyJointsLocateInfoHTC* locateInfo, XrBodyJointLocationsHTC* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracker, const XrBodyJointsLocateInfoHTC* locateInfo, XrBodyJointLocationsHTC* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3554,10 +4094,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateBodyJointsHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const XrFacialTrackerCreateInfoHTC* createInfo, XrFacialTrackerHTC* facialTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const XrFacialTrackerCreateInfoHTC* createInfo, XrFacialTrackerHTC* facialTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3582,8 +4126,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateFacialTrackerHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC facialTracker) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC facialTracker) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3605,8 +4153,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyFacialTrackerHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC facialTracker, XrFacialExpressionsHTC* facialExpressions) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC facialTracker, XrFacialExpressionsHTC* facialExpressions) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3630,10 +4182,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetFacialExpressionsHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFoveationApplyInfoHTC* applyInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFoveationApplyInfoHTC* applyInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3657,10 +4213,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrApplyFoveationHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const XrPassthroughCreateInfoHTC* createInfo, XrPassthroughHTC* passthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const XrPassthroughCreateInfoHTC* createInfo, XrPassthroughHTC* passthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3685,8 +4245,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreatePassthroughHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthrough) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthrough) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3708,10 +4272,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyPassthroughHTC: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D11KHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D11KHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3736,10 +4304,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetD3D11GraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D12KHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D12KHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3764,10 +4336,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetD3D12GraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession session, const XrSwapchainCreateInfo* info, XrSwapchain* swapchain, jobject* surface) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession session, const XrSwapchainCreateInfo* info, XrSwapchain* swapchain, jobject* surface) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3794,10 +4370,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSwapchainAndroidSurfaceKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession session, XrAndroidThreadTypeKHR threadType, uint32_t threadId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession session, XrAndroidThreadTypeKHR threadType, uint32_t threadId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3821,10 +4401,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetAndroidApplicationThreadKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instance, XrTime time, struct timespec* timespecTime) {
+XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instance, XrTime time, struct timespec* timespecTime) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3849,8 +4433,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrConvertTimeToTimespecTimeKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instance, const struct timespec* timespecTime, XrTime* time) {
+XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instance, const struct timespec* timespecTime, XrTime* time) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3876,10 +4464,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrConvertTimespecTimeToTimeKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3904,10 +4496,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStructureTypeToString2KHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3929,10 +4525,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrInitializeLoaderKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsMetalKHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsMetalKHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3957,10 +4557,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMetalGraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLKHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLKHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3985,10 +4589,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetOpenGLGraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4013,10 +4621,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetOpenGLESGraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewConfigurationType viewConfigurationType, uint32_t viewIndex, XrVisibilityMaskTypeKHR visibilityMaskType, XrVisibilityMaskKHR* visibilityMask) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewConfigurationType viewConfigurationType, uint32_t viewIndex, XrVisibilityMaskTypeKHR visibilityMaskType, XrVisibilityMaskKHR* visibilityMask) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4043,10 +4655,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVisibilityMaskKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4074,8 +4690,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVulkanDeviceExtensionsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance, XrSystemId systemId, VkInstance vkInstance, VkPhysicalDevice* vkPhysicalDevice) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance, XrSystemId systemId, VkInstance vkInstance, VkPhysicalDevice* vkPhysicalDevice) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4101,8 +4721,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVulkanGraphicsDeviceKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsVulkanKHR* graphicsRequirements) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsVulkanKHR* graphicsRequirements) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4127,8 +4751,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVulkanGraphicsRequirementsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4156,10 +4784,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVulkanInstanceExtensionsKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, const XrVulkanDeviceCreateInfoKHR* createInfo, VkDevice* vulkanDevice, VkResult* vulkanResult) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, const XrVulkanDeviceCreateInfoKHR* createInfo, VkDevice* vulkanDevice, VkResult* vulkanResult) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4186,8 +4818,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateVulkanDeviceKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, const XrVulkanInstanceCreateInfoKHR* createInfo, VkInstance* vulkanInstance, VkResult* vulkanResult) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, const XrVulkanInstanceCreateInfoKHR* createInfo, VkInstance* vulkanInstance, VkResult* vulkanResult) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4214,8 +4850,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateVulkanInstanceKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance, const XrVulkanGraphicsDeviceGetInfoKHR* getInfo, VkPhysicalDevice* vulkanPhysicalDevice) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance, const XrVulkanGraphicsDeviceGetInfoKHR* getInfo, VkPhysicalDevice* vulkanPhysicalDevice) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4240,10 +4880,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVulkanGraphicsDevice2KHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, XrTime time, LARGE_INTEGER* performanceCounter) {
+XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, XrTime time, LARGE_INTEGER* performanceCounter) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4268,8 +4912,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrConvertTimeToWin32PerformanceCounterKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, const LARGE_INTEGER* performanceCounter, XrTime* time) {
+XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, const LARGE_INTEGER* performanceCounter, XrTime* time) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4294,10 +4942,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrConvertWin32PerformanceCounterToTimeKHR: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStartInfoMETA* info, XrAsyncRequestIdFB* advertisementRequestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStartInfoMETA* info, XrAsyncRequestIdFB* advertisementRequestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4323,8 +4975,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStartColocationAdvertisementMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStartInfoMETA* info, XrAsyncRequestIdFB* discoveryRequestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStartInfoMETA* info, XrAsyncRequestIdFB* discoveryRequestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4349,8 +5005,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStartColocationDiscoveryMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStopInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4375,8 +5035,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStopColocationAdvertisementMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStopInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStopInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4401,10 +5065,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStopColocationDiscoveryMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo, XrEnvironmentDepthImageMETA* environmentDepthImage) {
+XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo, XrEnvironmentDepthImageMETA* environmentDepthImage) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4429,8 +5097,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrAcquireEnvironmentDepthImageMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession session, const XrEnvironmentDepthProviderCreateInfoMETA* createInfo, XrEnvironmentDepthProviderMETA* environmentDepthProvider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession session, const XrEnvironmentDepthProviderCreateInfoMETA* createInfo, XrEnvironmentDepthProviderMETA* environmentDepthProvider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4455,8 +5127,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateEnvironmentDepthProviderMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo, XrEnvironmentDepthSwapchainMETA* swapchain) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo, XrEnvironmentDepthSwapchainMETA* swapchain) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4481,8 +5157,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateEnvironmentDepthSwapchainMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4504,8 +5184,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyEnvironmentDepthProviderMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironmentDepthSwapchainMETA swapchain) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironmentDepthSwapchainMETA swapchain) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4527,8 +5211,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyEnvironmentDepthSwapchainMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4555,8 +5243,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateEnvironmentDepthSwapchainImagesMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnvironmentDepthSwapchainMETA swapchain, XrEnvironmentDepthSwapchainStateMETA* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnvironmentDepthSwapchainMETA swapchain, XrEnvironmentDepthSwapchainStateMETA* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4580,8 +5272,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetEnvironmentDepthSwapchainStateMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4604,8 +5300,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetEnvironmentDepthHandRemovalMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4627,8 +5327,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStartEnvironmentDepthProviderMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4650,10 +5354,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStopEnvironmentDepthProviderMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession session, XrFoveationEyeTrackedStateMETA* foveationState) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession session, XrFoveationEyeTrackedStateMETA* foveationState) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4677,10 +5385,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetFoveationEyeTrackedStateMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB passthrough, const XrPassthroughColorLutCreateInfoMETA* createInfo, XrPassthroughColorLutMETA* colorLut) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB passthrough, const XrPassthroughColorLutCreateInfoMETA* createInfo, XrPassthroughColorLutMETA* colorLut) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4705,8 +5417,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreatePassthroughColorLutMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4728,8 +5444,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyPassthroughColorLutMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut, const XrPassthroughColorLutUpdateInfoMETA* updateInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut, const XrPassthroughColorLutUpdateInfoMETA* updateInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4752,10 +5472,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUpdatePassthroughColorLutMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session, XrPassthroughPreferencesMETA* preferences) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session, XrPassthroughPreferencesMETA* preferences) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4779,10 +5503,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetPassthroughPreferencesMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, uint32_t counterPathCapacityInput, uint32_t* counterPathCountOutput, XrPath* counterPaths) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, uint32_t counterPathCapacityInput, uint32_t* counterPathCountOutput, XrPath* counterPaths) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4809,8 +5537,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumeratePerformanceMetricsCounterPathsMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession session, XrPerformanceMetricsStateMETA* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession session, XrPerformanceMetricsStateMETA* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4834,8 +5566,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetPerformanceMetricsStateMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession session, XrPath counterPath, XrPerformanceMetricsCounterMETA* counter) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession session, XrPath counterPath, XrPerformanceMetricsCounterMETA* counter) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4860,8 +5596,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQueryPerformanceMetricsCounterMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession session, const XrPerformanceMetricsStateMETA* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession session, const XrPerformanceMetricsStateMETA* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4884,10 +5624,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetPerformanceMetricsStateMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession session, const XrRecommendedLayerResolutionGetInfoMETA* info, XrRecommendedLayerResolutionMETA* resolution) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession session, const XrRecommendedLayerResolutionGetInfoMETA* info, XrRecommendedLayerResolutionMETA* resolution) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4912,10 +5656,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetRecommendedLayerResolutionMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4938,8 +5686,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPauseSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4962,10 +5714,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrResumeSimultaneousHandsAndControllersTrackingMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const XrSpaceTriangleMeshGetInfoMETA* getInfo, XrSpaceTriangleMeshMETA* triangleMeshOutput) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const XrSpaceTriangleMeshGetInfoMETA* getInfo, XrSpaceTriangleMeshMETA* triangleMeshOutput) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4990,10 +5746,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpaceTriangleMeshMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShareSpacesInfoMETA* info, XrAsyncRequestIdFB* requestId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShareSpacesInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5019,10 +5779,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrShareSpacesMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5045,8 +5809,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrChangeVirtualKeyboardTextContextMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, const XrVirtualKeyboardCreateInfoMETA* createInfo, XrVirtualKeyboardMETA* keyboard) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, const XrVirtualKeyboardCreateInfoMETA* createInfo, XrVirtualKeyboardMETA* keyboard) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5071,8 +5839,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateVirtualKeyboardMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession session, XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardSpaceCreateInfoMETA* createInfo, XrSpace* keyboardSpace) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession session, XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardSpaceCreateInfoMETA* createInfo, XrSpace* keyboardSpace) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5098,8 +5870,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateVirtualKeyboardSpaceMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMETA keyboard) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMETA keyboard) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5121,8 +5897,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyVirtualKeyboardMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, uint32_t textureIdCapacityInput, uint32_t* textureIdCountOutput, uint64_t* textureIds) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, uint32_t textureIdCapacityInput, uint32_t* textureIdCountOutput, uint64_t* textureIds) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5149,8 +5929,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVirtualKeyboardDirtyTexturesMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVirtualKeyboardMETA keyboard, XrVirtualKeyboardModelAnimationStatesMETA* animationStates) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVirtualKeyboardMETA keyboard, XrVirtualKeyboardModelAnimationStatesMETA* animationStates) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5174,8 +5958,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVirtualKeyboardModelAnimationStatesMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardMETA keyboard, float* scale) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardMETA keyboard, float* scale) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5199,8 +5987,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVirtualKeyboardScaleMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyboardMETA keyboard, uint64_t textureId, XrVirtualKeyboardTextureDataMETA* textureData) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyboardMETA keyboard, uint64_t textureId, XrVirtualKeyboardTextureDataMETA* textureData) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5225,8 +6017,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetVirtualKeyboardTextureDataMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardInputInfoMETA* info, XrPosef* interactorRootPose) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardInputInfoMETA* info, XrPosef* interactorRootPose) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5251,8 +6047,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSendVirtualKeyboardInputMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5275,8 +6075,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetVirtualKeyboardModelVisibilityMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardLocationInfoMETA* locationInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardLocationInfoMETA* locationInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5299,10 +6103,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSuggestVirtualKeyboardLocationMETA: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession session, const XrCoordinateSpaceCreateInfoML* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession session, const XrCoordinateSpaceCreateInfoML* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5327,10 +6135,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpaceFromCoordinateFrameUIDML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession session, const XrFacialExpressionClientCreateInfoML* createInfo, XrFacialExpressionClientML* facialExpressionClient) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession session, const XrFacialExpressionClientCreateInfoML* createInfo, XrFacialExpressionClientML* facialExpressionClient) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5355,8 +6167,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateFacialExpressionClientML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpressionClientML facialExpressionClient) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpressionClientML facialExpressionClient) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5378,8 +6194,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyFacialExpressionClientML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFacialExpressionClientML facialExpressionClient, const XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo, uint32_t blendShapeCount, XrFacialExpressionBlendShapePropertiesML* blendShapes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFacialExpressionClientML facialExpressionClient, const XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo, uint32_t blendShapeCount, XrFacialExpressionBlendShapePropertiesML* blendShapes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5405,10 +6225,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetFacialExpressionBlendShapePropertiesML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession session, const XrUuidEXT* mapUuid, XrExportedLocalizationMapML* map) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession session, const XrUuidEXT* mapUuid, XrExportedLocalizationMapML* map) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5433,8 +6257,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateExportedLocalizationMapML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLocalizationMapML map) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLocalizationMapML map) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5456,8 +6284,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyExportedLocalizationMapML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, const XrLocalizationEnableEventsInfoML* info) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, const XrLocalizationEnableEventsInfoML* info) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5480,8 +6312,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnableLocalizationEventsML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5508,8 +6344,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetExportedLocalizationMapDataML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, const XrLocalizationMapImportInfoML* importInfo, XrUuidEXT* mapUuid) {
+XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, const XrLocalizationMapImportInfoML* importInfo, XrUuidEXT* mapUuid) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5535,8 +6375,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrImportLocalizationMapML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, const XrLocalizationMapQueryInfoBaseHeaderML* queryInfo, uint32_t mapCapacityInput, uint32_t* mapCountOutput, XrLocalizationMapML* maps) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, const XrLocalizationMapQueryInfoBaseHeaderML* queryInfo, uint32_t mapCapacityInput, uint32_t* mapCountOutput, XrLocalizationMapML* maps) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5564,8 +6408,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQueryLocalizationMapsML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, const XrMapLocalizationRequestInfoML* requestInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, const XrMapLocalizationRequestInfoML* requestInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5588,10 +6436,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestMapLocalizationML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const XrMarkerDetectorCreateInfoML* createInfo, XrMarkerDetectorML* markerDetector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const XrMarkerDetectorCreateInfoML* createInfo, XrMarkerDetectorML* markerDetector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5616,8 +6468,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateMarkerDetectorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const XrMarkerSpaceCreateInfoML* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const XrMarkerSpaceCreateInfoML* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5642,8 +6498,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateMarkerSpaceML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML markerDetector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML markerDetector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5665,8 +6525,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyMarkerDetectorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML markerDetector, XrMarkerDetectorStateML* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML markerDetector, XrMarkerDetectorStateML* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5690,8 +6554,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerDetectorStateML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* meters) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* meters) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5716,8 +6584,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerLengthML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint64_t* number) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint64_t* number) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5742,8 +6614,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerNumberML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* reprojectionErrorMeters) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* reprojectionErrorMeters) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5768,8 +6644,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerReprojectionErrorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5797,8 +6677,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerStringML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector, uint32_t markerCapacityInput, uint32_t* markerCountOutput, XrMarkerML* markers) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector, uint32_t markerCapacityInput, uint32_t* markerCountOutput, XrMarkerML* markers) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5825,8 +6709,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkersML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML markerDetector, XrMarkerDetectorSnapshotInfoML* snapshotInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML markerDetector, XrMarkerDetectorSnapshotInfoML* snapshotInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5850,10 +6738,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSnapshotMarkerDetectorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, const XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, const XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5878,8 +6770,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorsAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession session, XrFutureEXT future, XrCreateSpatialAnchorsCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession session, XrFutureEXT future, XrCreateSpatialAnchorsCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5904,8 +6800,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorsCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpatialAnchorStateML* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpatialAnchorStateML* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5929,10 +6829,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpatialAnchorStateML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session, const XrSpatialAnchorsCreateStorageInfoML* createInfo, XrSpatialAnchorsStorageML* storage) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session, const XrSpatialAnchorsCreateStorageInfoML* createInfo, XrSpatialAnchorsStorageML* storage) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5957,8 +6861,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorsStorageML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsDeleteInfoML* deleteInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsDeleteInfoML* deleteInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5983,8 +6891,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDeleteSpatialAnchorsAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsDeleteCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsDeleteCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6009,8 +6921,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDeleteSpatialAnchorsCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchorsStorageML storage) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchorsStorageML storage) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6032,8 +6948,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpatialAnchorsStorageML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsPublishInfoML* publishInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsPublishInfoML* publishInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6058,8 +6978,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPublishSpatialAnchorsAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsPublishCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsPublishCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6084,8 +7008,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPublishSpatialAnchorsCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6110,8 +7038,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySpatialAnchorsAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsQueryCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsQueryCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6136,8 +7068,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrQuerySpatialAnchorsCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsUpdateExpirationInfoML* updateInfo, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsUpdateExpirationInfoML* updateInfo, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6162,8 +7098,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsUpdateExpirationCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsUpdateExpirationCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6188,10 +7128,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUpdateSpatialAnchorsExpirationCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, const XrSystemNotificationsSetInfoML* info) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, const XrSystemNotificationsSetInfoML* info) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6214,10 +7158,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetSystemNotificationsML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instance, const XrUserCalibrationEnableEventsInfoML* enableInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instance, const XrUserCalibrationEnableEventsInfoML* enableInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6240,10 +7188,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnableUserCalibrationEventsML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferSizeML* size, XrWorldMeshBufferML* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferSizeML* size, XrWorldMeshBufferML* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6269,8 +7221,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrAllocateWorldMeshBufferML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, const XrWorldMeshDetectorCreateInfoML* createInfo, XrWorldMeshDetectorML* detector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, const XrWorldMeshDetectorCreateInfoML* createInfo, XrWorldMeshDetectorML* detector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6295,8 +7251,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateWorldMeshDetectorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorML detector) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorML detector) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6318,8 +7278,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyWorldMeshDetectorML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferML* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferML* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6344,8 +7308,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrFreeWorldMeshBufferML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo, XrWorldMeshBufferSizeML* size) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo, XrWorldMeshBufferSizeML* size) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6370,8 +7338,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetWorldMeshBufferRecommendSizeML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshGetInfoML* getInfo, XrWorldMeshBufferML* buffer, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshGetInfoML* getInfo, XrWorldMeshBufferML* buffer, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6399,8 +7371,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestWorldMeshAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorML detector, const XrWorldMeshRequestCompletionInfoML* completionInfo, XrFutureEXT future, XrWorldMeshRequestCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorML detector, const XrWorldMeshRequestCompletionInfoML* completionInfo, XrFutureEXT future, XrWorldMeshRequestCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6426,8 +7402,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestWorldMeshCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshStateRequestInfoML* stateRequest, XrFutureEXT* future) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshStateRequestInfoML* stateRequest, XrFutureEXT* future) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6452,8 +7432,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestWorldMeshStateAsyncML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDetectorML detector, XrFutureEXT future, XrWorldMeshStateRequestCompletionML* completion) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDetectorML detector, XrFutureEXT future, XrWorldMeshStateRequestCompletionML* completion) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6478,10 +7462,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestWorldMeshStateCompleteML: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT handTracker, const XrForceFeedbackCurlApplyLocationsMNDX* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT handTracker, const XrForceFeedbackCurlApplyLocationsMNDX* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6505,10 +7493,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrApplyForceFeedbackCurlMNDX: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t modeCapacityInput, uint32_t* modeCountOutput, XrReprojectionModeMSFT* modes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t modeCapacityInput, uint32_t* modeCountOutput, XrReprojectionModeMSFT* modes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6537,10 +7529,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateReprojectionModesMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, XrPath topLevelUserPath, XrControllerModelKeyStateMSFT* controllerModelKeyState) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, XrPath topLevelUserPath, XrControllerModelKeyStateMSFT* controllerModelKeyState) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6565,8 +7561,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetControllerModelKeyMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelPropertiesMSFT* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelPropertiesMSFT* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6591,8 +7591,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetControllerModelPropertiesMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelStateMSFT* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelStateMSFT* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6617,8 +7621,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetControllerModelStateMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6646,10 +7654,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLoadControllerModelMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTracker, const XrHandMeshSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTracker, const XrHandMeshSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6674,8 +7686,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateHandMeshSpaceMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker, const XrHandMeshUpdateInfoMSFT* updateInfo, XrHandMeshMSFT* handMesh) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker, const XrHandMeshUpdateInfoMSFT* updateInfo, XrHandMeshMSFT* handMesh) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6700,10 +7716,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUpdateHandMeshMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrSession session, IUnknown* perceptionAnchor, XrSpatialAnchorMSFT* anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrSession session, IUnknown* perceptionAnchor, XrSpatialAnchorMSFT* anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6729,8 +7749,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorFromPerceptionAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrSession session, XrSpatialAnchorMSFT anchor, IUnknown** perceptionAnchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrSession session, XrSpatialAnchorMSFT anchor, IUnknown** perceptionAnchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6755,10 +7779,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTryGetPerceptionAnchorFromSpatialAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6786,8 +7814,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSceneMarkerDecodedStringMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6815,10 +7847,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSceneMarkerRawDataMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrNewSceneComputeInfoMSFT* computeInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrNewSceneComputeInfoMSFT* computeInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6841,8 +7877,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrComputeNewSceneMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneCreateInfoMSFT* createInfo, XrSceneMSFT* scene) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneCreateInfoMSFT* createInfo, XrSceneMSFT* scene) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6867,8 +7907,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSceneMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, const XrSceneObserverCreateInfoMSFT* createInfo, XrSceneObserverMSFT* sceneObserver) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, const XrSceneObserverCreateInfoMSFT* createInfo, XrSceneObserverMSFT* sceneObserver) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6893,8 +7937,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSceneObserverMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6916,8 +7964,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySceneMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sceneObserver) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sceneObserver) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6939,8 +7991,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySceneObserverMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, XrSystemId systemId, uint32_t featureCapacityInput, uint32_t* featureCountOutput, XrSceneComputeFeatureMSFT* features) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, XrSystemId systemId, uint32_t featureCapacityInput, uint32_t* featureCountOutput, XrSceneComputeFeatureMSFT* features) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6968,8 +8024,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateSceneComputeFeaturesMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsGetInfoMSFT* getInfo, XrSceneComponentsMSFT* components) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsGetInfoMSFT* getInfo, XrSceneComponentsMSFT* components) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6994,8 +8054,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSceneComponentsMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sceneObserver, XrSceneComputeStateMSFT* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sceneObserver, XrSceneComputeStateMSFT* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7019,8 +8083,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSceneComputeStateMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, const XrSceneMeshBuffersGetInfoMSFT* getInfo, XrSceneMeshBuffersMSFT* buffers) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, const XrSceneMeshBuffersGetInfoMSFT* getInfo, XrSceneMeshBuffersMSFT* buffers) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7045,8 +8113,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSceneMeshBuffersMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsLocateInfoMSFT* locateInfo, XrSceneComponentLocationsMSFT* locations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsLocateInfoMSFT* locateInfo, XrSceneComponentLocationsMSFT* locations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7071,10 +8143,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateSceneComponentsMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneDeserializeInfoMSFT* deserializeInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneDeserializeInfoMSFT* deserializeInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7097,8 +8173,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDeserializeSceneMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, const XrSerializedSceneFragmentDataGetInfoMSFT* getInfo, uint32_t countInput, uint32_t* readOutput, uint8_t* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, const XrSerializedSceneFragmentDataGetInfoMSFT* getInfo, uint32_t countInput, uint32_t* readOutput, uint8_t* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7126,10 +8206,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSerializedSceneFragmentDataMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, const XrSpatialAnchorCreateInfoMSFT* createInfo, XrSpatialAnchorMSFT* anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, const XrSpatialAnchorCreateInfoMSFT* createInfo, XrSpatialAnchorMSFT* anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7154,8 +8238,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session, const XrSpatialAnchorSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session, const XrSpatialAnchorSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7180,8 +8268,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorSpaceMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT anchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT anchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7203,10 +8295,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpatialAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
+XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7228,8 +8324,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrClearSpatialAnchorStoreMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, XrSpatialAnchorMSFT* spatialAnchor) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, XrSpatialAnchorMSFT* spatialAnchor) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7254,8 +8354,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorFromPersistedNameMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7279,8 +8383,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialAnchorStoreConnectionMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7302,8 +8410,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpatialAnchorStoreConnectionMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t* spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t* spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7330,8 +8442,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumeratePersistedSpatialAnchorNamesMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7354,8 +8470,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPersistSpatialAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName) {
+XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7378,10 +8498,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrUnpersistSpatialAnchorMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession session, const XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession session, const XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7406,8 +8530,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSpatialGraphNodeSpaceMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7429,8 +8557,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpatialGraphNodeBindingMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo, XrSpatialGraphNodeBindingPropertiesMSFT* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo, XrSpatialGraphNodeBindingPropertiesMSFT* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7455,8 +8587,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSpatialGraphNodeBindingPropertiesMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSession session, const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo, XrSpatialGraphNodeBindingMSFT* nodeBinding) {
+XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSession session, const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo, XrSpatialGraphNodeBindingMSFT* nodeBinding) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7481,10 +8617,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrTryCreateSpatialGraphStaticNodeBindingMSFT: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7508,8 +8648,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetAudioInputDeviceGuidOculus: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7533,10 +8677,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetAudioOutputDeviceGuidOculus: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession session, uint32_t cameraCapacityInput, uint32_t* cameraCountOutput, XrExternalCameraOCULUS* cameras) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession session, uint32_t cameraCapacityInput, uint32_t* cameraCountOutput, XrExternalCameraOCULUS* cameras) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7563,10 +8711,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateExternalCamerasOCULUS: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSession session, XrTrackingOptimizationSettingsDomainQCOM domain, XrTrackingOptimizationSettingsHintQCOM hint) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSession session, XrTrackingOptimizationSettingsDomainQCOM domain, XrTrackingOptimizationSettingsHintQCOM hint) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7590,10 +8742,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetTrackingOptimizationSettingsHintQCOM: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession session, XrBool32 enabled) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession session, XrBool32 enabled) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7616,10 +8772,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetEnvironmentDepthEstimationVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const XrMarkerSpaceCreateInfoVARJO* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const XrMarkerSpaceCreateInfoVARJO* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7644,8 +8804,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateMarkerSpaceVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t markerId, XrExtent2Df* size) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t markerId, XrExtent2Df* size) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7670,8 +8834,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetMarkerSizeVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession session, uint64_t markerId, XrBool32 enable) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession session, uint64_t markerId, XrBool32 enable) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7695,8 +8863,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetMarkerTrackingPredictionVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session, uint64_t markerId, XrDuration timeout) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session, uint64_t markerId, XrDuration timeout) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7720,8 +8892,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetMarkerTrackingTimeoutVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBool32 enabled) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBool32 enabled) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7744,10 +8920,14 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetMarkerTrackingVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float offset) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float offset) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7770,9 +8950,13 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSetViewOffsetVARJO: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageAcquireInfo* acquireInfo, uint32_t* index) {
+XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageAcquireInfo* acquireInfo, uint32_t* index) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7797,8 +8981,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrAcquireSwapchainImage: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo, const XrHapticBaseHeader* hapticFeedback) {
+XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo, const XrHapticBaseHeader* hapticFeedback) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7822,8 +9010,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrApplyHapticFeedback: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, const XrSessionActionSetsAttachInfo* attachInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, const XrSessionActionSetsAttachInfo* attachInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7846,8 +9038,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrAttachSessionActionSets: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBeginInfo* frameBeginInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBeginInfo* frameBeginInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7870,8 +9066,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrBeginFrame: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSessionBeginInfo* beginInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSessionBeginInfo* beginInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7894,8 +9094,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrBeginSession: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrActionCreateInfo* createInfo, XrAction* action) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrActionCreateInfo* createInfo, XrAction* action) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7920,8 +9124,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateAction: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrActionSetCreateInfo* createInfo, XrActionSet* actionSet) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrActionSetCreateInfo* createInfo, XrActionSet* actionSet) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7946,8 +9154,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateActionSet: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrActionSpaceCreateInfo* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrActionSpaceCreateInfo* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7972,8 +9184,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateActionSpace: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* createInfo, XrInstance* instance) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* createInfo, XrInstance* instance) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7997,8 +9213,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateInstance: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const XrReferenceSpaceCreateInfo* createInfo, XrSpace* space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const XrReferenceSpaceCreateInfo* createInfo, XrSpace* space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8023,8 +9243,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateReferenceSpace: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSessionCreateInfo* createInfo, XrSession* session) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSessionCreateInfo* createInfo, XrSession* session) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8049,8 +9273,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSession: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwapchainCreateInfo* createInfo, XrSwapchain* swapchain) {
+XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwapchainCreateInfo* createInfo, XrSwapchain* swapchain) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8075,8 +9303,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrCreateSwapchain: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8098,8 +9330,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyAction: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8121,8 +9357,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyActionSet: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8144,8 +9384,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroyInstance: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8167,8 +9411,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySession: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8190,8 +9438,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySpace: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
+XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8213,8 +9465,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrDestroySwapchain: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInfo* frameEndInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInfo* frameEndInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8237,8 +9493,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEndFrame: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8260,8 +9520,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEndSession: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrApiLayerProperties* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrApiLayerProperties* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8287,8 +9551,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateApiLayerProperties: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession session, const XrBoundSourcesForActionEnumerateInfo* enumerateInfo, uint32_t sourceCapacityInput, uint32_t* sourceCountOutput, XrPath* sources) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession session, const XrBoundSourcesForActionEnumerateInfo* enumerateInfo, uint32_t sourceCapacityInput, uint32_t* sourceCountOutput, XrPath* sources) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8316,8 +9584,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateBoundSourcesForAction: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t environmentBlendModeCapacityInput, uint32_t* environmentBlendModeCountOutput, XrEnvironmentBlendMode* environmentBlendModes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t environmentBlendModeCapacityInput, uint32_t* environmentBlendModeCountOutput, XrEnvironmentBlendMode* environmentBlendModes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8346,8 +9618,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateEnvironmentBlendModes: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8374,8 +9650,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateInstanceExtensionProperties: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uint32_t spaceCapacityInput, uint32_t* spaceCountOutput, XrReferenceSpaceType* spaces) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uint32_t spaceCapacityInput, uint32_t* spaceCountOutput, XrReferenceSpaceType* spaces) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8402,8 +9682,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateReferenceSpaces: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, uint32_t formatCapacityInput, uint32_t* formatCountOutput, int64_t* formats) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, uint32_t formatCapacityInput, uint32_t* formatCountOutput, int64_t* formats) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8430,8 +9714,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateSwapchainFormats: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8458,8 +9746,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateSwapchainImages: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrViewConfigurationView* views) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrViewConfigurationView* views) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8488,8 +9780,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateViewConfigurationViews: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance, XrSystemId systemId, uint32_t viewConfigurationTypeCapacityInput, uint32_t* viewConfigurationTypeCountOutput, XrViewConfigurationType* viewConfigurationTypes) {
+XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance, XrSystemId systemId, uint32_t viewConfigurationTypeCapacityInput, uint32_t* viewConfigurationTypeCountOutput, XrViewConfigurationType* viewConfigurationTypes) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8517,8 +9813,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrEnumerateViewConfigurations: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateBoolean* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateBoolean* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8543,8 +9843,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetActionStateBoolean: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateFloat* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateFloat* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8569,8 +9873,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetActionStateFloat: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStatePose* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStatePose* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8595,8 +9903,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetActionStatePose: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateVector2f* state) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateVector2f* state) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8621,8 +9933,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetActionStateVector2f: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session, XrPath topLevelUserPath, XrInteractionProfileState* interactionProfile) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session, XrPath topLevelUserPath, XrInteractionProfileState* interactionProfile) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8647,8 +9963,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetCurrentInteractionProfile: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, const XrInputSourceLocalizedNameGetInfo* getInfo, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, const XrInputSourceLocalizedNameGetInfo* getInfo, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8676,8 +9996,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetInputSourceLocalizedName: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrInstanceProperties* instanceProperties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrInstanceProperties* instanceProperties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8701,8 +10025,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetInstanceProperties: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, XrReferenceSpaceType referenceSpaceType, XrExtent2Df* bounds) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, XrReferenceSpaceType referenceSpaceType, XrExtent2Df* bounds) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8727,8 +10055,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetReferenceSpaceBoundsRect: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGetInfo* getInfo, XrSystemId* systemId) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGetInfo* getInfo, XrSystemId* systemId) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8753,8 +10085,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSystem: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSystemId systemId, XrSystemProperties* properties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSystemId systemId, XrSystemProperties* properties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8779,8 +10115,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetSystemProperties: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, XrViewConfigurationProperties* configurationProperties) {
+XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, XrViewConfigurationProperties* configurationProperties) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8806,8 +10146,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrGetViewConfigurationProperties: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, XrTime time, XrSpaceLocation* location) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, XrTime time, XrSpaceLocation* location) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8833,8 +10177,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateSpace: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesLocateInfo* locateInfo, XrSpaceLocations* spaceLocations) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesLocateInfo* locateInfo, XrSpaceLocations* spaceLocations) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8859,8 +10207,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateSpaces: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLocateInfo* viewLocateInfo, XrViewState* viewState, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrView* views) {
+XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLocateInfo* viewLocateInfo, XrViewState* viewState, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrView* views) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8890,8 +10242,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrLocateViews: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8919,8 +10275,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPathToString: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffer* eventData) {
+XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffer* eventData) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8944,8 +10304,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrPollEvent: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageReleaseInfo* releaseInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageReleaseInfo* releaseInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8968,8 +10332,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrReleaseSwapchainImage: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
+XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8991,8 +10359,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) {
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrRequestExitSession: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult value, char buffer[XR_MAX_RESULT_STRING_SIZE]) {
+XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult value, char buffer[XR_MAX_RESULT_STRING_SIZE]) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9017,8 +10389,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrResultToString: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9041,8 +10417,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStopHapticFeedback: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* pathString, XrPath* path) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* pathString, XrPath* path) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9067,8 +10447,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStringToPath: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE]) {
+XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE]) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9093,8 +10477,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrStructureTypeToString: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance instance, const XrInteractionProfileSuggestedBinding* suggestedBindings) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance instance, const XrInteractionProfileSuggestedBinding* suggestedBindings) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9117,8 +10505,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSuggestInteractionProfileBindings: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsSyncInfo* syncInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsSyncInfo* syncInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9141,8 +10533,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrSyncActions: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState) {
+XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9167,8 +10563,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
 
     return result;
 }
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrWaitFrame: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
+}
 
-XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo) {
+XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo) try {
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9190,6 +10590,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
     deserialize(&result, d_ctx);
 
     return result;
+}
+catch (const std::exception& e) {
+    spdlog::error("Exception in xrWaitSwapchainImage: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
 }
 
 

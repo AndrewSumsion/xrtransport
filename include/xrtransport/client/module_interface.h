@@ -12,15 +12,19 @@
 extern "C" {
 
 /**
- * This is called by the runtime to fetch information about which extensions to advertise to the application.
+ * This is called by the runtime to fetch information about which extensions to advertise to the application,
+ * and which functions to layer onto the function table.
  * 
- * If the application selects one of the extensions specified here, all of the provided LayerFunctions will
- * be layered onto the runtime's dispatch table.
+ * Any new function you want to expose to an application *must* be included in a ModuleExtension. The runtime
+ * tracks available functions based on which extensions the application has enabled.
  * 
- * This function uses a two-call idiom: if extensions_out is null, just return the number that would be
- * returned so that the caller can allocate space and call again.
+ * Any function you wish to override must be provided as a ModuleLayerFunction, with the new_function and
+ * an address to store the old_function, which the new_function may call to continue down the layers.
+ * 
+ * This function must return a pointer to a ModuleInfo struct that contains all of this. The ModuleInfo and
+ * all data it references must have a static storage lifetime -- no attempt to clean it up will be made.
  */
-XRTP_API_EXPORT void module_get_extensions(uint32_t* capacity_out, LayerExtension* extensions_out);
+XRTP_API_EXPORT void module_get_info(const ModuleInfo** info_out);
 
 } // extern "C"
 
