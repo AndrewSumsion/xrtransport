@@ -43,7 +43,7 @@ static std::optional<fs::path> get_runtime_folder() {
     return std::nullopt;
 #elif defined(__linux__)
     Dl_info info;
-    if (dladdr(get_runtime_folder, &info)) {
+    if (dladdr((void*)get_runtime_folder, &info)) {
         return fs::path(std::string(info.dli_fname)).parent_path();
     }
     return std::nullopt;

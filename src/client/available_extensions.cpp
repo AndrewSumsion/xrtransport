@@ -25,13 +25,13 @@ static std::unordered_map<std::string, ExtensionInfo> collect_rpc_available_exte
     uint32_t extension_count{};
     result = rpc::xrEnumerateInstanceExtensionProperties(nullptr, 0, &extension_count, nullptr);
     if (!XR_SUCCEEDED(result)) {
-        spdlog::error("Failed to enumerate server extensions: {}", result);
+        spdlog::error("Failed to enumerate server extensions: {}", (int)result);
         return rpc_available_extensions; // empty
     }
     std::vector<XrExtensionProperties> extension_properties_vector(extension_count, {XR_TYPE_EXTENSION_PROPERTIES});
     result = rpc::xrEnumerateInstanceExtensionProperties(nullptr, extension_count, &extension_count, extension_properties_vector.data());
     if (!XR_SUCCEEDED(result)) {
-        spdlog::error("Failed to enumerate server extensions: {}", result);
+        spdlog::error("Failed to enumerate server extensions: {}", (int)result);
         return rpc_available_extensions; // empty
     }
 
@@ -88,6 +88,8 @@ static std::unordered_map<std::string, ExtensionInfo> collect_rpc_available_exte
             "xrSessionInsertDebugUtilsLabelEXT"
         }
     });
+
+    return rpc_available_extensions;
 }
 
 std::unordered_map<std::string, ExtensionInfo> collect_available_extensions(std::vector<ModuleInfo> modules_info) {
