@@ -15,6 +15,7 @@
 #include <cstring>
 #include <limits>
 #include <sstream>
+#include <cstdlib>
 
 using nlohmann::json;
 
@@ -37,7 +38,7 @@ Config from_json(std::string json_str) {
         if (transport_type == "tcp") {
             result.transport_type = TransportType::TCP;
             result.ip_address = data.at("ip_address").get<std::string>();
-            result.port = data.at("port");
+            result.port = data.at("port").get<uint16_t>();
         }
         else if (transport_type == "unix") {
             result.transport_type = TransportType::UNIX;
@@ -100,10 +101,18 @@ Config from_android_system_properties() {
 #endif
 
 Config load_config() {
-#ifdef __ANDROID__
+#if defined(__ANDROID__)
     return from_android_system_properties();
+#elif defined(__linux__)
+    const char* config_path = std::getenv("XRTRANSPORT_CONFIG_PATH");
+    if (!config_path) {
+        config_path = XRTRANSPORT_CONFIG_PATH;
+    }
+    return from_file(config_path);
+#elif defined(_WIN32)
+#error TODO: implement
 #else
-    return from_file(XRTRANSPORT_CONFIG_PATH);
+#error Unsupported platform
 #endif
 }
 

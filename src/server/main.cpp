@@ -84,7 +84,7 @@ static inline bool is_filename_module(std::string_view filename) {
 
 static std::vector<std::string> collect_module_paths() {
     namespace fs = std::filesystem;
-    fs::path exe_dir = fs::path(exe_path());
+    fs::path exe_dir = fs::path(exe_path()).parent_path();
 
     std::vector<std::string> results;
 
