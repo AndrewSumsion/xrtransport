@@ -11,11 +11,12 @@ target_include_directories(module_server_vulkan2 PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
     ${CMAKE_SOURCE_DIR}/external/spdlog/include
-    ${Vulkan_INCLUDE_DIRS}
 )
 
 target_link_libraries(module_server_vulkan2 PRIVATE
+    module_common_vulkan2
     xrtransport_transport
+    xrtransport_serialization
     Vulkan::Vulkan
 )
 

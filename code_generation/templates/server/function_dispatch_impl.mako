@@ -21,7 +21,7 @@ namespace xrtransport {
 <%utils:for_grouped_functions args="function">\
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
-    function_loader.ensure_function_loaded("${function.name}", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_${function.name}));
+    function_loader.ensure_function_loaded("${function.name}", function_loader.pfn_${function.name});
     // by this point, the function id has already been read, now read the params
     DeserializeContext d_ctx(msg_in.stream);
     % for param in function.params:

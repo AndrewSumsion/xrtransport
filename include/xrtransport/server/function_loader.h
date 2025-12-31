@@ -579,13 +579,18 @@ public:
 
 
     // defined inline in header so that it can be used by server modules
-    void ensure_function_loaded(const char* name, PFN_xrVoidFunction* function) {
+    template <typename FuncPtr,
+            typename = std::enable_if_t<
+                std::is_pointer_v<FuncPtr> &&
+                std::is_function_v<std::remove_pointer_t<FuncPtr>>
+            >>
+    void ensure_function_loaded(const char* name, FuncPtr& function) const {
         if (*function != nullptr) {
             // function is already loaded, do nothing
             return;
         }
 
-        XrResult result = pfn_xrGetInstanceProcAddr(loader_instance, name, function);
+        XrResult result = pfn_xrGetInstanceProcAddr(loader_instance, name, reinterpret_cast<PFN_xrVoidFunction*>(&function));
 
         if (!XR_SUCCEEDED(result)) {
             throw FunctionLoaderException("xrGetInstanceProcAddr for " + std::string(name) + " returned an error: " + std::to_string(result));

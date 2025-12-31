@@ -1,6 +1,10 @@
+#include "vulkan2_common.h"
+
 #include "xrtransport/client/module_interface.h"
 
 #include "xrtransport/transport/transport.h"
+#include "xrtransport/serialization/serializer.h"
+#include "xrtransport/serialization/deserializer.h"
 
 #include <vulkan/vulkan.h>
 #define XR_USE_GRAPHICS_API_VULKAN
@@ -10,6 +14,10 @@
 #include <spdlog/spdlog.h>
 
 #include <memory>
+#include <cassert>
+#include <cstring>
+
+using namespace xrtransport;
 
 namespace {
 
@@ -97,11 +105,6 @@ PFN_xrEndFrame pfn_xrEndFrame_next;
 XRAPI_ATTR XrResult XRAPI_CALL xrEndFrameImpl(
     XrSession                                   session,
     const XrFrameEndInfo*                       frameEndInfo);
-
-// Static data
-std::unique_ptr<xrtransport::Transport> transport;
-XrInstance saved_instance;
-PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
 
 // Module metadata
 const char* vulkan2_function_names[] {
@@ -201,11 +204,38 @@ ModuleInfo module_info {
     .instance_callback = instance_callback,
 };
 
+// Static data
+std::unique_ptr<xrtransport::Transport> transport;
+
+XrInstance saved_xr_instance;
+PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
+
+VkInstance saved_vk_instance;
+VkPhysicalDevice saved_vk_physical_device;
+VkDevice saved_vk_device;
+PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr;
+PFN_vkCreateInstance pfn_vkCreateInstance;
+PFN_vkEnumeratePhysicalDevices pfn_vkEnumeratePhysicalDevices;
+PFN_vkGetPhysicalDeviceProperties2 pfn_vkGetPhysicalDeviceProperties2;
+PFN_vkCreateDevice pfn_vkCreateDevice;
+
+bool graphics_requirements_called = false;
+
 // Function implementations
 void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn) {
     spdlog::info("Instance callback in Vulkan2 client module called");
-    saved_instance = instance;
+    saved_xr_instance = instance;
     pfn_xrGetInstanceProcAddr = pfn;
+}
+
+void add_extension_if_not_present(std::vector<const char*>& extensions, const char* extension) {
+    // return if extension is present
+    for (const char* e : extensions) {
+        if (std::strncmp(e, extension, VK_MAX_EXTENSION_NAME_SIZE) == 0) {
+            return;
+        }
+    }
+    extensions.push_back(extension);
 }
 
 XrResult xrCreateVulkanInstanceKHRImpl(
@@ -214,7 +244,43 @@ XrResult xrCreateVulkanInstanceKHRImpl(
     VkInstance*                                 vulkanInstance,
     VkResult*                                   vulkanResult)
 {
-    return XR_ERROR_RUNTIME_FAILURE;
+    assert(instance == saved_xr_instance);
+
+    pfn_vkGetInstanceProcAddr = createInfo->pfnGetInstanceProcAddr;
+    pfn_vkCreateInstance = reinterpret_cast<PFN_vkCreateInstance>(pfn_vkGetInstanceProcAddr(VK_NULL_HANDLE, "vkCreateInstance"));
+
+    // copy create info so that it can be edited
+    VkInstanceCreateInfo vulkan_create_info{};
+    std::memcpy(&vulkan_create_info, createInfo->vulkanCreateInfo, sizeof(VkInstanceCreateInfo));
+
+    // copy application info so that it can be edited
+    VkApplicationInfo vulkan_application_info{};
+    std::memcpy(&vulkan_application_info, vulkan_create_info.pApplicationInfo, sizeof(VkApplicationInfo));
+    vulkan_create_info.pApplicationInfo = &vulkan_application_info;
+
+    // update requested API version
+    vulkan_application_info.apiVersion = std::max(vulkan_application_info.apiVersion, VK_API_VERSION_1_1);
+
+    std::vector<const char*> requested_extensions(
+        vulkan_create_info.ppEnabledExtensionNames,
+        vulkan_create_info.ppEnabledExtensionNames + vulkan_create_info.enabledExtensionCount
+    );
+    // For future use:
+    // add_extension_if_not_present(requested_extensions, "VK_KHR_example_instance_extension");
+    vulkan_create_info.enabledExtensionCount = requested_extensions.size();
+    vulkan_create_info.ppEnabledExtensionNames = requested_extensions.data();
+
+    *vulkanResult = pfn_vkCreateInstance(&vulkan_create_info, createInfo->vulkanAllocator, vulkanInstance);
+    if (*vulkanResult != VK_SUCCESS) {
+        return XR_ERROR_VALIDATION_FAILURE; // not obvious from the spec which error I should return here
+    }
+
+    saved_vk_instance = *vulkanInstance;
+    pfn_vkEnumeratePhysicalDevices = reinterpret_cast<PFN_vkEnumeratePhysicalDevices>(pfn_vkGetInstanceProcAddr(saved_vk_instance, "vkEnumeratePhysicalDevices"));
+    pfn_vkGetPhysicalDeviceProperties2 = reinterpret_cast<PFN_vkGetPhysicalDeviceProperties2>(pfn_vkGetInstanceProcAddr(saved_vk_instance, "vkGetPhysicalDeviceProperties2"));
+    pfn_vkCreateDevice = reinterpret_cast<PFN_vkCreateDevice>(pfn_vkGetInstanceProcAddr(saved_vk_instance, "vkCreateDevice"));
+
+    return XR_SUCCESS;
 }
 
 XrResult xrCreateVulkanDeviceKHRImpl(
@@ -223,7 +289,32 @@ XrResult xrCreateVulkanDeviceKHRImpl(
     VkDevice*                                   vulkanDevice,
     VkResult*                                   vulkanResult)
 {
-    return XR_ERROR_RUNTIME_FAILURE;
+    assert(instance == saved_xr_instance);
+    assert(createInfo->vulkanPhysicalDevice == saved_vk_physical_device);
+    assert(pfn_vkGetInstanceProcAddr == createInfo->pfnGetInstanceProcAddr);
+
+    // it's odd that this function doesn't get passed a VkInstance, or at least it's not expliclty
+    // stated that a runtime should hold onto its VkInstance handle for later use.
+
+    VkDeviceCreateInfo vulkan_create_info{};
+    std::memcpy(&vulkan_create_info, createInfo->vulkanCreateInfo, sizeof(VkDeviceCreateInfo));
+
+    std::vector<const char*> requested_extensions(
+        vulkan_create_info.ppEnabledExtensionNames,
+        vulkan_create_info.ppEnabledExtensionNames + vulkan_create_info.enabledExtensionCount
+    );
+    add_extension_if_not_present(requested_extensions, VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME);
+    add_extension_if_not_present(requested_extensions, VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME);
+    vulkan_create_info.enabledExtensionCount = requested_extensions.size();
+    vulkan_create_info.ppEnabledExtensionNames = requested_extensions.data();
+
+    *vulkanResult = pfn_vkCreateDevice(createInfo->vulkanPhysicalDevice, &vulkan_create_info, createInfo->vulkanAllocator, vulkanDevice);
+    if (*vulkanResult != VK_SUCCESS) {
+        return XR_ERROR_VALIDATION_FAILURE;
+    }
+
+    saved_vk_device = *vulkanDevice;
+    return XR_SUCCESS;
 }
 
 XrResult xrGetVulkanGraphicsDevice2KHRImpl(
@@ -231,7 +322,49 @@ XrResult xrGetVulkanGraphicsDevice2KHRImpl(
     const XrVulkanGraphicsDeviceGetInfoKHR*     getInfo,
     VkPhysicalDevice*                           vulkanPhysicalDevice)
 {
-    return XR_ERROR_RUNTIME_FAILURE;
+    assert(instance == saved_xr_instance);
+    assert(getInfo->vulkanInstance == saved_vk_instance);
+
+    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_GET_PHYSICAL_DEVICE);
+    msg_out.flush();
+
+    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_RETURN_PHYSICAL_DEVICE);
+    DeserializeContext d_ctx(msg_in.stream);
+    uint8_t target_uuid[VK_UUID_SIZE]{};
+    deserialize_array(target_uuid, VK_UUID_SIZE, d_ctx);
+
+    uint32_t device_count{};
+    pfn_vkEnumeratePhysicalDevices(saved_vk_instance, &device_count, nullptr);
+    std::vector<VkPhysicalDevice> devices(device_count);
+    pfn_vkEnumeratePhysicalDevices(saved_vk_instance, &device_count, devices.data());
+
+    VkPhysicalDevice found_device = VK_NULL_HANDLE;
+
+    for (VkPhysicalDevice phys : devices) {
+        VkPhysicalDeviceIDProperties id_props{};
+        id_props.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
+
+        VkPhysicalDeviceProperties2 props2{};
+        props2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
+        props2.pNext = &id_props;
+
+        pfn_vkGetPhysicalDeviceProperties2(phys, &props2);
+
+        if (std::memcmp(id_props.deviceUUID, target_uuid, VK_UUID_SIZE) == 0) {
+            found_device = phys;
+            break;
+        }
+    }
+
+    if (!found_device) {
+        spdlog::error("Did not find any devices with UUID supplied by server");
+        return XR_ERROR_RUNTIME_FAILURE;
+    }
+
+    saved_vk_physical_device = found_device;
+    *vulkanPhysicalDevice = found_device;
+
+    return XR_SUCCESS;
 }
 
 XrResult xrGetVulkanGraphicsRequirements2KHRImpl(
@@ -239,7 +372,12 @@ XrResult xrGetVulkanGraphicsRequirements2KHRImpl(
     XrSystemId                                  systemId,
     XrGraphicsRequirementsVulkanKHR*            graphicsRequirements)
 {
-    return XR_ERROR_RUNTIME_FAILURE;
+    assert(instance == saved_xr_instance);
+    graphics_requirements_called = true;
+    graphicsRequirements->minApiVersionSupported = XR_MAKE_VERSION(1, 1, 0);
+    graphicsRequirements->maxApiVersionSupported = XR_MAKE_VERSION(1, 4, 0);
+
+    return XR_SUCCESS;
 }
 
 XrResult xrEnumerateSwapchainFormatsImpl(

@@ -87,17 +87,17 @@ void Server::run() {
 #ifdef _WIN32
         function_loader.ensure_function_loaded(
             "xrConvertWin32PerformanceCounterToTimeKHR",
-            reinterpret_cast<PFN_xrVoidFunction*>(&from_platform_time));
+            from_platform_time);
         function_loader.ensure_function_loaded(
             "xrConvertTimeToWin32PerformanceCounterKHR",
-            reinterpret_cast<PFN_xrVoidFunction*>(&to_platform_time));
+            to_platform_time);
 #else
         function_loader.ensure_function_loaded(
             "xrConvertTimespecTimeToTimeKHR",
-            reinterpret_cast<PFN_xrVoidFunction*>(&from_platform_time));
+            from_platform_time);
         function_loader.ensure_function_loaded(
             "xrConvertTimeToTimespecTimeKHR",
-            reinterpret_cast<PFN_xrVoidFunction*>(&to_platform_time));
+            to_platform_time);
 #endif
 
         // read incoming time
@@ -116,7 +116,7 @@ void Server::run() {
     });
 
     // gather supported extensions so modules can decide whether to enable
-    function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrEnumerateInstanceExtensionProperties));
+    function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", function_loader.pfn_xrEnumerateInstanceExtensionProperties);
     uint32_t num_extensions{};
     function_loader.pfn_xrEnumerateInstanceExtensionProperties(nullptr, 0, &num_extensions, nullptr);
     std::vector<XrExtensionProperties> extensions(num_extensions, {XR_TYPE_EXTENSION_PROPERTIES});
@@ -137,12 +137,15 @@ void Server::run() {
     // run transport worker loop synchronously
     transport.run(true);
 
-    // Once handler loop terminates, close the connection
+    // Once handler loop terminates, destroy the instance and close the connection
+    xrDestroyInstance(saved_instance);
+    saved_instance = XR_NULL_HANDLE;
+    function_loader = FunctionLoader(xrGetInstanceProcAddr); // clear all saved functions
     transport.close();
 }
 
 void Server::instance_handler(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateInstance", reinterpret_cast<PFN_xrVoidFunction*>(&function_loader.pfn_xrCreateInstance));
+    function_loader.ensure_function_loaded("xrCreateInstance", function_loader.pfn_xrCreateInstance);
     
     // Read in args sent by client
     DeserializeContext d_ctx(msg_in.stream);
