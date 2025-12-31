@@ -1,5 +1,4 @@
 {
-    "transport_type": "tcp",
-    "ip_address": "127.0.0.1",
-    "port": 5892
+    "transport_type": "unix",
+    "unix_path": "/tmp/xrtransport/transport.sock"
 }

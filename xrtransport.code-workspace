@@ -68,7 +68,7 @@
 						"value": "${workspaceFolder:monado}/build/openxr_monado-dev.json"
 					}
 				],
-				"args": ["tcp", "127.0.0.1", "5892"],
+				"args": ["unix", "/tmp/xrtransport/transport.sock"],
 				"preLaunchTask": "Delay"
 			},
 			{

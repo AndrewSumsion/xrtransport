@@ -25,6 +25,7 @@
 using asio::ip::tcp;
 using asio::local::stream_protocol;
 using namespace xrtransport;
+namespace fs = std::filesystem;
 
 // Type alias for TCP socket wrapped in DuplexStreamImpl
 using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
@@ -83,7 +84,6 @@ static inline bool is_filename_module(std::string_view filename) {
 }
 
 static std::vector<std::string> collect_module_paths() {
-    namespace fs = std::filesystem;
     fs::path exe_dir = fs::path(exe_path()).parent_path();
 
     std::vector<std::string> results;
@@ -129,11 +129,11 @@ static AcceptorImpl<stream_protocol::acceptor, stream_protocol::socket> create_u
     );
 }
 
-static inline void remove_socket_file(std::string path) {
-    // not necessary on Windows, Unix sockets are automatically cleaned up.
-#ifndef _WIN32
-    unlink(path.c_str());
-#endif
+static inline void prepare_socket_file(std::string path_str) {
+    fs::path path(path_str);
+    std::error_code ec;
+    fs::remove(path, ec); // ignore error if it doesn't exist
+    fs::create_directories(path.parent_path());
 }
 
 int main(int argc, char** argv) {
@@ -173,7 +173,7 @@ int main(int argc, char** argv) {
         }
 
         std::string unix_path = argv[2];
-        remove_socket_file(unix_path);
+        prepare_socket_file(unix_path);
 
         try {
             acceptor = std::make_unique<AcceptorImpl<stream_protocol::acceptor, stream_protocol::socket>>(create_unix_acceptor(io_context, unix_path));
