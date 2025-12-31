@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # Client-side OpenXR transport implementation
 message(STATUS "Building xrtransport client components")
@@ -29,6 +29,7 @@ target_include_directories(xrtransport_client PUBLIC
 )
 
 add_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client>)
+install_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client> client)
 
 # setup install directory
 install(TARGETS xrtransport_client

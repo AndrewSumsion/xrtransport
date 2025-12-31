@@ -62,6 +62,24 @@ function(add_openxr_manifest filename library_path)
     
 endfunction()
 
+function(install_openxr_manifest filename library_path install_path)
+    if(WIN32)
+        message(FATAL_ERROR "TODO: implement")
+    else()
+        install(CODE "
+            get_filename_component(library_filename ${library_path} NAME)
+            execute_process(
+                COMMAND ${CMAKE_COMMAND}
+                    -DINPUT_PATH=${CMAKE_CURRENT_SOURCE_DIR}/${filename}
+                    -DOUTPUT_PATH=${CMAKE_INSTALL_PREFIX}/${install_path}/${filename}
+                    -DLIBRARY_PATH=./\${library_filename}
+                    -P ${PROJECT_SOURCE_DIR}/create_openxr_manifest.cmake
+            )
+        ")
+    endif()
+    
+endfunction()
+
 # Build xrtransport
 add_subdirectory(src)
 

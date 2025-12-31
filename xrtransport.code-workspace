@@ -81,7 +81,7 @@
 				"environment": [
 					{
 						"name": "XR_RUNTIME_JSON",
-						"value": "${workspaceFolder:xrtransport}/build/default/debug/src/client/xrtransport_client_manifest.json"
+						"value": "${workspaceFolder:xrtransport}/build/default/debug/install/client/xrtransport_client_manifest.json"
 					},
 					{
 						"name": "XRTRANSPORT_CONFIG_PATH",
