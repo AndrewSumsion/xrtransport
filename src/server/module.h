@@ -69,10 +69,12 @@ public:
     Module(Module&& other) noexcept {
         handle = other.handle;
         pfn_on_init = other.pfn_on_init;
+        pfn_get_required_extensions = other.pfn_get_required_extensions;
         pfn_on_instance = other.pfn_on_instance;
         pfn_on_shutdown = other.pfn_on_shutdown;
         other.handle = nullptr;
         other.pfn_on_init = nullptr;
+        other.pfn_get_required_extensions = nullptr;
         other.pfn_on_instance = nullptr;
         other.pfn_on_shutdown = nullptr;
     }
@@ -84,10 +86,12 @@ public:
 
         handle = other.handle;
         pfn_on_init = other.pfn_on_init;
+        pfn_get_required_extensions = other.pfn_get_required_extensions;
         pfn_on_instance = other.pfn_on_instance;
         pfn_on_shutdown = other.pfn_on_shutdown;
         other.handle = nullptr;
         other.pfn_on_init = nullptr;
+        other.pfn_get_required_extensions = nullptr;
         other.pfn_on_instance = nullptr;
         other.pfn_on_shutdown = nullptr;
 

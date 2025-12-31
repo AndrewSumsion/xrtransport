@@ -11,7 +11,7 @@ std::size_t count_null_terminated(T* x) {
         return 0;
     std::size_t count = 0;
     while (*(x++) != T{}) ++count;
-    return count;
+    return count + 1; // + 1 to include null terminator
 }
 
 } // namespace xrtransport

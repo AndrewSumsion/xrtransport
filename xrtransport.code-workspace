@@ -59,8 +59,8 @@
 				"name": "Launch xrtransport server",
 				"type": "cppdbg",
 				"request": "launch",
-				"program": "${workspaceFolder:xrtransport}/build/default/debug/src/server/xrtransport_server_main",
-				"cwd": "${workspaceFolder:xrtransport}/build/default/debug/src/server",
+				"program": "${workspaceFolder:xrtransport}/build/default/debug/install/server/xrtransport_server_main",
+				"cwd": "${workspaceFolder:xrtransport}/build/default/debug/install/server",
 				"externalConsole": false,
 				"environment": [
 					{

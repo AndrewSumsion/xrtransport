@@ -30,8 +30,8 @@ private:
 
     // function pointers to runtime's timer functions
     // this works because the functions have the same signature on both platforms
-    XrResult (*from_platform_time)(XrInstance instance, const XRTRANSPORT_PLATFORM_TIME* platform_time, XrTime* time);
-    XrResult (*to_platform_time)(XrInstance instance, XrTime time, XRTRANSPORT_PLATFORM_TIME* platform_time);
+    XrResult (*from_platform_time)(XrInstance instance, const XRTRANSPORT_PLATFORM_TIME* platform_time, XrTime* time) = nullptr;
+    XrResult (*to_platform_time)(XrInstance instance, XrTime time, XRTRANSPORT_PLATFORM_TIME* platform_time) = nullptr;
 
 public:
     explicit Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);

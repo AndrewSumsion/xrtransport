@@ -10,7 +10,7 @@ namespace xrtransport {
 
 // TransportImpl implementation
 TransportImpl::TransportImpl(std::unique_ptr<SyncDuplexStream> stream)
-    : stream(std::move(stream)), should_stop(false) {
+    : stream(std::move(stream)), should_stop(false), worker_running(false) {
 }
 
 TransportImpl::~TransportImpl() {

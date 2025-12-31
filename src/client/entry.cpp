@@ -235,10 +235,6 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     // and I don't think anyone relies on their XrInstanceCreateInfo not being edited.
     XrBaseOutStructure* chain_base = reinterpret_cast<XrBaseOutStructure*>(const_cast<XrInstanceCreateInfo*>(create_info));
 
-    // TODO: save this, and use a Transport handler to relay messages from the host to this callback
-    // either way it needs to be removed from the chain before going to the host
-    auto debug_create_info = reinterpret_cast<XrDebugUtilsMessengerCreateInfoEXT*>(remove_from_chain(chain_base, XR_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT));
-
 #ifdef __ANDROID__
     // TODO: It is unclear if we will need to save the contents of this struct
     // either way it needs to be removed from the chain before going to the host

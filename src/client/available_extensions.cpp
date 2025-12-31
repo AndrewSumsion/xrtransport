@@ -74,20 +74,6 @@ static std::unordered_map<std::string, ExtensionInfo> collect_rpc_available_exte
 #ifdef __ANDROID__
     rpc_available_extensions.emplace("XR_KHR_android_create_instance", ExtensionInfo{3, {}});
 #endif
-    rpc_available_extensions.emplace("XR_EXT_debug_utils", ExtensionInfo{
-        5,
-        {
-            // TODO: these need to be stubbed out. They are marked available here but not implemented
-            // yet, so attempting to get them will just return XR_ERROR_FUNCTION_UNSUPPORTED
-            "xrSetDebugUtilsObjectNameEXT",
-            "xrCreateDebugUtilsMessengerEXT",
-            "xrDestroyDebugUtilsMessengerEXT",
-            "xrSubmitDebugUtilsMessageEXT",
-            "xrSessionBeginDebugUtilsLabelRegionEXT",
-            "xrSessionEndDebugUtilsLabelRegionEXT",
-            "xrSessionInsertDebugUtilsLabelEXT"
-        }
-    });
 
     return rpc_available_extensions;
 }
