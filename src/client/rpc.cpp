@@ -14,19 +14,34 @@
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
+#include "xrtransport/time.h"
 #include "xrtransport/util.h"
 
-#include "openxr/openxr.h"
-
+#include <openxr/openxr.h>
 #include <spdlog/spdlog.h>
+
+#include <string>
 #include <stdexcept>
 
 namespace xrtransport {
 
 namespace rpc {
 
+static XrTime start_rpc_timer() {
+    return get_time();
+}
+
+static void end_rpc_timer(XrTime start_time, std::string tag) {
+    XrTime end_time = get_time();
+    float duration_ms = (float)(end_time - start_time) / 1000000;
+    if (duration_ms > 1) {
+        spdlog::warn("RPC call {} took too long: {:.3f} ms", tag, duration_ms);
+    }
+}
+
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession session, const XrDigitalLensControlALMALENCE* digitalLensControl) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -47,6 +62,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetDigitalLensControlALMALENCE");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -57,6 +74,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const XrBodyTrackerCreateInfoBD* createInfo, XrBodyTrackerBD* bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -79,6 +97,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateBodyTrackerBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -87,6 +107,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -106,6 +127,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyBodyTrackerBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -114,6 +137,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker, const XrBodyJointsLocateInfoBD* locateInfo, XrBodyJointLocationsBD* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -136,6 +160,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateBodyJointsBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -146,6 +172,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorCreateInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -168,6 +195,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -176,6 +205,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSpatialAnchorCreateCompletionBD* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -198,6 +228,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -206,6 +238,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorPersistInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -228,6 +261,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrPersistSpatialAnchorAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -236,6 +271,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -258,6 +294,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrPersistSpatialAnchorCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -266,6 +304,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorUnpersistInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -288,6 +327,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -296,6 +337,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -318,6 +360,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -328,6 +372,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSharedSpatialAnchorDownloadInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -350,6 +395,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrDownloadSharedSpatialAnchorAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -358,6 +405,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -380,6 +428,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrDownloadSharedSpatialAnchorCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -388,6 +438,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD provider, const XrSpatialAnchorShareInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -410,6 +461,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrShareSpatialAnchorAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -418,6 +471,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -440,6 +494,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrShareSpatialAnchorCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -450,6 +506,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provider, const XrSceneCaptureInfoBD* info, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -472,6 +529,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrCaptureSceneAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -480,6 +539,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -502,6 +562,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrCaptureSceneCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -512,6 +574,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const XrAnchorSpaceCreateInfoBD* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -534,6 +597,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateAnchorSpaceBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -542,6 +607,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, const XrSenseDataProviderCreateInfoBD* createInfo, XrSenseDataProviderBD* provider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -564,6 +630,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
     deserialize(&result, d_ctx);
     deserialize_ptr(&provider, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSenseDataProviderBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -572,6 +640,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProviderBD provider, const XrSpatialEntityAnchorCreateInfoBD* createInfo, XrAnchorBD* anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -594,6 +663,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
     deserialize(&result, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialEntityAnchorBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -602,6 +673,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -621,6 +693,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyAnchorBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -629,6 +703,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderBD provider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -648,6 +723,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySenseDataProviderBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -656,6 +733,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotBD snapshot) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -675,6 +753,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySenseDataSnapshotBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -683,6 +763,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpatialEntityComponentTypeBD* componentTypes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -708,6 +789,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
     deserialize_ptr(&componentTypeCountOutput, d_ctx);
     deserialize_ptr(&componentTypes, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateSpatialEntityComponentTypesBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -716,6 +799,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* uuid) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -737,6 +821,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
     deserialize(&result, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetAnchorUuidBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -745,6 +831,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD snapshot, XrQueriedSenseDataGetInfoBD* getInfo, XrQueriedSenseDataBD* queriedSenseData) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -768,6 +855,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
     deserialize_ptr(&getInfo, d_ctx);
     deserialize_ptr(&queriedSenseData, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetQueriedSenseDataBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -776,6 +865,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProviderBD provider, XrSenseDataProviderStateBD* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -797,6 +887,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSenseDataProviderStateBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -805,6 +897,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnapshotBD snapshot, const XrSpatialEntityComponentGetInfoBD* getInfo, XrSpatialEntityComponentDataBaseHeaderBD* componentData) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -827,6 +920,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
     deserialize(&result, d_ctx);
     deserialize_xr(&componentData, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpatialEntityComponentDataBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -835,6 +930,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD snapshot, XrSpatialEntityIdBD entityId, XrUuidEXT* uuid) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -857,6 +953,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
     deserialize(&result, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpatialEntityUuidBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -865,6 +963,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataQueryInfoBD* queryInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -887,6 +986,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySenseDataAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -895,6 +996,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD provider, XrFutureEXT future, XrSenseDataQueryCompletionBD* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -917,6 +1019,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySenseDataCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -925,6 +1029,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProviderBD provider, const XrSenseDataProviderStartInfoBD* startInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -947,6 +1052,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrStartSenseDataProviderAsyncBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -955,6 +1062,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession session, XrFutureEXT future, XrFutureCompletionEXT* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -977,6 +1085,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrStartSenseDataProviderCompleteBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -985,6 +1095,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD provider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1004,6 +1115,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrStopSenseDataProviderBD");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1014,6 +1127,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPath interactionProfile, XrPath topLevelPath, XrBool32 isActive) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1036,6 +1150,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetInputDeviceActiveEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1044,6 +1160,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrSpace space, XrPosef pose) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1067,6 +1184,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetInputDeviceLocationEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1075,6 +1194,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrBool32 state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1097,6 +1217,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetInputDeviceStateBoolEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1105,6 +1227,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, float state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1127,6 +1250,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetInputDeviceStateFloatEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1135,6 +1260,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession session, XrPath topLevelPath, XrPath inputSourcePath, XrVector2f state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1157,6 +1283,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetInputDeviceStateVector2fEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1167,6 +1295,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instance, const XrDebugUtilsMessengerCreateInfoEXT* createInfo, XrDebugUtilsMessengerEXT* messenger) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1190,6 +1319,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
     deserialize_ptr(&createInfo->userData, d_ctx);
     deserialize_ptr(&messenger, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateDebugUtilsMessengerEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1198,6 +1329,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMessengerEXT messenger) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1217,6 +1349,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyDebugUtilsMessengerEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1225,6 +1359,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1245,6 +1380,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSessionBeginDebugUtilsLabelRegionEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1253,6 +1390,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession session) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1272,6 +1410,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSessionEndDebugUtilsLabelRegionEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1280,6 +1420,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession session, const XrDebugUtilsLabelEXT* labelInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1300,6 +1441,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSessionInsertDebugUtilsLabelEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1308,6 +1451,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance, const XrDebugUtilsObjectNameInfoEXT* nameInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1328,6 +1472,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetDebugUtilsObjectNameEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1336,6 +1482,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance, XrDebugUtilsMessageSeverityFlagsEXT messageSeverity, XrDebugUtilsMessageTypeFlagsEXT messageTypes, const XrDebugUtilsMessengerCallbackDataEXT* callbackData) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1360,6 +1507,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
     deserialize_ptr(&callbackData->objects, d_ctx);
     deserialize_ptr(&callbackData->sessionLabels, d_ctx);
 
+    end_rpc_timer(start_time, "xrSubmitDebugUtilsMessageEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1370,6 +1519,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
 XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFutureCancelInfoEXT* cancelInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1390,6 +1540,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrCancelFutureEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1398,6 +1550,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFuturePollInfoEXT* pollInfo, XrFuturePollResultEXT* pollResult) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1420,6 +1573,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
     deserialize(&result, d_ctx);
     deserialize_ptr(&pollResult, d_ctx);
 
+    end_rpc_timer(start_time, "xrPollFutureEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1430,6 +1585,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const XrHandTrackerCreateInfoEXT* createInfo, XrHandTrackerEXT* handTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1452,6 +1608,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&handTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateHandTrackerEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1460,6 +1618,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1479,6 +1638,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyHandTrackerEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1487,6 +1648,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracker, const XrHandJointsLocateInfoEXT* locateInfo, XrHandJointLocationsEXT* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1509,6 +1671,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateHandJointsEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1519,6 +1683,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsLevelEXT level) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1540,6 +1705,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPerfSettingsSetPerformanceLevelEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1550,6 +1717,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorBeginInfoEXT* beginInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1570,6 +1738,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrBeginPlaneDetectionEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1578,6 +1748,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const XrPlaneDetectorCreateInfoEXT* createInfo, XrPlaneDetectorEXT* planeDetector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1600,6 +1771,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&planeDetector, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreatePlaneDetectorEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1608,6 +1781,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT planeDetector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1627,6 +1801,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyPlaneDetectorEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1635,6 +1811,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT planeDetector, XrPlaneDetectionStateEXT* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1656,6 +1833,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetPlaneDetectionStateEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1664,6 +1843,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeDetector, const XrPlaneDetectorGetInfoEXT* info, XrPlaneDetectorLocationsEXT* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1686,6 +1866,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetPlaneDetectionsEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1694,6 +1876,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT planeDetector, uint64_t planeId, uint32_t polygonBufferIndex, XrPlaneDetectorPolygonBufferEXT* polygonBuffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1717,6 +1900,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
     deserialize(&result, d_ctx);
     deserialize_ptr(&polygonBuffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetPlanePolygonBufferEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1727,6 +1912,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
 XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session, XrPerfSettingsDomainEXT domain, XrPerfSettingsNotificationLevelEXT* notificationLevel, float* tempHeadroom, float* tempSlope) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1753,6 +1939,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
     deserialize_ptr(&tempHeadroom, d_ctx);
     deserialize_ptr(&tempSlope, d_ctx);
 
+    end_rpc_timer(start_time, "xrThermalGetTemperatureTrendEXT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1763,6 +1951,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const XrBodyTrackerCreateInfoFB* createInfo, XrBodyTrackerFB* bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1785,6 +1974,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateBodyTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1793,6 +1984,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1812,6 +2004,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyBodyTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1820,6 +2014,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, XrBodySkeletonFB* skeleton) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1841,6 +2036,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&skeleton, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetBodySkeletonFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1849,6 +2046,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker, const XrBodyJointsLocateInfoFB* locateInfo, XrBodyJointLocationsFB* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1871,6 +2069,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateBodyJointsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1881,6 +2081,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint32_t colorSpaceCapacityInput, uint32_t* colorSpaceCountOutput, XrColorSpaceFB* colorSpaces) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1905,6 +2106,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
     deserialize_ptr(&colorSpaceCountOutput, d_ctx);
     deserialize_ptr(&colorSpaces, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateColorSpacesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1913,6 +2116,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColorSpaceFB colorSpace) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1933,6 +2137,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetColorSpaceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1943,6 +2149,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession session, uint32_t displayRefreshRateCapacityInput, uint32_t* displayRefreshRateCountOutput, float* displayRefreshRates) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1967,6 +2174,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
     deserialize_ptr(&displayRefreshRateCountOutput, d_ctx);
     deserialize_ptr(&displayRefreshRates, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateDisplayRefreshRatesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -1975,6 +2184,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, float* displayRefreshRate) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -1996,6 +2206,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
     deserialize(&result, d_ctx);
     deserialize_ptr(&displayRefreshRate, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetDisplayRefreshRateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2004,6 +2216,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, float displayRefreshRate) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2024,6 +2237,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestDisplayRefreshRateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2034,6 +2249,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrEyeTrackerCreateInfoFB* createInfo, XrEyeTrackerFB* eyeTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2056,6 +2272,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
     deserialize(&result, d_ctx);
     deserialize_ptr(&eyeTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateEyeTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2064,6 +2282,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2083,6 +2302,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyEyeTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2091,6 +2312,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const XrEyeGazesInfoFB* gazeInfo, XrEyeGazesFB* eyeGazes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2113,6 +2335,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&eyeGazes, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetEyeGazesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2123,6 +2347,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const XrFaceTrackerCreateInfoFB* createInfo, XrFaceTrackerFB* faceTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2145,6 +2370,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&faceTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateFaceTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2153,6 +2380,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2172,6 +2400,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyFaceTrackerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2180,6 +2410,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB faceTracker, const XrFaceExpressionInfoFB* expressionInfo, XrFaceExpressionWeightsFB* expressionWeights) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2202,6 +2433,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
     deserialize(&result, d_ctx);
     deserialize_ptr(&expressionWeights, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetFaceExpressionWeightsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2212,6 +2445,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const XrFaceTrackerCreateInfo2FB* createInfo, XrFaceTracker2FB* faceTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2235,6 +2469,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
     deserialize_ptr(&createInfo->requestedDataSources, d_ctx);
     deserialize_ptr(&faceTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateFaceTracker2FB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2243,6 +2479,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2262,6 +2499,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyFaceTracker2FB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2270,6 +2509,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB faceTracker, const XrFaceExpressionInfo2FB* expressionInfo, XrFaceExpressionWeights2FB* expressionWeights) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2292,6 +2532,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
     deserialize(&result, d_ctx);
     deserialize_ptr(&expressionWeights, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetFaceExpressionWeights2FB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2302,6 +2544,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, const XrFoveationProfileCreateInfoFB* createInfo, XrFoveationProfileFB* profile) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2325,6 +2568,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
     deserialize_xr(&createInfo->next, d_ctx);
     deserialize_ptr(&profile, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateFoveationProfileFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2333,6 +2578,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB profile) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2352,6 +2598,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyFoveationProfileFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2362,6 +2610,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrHandTrackingMeshFB* mesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2383,6 +2632,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
     deserialize(&result, d_ctx);
     deserialize_ptr(&mesh, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetHandMeshFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2393,6 +2644,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
 XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const XrHapticActionInfo* hapticActionInfo, XrDevicePcmSampleRateGetInfoFB* deviceSampleRate) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2415,6 +2667,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&deviceSampleRate, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetDeviceSampleRateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2425,6 +2679,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const XrKeyboardSpaceCreateInfoFB* createInfo, XrSpace* keyboardSpace) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2448,6 +2703,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
     deserialize_xr(&createInfo->next, d_ctx);
     deserialize_ptr(&keyboardSpace, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateKeyboardSpaceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2456,6 +2713,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session, const XrKeyboardTrackingQueryFB* queryInfo, XrKeyboardTrackingDescriptionFB* keyboard) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2479,6 +2737,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
     deserialize_xr(&queryInfo->next, d_ctx);
     deserialize_ptr(&keyboard, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySystemTrackedKeyboardFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2489,6 +2749,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, const XrGeometryInstanceCreateInfoFB* createInfo, XrGeometryInstanceFB* outGeometryInstance) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2511,6 +2772,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
     deserialize(&result, d_ctx);
     deserialize_ptr(&outGeometryInstance, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateGeometryInstanceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2519,6 +2782,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const XrPassthroughCreateInfoFB* createInfo, XrPassthroughFB* outPassthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2541,6 +2805,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&outPassthrough, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreatePassthroughFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2549,6 +2815,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, const XrPassthroughLayerCreateInfoFB* createInfo, XrPassthroughLayerFB* outLayer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2571,6 +2838,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
     deserialize(&result, d_ctx);
     deserialize_ptr(&outLayer, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreatePassthroughLayerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2579,6 +2848,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB instance) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2598,6 +2868,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyGeometryInstanceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2606,6 +2878,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2625,6 +2898,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyPassthroughFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2633,6 +2908,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB layer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2652,6 +2928,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyPassthroughLayerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2660,6 +2938,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstanceFB instance, const XrGeometryInstanceTransformFB* transformation) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2680,6 +2959,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrGeometryInstanceSetTransformFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2688,6 +2969,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB layer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2707,6 +2989,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughLayerPauseFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2715,6 +2999,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB layer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2734,6 +3019,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughLayerResumeFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2742,6 +3029,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB layer, const XrPassthroughStyleFB* style) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2762,6 +3050,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughLayerSetStyleFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2770,6 +3060,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2789,6 +3080,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughPauseFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2797,6 +3090,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2816,6 +3110,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughStartFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2826,6 +3122,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrPassthroughLayerFB layer, const XrPassthroughKeyboardHandsIntensityFB* intensity) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2846,6 +3143,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPassthroughLayerSetKeyboardHandsIntensityFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2856,6 +3155,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrRenderModelPathInfoFB* paths) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2880,6 +3180,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
     deserialize_ptr(&pathCountOutput, d_ctx);
     deserialize_ptr(&paths, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateRenderModelPathsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2888,6 +3190,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, XrPath path, XrRenderModelPropertiesFB* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2910,6 +3213,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
     deserialize(&result, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetRenderModelPropertiesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2918,6 +3223,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRenderModelLoadInfoFB* info, XrRenderModelBufferFB* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2941,6 +3247,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
     deserialize_xr(&info->next, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrLoadRenderModelFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2951,6 +3259,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace space, XrBoundary2DFB* boundary2DOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -2973,6 +3282,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
     deserialize(&result, d_ctx);
     deserialize_ptr(&boundary2DOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceBoundary2DFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -2981,6 +3292,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSpace space, XrRect2Df* boundingBox2DOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3003,6 +3315,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
     deserialize(&result, d_ctx);
     deserialize_ptr(&boundingBox2DOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceBoundingBox2DFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3011,6 +3325,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSpace space, XrRect3DfFB* boundingBox3DOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3033,6 +3348,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
     deserialize(&result, d_ctx);
     deserialize_ptr(&boundingBox3DOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceBoundingBox3DFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3041,6 +3358,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace space, XrRoomLayoutFB* roomLayoutOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3063,6 +3381,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
     deserialize(&result, d_ctx);
     deserialize_ptr(&roomLayoutOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceRoomLayoutFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3071,6 +3391,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrSpace space, XrSemanticLabelsFB* semanticLabelsOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3093,6 +3414,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
     deserialize(&result, d_ctx);
     deserialize_ptr(&semanticLabelsOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceSemanticLabelsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3103,6 +3426,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const XrSceneCaptureRequestInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3125,6 +3449,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestSceneCaptureFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3135,6 +3461,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const XrSpatialAnchorCreateInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3157,6 +3484,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3165,6 +3494,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace space, uint32_t componentTypeCapacityInput, uint32_t* componentTypeCountOutput, XrSpaceComponentTypeFB* componentTypes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3189,6 +3519,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
     deserialize_ptr(&componentTypeCountOutput, d_ctx);
     deserialize_ptr(&componentTypes, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateSpaceSupportedComponentsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3197,6 +3529,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpaceComponentTypeFB componentType, XrSpaceComponentStatusFB* status) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3219,6 +3552,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
     deserialize(&result, d_ctx);
     deserialize_ptr(&status, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceComponentStatusFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3227,6 +3562,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3248,6 +3584,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
     deserialize(&result, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceUuidFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3256,6 +3594,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const XrSpaceComponentStatusSetInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3278,6 +3617,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetSpaceComponentStatusFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3288,6 +3629,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace space, XrSpaceContainerFB* spaceContainerOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3310,6 +3652,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
     deserialize(&result, d_ctx);
     deserialize_ptr(&spaceContainerOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceContainerFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3320,6 +3664,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQueryInfoBaseHeaderFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3342,6 +3687,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySpacesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3350,6 +3697,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, XrAsyncRequestIdFB requestId, XrSpaceQueryResultsFB* results) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3372,6 +3720,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&results, d_ctx);
 
+    end_rpc_timer(start_time, "xrRetrieveSpaceQueryResultsFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3382,6 +3732,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceShareInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3406,6 +3757,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
     deserialize_ptr(&info->users, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrShareSpacesFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3416,6 +3769,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEraseInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3438,6 +3792,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrEraseSpaceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3446,6 +3802,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSaveInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3468,6 +3825,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrSaveSpaceFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3478,6 +3837,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpaceListSaveInfoFB* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3501,6 +3861,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
     deserialize_ptr(&info->spaces, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrSaveSpaceListFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3511,6 +3873,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSpaceUserCreateInfoFB* info, XrSpaceUserFB* user) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3533,6 +3896,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
     deserialize(&result, d_ctx);
     deserialize_ptr(&user, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpaceUserFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3541,6 +3906,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3560,6 +3926,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpaceUserFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3568,6 +3936,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUserIdFB* userId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3589,6 +3958,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
     deserialize(&result, d_ctx);
     deserialize_ptr(&userId, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceUserIdFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3599,6 +3970,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSwapchainStateBaseHeaderFB* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3620,6 +3992,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
     deserialize(&result, d_ctx);
     deserialize_xr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSwapchainStateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3628,6 +4002,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const XrSwapchainStateBaseHeaderFB* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3648,6 +4023,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrUpdateSwapchainFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3658,6 +4035,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const XrTriangleMeshCreateInfoFB* createInfo, XrTriangleMeshFB* outTriangleMesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3680,6 +4058,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&outTriangleMesh, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateTriangleMeshFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3688,6 +4068,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3707,6 +4088,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) tr
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyTriangleMeshFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3715,6 +4098,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3734,6 +4118,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshBeginUpdateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3742,6 +4128,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangleMeshFB mesh, uint32_t* outVertexCount) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3763,6 +4150,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
     deserialize(&result, d_ctx);
     deserialize_ptr(&outVertexCount, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshBeginVertexBufferUpdateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3771,6 +4160,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, uint32_t vertexCount, uint32_t triangleCount) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3792,6 +4182,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshEndUpdateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3800,6 +4192,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleMeshFB mesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3819,6 +4212,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshEndVertexBufferUpdateFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3827,6 +4222,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB mesh, uint32_t** outIndexBuffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3848,6 +4244,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
     deserialize(&result, d_ctx);
     deserialize_ptr(&outIndexBuffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshGetIndexBufferFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3856,6 +4254,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB mesh, XrVector3f** outVertexBuffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3877,6 +4276,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
     deserialize(&result, d_ctx);
     deserialize_ptr(&outVertexBuffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrTriangleMeshGetVertexBufferFB");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3887,6 +4288,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instance, uint32_t pathCapacityInput, uint32_t* pathCountOutput, XrViveTrackerPathsHTCX* paths) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3911,6 +4313,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
     deserialize_ptr(&pathCountOutput, d_ctx);
     deserialize_ptr(&paths, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateViveTrackerPathsHTCX");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3921,6 +4325,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const XrSpatialAnchorCreateInfoHTC* createInfo, XrSpace* anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3943,6 +4348,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3951,6 +4358,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpatialAnchorNameHTC* name) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -3972,6 +4380,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
     deserialize(&result, d_ctx);
     deserialize_ptr(&name, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpatialAnchorNameHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -3982,6 +4392,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const XrBodyTrackerCreateInfoHTC* createInfo, XrBodyTrackerHTC* bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4004,6 +4415,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateBodyTrackerHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4012,6 +4425,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4031,6 +4445,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyBodyTrackerHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4039,6 +4455,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker, XrSpace baseSpace, uint32_t skeletonGenerationId, XrBodySkeletonHTC* skeleton) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4062,6 +4479,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
     deserialize(&result, d_ctx);
     deserialize_ptr(&skeleton, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetBodySkeletonHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4070,6 +4489,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracker, const XrBodyJointsLocateInfoHTC* locateInfo, XrBodyJointLocationsHTC* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4092,6 +4512,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateBodyJointsHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4102,6 +4524,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const XrFacialTrackerCreateInfoHTC* createInfo, XrFacialTrackerHTC* facialTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4124,6 +4547,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&facialTracker, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateFacialTrackerHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4132,6 +4557,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC facialTracker) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4151,6 +4577,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyFacialTrackerHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4159,6 +4587,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC facialTracker, XrFacialExpressionsHTC* facialExpressions) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4180,6 +4609,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
     deserialize(&result, d_ctx);
     deserialize_ptr(&facialExpressions, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetFacialExpressionsHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4190,6 +4621,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFoveationApplyInfoHTC* applyInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4211,6 +4643,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
     deserialize(&result, d_ctx);
     deserialize_ptr(&applyInfo->subImages, d_ctx);
 
+    end_rpc_timer(start_time, "xrApplyFoveationHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4221,6 +4655,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const XrPassthroughCreateInfoHTC* createInfo, XrPassthroughHTC* passthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4243,6 +4678,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&passthrough, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreatePassthroughHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4251,6 +4688,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthrough) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4270,6 +4708,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyPassthroughHTC");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4280,6 +4720,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D11KHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4302,6 +4743,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetD3D11GraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4312,6 +4755,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsD3D12KHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4334,6 +4778,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetD3D12GraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4344,6 +4790,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession session, const XrSwapchainCreateInfo* info, XrSwapchain* swapchain, jobject* surface) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4368,6 +4815,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
     deserialize_ptr(&swapchain, d_ctx);
     deserialize_ptr(&surface, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSwapchainAndroidSurfaceKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4378,6 +4827,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession session, XrAndroidThreadTypeKHR threadType, uint32_t threadId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4399,6 +4849,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetAndroidApplicationThreadKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4409,6 +4861,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instance, XrTime time, struct timespec* timespecTime) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4431,6 +4884,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
     deserialize(&result, d_ctx);
     deserialize_ptr(&timespecTime, d_ctx);
 
+    end_rpc_timer(start_time, "xrConvertTimeToTimespecTimeKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4439,6 +4894,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instance, const struct timespec* timespecTime, XrTime* time) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4462,6 +4918,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
     deserialize_ptr(&timespecTime, d_ctx);
     deserialize_ptr(&time, d_ctx);
 
+    end_rpc_timer(start_time, "xrConvertTimespecTimeToTimeKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4472,6 +4930,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4494,6 +4953,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrStructureTypeToString2KHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4504,6 +4965,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
 XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4523,6 +4985,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrInitializeLoaderKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4533,6 +4997,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsMetalKHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4555,6 +5020,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMetalGraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4565,6 +5032,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLKHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4587,6 +5055,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetOpenGLGraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4597,6 +5067,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4619,6 +5090,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetOpenGLESGraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4629,6 +5102,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewConfigurationType viewConfigurationType, uint32_t viewIndex, XrVisibilityMaskTypeKHR visibilityMaskType, XrVisibilityMaskKHR* visibilityMask) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4653,6 +5127,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
     deserialize(&result, d_ctx);
     deserialize_ptr(&visibilityMask, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVisibilityMaskKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4663,6 +5139,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4688,6 +5165,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVulkanDeviceExtensionsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4696,6 +5175,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance, XrSystemId systemId, VkInstance vkInstance, VkPhysicalDevice* vkPhysicalDevice) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4719,6 +5199,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
     deserialize(&result, d_ctx);
     deserialize_ptr(&vkPhysicalDevice, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVulkanGraphicsDeviceKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4727,6 +5209,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance instance, XrSystemId systemId, XrGraphicsRequirementsVulkanKHR* graphicsRequirements) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4749,6 +5232,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
     deserialize(&result, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVulkanGraphicsRequirementsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4757,6 +5242,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance instance, XrSystemId systemId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4782,6 +5268,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVulkanInstanceExtensionsKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4792,6 +5280,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, const XrVulkanDeviceCreateInfoKHR* createInfo, VkDevice* vulkanDevice, VkResult* vulkanResult) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4816,6 +5305,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
     deserialize_ptr(&vulkanDevice, d_ctx);
     deserialize_ptr(&vulkanResult, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateVulkanDeviceKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4824,6 +5315,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, const XrVulkanInstanceCreateInfoKHR* createInfo, VkInstance* vulkanInstance, VkResult* vulkanResult) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4848,6 +5340,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
     deserialize_ptr(&vulkanInstance, d_ctx);
     deserialize_ptr(&vulkanResult, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateVulkanInstanceKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4856,6 +5350,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance, const XrVulkanGraphicsDeviceGetInfoKHR* getInfo, VkPhysicalDevice* vulkanPhysicalDevice) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4878,6 +5373,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
     deserialize(&result, d_ctx);
     deserialize_ptr(&vulkanPhysicalDevice, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVulkanGraphicsDevice2KHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4888,6 +5385,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInstance instance, XrTime time, LARGE_INTEGER* performanceCounter) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4910,6 +5408,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
     deserialize(&result, d_ctx);
     deserialize_ptr(&performanceCounter, d_ctx);
 
+    end_rpc_timer(start_time, "xrConvertTimeToWin32PerformanceCounterKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4918,6 +5418,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInstance instance, const LARGE_INTEGER* performanceCounter, XrTime* time) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4940,6 +5441,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
     deserialize(&result, d_ctx);
     deserialize_ptr(&time, d_ctx);
 
+    end_rpc_timer(start_time, "xrConvertWin32PerformanceCounterToTimeKHR");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4950,6 +5453,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStartInfoMETA* info, XrAsyncRequestIdFB* advertisementRequestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -4973,6 +5477,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
     deserialize_ptr(&info->buffer, d_ctx);
     deserialize_ptr(&advertisementRequestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrStartColocationAdvertisementMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -4981,6 +5487,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStartInfoMETA* info, XrAsyncRequestIdFB* discoveryRequestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5003,6 +5510,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
     deserialize(&result, d_ctx);
     deserialize_ptr(&discoveryRequestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrStartColocationDiscoveryMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5011,6 +5520,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession session, const XrColocationAdvertisementStopInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5033,6 +5543,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrStopColocationAdvertisementMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5041,6 +5553,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, const XrColocationDiscoveryStopInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5063,6 +5576,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrStopColocationDiscoveryMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5073,6 +5588,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo, XrEnvironmentDepthImageMETA* environmentDepthImage) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5095,6 +5611,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
     deserialize(&result, d_ctx);
     deserialize_ptr(&environmentDepthImage, d_ctx);
 
+    end_rpc_timer(start_time, "xrAcquireEnvironmentDepthImageMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5103,6 +5621,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession session, const XrEnvironmentDepthProviderCreateInfoMETA* createInfo, XrEnvironmentDepthProviderMETA* environmentDepthProvider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5125,6 +5644,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
     deserialize(&result, d_ctx);
     deserialize_ptr(&environmentDepthProvider, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateEnvironmentDepthProviderMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5133,6 +5654,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo, XrEnvironmentDepthSwapchainMETA* swapchain) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5155,6 +5677,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
     deserialize(&result, d_ctx);
     deserialize_ptr(&swapchain, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateEnvironmentDepthSwapchainMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5163,6 +5687,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5182,6 +5707,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyEnvironmentDepthProviderMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5190,6 +5717,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironmentDepthSwapchainMETA swapchain) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5209,6 +5737,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyEnvironmentDepthSwapchainMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5217,6 +5747,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(XrEnvironmentDepthSwapchainMETA swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5241,6 +5772,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
     deserialize_ptr(&imageCountOutput, d_ctx);
     deserialize_xr_array(&images, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateEnvironmentDepthSwapchainImagesMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5249,6 +5782,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnvironmentDepthSwapchainMETA swapchain, XrEnvironmentDepthSwapchainStateMETA* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5270,6 +5804,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetEnvironmentDepthSwapchainStateMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5278,6 +5814,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider, const XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5298,6 +5835,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetEnvironmentDepthHandRemovalMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5306,6 +5845,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5325,6 +5865,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrStartEnvironmentDepthProviderMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5333,6 +5875,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentDepthProviderMETA environmentDepthProvider) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5352,6 +5895,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrStopEnvironmentDepthProviderMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5362,6 +5907,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession session, XrFoveationEyeTrackedStateMETA* foveationState) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5383,6 +5929,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
     deserialize(&result, d_ctx);
     deserialize_ptr(&foveationState, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetFoveationEyeTrackedStateMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5393,6 +5941,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB passthrough, const XrPassthroughColorLutCreateInfoMETA* createInfo, XrPassthroughColorLutMETA* colorLut) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5415,6 +5964,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
     deserialize(&result, d_ctx);
     deserialize_ptr(&colorLut, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreatePassthroughColorLutMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5423,6 +5974,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5442,6 +5994,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyPassthroughColorLutMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5450,6 +6004,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColorLutMETA colorLut, const XrPassthroughColorLutUpdateInfoMETA* updateInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5470,6 +6025,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrUpdatePassthroughColorLutMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5480,6 +6037,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session, XrPassthroughPreferencesMETA* preferences) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5501,6 +6059,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
     deserialize(&result, d_ctx);
     deserialize_ptr(&preferences, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetPassthroughPreferencesMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5511,6 +6071,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrInstance instance, uint32_t counterPathCapacityInput, uint32_t* counterPathCountOutput, XrPath* counterPaths) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5535,6 +6096,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
     deserialize_ptr(&counterPathCountOutput, d_ctx);
     deserialize_ptr(&counterPaths, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumeratePerformanceMetricsCounterPathsMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5543,6 +6106,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession session, XrPerformanceMetricsStateMETA* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5564,6 +6128,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetPerformanceMetricsStateMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5572,6 +6138,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession session, XrPath counterPath, XrPerformanceMetricsCounterMETA* counter) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5594,6 +6161,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
     deserialize(&result, d_ctx);
     deserialize_ptr(&counter, d_ctx);
 
+    end_rpc_timer(start_time, "xrQueryPerformanceMetricsCounterMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5602,6 +6171,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession session, const XrPerformanceMetricsStateMETA* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5622,6 +6192,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetPerformanceMetricsStateMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5632,6 +6204,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession session, const XrRecommendedLayerResolutionGetInfoMETA* info, XrRecommendedLayerResolutionMETA* resolution) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5654,6 +6227,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
     deserialize(&result, d_ctx);
     deserialize_ptr(&resolution, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetRecommendedLayerResolutionMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5664,6 +6239,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5684,6 +6260,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPauseSimultaneousHandsAndControllersTrackingMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5692,6 +6270,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingMETA(XrSession session, const XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5712,6 +6291,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrResumeSimultaneousHandsAndControllersTrackingMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5722,6 +6303,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const XrSpaceTriangleMeshGetInfoMETA* getInfo, XrSpaceTriangleMeshMETA* triangleMeshOutput) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5744,6 +6326,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&triangleMeshOutput, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpaceTriangleMeshMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5754,6 +6338,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShareSpacesInfoMETA* info, XrAsyncRequestIdFB* requestId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5777,6 +6362,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
     deserialize_ptr(&info->spaces, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
+    end_rpc_timer(start_time, "xrShareSpacesMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5787,6 +6374,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
 XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5807,6 +6395,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrChangeVirtualKeyboardTextContextMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5815,6 +6405,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, const XrVirtualKeyboardCreateInfoMETA* createInfo, XrVirtualKeyboardMETA* keyboard) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5837,6 +6428,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
     deserialize(&result, d_ctx);
     deserialize_ptr(&keyboard, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateVirtualKeyboardMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5845,6 +6438,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession session, XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardSpaceCreateInfoMETA* createInfo, XrSpace* keyboardSpace) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5868,6 +6462,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
     deserialize(&result, d_ctx);
     deserialize_ptr(&keyboardSpace, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateVirtualKeyboardSpaceMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5876,6 +6472,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMETA keyboard) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5895,6 +6492,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyVirtualKeyboardMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5903,6 +6502,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKeyboardMETA keyboard, uint32_t textureIdCapacityInput, uint32_t* textureIdCountOutput, uint64_t* textureIds) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5927,6 +6527,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
     deserialize_ptr(&textureIdCountOutput, d_ctx);
     deserialize_ptr(&textureIds, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVirtualKeyboardDirtyTexturesMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5935,6 +6537,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVirtualKeyboardMETA keyboard, XrVirtualKeyboardModelAnimationStatesMETA* animationStates) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5956,6 +6559,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
     deserialize(&result, d_ctx);
     deserialize_ptr(&animationStates, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVirtualKeyboardModelAnimationStatesMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5964,6 +6569,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardMETA keyboard, float* scale) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -5985,6 +6591,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
     deserialize(&result, d_ctx);
     deserialize_ptr(&scale, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVirtualKeyboardScaleMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -5993,6 +6601,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyboardMETA keyboard, uint64_t textureId, XrVirtualKeyboardTextureDataMETA* textureData) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6015,6 +6624,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
     deserialize(&result, d_ctx);
     deserialize_ptr(&textureData, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetVirtualKeyboardTextureDataMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6023,6 +6634,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardInputInfoMETA* info, XrPosef* interactorRootPose) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6045,6 +6657,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
     deserialize(&result, d_ctx);
     deserialize_ptr(&interactorRootPose, d_ctx);
 
+    end_rpc_timer(start_time, "xrSendVirtualKeyboardInputMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6053,6 +6667,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6073,6 +6688,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetVirtualKeyboardModelVisibilityMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6081,6 +6698,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKeyboardMETA keyboard, const XrVirtualKeyboardLocationInfoMETA* locationInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6101,6 +6719,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSuggestVirtualKeyboardLocationMETA");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6111,6 +6731,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession session, const XrCoordinateSpaceCreateInfoML* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6133,6 +6754,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpaceFromCoordinateFrameUIDML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6143,6 +6766,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession session, const XrFacialExpressionClientCreateInfoML* createInfo, XrFacialExpressionClientML* facialExpressionClient) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6165,6 +6789,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
     deserialize(&result, d_ctx);
     deserialize_ptr(&facialExpressionClient, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateFacialExpressionClientML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6173,6 +6799,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpressionClientML facialExpressionClient) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6192,6 +6819,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyFacialExpressionClientML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6200,6 +6829,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFacialExpressionClientML facialExpressionClient, const XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo, uint32_t blendShapeCount, XrFacialExpressionBlendShapePropertiesML* blendShapes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6223,6 +6853,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
     deserialize(&result, d_ctx);
     deserialize_ptr(&blendShapes, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetFacialExpressionBlendShapePropertiesML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6233,6 +6865,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession session, const XrUuidEXT* mapUuid, XrExportedLocalizationMapML* map) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6255,6 +6888,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
     deserialize(&result, d_ctx);
     deserialize_ptr(&map, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateExportedLocalizationMapML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6263,6 +6898,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLocalizationMapML map) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6282,6 +6918,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyExportedLocalizationMapML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6290,6 +6928,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, const XrLocalizationEnableEventsInfoML* info) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6310,6 +6949,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnableLocalizationEventsML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6318,6 +6959,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLocalizationMapML map, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6342,6 +6984,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetExportedLocalizationMapDataML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6350,6 +6994,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, const XrLocalizationMapImportInfoML* importInfo, XrUuidEXT* mapUuid) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6373,6 +7018,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
     deserialize_ptr(&importInfo->data, d_ctx);
     deserialize_ptr(&mapUuid, d_ctx);
 
+    end_rpc_timer(start_time, "xrImportLocalizationMapML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6381,6 +7028,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, const XrLocalizationMapQueryInfoBaseHeaderML* queryInfo, uint32_t mapCapacityInput, uint32_t* mapCountOutput, XrLocalizationMapML* maps) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6406,6 +7054,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
     deserialize_ptr(&mapCountOutput, d_ctx);
     deserialize_ptr(&maps, d_ctx);
 
+    end_rpc_timer(start_time, "xrQueryLocalizationMapsML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6414,6 +7064,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, const XrMapLocalizationRequestInfoML* requestInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6434,6 +7085,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestMapLocalizationML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6444,6 +7097,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const XrMarkerDetectorCreateInfoML* createInfo, XrMarkerDetectorML* markerDetector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6466,6 +7120,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&markerDetector, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateMarkerDetectorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6474,6 +7130,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const XrMarkerSpaceCreateInfoML* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6496,6 +7153,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateMarkerSpaceML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6504,6 +7163,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML markerDetector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6523,6 +7183,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyMarkerDetectorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6531,6 +7193,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML markerDetector, XrMarkerDetectorStateML* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6552,6 +7215,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerDetectorStateML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6560,6 +7225,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* meters) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6582,6 +7248,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
     deserialize(&result, d_ctx);
     deserialize_ptr(&meters, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerLengthML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6590,6 +7258,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint64_t* number) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6612,6 +7281,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
     deserialize(&result, d_ctx);
     deserialize_ptr(&number, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerNumberML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6620,6 +7291,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML markerDetector, XrMarkerML marker, float* reprojectionErrorMeters) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6642,6 +7314,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
     deserialize(&result, d_ctx);
     deserialize_ptr(&reprojectionErrorMeters, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerReprojectionErrorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6650,6 +7324,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDetector, XrMarkerML marker, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6675,6 +7350,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerStringML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6683,6 +7360,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector, uint32_t markerCapacityInput, uint32_t* markerCountOutput, XrMarkerML* markers) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6707,6 +7385,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
     deserialize_ptr(&markerCountOutput, d_ctx);
     deserialize_ptr(&markers, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkersML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6715,6 +7395,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML markerDetector, XrMarkerDetectorSnapshotInfoML* snapshotInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6736,6 +7417,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
     deserialize(&result, d_ctx);
     deserialize_ptr(&snapshotInfo, d_ctx);
 
+    end_rpc_timer(start_time, "xrSnapshotMarkerDetectorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6746,6 +7429,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, const XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6768,6 +7452,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorsAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6776,6 +7462,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession session, XrFutureEXT future, XrCreateSpatialAnchorsCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6798,6 +7485,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorsCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6806,6 +7495,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpatialAnchorStateML* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6827,6 +7517,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpatialAnchorStateML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6837,6 +7529,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session, const XrSpatialAnchorsCreateStorageInfoML* createInfo, XrSpatialAnchorsStorageML* storage) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6859,6 +7552,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
     deserialize(&result, d_ctx);
     deserialize_ptr(&storage, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorsStorageML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6867,6 +7562,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsDeleteInfoML* deleteInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6889,6 +7585,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrDeleteSpatialAnchorsAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6897,6 +7595,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsDeleteCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6919,6 +7618,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrDeleteSpatialAnchorsCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6927,6 +7628,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchorsStorageML storage) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6946,6 +7648,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpatialAnchorsStorageML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6954,6 +7658,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsPublishInfoML* publishInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -6976,6 +7681,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrPublishSpatialAnchorsAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -6984,6 +7691,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsPublishCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7006,6 +7714,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrPublishSpatialAnchorsCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7014,6 +7724,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7036,6 +7747,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySpatialAnchorsAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7044,6 +7757,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsQueryCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7066,6 +7780,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrQuerySpatialAnchorsCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7074,6 +7790,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatialAnchorsStorageML storage, const XrSpatialAnchorsUpdateExpirationInfoML* updateInfo, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7096,6 +7813,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrUpdateSpatialAnchorsExpirationAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7104,6 +7823,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpatialAnchorsStorageML storage, XrFutureEXT future, XrSpatialAnchorsUpdateExpirationCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7126,6 +7846,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrUpdateSpatialAnchorsExpirationCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7136,6 +7858,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
 XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, const XrSystemNotificationsSetInfoML* info) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7156,6 +7879,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetSystemNotificationsML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7166,6 +7891,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
 XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instance, const XrUserCalibrationEnableEventsInfoML* enableInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7186,6 +7912,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnableUserCalibrationEventsML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7196,6 +7924,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferSizeML* size, XrWorldMeshBufferML* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7219,6 +7948,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
     deserialize_xr(&size->next, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrAllocateWorldMeshBufferML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7227,6 +7958,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, const XrWorldMeshDetectorCreateInfoML* createInfo, XrWorldMeshDetectorML* detector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7249,6 +7981,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
     deserialize(&result, d_ctx);
     deserialize_ptr(&detector, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateWorldMeshDetectorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7257,6 +7991,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorML detector) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7276,6 +8011,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyWorldMeshDetectorML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7284,6 +8021,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferML* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7306,6 +8044,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
     deserialize_xr(&buffer->next, d_ctx);
     deserialize_ptr(&buffer->buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrFreeWorldMeshBufferML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7314,6 +8054,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDetectorML detector, const XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo, XrWorldMeshBufferSizeML* size) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7336,6 +8077,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
     deserialize(&result, d_ctx);
     deserialize_ptr(&size, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetWorldMeshBufferRecommendSizeML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7344,6 +8087,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshGetInfoML* getInfo, XrWorldMeshBufferML* buffer, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7369,6 +8113,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
     deserialize_ptr(&buffer, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestWorldMeshAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7377,6 +8123,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorML detector, const XrWorldMeshRequestCompletionInfoML* completionInfo, XrFutureEXT future, XrWorldMeshRequestCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7400,6 +8147,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestWorldMeshCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7408,6 +8157,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetectorML detector, const XrWorldMeshStateRequestInfoML* stateRequest, XrFutureEXT* future) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7430,6 +8180,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
     deserialize(&result, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestWorldMeshStateAsyncML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7438,6 +8190,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDetectorML detector, XrFutureEXT future, XrWorldMeshStateRequestCompletionML* completion) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7460,6 +8213,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
     deserialize(&result, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestWorldMeshStateCompleteML");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7470,6 +8225,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT handTracker, const XrForceFeedbackCurlApplyLocationsMNDX* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7491,6 +8247,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations->locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrApplyForceFeedbackCurlMNDX");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7501,6 +8259,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t modeCapacityInput, uint32_t* modeCountOutput, XrReprojectionModeMSFT* modes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7527,6 +8286,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
     deserialize_ptr(&modeCountOutput, d_ctx);
     deserialize_ptr(&modes, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateReprojectionModesMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7537,6 +8298,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, XrPath topLevelUserPath, XrControllerModelKeyStateMSFT* controllerModelKeyState) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7559,6 +8321,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&controllerModelKeyState, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetControllerModelKeyMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7567,6 +8331,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelPropertiesMSFT* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7589,6 +8354,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
     deserialize(&result, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetControllerModelPropertiesMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7597,6 +8364,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, XrControllerModelStateMSFT* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7619,6 +8387,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetControllerModelStateMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7627,6 +8397,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrControllerModelKeyMSFT modelKey, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7652,6 +8423,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrLoadControllerModelMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7662,6 +8435,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTracker, const XrHandMeshSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7684,6 +8458,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateHandMeshSpaceMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7692,6 +8468,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker, const XrHandMeshUpdateInfoMSFT* updateInfo, XrHandMeshMSFT* handMesh) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7714,6 +8491,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
     deserialize(&result, d_ctx);
     deserialize_ptr(&handMesh, d_ctx);
 
+    end_rpc_timer(start_time, "xrUpdateHandMeshMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7724,6 +8503,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrSession session, IUnknown* perceptionAnchor, XrSpatialAnchorMSFT* anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7747,6 +8527,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
     deserialize_ptr(&perceptionAnchor, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorFromPerceptionAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7755,6 +8537,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrSession session, XrSpatialAnchorMSFT anchor, IUnknown** perceptionAnchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7777,6 +8560,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
     deserialize(&result, d_ctx);
     deserialize_ptr(&perceptionAnchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrTryGetPerceptionAnchorFromSpatialAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7787,6 +8572,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7812,6 +8598,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSceneMarkerDecodedStringMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7820,6 +8608,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, const XrUuidMSFT* markerId, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, uint8_t* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7845,6 +8634,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSceneMarkerRawDataMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7855,6 +8646,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrNewSceneComputeInfoMSFT* computeInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7875,6 +8667,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrComputeNewSceneMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7883,6 +8677,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneCreateInfoMSFT* createInfo, XrSceneMSFT* scene) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7905,6 +8700,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
     deserialize(&result, d_ctx);
     deserialize_ptr(&scene, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSceneMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7913,6 +8710,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, const XrSceneObserverCreateInfoMSFT* createInfo, XrSceneObserverMSFT* sceneObserver) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7935,6 +8733,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
     deserialize(&result, d_ctx);
     deserialize_ptr(&sceneObserver, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSceneObserverMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7943,6 +8743,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7962,6 +8763,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySceneMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7970,6 +8773,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sceneObserver) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -7989,6 +8793,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySceneObserverMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -7997,6 +8803,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance instance, XrSystemId systemId, uint32_t featureCapacityInput, uint32_t* featureCountOutput, XrSceneComputeFeatureMSFT* features) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8022,6 +8829,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
     deserialize_ptr(&featureCountOutput, d_ctx);
     deserialize_ptr(&features, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateSceneComputeFeaturesMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8030,6 +8839,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsGetInfoMSFT* getInfo, XrSceneComponentsMSFT* components) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8052,6 +8862,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&components, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSceneComponentsMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8060,6 +8872,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sceneObserver, XrSceneComputeStateMSFT* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8081,6 +8894,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSceneComputeStateMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8089,6 +8904,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, const XrSceneMeshBuffersGetInfoMSFT* getInfo, XrSceneMeshBuffersMSFT* buffers) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8111,6 +8927,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffers, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSceneMeshBuffersMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8119,6 +8937,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, const XrSceneComponentsLocateInfoMSFT* locateInfo, XrSceneComponentLocationsMSFT* locations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8141,6 +8960,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
     deserialize(&result, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateSceneComponentsMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8151,6 +8972,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneObserver, const XrSceneDeserializeInfoMSFT* deserializeInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8171,6 +8993,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDeserializeSceneMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8179,6 +9003,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT scene, const XrSerializedSceneFragmentDataGetInfoMSFT* getInfo, uint32_t countInput, uint32_t* readOutput, uint8_t* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8204,6 +9029,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
     deserialize_ptr(&readOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSerializedSceneFragmentDataMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8214,6 +9041,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, const XrSpatialAnchorCreateInfoMSFT* createInfo, XrSpatialAnchorMSFT* anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8236,6 +9064,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
     deserialize(&result, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8244,6 +9074,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session, const XrSpatialAnchorSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8266,6 +9097,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorSpaceMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8274,6 +9107,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT anchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8293,6 +9127,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpatialAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8303,6 +9139,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8322,6 +9159,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrClearSpatialAnchorStoreMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8330,6 +9169,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSession session, const XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo, XrSpatialAnchorMSFT* spatialAnchor) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8352,6 +9192,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
     deserialize(&result, d_ctx);
     deserialize_ptr(&spatialAnchor, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorFromPersistedNameMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8360,6 +9202,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSession session, XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8381,6 +9224,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
     deserialize(&result, d_ctx);
     deserialize_ptr(&spatialAnchorStore, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialAnchorStoreConnectionMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8389,6 +9234,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8408,6 +9254,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpatialAnchorStoreConnectionMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8416,6 +9264,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, uint32_t spatialAnchorNameCapacityInput, uint32_t* spatialAnchorNameCountOutput, XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8440,6 +9289,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
     deserialize_ptr(&spatialAnchorNameCountOutput, d_ctx);
     deserialize_ptr(&spatialAnchorNames, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumeratePersistedSpatialAnchorNamesMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8448,6 +9299,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8468,6 +9320,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrPersistSpatialAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8476,6 +9330,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore, const XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8496,6 +9351,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8506,6 +9363,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession session, const XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8528,6 +9386,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSpatialGraphNodeSpaceMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8536,6 +9396,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8555,6 +9416,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpatialGraphNodeBindingMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8563,6 +9426,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpatialGraphNodeBindingMSFT nodeBinding, const XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo, XrSpatialGraphNodeBindingPropertiesMSFT* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8585,6 +9449,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
     deserialize(&result, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSpatialGraphNodeBindingPropertiesMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8593,6 +9459,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSession session, const XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo, XrSpatialGraphNodeBindingMSFT* nodeBinding) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8615,6 +9482,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
     deserialize(&result, d_ctx);
     deserialize_ptr(&nodeBinding, d_ctx);
 
+    end_rpc_timer(start_time, "xrTryCreateSpatialGraphStaticNodeBindingMSFT");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8625,6 +9494,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8646,6 +9516,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetAudioInputDeviceGuidOculus");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8654,6 +9526,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance instance, wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8675,6 +9548,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetAudioOutputDeviceGuidOculus");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8685,6 +9560,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession session, uint32_t cameraCapacityInput, uint32_t* cameraCountOutput, XrExternalCameraOCULUS* cameras) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8709,6 +9585,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
     deserialize_ptr(&cameraCountOutput, d_ctx);
     deserialize_ptr(&cameras, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateExternalCamerasOCULUS");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8719,6 +9597,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSession session, XrTrackingOptimizationSettingsDomainQCOM domain, XrTrackingOptimizationSettingsHintQCOM hint) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8740,6 +9619,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetTrackingOptimizationSettingsHintQCOM");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8750,6 +9631,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession session, XrBool32 enabled) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8770,6 +9652,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetEnvironmentDepthEstimationVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8780,6 +9664,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const XrMarkerSpaceCreateInfoVARJO* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8802,6 +9687,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateMarkerSpaceVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8810,6 +9697,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t markerId, XrExtent2Df* size) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8832,6 +9720,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
     deserialize(&result, d_ctx);
     deserialize_ptr(&size, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetMarkerSizeVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8840,6 +9730,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession session, uint64_t markerId, XrBool32 enable) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8861,6 +9752,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetMarkerTrackingPredictionVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8869,6 +9762,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session, uint64_t markerId, XrDuration timeout) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8890,6 +9784,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetMarkerTrackingTimeoutVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8898,6 +9794,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBool32 enabled) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8918,6 +9815,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetMarkerTrackingVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8928,6 +9827,7 @@ catch (const std::exception& e) {
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
 XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float offset) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8948,6 +9848,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSetViewOffsetVARJO");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8957,6 +9859,7 @@ catch (const std::exception& e) {
 
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
 XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageAcquireInfo* acquireInfo, uint32_t* index) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -8979,6 +9882,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
     deserialize(&result, d_ctx);
     deserialize_ptr(&index, d_ctx);
 
+    end_rpc_timer(start_time, "xrAcquireSwapchainImage");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -8987,6 +9892,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo, const XrHapticBaseHeader* hapticFeedback) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9008,6 +9914,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrApplyHapticFeedback");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9016,6 +9924,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, const XrSessionActionSetsAttachInfo* attachInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9036,6 +9945,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrAttachSessionActionSets");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9044,6 +9955,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBeginInfo* frameBeginInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9064,6 +9976,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrBeginFrame");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9072,6 +9986,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSessionBeginInfo* beginInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9092,6 +10007,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrBeginSession");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9100,6 +10017,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrActionCreateInfo* createInfo, XrAction* action) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9122,6 +10040,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
     deserialize(&result, d_ctx);
     deserialize_ptr(&action, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateAction");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9130,6 +10050,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrActionSetCreateInfo* createInfo, XrActionSet* actionSet) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9152,6 +10073,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
     deserialize(&result, d_ctx);
     deserialize_ptr(&actionSet, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateActionSet");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9160,6 +10083,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrActionSpaceCreateInfo* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9182,6 +10106,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateActionSpace");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9190,6 +10116,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* createInfo, XrInstance* instance) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9211,6 +10138,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     deserialize(&result, d_ctx);
     deserialize_ptr(&instance, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateInstance");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9219,6 +10148,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const XrReferenceSpaceCreateInfo* createInfo, XrSpace* space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9241,6 +10171,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
     deserialize(&result, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateReferenceSpace");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9249,6 +10181,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSessionCreateInfo* createInfo, XrSession* session) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9271,6 +10204,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
     deserialize(&result, d_ctx);
     deserialize_ptr(&session, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSession");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9279,6 +10214,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwapchainCreateInfo* createInfo, XrSwapchain* swapchain) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9301,6 +10237,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
     deserialize(&result, d_ctx);
     deserialize_ptr(&swapchain, d_ctx);
 
+    end_rpc_timer(start_time, "xrCreateSwapchain");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9309,6 +10247,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9328,6 +10267,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyAction");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9336,6 +10277,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9355,6 +10297,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyActionSet");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9363,6 +10307,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9382,6 +10327,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroyInstance");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9390,6 +10337,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9409,6 +10357,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySession");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9417,6 +10367,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9436,6 +10387,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySpace");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9444,6 +10397,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9463,6 +10417,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrDestroySwapchain");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9471,6 +10427,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInfo* frameEndInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9491,6 +10448,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrEndFrame");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9499,6 +10458,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9518,6 +10478,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrEndSession");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9526,6 +10488,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrApiLayerProperties* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9549,6 +10512,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
     deserialize_ptr(&propertyCountOutput, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateApiLayerProperties");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9557,6 +10522,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession session, const XrBoundSourcesForActionEnumerateInfo* enumerateInfo, uint32_t sourceCapacityInput, uint32_t* sourceCountOutput, XrPath* sources) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9582,6 +10548,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
     deserialize_ptr(&sourceCountOutput, d_ctx);
     deserialize_ptr(&sources, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateBoundSourcesForAction");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9590,6 +10558,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t environmentBlendModeCapacityInput, uint32_t* environmentBlendModeCountOutput, XrEnvironmentBlendMode* environmentBlendModes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9616,6 +10585,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
     deserialize_ptr(&environmentBlendModeCountOutput, d_ctx);
     deserialize_ptr(&environmentBlendModes, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateEnvironmentBlendModes");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9624,6 +10595,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char* layerName, uint32_t propertyCapacityInput, uint32_t* propertyCountOutput, XrExtensionProperties* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9648,6 +10620,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
     deserialize_ptr(&propertyCountOutput, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateInstanceExtensionProperties");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9656,6 +10630,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uint32_t spaceCapacityInput, uint32_t* spaceCountOutput, XrReferenceSpaceType* spaces) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9680,6 +10655,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
     deserialize_ptr(&spaceCountOutput, d_ctx);
     deserialize_ptr(&spaces, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateReferenceSpaces");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9688,6 +10665,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, uint32_t formatCapacityInput, uint32_t* formatCountOutput, int64_t* formats) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9712,6 +10690,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
     deserialize_ptr(&formatCountOutput, d_ctx);
     deserialize_ptr(&formats, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateSwapchainFormats");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9720,6 +10700,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain, uint32_t imageCapacityInput, uint32_t* imageCountOutput, XrSwapchainImageBaseHeader* images) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9744,6 +10725,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
     deserialize_ptr(&imageCountOutput, d_ctx);
     deserialize_xr_array(&images, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateSwapchainImages");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9752,6 +10735,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrViewConfigurationView* views) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9778,6 +10762,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
     deserialize_ptr(&viewCountOutput, d_ctx);
     deserialize_ptr(&views, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateViewConfigurationViews");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9786,6 +10772,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance, XrSystemId systemId, uint32_t viewConfigurationTypeCapacityInput, uint32_t* viewConfigurationTypeCountOutput, XrViewConfigurationType* viewConfigurationTypes) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9811,6 +10798,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
     deserialize_ptr(&viewConfigurationTypeCountOutput, d_ctx);
     deserialize_ptr(&viewConfigurationTypes, d_ctx);
 
+    end_rpc_timer(start_time, "xrEnumerateViewConfigurations");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9819,6 +10808,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateBoolean* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9841,6 +10831,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetActionStateBoolean");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9849,6 +10841,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateFloat* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9871,6 +10864,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetActionStateFloat");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9879,6 +10874,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStatePose* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9901,6 +10897,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetActionStatePose");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9909,6 +10907,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const XrActionStateGetInfo* getInfo, XrActionStateVector2f* state) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9931,6 +10930,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
     deserialize(&result, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetActionStateVector2f");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9939,6 +10940,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session, XrPath topLevelUserPath, XrInteractionProfileState* interactionProfile) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9961,6 +10963,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
     deserialize(&result, d_ctx);
     deserialize_ptr(&interactionProfile, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetCurrentInteractionProfile");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -9969,6 +10973,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, const XrInputSourceLocalizedNameGetInfo* getInfo, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -9994,6 +10999,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetInputSourceLocalizedName");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10002,6 +11009,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrInstanceProperties* instanceProperties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10023,6 +11031,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
     deserialize(&result, d_ctx);
     deserialize_ptr(&instanceProperties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetInstanceProperties");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10031,6 +11041,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, XrReferenceSpaceType referenceSpaceType, XrExtent2Df* bounds) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10053,6 +11064,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
     deserialize(&result, d_ctx);
     deserialize_ptr(&bounds, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetReferenceSpaceBoundsRect");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10061,6 +11074,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGetInfo* getInfo, XrSystemId* systemId) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10083,6 +11097,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
     deserialize(&result, d_ctx);
     deserialize_ptr(&systemId, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSystem");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10091,6 +11107,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSystemId systemId, XrSystemProperties* properties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10113,6 +11130,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
     deserialize(&result, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetSystemProperties");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10121,6 +11140,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance instance, XrSystemId systemId, XrViewConfigurationType viewConfigurationType, XrViewConfigurationProperties* configurationProperties) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10144,6 +11164,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
     deserialize(&result, d_ctx);
     deserialize_ptr(&configurationProperties, d_ctx);
 
+    end_rpc_timer(start_time, "xrGetViewConfigurationProperties");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10152,6 +11174,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, XrTime time, XrSpaceLocation* location) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10175,6 +11198,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
     deserialize(&result, d_ctx);
     deserialize_ptr(&location, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateSpace");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10183,6 +11208,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesLocateInfo* locateInfo, XrSpaceLocations* spaceLocations) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10205,6 +11231,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
     deserialize(&result, d_ctx);
     deserialize_ptr(&spaceLocations, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateSpaces");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10213,6 +11241,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLocateInfo* viewLocateInfo, XrViewState* viewState, uint32_t viewCapacityInput, uint32_t* viewCountOutput, XrView* views) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10240,6 +11269,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
     deserialize_ptr(&viewCountOutput, d_ctx);
     deserialize_ptr(&views, d_ctx);
 
+    end_rpc_timer(start_time, "xrLocateViews");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10248,6 +11279,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, uint32_t bufferCapacityInput, uint32_t* bufferCountOutput, char* buffer) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10273,6 +11305,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrPathToString");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10281,6 +11315,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffer* eventData) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10302,6 +11337,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
     deserialize(&result, d_ctx);
     deserialize_ptr(&eventData, d_ctx);
 
+    end_rpc_timer(start_time, "xrPollEvent");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10310,6 +11347,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageReleaseInfo* releaseInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10330,6 +11368,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrReleaseSwapchainImage");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10338,6 +11378,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10357,6 +11398,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) try {
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrRequestExitSession");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10365,6 +11408,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult value, char buffer[XR_MAX_RESULT_STRING_SIZE]) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10387,6 +11431,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrResultToString");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10395,6 +11441,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrHapticActionInfo* hapticActionInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10415,6 +11462,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrStopHapticFeedback");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10423,6 +11472,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* pathString, XrPath* path) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10445,6 +11495,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
     deserialize(&result, d_ctx);
     deserialize_ptr(&path, d_ctx);
 
+    end_rpc_timer(start_time, "xrStringToPath");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10453,6 +11505,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrStructureType value, char buffer[XR_MAX_STRUCTURE_NAME_SIZE]) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10475,6 +11528,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
     deserialize(&result, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
+    end_rpc_timer(start_time, "xrStructureTypeToString");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10483,6 +11538,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance instance, const XrInteractionProfileSuggestedBinding* suggestedBindings) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10503,6 +11559,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSuggestInteractionProfileBindings");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10511,6 +11569,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsSyncInfo* syncInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10531,6 +11590,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
     XrResult result;
     deserialize(&result, d_ctx);
 
+    end_rpc_timer(start_time, "xrSyncActions");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10539,6 +11600,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitInfo* frameWaitInfo, XrFrameState* frameState) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10561,6 +11623,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
     deserialize(&result, d_ctx);
     deserialize_ptr(&frameState, d_ctx);
 
+    end_rpc_timer(start_time, "xrWaitFrame");
+
     return result;
 }
 catch (const std::exception& e) {
@@ -10569,6 +11633,7 @@ catch (const std::exception& e) {
 }
 
 XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const XrSwapchainImageWaitInfo* waitInfo) try {
+    XrTime start_time = start_rpc_timer();
     auto& transport = get_runtime().get_transport();
 
     // synchronize if needed and get time offset
@@ -10588,6 +11653,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+
+    end_rpc_timer(start_time, "xrWaitSwapchainImage");
 
     return result;
 }

@@ -4,6 +4,7 @@
 #include "xrtransport/time.h"
 
 #include <asio.hpp>
+#include <spdlog/spdlog.h>
 
 namespace xrtransport {
 
@@ -48,13 +49,20 @@ static void do_synchronize() {
 
     XrDuration delay = min_rtt / 2;
     time_offset = (min_t1 + delay) - min_t2;
+    last_sync = get_time();
 }
 
 XrDuration get_time_offset(bool try_synchronize) {
     if (try_synchronize && synchronization_enabled) {
         XrTime time = get_time();
         if (time > last_sync + sync_interval) {
+            XrDuration old_offset = time_offset;
+            XrTime start_time = get_time();
             do_synchronize();
+            XrTime end_time = get_time();
+            XrDuration took = end_time - start_time;
+            XrDuration drift = old_offset - time_offset;
+            spdlog::info("Synchronization complete. Drift: {:.3f} microseconds, Took: {:.3f} microseconds", (float)drift / 1000, (float)took / 1000);
         }
     }
 
