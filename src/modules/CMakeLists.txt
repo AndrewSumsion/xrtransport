@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
 
 if(XRTRANSPORT_BUILD_MODULE_VULKAN2)
-    if(XRTRANSPORT_BUILD_CLIENT)
-        add_subdirectory(vulkan2/client)
-    endif()
-    if(XRTRANSPORT_BUILD_SERVER)
-        add_subdirectory(vulkan2/server)
-    endif()
+    add_subdirectory(vulkan2)
 endif()
