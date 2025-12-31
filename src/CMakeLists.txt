@@ -12,3 +12,5 @@ endif()
 if(XRTRANSPORT_BUILD_SERVER)
     add_subdirectory(server)
 endif()
+
+add_subdirectory(modules)

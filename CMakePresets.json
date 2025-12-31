@@ -7,7 +7,8 @@
             "binaryDir": "build/default/debug",
             "installDir": "build/default/debug/install",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON"
             }
         },
         {
