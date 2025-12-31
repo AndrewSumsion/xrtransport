@@ -18,9 +18,61 @@
 
 namespace xrtransport {
 
+class ReceiveBuffer : public SyncReadStream {
+public:
+    explicit ReceiveBuffer(std::size_t size)
+        : buffer_(size), read_head(0)
+    {}
+
+    std::size_t read_some(const asio::mutable_buffer& buffer, asio::error_code& ec) override {
+        ec.clear();
+        if (buffer_.size() - read_head == 0) {
+            ec = asio::error::eof;
+            return 0;
+        }
+        std::uint8_t* dest = static_cast<std::uint8_t*>(buffer.data());
+        std::size_t size = std::min(buffer.size(), buffer_.size() - read_head);
+        std::memcpy(buffer.data(), buffer_.data() + read_head, size);
+        read_head += size;
+
+        return size;
+    }
+
+    std::size_t read_some(const asio::mutable_buffer& buffer) override {
+        asio::error_code ec;
+        auto n = read_some(buffer, ec);
+        if (ec) throw asio::system_error(ec);
+        return n;
+    }
+
+    std::size_t available(asio::error_code& ec) override {
+        ec.clear();
+        return buffer_.size() - read_head;
+    }
+
+    std::size_t available() override {
+        return buffer_.size() - read_head;
+    }
+
+    // No-ops
+    void non_blocking(bool mode) override {}
+    bool non_blocking() const override { return false; }
+    bool is_open() const override { return true; }
+    void close() override {}
+    void close(asio::error_code& ec) override { ec.clear(); }
+
+    const std::uint8_t* data() const { return buffer_.data(); }
+    std::uint8_t* data() { return buffer_.data(); }
+    std::size_t size() const { return buffer_.size(); }
+
+private:
+    std::size_t read_head;
+    std::vector<std::uint8_t> buffer_;
+};
+
 class SendBuffer : public SyncWriteStream {
 public:
-    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) {
+    std::size_t write_some(const asio::const_buffer& buffer, asio::error_code& ec) override {
         ec.clear();
         std::size_t total = 0;
         const std::uint8_t* data = static_cast<const std::uint8_t*>(buffer.data());
@@ -30,7 +82,7 @@ public:
         return total;
     }
 
-    std::size_t write_some(const asio::const_buffer& buffer) {
+    std::size_t write_some(const asio::const_buffer& buffer) override {
         asio::error_code ec;
         auto n = write_some(buffer, ec);
         if (ec) throw asio::system_error(ec);
@@ -38,14 +90,15 @@ public:
     }
 
     // No-ops
-    void non_blocking(bool mode) {}
-    bool non_blocking() const { return false; }
-    bool is_open() const { return true; }
-    void close() {}
-    void close(asio::error_code& ec) { ec.clear(); }
+    void non_blocking(bool mode) override {}
+    bool non_blocking() const override { return false; }
+    bool is_open() const override { return true; }
+    void close() override {}
+    void close(asio::error_code& ec) override { ec.clear(); }
 
-    const std::vector<std::uint8_t>& data() const { return buffer_; }
-    std::vector<std::uint8_t>& data() { return buffer_; }
+    const std::uint8_t* data() const { return buffer_.data(); }
+    std::uint8_t* data() { return buffer_.data(); }
+    std::size_t size() const { return buffer_.size(); }
 
     void clear() { buffer_.clear(); }
 
@@ -55,11 +108,18 @@ private:
 
 // RAII stream lock classes
 struct [[nodiscard]] MessageLockInImpl {
-    std::unique_lock<std::recursive_mutex> lock;
+private:
     SyncReadStream* stream;
+public:
+    std::unique_lock<std::recursive_mutex> lock;
+    ReceiveBuffer buffer;
 
-    MessageLockInImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
-        : lock(std::move(lock)), stream(&stream) {}
+    MessageLockInImpl(std::size_t size, std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
+        : lock(std::move(lock)), stream(&stream), buffer(size)
+    {
+        // read message contents in
+        asio::read(stream, asio::buffer(buffer.data(), buffer.size()));
+    }
 
     MessageLockInImpl(const MessageLockInImpl&) = delete;
     MessageLockInImpl& operator=(const MessageLockInImpl&) = delete;
@@ -77,7 +137,9 @@ public:
     MessageLockOutImpl(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
         : lock(std::move(lock)), stream(&stream), buffer() {
         // write header to buffer
-        asio::write(stream, asio::buffer(reinterpret_cast<std::uint8_t*>(&header), sizeof(std::uint16_t)));
+        asio::write(buffer, asio::buffer(&header, sizeof(std::uint16_t)));
+        std::uint8_t placeholder[6]{}; // 2 bytes of padding + 4 byte size
+        asio::write(buffer, asio::buffer(placeholder, sizeof(placeholder)));
     }
 
     MessageLockOutImpl(const MessageLockOutImpl&) = delete;
@@ -86,7 +148,12 @@ public:
     MessageLockOutImpl& operator=(MessageLockOutImpl&&) = default;
 
     void flush() {
-        asio::write(*stream, asio::buffer(buffer.data()));
+        if (buffer.size() == 0) return; // buffer was already flushed
+
+        // copy buffer size onto reserved slot, -8 to account for header, padding, and size
+        std::uint32_t size = static_cast<std::uint32_t>(buffer.size()) - 8;
+        std::memcpy(buffer.data() + 4, &size, 4);
+        asio::write(*stream, asio::buffer(buffer.data(), buffer.size()));
         buffer.clear();
     }
 
@@ -121,7 +188,7 @@ private:
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
 
     // Internal helper to dispatch messages to handlers
-    void dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock);
+    void dispatch_to_handler(uint16_t header, uint32_t size, std::unique_lock<std::recursive_mutex>&& lock);
 
     // throwing helper method
     void run_once_internal();

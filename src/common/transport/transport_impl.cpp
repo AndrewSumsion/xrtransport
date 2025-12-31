@@ -8,6 +8,13 @@
 
 namespace xrtransport {
 
+struct MessageInHeader {
+    uint16_t header;
+    uint16_t _padding;
+    uint32_t size;
+};
+static_assert(sizeof(MessageInHeader) == 8);
+
 // TransportImpl implementation
 TransportImpl::TransportImpl(std::unique_ptr<SyncDuplexStream> stream)
     : stream(std::move(stream)), should_stop(false), worker_running(false) {
@@ -43,15 +50,15 @@ MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     while (true) {
         std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-        uint16_t received_header{};
-        asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(uint16_t)));
+        MessageInHeader received_header{};
+        asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
 
         // keep reading and handling messages synchronously until we find the one we want
-        if (received_header == header) {
-            return MessageLockInImpl(std::move(lock), *stream);
+        if (received_header.header == header) {
+            return MessageLockInImpl(received_header.size, std::move(lock), *stream);
         }
         else {
-            dispatch_to_handler(received_header, std::move(lock));
+            dispatch_to_handler(received_header.header, received_header.size, std::move(lock));
         }
     }
 }
@@ -61,11 +68,11 @@ StreamLockImpl TransportImpl::lock_stream() {
     return StreamLockImpl(std::move(lock), *stream);
 }
 
-void TransportImpl::dispatch_to_handler(uint16_t header, std::unique_lock<std::recursive_mutex>&& lock) {
+void TransportImpl::dispatch_to_handler(uint16_t header, uint32_t size, std::unique_lock<std::recursive_mutex>&& lock) {
     auto it = handlers.find(header);
     if (it != handlers.end()) {
         // Create MessageLockInImpl and call handler
-        MessageLockInImpl message_lock(std::move(lock), *stream);
+        MessageLockInImpl message_lock(size, std::move(lock), *stream);
         it->second(std::move(message_lock));
     } else {
         // No handler for this message type - stream is corrupted
@@ -120,11 +127,11 @@ void TransportImpl::run_once_internal() {
     // Acquire lock for synchronous operations
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
 
-    uint16_t header;
-    asio::read(*stream, asio::buffer(&header, sizeof(uint16_t)));
+    MessageInHeader header{};
+    asio::read(*stream, asio::buffer(&header, sizeof(header)));
 
     // Dispatch to handler (will throw TransportException if unknown message type)
-    dispatch_to_handler(header, std::move(lock));
+    dispatch_to_handler(header.header, header.size, std::move(lock));
 }
 
 bool TransportImpl::is_open() const {

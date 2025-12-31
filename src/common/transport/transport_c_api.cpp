@@ -197,7 +197,7 @@ xrtp_Result xrtp_msg_in_read_some(
 XRTP_TRY
 {
     auto msg_in_impl = reinterpret_cast<MessageLockInImpl*>(msg_in);
-    *size_read = msg_in_impl->stream->read_some(asio::buffer(dst, size));
+    *size_read = msg_in_impl->buffer.read_some(asio::buffer(dst, size));
     return 0;
 }
 XRTP_CATCH_HANDLER
