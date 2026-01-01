@@ -187,13 +187,6 @@ void Server::instance_handler(MessageLockIn msg_in) {
     // Call xrCreateInstance
     XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
 
-    // Send response to client
-    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&_result, s_ctx);
-    serialize_ptr(instance, 1, s_ctx);
-    msg_out.flush();
-
     if (XR_SUCCEEDED(_result)) {
         saved_instance = *instance;
         function_loader.loader_instance = saved_instance;
@@ -203,6 +196,15 @@ void Server::instance_handler(MessageLockIn msg_in) {
             module.on_instance(transport.get_handle(), &function_loader, *instance);
         }
     }
+
+    // Send response to client
+    // Note: we do this after notifying modules to avoid a race condition
+    // Server modules need to be fully initialized before the client returns from xrCreateInstance
+    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize_ptr(instance, 1, s_ctx);
+    msg_out.flush();
 
     // Restore createInfo to make sure cleanup works as expected
     createInfo->enabledExtensionCount = old_enabled_extension_count;
