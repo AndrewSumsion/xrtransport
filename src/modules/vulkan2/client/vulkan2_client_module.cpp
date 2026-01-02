@@ -396,12 +396,14 @@ struct SessionState {
     XrSession handle;
     XrGraphicsBindingVulkan2KHR graphics_binding;
     std::unordered_set<XrSwapchain> swapchains;
+    std::thread frame_end_thread;
 };
+
+// Static data
 
 std::unordered_map<XrSession, SessionState> sessions;
 std::unordered_map<XrSwapchain, SwapchainState> swapchains;
 
-// Static data
 std::unique_ptr<xrtransport::Transport> transport;
 
 XrInstance saved_xr_instance;
@@ -411,12 +413,9 @@ std::unique_ptr<VulkanLoader> vk;
 
 bool graphics_requirements_called = false;
 
-bool formats_filled = false;
-std::vector<int64_t> supported_formats;
+int dma_buf_exchange_fd;
 
 // Function implementations
-
-int dma_buf_exchange_fd;
 
 void open_dma_buf_exchange() {
     char* dma_buf_exchange_path{};
@@ -1039,6 +1038,10 @@ try {
 
     if (instance != saved_xr_instance) {
         return XR_ERROR_HANDLE_INVALID;
+    }
+
+    if (!graphics_requirements_called) {
+        return XR_ERROR_GRAPHICS_REQUIREMENTS_CALL_MISSING;
     }
 
     const XrGraphicsBindingVulkan2KHR& graphics_binding = *p_graphics_binding;
