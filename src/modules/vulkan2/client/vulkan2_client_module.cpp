@@ -747,6 +747,7 @@ XrResult xrWaitSwapchainImageImpl(
     return swapchain_state.wait(waitInfo->timeout);
 }
 
+// TODO: evaluate whether it would be better to start server copy in this function
 XrResult xrReleaseSwapchainImageImpl(
     XrSwapchain                                 swapchain,
     const XrSwapchainImageReleaseInfo*          releaseInfo)

@@ -16,10 +16,9 @@ XrResult validate_swapchain(XrSwapchain swapchain, ValidateContext& ctx) {
 
     SwapchainState& swapchain_state = opt_swapchain_state.value();
 
-    // there must be at least one image that was just released
-    // TODO: there should be a better way to check this, because it's possible that the swapchain
-    // isn't full but has had no images released
-    if (swapchain_state.get_size() == swapchain_state.get_images().size()) {
+    if (swapchain_state.get_last_released_index() == -1 || 
+        swapchain_state.get_size() == swapchain_state.get_images().size()) {
+        // no image has ever been released, or all images are currently acquired
         return XR_ERROR_LAYER_INVALID;
     }
 

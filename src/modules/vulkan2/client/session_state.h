@@ -41,6 +41,7 @@ private:
 
     // ring buffer heads indicating which images have been acquired
     uint32_t acquire_head = 0, acquire_tail = 0;
+    int32_t last_released_index = -1;
 
     // used to make sure that an image has been waited on before it is released
     uint32_t wait_head = 0;
@@ -90,6 +91,7 @@ public:
             return XR_ERROR_CALL_ORDER_INVALID;
         }
 
+        index_out = acquire_head;
         acquire_head = (acquire_head + 1) % images.size();
         size += 1;
         return XR_SUCCESS;
@@ -109,6 +111,7 @@ public:
             }
         }
 
+        last_released_index = acquire_tail;
         acquire_tail = (acquire_tail + 1) % images.size();
         size -= 1;
         return XR_SUCCESS;
@@ -146,6 +149,11 @@ public:
 
     const std::vector<VkDeviceMemory>& get_image_memory() const {
         return image_memory;
+    }
+
+    int32_t get_last_released_index() {
+        std::lock_guard<std::mutex> lock(acquire_mutex);
+        return last_released_index;
     }
 
     // gets the number of swapchains that are currently acquired
