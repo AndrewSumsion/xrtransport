@@ -55,8 +55,10 @@ private:
     // starts at the total number of images, because they are all initially available
     uint32_t available;
 
-    // if true, size is 1 and heads do not loop, i.e. the image can only be used once
+    // if true, size is 1 and the image can only be acquired once
     bool is_static;
+    bool has_been_acquired = false;
+
 public:
     XrSwapchain handle;
     XrSession parent_handle;
@@ -86,6 +88,10 @@ public:
 
     XrResult acquire(uint32_t& index_out) {
         std::lock_guard<std::mutex> lock(acquire_mutex);
+        if (is_static && has_been_acquired) {
+            return XR_ERROR_CALL_ORDER_INVALID;
+        }
+
         if (size >= images.size()) {
             // all images are already acquired
             return XR_ERROR_CALL_ORDER_INVALID;
@@ -94,6 +100,7 @@ public:
         index_out = acquire_head;
         acquire_head = (acquire_head + 1) % images.size();
         size += 1;
+        has_been_acquired = true;
         return XR_SUCCESS;
     }
 
