@@ -817,7 +817,7 @@ try {
     DeserializeContext d_ctx(msg_in.stream);
     deserialize(&handle, d_ctx);
 
-    store_session_state(handle, SessionState(handle, graphics_binding));
+    store_session_state(handle, SessionState(handle, graphics_binding, *transport));
 
     *session = handle;
     return XR_SUCCESS;

@@ -1,6 +1,11 @@
 #ifndef XRTRANSPORT_VULKAN2_SESSION_STATE_H
 #define XRTRANSPORT_VULKAN2_SESSION_STATE_H
 
+#include "vulkan2_common.h"
+
+#include "xrtransport/transport/transport.h"
+#include "xrtransport/serialization/serializer.h"
+
 #include <vulkan/vulkan.h>
 #define XR_USE_GRAPHICS_API_VULKAN
 #include <openxr/openxr_platform.h>
@@ -12,6 +17,8 @@
 #include <vector>
 #include <unordered_set>
 #include <optional>
+#include <queue>
+#include <future>
 
 class SwapchainState;
 class SessionState;
@@ -184,6 +191,7 @@ private:
     std::mutex worker_mutex;
     std::condition_variable worker_cv;
     std::queue<FrameEndJob> worker_queue;
+    std::reference_wrapper<xrtransport::Transport> transport_ref;
 
 public:
     XrSession handle;
@@ -192,8 +200,8 @@ public:
 
     bool is_running = false; // TODO: track this so that we can validate it in xrEndFrame
 
-    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR graphics_binding)
-        : worker_thread(SessionState::worker_thread_loop, this)
+    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR graphics_binding, xrtransport::Transport& transport)
+        : worker_thread(SessionState::worker_thread_loop, this), transport_ref(transport)
     {}
 
     void worker_thread_loop() {
@@ -206,8 +214,9 @@ public:
             worker_queue.pop();
             lock.unlock();
 
-            auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_END_FRAME);
-            SerializeContext s_ctx(msg_out.buffer);
+            xrtransport::Transport& transport = transport_ref;
+            auto msg_out = transport.start_message(XRTP_MSG_VULKAN2_END_FRAME);
+            xrtransport::SerializeContext s_ctx(msg_out.buffer);
             serialize(&job.session, s_ctx);
             serialize_ptr(job.frame_end_info, 1, s_ctx);
             msg_out.flush();
@@ -216,7 +225,7 @@ public:
             job.message_sent_promise.set_value();
 
             // wait until server says it's done reading from the swapchain
-            auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_END_FRAME_RETURN);
+            auto msg_in = transport.await_message(XRTP_MSG_VULKAN2_END_FRAME_RETURN);
 
             // mark swapchains as available again
             for (XrSwapchain swapchain : job.referenced_swapchains) {
