@@ -1,34 +1,8 @@
-/**
- * Still to implement:
- * - swapchain creation
- *   - the flow goes like this:
- *   - client tells server to create swapchain
- *   - server creates swapchain
- *   - server sends back number of images
- *   - client creates local swapchain
- *   - client writes dma_buf handles onto the fd exchange socket
- *   - client sends import ready command to server
- *   - server reads fds off of exchange socket and stores them per swapchain
- *   - server responds to client so that it can return from xrCreateSwapchain
- * - session creation
- *   - mostly ignore the XrGraphicsBindingVulkan2KHR on the client side, just store it in SessionState
- *   - tell the server to create a session, server returns handle which is used on the client
- *   - server already stored VkInstance, VkPhysicalDevice, VkDevice, but it needs to pick queue family and
- *     queue for its own XrGraphicsBindingVulkanKHR. Do this here when creating the session.
- * 
- * server and client swapchains are kept in sync entirely through xrEndFrame and the assumption that they
- * will cycle through them. note that we can't control the order of acquiring swapchains on the server, so
- * we'll just use whichever swapchain the server gives us, but cycle through the client FDs as the copy source
- * 
- * on the client, xrEndFrame will do whatever validation it can, and queue up the submission to a dedicated
- * submission thread and return immediately. On the submission thread, it will send a message to the server
- * that tells it to acquire, wait for, and copy onto a server swap chain. Once it has finished copying, it
- * sends a message back to the client that the client can stop waiting and mark the swapchain available.
- * This allows calls after xrEndFrame and before the next xrWaitSwapchainImage (as long as they don't need
- * to lock the transport stream)
- */
-
 #include "vulkan2_common.h"
+#include "vulkan_loader.h"
+#include "session_state.h"
+#include "dma_buf_exchange.h"
+#include "validate_frame_end.h"
 
 #include "xrtransport/client/module_interface.h"
 
@@ -53,6 +27,7 @@
 #include <vector>
 #include <thread>
 #include <tuple>
+#include <queue>
 
 using namespace xrtransport;
 
@@ -229,180 +204,7 @@ ModuleInfo module_info {
     .instance_callback = instance_callback,
 };
 
-struct VulkanLoader {
-    VkInstance instance = VK_NULL_HANDLE;
-    PFN_vkGetInstanceProcAddr GetInstanceProcAddr = nullptr;
-    PFN_vkCreateInstance CreateInstance = nullptr;
-    PFN_vkEnumeratePhysicalDevices EnumeratePhysicalDevices = nullptr;
-    PFN_vkGetPhysicalDeviceProperties2 GetPhysicalDeviceProperties2 = nullptr;
-    PFN_vkCreateDevice CreateDevice = nullptr;
-    PFN_vkCreateImage CreateImage = nullptr;
-    PFN_vkGetImageMemoryRequirements GetImageMemoryRequirements = nullptr;
-    PFN_vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties = nullptr;
-    PFN_vkAllocateMemory AllocateMemory = nullptr;
-    PFN_vkBindImageMemory BindImageMemory = nullptr;
-    PFN_vkGetMemoryFdKHR GetMemoryFdKHR = nullptr;
-    PFN_vkDeviceWaitIdle DeviceWaitIdle = nullptr;
-    PFN_vkDestroyImage DestroyImage = nullptr;
-    PFN_vkFreeMemory FreeMemory = nullptr;
-
-    VulkanLoader(PFN_vkGetInstanceProcAddr GetInstanceProcAddr)
-        : GetInstanceProcAddr(GetInstanceProcAddr)
-    {
-        // Load pre-instance functions
-        load_function("vkCreateInstance", CreateInstance);
-    }
-
-    void load_post_instance(VkInstance instance) {
-        this->instance = instance;
-        load_function("vkEnumeratePhysicalDevices", EnumeratePhysicalDevices);
-        load_function("vkGetPhysicalDeviceProperties2", GetPhysicalDeviceProperties2);
-        load_function("vkCreateDevice", CreateDevice);
-        load_function("vkCreateImage", CreateImage);
-        load_function("vkGetImageMemoryRequirements", GetImageMemoryRequirements);
-        load_function("vkGetPhysicalDeviceMemoryProperties", GetPhysicalDeviceMemoryProperties);
-        load_function("vkAllocateMemory", AllocateMemory);
-        load_function("vkBindImageMemory", BindImageMemory);
-        load_function("vkGetMemoryFdKHR", GetMemoryFdKHR);
-        load_function("vkDeviceWaitIdle", DeviceWaitIdle);
-        load_function("vkDestroyImage", DestroyImage);
-        load_function("vkFreeMemory", FreeMemory);
-    }
-
-private:
-    template <typename T>
-    void load_function(const char* function_name, T& function) {
-        function = reinterpret_cast<T>(GetInstanceProcAddr(instance, function_name));
-    }
-};
-
-class SwapchainState {
-private:
-
-    std::vector<XrSwapchainImageVulkan2KHR> images;
-
-    // need to track these for cleanup
-    std::vector<VkDeviceMemory> image_memory;
-
-    // This mutex guards size, acquire_head, acquire_tail
-    std::mutex acquire_mutex;
-    
-    // keeps track of how many images have been acquired
-    uint32_t size = 0;
-
-    // ring buffer heads indicating which images have been acquired
-    uint32_t acquire_head = 0, acquire_tail = 0;
-
-    // used to make sure that an image has been waited on before it is released
-    uint32_t wait_head = 0;
-
-    // This mutex guards wait_head and available
-    std::mutex available_mutex;
-    std::condition_variable available_cv;
-
-    // semaphore counter for how many images are available to return from xrWaitSwapchainImage.
-    // wait waits until this is > 0 and decrements this, and mark_available increments this.
-    // starts at the total number of images, because they are all initially available
-    uint32_t available;
-
-    // if true, size is 1 and heads do not loop, i.e. the image can only be used once
-    bool is_static;
-public:
-    XrSwapchain handle;
-    XrSession parent_handle;
-
-    SwapchainState(
-        XrSwapchain handle,
-        XrSession parent_handle,
-        std::vector<XrSwapchainImageVulkan2KHR> images,
-        std::vector<VkDeviceMemory> image_memory,
-        bool is_static
-    )
-      : handle(handle),
-        parent_handle(parent_handle),
-        images(std::move(images)),
-        image_memory(std::move(image_memory)),
-        is_static(is_static)
-    {
-        // intentionally set after initializer list because images moves
-        available = images.size();
-    }
-
-    XrResult acquire(uint32_t& index_out) {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        if (size >= images.size()) {
-            // all images are already acquired
-            return XR_ERROR_CALL_ORDER_INVALID;
-        }
-
-        acquire_head = (acquire_head + 1) % images.size();
-        size += 1;
-        return XR_SUCCESS;
-    }
-
-    XrResult release() {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        if (size == 0) {
-            // no image to release
-            return XR_ERROR_CALL_ORDER_INVALID;
-        }
-        {
-            std::lock_guard<std::mutex> wait_lock(available_mutex);
-            if (wait_head == acquire_tail) {
-                // the current image has not been waited on
-                return XR_ERROR_CALL_ORDER_INVALID;
-            }
-        }
-
-        acquire_tail = (acquire_tail + 1) % images.size();
-        size -= 1;
-        return XR_SUCCESS;
-    }
-
-    XrResult wait(XrDuration timeout) {
-        std::unique_lock<std::mutex> lock(available_mutex);
-        if (timeout == XR_INFINITE_DURATION) {
-            available_cv.wait(lock, [this]{ return available > 0; });
-        }
-        else {
-            bool completed = available_cv.wait_for(
-                lock,
-                std::chrono::nanoseconds(timeout),
-                [this]{ return available > 0; }
-            );
-            if (!completed) {
-                return XR_TIMEOUT_EXPIRED;
-            }
-        }
-        available -= 1;
-    }
-
-    void mark_available() {
-        std::lock_guard<std::mutex> lock(available_mutex);
-        available += 1;
-        available_cv.notify_one();
-    }
-
-    const std::vector<XrSwapchainImageVulkan2KHR>& get_images() const {
-        return images;
-    }
-
-    const std::vector<VkDeviceMemory>& get_image_memory() const {
-        return image_memory;
-    }
-};
-
-struct SessionState {
-    XrSession handle;
-    XrGraphicsBindingVulkan2KHR graphics_binding;
-    std::unordered_set<XrSwapchain> swapchains;
-    std::thread frame_end_thread;
-};
-
 // Static data
-
-std::unordered_map<XrSession, SessionState> sessions;
-std::unordered_map<XrSwapchain, SwapchainState> swapchains;
 
 std::unique_ptr<xrtransport::Transport> transport;
 
@@ -413,69 +215,17 @@ std::unique_ptr<VulkanLoader> vk;
 
 bool graphics_requirements_called = false;
 
-int dma_buf_exchange_fd;
+// TODO: override xrEnumerateEnvironmentBlendModes to set this, and check this in xrEndFrame
+bool environment_blend_called = false;
 
 // Function implementations
-
-void open_dma_buf_exchange() {
-    char* dma_buf_exchange_path{};
-
-    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_GET_DMA_BUF_EXCHANGE_PATH);
-    msg_out.flush();
-
-    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_RETURN_DMA_BUF_EXCHANGE_PATH);
-    DeserializeContext d_ctx(msg_in.stream);
-    deserialize_ptr(&dma_buf_exchange_path, d_ctx);
-
-    dma_buf_exchange_fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if (dma_buf_exchange_fd < 0) {
-        throw std::runtime_error("Failed to create DMA BUF exchange socket");
-    }
-
-    sockaddr_un addr{};
-    addr.sun_family = AF_UNIX;
-    std::strncpy(addr.sun_path, dma_buf_exchange_path, sizeof(addr.sun_path - 1));
-
-    if (connect(dma_buf_exchange_fd, (sockaddr*)&addr, sizeof(addr)) < 0) {
-        throw std::runtime_error("Failed to connect DMA BUF exchange socket to path: " + std::string(dma_buf_exchange_path));
-    }
-}
-
-void write_to_dma_buf_exchange(int fd) {
-    msghdr msg{};
-    char buf[CMSG_SPACE(sizeof(fd))]{};
-
-    // one byte of dummy data to send with FD
-    uint8_t dummy = 0;
-    iovec io = {
-        .iov_base = &dummy,
-        .iov_len = 1
-    };
-
-    msg.msg_iov = &io;
-    msg.msg_iovlen = 1;
-
-    msg.msg_control = buf;
-    msg.msg_controllen = sizeof(buf);
-
-    cmsghdr* cmsg = CMSG_FIRSTHDR(&msg);
-    cmsg->cmsg_level = SOL_SOCKET;
-    cmsg->cmsg_type = SCM_RIGHTS;
-    cmsg->cmsg_len = CMSG_LEN(sizeof(fd));
-
-    std::memcpy(CMSG_DATA(cmsg), &fd, sizeof(fd));
-
-    if (sendmsg(dma_buf_exchange_fd, &msg, 0) == -1) {
-        throw std::runtime_error("Failed to send FD via SCM_RIGHTS");
-    }
-}
 
 void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn) {
     spdlog::info("Instance callback in Vulkan2 client module called");
     saved_xr_instance = instance;
     pfn_xrGetInstanceProcAddr = pfn;
 
-    open_dma_buf_exchange();
+    open_dma_buf_exchange(*transport);
 }
 
 void add_extension_if_not_present(std::vector<const char*>& extensions, const char* extension) {
@@ -785,8 +535,17 @@ SwapchainState& create_local_swapchain(
         fds_out.push_back(dma_buf_fd);
     }
     
-    SwapchainState result(handle, session_state.handle, std::move(images), std::move(image_memory), is_static);
-    SwapchainState& moved_reference = swapchains.emplace(handle, std::move(result)).first->second;
+    SwapchainState result(
+        handle,
+        session_state.handle,
+        std::move(images),
+        std::move(image_memory),
+        create_info.width,
+        create_info.height,
+        is_static
+    );
+
+    SwapchainState& moved_reference = store_swapchain_state(handle, std::move(result));
     session_state.swapchains.emplace(moved_reference);
     return moved_reference;
 }
@@ -819,15 +578,15 @@ XrResult xrCreateSwapchainImpl(
     const XrSwapchainCreateInfo*                createInfo,
     XrSwapchain*                                swapchain)
 try {
-    auto it = sessions.find(session);
-    if (it == sessions.end()) {
+    auto opt_session_state = get_session_state(session);
+    if (!opt_session_state.has_value()) {
         if (pfn_xrCreateSwapchain_next)
             return pfn_xrCreateSwapchain_next(session, createInfo, swapchain);
         else
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SessionState& session_state = it->second;
+    SessionState& session_state = opt_session_state.value();
 
     auto msg_out1 = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN);
     SerializeContext s_ctx(msg_out1.buffer);
@@ -879,16 +638,16 @@ catch (const std::exception& e) {
 XrResult xrDestroySwapchainImpl(
     XrSwapchain                                 swapchain)
 try {
-    auto it = swapchains.find(swapchain);
-    if (it == swapchains.end()) {
+    auto opt_swapchain_state = get_swapchain_state(swapchain);
+    if (!opt_swapchain_state.has_value()) {
         if (pfn_xrDestroySwapchain_next)
             return pfn_xrDestroySwapchain_next(swapchain);
         else
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SwapchainState& swapchain_state = it->second;
-    SessionState& session_state = sessions.at(swapchain_state.parent_handle);
+    SwapchainState& swapchain_state = opt_swapchain_state.value();
+    SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
     
     vk->DeviceWaitIdle(session_state.graphics_binding.device);
 
@@ -903,7 +662,7 @@ try {
     }
 
     session_state.swapchains.erase(swapchain);
-    swapchains.erase(swapchain);
+    destroy_swapchain_state(swapchain);
 
     auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_DESTROY_SWAPCHAIN);
     SerializeContext s_ctx(msg_out.buffer);
@@ -925,8 +684,8 @@ XrResult xrEnumerateSwapchainImagesImpl(
     uint32_t*                                   imageCountOutput,
     XrSwapchainImageBaseHeader*                 images)
 {
-    auto it = swapchains.find(swapchain);
-    if (it == swapchains.end()) {
+    auto opt_swapchain_state = get_swapchain_state(swapchain);
+    if (!opt_swapchain_state.has_value()) {
         // forward to next layer in case there's another layer that implements this
         if (pfn_xrEnumerateSwapchainImages_next)
             return pfn_xrEnumerateSwapchainImages_next(swapchain, imageCapacityInput, imageCountOutput, images);
@@ -934,7 +693,7 @@ XrResult xrEnumerateSwapchainImagesImpl(
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SwapchainState& swapchain_state = it->second;
+    SwapchainState& swapchain_state = opt_swapchain_state.value();
     uint32_t num_images = (uint32_t)swapchain_state.get_images().size();
 
     if (imageCapacityInput == 0) {
@@ -957,8 +716,8 @@ XrResult xrAcquireSwapchainImageImpl(
     const XrSwapchainImageAcquireInfo*          acquireInfo,
     uint32_t*                                   index)
 {
-    auto it = swapchains.find(swapchain);
-    if (it == swapchains.end()) {
+    auto opt_swapchain_state = get_swapchain_state(swapchain);
+    if (!opt_swapchain_state.has_value()) {
         // forward to next layer in case there's another layer that implements this
         if (pfn_xrAcquireSwapchainImage_next)
             return pfn_xrAcquireSwapchainImage_next(swapchain, acquireInfo, index);
@@ -966,7 +725,7 @@ XrResult xrAcquireSwapchainImageImpl(
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SwapchainState& swapchain_state = it->second;
+    SwapchainState& swapchain_state = opt_swapchain_state.value();
     return swapchain_state.acquire(*index);
 }
 
@@ -974,8 +733,8 @@ XrResult xrWaitSwapchainImageImpl(
     XrSwapchain                                 swapchain,
     const XrSwapchainImageWaitInfo*             waitInfo)
 {
-    auto it = swapchains.find(swapchain);
-    if (it == swapchains.end()) {
+    auto opt_swapchain_state = get_swapchain_state(swapchain);
+    if (!opt_swapchain_state.has_value()) {
         // forward to next layer in case there's another layer that implements this
         if (pfn_xrWaitSwapchainImage_next)
             return pfn_xrWaitSwapchainImage_next(swapchain, waitInfo);
@@ -983,7 +742,7 @@ XrResult xrWaitSwapchainImageImpl(
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SwapchainState& swapchain_state = it->second;
+    SwapchainState& swapchain_state = opt_swapchain_state.value();
 
     return swapchain_state.wait(waitInfo->timeout);
 }
@@ -992,8 +751,8 @@ XrResult xrReleaseSwapchainImageImpl(
     XrSwapchain                                 swapchain,
     const XrSwapchainImageReleaseInfo*          releaseInfo)
 {
-    auto it = swapchains.find(swapchain);
-    if (it == swapchains.end()) {
+    auto opt_swapchain_state = get_swapchain_state(swapchain);
+    if (!opt_swapchain_state.has_value()) {
         // forward to next layer in case there's another layer that implements this
         if (pfn_xrReleaseSwapchainImage_next)
             return pfn_xrReleaseSwapchainImage_next(swapchain, releaseInfo);
@@ -1001,7 +760,7 @@ XrResult xrReleaseSwapchainImageImpl(
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SwapchainState& swapchain_state = it->second;
+    SwapchainState& swapchain_state = opt_swapchain_state.value();
 
     return swapchain_state.release();
 }
@@ -1057,7 +816,7 @@ try {
     DeserializeContext d_ctx(msg_in.stream);
     deserialize(&handle, d_ctx);
 
-    sessions.emplace(handle, SessionState{handle, graphics_binding, {}});
+    store_session_state(handle, SessionState(handle, graphics_binding));
 
     *session = handle;
     return XR_SUCCESS;
@@ -1070,15 +829,15 @@ catch (const std::exception& e) {
 XrResult xrDestroySessionImpl(
     XrSession                                   session)
 try {
-    auto it = sessions.find(session);
-    if (it == sessions.end()) {
+    auto opt_session_state = get_session_state(session);
+    if (!opt_session_state.has_value()) {
         if (pfn_xrDestroySession_next)
             return pfn_xrDestroySession_next(session);
         else
             return XR_ERROR_HANDLE_INVALID;
     }
 
-    SessionState& session_state = it->second;
+    SessionState& session_state = opt_session_state.value();
     for (XrSwapchain swapchain : session_state.swapchains) {
         xrDestroySwapchainImpl(swapchain);
     }
@@ -1098,7 +857,34 @@ XrResult xrEndFrameImpl(
     XrSession                                   session,
     const XrFrameEndInfo*                       frameEndInfo)
 {
-    return XR_ERROR_RUNTIME_FAILURE;
+    auto opt_session_state = get_session_state(session);
+    if (!opt_session_state.has_value()) {
+        if (pfn_xrEndFrame_next)
+            return pfn_xrEndFrame_next(session, frameEndInfo);
+        else
+            return XR_ERROR_HANDLE_INVALID;
+    }
+
+    SessionState& session_state = opt_session_state.value();
+
+    ValidateContext validate_context;
+    XrResult result = validate_frame_end(frameEndInfo, validate_context);
+    if (result != XR_SUCCESS) {
+        return result;
+    }
+
+    std::vector<XrSwapchain> referenced_swapchains(
+        validate_context.referenced_swapchains.begin(),
+        validate_context.referenced_swapchains.end()
+    );
+
+    FrameEndJob job{session, frameEndInfo, std::move(referenced_swapchains)};
+    auto message_sent_future = job.message_sent_promise.get_future();
+
+    session_state.submit_job(std::move(job));
+    message_sent_future.get();
+
+    return XR_SUCCESS;
 }
 
 } // namespace

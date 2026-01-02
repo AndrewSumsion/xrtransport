@@ -4,6 +4,8 @@ find_package(Vulkan REQUIRED)
 
 add_library(module_client_vulkan2 SHARED
     vulkan2_client_module.cpp
+    validate_frame_end.cpp
+    dma_buf_exchange.cpp
 )
 
 target_include_directories(module_client_vulkan2 PRIVATE
