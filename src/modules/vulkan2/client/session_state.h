@@ -56,6 +56,39 @@ struct SwapchainImage {
     XrSwapchainImageVulkan2KHR image;
     VkDeviceMemory memory;
     VkFence fence;
+
+    std::mutex mutex;
+    std::condition_variable cv;
+    bool in_use_by_server;
+
+    bool wait_called;
+
+    explicit SwapchainImage(
+        const XrSwapchainImageVulkan2KHR& image,
+        VkDeviceMemory memory,
+        VkFence fence)
+        : image(image), memory(memory), fence(fence), in_use_by_server(false), wait_called(false)
+    {}
+
+    void server_acquire() {
+        std::lock_guard<std::mutex> lock(mutex);
+        in_use_by_server = true;
+    }
+
+    void server_release() {
+        std::unique_lock<std::mutex> lock(mutex);
+        in_use_by_server = false;
+        lock.unlock();
+        cv.notify_all();
+    }
+
+    void wait() {
+        std::unique_lock<std::mutex> lock(mutex);
+        cv.wait(lock, [&]{
+            return !in_use_by_server;
+        });
+        wait_called = true;
+    }
 };
 
 class SwapchainState {

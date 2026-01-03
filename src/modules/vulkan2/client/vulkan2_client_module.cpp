@@ -530,7 +530,7 @@ SwapchainState& create_local_swapchain(
         VkFence fence{};
         vk->CreateFence(session_state.graphics_binding.device, &fence_info, nullptr, &fence);
 
-        images.push_back({
+        images.push_back(SwapchainImage(
             {
                 XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR,
                 nullptr,
@@ -538,7 +538,7 @@ SwapchainState& create_local_swapchain(
             },
             memory,
             fence
-        });
+        ));
         fds_out.push_back(dma_buf_fd);
     }
 
