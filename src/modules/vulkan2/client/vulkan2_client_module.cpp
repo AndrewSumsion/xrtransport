@@ -504,7 +504,7 @@ SwapchainState& create_local_swapchain(
 {
     VkResult vk_result{};
 
-    std::vector<SwapchainImage> images;
+    std::vector<std::unique_ptr<SwapchainImage>> images;
     images.reserve(num_images);
 
     auto image_create_info = create_vk_image_create_info(create_info);
@@ -530,8 +530,8 @@ SwapchainState& create_local_swapchain(
         VkFence fence{};
         vk->CreateFence(session_state.graphics_binding.device, &fence_info, nullptr, &fence);
 
-        images.push_back(SwapchainImage(
-            {
+        images.emplace_back(std::make_unique<SwapchainImage>(
+            XrSwapchainImageVulkan2KHR{
                 XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR,
                 nullptr,
                 image
@@ -661,8 +661,8 @@ try {
 
     // destroy VkImages
     for (auto& swapchain_image : swapchain_state.get_images()) {
-        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image.image, nullptr);
-        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image.memory, nullptr);
+        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image->image.image, nullptr);
+        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image->memory, nullptr);
     }
 
     session_state.swapchains.erase(swapchain);
@@ -780,7 +780,7 @@ XrResult xrReleaseSwapchainImageImpl(
         session_state.queue,
         0,
         nullptr,
-        swapchain_state.get_images()[released_index].fence
+        swapchain_state.get_images()[released_index]->fence
     );
     if (vk_result != VK_SUCCESS) {
         spdlog::error("Failed to add fence to queue: {}", (int)vk_result);

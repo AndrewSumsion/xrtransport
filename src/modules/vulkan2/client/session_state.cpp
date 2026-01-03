@@ -52,7 +52,7 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage> images,
+    std::vector<std::unique_ptr<SwapchainImage>> images,
     uint32_t width,
     uint32_t height,
     bool is_static,
@@ -102,7 +102,7 @@ void destroy_session_state(XrSession handle) {
 SwapchainState::SwapchainState(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage> images,
+    std::vector<std::unique_ptr<SwapchainImage>> images,
     uint32_t width,
     uint32_t height,
     bool is_static,
@@ -232,7 +232,7 @@ void SwapchainState::worker_thread_loop() {
         // invalid.
         job.can_return.set_value();
 
-        const SwapchainImage& image = images[job.image_index];
+        const SwapchainImage& image = *images[job.image_index];
         const SessionState& session_state = get_session_state(parent_handle).value();
 
         // wait for the work on the queue as of the xrReleaseSwapchainImage call to complete

@@ -29,7 +29,7 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage>&& images,
+    std::vector<std::unique_ptr<SwapchainImage>>&& images,
     uint32_t width,
     uint32_t height,
     bool is_static,
@@ -93,7 +93,8 @@ struct SwapchainImage {
 
 class SwapchainState {
 private:
-    std::vector<SwapchainImage> images;
+    // using unique_ptr because SwapchainImage is not moveable
+    std::vector<std::unique_ptr<SwapchainImage>> images;
 
     // This mutex guards size, acquire_head, acquire_tail
     std::mutex acquire_mutex;
@@ -140,7 +141,7 @@ public:
     explicit SwapchainState(
         XrSwapchain handle,
         XrSession parent_handle,
-        std::vector<SwapchainImage> images,
+        std::vector<std::unique_ptr<SwapchainImage>> images,
         uint32_t width,
         uint32_t height,
         bool is_static,
@@ -154,7 +155,7 @@ public:
     XrResult wait(XrDuration timeout);
     void mark_available();
 
-    const std::vector<SwapchainImage>& get_images() const {
+    const std::vector<std::unique_ptr<SwapchainImage>>& get_images() const {
         return images;
     }
 
