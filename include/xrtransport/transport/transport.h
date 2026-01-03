@@ -314,6 +314,48 @@ public:
     }
 };
 
+// RAII class to make sure that the worker gets stopped when running asynchronously
+class [[nodiscard]] TransportWorker {
+private:
+    bool is_valid;
+    xrtp_Transport transport_handle;
+
+public:
+    TransportWorker(xrtp_Transport transport_handle)
+        : is_valid(true), transport_handle(transport_handle) {
+        CHK_XRTP(xrtp_run(transport_handle, false));
+    }
+
+    // delete copy constructors
+    TransportWorker(const TransportWorker&) = delete;
+    TransportWorker& operator=(const TransportWorker&) = delete;
+
+    TransportWorker(TransportWorker&& other) {
+        is_valid = other.is_valid;
+        transport_handle = other.transport_handle;
+        other.is_valid = false;
+        other.transport_handle = nullptr;
+    }
+
+    TransportWorker& operator=(TransportWorker&& other) {
+        if (this != &other) {
+            if (is_valid) {
+                CHK_XRTP(xrtp_stop(transport_handle));
+            }
+            is_valid = other.is_valid;
+            transport_handle = other.transport_handle;
+            other.is_valid = false;
+            other.transport_handle = nullptr;
+        }
+
+        return *this;
+    }
+
+    ~TransportWorker() {
+        CHK_XRTP(xrtp_stop(transport_handle));
+    }
+};
+
 class Transport {
 private:
     bool owns_transport;
@@ -386,8 +428,12 @@ public:
         handlers.clear();
     }
 
-    void run(bool synchronous) {
-        CHK_XRTP(xrtp_run(wrapped, synchronous));
+    void run_synchronously() {
+        CHK_XRTP(xrtp_run(wrapped, true));
+    }
+
+    TransportWorker run_asynchronously() {
+        return TransportWorker(wrapped);
     }
 
     void run_once() {

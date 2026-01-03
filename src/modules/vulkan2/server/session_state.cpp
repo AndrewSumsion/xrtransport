@@ -9,7 +9,7 @@ std::unordered_map<XrSession, SessionState> session_states;
 
 } // namespace
 
-std::optional<SwapchainState&> get_swapchain_state(XrSwapchain handle) {
+std::optional<std::reference_wrapper<SwapchainState>> get_swapchain_state(XrSwapchain handle) {
     auto it = swapchain_states.find(handle);
     if (it == swapchain_states.end()) {
         return std::nullopt;
@@ -19,7 +19,7 @@ std::optional<SwapchainState&> get_swapchain_state(XrSwapchain handle) {
     }
 }
 
-std::optional<SessionState&> get_session_state(XrSession handle) {
+std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession handle) {
     auto it = session_states.find(handle);
     if (it == session_states.end()) {
         return std::nullopt;
@@ -49,7 +49,7 @@ SwapchainState& store_swapchain_state(
 
 SessionState& store_session_state(
     XrSession handle,
-    const XrGraphicsBindingVulkan2KHR&& graphics_binding,
+    const XrGraphicsBindingVulkan2KHR& graphics_binding,
     VkQueue queue
 ) {
     return session_states.emplace(

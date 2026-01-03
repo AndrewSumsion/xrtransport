@@ -59,7 +59,7 @@ private:
             register_handlers(transport);
 
             // Start async worker
-            transport.run(false);
+            auto worker = transport.run_asynchronously();
 
             // Keep connection alive until socket closes
             while (transport.is_open()) {

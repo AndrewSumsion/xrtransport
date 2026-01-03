@@ -23,8 +23,8 @@ class SwapchainState;
 class SessionState;
 class SwapchainImage;
 
-std::optional<SwapchainState&> get_swapchain_state(XrSwapchain handle);
-std::optional<SessionState&> get_session_state(XrSession handle);
+std::optional<std::reference_wrapper<SwapchainState>> get_swapchain_state(XrSwapchain handle);
+std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession handle);
 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
@@ -38,7 +38,7 @@ SwapchainState& store_swapchain_state(
 );
 SessionState& store_session_state(
     XrSession handle,
-    const XrGraphicsBindingVulkan2KHR&& graphics_binding,
+    const XrGraphicsBindingVulkan2KHR& graphics_binding,
     VkQueue queue
 );
 
@@ -140,8 +140,8 @@ struct SessionState {
     std::unordered_set<XrSwapchain> swapchains;
     bool is_running = false; // TODO: track this so that we can validate it in xrEndFrame
 
-    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR&& graphics_binding, VkQueue queue)
-        : handle(handle), graphics_binding(std::move(graphics_binding)), queue(queue)
+    explicit SessionState(XrSession handle, const XrGraphicsBindingVulkan2KHR& graphics_binding, VkQueue queue)
+        : handle(handle), graphics_binding(graphics_binding), queue(queue)
     {}
 };
 

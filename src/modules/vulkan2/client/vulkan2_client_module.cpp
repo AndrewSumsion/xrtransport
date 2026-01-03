@@ -553,7 +553,7 @@ SwapchainState& create_local_swapchain(
         *vk
     );
 
-    session_state.swapchains.emplace(result);
+    session_state.swapchains.emplace(handle);
     return result;
 }
 
@@ -881,6 +881,8 @@ try {
     serialize(&session, s_ctx);
     msg_out.flush();
     auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_DESTROY_SESSION_RETURN);
+
+    return XR_SUCCESS;
 }
 catch (const std::exception& e) {
     spdlog::error("Exception thrown in xrDestroySessionImpl: {}", e.what());

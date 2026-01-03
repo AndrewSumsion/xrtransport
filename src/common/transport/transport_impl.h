@@ -176,13 +176,58 @@ struct [[nodiscard]] StreamLockImpl {
     StreamLockImpl& operator=(StreamLockImpl&&) = default;
 };
 
+struct MessageInHeader {
+    uint16_t header;
+    uint16_t _padding;
+    uint32_t size;
+};
+static_assert(sizeof(MessageInHeader) == 8);
+
+/**
+ * States the transport worker can be in:
+ * - not running
+ * - running on worker thread
+ * - running on other thread
+ * - running on worker thread and stopping
+ * - running on other thread and stopping
+ * 
+ * Calling run(synchronous = true) on any state other than "not running" is an exception
+ * 
+ * What run(synchronous = false) should do:
+ * - Not running:
+ *   - start worker on worker thread
+ * - Running on worker thread:
+ *   - keep running on worker thread (reference count +1)
+ * - Running on other thread:
+ *   - exception
+ * - Running on worker thread and stopping
+ *   - let it stop and make sure it restarts without blocking
+ * - Running on other thread and stopping
+ *   - let it stop and make sure it restarts without blocking
+ * 
+ * stop decrements the reference count and sets stopping to true if it's 0
+ */
+struct WorkerState {
+    std::mutex mutex;
+    bool running = false;
+    bool running_on_worker_thread = false;
+    bool stopping = false;
+    bool should_restart = false;
+    std::uint32_t reference_count = 0;
+};
+
 // Transport class for message-based communication
 class TransportImpl {
 private:
     std::unique_ptr<SyncDuplexStream> stream;
     mutable std::recursive_mutex stream_mutex;
-    std::atomic<bool> should_stop;
-    std::atomic<bool> worker_running;
+
+    // protected by stream_mutex
+    bool has_buffered_header;
+    MessageInHeader buffered_header;
+    
+    WorkerState worker_state;
+
     std::thread worker_thread;
 
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
@@ -190,8 +235,10 @@ private:
     // Internal helper to dispatch messages to handlers
     void dispatch_to_handler(uint16_t header, uint32_t size, std::unique_lock<std::recursive_mutex>&& lock);
 
-    // throwing helper method
-    void run_once_internal();
+    void worker_loop();
+
+    // Uses the buffered header if it's available, or blocks and reads a header
+    MessageInHeader read_header();
 
 public:
     explicit TransportImpl(std::unique_ptr<SyncDuplexStream> stream);

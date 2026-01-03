@@ -94,7 +94,7 @@ XrResult validate_projection_view(const XrCompositionLayerProjectionView* view) 
                 result = validate_depth_info(reinterpret_cast<const XrCompositionLayerDepthInfoKHR*>(chain));
                 break;
             default:
-                spdlog::warn("Unknown XrCompositionLayerProjectionView extension: {}", chain->type);
+                spdlog::warn("Unknown XrCompositionLayerProjectionView extension: {}", (int)chain->type);
                 spdlog::warn("This may lead to a stall because the swapchain references cannot be extracted");
                 // allow this to pass with a warning, maybe it's a struct with no swapchains
         }

@@ -135,7 +135,7 @@ void Server::run() {
     modules = std::move(enabled_modules);
 
     // run transport worker loop synchronously
-    transport.run(true);
+    transport.run_synchronously();
 
     // Once handler loop terminates, destroy the instance and close the connection
     xrDestroyInstance(saved_instance);
