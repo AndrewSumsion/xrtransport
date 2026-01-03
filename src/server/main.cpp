@@ -196,17 +196,18 @@ int main(int argc, char** argv) {
             auto stream = acceptor->accept();
 
             spdlog::info("Client connected");
+
+            if (!Server::do_handshake(*stream)) {
+                // handshake failed, socket was closed, try again
+                spdlog::warn("Client handshake failed");
+                continue;
+            }
             
             Server server(
                 std::move(stream),
                 io_context,
                 collect_module_paths()
             );
-
-            if (!server.do_handshake()) {
-                // handshake failed, socket was closed, try again
-                continue;
-            }
 
             // Run server event loop synchronously until it stops
             server.run();

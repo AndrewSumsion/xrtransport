@@ -44,37 +44,6 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_run(
-    xrtp_Transport transport,
-    bool synchronous)
-XRTP_TRY
-{
-    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    transport_impl->run(synchronous);
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
-xrtp_Result xrtp_run_once(
-    xrtp_Transport transport)
-XRTP_TRY
-{
-    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    transport_impl->run_once();
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
-xrtp_Result xrtp_stop(
-    xrtp_Transport transport)
-XRTP_TRY
-{
-    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    transport_impl->stop();
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
 xrtp_Result xrtp_release_transport(
     xrtp_Transport transport)
 XRTP_TRY
@@ -166,15 +135,25 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_lock_stream(
+xrtp_Result xrtp_acquire_message_lock(
     xrtp_Transport transport,
-    xrtp_StreamLock* lock)
+    xrtp_MessageLock* lock)
 XRTP_TRY
 {
     auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    auto lock_impl = transport_impl->lock_stream();
-    auto p_lock_impl = new StreamLockImpl(std::move(lock_impl)); // move onto heap
-    *lock = reinterpret_cast<xrtp_StreamLock>(p_lock_impl);
+    auto lock_impl = transport_impl->acquire_message_lock();
+    auto p_lock_impl = new MessageLockImpl(std::move(lock_impl)); // move onto heap
+    *lock = reinterpret_cast<xrtp_MessageLock>(p_lock_impl);
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
+xrtp_Result xrtp_join_transport(
+    xrtp_Transport transport)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    transport_impl->join();
     return 0;
 }
 XRTP_CATCH_HANDLER
@@ -256,38 +235,12 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_stream_lock_write_some(
-    xrtp_StreamLock stream_lock,
-    const void* src,
-    uint64_t size,
-    uint64_t* size_written)
+xrtp_Result xrtp_release_message_lock(
+    xrtp_MessageLock lock)
 XRTP_TRY
 {
-    auto stream_lock_impl = reinterpret_cast<StreamLockImpl*>(stream_lock);
-    *size_written = stream_lock_impl->stream->write_some(asio::buffer(src, size));
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
-xrtp_Result xrtp_stream_lock_read_some(
-    xrtp_StreamLock stream_lock,
-    void* src,
-    uint64_t size,
-    uint64_t* size_read)
-XRTP_TRY
-{
-    auto stream_lock_impl = reinterpret_cast<StreamLockImpl*>(stream_lock);
-    *size_read = stream_lock_impl->stream->read_some(asio::buffer(src, size));
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
-xrtp_Result xrtp_stream_lock_release(
-    xrtp_StreamLock stream_lock)
-XRTP_TRY
-{
-    auto stream_lock_impl = reinterpret_cast<StreamLockImpl*>(stream_lock);
-    delete stream_lock_impl;
+    auto lock_impl = reinterpret_cast<MessageLockImpl*>(lock);
+    delete lock_impl;
     return 0;
 }
 XRTP_CATCH_HANDLER

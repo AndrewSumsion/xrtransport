@@ -15,13 +15,37 @@
 #include <atomic>
 #include <stdexcept>
 #include <vector>
+#include <queue>
 
 namespace xrtransport {
+
+struct MessageHeader {
+    uint16_t header;
+    uint16_t _padding;
+    uint32_t size;
+};
+static_assert(sizeof(MessageHeader) == 8);
+
+struct MessageIn {
+    uint16_t header;
+
+    // All the data read after the header
+    // (payload does not include size, size is stored as an attribute of the vector)
+    std::vector<uint8_t> payload;
+
+    explicit MessageIn(uint16_t header, std::vector<uint8_t> payload)
+        : header(header), payload(std::move(payload))
+    {}
+};
 
 class ReceiveBuffer : public SyncReadStream {
 public:
     explicit ReceiveBuffer(std::size_t size)
         : buffer_(size), read_head(0)
+    {}
+
+    explicit ReceiveBuffer(std::vector<uint8_t> buffer)
+        : buffer_(std::move(buffer)), read_head(0)
     {}
 
     std::size_t read_some(const asio::mutable_buffer& buffer, asio::error_code& ec) override {
@@ -108,18 +132,13 @@ private:
 
 // RAII stream lock classes
 struct [[nodiscard]] MessageLockInImpl {
-private:
-    SyncReadStream* stream;
 public:
     std::unique_lock<std::recursive_mutex> lock;
     ReceiveBuffer buffer;
 
-    MessageLockInImpl(std::size_t size, std::unique_lock<std::recursive_mutex>&& lock, SyncReadStream& stream)
-        : lock(std::move(lock)), stream(&stream), buffer(size)
-    {
-        // read message contents in
-        asio::read(stream, asio::buffer(buffer.data(), buffer.size()));
-    }
+    MessageLockInImpl(std::vector<uint8_t> payload, std::unique_lock<std::recursive_mutex>&& lock)
+        : buffer(std::move(payload)), lock(std::move(lock))
+    {}
 
     MessageLockInImpl(const MessageLockInImpl&) = delete;
     MessageLockInImpl& operator=(const MessageLockInImpl&) = delete;
@@ -130,16 +149,15 @@ public:
 struct [[nodiscard]] MessageLockOutImpl {
 private:
     SyncWriteStream* stream;
+    MessageHeader header;
 public:
     std::unique_lock<std::recursive_mutex> lock;
     SendBuffer buffer;
 
-    MessageLockOutImpl(std::uint16_t header, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), stream(&stream), buffer() {
-        // write header to buffer
-        asio::write(buffer, asio::buffer(&header, sizeof(std::uint16_t)));
-        std::uint8_t placeholder[6]{}; // 2 bytes of padding + 4 byte size
-        asio::write(buffer, asio::buffer(placeholder, sizeof(placeholder)));
+    MessageLockOutImpl(std::uint16_t header_code, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
+        : lock(std::move(lock)), stream(&stream), header({header_code, 0, 0}), buffer() {
+        // save space for the header in the buffer
+        asio::write(buffer, asio::buffer(&header, sizeof(MessageHeader)));
     }
 
     MessageLockOutImpl(const MessageLockOutImpl&) = delete;
@@ -150,9 +168,9 @@ public:
     void flush() {
         if (buffer.size() == 0) return; // buffer was already flushed
 
-        // copy buffer size onto reserved slot, -8 to account for header, padding, and size
-        std::uint32_t size = static_cast<std::uint32_t>(buffer.size()) - 8;
-        std::memcpy(buffer.data() + 4, &size, 4);
+        // overwrite header at beginning of buffer with updated size
+        header.size = static_cast<std::uint32_t>(buffer.size() - sizeof(MessageHeader));
+        std::memcpy(buffer.data(), &header, sizeof(MessageHeader));
         asio::write(*stream, asio::buffer(buffer.data(), buffer.size()));
         buffer.clear();
     }
@@ -162,83 +180,44 @@ public:
     }
 };
 
-// Lock class for raw stream access
-struct [[nodiscard]] StreamLockImpl {
+struct [[nodiscard]] MessageLockImpl {
     std::unique_lock<std::recursive_mutex> lock;
-    SyncDuplexStream* stream;
 
-    StreamLockImpl(std::unique_lock<std::recursive_mutex>&& lock, SyncDuplexStream& stream)
-        : lock(std::move(lock)), stream(&stream) {}
-
-    StreamLockImpl(const StreamLockImpl&) = delete;
-    StreamLockImpl& operator=(const StreamLockImpl&) = delete;
-    StreamLockImpl(StreamLockImpl&&) = default;
-    StreamLockImpl& operator=(StreamLockImpl&&) = default;
-};
-
-struct MessageInHeader {
-    uint16_t header;
-    uint16_t _padding;
-    uint32_t size;
-};
-static_assert(sizeof(MessageInHeader) == 8);
-
-/**
- * States the transport worker can be in:
- * - not running
- * - running on worker thread
- * - running on other thread
- * - running on worker thread and stopping
- * - running on other thread and stopping
- * 
- * Calling run(synchronous = true) on any state other than "not running" is an exception
- * 
- * What run(synchronous = false) should do:
- * - Not running:
- *   - start worker on worker thread
- * - Running on worker thread:
- *   - keep running on worker thread (reference count +1)
- * - Running on other thread:
- *   - exception
- * - Running on worker thread and stopping
- *   - let it stop and make sure it restarts without blocking
- * - Running on other thread and stopping
- *   - let it stop and make sure it restarts without blocking
- * 
- * stop decrements the reference count and sets stopping to true if it's 0
- */
-struct WorkerState {
-    std::mutex mutex;
-    bool running = false;
-    bool running_on_worker_thread = false;
-    bool stopping = false;
-    bool should_restart = false;
-    std::uint32_t reference_count = 0;
+    explicit MessageLockImpl(std::unique_lock<std::recursive_mutex>&& lock)
+        : lock(std::move(lock))
+    {}
 };
 
 // Transport class for message-based communication
 class TransportImpl {
 private:
     std::unique_ptr<SyncDuplexStream> stream;
-    mutable std::recursive_mutex stream_mutex;
 
-    // protected by stream_mutex
-    bool has_buffered_header;
-    MessageInHeader buffered_header;
-    
-    WorkerState worker_state;
+    // Owning a lock on this means you are allowed to handle incoming messages and write messages to the stream
+    std::recursive_mutex message_mutex;
 
-    std::thread worker_thread;
+    std::mutex queue_mutex;
+    std::condition_variable queue_cv;
+    std::queue<MessageIn> queue;
 
+    std::atomic<bool> stopping;
+    std::thread producer_thread;
+    std::thread consumer_thread;
+
+    // protected by message_mutex
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
 
     // Internal helper to dispatch messages to handlers
-    void dispatch_to_handler(uint16_t header, uint32_t size, std::unique_lock<std::recursive_mutex>&& lock);
+    // message_mutex must be held
+    void dispatch_to_handler(MessageIn msg_in);
 
-    void worker_loop();
+    void producer_loop();
+    void consumer_loop();
 
-    // Uses the buffered header if it's available, or blocks and reads a header
-    MessageInHeader read_header();
+    // message_mutex must be held
+    MessageIn await_any_message();
+
+    void cleanup();
 
 public:
     explicit TransportImpl(std::unique_ptr<SyncDuplexStream> stream);
@@ -254,15 +233,13 @@ public:
     void unregister_handler(uint16_t header);
     void clear_handlers();
     MessageLockInImpl await_message(uint16_t header);
-    void handle_message(uint16_t);
+    void handle_message(uint16_t header);
 
-    // Raw stream access
-    StreamLockImpl lock_stream();
+    // Pre-emptive locking of message mutex, useful for keeping a lock when locking in a loop.
+    MessageLockImpl acquire_message_lock();
 
-    // Worker management
-    void run(bool synchronous);
-    void run_once();
-    void stop();
+    // Allow the handlers to run and wait until the transport closes
+    void join();
 
     // Stream status
     bool is_open() const;

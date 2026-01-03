@@ -10,255 +10,215 @@ namespace xrtransport {
 
 // TransportImpl implementation
 TransportImpl::TransportImpl(std::unique_ptr<SyncDuplexStream> stream)
-    : stream(std::move(stream)) {
-}
+    : stream(std::move(stream)),
+    stopping(false),
+    producer_thread(&TransportImpl::producer_loop, this),
+    consumer_thread(&TransportImpl::consumer_loop, this)
+{}
 
 TransportImpl::~TransportImpl() {
-    close();
-    {
-        std::lock_guard<std::mutex> lock(worker_state.mutex);
-        worker_state.stopping = true;
-        worker_state.should_restart = false;
+    cleanup();
+    if (producer_thread.joinable()) {
+        producer_thread.join();
     }
-    if (worker_thread.joinable()) {
-        worker_thread.join();
+    if (consumer_thread.joinable()) {
+        consumer_thread.join();
+    }
+}
+
+void TransportImpl::cleanup() {
+    // make sure stream is closed and ignore error
+    asio::error_code ec;
+    stream->close(ec);
+
+    stopping = true;
+    queue_cv.notify_all();
+}
+
+void TransportImpl::producer_loop() {
+    while (!stopping) try {
+        MessageHeader header{};
+        asio::read(*stream, asio::buffer(&header, sizeof(MessageHeader)));
+
+        // check if we're stopping after the long header read
+        if (stopping)
+            break;
+        
+        std::vector<uint8_t> payload(header.size);
+        asio::read(*stream, asio::buffer(payload.data(), header.size));
+
+        MessageIn msg_in(header.header, std::move(payload));
+
+        std::unique_lock<std::mutex> lock(queue_mutex);
+        queue.emplace(std::move(msg_in));
+        lock.unlock();
+        // notify_all so that if the user and the consumer thread are both waiting, the user is guaranteed
+        // to be woken up
+        queue_cv.notify_all();
+    }
+    catch(const asio::system_error& e) {
+        if (e.code() == asio::error::eof) {
+            spdlog::info("Connection closed (EOF)");
+        }
+        else if (e.code() == asio::error::operation_aborted) {
+            spdlog::info("Connection closed (Operation Aborted)");
+        }
+        else {
+            spdlog::error("Connection closed due to IO error: {}", e.what());
+        }
+    }
+    catch (const std::exception& e) {
+        spdlog::error("Connection closed due to unhandled exception: {}", e.what());
+    }
+
+    cleanup();
+}
+
+/**
+ * Designed to always defer to the user (anyone owning the message lock)
+ */
+void TransportImpl::consumer_loop() {
+    while (!stopping) {
+        std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
+
+        // we got the message lock, meaning no user is using the transport
+        // now check if there's any work to do
+
+        std::unique_lock<std::mutex> queue_lock(queue_mutex);
+        if (stopping) {
+            break; // stop point after blocking mutex acquire
+        }
+        if (!queue.empty()) {
+            // there is work to do
+            // consume from the queue and release it
+            MessageIn msg_in = std::move(queue.front());
+            queue.pop();
+            queue_lock.unlock();
+
+            // now handle it while we still have the message lock
+            // it is very important that the queue lock is unlocked so that producer can start again and
+            // handlers can await responses
+            dispatch_to_handler(std::move(msg_in));
+        }
+        else {
+            // there is nothing to do...
+            // wait until there is something to do to avoid busy waiting, but don't do it in case the user
+            // wants to consume it
+
+            // allow the user to acquire the message lock while we're waiting
+            message_lock.unlock();
+
+            // note: no predicate because we don't actually need to use the queue after this, it's just to
+            // avoid busy waiting
+            queue_cv.wait(queue_lock);
+        }
     }
 }
 
 MessageLockOutImpl TransportImpl::start_message(uint16_t header) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    if (stopping) {
+        throw TransportException("cannot start message: transport closed");
+    }
 
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
     return MessageLockOutImpl(header, std::move(lock), *stream);
 }
 
 void TransportImpl::register_handler(uint16_t header, std::function<void(MessageLockInImpl)> handler) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
     handlers[header] = std::move(handler);
 }
 
 void TransportImpl::unregister_handler(uint16_t header) {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
     handlers.erase(header);
 }
 
 void TransportImpl::clear_handlers() {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
     handlers.clear();
 }
 
-MessageLockInImpl TransportImpl::await_message(uint16_t header) {
-    while (true) {
-        std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+MessageIn TransportImpl::await_any_message() {
+    std::unique_lock<std::mutex> queue_lock(queue_mutex);
+    queue_cv.wait(queue_lock, [&]{
+        return stopping || !queue.empty();
+    });
 
-        MessageInHeader received_header = read_header();
+    if (stopping) {
+        throw TransportException("Await aborted: transport closed");
+    }
+
+    MessageIn msg_in = std::move(queue.front());
+    queue.pop();
+
+    return std::move(msg_in);
+}
+
+MessageLockInImpl TransportImpl::await_message(uint16_t header) {
+    std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
+    while (true) {
+        MessageIn msg_in = await_any_message();
 
         // keep reading and handling messages synchronously until we find the one we want
-        if (received_header.header == header) {
-            return MessageLockInImpl(received_header.size, std::move(lock), *stream);
+        if (msg_in.header == header) {
+            return MessageLockInImpl(std::move(msg_in.payload), std::move(message_lock));
         }
         else {
-            dispatch_to_handler(received_header.header, received_header.size, std::move(lock));
+            dispatch_to_handler(std::move(msg_in));
         }
     }
 }
 
 void TransportImpl::handle_message(uint16_t header) {
     // keep reading and handling messages synchronously until we've handled the one we want
+    std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
     while (true) {
-        std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+        MessageIn msg_in = await_any_message();
+        uint16_t msg_header = msg_in.header;
 
-        MessageInHeader received_header = read_header();
-        dispatch_to_handler(received_header.header, received_header.size, std::move(lock));
-
-        if (received_header.header == header) {
+        // keep reading and handling messages synchronously until we find the one we want
+        dispatch_to_handler(std::move(msg_in));
+        if (msg_header == header) {
             return;
         }
     }
 }
 
-StreamLockImpl TransportImpl::lock_stream() {
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
-    return StreamLockImpl(std::move(lock), *stream);
+MessageLockImpl TransportImpl::acquire_message_lock() {
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    return MessageLockImpl(std::move(lock));
 }
 
-void TransportImpl::dispatch_to_handler(uint16_t header, uint32_t size, std::unique_lock<std::recursive_mutex>&& lock) {
-    auto it = handlers.find(header);
+void TransportImpl::dispatch_to_handler(MessageIn msg_in) {
+    // this must be called by a thread that already owns the message lock, so make sure
+    std::unique_lock<std::recursive_mutex> lock(message_mutex, std::try_to_lock);
+    if (!lock.owns_lock()) {
+        throw TransportException("Cannot dispatch to handler without owning message lock");
+    }
+
+    auto it = handlers.find(msg_in.header);
     if (it != handlers.end()) {
         // Create MessageLockInImpl and call handler
-        MessageLockInImpl message_lock(size, std::move(lock), *stream);
-        it->second(std::move(message_lock));
+        it->second(MessageLockInImpl(std::move(msg_in.payload), std::move(lock)));
     } else {
-        // No handler for this message type - stream is corrupted
-        // We don't know how many bytes to read, so stream is permanently out of sync
-        throw TransportException("No handler registered for message type: " + std::to_string(header));
+        // no registered handler, log a warning and skip it
+        spdlog::warn("No handler registered for message type: {}, ignoring", msg_in.header);
     }
 }
 
-void TransportImpl::stop() {
-    std::lock_guard<std::mutex> lock(worker_state.mutex);
-    if (worker_state.reference_count > 0) {
-        worker_state.reference_count -= 1;
+void TransportImpl::join() {
+    if (producer_thread.joinable()) {
+        producer_thread.join();
     }
-    if (worker_state.reference_count == 0) {
-        worker_state.stopping = true;
-    }
-}
-
-void TransportImpl::run(bool synchronous) {
-    // Warning: horrifically smelly code ahead
-    // This is essentially a state machine based on WorkerState
-    // See the header comment on WorkerState to understand the possible states and how they transition
-    // into each other.
-    // If it makes it any easier to understand, control flow cannot fall through any of the innermost
-    // scopes, each innermost scope describes the behavior of the whole method.
-    std::lock_guard lock(worker_state.mutex);
-    if (synchronous) {
-        if (worker_state.running) {
-            throw TransportException("Worker is already running");
-        }
-        else {
-            // start the worker synchronously
-            worker_state.running = true;
-            worker_state.running_on_worker_thread = false;
-            worker_state.stopping = false;
-            worker_state.should_restart = false;
-            worker_state.reference_count = 1;
-            worker_loop();
-            return;
-        }
-    }
-    else {
-        if (worker_state.running) {
-            if (worker_state.stopping) {
-                // worker is stopping, either on worker thread or otherwise
-                // make the worker restart on worker thread
-                // this works because we got the lock before it could mark worker_state.running as false,
-                // so we still have time to tell it to restart
-                worker_state.should_restart = true;
-                return;
-            }
-            else {
-                if (worker_state.running_on_worker_thread) {
-                    // worker is running on worker thread and not stopping
-                    // increment reference count (meaning we are expecting another stop call) and return
-                    worker_state.reference_count += 1;
-                    return;
-                }
-                else {
-                    // worker is running on another thread and not stopping
-                    throw TransportException("Worker is already running synchronously on another thread");
-                }
-            }
-        }
-        else {
-            if (worker_thread.joinable()) {
-                worker_thread.join();
-            }
-            // start worker on worker thread
-            worker_state.running = true;
-            worker_state.running_on_worker_thread = true;
-            worker_state.stopping = false;
-            worker_state.should_restart = false;
-            worker_state.reference_count = 1;
-            worker_thread = std::thread([&]{
-                worker_loop();
-            });
-            return;
-        }
-    }
-}
-
-void TransportImpl::worker_loop() {
-    try {
-        while (true) {
-            {
-                std::lock_guard<std::mutex> lock(worker_state.mutex);
-                if (worker_state.stopping) {
-                    break;
-                }
-            }
-
-            std::unique_lock<std::recursive_mutex> lock(stream_mutex);
-
-            MessageInHeader header = read_header();
-            {
-                std::lock_guard<std::mutex> lock(worker_state.mutex);
-                if (worker_state.stopping) {
-                    buffered_header = header;
-                    has_buffered_header = true;
-                    break;
-                }
-            }
-
-            // Dispatch to handler (will throw TransportException if unknown message type)
-            dispatch_to_handler(header.header, header.size, std::move(lock));
-        }
-    }
-    catch (const asio::system_error& e) {
-        // don't propagate stream errors, just let the stream close
-        spdlog::error("Transport worker exiting due to exception: {}", e.what());
-    }
-
-    std::unique_lock<std::mutex> lock(worker_state.mutex);
-
-    // if should_restart was set between stopping being set and now, restart on the worker thread
-    if (worker_state.should_restart) {
-        // reset state to reflect running on the worker thread
-        worker_state.running = true;
-        worker_state.running_on_worker_thread = true;
-        worker_state.stopping = false;
-        worker_state.should_restart = false;
-        worker_state.reference_count = 1;
-
-        if (worker_state.running_on_worker_thread) {
-            assert(std::this_thread::get_id() == worker_thread.get_id());
-            // we're already on the worker thread, just reset the state and start over
-            // note: hopefully this gets tail-call optimized, although this will probably happen so rarely
-            // that it doesn't matter
-            worker_loop();
-        }
-        else {
-            // we're on another thread but it was requested to restart on the worker thread
-            if (worker_thread.joinable()) {
-                worker_thread.join();
-            }
-            worker_thread = std::thread([&]{
-                worker_loop();
-            });
-        }
-    }
-}
-
-MessageInHeader TransportImpl::read_header() {
-    std::lock_guard<std::recursive_mutex> lock(stream_mutex);
-    if (has_buffered_header) {
-        has_buffered_header = false;
-        return buffered_header;
-    }
-    else {
-        MessageInHeader header{};
-        asio::read(*stream, asio::buffer(&header, sizeof(header)));
-        return header;
-    }
-}
-
-void TransportImpl::run_once() {
-    {
-        std::lock_guard<std::mutex> lock(worker_state.mutex);
-        if (worker_state.running) {
-            throw TransportException("Cannot run once when worker is running");
-        }
-    }
-    std::unique_lock<std::recursive_mutex> lock(stream_mutex);
-    MessageInHeader header = read_header();
-    dispatch_to_handler(header.header, header.size, std::move(lock));
 }
 
 bool TransportImpl::is_open() const {
-    return stream->is_open();
+    return !stopping;
 }
 
 void TransportImpl::close() {
+    stopping = true;
     stream->close();
 }
 

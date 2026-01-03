@@ -36,7 +36,8 @@ private:
 public:
     explicit Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths);
 
-    bool do_handshake();
+    static bool do_handshake(SyncDuplexStream& stream);
+
     void run();
 };
 

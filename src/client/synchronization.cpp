@@ -19,7 +19,7 @@ static void do_synchronize() {
     Transport& transport = get_runtime().get_transport();
 
     // keep stream locked while in between messages
-    auto lock = transport.lock_stream();
+    auto lock = transport.acquire_message_lock();
 
     XrTime min_t1{};
     XrTime min_t2{};

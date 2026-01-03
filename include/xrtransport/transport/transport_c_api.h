@@ -14,12 +14,12 @@ extern "C" {
 typedef struct xrtp_Transport_T xrtp_Transport_T;
 typedef struct xrtp_MessageLockOut_T xrtp_MessageLockOut_T;
 typedef struct xrtp_MessageLockIn_T xrtp_MessageLockIn_T;
-typedef struct xrtp_StreamLock_T xrtp_StreamLock_T;
+typedef struct xrtp_MessageLock_T xrtp_MessageLock_T;
 
 typedef xrtp_Transport_T* xrtp_Transport;
 typedef xrtp_MessageLockOut_T* xrtp_MessageLockOut;
 typedef xrtp_MessageLockIn_T* xrtp_MessageLockIn;
-typedef xrtp_StreamLock_T* xrtp_StreamLock;
+typedef xrtp_MessageLock_T* xrtp_MessageLock;
 
 // message headers
 typedef uint16_t xrtp_MessageHeader;
@@ -38,43 +38,27 @@ typedef int32_t xrtp_Result;
 /**
  * Must be called with a class that implements SyncDuplexStream from asio_compat.h
  * This function takes memory ownership of the SyncDuplexStream.
+ * 
+ * The transport will start reading the stream immediately.
  */
 XRTP_API xrtp_Result xrtp_create_transport(
     void* sync_duplex_stream,
     xrtp_Transport* transport_out);
 
 /**
- * Starts the worker loop of the Transport that handles incoming messages when
- * no one is awaiting a message. If synchronous is false, it will start the loop
- * in another thread and return immediately.
- */
-XRTP_API xrtp_Result xrtp_run(
-    xrtp_Transport transport,
-    bool synchronous);
-
-/**
- * Runs one single iteration of the worker loop, i.e. handles one incoming message
- */
-XRTP_API xrtp_Result xrtp_run_once(
-    xrtp_Transport transport);
-
-/**
- * Sets a flag inside the Transport to stop handling messages.
- */
-XRTP_API xrtp_Result xrtp_stop(
-    xrtp_Transport transport);
-
-/**
  * Destruct the Transport instance
+ * 
+ * This will stop the transport's producer and consumer threads, and
+ * interrupt any calls awaiting a message
  */
 XRTP_API xrtp_Result xrtp_release_transport(
     xrtp_Transport transport);
 
 /**
- * Acquires lock on the Transport's stream, and adds the header to msg_out's
- * buffer.
+ * Acquires the Transport's message lock, and returns a buffer that can be
+ * written to.
  * 
- * msg_out can be written to and *must* be released.
+ * msg_out *must* be released.
  */
 XRTP_API xrtp_Result xrtp_start_message(
     xrtp_Transport transport,
@@ -106,8 +90,8 @@ XRTP_API xrtp_Result xrtp_clear_handlers(
     xrtp_Transport transport);
 
 /**
- * Acquires Transport's stream lock and handles messages synchronously until
- * the requested header is detected.
+ * Acquires Transport's message lock and handles messages synchronously
+ * until the requested header is detected.
  * 
  * msg_in can be read from and *must* be released.
  */
@@ -117,37 +101,46 @@ XRTP_API xrtp_Result xrtp_await_message(
     xrtp_MessageLockIn* msg_in);
 
 /**
- * Similar to xrtp_await_message, but handles the final message using a
- * built-in handler instead of exposing a MessageLockIn.
+ * Similar to xrtp_await_message, but handles the requested message using
+ * a registered handler instead of exposing a MessageLockIn.
  */
 XRTP_API xrtp_Result xrtp_handle_message(
     xrtp_Transport transport,
     xrtp_MessageHeader header);
 
 /**
- * Acquires Transport's stream lock and exposes raw read-write access.
+ * Acquires the Transport's message lock without any input/output buffers
  * 
- * lock can be written to and read from, and *must* be released.
+ * This is useful for e.g. maintaining the lock while repeatedly locking and
+ * unlocking in a loop.
+ * 
+ * The lock *must* be released.
  */
-XRTP_API xrtp_Result xrtp_lock_stream(
+XRTP_API xrtp_Result xrtp_acquire_message_lock(
     xrtp_Transport transport,
-    xrtp_StreamLock* lock);
+    xrtp_MessageLock* lock);
 
 /**
- * Returns whether the underlying stream of the Transport is still open.
+ * Allows the handlers to run and waits for the transport to close
+ */
+XRTP_API xrtp_Result xrtp_join_transport(
+    xrtp_Transport transport);
+
+/**
+ * Returns whether the Transport is still running.
  */
 XRTP_API xrtp_Result xrtp_is_open(
     xrtp_Transport transport,
     bool* is_open);
 
 /**
- * Closes the Transport's underlying stream.
+ * Stops the Transport and closes the underlying stream.
  */
 XRTP_API xrtp_Result xrtp_close(
     xrtp_Transport transport);
 
 /**
- * Blocking read of the underlying stream
+ * Reads some of the MessageLockIn's buffered data
  */
 XRTP_API xrtp_Result xrtp_msg_in_read_some(
     xrtp_MessageLockIn msg_in,
@@ -156,13 +149,13 @@ XRTP_API xrtp_Result xrtp_msg_in_read_some(
     uint64_t* size_read);
 
 /**
- * Releases the Transport's lock and destructs the MessageLockIn
+ * Releases the message lock and destructs the MessageLockIn
  */
 XRTP_API xrtp_Result xrtp_msg_in_release(
     xrtp_MessageLockIn msg_in);
 
 /**
- * Write to the message's outbound buffer
+ * Writes to the MessageLockOut's outbound buffer
  */
 XRTP_API xrtp_Result xrtp_msg_out_write_some(
     xrtp_MessageLockOut msg_out,
@@ -171,41 +164,23 @@ XRTP_API xrtp_Result xrtp_msg_out_write_some(
     uint64_t* size_written);
 
 /**
- * Writes the message's outbound buffer to the stream
+ * Writes the MessageLockOut's outbound buffer to the stream
  */
 XRTP_API xrtp_Result xrtp_msg_out_flush(
     xrtp_MessageLockOut msg_out);
 
 /**
- * Flushes the message's buffer, releases the Transport's lock,
+ * Flushes the MessageLockOut's buffer, releases the message lock,
  * and destructs the MessageLockOut
  */
 XRTP_API xrtp_Result xrtp_msg_out_release(
     xrtp_MessageLockOut msg_out);
 
 /**
- * Blocking write to the underlying stream
+ * Releases the message lock acquired by xrtp_acquire_message_lock
  */
-XRTP_API xrtp_Result xrtp_stream_lock_write_some(
-    xrtp_StreamLock stream_lock,
-    const void* src,
-    uint64_t size,
-    uint64_t* size_written);
-
-/**
- * Blocking read from the underlying stream
- */
-XRTP_API xrtp_Result xrtp_stream_lock_read_some(
-    xrtp_StreamLock stream_lock,
-    void* src,
-    uint64_t size,
-    uint64_t* size_read);
-
-/**
- * Release the Transport's lock and destruct the StreamLock
- */
-XRTP_API xrtp_Result xrtp_stream_lock_release(
-    xrtp_StreamLock stream_lock);
+XRTP_API xrtp_Result xrtp_release_message_lock(
+    xrtp_MessageLock lock);
 
 #ifdef __cplusplus
 } // extern "C"

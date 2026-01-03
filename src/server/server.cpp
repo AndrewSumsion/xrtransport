@@ -30,35 +30,34 @@ Server::Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& strea
     }
 }
 
-bool Server::do_handshake() {
-    auto lock = transport.lock_stream();
-
+// static
+bool Server::do_handshake(SyncDuplexStream& stream) {
     uint32_t client_magic{};
-    asio::read(lock.stream, asio::buffer(&client_magic, sizeof(uint32_t)));
+    asio::read(stream, asio::buffer(&client_magic, sizeof(uint32_t)));
     uint32_t server_magic = XRTRANSPORT_MAGIC;
     // make sure magic matches
     if (server_magic != client_magic) {
-        transport.close();
+        stream.close();
         return false;
     }
-    asio::write(lock.stream, asio::buffer(&server_magic, sizeof(uint32_t)));
+    asio::write(stream, asio::buffer(&server_magic, sizeof(uint32_t)));
     
     // read version numbers from client
     uint64_t client_xr_api_version{};
-    asio::read(lock.stream, asio::buffer(&client_xr_api_version, sizeof(uint64_t)));
+    asio::read(stream, asio::buffer(&client_xr_api_version, sizeof(uint64_t)));
     uint32_t client_xrtransport_protocol_version{};
-    asio::read(lock.stream, asio::buffer(&client_xrtransport_protocol_version, sizeof(uint32_t)));
+    asio::read(stream, asio::buffer(&client_xrtransport_protocol_version, sizeof(uint32_t)));
 
     // write server's version numbers
     uint64_t server_xr_api_version = XR_CURRENT_API_VERSION;
-    asio::write(lock.stream, asio::buffer(&server_xr_api_version, sizeof(uint64_t)));
+    asio::write(stream, asio::buffer(&server_xr_api_version, sizeof(uint64_t)));
     uint32_t server_xrtransport_protocol_version = XRTRANSPORT_PROTOCOL_VERSION;
-    asio::write(lock.stream, asio::buffer(&server_xrtransport_protocol_version, sizeof(uint32_t)));
+    asio::write(stream, asio::buffer(&server_xrtransport_protocol_version, sizeof(uint32_t)));
 
     uint32_t client_ok{};
-    asio::read(lock.stream, asio::buffer(&client_ok, sizeof(uint32_t)));
+    asio::read(stream, asio::buffer(&client_ok, sizeof(uint32_t)));
     if (!client_ok) {
-        transport.close();
+        stream.close();
         return false;
     }
 
@@ -66,9 +65,9 @@ bool Server::do_handshake() {
     uint32_t server_ok =
         client_xr_api_version == server_xr_api_version &&
         client_xrtransport_protocol_version == server_xrtransport_protocol_version;
-    asio::write(lock.stream, asio::buffer(&server_ok, sizeof(uint32_t)));
+    asio::write(stream, asio::buffer(&server_ok, sizeof(uint32_t)));
     if (!server_ok) {
-        transport.close();
+        stream.close();
         return false;
     }
 
@@ -134,14 +133,13 @@ void Server::run() {
     // update set of enabled extensions
     modules = std::move(enabled_modules);
 
-    // run transport worker loop synchronously
-    transport.run_synchronously();
+    // let transport run until it closes
+    transport.join();
 
-    // Once handler loop terminates, destroy the instance and close the connection
+    // Once handler loop terminates, destroy the instance in case the client didn't
     xrDestroyInstance(saved_instance);
     saved_instance = XR_NULL_HANDLE;
     function_loader = FunctionLoader(xrGetInstanceProcAddr); // clear all saved functions
-    transport.close();
 }
 
 void Server::instance_handler(MessageLockIn msg_in) {
