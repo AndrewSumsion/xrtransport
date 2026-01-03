@@ -1,10 +1,9 @@
 #ifndef XRTRANSPORT_VULKAN2_SESSION_STATE_H
 #define XRTRANSPORT_VULKAN2_SESSION_STATE_H
 
-#include "vulkan2_common.h"
+#include "vulkan_loader.h"
 
 #include "xrtransport/transport/transport.h"
-#include "xrtransport/serialization/serializer.h"
 
 #include <vulkan/vulkan.h>
 #define XR_USE_GRAPHICS_API_VULKAN
@@ -22,23 +21,46 @@
 
 class SwapchainState;
 class SessionState;
+class SwapchainImage;
 
 std::optional<SwapchainState&> get_swapchain_state(XrSwapchain handle);
 std::optional<SessionState&> get_session_state(XrSession handle);
 
-SwapchainState& store_swapchain_state(XrSwapchain handle, SwapchainState&& swapchain_state);
-SessionState& store_session_state(XrSession handle, SessionState&& session_state);
+SwapchainState& store_swapchain_state(
+    XrSwapchain handle,
+    XrSession parent_handle,
+    std::vector<SwapchainImage> images,
+    uint32_t width,
+    uint32_t height,
+    bool is_static,
+    xrtransport::Transport& transport,
+    VulkanLoader& vk
+);
+SessionState& store_session_state(
+    XrSession handle,
+    const XrGraphicsBindingVulkan2KHR&& graphics_binding,
+    VkQueue queue
+);
 
 void destroy_swapchain_state(XrSwapchain handle);
 void destroy_session_state(XrSession handle);
 
+struct ReleaseImageJob {
+    const XrSwapchainImageReleaseInfo* release_info;
+    uint32_t image_index;
+    bool should_stop = false;
+    std::promise<void> can_return;
+};
+
+struct SwapchainImage {
+    XrSwapchainImageVulkan2KHR image;
+    VkDeviceMemory memory;
+    VkFence fence;
+};
+
 class SwapchainState {
 private:
-
-    std::vector<XrSwapchainImageVulkan2KHR> images;
-
-    // need to track these for cleanup
-    std::vector<VkDeviceMemory> image_memory;
+    std::vector<SwapchainImage> images;
 
     // This mutex guards size, acquire_head, acquire_tail
     std::mutex acquire_mutex;
@@ -66,185 +88,61 @@ private:
     bool is_static;
     bool has_been_acquired = false;
 
+    xrtransport::Transport& transport;
+    VulkanLoader& vk;
+
+    std::thread worker_thread;
+    std::mutex worker_mutex;
+    std::condition_variable worker_cv;
+    std::queue<ReleaseImageJob> worker_jobs;
+
+    void worker_thread_loop();
+
 public:
     XrSwapchain handle;
     XrSession parent_handle;
     uint32_t width;
     uint32_t height;
 
-    SwapchainState(
+    explicit SwapchainState(
         XrSwapchain handle,
         XrSession parent_handle,
-        std::vector<XrSwapchainImageVulkan2KHR> images,
-        std::vector<VkDeviceMemory> image_memory,
+        std::vector<SwapchainImage> images,
         uint32_t width,
         uint32_t height,
-        bool is_static
-    )
-      : handle(handle),
-        parent_handle(parent_handle),
-        images(std::move(images)),
-        image_memory(std::move(image_memory)),
-        is_static(is_static),
-        width(width),
-        height(height)
-    {
-        // intentionally set after initializer list because images moves
-        available = images.size();
-    }
+        bool is_static,
+        xrtransport::Transport& transport,
+        VulkanLoader& vk);
 
-    XrResult acquire(uint32_t& index_out) {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        if (is_static && has_been_acquired) {
-            return XR_ERROR_CALL_ORDER_INVALID;
-        }
+    ~SwapchainState();
 
-        if (size >= images.size()) {
-            // all images are already acquired
-            return XR_ERROR_CALL_ORDER_INVALID;
-        }
+    XrResult acquire(uint32_t& index_out);
+    XrResult release(uint32_t& index_out);
+    XrResult wait(XrDuration timeout);
+    void mark_available();
 
-        index_out = acquire_head;
-        acquire_head = (acquire_head + 1) % images.size();
-        size += 1;
-        has_been_acquired = true;
-        return XR_SUCCESS;
-    }
-
-    XrResult release() {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        if (size == 0) {
-            // no image to release
-            return XR_ERROR_CALL_ORDER_INVALID;
-        }
-        {
-            std::lock_guard<std::mutex> wait_lock(available_mutex);
-            if (wait_head == acquire_tail) {
-                // the current image has not been waited on
-                return XR_ERROR_CALL_ORDER_INVALID;
-            }
-        }
-
-        last_released_index = acquire_tail;
-        acquire_tail = (acquire_tail + 1) % images.size();
-        size -= 1;
-        return XR_SUCCESS;
-    }
-
-    XrResult wait(XrDuration timeout) {
-        std::unique_lock<std::mutex> lock(available_mutex);
-        if (timeout == XR_INFINITE_DURATION) {
-            available_cv.wait(lock, [this]{ return available > 0; });
-        }
-        else {
-            bool completed = available_cv.wait_for(
-                lock,
-                std::chrono::nanoseconds(timeout),
-                [this]{ return available > 0; }
-            );
-            if (!completed) {
-                return XR_TIMEOUT_EXPIRED;
-            }
-        }
-        available -= 1;
-    }
-
-    void mark_available() {
-        {
-            std::lock_guard<std::mutex> lock(available_mutex);
-            available += 1;
-        }
-        available_cv.notify_one();
-    }
-
-    const std::vector<XrSwapchainImageVulkan2KHR>& get_images() const {
+    const std::vector<SwapchainImage>& get_images() const {
         return images;
     }
 
-    const std::vector<VkDeviceMemory>& get_image_memory() const {
-        return image_memory;
-    }
-
-    int32_t get_last_released_index() {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        return last_released_index;
-    }
+    int32_t get_last_released_index();
 
     // gets the number of swapchains that are currently acquired
-    uint32_t get_size() {
-        std::lock_guard<std::mutex> lock(acquire_mutex);
-        return size;
-    }
+    uint32_t get_size();
+
+    void submit_release_job(ReleaseImageJob job);
 };
 
-struct FrameEndJob {
-    XrSession session;
-    const XrFrameEndInfo* frame_end_info;
-    std::vector<XrSwapchain> referenced_swapchains;
-    std::promise<void> message_sent_promise;
-};
-
-class SessionState {
-private:
-    std::thread worker_thread;
-    // Frame end worker message passing
-    std::mutex worker_mutex;
-    std::condition_variable worker_cv;
-    std::queue<FrameEndJob> worker_queue;
-    std::reference_wrapper<xrtransport::Transport> transport_ref;
-
-public:
+struct SessionState {
     XrSession handle;
     XrGraphicsBindingVulkan2KHR graphics_binding;
+    VkQueue queue;
     std::unordered_set<XrSwapchain> swapchains;
-
     bool is_running = false; // TODO: track this so that we can validate it in xrEndFrame
 
-    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR graphics_binding, xrtransport::Transport& transport)
-        : worker_thread(SessionState::worker_thread_loop, this), transport_ref(transport)
+    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR graphics_binding, VkQueue queue)
+        : handle(handle), graphics_binding(std::move(graphics_binding)), queue(queue)
     {}
-
-    void worker_thread_loop() {
-        while (true) try {
-            std::unique_lock<std::mutex> lock(worker_mutex);
-            worker_cv.wait(lock, [this]{
-                return !worker_queue.empty();
-            });
-            FrameEndJob job = std::move(worker_queue.front());
-            worker_queue.pop();
-            lock.unlock();
-
-            xrtransport::Transport& transport = transport_ref;
-            auto msg_out = transport.start_message(XRTP_MSG_VULKAN2_END_FRAME);
-            xrtransport::SerializeContext s_ctx(msg_out.buffer);
-            serialize(&job.session, s_ctx);
-            serialize_ptr(job.frame_end_info, 1, s_ctx);
-            msg_out.flush();
-
-            // frame end info has been consumed so xrEndFrame can return
-            job.message_sent_promise.set_value();
-
-            // wait until server says it's done reading from the swapchain
-            auto msg_in = transport.await_message(XRTP_MSG_VULKAN2_END_FRAME_RETURN);
-
-            // mark swapchains as available again
-            for (XrSwapchain swapchain : job.referenced_swapchains) {
-                SwapchainState& swapchain_state = get_swapchain_state(swapchain).value();
-                swapchain_state.mark_available();
-            }
-        }
-        catch (const std::exception& e) {
-            spdlog::error("Exception occurred in frame end worker thread: {}", e.what());
-            // wait for another job
-        }
-    }
-
-    void submit_job(FrameEndJob job) {
-        std::unique_lock<std::mutex> lock(worker_mutex);
-        worker_queue.emplace(std::move(job));
-        lock.unlock();
-        worker_cv.notify_one();
-    }
 };
 
 #endif // XRTRANSPORT_VULKAN2_SESSION_STATE_H

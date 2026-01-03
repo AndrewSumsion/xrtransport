@@ -19,6 +19,11 @@ struct VulkanLoader {
     PFN_vkDeviceWaitIdle DeviceWaitIdle = nullptr;
     PFN_vkDestroyImage DestroyImage = nullptr;
     PFN_vkFreeMemory FreeMemory = nullptr;
+    PFN_vkGetDeviceQueue GetDeviceQueue = nullptr;
+    PFN_vkQueueSubmit QueueSubmit = nullptr;
+    PFN_vkCreateFence CreateFence = nullptr;
+    PFN_vkWaitForFences WaitForFences = nullptr;
+    PFN_vkResetFences ResetFences = nullptr;
 
     VulkanLoader(PFN_vkGetInstanceProcAddr GetInstanceProcAddr)
         : GetInstanceProcAddr(GetInstanceProcAddr)
@@ -41,6 +46,11 @@ struct VulkanLoader {
         load_function("vkDeviceWaitIdle", DeviceWaitIdle);
         load_function("vkDestroyImage", DestroyImage);
         load_function("vkFreeMemory", FreeMemory);
+        load_function("vkGetDeviceQueue", GetDeviceQueue);
+        load_function("vkQueueSubmit", QueueSubmit);
+        load_function("vkCreateFence", CreateFence);
+        load_function("vkWaitForFences", WaitForFences);
+        load_function("vkResetFences", ResetFences);
     }
 
 private:

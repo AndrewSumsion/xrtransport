@@ -504,10 +504,8 @@ SwapchainState& create_local_swapchain(
 {
     VkResult vk_result{};
 
-    std::vector<XrSwapchainImageVulkan2KHR> images;
-    std::vector<VkDeviceMemory> image_memory;
+    std::vector<SwapchainImage> images;
     images.reserve(num_images);
-    image_memory.reserve(num_images);
 
     auto image_create_info = create_vk_image_create_info(create_info);
     VkPhysicalDeviceMemoryProperties memory_properties{};
@@ -526,28 +524,37 @@ SwapchainState& create_local_swapchain(
             session_state.graphics_binding,
             memory_properties,
             required_flags);
+        
+        // create fence
+        VkFenceCreateInfo fence_info{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
+        VkFence fence{};
+        vk->CreateFence(session_state.graphics_binding.device, &fence_info, nullptr, &fence);
+
         images.push_back({
-            XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR,
-            nullptr,
-            image
+            {
+                XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR,
+                nullptr,
+                image
+            },
+            memory,
+            fence
         });
-        image_memory.push_back(memory);
         fds_out.push_back(dma_buf_fd);
     }
-    
-    SwapchainState result(
+
+    SwapchainState& result = store_swapchain_state(
         handle,
         session_state.handle,
         std::move(images),
-        std::move(image_memory),
         create_info.width,
         create_info.height,
-        is_static
+        is_static,
+        *transport,
+        *vk
     );
 
-    SwapchainState& moved_reference = store_swapchain_state(handle, std::move(result));
-    session_state.swapchains.emplace(moved_reference);
-    return moved_reference;
+    session_state.swapchains.emplace(result);
+    return result;
 }
 
 /**
@@ -561,17 +568,18 @@ SwapchainState& create_local_swapchain(
  * - server reads fds off of exchange socket, imports them, and stores the images
  * - server responds to client so that it can free its fds and return from xrCreateSwapchain
  * 
- * server and client swapchains are kept in sync entirely through xrEndFrame and the assumption that they
- * will cycle through them. note that we can't control the order of acquiring swapchains on the server, so
- * we'll just use whichever swapchain the server gives us, but cycle through the client images as the copy
- * source.
+ * Server and client swapchains are kept in sync via xrReleaseSwapchainImage. When an image is released, a
+ * fence is inserted onto the Vulkan queue to capture all of the operations that may write to the image.
+ * Then, a job is submitted to the swapchain's worker thread, which waits until this fence has been
+ * signaled (it is done being written to), and notifies the server, which calls xrAcquireSwapchainImage,
+ * xrWaitSwapchainImage, then copies the image onto the server swapchain image it just acquired, and then
+ * calls xrReleaseSwapchainImage on it.
  * 
- * on the client, xrEndFrame will do whatever validation it can, and queue up the submission to a dedicated
- * submission thread and return immediately. On the submission thread, it will send a message to the server
- * that tells it to acquire, wait for, and copy onto a server swap chain. Once the server has has finished
- * copying (waiting on a fence), it sends a message back to the client that the client can stop waiting and
- * mark the swapchain available. This allows calls after xrEndFrame and before the next xrWaitSwapchainImage
- * to occur (as long as they don't need to lock the transport stream).
+ * When xrEndFrame is called, the client simply validates the input, sends the input to the server, and
+ * returns immediately. The server has a per-swapchain (not per-image) fence that is initially set as
+ * signaled, and before it starts copying it resets it. When the server receives the XrFrameEndInfo, it
+ * collects a deduplicated list of swapchains mentioned by it, and then waits for the fences of each of
+ * them to be signaled (done copying) before forwarding onto the real runtime.
  */
 XrResult xrCreateSwapchainImpl(
     XrSession                                   session,
@@ -653,12 +661,8 @@ try {
 
     // destroy VkImages
     for (auto& swapchain_image : swapchain_state.get_images()) {
-        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image, nullptr);
-    }
-
-    // free memory
-    for (VkDeviceMemory memory : swapchain_state.get_image_memory()) {
-        vk->FreeMemory(session_state.graphics_binding.device, memory, nullptr);
+        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image.image, nullptr);
+        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image.memory, nullptr);
     }
 
     session_state.swapchains.erase(swapchain);
@@ -747,7 +751,6 @@ XrResult xrWaitSwapchainImageImpl(
     return swapchain_state.wait(waitInfo->timeout);
 }
 
-// TODO: evaluate whether it would be better to start server copy in this function
 XrResult xrReleaseSwapchainImageImpl(
     XrSwapchain                                 swapchain,
     const XrSwapchainImageReleaseInfo*          releaseInfo)
@@ -762,8 +765,34 @@ XrResult xrReleaseSwapchainImageImpl(
     }
 
     SwapchainState& swapchain_state = opt_swapchain_state.value();
+    SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
 
-    return swapchain_state.release();
+    // Release an image and get its index
+    uint32_t released_index{};
+    XrResult result = swapchain_state.release(released_index);
+    if (result != XR_SUCCESS) {
+        return result;
+    }
+
+    // Submit a no-op with a fence to the VkQueue to allow the worker thread to wait for all of the work
+    // that has been submitted up to this point.
+    VkResult vk_result = vk->QueueSubmit(
+        session_state.queue,
+        0,
+        nullptr,
+        swapchain_state.get_images()[released_index].fence
+    );
+    if (vk_result != VK_SUCCESS) {
+        spdlog::error("Failed to add fence to queue: {}", (int)vk_result);
+    }
+
+    // submit a job and wait until the worker thread has finished reading releaseInfo
+    ReleaseImageJob job{releaseInfo, released_index};
+    auto can_return_future = job.can_return.get_future();
+    swapchain_state.submit_release_job(std::move(job));
+    can_return_future.get();
+
+    return XR_SUCCESS;
 }
 
 const XrGraphicsBindingVulkan2KHR* find_graphics_binding(const XrSessionCreateInfo* create_info) {
@@ -817,7 +846,11 @@ try {
     DeserializeContext d_ctx(msg_in.stream);
     deserialize(&handle, d_ctx);
 
-    store_session_state(handle, SessionState(handle, graphics_binding, *transport));
+    // get VkQueue from provided family index and index
+    VkQueue queue{};
+    vk->GetDeviceQueue(graphics_binding.device, graphics_binding.queueFamilyIndex, graphics_binding.queueIndex, &queue);
+
+    store_session_state(handle, std::move(graphics_binding), queue);
 
     *session = handle;
     return XR_SUCCESS;
@@ -857,7 +890,7 @@ catch (const std::exception& e) {
 XrResult xrEndFrameImpl(
     XrSession                                   session,
     const XrFrameEndInfo*                       frameEndInfo)
-{
+try {
     auto opt_session_state = get_session_state(session);
     if (!opt_session_state.has_value()) {
         if (pfn_xrEndFrame_next)
@@ -868,24 +901,24 @@ XrResult xrEndFrameImpl(
 
     SessionState& session_state = opt_session_state.value();
 
-    ValidateContext validate_context;
-    XrResult result = validate_frame_end(frameEndInfo, validate_context);
+    XrResult result = validate_frame_end(frameEndInfo);
     if (result != XR_SUCCESS) {
         return result;
     }
 
-    std::vector<XrSwapchain> referenced_swapchains(
-        validate_context.referenced_swapchains.begin(),
-        validate_context.referenced_swapchains.end()
-    );
+    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_END_FRAME);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&session, s_ctx);
+    serialize_ptr(frameEndInfo, 1, s_ctx);
+    msg_out.flush();
 
-    FrameEndJob job{session, frameEndInfo, std::move(referenced_swapchains)};
-    auto message_sent_future = job.message_sent_promise.get_future();
-
-    session_state.submit_job(std::move(job));
-    message_sent_future.get();
+    // no need to wait for a response
 
     return XR_SUCCESS;
+}
+catch (const std::exception& e) {
+    spdlog::error("Exception thrown in xrEndFrameImpl: {}", e.what());
+    return XR_ERROR_RUNTIME_FAILURE;
 }
 
 } // namespace

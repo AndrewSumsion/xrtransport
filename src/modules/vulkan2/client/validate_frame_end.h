@@ -8,10 +8,6 @@
 #include <unordered_set>
 #include <unordered_map>
 
-struct ValidateContext {
-    std::unordered_set<XrSwapchain> referenced_swapchains;
-};
-
-XrResult validate_frame_end(const XrFrameEndInfo* frame_end_info, ValidateContext& ctx);
+XrResult validate_frame_end(const XrFrameEndInfo* frame_end_info);
 
 #endif // XRTRANSPORT_VULKAN2_VALIDATE_FRAME_END_H
