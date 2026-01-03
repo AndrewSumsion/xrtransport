@@ -155,6 +155,17 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
+xrtp_Result xrtp_handle_message(
+    xrtp_Transport transport,
+    xrtp_MessageHeader header)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    transport_impl->handle_message(header);
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
 xrtp_Result xrtp_lock_stream(
     xrtp_Transport transport,
     xrtp_StreamLock* lock)

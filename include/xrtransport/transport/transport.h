@@ -350,6 +350,10 @@ public:
         return MessageLockIn(raw_msg_in);
     }
 
+    void handle_message(xrtp_MessageHeader header) {
+        CHK_XRTP(xrtp_handle_message(wrapped, header));
+    }
+
     StreamLock lock_stream() {
         xrtp_StreamLock raw_lock{};
         CHK_XRTP(xrtp_lock_stream(wrapped, &raw_lock));

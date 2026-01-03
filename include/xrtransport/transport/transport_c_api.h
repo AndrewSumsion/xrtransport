@@ -117,6 +117,14 @@ XRTP_API xrtp_Result xrtp_await_message(
     xrtp_MessageLockIn* msg_in);
 
 /**
+ * Similar to xrtp_await_message, but handles the final message using a
+ * built-in handler instead of exposing a MessageLockIn.
+ */
+XRTP_API xrtp_Result xrtp_handle_message(
+    xrtp_Transport transport,
+    xrtp_MessageHeader header);
+
+/**
  * Acquires Transport's stream lock and exposes raw read-write access.
  * 
  * lock can be written to and read from, and *must* be released.

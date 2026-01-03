@@ -63,6 +63,21 @@ MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     }
 }
 
+void TransportImpl::handle_message(uint16_t header) {
+    // keep reading and handling messages synchronously until we've handled the one we want
+    while (true) {
+        std::unique_lock<std::recursive_mutex> lock(stream_mutex);
+
+        MessageInHeader received_header{};
+        asio::read(*stream, asio::mutable_buffer(&received_header, sizeof(received_header)));
+
+        dispatch_to_handler(received_header.header, received_header.size, std::move(lock));
+        if (received_header.header == header) {
+            return;
+        }
+    }
+}
+
 StreamLockImpl TransportImpl::lock_stream() {
     std::unique_lock<std::recursive_mutex> lock(stream_mutex);
     return StreamLockImpl(std::move(lock), *stream);

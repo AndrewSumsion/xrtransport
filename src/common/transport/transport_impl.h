@@ -207,6 +207,7 @@ public:
     void unregister_handler(uint16_t header);
     void clear_handlers();
     MessageLockInImpl await_message(uint16_t header);
+    void handle_message(uint16_t);
 
     // Raw stream access
     StreamLockImpl lock_stream();
