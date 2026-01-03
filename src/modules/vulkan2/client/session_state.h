@@ -1,5 +1,5 @@
-#ifndef XRTRANSPORT_VULKAN2_SESSION_STATE_H
-#define XRTRANSPORT_VULKAN2_SESSION_STATE_H
+#ifndef XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H
+#define XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H
 
 #include "vulkan_loader.h"
 
@@ -29,7 +29,7 @@ std::optional<SessionState&> get_session_state(XrSession handle);
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage> images,
+    std::vector<SwapchainImage>&& images,
     uint32_t width,
     uint32_t height,
     bool is_static,
@@ -140,9 +140,9 @@ struct SessionState {
     std::unordered_set<XrSwapchain> swapchains;
     bool is_running = false; // TODO: track this so that we can validate it in xrEndFrame
 
-    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR graphics_binding, VkQueue queue)
+    explicit SessionState(XrSession handle, XrGraphicsBindingVulkan2KHR&& graphics_binding, VkQueue queue)
         : handle(handle), graphics_binding(std::move(graphics_binding)), queue(queue)
     {}
 };
 
-#endif // XRTRANSPORT_VULKAN2_SESSION_STATE_H
+#endif // XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H

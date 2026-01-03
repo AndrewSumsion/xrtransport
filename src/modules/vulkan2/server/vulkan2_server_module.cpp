@@ -124,6 +124,7 @@ bool on_init(
     }
 
     if (!vulkan2_found) {
+        spdlog::warn("XR_KHR_vulkan_enable2 extension not found on host runtime, not enabling Vulkan2 module");
         return false; // don't enable if runtime doesn't support XR_KHR_vulkan_enable2
     }
 
