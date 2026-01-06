@@ -125,6 +125,9 @@ Runtime& get_runtime() {
 
         // Create the Transport instance
         runtime = std::make_unique<Runtime>(std::move(stream));
+
+        // Start Transport thread
+        runtime->get_transport().start();
     }
 
     return *runtime;

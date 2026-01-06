@@ -2,6 +2,7 @@
 #define XRTRANSPORT_TRANSPORT_IMPL_H
 
 #include "xrtransport/asio_compat.h"
+#include "xrtransport/transport/transport_c_api.h" // for xrtp_TransportStatus
 
 #include "asio/write.hpp"
 #include "asio/read.hpp"
@@ -18,6 +19,8 @@
 #include <queue>
 
 namespace xrtransport {
+
+class TransportImpl;
 
 struct MessageHeader {
     uint16_t header;
@@ -130,63 +133,10 @@ private:
     std::vector<std::uint8_t> buffer_;
 };
 
-// RAII stream lock classes
-struct [[nodiscard]] MessageLockInImpl {
-public:
-    std::unique_lock<std::recursive_mutex> lock;
-    ReceiveBuffer buffer;
-
-    MessageLockInImpl(std::vector<uint8_t> payload, std::unique_lock<std::recursive_mutex>&& lock)
-        : buffer(std::move(payload)), lock(std::move(lock))
-    {}
-
-    MessageLockInImpl(const MessageLockInImpl&) = delete;
-    MessageLockInImpl& operator=(const MessageLockInImpl&) = delete;
-    MessageLockInImpl(MessageLockInImpl&&) = default;
-    MessageLockInImpl& operator=(MessageLockInImpl&&) = default;
-};
-
-struct [[nodiscard]] MessageLockOutImpl {
-private:
-    SyncWriteStream* stream;
-    MessageHeader header;
-public:
-    std::unique_lock<std::recursive_mutex> lock;
-    SendBuffer buffer;
-
-    MessageLockOutImpl(std::uint16_t header_code, std::unique_lock<std::recursive_mutex>&& lock, SyncWriteStream& stream)
-        : lock(std::move(lock)), stream(&stream), header({header_code, 0, 0}), buffer() {
-        // save space for the header in the buffer
-        asio::write(buffer, asio::buffer(&header, sizeof(MessageHeader)));
-    }
-
-    MessageLockOutImpl(const MessageLockOutImpl&) = delete;
-    MessageLockOutImpl& operator=(const MessageLockOutImpl&) = delete;
-    MessageLockOutImpl(MessageLockOutImpl&&) = default;
-    MessageLockOutImpl& operator=(MessageLockOutImpl&&) = default;
-
-    void flush() {
-        if (buffer.size() == 0) return; // buffer was already flushed
-
-        // overwrite header at beginning of buffer with updated size
-        header.size = static_cast<std::uint32_t>(buffer.size() - sizeof(MessageHeader));
-        std::memcpy(buffer.data(), &header, sizeof(MessageHeader));
-        asio::write(*stream, asio::buffer(buffer.data(), buffer.size()));
-        buffer.clear();
-    }
-
-    ~MessageLockOutImpl() {
-        flush();
-    }
-};
-
-struct [[nodiscard]] MessageLockImpl {
-    std::unique_lock<std::recursive_mutex> lock;
-
-    explicit MessageLockImpl(std::unique_lock<std::recursive_mutex>&& lock)
-        : lock(std::move(lock))
-    {}
-};
+// RAII stream lock classes forward declarations
+struct [[nodiscard]] MessageLockInImpl;
+struct [[nodiscard]] MessageLockOutImpl;
+struct [[nodiscard]] MessageLockImpl;
 
 // Transport class for message-based communication
 class TransportImpl {
@@ -196,11 +146,17 @@ private:
     // Owning a lock on this means you are allowed to handle incoming messages and write messages to the stream
     std::recursive_mutex message_mutex;
 
+    // Determines whether certain operations are allowed, and controls the stopping of the worker threads
+    std::atomic<xrtp_TransportStatus> status;
+
+    // this mutex protects access to the queue
+    // additionally, this mutex mutually excludes any code that updates the status, and consumer code being
+    // between a status check and a wait (using this mutex) to make sure that no consumer falls into a wait
+    // after the status has been updated to closed
     std::mutex queue_mutex;
     std::condition_variable queue_cv;
     std::queue<MessageIn> queue;
 
-    std::atomic<bool> stopping;
     std::thread producer_thread;
     std::thread consumer_thread;
 
@@ -217,7 +173,8 @@ private:
     // message_mutex must be held
     MessageIn await_any_message();
 
-    void cleanup();
+    friend class MessageLockOutImpl;
+    void flush_to_stream(const void* data, std::size_t size);
 
 public:
     explicit TransportImpl(std::unique_ptr<SyncDuplexStream> stream);
@@ -238,12 +195,79 @@ public:
     // Pre-emptive locking of message mutex, useful for keeping a lock when locking in a loop.
     MessageLockImpl acquire_message_lock();
 
+    // Start the internal producer and consumer threads. There is no fully synchronous mode,
+    // you *must* call this before using the Transport. Make sure to register any handlers that
+    // might be used immediately before calling this.
+    void start();
+
+    // close the writing end of the stream. messages can continue to be handled until the other
+    // side shuts down
+    void shutdown();
+
     // Allow the handlers to run and wait until the transport closes
     void join();
 
-    // Stream status
-    bool is_open() const;
+    xrtp_TransportStatus get_status();
+
     void close();
+};
+
+// RAII stream lock classes
+struct [[nodiscard]] MessageLockInImpl {
+public:
+    std::unique_lock<std::recursive_mutex> lock;
+    ReceiveBuffer buffer;
+
+    MessageLockInImpl(std::vector<uint8_t> payload, std::unique_lock<std::recursive_mutex>&& lock)
+        : buffer(std::move(payload)), lock(std::move(lock))
+    {}
+
+    MessageLockInImpl(const MessageLockInImpl&) = delete;
+    MessageLockInImpl& operator=(const MessageLockInImpl&) = delete;
+    MessageLockInImpl(MessageLockInImpl&&) = default;
+    MessageLockInImpl& operator=(MessageLockInImpl&&) = default;
+};
+
+struct [[nodiscard]] MessageLockOutImpl {
+private:
+    TransportImpl* transport;
+    MessageHeader header;
+public:
+    std::unique_lock<std::recursive_mutex> lock;
+    SendBuffer buffer;
+
+    MessageLockOutImpl(std::uint16_t header_code, std::unique_lock<std::recursive_mutex>&& lock, TransportImpl* transport)
+        : lock(std::move(lock)), transport(transport), header({header_code, 0, 0}), buffer() {
+        // save space for the header in the buffer
+        asio::write(buffer, asio::buffer(&header, sizeof(MessageHeader)));
+    }
+
+    MessageLockOutImpl(const MessageLockOutImpl&) = delete;
+    MessageLockOutImpl& operator=(const MessageLockOutImpl&) = delete;
+    MessageLockOutImpl(MessageLockOutImpl&&) = default;
+    MessageLockOutImpl& operator=(MessageLockOutImpl&&) = default;
+
+    void flush() {
+        if (buffer.size() == 0) return; // buffer was already flushed
+
+        // overwrite header at beginning of buffer with updated size
+        header.size = static_cast<std::uint32_t>(buffer.size() - sizeof(MessageHeader));
+        std::memcpy(buffer.data(), &header, sizeof(MessageHeader));
+        transport->flush_to_stream(buffer.data(), buffer.size());
+        buffer.clear();
+    }
+
+    ~MessageLockOutImpl() {
+        flush();
+    }
+};
+
+struct [[nodiscard]] MessageLockImpl {
+    std::unique_lock<std::recursive_mutex> lock;
+
+    explicit MessageLockImpl(std::unique_lock<std::recursive_mutex>&& lock)
+        : lock(std::move(lock))
+    {}
 };
 
 } // namespace xrtransport

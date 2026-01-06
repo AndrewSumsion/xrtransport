@@ -58,13 +58,8 @@ private:
             // Register protocol handlers
             register_handlers(transport);
 
-            // Start async worker
-            auto worker = transport.run_asynchronously();
-
-            // Keep connection alive until socket closes
-            while (transport.is_open()) {
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
-            }
+            transport.start();
+            transport.join();
 
         } catch (const std::exception& e) {
             std::cerr << "Client handler error: " << e.what() << std::endl;

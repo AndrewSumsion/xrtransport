@@ -8,6 +8,13 @@
 #include "asio/read.hpp"
 #include "asio/write.hpp"
 
+#include <spdlog/spdlog.h>
+#include <cstdio>
+#include <cstdlib>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+
 #include <thread>
 #include <chrono>
 #include <atomic>
@@ -23,6 +30,8 @@ TEST_CASE("Basic sync sending and awaiting", "[transport][sync]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -46,6 +55,8 @@ TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     uint32_t message_sent = 1000;
     uint32_t message_received = 0;
@@ -75,24 +86,27 @@ TEST_CASE("Basic async handler", "[transport][async]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     uint32_t message_sent = 1000;
-    uint32_t message_received = 0;
+    std::atomic<uint32_t> message_received = 0;
 
     transport_b.register_handler(100, [&](MessageLockIn msg_in){
-        asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
+        uint32_t tmp{};
+        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        message_received = tmp;
     });
 
     auto msg_out = transport_a.start_message(100);
     asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
     msg_out.flush();
 
-    // run worker loop until handler is invoked
-    while (!message_received) {
-        transport_b.run_once();
-    }
+    // shut down transport_a and wait for transport_b to handle message and close
+    transport_a.shutdown();
+    transport_a.join();
 
-    REQUIRE(message_received == message_sent);
+    REQUIRE(message_received.load() == message_sent);
 }
 
 TEST_CASE("Round trip async handler", "[transport][async]") {
@@ -100,99 +114,36 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     uint32_t message_sent = 1000;
-    uint32_t message_received = 0;
+    std::atomic<uint32_t> message_received = 0;
 
     transport_b.register_handler(100, [&](MessageLockIn msg_in){
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
         asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
+        msg_out.flush();
+        transport_b.shutdown();
     });
 
     transport_a.register_handler(101, [&](MessageLockIn msg_in){
-        asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
+        uint32_t tmp{};
+        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        message_received = tmp;
     });
 
     auto msg_out = transport_a.start_message(100);
     asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
     msg_out.flush();
 
-    transport_b.run_once();
-    transport_a.run_once();
+    // transport_b will receive the message and send it back, then shut itself down
+    // wait for transport_a to receive it and close
+    transport_a.join();
 
     REQUIRE(message_received == message_sent);
-}
-
-TEST_CASE("Thread-safe async handler", "[transport][async]") {
-    asio::io_context io_context;
-    auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(std::move(stream_a));
-    Transport transport_b(std::move(stream_b));
-
-    uint32_t message_sent = 1000;
-    std::atomic<uint32_t> message_received = 0;
-
-    transport_b.register_handler(100, [&](MessageLockIn msg_in){
-        uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
-        message_received = tmp;
-    });
-
-    auto msg_out = transport_a.start_message(100);
-    asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
-    msg_out.flush();
-
-    // run async loop until handler is invoked
-    std::thread io_thread([&](){
-        while (!message_received.load()) {
-            transport_b.run_once();
-        }
-    });
-
-    io_thread.join();
-
-    REQUIRE(message_received.load() == message_sent);
-}
-
-TEST_CASE("Thread-safe round trip async handler", "[transport][async]") {
-    asio::io_context io_context;
-    auto [stream_a, stream_b] = create_connected_streams(io_context);
-    Transport transport_a(std::move(stream_a));
-    Transport transport_b(std::move(stream_b));
-
-    uint32_t message_sent = 1000;
-    std::atomic<uint32_t> message_received = 0;
-
-    transport_b.register_handler(100, [&](MessageLockIn msg_in){
-        uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
-        auto msg_out = transport_b.start_message(101);
-        asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
-    });
-
-    transport_a.register_handler(101, [&](MessageLockIn msg_in){
-        uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
-        message_received = tmp;
-    });
-
-    {
-        // this lock needs to be released so that transport_a's handler can run
-        auto msg_out = transport_a.start_message(100);
-        asio::write(msg_out.buffer, asio::buffer(&message_sent, sizeof(message_sent)));
-    }
-
-    // run async loop until handler is invoked
-    std::thread io_thread([&](){
-        transport_b.run_once();
-        transport_a.run_once();
-    });
-
-    io_thread.join();
-
-    REQUIRE(message_received.load() == message_sent);
 }
 
 TEST_CASE("Handler registration and removal", "[transport][handlers]") {
@@ -200,6 +151,8 @@ TEST_CASE("Handler registration and removal", "[transport][handlers]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     std::atomic<bool> handler_called = false;
 
@@ -213,13 +166,8 @@ TEST_CASE("Handler registration and removal", "[transport][handlers]") {
         auto msg_out = transport_a.start_message(200);
     }
 
-    // Wait for handler to be called
-    std::thread io_thread([&](){
-        while (!handler_called.load()) {
-            transport_b.run_once();
-        }
-    });
-    io_thread.join();
+    // Busy wait for handler to be called
+    while (!handler_called.load());
 
     REQUIRE(handler_called.load() == true);
 
@@ -228,12 +176,12 @@ TEST_CASE("Handler registration and removal", "[transport][handlers]") {
     transport_b.unregister_handler(200);
 
     // Send message again - handler should NOT be called
-    // This should throw since no handler is registered
-    REQUIRE_THROWS_AS([&](){
+    {
         auto msg_out = transport_a.start_message(200);
-        // Run transport_b briefly to process the message
-        transport_b.run_once();
-    }(), TransportException);
+    }
+
+    transport_a.shutdown();
+    transport_b.join();
 
     REQUIRE(handler_called.load() == false);
 }
@@ -243,6 +191,8 @@ TEST_CASE("Clear all handlers", "[transport][handlers]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     std::atomic<int> handler_calls = 0;
 
@@ -254,11 +204,18 @@ TEST_CASE("Clear all handlers", "[transport][handlers]") {
     // Clear all handlers
     transport_b.clear_handlers();
 
-    // Try sending to any of the registered handlers - should all throw
-    REQUIRE_THROWS_AS([&](){
-        auto msg_out = transport_a.start_message(300);
-        transport_b.run_once();
-    }(), TransportException);
+    // Try sending to all of the unregistered handlers - should not update handler_calls
+    {
+        auto msg_out1 = transport_a.start_message(300);
+        msg_out1.flush();
+        auto msg_out2 = transport_a.start_message(301);
+        msg_out2.flush();
+        auto msg_out3 = transport_a.start_message(302);
+        msg_out3.flush();
+    }
+
+    transport_a.shutdown();
+    transport_b.join();
 
     REQUIRE(handler_calls.load() == 0);
 }
@@ -268,6 +225,8 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
     auto [stream_a, stream_b] = create_connected_streams(io_context);
     Transport transport_a(std::move(stream_a));
     Transport transport_b(std::move(stream_b));
+    transport_a.start();
+    transport_b.start();
 
     std::atomic<bool> intermediate_received = false;
     std::atomic<bool> message_echoed = false;
@@ -282,18 +241,16 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
         asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
+        msg_out.flush();
         message_echoed = true;
+
+        transport_b.shutdown();
     });
 
     transport_a.register_handler(102, [&](MessageLockIn msg_in){
         uint32_t tmp;
         asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
         intermediate_received = true;
-    });
-
-    // run async loop until handler is invoked
-    std::thread io_thread([&](){
-        transport_b.run_once();
     });
 
     auto msg_out = transport_a.start_message(100);
@@ -308,7 +265,7 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
     uint32_t message_received;
     asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
 
-    io_thread.join();
+    transport_a.join();
 
     REQUIRE(message_received == message_sent);
 }

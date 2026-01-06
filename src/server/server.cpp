@@ -134,9 +134,11 @@ void Server::run() {
     modules = std::move(enabled_modules);
 
     // let transport run until it closes
+    transport.start();
     transport.join();
 
     // Once handler loop terminates, destroy the instance in case the client didn't
+    // TODO: track whether the client deleted it so we don't delete it twice because that might work but it's not compliant.
     xrDestroyInstance(saved_instance);
     saved_instance = XR_NULL_HANDLE;
     function_loader = FunctionLoader(xrGetInstanceProcAddr); // clear all saved functions

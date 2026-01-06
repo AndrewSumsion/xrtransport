@@ -233,7 +233,7 @@ public:
     MessageLock& operator=(MessageLock&& other) {
         if (this != &other) {
             if (wrapped) {
-                CHK_XRTP(xrtp_release_message_lock(wrapped));
+                CHK_XRTP(xrtp_msg_lock_release(wrapped));
             }
             wrapped = other.wrapped;
             other.wrapped = nullptr;
@@ -244,7 +244,7 @@ public:
 
     ~MessageLock() {
         if (wrapped) {
-            CHK_XRTP(xrtp_release_message_lock(wrapped));
+            CHK_XRTP(xrtp_msg_lock_release(wrapped));
         }
     }
 };
@@ -260,7 +260,7 @@ private:
 
 public:
     explicit Transport(std::unique_ptr<SyncDuplexStream> stream) : owns_transport(true) {
-        xrtp_create_transport(stream.release(), &wrapped);
+        xrtp_transport_create(stream.release(), &wrapped);
     }
 
     explicit Transport(xrtp_Transport wrapped)
@@ -291,7 +291,7 @@ public:
 
     MessageLock acquire_message_lock() {
         xrtp_MessageLock raw_lock{};
-        CHK_XRTP(xrtp_acquire_message_lock(wrapped, &raw_lock));
+        CHK_XRTP(xrtp_msg_lock_acquire(wrapped, &raw_lock));
         return MessageLock(raw_lock);
     }
 
@@ -323,18 +323,26 @@ public:
         handlers.clear();
     }
 
-    void join() {
-        CHK_XRTP(xrtp_join_transport(wrapped));
+    void start() {
+        CHK_XRTP(xrtp_transport_start(wrapped));
     }
 
-    bool is_open() {
-        bool result{};
-        CHK_XRTP(xrtp_is_open(wrapped, &result));
+    void shutdown() {
+        CHK_XRTP(xrtp_transport_shutdown(wrapped));
+    }
+
+    void join() {
+        CHK_XRTP(xrtp_transport_join(wrapped));
+    }
+
+    xrtp_TransportStatus get_status() {
+        xrtp_TransportStatus result{};
+        CHK_XRTP(xrtp_transport_get_status(wrapped, &result));
         return result;
     }
 
     void close() {
-        CHK_XRTP(xrtp_close(wrapped));
+        CHK_XRTP(xrtp_transport_close(wrapped));
     }
 
     xrtp_Transport get_handle() const {
@@ -343,7 +351,7 @@ public:
 
     ~Transport() {
         if (owns_transport) {
-            CHK_XRTP(xrtp_release_transport(wrapped));
+            CHK_XRTP(xrtp_transport_release(wrapped));
         }
     }
 };

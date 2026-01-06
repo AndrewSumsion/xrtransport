@@ -27,7 +27,26 @@ typedef uint16_t xrtp_MessageHeader;
 #define XRTP_MSG_FUNCTION_RETURN 2
 #define XRTP_MSG_SYNCHRONIZATION_REQUEST 3
 #define XRTP_MSG_SYNCHRONIZATION_RESPONSE 4
+#define XRTP_MSG_SHUTDOWN 99
 #define XRTP_MSG_CUSTOM_BASE 100
+
+// transport status
+typedef enum xrtp_TransportStatus {
+    // Just created and not yet useable.
+    // You should register handlers and call start
+    XRTP_STATUS_CREATED,
+
+    // Started, reading from the stream and handling messages
+    XRTP_STATUS_OPEN,
+
+    // Shutdown initiated
+    // Writes have been disabled and peer can handle pending messages.
+    // Once the peer has finished, the transport will be closed.
+    XRTP_STATUS_WRITE_CLOSED,
+
+    // Worker threads have stopped, and the underlying stream has been closed
+    XRTP_STATUS_CLOSED
+} xrtp_TransportStatus;
 
 // protocol values
 #define XRTRANSPORT_PROTOCOL_VERSION 1
@@ -41,9 +60,18 @@ typedef int32_t xrtp_Result;
  * 
  * The transport will start reading the stream immediately.
  */
-XRTP_API xrtp_Result xrtp_create_transport(
+XRTP_API xrtp_Result xrtp_transport_create(
     void* sync_duplex_stream,
     xrtp_Transport* transport_out);
+
+/**
+ * Start the transport reading and handling messages. The transport is mostly
+ * unusable before this, aside from handler management.
+ * 
+ * Handlers that are needed immediately should be called before this.
+ */
+XRTP_API xrtp_Result xrtp_transport_start(
+    xrtp_Transport transport);
 
 /**
  * Destruct the Transport instance
@@ -51,7 +79,7 @@ XRTP_API xrtp_Result xrtp_create_transport(
  * This will stop the transport's producer and consumer threads, and
  * interrupt any calls awaiting a message
  */
-XRTP_API xrtp_Result xrtp_release_transport(
+XRTP_API xrtp_Result xrtp_transport_release(
     xrtp_Transport transport);
 
 /**
@@ -116,27 +144,35 @@ XRTP_API xrtp_Result xrtp_handle_message(
  * 
  * The lock *must* be released.
  */
-XRTP_API xrtp_Result xrtp_acquire_message_lock(
+XRTP_API xrtp_Result xrtp_msg_lock_acquire(
     xrtp_Transport transport,
     xrtp_MessageLock* lock);
 
 /**
- * Allows the handlers to run and waits for the transport to close
+ * Returns the current status of the Transport.
  */
-XRTP_API xrtp_Result xrtp_join_transport(
+XRTP_API xrtp_Result xrtp_transport_get_status(
+    xrtp_Transport transport,
+    xrtp_TransportStatus* status);
+
+/**
+ * Initiates a graceful shutdown of the Transport. Allows the peer to handle
+ * the rest of the pending message, and prevents writes until all messages
+ * from the peer have been handled, and finally closes the connection.
+ */
+XRTP_API xrtp_Result xrtp_transport_shutdown(
     xrtp_Transport transport);
 
 /**
- * Returns whether the Transport is still running.
+ * Allows the handlers to run and waits for the transport to close
  */
-XRTP_API xrtp_Result xrtp_is_open(
-    xrtp_Transport transport,
-    bool* is_open);
+XRTP_API xrtp_Result xrtp_transport_join(
+    xrtp_Transport transport);
 
 /**
  * Stops the Transport and closes the underlying stream.
  */
-XRTP_API xrtp_Result xrtp_close(
+XRTP_API xrtp_Result xrtp_transport_close(
     xrtp_Transport transport);
 
 /**
@@ -177,9 +213,9 @@ XRTP_API xrtp_Result xrtp_msg_out_release(
     xrtp_MessageLockOut msg_out);
 
 /**
- * Releases the message lock acquired by xrtp_acquire_message_lock
+ * Releases the message lock acquired by xrtp_msg_lock_acquire
  */
-XRTP_API xrtp_Result xrtp_release_message_lock(
+XRTP_API xrtp_Result xrtp_msg_lock_release(
     xrtp_MessageLock lock);
 
 #ifdef __cplusplus

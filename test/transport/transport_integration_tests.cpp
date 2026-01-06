@@ -25,7 +25,6 @@ class IntegrationTestFixture {
 private:
     static std::unique_ptr<asio::io_context> io_context_;
     static std::unique_ptr<Transport> transport_;
-    static std::thread io_thread_;
     static constexpr uint16_t SERVER_PORT = 12345;
 
 public:
@@ -53,20 +52,13 @@ public:
 
         // Create Transport
         transport_ = std::make_unique<Transport>(std::make_unique<TcpDuplexStream>(std::move(client_socket_)));
+        transport_->start();
     }
 
     static void TearDownTestSuite() {
         std::cout << "Cleaning up integration test..." << std::endl;
 
-        transport_->clear_handlers();
-        transport_->stop();
-        transport_->close();
-        io_context_->stop();
-
-        // Join io thread
-        if (io_thread_.joinable()) {
-            io_thread_.join();
-        }
+        transport_->shutdown();
     }
 
     static Transport& GetTransport() {
@@ -81,7 +73,6 @@ public:
 // Static member definitions
 std::unique_ptr<asio::io_context> IntegrationTestFixture::io_context_;
 std::unique_ptr<Transport> IntegrationTestFixture::transport_;
-std::thread IntegrationTestFixture::io_thread_;
 
 TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 1: Simple Echo", "[integration][protocol1]") {
     auto& transport = GetTransport();
@@ -106,6 +97,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 2: Variable Length Data", "[i
 
     // Send message 102 (no payload)
     auto msg_out = transport.start_message(102);
+    msg_out.flush();
     // No data to write
 
     // Receive response message 103

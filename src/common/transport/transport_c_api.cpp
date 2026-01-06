@@ -31,7 +31,7 @@ catch (...) { \
     return -1; \
 }
 
-xrtp_Result xrtp_create_transport(
+xrtp_Result xrtp_transport_create(
     void* duplex_stream,
     xrtp_Transport* transport_out)
 XRTP_TRY
@@ -44,7 +44,17 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_release_transport(
+xrtp_Result xrtp_transport_start(
+    xrtp_Transport transport)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    transport_impl->start();
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
+xrtp_Result xrtp_transport_release(
     xrtp_Transport transport)
 XRTP_TRY
 {
@@ -135,7 +145,7 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_acquire_message_lock(
+xrtp_Result xrtp_msg_lock_acquire(
     xrtp_Transport transport,
     xrtp_MessageLock* lock)
 XRTP_TRY
@@ -148,7 +158,28 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_join_transport(
+xrtp_Result xrtp_transport_get_status(
+    xrtp_Transport transport,
+    xrtp_TransportStatus* status)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    *status = transport_impl->get_status();
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
+xrtp_Result xrtp_transport_shutdown(
+    xrtp_Transport transport)
+XRTP_TRY
+{
+    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
+    transport_impl->shutdown();
+    return 0;
+}
+XRTP_CATCH_HANDLER
+
+xrtp_Result xrtp_transport_join(
     xrtp_Transport transport)
 XRTP_TRY
 {
@@ -158,18 +189,7 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_is_open(
-    xrtp_Transport transport,
-    bool* is_open)
-XRTP_TRY
-{
-    auto transport_impl = reinterpret_cast<TransportImpl*>(transport);
-    *is_open = transport_impl->is_open();
-    return 0;
-}
-XRTP_CATCH_HANDLER
-
-xrtp_Result xrtp_close(
+xrtp_Result xrtp_transport_close(
     xrtp_Transport transport)
 XRTP_TRY
 {
@@ -235,7 +255,7 @@ XRTP_TRY
 }
 XRTP_CATCH_HANDLER
 
-xrtp_Result xrtp_release_message_lock(
+xrtp_Result xrtp_msg_lock_release(
     xrtp_MessageLock lock)
 XRTP_TRY
 {
