@@ -11,8 +11,8 @@
 using namespace xrtransport;
 using asio::ip::tcp;
 
-// Type alias for TCP socket wrapped in DuplexStreamImpl
-using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
+// Type alias for TCP socket wrapped in SyncDuplexStreamImpl
+using TcpSyncDuplexStream = SyncDuplexStreamImpl<tcp::socket>;
 
 class TransportServer {
 private:
@@ -53,7 +53,7 @@ private:
     void handle_client(tcp::socket socket) {
         try {
             // Create DuplexStream wrapper around TCP socket
-            Transport transport(std::make_unique<TcpDuplexStream>(std::move(socket)));
+            Transport transport(std::make_unique<TcpSyncDuplexStream>(std::move(socket)));
 
             // Register protocol handlers
             register_handlers(transport);

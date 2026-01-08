@@ -14,11 +14,11 @@ namespace xrtransport {
 namespace test {
 
 /**
- * Test implementation of DuplexStream that uses SharedBuffer for bidirectional communication.
+ * Test implementation of SyncDuplexStream that uses SharedBuffer for bidirectional communication.
  * Two TestDuplexStream instances can be created with the same SharedBuffer to simulate
  * a connected pair of streams.
  */
-class TestDuplexStream : public DuplexStream {
+class TestSyncDuplexStream : public SyncDuplexStream {
 private:
     std::shared_ptr<SharedBuffer> buffer_;
     SharedBuffer::Side side_;
@@ -29,8 +29,6 @@ private:
     std::chrono::milliseconds write_delay_{0};
     size_t max_read_size_{SIZE_MAX};  // For simulating partial reads
 
-    std::atomic<bool> non_blocking_{false};
-
 public:
     /**
      * Create a TestDuplexStream
@@ -38,11 +36,11 @@ public:
      * @param side Which side of the communication this stream represents
      * @param io_context IO context for async operations
      */
-    TestDuplexStream(std::shared_ptr<SharedBuffer> buffer,
+    TestSyncDuplexStream(std::shared_ptr<SharedBuffer> buffer,
                      SharedBuffer::Side side,
                      asio::io_context& io_context);
 
-    ~TestDuplexStream() override = default;
+    ~TestSyncDuplexStream() override = default;
 
     // Configuration methods for testing
     void set_read_delay(std::chrono::milliseconds delay) { read_delay_ = delay; }
@@ -50,15 +48,8 @@ public:
     void set_max_read_size(size_t max_size) { max_read_size_ = max_size; }
 
     // Stream interface
-    bool is_open() const override;
     void close() override;
     void close(asio::error_code& ec) override;
-
-    // SyncStream interface
-    void non_blocking(bool mode) override;
-    bool non_blocking() const override;
-    std::size_t available() override;
-    std::size_t available(asio::error_code& ec) override;
 
     // SyncReadStream interface
     std::size_t read_some(const asio::mutable_buffer& buffers) override;
@@ -68,19 +59,6 @@ public:
     std::size_t write_some(const asio::const_buffer& buffers) override;
     std::size_t write_some(const asio::const_buffer& buffers, asio::error_code& ec) override;
 
-protected:
-    // AsyncStream interface
-    void async_wait_impl(asio::socket_base::wait_type wait_type,
-                         std::function<void(asio::error_code)> handler) override;
-
-    // AsyncReadStream interface
-    void async_read_some_impl(const asio::mutable_buffer& buffers,
-                              std::function<void(asio::error_code, std::size_t)> handler) override;
-
-    // AsyncWriteStream interface
-    void async_write_some_impl(const asio::const_buffer& buffers,
-                               std::function<void(asio::error_code, std::size_t)> handler) override;
-
 private:
     void apply_delays();
 };
@@ -88,7 +66,7 @@ private:
 /**
  * Helper function to create a pair of connected TestDuplexStream instances
  */
-std::pair<std::unique_ptr<DuplexStream>, std::unique_ptr<DuplexStream>>
+std::pair<std::unique_ptr<SyncDuplexStream>, std::unique_ptr<SyncDuplexStream>>
 create_connected_streams(asio::io_context& io_context);
 
 } // namespace test

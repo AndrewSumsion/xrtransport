@@ -27,9 +27,6 @@ using asio::local::stream_protocol;
 using namespace xrtransport;
 namespace fs = std::filesystem;
 
-// Type alias for TCP socket wrapped in DuplexStreamImpl
-using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
-
 std::string exe_path() {
 #ifdef _WIN32
     // Get UTF-16 path

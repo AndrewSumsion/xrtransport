@@ -72,19 +72,6 @@ public:
         return n;
     }
 
-    std::size_t available(asio::error_code& ec) override {
-        ec.clear();
-        return buffer_.size() - read_head;
-    }
-
-    std::size_t available() override {
-        return buffer_.size() - read_head;
-    }
-
-    // No-ops
-    void non_blocking(bool mode) override {}
-    bool non_blocking() const override { return false; }
-    bool is_open() const override { return true; }
     void close() override {}
     void close(asio::error_code& ec) override { ec.clear(); }
 
@@ -117,9 +104,6 @@ public:
     }
 
     // No-ops
-    void non_blocking(bool mode) override {}
-    bool non_blocking() const override { return false; }
-    bool is_open() const override { return true; }
     void close() override {}
     void close(asio::error_code& ec) override { ec.clear(); }
 

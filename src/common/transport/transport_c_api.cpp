@@ -32,12 +32,12 @@ catch (...) { \
 }
 
 xrtp_Result xrtp_transport_create(
-    void* duplex_stream,
+    void* sync_duplex_stream,
     xrtp_Transport* transport_out)
 XRTP_TRY
 {
     // unique_ptr takes ownership of duplex_stream
-    std::unique_ptr<DuplexStream> p_duplex_stream(reinterpret_cast<DuplexStream*>(duplex_stream));
+    std::unique_ptr<SyncDuplexStream> p_duplex_stream(reinterpret_cast<SyncDuplexStream*>(sync_duplex_stream));
     TransportImpl* transport = new TransportImpl(std::move(p_duplex_stream));
     *transport_out = reinterpret_cast<xrtp_Transport>(transport);
     return 0;

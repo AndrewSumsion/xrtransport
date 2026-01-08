@@ -19,7 +19,7 @@ using namespace xrtransport;
 using asio::ip::tcp;
 
 // Type alias for TCP socket wrapped in DuplexStreamImpl
-using TcpDuplexStream = DuplexStreamImpl<tcp::socket>;
+using TcpSyncDuplexStream = SyncDuplexStreamImpl<tcp::socket>;
 
 class IntegrationTestFixture {
 private:
@@ -51,7 +51,7 @@ public:
         }
 
         // Create Transport
-        transport_ = std::make_unique<Transport>(std::make_unique<TcpDuplexStream>(std::move(client_socket_)));
+        transport_ = std::make_unique<Transport>(std::make_unique<TcpSyncDuplexStream>(std::move(client_socket_)));
         transport_->start();
     }
 

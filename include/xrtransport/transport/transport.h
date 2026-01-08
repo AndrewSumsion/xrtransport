@@ -65,11 +65,6 @@ public:
         return size_read;
     }
 
-    std::size_t available() override { throw InvalidOperationException(); }
-    std::size_t available(asio::error_code& ec) override { throw InvalidOperationException(); }
-    void non_blocking(bool mode) override { throw InvalidOperationException(); }
-    bool non_blocking() const override { throw InvalidOperationException(); }
-    bool is_open() const override { throw InvalidOperationException(); }
     void close() override { throw InvalidOperationException(); }
     void close(asio::error_code& ec) override { throw InvalidOperationException(); }
 
@@ -152,9 +147,6 @@ public:
         return size_written;
     }
 
-    void non_blocking(bool mode) override { throw InvalidOperationException(); }
-    bool non_blocking() const override { throw InvalidOperationException(); }
-    bool is_open() const override { throw InvalidOperationException(); }
     void close() override { throw InvalidOperationException(); }
     void close(asio::error_code& ec) override { throw InvalidOperationException(); }
 
