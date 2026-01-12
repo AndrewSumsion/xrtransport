@@ -21,6 +21,30 @@ TransportImpl::~TransportImpl() {
     join();
 }
 
+std::unique_lock<std::recursive_mutex> TransportImpl::lock_message_mutex() {
+    // increment waiting semaphore
+    {
+        std::lock_guard<std::mutex> num_waiting_lock(num_waiting_mutex);
+        num_waiting += 1;
+    }
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    // lock acquired, decrement semaphore
+    bool should_notify = false;
+    {
+        std::lock_guard<std::mutex> num_waiting_lock(num_waiting_mutex);
+        num_waiting -= 1;
+        if (num_waiting == 0) {
+            should_notify = true;
+        }
+    }
+    if (should_notify) {
+        // only the consumer thread waits on this
+        num_waiting_cv.notify_one();
+    }
+
+    return std::move(lock);
+}
+
 void TransportImpl::producer_loop() {
     try {
         while (status != XRTP_STATUS_CLOSED) {
@@ -63,6 +87,16 @@ void TransportImpl::producer_loop() {
 void TransportImpl::consumer_loop() {
     while (status != XRTP_STATUS_CLOSED) {
         std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
+        // make sure no user thread is waiting on the lock
+        {
+            std::unique_lock<std::mutex> num_waiting_lock(num_waiting_mutex);
+            if (num_waiting > 0) {
+                message_lock.unlock();
+                // wait until num_waiting hits zero before trying again
+                num_waiting_cv.wait(num_waiting_lock);
+                continue;
+            }
+        }
 
         // we got the message lock, meaning no user is using the transport
         // now check if there's any work to do
@@ -104,7 +138,7 @@ MessageLockOutImpl TransportImpl::start_message(uint16_t header) {
     if (status != XRTP_STATUS_OPEN)
         throw TransportException("cannot start message: transport write closed");
 
-    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    auto lock = lock_message_mutex();
     return MessageLockOutImpl(header, std::move(lock), this);
 }
 
@@ -116,17 +150,17 @@ void TransportImpl::flush_to_stream(const void* data, size_t size) {
 }
 
 void TransportImpl::register_handler(uint16_t header, std::function<void(MessageLockInImpl)> handler) {
-    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    auto lock = lock_message_mutex();
     handlers[header] = std::move(handler);
 }
 
 void TransportImpl::unregister_handler(uint16_t header) {
-    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    auto lock = lock_message_mutex();
     handlers.erase(header);
 }
 
 void TransportImpl::clear_handlers() {
-    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    auto lock = lock_message_mutex();
     handlers.clear();
 }
 
@@ -151,11 +185,11 @@ MessageIn TransportImpl::await_any_message() {
 MessageLockInImpl TransportImpl::await_message(uint16_t header) {
     if (status == XRTP_STATUS_CREATED)
         throw TransportException("You must start the transport before using");
-
-    std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
-    if (header == XRTP_MSG_SHUTDOWN) {
+    if (header == XRTP_MSG_SHUTDOWN)
         throw TransportException("Can't await shutdown message");
-    }
+
+    auto message_lock = lock_message_mutex();
+
     while (true) {
         MessageIn msg_in = await_any_message();
 
@@ -174,7 +208,7 @@ void TransportImpl::handle_message(uint16_t header) {
         throw TransportException("You must start the transport before using");
 
     // keep reading and handling messages synchronously until we've handled the one we want
-    std::unique_lock<std::recursive_mutex> message_lock(message_mutex);
+    auto message_lock = lock_message_mutex();
     while (true) {
         MessageIn msg_in = await_any_message();
         uint16_t msg_header = msg_in.header;
@@ -188,16 +222,14 @@ void TransportImpl::handle_message(uint16_t header) {
 }
 
 MessageLockImpl TransportImpl::acquire_message_lock() {
-    std::unique_lock<std::recursive_mutex> lock(message_mutex);
+    auto lock = lock_message_mutex();
     return MessageLockImpl(std::move(lock));
 }
 
 void TransportImpl::dispatch_to_handler(MessageIn msg_in) {
-    // this must be called by a thread that already owns the message lock, so make sure
-    std::unique_lock<std::recursive_mutex> lock(message_mutex, std::try_to_lock);
-    if (!lock.owns_lock()) {
-        throw TransportException("Cannot dispatch to handler without owning message lock");
-    }
+    // this must be called by a thread that already owns the message lock,
+    // so it's safe to acquire a child lock to pass to handlers
+    std::unique_lock<std::recursive_mutex> lock(message_mutex);
 
     if (msg_in.header == XRTP_MSG_SHUTDOWN) {
         // this happens once the message have been reached in the queue, *not* read in by the producer,
@@ -206,8 +238,7 @@ void TransportImpl::dispatch_to_handler(MessageIn msg_in) {
             auto msg_out = start_message(XRTP_MSG_SHUTDOWN);
             msg_out.flush();
         }
-        // if we received this, we've read the last message so close the transport
-        close();
+        stop_threads();
     }
     else {
         auto it = handlers.find(msg_in.header);
@@ -252,10 +283,7 @@ void TransportImpl::shutdown() {
     // TODO: call shutdown on the native stream, if possible
 }
 
-void TransportImpl::close() {
-    // only close the underlying stream if we haven't already
-    bool should_close_stream = status != XRTP_STATUS_CLOSED;
-
+void TransportImpl::stop_threads() {
     // Acquiring this mutex guarantees that all consumers are right before a status check. It is internally
     // enforced that all consumers must check the status after acquiring the queue lock, including in the
     // predicate and after returning from a wait. That means that setting the status to closed and notifying
@@ -265,10 +293,11 @@ void TransportImpl::close() {
         status = XRTP_STATUS_CLOSED;
     }
     queue_cv.notify_all();
+}
 
-    // close the stream to interrupt its read if necessary
-    if (should_close_stream)
-        stream->close();
+void TransportImpl::close() {
+    stop_threads();
+    stream->close();
 }
 
 } // namespace xrtransport

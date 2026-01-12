@@ -141,11 +141,20 @@ private:
     std::condition_variable queue_cv;
     std::queue<MessageIn> queue;
 
+    // semaphore of threads waiting for the message lock, so that the consumer thread can immediately release
+    // it if anyone else is waiting for it
+    std::mutex num_waiting_mutex;
+    std::condition_variable num_waiting_cv;
+    std::uint32_t num_waiting;
+
     std::thread producer_thread;
     std::thread consumer_thread;
 
     // protected by message_mutex
     std::unordered_map<uint16_t, std::function<void(MessageLockInImpl)>> handlers;
+
+    // internal helper that will lock the message mutex at a higher priority than the consumer thread
+    std::unique_lock<std::recursive_mutex> lock_message_mutex();
 
     // Internal helper to dispatch messages to handlers
     // message_mutex must be held
@@ -159,6 +168,9 @@ private:
 
     friend class MessageLockOutImpl;
     void flush_to_stream(const void* data, std::size_t size);
+
+    // updates the status to closed in a way that guarantees they will not get stuck in a wait
+    void stop_threads();
 
 public:
     explicit TransportImpl(std::unique_ptr<SyncDuplexStream> stream);
