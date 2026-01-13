@@ -1,3 +1,12 @@
+/**
+ * TODO:
+ * - move image creation to server, import images here
+ * - also import one semaphore per image, for which a signal operation is queued up when xrReleaseSwapchainImage is called
+ * - do ALL the due dilligence to make sure that exporting and importing images will work
+ * - create fence executor on server that sends a swapchain image ready message to the client, which will signal a local fence (binary semaphore)
+ *   - this is because sharing memory and semaphores is well-supported, but sharing fences is less well-supported, so we'll just wait on fences via IPC.
+ */
+
 #include "vulkan2_common.h"
 #include "vulkan_loader.h"
 #include "session_state.h"

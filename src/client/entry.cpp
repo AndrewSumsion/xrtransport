@@ -256,7 +256,8 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
 
         // run instance callback on all modules
         for (const auto& module_info : modules_info) {
-            module_info.instance_callback(saved_instance, xrGetInstanceProcAddrImpl);
+            if (module_info.instance_callback)
+                module_info.instance_callback(saved_instance, xrGetInstanceProcAddrImpl);
         }
     }
     else {
