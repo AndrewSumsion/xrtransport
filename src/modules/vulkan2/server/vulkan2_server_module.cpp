@@ -89,6 +89,7 @@ void setup_vulkan_instance() {
         throw std::runtime_error("Failed to get Vulkan graphics device: " + std::to_string(xr_result));
     }
 
+    // Save PhysicalDevice UUID to send to client
     VkPhysicalDeviceIDProperties vk_device_id_props{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES};
 
     VkPhysicalDeviceProperties2 vk_device_props{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2};
@@ -105,6 +106,26 @@ void handle_get_physical_device(MessageLockIn msg_in) {
     SerializeContext s_ctx(msg_out.buffer);
     serialize_array(physical_device_uuid, VK_UUID_SIZE, s_ctx);
     msg_out.flush();
+}
+
+void handle_create_swapchain(MessageLockIn msg_in) {
+
+}
+
+void handle_destroy_swapchain(MessageLockIn msg_in) {
+
+}
+
+void handle_create_session(MessageLockIn msg_in) {
+
+}
+
+void handle_destroy_session(MessageLockIn msg_in) {
+
+}
+
+void handle_release_swapchain_image(MessageLockIn msg_in) {
+    
 }
 
 } // namespace

@@ -10,11 +10,10 @@
 #include "vulkan2_common.h"
 #include "vulkan_loader.h"
 #include "session_state.h"
-#include "dma_buf_exchange.h"
-#include "validate_frame_end.h"
 
 #include "xrtransport/client/module_interface.h"
 
+#include "xrtransport/handle_exchange.h"
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
@@ -233,8 +232,6 @@ void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn) {
     spdlog::info("Instance callback in Vulkan2 client module called");
     saved_xr_instance = instance;
     pfn_xrGetInstanceProcAddr = pfn;
-
-    open_dma_buf_exchange(*transport);
 }
 
 void add_extension_if_not_present(std::vector<const char*>& extensions, const char* extension) {
