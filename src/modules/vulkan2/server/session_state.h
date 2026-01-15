@@ -10,7 +10,7 @@
 #include <vector>
 #include <optional>
 
-struct ClientImage;
+struct SwapchainImage;
 struct SwapchainState;
 struct SessionState;
 
@@ -20,52 +20,45 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<ClientImage>&& images,
-    VkFence copying_fence
+    std::vector<SwapchainImage>&& images
 );
 SessionState& store_session_state(
-    XrSession handle,
-    const XrGraphicsBindingVulkan2KHR& graphics_binding,
-    VkQueue queue
+    XrSession handle
 );
 
 void destroy_swapchain_state(XrSwapchain handle);
 void destroy_session_state(XrSession handle);
 
-struct ClientImage {
+struct SwapchainImage {
     VkImage image;
-    VkDeviceMemory memory;
+    VkDeviceMemory shared_memory;
+    VkSemaphore shared_semaphore;
+    VkSemaphore copy_finished_semaphore;
+    uint64_t copy_finished_counter;
 };
 
 struct SwapchainState {
     XrSwapchain handle;
     XrSession parent_handle;
-    std::vector<ClientImage> client_images;
-    // if this fence is signaled, this swapchain is not copying
-    // if it is reset, the swapchain is copying
-    VkFence copying_fence;
+    std::vector<SwapchainImage> images;
 
     explicit SwapchainState(
         XrSwapchain handle,
         XrSession parent_handle,
-        std::vector<ClientImage>&& images,
-        VkFence copying_fence
+        std::vector<SwapchainImage>&& images
     ) :
         handle(handle),
         parent_handle(parent_handle),
-        client_images(std::move(client_images)),
-        copying_fence(copying_fence)
+        images(std::move(images))
     {}
 };
 
 struct SessionState {
     XrSession handle;
-    XrGraphicsBindingVulkan2KHR graphics_binding;
-    VkQueue queue;
     std::unordered_set<XrSwapchain> swapchains;
 
-    explicit SessionState(XrSession handle, const XrGraphicsBindingVulkan2KHR& graphics_binding, VkQueue queue)
-        : handle(handle), graphics_binding(graphics_binding), queue(queue)
+    explicit SessionState(XrSession handle)
+        : handle(handle)
     {}
 };
 

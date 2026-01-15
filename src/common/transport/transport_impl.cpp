@@ -243,8 +243,13 @@ void TransportImpl::dispatch_to_handler(MessageIn msg_in) {
     else {
         auto it = handlers.find(msg_in.header);
         if (it != handlers.end()) {
-            // Create MessageLockInImpl and call handler
-            it->second(MessageLockInImpl(std::move(msg_in.payload), std::move(lock)));
+            try {
+                // Create MessageLockInImpl and call handler
+                it->second(MessageLockInImpl(std::move(msg_in.payload), std::move(lock)));
+            }
+            catch (const std::exception& e) {
+                spdlog::error("Unhandled exception in handler for message {}: {}", msg_in.header, e.what());
+            }
         } else {
             // no registered handler, log a warning and skip it
             spdlog::warn("No handler registered for message type: {}, ignoring", msg_in.header);

@@ -192,4 +192,7 @@ void xrtp_write_handle(xrtp_Handle handle) {
     if (sendmsg(socket_fd, &msg, 0) == -1) {
         spdlog::error("Failed to send FD via SCM_RIGHTS: {}", errno);
     }
+
+    // now that sendmsg has returned, it's safe to close local fd handle
+    close(fd);
 }

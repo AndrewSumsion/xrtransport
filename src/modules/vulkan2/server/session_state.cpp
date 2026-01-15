@@ -32,8 +32,7 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<ClientImage>&& images,
-    VkFence copying_fence
+    std::vector<SwapchainImage>&& images
 ) {
     return swapchain_states.emplace(
         std::piecewise_construct,
@@ -41,24 +40,19 @@ SwapchainState& store_swapchain_state(
         std::forward_as_tuple(
             handle,
             parent_handle,
-            std::move(images),
-            copying_fence
+            std::move(images)
         )
     ).first->second;
 }
 
 SessionState& store_session_state(
-    XrSession handle,
-    const XrGraphicsBindingVulkan2KHR& graphics_binding,
-    VkQueue queue
+    XrSession handle
 ) {
     return session_states.emplace(
         std::piecewise_construct,
         std::forward_as_tuple(handle),
         std::forward_as_tuple(
-            handle,
-            std::move(graphics_binding),
-            queue
+            handle
         )
     ).first->second;
 }
