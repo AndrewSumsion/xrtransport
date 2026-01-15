@@ -32,9 +32,8 @@ void destroy_session_state(XrSession handle);
 struct SwapchainImage {
     VkImage image;
     VkDeviceMemory shared_memory;
-    VkSemaphore shared_semaphore;
-    VkSemaphore copy_finished_semaphore;
-    uint64_t copy_finished_counter;
+    VkSemaphore rendering_done;
+    VkSemaphore copying_done;
 };
 
 struct SwapchainState {
