@@ -10,9 +10,11 @@
 #include <vector>
 #include <optional>
 
-struct SwapchainImage;
+struct SharedImage;
+struct RuntimeImage;
 struct SwapchainState;
 struct SessionState;
+enum class ImageType;
 
 std::optional<std::reference_wrapper<SwapchainState>> get_swapchain_state(XrSwapchain handle);
 std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession handle);
@@ -20,7 +22,12 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage>&& images
+    std::vector<SharedImage>&& shared_images,
+    std::vector<RuntimeImage>&& runtime_images,
+    std::vector<VkCommandBuffer>&& command_buffers,
+    ImageType image_type,
+    uint32_t width,
+    uint32_t height
 );
 SessionState& store_session_state(
     XrSession handle
@@ -29,26 +36,50 @@ SessionState& store_session_state(
 void destroy_swapchain_state(XrSwapchain handle);
 void destroy_session_state(XrSession handle);
 
-struct SwapchainImage {
+enum class ImageType {
+    COLOR,
+    DEPTH_STENCIL
+};
+
+struct SharedImage {
     VkImage image;
     VkDeviceMemory shared_memory;
     VkSemaphore rendering_done;
     VkSemaphore copying_done;
 };
 
+struct RuntimeImage {
+    VkImage image;
+};
+
 struct SwapchainState {
     XrSwapchain handle;
     XrSession parent_handle;
-    std::vector<SwapchainImage> images;
+    std::vector<SharedImage> shared_images;
+    std::vector<RuntimeImage> runtime_images;
+    std::vector<VkCommandBuffer> command_buffers;
+    ImageType image_type;
+    uint32_t width;
+    uint32_t height;
 
     explicit SwapchainState(
         XrSwapchain handle,
         XrSession parent_handle,
-        std::vector<SwapchainImage>&& images
+        std::vector<SharedImage>&& shared_images,
+        std::vector<RuntimeImage>&& runtime_images,
+        std::vector<VkCommandBuffer>&& command_buffers,
+        ImageType image_type,
+        uint32_t width,
+        uint32_t height
     ) :
         handle(handle),
         parent_handle(parent_handle),
-        images(std::move(images))
+        shared_images(std::move(shared_images)),
+        runtime_images(std::move(runtime_images)),
+        command_buffers(std::move(command_buffers)),
+        image_type(image_type),
+        width(width),
+        height(height)
     {}
 };
 

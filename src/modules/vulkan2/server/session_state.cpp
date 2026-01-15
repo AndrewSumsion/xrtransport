@@ -32,7 +32,12 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<SwapchainImage>&& images
+    std::vector<SharedImage>&& shared_images,
+    std::vector<RuntimeImage>&& runtime_images,
+    std::vector<VkCommandBuffer>&& command_buffers,
+    ImageType image_type,
+    uint32_t width,
+    uint32_t height
 ) {
     return swapchain_states.emplace(
         std::piecewise_construct,
@@ -40,7 +45,12 @@ SwapchainState& store_swapchain_state(
         std::forward_as_tuple(
             handle,
             parent_handle,
-            std::move(images)
+            std::move(shared_images),
+            std::move(runtime_images),
+            std::move(command_buffers),
+            image_type,
+            width,
+            height
         )
     ).first->second;
 }

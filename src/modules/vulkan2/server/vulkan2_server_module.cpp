@@ -1,6 +1,6 @@
 #include "vulkan2_common.h"
+#include "image_handles.h"
 #include "session_state.h"
-#include "timeline_semaphore_executor.h"
 
 #include "xrtransport/server/module_interface.h"
 
@@ -28,8 +28,10 @@ namespace {
 
 std::unique_ptr<Transport> transport;
 const FunctionLoader* function_loader;
+
 XrInstance saved_xr_instance;
 XrSystemId saved_xr_system_id;
+
 VkInstance saved_vk_instance;
 VkPhysicalDevice saved_vk_physical_device;
 VkDevice saved_vk_device;
@@ -37,6 +39,8 @@ VkDevice saved_vk_device;
 uint32_t queue_family_index;
 uint32_t queue_index;
 VkQueue saved_vk_queue;
+
+VkCommandPool saved_vk_command_pool;
 
 uint8_t physical_device_uuid[VK_UUID_SIZE];
 
@@ -139,6 +143,18 @@ void setup_vulkan_instance() {
 
     // find queue family and get VkQueue handle
     setup_vulkan_queue();
+
+    // Create command pool
+    VkCommandPoolCreateInfo pool_create_info{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
+    pool_create_info.flags =
+        VK_COMMAND_POOL_CREATE_TRANSIENT_BIT |
+        VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
+    pool_create_info.queueFamilyIndex = queue_family_index;
+
+    vk_result = vkCreateCommandPool(saved_vk_device, &pool_create_info, nullptr, &saved_vk_command_pool);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create command pool: " + std::to_string(vk_result));
+    }
 }
 
 int32_t find_memory_type(
@@ -161,7 +177,50 @@ int32_t find_memory_type(
     return -1;
 }
 
-std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
+VkImageView create_image_view(const VkImageCreateInfo& image_create_info, VkImage image) {
+    VkImageViewCreateInfo view_info{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
+    view_info.image = image;
+    view_info.format = image_create_info.format;
+
+    // Ideally we should choose these values based on the XrSwapchainCreateInfo, but we can infer
+    // them based on how we generated the VkImageCreateInfo.
+
+    // include all mips and layers
+    view_info.subresourceRange.baseMipLevel = 0;
+    view_info.subresourceRange.levelCount = image_create_info.mipLevels;
+    view_info.subresourceRange.baseArrayLayer = 0;
+    view_info.subresourceRange.layerCount = image_create_info.arrayLayers;
+
+    if (image_create_info.usage & VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+        view_info.subresourceRange.aspectMask |= (VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT);
+    }
+    if (image_create_info.usage & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT) {
+        view_info.subresourceRange.aspectMask |= VK_IMAGE_ASPECT_COLOR_BIT;
+    }
+    
+    if (image_create_info.flags & VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT) {
+        if (image_create_info.arrayLayers > 6) {
+            view_info.viewType = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
+        }
+        else {
+            view_info.viewType = VK_IMAGE_VIEW_TYPE_CUBE;
+        }
+    }
+    else if (image_create_info.arrayLayers > 1) {
+        view_info.viewType = VK_IMAGE_VIEW_TYPE_2D_ARRAY;
+    }
+    else {
+        view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    }
+
+    VkImageView image_view{};
+    VkResult vk_result = vkCreateImageView(saved_vk_device, &view_info, nullptr, &image_view);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Unable to create image view: " + std::to_string(vk_result));
+    }
+}
+
+std::tuple<VkImage, VkImageView, VkDeviceMemory, xrtp_Handle> create_image(
     const VkImageCreateInfo& image_create_info,
     const VkPhysicalDeviceMemoryProperties& memory_properties,
     VkMemoryPropertyFlags required_flags
@@ -225,7 +284,9 @@ std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
     handle = static_cast<xrtp_Handle>(fd);
 #endif
 
-    return {image, memory, handle};
+    VkImageView image_view = create_image_view(image_create_info, image);
+
+    return {image, image_view, memory, handle};
 }
 
 std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
@@ -266,38 +327,55 @@ std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
     return {semaphore, handle};
 }
 
-VkSemaphore create_timeline_semaphore() {
-    VkSemaphoreTypeCreateInfo timeline_create_info{VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO};
-    timeline_create_info.semaphoreType = VK_SEMAPHORE_TYPE_TIMELINE;
-    timeline_create_info.initialValue = 0;
+VkCommandBuffer create_command_buffer() {
+    VkCommandBufferAllocateInfo cmdbuf_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
+    cmdbuf_info.commandPool = saved_vk_command_pool;
+    cmdbuf_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+    cmdbuf_info.commandBufferCount = 1;
 
-    VkSemaphoreCreateInfo create_info{VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO};
-    create_info.pNext = &timeline_create_info;
-
-    VkSemaphore semaphore{};
-    VkResult result = vkCreateSemaphore(saved_vk_device, &create_info, nullptr, &semaphore);
+    VkCommandBuffer command_buffer{};
+    VkResult result = vkAllocateCommandBuffers(saved_vk_device, &cmdbuf_info, &command_buffer);
     if (result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to create timeline semaphore: " + std::to_string(result));
+        throw std::runtime_error("Unable to allocate command buffer: " + std::to_string(result));
     }
 
-    return semaphore;
+    return command_buffer;
 }
 
-// TODO: might need to select a memory heap and format that allow export
+// TODO: might need to select and format that allows export
 SwapchainState& create_swapchain_state(
     SessionState& session_state,
     const XrSwapchainCreateInfo& create_info,
     XrSwapchain handle,
-    uint32_t num_images,
-    std::vector<xrtp_Handle>& memory_handles_out,
-    std::vector<xrtp_Handle>& semaphore_handles_out
+    std::vector<ImageHandles>& handles_out
 ) {
     VkResult vk_result{};
+    XrResult xr_result{};
 
-    std::vector<SwapchainImage> images;
-    images.reserve(num_images);
+    uint32_t num_images{};
+    xr_result = function_loader->pfn_xrEnumerateSwapchainImages(handle, 0, &num_images, nullptr);
+    if (!XR_SUCCEEDED(xr_result)) {
+        throw std::runtime_error("Unable to get swapchain images: " + std::to_string(xr_result));
+    }
+
+    std::vector<XrSwapchainImageVulkan2KHR> runtime_image_structs(num_images, {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR});
+    auto p_runtime_image_structs = reinterpret_cast<XrSwapchainImageBaseHeader*>(runtime_image_structs.data());
+    xr_result = function_loader->pfn_xrEnumerateSwapchainImages(handle, num_images, &num_images, p_runtime_image_structs);
+    if (!XR_SUCCEEDED(xr_result)) {
+        throw std::runtime_error("Unable to get swapchain images: " + std::to_string(xr_result));
+    }
+
+    std::vector<SharedImage> shared_images;
+    shared_images.reserve(num_images);
+    std::vector<RuntimeImage> runtime_images;
+    runtime_images.reserve(num_images);
+    std::vector<VkCommandBuffer> command_buffers;
+    command_buffers.reserve(num_images);
+
+    handles_out.reserve(num_images);
 
     auto image_create_info = create_vk_image_create_info(create_info);
+
     VkPhysicalDeviceMemoryProperties memory_properties{};
     vkGetPhysicalDeviceMemoryProperties(saved_vk_physical_device, &memory_properties);
 
@@ -309,30 +387,60 @@ SwapchainState& create_swapchain_state(
     bool is_static = (create_info.createFlags & XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT) != 0;
 
     for (uint32_t i = 0; i < num_images; i++) {
-        auto [image, memory, memory_handle] = create_image(
+        auto [shared_image_handle, shared_image_view, memory, memory_handle] = create_image(
             image_create_info,
             memory_properties,
             required_flags
         );
         
-        auto [shared_semaphore, semaphore_handle] = create_shared_semaphore();
-        auto timeline_semaphore = create_timeline_semaphore();
+        auto [rendering_done, rendering_done_handle] = create_shared_semaphore();
+        auto [copying_done, copying_done_handle] = create_shared_semaphore();
 
-        SwapchainImage image_state{
-            image,
+        auto command_buffer = create_command_buffer();
+
+        auto runtime_image_handle = runtime_image_structs[i].image;
+        auto runtime_image_view = create_image_view(image_create_info, runtime_image_handle);
+
+        shared_images.emplace_back(SharedImage{
+            shared_image_handle,
             memory,
-            shared_semaphore,
-            timeline_semaphore,
-            0
-        };
+            rendering_done,
+            copying_done
+        });
 
-        images.emplace_back(std::move(image_state));
+        runtime_images.emplace_back(RuntimeImage{
+            runtime_image_handle,
+        });
+
+        command_buffers.emplace_back(command_buffer);
+
+        handles_out.emplace_back(ImageHandles{
+            memory_handle,
+            rendering_done_handle,
+            copying_done_handle
+        });
+    }
+
+    ImageType image_type;
+    if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT) {
+        image_type = ImageType::COLOR;
+    }
+    else if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+        image_type = ImageType::DEPTH_STENCIL;
+    }
+    else {
+        throw std::runtime_error("Images must be either color or depth-stencil images");
     }
 
     SwapchainState& result = store_swapchain_state(
         handle,
         session_state.handle,
-        std::move(images)
+        std::move(shared_images),
+        std::move(runtime_images),
+        std::move(command_buffers),
+        image_type,
+        create_info.width,
+        create_info.height
     );
 
     session_state.swapchains.emplace(handle);
@@ -368,32 +476,24 @@ void handle_create_swapchain(MessageLockIn msg_in) {
     }
 
     // Create corresponding swapchain and send memory and semaphore handles over handle exchange
-    uint32_t num_images{};
-    function_loader->pfn_xrEnumerateSwapchainImages(swapchain_handle, 0, &num_images, nullptr);
     
     SessionState& session_state = get_session_state(session_handle).value();
 
-    std::vector<xrtp_Handle> memory_handles;
-    std::vector<xrtp_Handle> semaphore_handles;
-    memory_handles.reserve(num_images);
-    semaphore_handles.reserve(num_images);
+    std::vector<ImageHandles> handles;
 
     create_swapchain_state(
         session_state,
         *create_info,
         swapchain_handle,
-        num_images,
-        memory_handles,
-        semaphore_handles
+        handles
     );
 
-    for (auto handle : memory_handles) {
+    for (auto image_handles : handles) {
         // xrtp_write_handle should take care of closing our copy of the handle
-        xrtp_write_handle(handle);
+        write_image_handles(image_handles);
     }
-    for (auto handle : semaphore_handles) {
-        xrtp_write_handle(handle);
-    }
+
+    uint32_t num_images = static_cast<uint32_t>(handles.size());
 
     auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
@@ -409,12 +509,19 @@ void destroy_swapchain(XrSwapchain swapchain_handle) {
     SwapchainState& swapchain_state = get_swapchain_state(swapchain_handle).value();
     SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
 
-    for (auto& image : swapchain_state.images) {
+    for (auto& image : swapchain_state.shared_images) {
         vkDestroyImage(saved_vk_device, image.image, nullptr);
         vkFreeMemory(saved_vk_device, image.shared_memory, nullptr);
-        vkDestroySemaphore(saved_vk_device, image.shared_semaphore, nullptr);
-        vkDestroySemaphore(saved_vk_device, image.copy_finished_semaphore, nullptr);
+        vkDestroySemaphore(saved_vk_device, image.rendering_done, nullptr);
+        vkDestroySemaphore(saved_vk_device, image.copying_done, nullptr);
     }
+
+    vkFreeCommandBuffers(
+        saved_vk_device,
+        saved_vk_command_pool,
+        static_cast<uint32_t>(swapchain_state.command_buffers.size()),
+        swapchain_state.command_buffers.data()
+    );
 
     destroy_swapchain_state(swapchain_handle);
     session_state.swapchains.erase(swapchain_handle);
@@ -487,7 +594,159 @@ void handle_destroy_session(MessageLockIn msg_in) {
 }
 
 void handle_release_swapchain_image(MessageLockIn msg_in) {
-    
+    XrResult xr_result{};
+    VkResult vk_result{};
+
+    XrSwapchain swapchain_handle{};
+    uint32_t src_index{};
+
+    DeserializeContext d_ctx(msg_in.stream);
+    deserialize(&swapchain_handle, d_ctx);
+    deserialize(&src_index, d_ctx);
+
+    SwapchainState& swapchain_state = get_swapchain_state(swapchain_handle).value();
+
+    uint32_t dest_index{};
+    xr_result = function_loader->pfn_xrAcquireSwapchainImage(swapchain_handle, nullptr, &dest_index);
+
+    auto& shared_image = swapchain_state.shared_images.at(src_index);
+    auto& runtime_image = swapchain_state.shared_images.at(dest_index);
+
+    VkImage src_image = shared_image.image;
+    VkImage dest_image = runtime_image.image;
+    VkSemaphore rendering_done = shared_image.rendering_done;
+    VkSemaphore copying_done = shared_image.copying_done;
+    VkCommandBuffer command_buffer = swapchain_state.command_buffers.at(src_index);
+
+    // record command buffer with these source and destination images
+
+    VkCommandBufferBeginInfo begin_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
+    begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+    vk_result = vkBeginCommandBuffer(command_buffer, &begin_info);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to begin command buffer: " + std::to_string(vk_result));
+    }
+
+    // initialize these values that will be reused later. represents the first mip and all layers
+    // and the color/depth-stencil aspect for images.
+    VkImageAspectFlags image_aspect_flags;
+    if (swapchain_state.image_type == ImageType::COLOR) {
+        image_aspect_flags = VK_IMAGE_ASPECT_COLOR_BIT;
+    }
+    else if (swapchain_state.image_type == ImageType::DEPTH_STENCIL) {
+        image_aspect_flags = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+    }
+
+    VkImageSubresourceRange image_subresource_range{};
+    image_subresource_range.aspectMask = image_aspect_flags;
+    image_subresource_range.baseMipLevel = 0;
+    image_subresource_range.levelCount = 1;
+    image_subresource_range.baseArrayLayer = 0;
+    image_subresource_range.layerCount = VK_REMAINING_ARRAY_LAYERS;
+
+    VkImageSubresourceLayers image_subresource_layers{};
+    image_subresource_layers.aspectMask = image_aspect_flags;
+    image_subresource_layers.mipLevel = 0;
+    image_subresource_layers.baseArrayLayer = 0;
+    image_subresource_layers.layerCount = VK_REMAINING_ARRAY_LAYERS;
+
+    std::array<VkImageMemoryBarrier, 2> image_barriers{{
+        {VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER},
+        {VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER}
+    }};
+
+    auto& src_acquire_barrier = image_barriers[0];
+    src_acquire_barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+    src_acquire_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+    src_acquire_barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL;
+    src_acquire_barrier.dstQueueFamilyIndex = queue_family_index;
+    src_acquire_barrier.image = src_image;
+    src_acquire_barrier.subresourceRange = image_subresource_range;
+
+    auto& dest_transition_barrier = image_barriers[1];
+    dest_transition_barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
+    dest_transition_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    dest_transition_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    dest_transition_barrier.image = dest_image;
+    dest_transition_barrier.subresourceRange = image_subresource_range;
+
+    vkCmdPipelineBarrier(
+        command_buffer,
+        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+        VK_PIPELINE_STAGE_TRANSFER_BIT,
+        0,
+        0, nullptr,
+        0, nullptr,
+        2, image_barriers.data()
+    );
+
+    VkImageCopy image_copy{};
+    image_copy.srcSubresource = image_subresource_layers; // first mip and all layers
+    image_copy.dstSubresource = image_subresource_layers;
+    image_copy.srcOffset = {0, 0, 0};
+    image_copy.dstOffset = {0, 0, 0};
+    // TODO: it's not clear if the depth value of this extent applies to image layers. If only one
+    // eye ends up displaying, this would be a good place to look.
+    image_copy.extent = {swapchain_state.width, swapchain_state.height, 1};
+
+    vkCmdCopyImage(
+        command_buffer,
+        src_image, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+        dest_image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+        1, &image_copy
+    );
+
+    VkImageMemoryBarrier dest_transition_back_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
+    dest_transition_back_barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+    dest_transition_back_barrier.newLayout =
+        swapchain_state.image_type == ImageType::COLOR ?
+        VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL :
+        VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+    dest_transition_back_barrier.image = dest_image;
+    dest_transition_back_barrier.subresourceRange = image_subresource_range;
+
+    vkCmdPipelineBarrier(
+        command_buffer,
+        VK_PIPELINE_STAGE_TRANSFER_BIT,
+        VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+        0,
+        0, nullptr,
+        0, nullptr,
+        1, &dest_transition_back_barrier
+    );
+
+    vk_result = vkEndCommandBuffer(command_buffer);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to end command buffer: " + std::to_string(vk_result));
+    }
+
+    // command buffer recorded, now use it
+
+    XrSwapchainImageWaitInfo wait_info{XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO};
+    wait_info.timeout = XR_INFINITE_DURATION;
+    xr_result = function_loader->pfn_xrWaitSwapchainImage(swapchain_handle, &wait_info);
+    if (xr_result != XR_SUCCESS) {
+        throw std::runtime_error("Failed to wait for swapchain image: " + std::to_string(xr_result));
+    }
+
+    VkPipelineStageFlags all_commands_stage = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
+    VkSubmitInfo submit_info{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submit_info.waitSemaphoreCount = 1;
+    submit_info.pWaitSemaphores = &rendering_done;
+    submit_info.pWaitDstStageMask = &all_commands_stage;
+    submit_info.commandBufferCount = 1;
+    submit_info.pCommandBuffers = &command_buffer;
+    submit_info.signalSemaphoreCount = 1;
+    submit_info.pSignalSemaphores = &copying_done;
+
+    vk_result = vkQueueSubmit(saved_vk_queue, 1, &submit_info, VK_NULL_HANDLE);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to submit copy operation to queue: " + std::to_string(vk_result));
+    }
+
+    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE_RETURN);
+    msg_out.flush();
 }
 
 } // namespace
@@ -552,6 +811,9 @@ void on_instance(
     function_loader->ensure_function_loaded("xrDestroySwapchain", function_loader->pfn_xrDestroySwapchain);
     function_loader->ensure_function_loaded("xrCreateSession", function_loader->pfn_xrCreateSession);
     function_loader->ensure_function_loaded("xrDestroySession", function_loader->pfn_xrDestroySession);
+    function_loader->ensure_function_loaded("xrAcquireSwapchainImage", function_loader->pfn_xrAcquireSwapchainImage);
+    function_loader->ensure_function_loaded("xrWaitSwapchainImage", function_loader->pfn_xrWaitSwapchainImage);
+    function_loader->ensure_function_loaded("xrReleaseSwapchainImage", function_loader->pfn_xrReleaseSwapchainImage);
 
     setup_vulkan_instance();
 }

@@ -31,7 +31,18 @@ static inline VkImageCreateInfo create_vk_image_create_info(const XrSwapchainCre
     // works as long as sampleCount is a power of 2 up to 64
     image_create_info.samples = static_cast<VkSampleCountFlagBits>(create_info.sampleCount);
     image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-    image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+
+    if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT) {
+        image_create_info.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+    }
+    else if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+        image_create_info.initialLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
+    }
+    else {
+        // This should definitely never happen, maybe throw an exception here?
+        image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    }
+
     if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT)
         image_create_info.usage |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
     if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)

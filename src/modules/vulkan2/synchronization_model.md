@@ -12,7 +12,7 @@ In addition to sharing the memory for the swapchain images, two semaphores are s
 
 Below is an illustration of the rendering flow and how these semaphores are used for synchronization.
 
-- Application calls xrAcquireSwapchainImage, client returns an index into the local swapchain
+- Application calls xrAcquireSwapchainImage, first time only returns an index
 - Application calls xrWaitSwapchainImage, client waits on a per-image fence
   - This fence is initialized as signaled, so the first call to xrWaitSwapchainImage returns immediately.
 - Application submits render commands to the queue
@@ -20,10 +20,6 @@ Below is an illustration of the rendering flow and how these semaphores are used
 - Client enqueues command buffer:
   - Image memory barrier that transitions image layout to TRANSFER_SRC_OPTIMAL and releases ownership to QUEUE_FAMILY_EXTERNAL. srcStageMask = ALL_COMMANDS and dstStageMask = BOTTOM_OF_PIPE. We need to wait for srcStageMask = ALL_COMMANDS before releasing ownership, but we don't need to make writes available because the following semaphore signal is a full memory barrier (implicit synchronization guarantee)
   - Signal rendering_done semaphore
-- Client enqueues another command buffer:
-  - Wait for copying_done semaphore
-  - Image memory barrier that transitions the shared image from UNDEFINED (don't care about the old contents) to COLOR_ATTACHMENT_OPTIMAL or DEPTH_STENCIL_ATTACHMENT_OPTIMAL. Note that we don't re-acquire ownership from QUEUE_FAMILY_EXTERNAL because the Vulkan spec says we should only do this if we care about keeping the contents. No execution barrier needed here.
-  - Signal the per-image fence
 - Client resets the per-image fence
 - Client sends MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE to server
 - Server calls xrAcquireSwapchainImage to get destination image
@@ -42,7 +38,11 @@ Below is an illustration of the rendering flow and how these semaphores are used
 - Server calls xrReleaseSwapchainImage and sends return message to client
   - This server-client sync point is necessary because all xrReleaseSwapchainImage calls on the server need to complete before xrEndFrame is called.
 - Application calls xrEndFrame which is handled via default generated RPC call
-- Repeat
+- Application calls xrAcquireSwapchainImage, client returns an image index and enqueues a command buffer:
+  - Wait for copying_done semaphore
+  - Image memory barrier that transitions the shared image from UNDEFINED (don't care about the old contents) to COLOR_ATTACHMENT_OPTIMAL or DEPTH_STENCIL_ATTACHMENT_OPTIMAL. Note that we don't re-acquire ownership from QUEUE_FAMILY_EXTERNAL because the Vulkan spec says we should only do this if we care about keeping the contents. No execution barrier needed here.
+  - Signal the per-image fence
+- Repeat (to step 2)
 
 Note that we can't enqueue the work to wait on copying_done in xrWaitSwapchainImage because xrAcquireSwapchainImage and xrReleaseSwapchainImage are the only times the runtime is allowed to access the VkQueue. We have to transition the layout back to COLOR_ATTACHMENT_OPTIMAL or DEPTH_STENCIL_ATTACHMENT_OPTIMAL before the application uses it, and enqueue the fence signal, and we can't do these in xrWaitSwapchainImage.
 
