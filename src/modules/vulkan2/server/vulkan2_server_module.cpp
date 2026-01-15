@@ -177,50 +177,7 @@ int32_t find_memory_type(
     return -1;
 }
 
-VkImageView create_image_view(const VkImageCreateInfo& image_create_info, VkImage image) {
-    VkImageViewCreateInfo view_info{VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO};
-    view_info.image = image;
-    view_info.format = image_create_info.format;
-
-    // Ideally we should choose these values based on the XrSwapchainCreateInfo, but we can infer
-    // them based on how we generated the VkImageCreateInfo.
-
-    // include all mips and layers
-    view_info.subresourceRange.baseMipLevel = 0;
-    view_info.subresourceRange.levelCount = image_create_info.mipLevels;
-    view_info.subresourceRange.baseArrayLayer = 0;
-    view_info.subresourceRange.layerCount = image_create_info.arrayLayers;
-
-    if (image_create_info.usage & VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
-        view_info.subresourceRange.aspectMask |= (VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT);
-    }
-    if (image_create_info.usage & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT) {
-        view_info.subresourceRange.aspectMask |= VK_IMAGE_ASPECT_COLOR_BIT;
-    }
-    
-    if (image_create_info.flags & VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT) {
-        if (image_create_info.arrayLayers > 6) {
-            view_info.viewType = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY;
-        }
-        else {
-            view_info.viewType = VK_IMAGE_VIEW_TYPE_CUBE;
-        }
-    }
-    else if (image_create_info.arrayLayers > 1) {
-        view_info.viewType = VK_IMAGE_VIEW_TYPE_2D_ARRAY;
-    }
-    else {
-        view_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
-    }
-
-    VkImageView image_view{};
-    VkResult vk_result = vkCreateImageView(saved_vk_device, &view_info, nullptr, &image_view);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to create image view: " + std::to_string(vk_result));
-    }
-}
-
-std::tuple<VkImage, VkImageView, VkDeviceMemory, xrtp_Handle> create_image(
+std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
     const VkImageCreateInfo& image_create_info,
     const VkPhysicalDeviceMemoryProperties& memory_properties,
     VkMemoryPropertyFlags required_flags
@@ -284,9 +241,7 @@ std::tuple<VkImage, VkImageView, VkDeviceMemory, xrtp_Handle> create_image(
     handle = static_cast<xrtp_Handle>(fd);
 #endif
 
-    VkImageView image_view = create_image_view(image_create_info, image);
-
-    return {image, image_view, memory, handle};
+    return {image, memory, handle};
 }
 
 std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
@@ -387,7 +342,7 @@ SwapchainState& create_swapchain_state(
     bool is_static = (create_info.createFlags & XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT) != 0;
 
     for (uint32_t i = 0; i < num_images; i++) {
-        auto [shared_image_handle, shared_image_view, memory, memory_handle] = create_image(
+        auto [shared_image_handle, memory, memory_handle] = create_image(
             image_create_info,
             memory_properties,
             required_flags
@@ -399,7 +354,6 @@ SwapchainState& create_swapchain_state(
         auto command_buffer = create_command_buffer();
 
         auto runtime_image_handle = runtime_image_structs[i].image;
-        auto runtime_image_view = create_image_view(image_create_info, runtime_image_handle);
 
         shared_images.emplace_back(SharedImage{
             shared_image_handle,
