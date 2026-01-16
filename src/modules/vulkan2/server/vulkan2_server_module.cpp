@@ -281,6 +281,8 @@ std::tuple<VkImage, VkDeviceMemory, xrtp_Handle, uint64_t, uint32_t> create_imag
 }
 
 std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
+    VkResult result{};
+
     VkExportSemaphoreCreateInfo export_info{VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO};
 #ifdef _WIN32
     export_info.handleTypes = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT;
@@ -292,7 +294,7 @@ std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
     create_info.pNext = &export_info;
 
     VkSemaphore semaphore{};
-    VkResult result = vkCreateSemaphore(saved_vk_device, &create_info, nullptr, &semaphore);
+    result = vkCreateSemaphore(saved_vk_device, &create_info, nullptr, &semaphore);
     if (result != VK_SUCCESS) {
         throw std::runtime_error("Unable to create exportable semaphore: " + std::to_string(result));
     }
@@ -307,7 +309,7 @@ std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
     get_fd_info.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT;
 
     int fd{};
-    VkResult result = vkGetSemaphoreFdKHR(saved_vk_device, &get_fd_info, &fd);
+    result = vkGetSemaphoreFdKHR(saved_vk_device, &get_fd_info, &fd);
     if (result != VK_SUCCESS) {
         throw std::runtime_error("Unable to export FD for semaphore: " + std::to_string(result));
     }
@@ -798,7 +800,7 @@ void get_required_extensions(
 
 void on_instance(
     xrtp_Transport transport,
-    const FunctionLoader* function_loader,
+    FunctionLoader* function_loader,
     XrInstance instance)
 {
     saved_xr_instance = instance;

@@ -26,7 +26,7 @@ namespace xrtransport {
 // Module function signatures
 typedef bool (*PFN_module_on_init)(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
     const XrExtensionProperties* extensions);
 typedef void (*PFN_module_get_required_extensions)(
@@ -34,7 +34,7 @@ typedef void (*PFN_module_get_required_extensions)(
     const char** extensions_out);
 typedef void (*PFN_module_on_instance)(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     XrInstance instance);
 typedef void (*PFN_module_on_shutdown)();
 
@@ -100,7 +100,7 @@ public:
 
     inline bool on_init(
         xrtp_Transport transport,
-        const xrtransport::FunctionLoader* function_loader,
+        xrtransport::FunctionLoader* function_loader,
         std::uint32_t num_extensions,
         const XrExtensionProperties* extensions)
     {
@@ -116,7 +116,7 @@ public:
 
     inline void on_instance(
         xrtp_Transport transport,
-        const xrtransport::FunctionLoader* function_loader,
+        xrtransport::FunctionLoader* function_loader,
         XrInstance instance)
     {
         return pfn_on_instance(transport, function_loader, instance);

@@ -28,6 +28,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
     ${CMAKE_SOURCE_DIR}/external/spdlog/include
+    ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
 # Build with PIC so that static libraries can be linked into shared libraries

@@ -17,7 +17,7 @@ extern "C" {
  */
 XRTP_API_EXPORT bool on_init(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
     const XrExtensionProperties* extensions);
 
@@ -38,7 +38,7 @@ XRTP_API_EXPORT void get_required_extensions(
  */
 XRTP_API_EXPORT void on_instance(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     XrInstance instance);
 
 /**
