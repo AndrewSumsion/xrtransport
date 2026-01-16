@@ -5,7 +5,6 @@ find_package(Vulkan REQUIRED)
 add_library(module_server_vulkan2 SHARED
     vulkan2_server_module.cpp
     session_state.cpp
-    timeline_semaphore_executor.cpp
 )
 
 target_include_directories(module_server_vulkan2 PRIVATE

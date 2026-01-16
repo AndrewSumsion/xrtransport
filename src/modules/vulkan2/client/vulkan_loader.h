@@ -15,7 +15,6 @@ struct VulkanLoader {
     PFN_vkGetPhysicalDeviceMemoryProperties GetPhysicalDeviceMemoryProperties = nullptr;
     PFN_vkAllocateMemory AllocateMemory = nullptr;
     PFN_vkBindImageMemory BindImageMemory = nullptr;
-    PFN_vkGetMemoryFdKHR GetMemoryFdKHR = nullptr;
     PFN_vkDeviceWaitIdle DeviceWaitIdle = nullptr;
     PFN_vkDestroyImage DestroyImage = nullptr;
     PFN_vkFreeMemory FreeMemory = nullptr;
@@ -24,6 +23,21 @@ struct VulkanLoader {
     PFN_vkCreateFence CreateFence = nullptr;
     PFN_vkWaitForFences WaitForFences = nullptr;
     PFN_vkResetFences ResetFences = nullptr;
+    PFN_vkCreateSemaphore CreateSemaphore = nullptr;
+    PFN_vkDestroySemaphore DestroySemaphore = nullptr;
+    PFN_vkDestroyFence DestroyFence = nullptr;
+    PFN_vkFreeCommandBuffers FreeCommandBuffers = nullptr;
+    PFN_vkCreateCommandPool CreateCommandPool = nullptr;
+    PFN_vkDestroyCommandPool DestroyCommandPool = nullptr;
+    PFN_vkAllocateCommandBuffers AllocateCommandBuffers = nullptr;
+    PFN_vkBeginCommandBuffer BeginCommandBuffer = nullptr;
+    PFN_vkEndCommandBuffer EndCommandBuffer = nullptr;
+    PFN_vkCmdPipelineBarrier CmdPipelineBarrier = nullptr;
+#ifdef _WIN32
+
+#else
+    PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
+#endif
 
     VulkanLoader(PFN_vkGetInstanceProcAddr GetInstanceProcAddr)
         : GetInstanceProcAddr(GetInstanceProcAddr)
@@ -42,7 +56,6 @@ struct VulkanLoader {
         load_function("vkGetPhysicalDeviceMemoryProperties", GetPhysicalDeviceMemoryProperties);
         load_function("vkAllocateMemory", AllocateMemory);
         load_function("vkBindImageMemory", BindImageMemory);
-        load_function("vkGetMemoryFdKHR", GetMemoryFdKHR);
         load_function("vkDeviceWaitIdle", DeviceWaitIdle);
         load_function("vkDestroyImage", DestroyImage);
         load_function("vkFreeMemory", FreeMemory);
@@ -51,6 +64,21 @@ struct VulkanLoader {
         load_function("vkCreateFence", CreateFence);
         load_function("vkWaitForFences", WaitForFences);
         load_function("vkResetFences", ResetFences);
+        load_function("vkCreateSemaphore", CreateSemaphore);
+        load_function("vkDestroySemaphore", DestroySemaphore);
+        load_function("vkDestroyFence", DestroyFence);
+        load_function("vkFreeCommandBuffers", FreeCommandBuffers);
+        load_function("vkCreateCommandPool", CreateCommandPool);
+        load_function("vkDestroyCommandPool", DestroyCommandPool);
+        load_function("vkAllocateCommandBuffers", AllocateCommandBuffers);
+        load_function("vkBeginCommandBuffer", BeginCommandBuffer);
+        load_function("vkEndCommandBuffer", EndCommandBuffer);
+        load_function("vkCmdPipelineBarrier", CmdPipelineBarrier);
+#ifdef _WIN32
+
+#else
+        load_function("vkImportSemaphoreFdKHR", ImportSemaphoreFdKHR);
+#endif
     }
 
 private:

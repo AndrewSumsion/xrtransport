@@ -40,7 +40,7 @@ Below is an illustration of the rendering flow and how these semaphores are used
 - Application calls xrEndFrame which is handled via default generated RPC call
 - Application calls xrAcquireSwapchainImage, client returns an image index and enqueues a command buffer:
   - Wait for copying_done semaphore
-  - Image memory barrier that transitions the shared image from UNDEFINED (don't care about the old contents) to COLOR_ATTACHMENT_OPTIMAL or DEPTH_STENCIL_ATTACHMENT_OPTIMAL. Note that we don't re-acquire ownership from QUEUE_FAMILY_EXTERNAL because the Vulkan spec says we should only do this if we care about keeping the contents. No execution barrier needed here.
+  - Image memory barrier that transitions the shared image from UNDEFINED (don't care about the old contents) to COLOR_ATTACHMENT_OPTIMAL or DEPTH_STENCIL_ATTACHMENT_OPTIMAL. Note that we don't re-acquire ownership from QUEUE_FAMILY_EXTERNAL because the Vulkan spec says we should only do this if we care about keeping the contents. Full execution barrier needed to ensure that the layout has transitioned before application-submitted commands.
   - Signal the per-image fence
 - Repeat (to step 2)
 

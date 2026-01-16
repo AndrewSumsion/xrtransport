@@ -1,6 +1,7 @@
 #ifndef XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H
 #define XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H
 
+#include "image_type.h"
 #include "vulkan_loader.h"
 
 #include "xrtransport/transport/transport.h"
@@ -29,28 +30,22 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<std::unique_ptr<SwapchainImage>>&& images,
+    std::vector<SwapchainImage>&& images,
     uint32_t width,
     uint32_t height,
     bool is_static,
-    xrtransport::Transport& transport,
+    ImageType image_type,
     VulkanLoader& vk
 );
 SessionState& store_session_state(
     XrSession handle,
     const XrGraphicsBindingVulkan2KHR& graphics_binding,
-    VkQueue queue
+    VkQueue queue,
+    VkCommandPool command_pool
 );
 
 void destroy_swapchain_state(XrSwapchain handle);
 void destroy_session_state(XrSession handle);
-
-struct ReleaseImageJob {
-    const XrSwapchainImageReleaseInfo* release_info;
-    uint32_t image_index;
-    bool should_stop = false;
-    std::promise<void> can_return;
-};
 
 struct SwapchainImage {
     XrSwapchainImageVulkan2KHR image;
@@ -58,94 +53,78 @@ struct SwapchainImage {
     VkSemaphore rendering_done;
     VkSemaphore copying_done;
     VkFence copying_done_fence;
+    VkCommandBuffer acquire_command_buffer;
+    VkCommandBuffer release_command_buffer;
+    bool has_been_acquired = false;
 };
 
 class SwapchainState {
 private:
     // using unique_ptr because SwapchainImage is not moveable
-    std::vector<std::unique_ptr<SwapchainImage>> images;
+    std::vector<SwapchainImage> images;
 
-    // This mutex guards size, acquire_head, acquire_tail
-    std::mutex acquire_mutex;
+    // This mutex guards all of the mutable state
+    std::mutex mutex;
     
     // keeps track of how many images have been acquired
-    uint32_t size = 0;
+    uint32_t num_acquired = 0;
 
-    // ring buffer heads indicating which images have been acquired
-    uint32_t acquire_head = 0, acquire_tail = 0;
-    int32_t last_released_index = -1;
-
-    // used to make sure that an image has been waited on before it is released
+    // ring buffer heads indicating which images have been acquired, waited, and released
+    uint32_t acquire_head = 0;
     uint32_t wait_head = 0;
-
-    // This mutex guards wait_head and available
-    std::mutex available_mutex;
-    std::condition_variable available_cv;
-
-    // semaphore counter for how many images are available to return from xrWaitSwapchainImage.
-    // wait waits until this is > 0 and decrements this, and mark_available increments this.
-    // starts at the total number of images, because they are all initially available
-    uint32_t available;
+    uint32_t release_head = 0;
 
     // if true, size is 1 and the image can only be acquired once
     bool is_static;
-    bool has_been_acquired = false;
 
-    xrtransport::Transport& transport;
     VulkanLoader& vk;
 
-    std::thread worker_thread;
-    std::mutex worker_mutex;
-    std::condition_variable worker_cv;
-    std::queue<ReleaseImageJob> worker_jobs;
-
-    void worker_thread_loop();
+    // retrieved from the parent SessionState and stored here for convenience
+    VkDevice device;
+    VkQueue queue;
 
 public:
     XrSwapchain handle;
     XrSession parent_handle;
     uint32_t width;
     uint32_t height;
+    ImageType image_type;
 
     explicit SwapchainState(
         XrSwapchain handle,
         XrSession parent_handle,
-        std::vector<std::unique_ptr<SwapchainImage>> images,
+        std::vector<SwapchainImage>&& images,
         uint32_t width,
         uint32_t height,
         bool is_static,
-        xrtransport::Transport& transport,
-        VulkanLoader& vk);
+        ImageType image_type,
+        VulkanLoader& vk
+    );
 
     ~SwapchainState();
 
     XrResult acquire(uint32_t& index_out);
-    XrResult release(uint32_t& index_out);
     XrResult wait(XrDuration timeout);
-    void mark_available();
+    XrResult release(uint32_t& index_out);
 
-    const std::vector<std::unique_ptr<SwapchainImage>>& get_images() const {
+    const std::vector<SwapchainImage>& get_images() const {
         return images;
     }
-
-    int32_t get_last_released_index();
-
-    // gets the number of swapchains that are currently acquired
-    uint32_t get_size();
-
-    void submit_release_job(ReleaseImageJob job);
 };
 
 struct SessionState {
     XrSession handle;
     XrGraphicsBindingVulkan2KHR graphics_binding;
     VkQueue queue;
+    VkCommandPool command_pool;
     std::unordered_set<XrSwapchain> swapchains;
-    bool is_running = false; // TODO: track this so that we can validate it in xrEndFrame
 
-    explicit SessionState(XrSession handle, const XrGraphicsBindingVulkan2KHR& graphics_binding, VkQueue queue)
-        : handle(handle), graphics_binding(graphics_binding), queue(queue)
-    {}
+    explicit SessionState(
+        XrSession handle,
+        const XrGraphicsBindingVulkan2KHR& graphics_binding,
+        VkQueue queue,
+        VkCommandPool command_pool
+    );
 };
 
 #endif // XRTRANSPORT_VULKAN2_CLIENT_SESSION_STATE_H

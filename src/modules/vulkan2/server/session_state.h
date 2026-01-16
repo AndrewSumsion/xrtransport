@@ -1,6 +1,8 @@
 #ifndef XRTRANSPORT_VULKAN2_SERVER_SESSION_STATE_H
 #define XRTRANSPORT_VULKAN2_SERVER_SESSION_STATE_H
 
+#include "image_type.h"
+
 #include <vulkan/vulkan.h>
 #define XR_USE_GRAPHICS_API_VULKAN
 #include <openxr/openxr_platform.h>
@@ -14,7 +16,6 @@ struct SharedImage;
 struct RuntimeImage;
 struct SwapchainState;
 struct SessionState;
-enum class ImageType;
 
 std::optional<std::reference_wrapper<SwapchainState>> get_swapchain_state(XrSwapchain handle);
 std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession handle);
@@ -35,11 +36,6 @@ SessionState& store_session_state(
 
 void destroy_swapchain_state(XrSwapchain handle);
 void destroy_session_state(XrSession handle);
-
-enum class ImageType {
-    COLOR,
-    DEPTH_STENCIL
-};
 
 struct SharedImage {
     VkImage image;

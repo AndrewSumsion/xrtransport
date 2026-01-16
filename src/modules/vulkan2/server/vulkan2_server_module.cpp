@@ -50,7 +50,7 @@ PFN_xrCreateVulkanInstanceKHR pfn_xrCreateVulkanInstanceKHR;
 PFN_xrGetVulkanGraphicsDevice2KHR pfn_xrGetVulkanGraphicsDevice2KHR;
 PFN_xrCreateVulkanDeviceKHR pfn_xrCreateVulkanDeviceKHR;
 
-void setup_vulkan_queue() {
+void select_queue_family() {
     uint32_t queue_family_count{};
     vkGetPhysicalDeviceQueueFamilyProperties(saved_vk_physical_device, &queue_family_count, nullptr);
     std::vector<VkQueueFamilyProperties> queue_families(queue_family_count);
@@ -77,8 +77,6 @@ void setup_vulkan_queue() {
         throw std::runtime_error("Unable to find a queue family with at least one queue "
             "and that supports transfer operations");
     }
-
-    vkGetDeviceQueue(saved_vk_device, queue_family_index, queue_index, &saved_vk_queue);
 }
 
 void setup_vulkan_instance() {
@@ -115,11 +113,11 @@ void setup_vulkan_instance() {
     xr_create_info.vulkanCreateInfo = &vk_create_info;
 
     xr_result = pfn_xrCreateVulkanInstanceKHR(saved_xr_instance, &xr_create_info, &saved_vk_instance, &vk_result);
-    if (!XR_SUCCEEDED(xr_result)) {
-        throw std::runtime_error("XR error on Vulkan instance creation: " + std::to_string(xr_result));
-    }
     if (vk_result != VK_SUCCESS) {
         throw std::runtime_error("Vulkan error on instance creation: " + std::to_string(vk_result));
+    }
+    if (!XR_SUCCEEDED(xr_result)) {
+        throw std::runtime_error("XR error on Vulkan instance creation: " + std::to_string(xr_result));
     }
 
     XrVulkanGraphicsDeviceGetInfoKHR xr_device_get_info{XR_TYPE_VULKAN_GRAPHICS_DEVICE_GET_INFO_KHR};
@@ -141,8 +139,46 @@ void setup_vulkan_instance() {
 
     std::memcpy(physical_device_uuid, vk_device_id_props.deviceUUID, VK_UUID_SIZE);
 
-    // find queue family and get VkQueue handle
-    setup_vulkan_queue();
+    // choose queue family
+    select_queue_family();
+
+    // Setup VkDevice
+    const char* vk_device_extensions[]{
+#ifdef _WIN32
+        VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME,
+        VK_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_NAME,
+#else
+        VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME,
+        VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME,
+#endif
+    };
+
+    float queue_priority = 1.0;
+
+    VkDeviceQueueCreateInfo vk_queue_info{VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO};
+    vk_queue_info.queueFamilyIndex = queue_family_index;
+    vk_queue_info.queueCount = 1;
+    vk_queue_info.pQueuePriorities = &queue_priority;
+
+    VkDeviceCreateInfo vk_device_create_info{VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO};
+    vk_device_create_info.queueCreateInfoCount = 1;
+    vk_device_create_info.pQueueCreateInfos = &vk_queue_info;
+    vk_device_create_info.enabledExtensionCount = sizeof(vk_device_extensions) / sizeof(const char*);
+    vk_device_create_info.ppEnabledExtensionNames = vk_device_extensions;
+
+    XrVulkanDeviceCreateInfoKHR xr_device_create_info{XR_TYPE_VULKAN_DEVICE_CREATE_INFO_KHR};
+    xr_device_create_info.systemId = saved_xr_system_id;
+    xr_device_create_info.pfnGetInstanceProcAddr = vkGetInstanceProcAddr;
+    xr_device_create_info.vulkanPhysicalDevice = saved_vk_physical_device;
+    xr_device_create_info.vulkanCreateInfo = &vk_device_create_info;
+
+    xr_result = pfn_xrCreateVulkanDeviceKHR(saved_xr_instance, &xr_device_create_info, &saved_vk_device, &vk_result);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Vulkan error on device creation: " + std::to_string(vk_result));
+    }
+    if (xr_result != XR_SUCCESS) {
+        throw std::runtime_error("XR error on Vulkan device creation: " + std::to_string(xr_result));
+    }
 
     // Create command pool
     VkCommandPoolCreateInfo pool_create_info{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
@@ -177,7 +213,7 @@ int32_t find_memory_type(
     return -1;
 }
 
-std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
+std::tuple<VkImage, VkDeviceMemory, xrtp_Handle, uint64_t, uint32_t> create_image(
     const VkImageCreateInfo& image_create_info,
     const VkPhysicalDeviceMemoryProperties& memory_properties,
     VkMemoryPropertyFlags required_flags
@@ -193,12 +229,12 @@ std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
     VkMemoryRequirements memory_requirements{};
     vkGetImageMemoryRequirements(saved_vk_device, image, &memory_requirements);
 
-    int64_t memory_type = find_memory_type(memory_properties, memory_requirements.memoryTypeBits, required_flags);
+    int32_t memory_type = find_memory_type(memory_properties, memory_requirements.memoryTypeBits, required_flags);
     if (memory_type == -1) {
         throw std::runtime_error("Unable to find memory type with required bits: " + 
             std::to_string(memory_requirements.memoryTypeBits));
     }
-    uint64_t memory_type_index = static_cast<uint64_t>(memory_type);
+    uint32_t memory_type_index = static_cast<uint32_t>(memory_type);
 
     VkExportMemoryAllocateInfo export_alloc_info{VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO};
 #ifdef _WIN32
@@ -241,7 +277,7 @@ std::tuple<VkImage, VkDeviceMemory, xrtp_Handle> create_image(
     handle = static_cast<xrtp_Handle>(fd);
 #endif
 
-    return {image, memory, handle};
+    return {image, memory, handle, memory_requirements.size, memory_type_index};
 }
 
 std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
@@ -302,7 +338,9 @@ SwapchainState& create_swapchain_state(
     SessionState& session_state,
     const XrSwapchainCreateInfo& create_info,
     XrSwapchain handle,
-    std::vector<ImageHandles>& handles_out
+    std::vector<ImageHandles>& handles_out,
+    uint64_t& memory_size_out,
+    uint32_t& memory_type_index_out
 ) {
     VkResult vk_result{};
     XrResult xr_result{};
@@ -342,7 +380,7 @@ SwapchainState& create_swapchain_state(
     bool is_static = (create_info.createFlags & XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT) != 0;
 
     for (uint32_t i = 0; i < num_images; i++) {
-        auto [shared_image_handle, memory, memory_handle] = create_image(
+        auto [shared_image_handle, memory, memory_handle, memory_size, memory_type_index] = create_image(
             image_create_info,
             memory_properties,
             required_flags
@@ -373,6 +411,10 @@ SwapchainState& create_swapchain_state(
             rendering_done_handle,
             copying_done_handle
         });
+
+        // just overwrite these values for each image because they should be the same 
+        memory_size_out = memory_size;
+        memory_type_index_out = memory_type_index;
     }
 
     ImageType image_type;
@@ -435,11 +477,16 @@ void handle_create_swapchain(MessageLockIn msg_in) {
 
     std::vector<ImageHandles> handles;
 
+    uint64_t memory_size{};
+    uint32_t memory_type_index{};
+
     create_swapchain_state(
         session_state,
         *create_info,
         swapchain_handle,
-        handles
+        handles,
+        memory_size,
+        memory_type_index
     );
 
     for (auto image_handles : handles) {
@@ -454,6 +501,8 @@ void handle_create_swapchain(MessageLockIn msg_in) {
     serialize(&result, s_ctx);
     serialize(&swapchain_handle, s_ctx);
     serialize(&num_images, s_ctx);
+    serialize(&memory_size, s_ctx);
+    serialize(&memory_type_index, s_ctx);
     msg_out.flush();
 
     cleanup_ptr(create_info, 1);

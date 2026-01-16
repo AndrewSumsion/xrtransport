@@ -52,11 +52,11 @@ std::optional<std::reference_wrapper<SessionState>> get_session_state(XrSession 
 SwapchainState& store_swapchain_state(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<std::unique_ptr<SwapchainImage>> images,
+    std::vector<SwapchainImage>&& images,
     uint32_t width,
     uint32_t height,
     bool is_static,
-    xrtransport::Transport& transport,
+    ImageType image_type,
     VulkanLoader& vk
 ) {
     return swapchain_states.emplace(
@@ -69,7 +69,7 @@ SwapchainState& store_swapchain_state(
             width,
             height,
             is_static,
-            transport,
+            image_type,
             vk
         )
     ).first->second;
@@ -77,16 +77,18 @@ SwapchainState& store_swapchain_state(
 
 SessionState& store_session_state(
     XrSession handle,
-    const XrGraphicsBindingVulkan2KHR&& graphics_binding,
-    VkQueue queue
+    const XrGraphicsBindingVulkan2KHR& graphics_binding,
+    VkQueue queue,
+    VkCommandPool command_pool
 ) {
     return session_states.emplace(
         std::piecewise_construct,
         std::forward_as_tuple(handle),
         std::forward_as_tuple(
             handle,
-            std::move(graphics_binding),
-            queue
+            graphics_binding,
+            queue,
+            command_pool
         )
     ).first->second;
 }
@@ -102,11 +104,11 @@ void destroy_session_state(XrSession handle) {
 SwapchainState::SwapchainState(
     XrSwapchain handle,
     XrSession parent_handle,
-    std::vector<std::unique_ptr<SwapchainImage>> images,
+    std::vector<SwapchainImage>&& images,
     uint32_t width,
     uint32_t height,
     bool is_static,
-    xrtransport::Transport& transport,
+    ImageType image_type,
     VulkanLoader& vk
 )
     : handle(handle),
@@ -115,145 +117,142 @@ SwapchainState::SwapchainState(
     is_static(is_static),
     width(width),
     height(height),
-    transport(transport),
+    image_type(image_type),
     vk(vk)
 {
-    // intentionally set after initializer list because images moves
-    available = images.size();
+    SessionState& parent_state = get_session_state(parent_handle).value();
+    device = parent_state.graphics_binding.device;
+    queue = parent_state.queue;
 }
 
 XrResult SwapchainState::acquire(uint32_t& index_out) {
-    std::lock_guard<std::mutex> lock(acquire_mutex);
-    if (is_static && has_been_acquired) {
-        return XR_ERROR_CALL_ORDER_INVALID;
-    }
-
-    if (size >= images.size()) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (num_acquired >= images.size()) {
         // all images are already acquired
         return XR_ERROR_CALL_ORDER_INVALID;
     }
 
-    index_out = acquire_head;
-    acquire_head = (acquire_head + 1) % images.size();
-    size += 1;
-    has_been_acquired = true;
-    return XR_SUCCESS;
-}
+    SwapchainImage& swapchain_image = images[acquire_head];
 
-XrResult SwapchainState::release(uint32_t& index_out) {
-    std::lock_guard<std::mutex> lock(acquire_mutex);
-    if (size == 0) {
-        // no image to release
+    if (is_static && swapchain_image.has_been_acquired) {
+        // you can only acquire the one image in a static swapchain once
         return XR_ERROR_CALL_ORDER_INVALID;
     }
-    {
-        std::lock_guard<std::mutex> wait_lock(available_mutex);
-        if (wait_head == acquire_tail) {
-            // the current image has not been waited on
-            return XR_ERROR_CALL_ORDER_INVALID;
+
+    // don't enqueue the semaphore wait on the first acquire
+    if (swapchain_image.has_been_acquired) {
+        // enqueue command buffer to re-acquire image, transition layout, and signal fence
+
+        // make the pipeline barrier in the command buffer wait for the semaphore
+        VkPipelineStageFlags wait_flags = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
+
+        VkSubmitInfo submit_info{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+        submit_info.waitSemaphoreCount = 1;
+        submit_info.pWaitSemaphores = &swapchain_image.copying_done;
+        submit_info.pWaitDstStageMask = &wait_flags;
+        submit_info.commandBufferCount = 1;
+        submit_info.pCommandBuffers = &swapchain_image.acquire_command_buffer;
+
+        VkResult result = vk.QueueSubmit(queue, 1, &submit_info, swapchain_image.copying_done_fence);
+        if (result != VK_SUCCESS) {
+            spdlog::error("Failed to submit image acquire command buffer: {}", (int)result);
+            return XR_ERROR_RUNTIME_FAILURE;
         }
     }
+    else {
+        // make sure that the command buffer gets enqueued next time
+        swapchain_image.has_been_acquired = true;
+    }
 
-    last_released_index = acquire_tail;
-    acquire_tail = (acquire_tail + 1) % images.size();
-    size -= 1;
-
-    index_out = last_released_index;
+    index_out = acquire_head;
+    acquire_head = (acquire_head + 1) % images.size();
+    num_acquired += 1;
     return XR_SUCCESS;
 }
 
 XrResult SwapchainState::wait(XrDuration timeout) {
-    std::unique_lock<std::mutex> lock(available_mutex);
-    if (timeout == XR_INFINITE_DURATION) {
-        available_cv.wait(lock, [this]{ return available > 0; });
+    std::unique_lock<std::mutex> lock(mutex);
+
+    if (num_acquired == 0) {
+        // no image has been acquired to wait on
+        return XR_ERROR_CALL_ORDER_INVALID;
+    }
+    if (wait_head != release_head) {
+        // every wait call must be followed by a release call.
+        // in other words, the wait head cannot be more than one slot ahead of the release head
+        // by the end of this function.
+        return XR_ERROR_CALL_ORDER_INVALID;
+    }
+
+    SwapchainImage& swapchain_image = images[wait_head];
+
+    VkResult result = vk.WaitForFences(
+        device,
+        1, &swapchain_image.copying_done_fence,
+        VK_TRUE,
+        timeout
+    );
+
+    if (result == VK_TIMEOUT) {
+        return XR_TIMEOUT_EXPIRED;
+    }
+    else if (result != VK_SUCCESS) {
+        spdlog::error("Failed to wait for swapchain image fence: {}", (int)result);
+        return XR_ERROR_RUNTIME_FAILURE;
     }
     else {
-        bool completed = available_cv.wait_for(
-            lock,
-            std::chrono::nanoseconds(timeout),
-            [this]{ return available > 0; }
-        );
-        if (!completed) {
-            return XR_TIMEOUT_EXPIRED;
-        }
-    }
-    available -= 1;
-}
-
-void SwapchainState::mark_available() {
-    {
-        std::lock_guard<std::mutex> lock(available_mutex);
-        available += 1;
-    }
-    available_cv.notify_one();
-}
-
-int32_t SwapchainState::get_last_released_index() {
-    std::lock_guard<std::mutex> lock(acquire_mutex);
-    return last_released_index;
-}
-
-uint32_t SwapchainState::get_size() {
-    std::lock_guard<std::mutex> lock(acquire_mutex);
-    return size;
-}
-
-void SwapchainState::submit_release_job(ReleaseImageJob job) {
-    std::unique_lock<std::mutex> lock(worker_mutex);
-    worker_jobs.emplace(std::move(job));
-    lock.unlock();
-    worker_cv.notify_one();
-}
-
-SwapchainState::~SwapchainState() {
-    // poison pill
-    submit_release_job(ReleaseImageJob{nullptr, true});
-    if (worker_thread.joinable()) {
-        worker_thread.join();
+        wait_head = (wait_head + 1) % images.size();
+        return XR_SUCCESS;
     }
 }
 
-void SwapchainState::worker_thread_loop() {
-    while (true) try {
-        std::unique_lock<std::mutex> lock(worker_mutex);
-        worker_cv.wait(lock, [this]{
-            return !worker_jobs.empty();
-        });
-        ReleaseImageJob job = std::move(worker_jobs.front());
-        worker_jobs.pop();
-        lock.unlock();
-
-        // handle poison pill
-        if (job.should_stop)
-            break;
-
-        // For the future, we can copy any information out of job.release_info, but we're not using it now.
-        // Signalling this promise allows xrReleaseSwapchainImage to return and job.release_info to become
-        // invalid.
-        job.can_return.set_value();
-
-        const SwapchainImage& image = *images[job.image_index];
-        const SessionState& session_state = get_session_state(parent_handle).value();
-
-        // wait for the work on the queue as of the xrReleaseSwapchainImage call to complete
-        vk.WaitForFences(session_state.graphics_binding.device, 1, &image.fence, VK_TRUE, UINT64_MAX);
-        vk.ResetFences(session_state.graphics_binding.device, 1, &image.fence);
-
-        // notify the server that the image is ready to copy from
-        auto msg_out = transport.start_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE);
-        xrtransport::SerializeContext s_ctx(msg_out.buffer);
-        xrtransport::serialize(&handle, s_ctx);
-        xrtransport::serialize(&job.image_index, s_ctx);
-        msg_out.flush();
-
-        // wait until server says it's done reading from the image
-        auto msg_in = transport.await_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE_RETURN);
-
-        // notify anyone waiting on this swapchain image
-        mark_available();
+XrResult SwapchainState::release(uint32_t& index_out) {
+    std::lock_guard<std::mutex> lock(mutex);
+    if (num_acquired == 0) {
+        // no image to release
+        return XR_ERROR_CALL_ORDER_INVALID;
     }
-    catch (const std::exception& e) {
-        spdlog::error("Exception occured in swapchain {:#x} worker loop: {}", handle, e.what());
-        // continue processing jobs
+    if (wait_head != (release_head + 1) % images.size()) {
+        // the current image has not been waited on
+        return XR_ERROR_CALL_ORDER_INVALID;
     }
+
+    VkResult result{};
+
+    SwapchainImage& swapchain_image = images[release_head];
+
+    result = vk.ResetFences(device, 1, &swapchain_image.copying_done_fence);
+    if (result != VK_SUCCESS) {
+        spdlog::error("Failed to reset image fence: {}", (int)result);
+        return XR_ERROR_RUNTIME_FAILURE;
+    }
+
+    VkSubmitInfo submit_info{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submit_info.commandBufferCount = 1;
+    submit_info.pCommandBuffers = &swapchain_image.release_command_buffer;
+    submit_info.signalSemaphoreCount = 1;
+    submit_info.pSignalSemaphores = &swapchain_image.rendering_done;
+
+    result = vk.QueueSubmit(queue, 1, &submit_info, VK_NULL_HANDLE);
+    if (result != VK_SUCCESS) {
+        spdlog::error("Failed to submit image release command buffer: {}", (int)result);
+        return XR_ERROR_RUNTIME_FAILURE;
+    }
+
+    index_out = release_head;
+    release_head = (release_head + 1) % images.size();
+    num_acquired -= 1;
+    return XR_SUCCESS;
 }
+
+SessionState::SessionState(
+    XrSession handle,
+    const XrGraphicsBindingVulkan2KHR& graphics_binding,
+    VkQueue queue,
+    VkCommandPool command_pool
+)
+    : handle(handle),
+    graphics_binding(graphics_binding),
+    queue(queue),
+    command_pool(command_pool)
+{}
