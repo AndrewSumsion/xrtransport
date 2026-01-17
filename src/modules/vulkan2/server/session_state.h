@@ -25,7 +25,6 @@ SwapchainState& store_swapchain_state(
     XrSession parent_handle,
     std::vector<SharedImage>&& shared_images,
     std::vector<RuntimeImage>&& runtime_images,
-    std::vector<VkCommandBuffer>&& command_buffers,
     ImageType image_type,
     uint32_t width,
     uint32_t height
@@ -42,6 +41,8 @@ struct SharedImage {
     VkDeviceMemory shared_memory;
     VkSemaphore rendering_done;
     VkSemaphore copying_done;
+    VkCommandBuffer command_buffer;
+    VkFence command_buffer_fence;
 };
 
 struct RuntimeImage {
@@ -53,7 +54,6 @@ struct SwapchainState {
     XrSession parent_handle;
     std::vector<SharedImage> shared_images;
     std::vector<RuntimeImage> runtime_images;
-    std::vector<VkCommandBuffer> command_buffers;
     ImageType image_type;
     uint32_t width;
     uint32_t height;
@@ -63,7 +63,6 @@ struct SwapchainState {
         XrSession parent_handle,
         std::vector<SharedImage>&& shared_images,
         std::vector<RuntimeImage>&& runtime_images,
-        std::vector<VkCommandBuffer>&& command_buffers,
         ImageType image_type,
         uint32_t width,
         uint32_t height
@@ -72,7 +71,6 @@ struct SwapchainState {
         parent_handle(parent_handle),
         shared_images(std::move(shared_images)),
         runtime_images(std::move(runtime_images)),
-        command_buffers(std::move(command_buffers)),
         image_type(image_type),
         width(width),
         height(height)

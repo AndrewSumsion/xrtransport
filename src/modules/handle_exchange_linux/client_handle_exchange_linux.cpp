@@ -50,7 +50,7 @@ void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn_xrGetI
 
     sockaddr_un addr{};
     addr.sun_family = AF_UNIX;
-    std::strncpy(addr.sun_path, socket_path, sizeof(addr.sun_path - 1));
+    std::strncpy(addr.sun_path, socket_path, sizeof(addr.sun_path) - 1);
     cleanup_ptr(socket_path, count_null_terminated(socket_path));
 
     // send a message to tell the server to call accept

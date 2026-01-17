@@ -50,6 +50,9 @@ PFN_xrCreateVulkanInstanceKHR pfn_xrCreateVulkanInstanceKHR;
 PFN_xrGetVulkanGraphicsDevice2KHR pfn_xrGetVulkanGraphicsDevice2KHR;
 PFN_xrCreateVulkanDeviceKHR pfn_xrCreateVulkanDeviceKHR;
 
+PFN_vkGetMemoryFdKHR pfn_vkGetMemoryFdKHR;
+PFN_vkGetSemaphoreFdKHR pfn_vkGetSemaphoreFdKHR;
+
 void select_queue_family() {
     uint32_t queue_family_count{};
     vkGetPhysicalDeviceQueueFamilyProperties(saved_vk_physical_device, &queue_family_count, nullptr);
@@ -106,6 +109,11 @@ void setup_vulkan_instance() {
 
     VkInstanceCreateInfo vk_create_info{VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO};
     vk_create_info.pApplicationInfo = &vk_application_info;
+#ifndef NDEBUG
+    const char* layers[]{"VK_LAYER_KHRONOS_validation"};
+    vk_create_info.enabledLayerCount = 1;
+    vk_create_info.ppEnabledLayerNames = layers;
+#endif
 
     XrVulkanInstanceCreateInfoKHR xr_create_info{XR_TYPE_VULKAN_INSTANCE_CREATE_INFO_KHR};
     xr_create_info.systemId = saved_xr_system_id;
@@ -179,6 +187,11 @@ void setup_vulkan_instance() {
     if (xr_result != XR_SUCCESS) {
         throw std::runtime_error("XR error on Vulkan device creation: " + std::to_string(xr_result));
     }
+
+    pfn_vkGetMemoryFdKHR = (PFN_vkGetMemoryFdKHR)vkGetDeviceProcAddr(saved_vk_device, "vkGetMemoryFdKHR");
+    pfn_vkGetSemaphoreFdKHR = (PFN_vkGetSemaphoreFdKHR)vkGetDeviceProcAddr(saved_vk_device, "vkGetSemaphoreFdKHR");
+
+    vkGetDeviceQueue(saved_vk_device, queue_family_index, queue_index, &saved_vk_queue);
 
     // Create command pool
     VkCommandPoolCreateInfo pool_create_info{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
@@ -269,7 +282,7 @@ std::tuple<VkImage, VkDeviceMemory, xrtp_Handle, uint64_t, uint32_t> create_imag
     get_fd_info.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
 
     int fd{};
-    vk_result = vkGetMemoryFdKHR(saved_vk_device, &get_fd_info, &fd);
+    vk_result = pfn_vkGetMemoryFdKHR(saved_vk_device, &get_fd_info, &fd);
     if (vk_result != VK_SUCCESS) {
         throw std::runtime_error("Failed to get memory fd: " + std::to_string(vk_result));
     }
@@ -309,7 +322,7 @@ std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
     get_fd_info.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT;
 
     int fd{};
-    result = vkGetSemaphoreFdKHR(saved_vk_device, &get_fd_info, &fd);
+    result = pfn_vkGetSemaphoreFdKHR(saved_vk_device, &get_fd_info, &fd);
     if (result != VK_SUCCESS) {
         throw std::runtime_error("Unable to export FD for semaphore: " + std::to_string(result));
     }
@@ -333,6 +346,19 @@ VkCommandBuffer create_command_buffer() {
     }
 
     return command_buffer;
+}
+
+VkFence create_signaled_fence() {
+    VkFenceCreateInfo fence_info{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
+    fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
+
+    VkFence fence{};
+    VkResult result = vkCreateFence(saved_vk_device, &fence_info, nullptr, &fence);
+    if (result != VK_SUCCESS) {
+        throw std::runtime_error("Unable to create fence: " + std::to_string(result));
+    }
+
+    return fence;
 }
 
 // TODO: might need to select and format that allows export
@@ -364,8 +390,6 @@ SwapchainState& create_swapchain_state(
     shared_images.reserve(num_images);
     std::vector<RuntimeImage> runtime_images;
     runtime_images.reserve(num_images);
-    std::vector<VkCommandBuffer> command_buffers;
-    command_buffers.reserve(num_images);
 
     handles_out.reserve(num_images);
 
@@ -392,6 +416,7 @@ SwapchainState& create_swapchain_state(
         auto [copying_done, copying_done_handle] = create_shared_semaphore();
 
         auto command_buffer = create_command_buffer();
+        auto command_buffer_fence = create_signaled_fence();
 
         auto runtime_image_handle = runtime_image_structs[i].image;
 
@@ -399,14 +424,14 @@ SwapchainState& create_swapchain_state(
             shared_image_handle,
             memory,
             rendering_done,
-            copying_done
+            copying_done,
+            command_buffer,
+            command_buffer_fence
         });
 
         runtime_images.emplace_back(RuntimeImage{
             runtime_image_handle,
         });
-
-        command_buffers.emplace_back(command_buffer);
 
         handles_out.emplace_back(ImageHandles{
             memory_handle,
@@ -435,7 +460,6 @@ SwapchainState& create_swapchain_state(
         session_state.handle,
         std::move(shared_images),
         std::move(runtime_images),
-        std::move(command_buffers),
         image_type,
         create_info.width,
         create_info.height
@@ -519,14 +543,13 @@ void destroy_swapchain(XrSwapchain swapchain_handle) {
         vkFreeMemory(saved_vk_device, image.shared_memory, nullptr);
         vkDestroySemaphore(saved_vk_device, image.rendering_done, nullptr);
         vkDestroySemaphore(saved_vk_device, image.copying_done, nullptr);
+        vkFreeCommandBuffers(
+            saved_vk_device,
+            saved_vk_command_pool,
+            1,
+            &image.command_buffer
+        );
     }
-
-    vkFreeCommandBuffers(
-        saved_vk_device,
-        saved_vk_command_pool,
-        static_cast<uint32_t>(swapchain_state.command_buffers.size()),
-        swapchain_state.command_buffers.data()
-    );
 
     destroy_swapchain_state(swapchain_handle);
     session_state.swapchains.erase(swapchain_handle);
@@ -621,7 +644,20 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     VkImage dest_image = runtime_image.image;
     VkSemaphore rendering_done = shared_image.rendering_done;
     VkSemaphore copying_done = shared_image.copying_done;
-    VkCommandBuffer command_buffer = swapchain_state.command_buffers.at(src_index);
+    VkCommandBuffer command_buffer = shared_image.command_buffer;
+    VkFence command_buffer_fence = shared_image.command_buffer_fence;
+
+    // wait on fence to make sure that the command buffer is not still being used
+    // synchronization with the client should already guarantee this, but this is just for safety
+    // in case of misbehaving clients
+    vk_result = vkWaitForFences(saved_vk_device, 1, &command_buffer_fence, VK_TRUE, UINT64_MAX);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to wait on fence: " + std::to_string(vk_result));
+    }
+    vk_result = vkResetFences(saved_vk_device, 1, &command_buffer_fence);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to reset fence: " + std::to_string(vk_result));
+    }
 
     // record command buffer with these source and destination images
 
@@ -745,9 +781,14 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     submit_info.signalSemaphoreCount = 1;
     submit_info.pSignalSemaphores = &copying_done;
 
-    vk_result = vkQueueSubmit(saved_vk_queue, 1, &submit_info, VK_NULL_HANDLE);
+    vk_result = vkQueueSubmit(saved_vk_queue, 1, &submit_info, command_buffer_fence);
     if (vk_result != VK_SUCCESS) {
         throw std::runtime_error("Failed to submit copy operation to queue: " + std::to_string(vk_result));
+    }
+
+    xr_result = function_loader->pfn_xrReleaseSwapchainImage(swapchain_handle, nullptr);
+    if (!XR_SUCCEEDED(xr_result)) {
+        throw std::runtime_error("Failed to release swapchain image: " + std::to_string(xr_result));
     }
 
     auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE_RETURN);
@@ -758,7 +799,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
 
 bool on_init(
     xrtp_Transport _transport,
-    const FunctionLoader* _function_loader,
+    FunctionLoader* _function_loader,
     uint32_t num_extensions,
     const XrExtensionProperties* extensions)
 {

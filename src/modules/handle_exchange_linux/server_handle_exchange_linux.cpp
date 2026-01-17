@@ -32,7 +32,7 @@ int socket_fd = -1;
 
 bool on_init(
     xrtp_Transport transport_handle,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
     const XrExtensionProperties* extensions
 ) {
@@ -66,7 +66,7 @@ void get_required_extensions(
 
 void on_instance(
     xrtp_Transport transport_handle,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     XrInstance instance
 ) {
     const char* server_path = std::getenv("XRTP_SERVER_FD_EXCHANGE_PATH");
@@ -96,7 +96,8 @@ void on_instance(
     unlink(server_path); // ignore error if any
 
     sockaddr_un addr{};
-    std::strncpy(addr.sun_path, server_path, sizeof(addr.sun_path - 1));
+    addr.sun_family = AF_UNIX;
+    std::strncpy(addr.sun_path, server_path, sizeof(addr.sun_path) - 1);
 
     if (bind(server_fd, (sockaddr*)&addr, sizeof(addr)) < 0) {
         spdlog::error("Unable to bind to handle exchange path: {}, errno: {}", server_path, errno);

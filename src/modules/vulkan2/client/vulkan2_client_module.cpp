@@ -222,14 +222,14 @@ void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn) {
     pfn_xrGetInstanceProcAddr = pfn;
 }
 
-void add_extension_if_not_present(std::vector<const char*>& extensions, const char* extension) {
-    // return if extension is present
-    for (const char* e : extensions) {
-        if (std::strncmp(e, extension, VK_MAX_EXTENSION_NAME_SIZE) == 0) {
+void add_string_if_not_present(std::vector<const char*>& strings, const char* string) {
+    // return if string is present
+    for (const char* e : strings) {
+        if (std::strncmp(e, string, VK_MAX_EXTENSION_NAME_SIZE) == 0) {
             return;
         }
     }
-    extensions.push_back(extension);
+    strings.push_back(string);
 }
 
 XrResult xrCreateVulkanInstanceKHRImpl(
@@ -261,9 +261,19 @@ XrResult xrCreateVulkanInstanceKHRImpl(
         vulkan_create_info.ppEnabledExtensionNames + vulkan_create_info.enabledExtensionCount
     );
     // For future use:
-    // add_extension_if_not_present(requested_extensions, "VK_KHR_example_instance_extension");
+    // add_string_if_not_present(requested_extensions, "VK_KHR_example_instance_extension");
     vulkan_create_info.enabledExtensionCount = requested_extensions.size();
     vulkan_create_info.ppEnabledExtensionNames = requested_extensions.data();
+
+    std::vector<const char*> requested_layers(
+        vulkan_create_info.ppEnabledLayerNames,
+        vulkan_create_info.ppEnabledLayerNames + vulkan_create_info.enabledLayerCount
+    );
+#ifndef NDEBUG
+    add_string_if_not_present(requested_layers, "VK_LAYER_KHRONOS_validation");
+#endif
+    vulkan_create_info.enabledLayerCount = requested_layers.size();
+    vulkan_create_info.ppEnabledLayerNames = requested_layers.data();
 
     *vulkanResult = vk->CreateInstance(&vulkan_create_info, createInfo->vulkanAllocator, vulkanInstance);
     if (*vulkanResult != VK_SUCCESS) {
@@ -297,11 +307,11 @@ XrResult xrCreateVulkanDeviceKHRImpl(
         vulkan_create_info.ppEnabledExtensionNames + vulkan_create_info.enabledExtensionCount
     );
 #ifdef _WIN32
-    add_extension_if_not_present(requested_extensions, VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME);
-    add_extension_if_not_present(requested_extensions, VK_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_NAME);
+    add_string_if_not_present(requested_extensions, VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME);
+    add_string_if_not_present(requested_extensions, VK_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_NAME);
 #else
-    add_extension_if_not_present(requested_extensions, VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME);
-    add_extension_if_not_present(requested_extensions, VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME);
+    add_string_if_not_present(requested_extensions, VK_KHR_EXTERNAL_MEMORY_FD_EXTENSION_NAME);
+    add_string_if_not_present(requested_extensions, VK_KHR_EXTERNAL_SEMAPHORE_FD_EXTENSION_NAME);
 #endif
     vulkan_create_info.enabledExtensionCount = requested_extensions.size();
     vulkan_create_info.ppEnabledExtensionNames = requested_extensions.data();
@@ -906,6 +916,8 @@ try {
     serialize(&swapchain, s_ctx);
     serialize(&released_index, s_ctx);
     msg_out.flush();
+
+    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE_RETURN);
 
     return XR_SUCCESS;
 }

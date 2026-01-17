@@ -101,8 +101,6 @@ public:
         VulkanLoader& vk
     );
 
-    ~SwapchainState();
-
     XrResult acquire(uint32_t& index_out);
     XrResult wait(XrDuration timeout);
     XrResult release(uint32_t& index_out);

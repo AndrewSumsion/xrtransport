@@ -66,6 +66,14 @@
 					{
 						"name": "XR_RUNTIME_JSON",
 						"value": "${workspaceFolder:monado}/build/openxr_monado-dev.json"
+					},
+					{
+						"name": "XRTP_SERVER_FD_EXCHANGE_PATH",
+						"value": "/tmp/xrtransport/fd_exchange.sock"
+					},
+					{
+						"name": "XRTP_CLIENT_FD_EXCHANGE_PATH",
+						"value": "/tmp/xrtransport/fd_exchange.sock"
 					}
 				],
 				"args": ["unix", "/tmp/xrtransport/transport.sock"],

@@ -34,7 +34,6 @@ SwapchainState& store_swapchain_state(
     XrSession parent_handle,
     std::vector<SharedImage>&& shared_images,
     std::vector<RuntimeImage>&& runtime_images,
-    std::vector<VkCommandBuffer>&& command_buffers,
     ImageType image_type,
     uint32_t width,
     uint32_t height
@@ -47,7 +46,6 @@ SwapchainState& store_swapchain_state(
             parent_handle,
             std::move(shared_images),
             std::move(runtime_images),
-            std::move(command_buffers),
             image_type,
             width,
             height

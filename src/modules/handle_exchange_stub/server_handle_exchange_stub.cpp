@@ -5,7 +5,7 @@
 
 bool on_init(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
     const XrExtensionProperties* extensions
 ) {
@@ -21,7 +21,7 @@ void get_required_extensions(
 
 void on_instance(
     xrtp_Transport transport,
-    const xrtransport::FunctionLoader* function_loader,
+    xrtransport::FunctionLoader* function_loader,
     XrInstance instance
 ) {
 
