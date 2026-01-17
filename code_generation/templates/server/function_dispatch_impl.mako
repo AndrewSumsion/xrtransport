@@ -6,6 +6,7 @@
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
+#include "xrtransport/time.h"
 
 #include "openxr/openxr.h"
 
@@ -18,6 +19,14 @@ using std::uint32_t;
 
 namespace xrtransport {
 
+static XrTime start_runtime_timer() {
+    return get_time();
+}
+
+static XrDuration end_runtime_timer(XrTime start_time) {
+    return get_time() - start_time;
+}
+
 <%utils:for_grouped_functions args="function">\
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
@@ -29,11 +38,14 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     ${utils.deserialize_member(param, binding_prefix='', ctx_var='d_ctx')}
     % endfor
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_${function.name}(${', '.join(param.name for param in function.params)});
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     % for binding in function.modifiable_bindings:
     ${utils.serialize_binding(binding, ctx_var='s_ctx')}
     % endfor

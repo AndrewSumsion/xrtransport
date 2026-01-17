@@ -12,7 +12,7 @@
 #include <openxr/openxr.h>
 #include <spdlog/spdlog.h>
 
-#include <string>
+#include <string_view>
 #include <stdexcept>
 
 namespace xrtransport {
@@ -23,9 +23,11 @@ static XrTime start_rpc_timer() {
     return get_time();
 }
 
-static void end_rpc_timer(XrTime start_time, std::string tag) {
+static void end_rpc_timer(XrTime start_time, XrDuration runtime_duration, std::string_view tag) {
     XrTime end_time = get_time();
-    float duration_ms = (float)(end_time - start_time) / 1000000;
+    XrDuration total_duration = end_time - start_time;
+    XrDuration rpc_duration = total_duration - runtime_duration;
+    float duration_ms = (float)(rpc_duration) / 1000000;
     if (duration_ms > 1) {
         spdlog::warn("RPC call {} took too long: {:.3f} ms", tag, duration_ms);
     }
@@ -54,11 +56,13 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     % for binding in function.modifiable_bindings:
     ${utils.deserialize_binding(binding, ctx_var='d_ctx')}
     % endfor
 
-    end_rpc_timer(start_time, "${function.name}");
+    end_rpc_timer(start_time, runtime_duration, "${function.name}");
 
     return result;
 }

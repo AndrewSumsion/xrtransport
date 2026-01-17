@@ -14,6 +14,7 @@
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
+#include "xrtransport/time.h"
 
 #include "openxr/openxr.h"
 
@@ -26,6 +27,14 @@ using std::uint32_t;
 
 namespace xrtransport {
 
+static XrTime start_runtime_timer() {
+    return get_time();
+}
+
+static XrDuration end_runtime_timer(XrTime start_time) {
+    return get_time() - start_time;
+}
+
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDigitalLensControlALMALENCE", function_loader.pfn_xrSetDigitalLensControlALMALENCE);
@@ -36,11 +45,14 @@ void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg
     XrDigitalLensControlALMALENCE* digitalLensControl{};
     deserialize_ptr(&digitalLensControl, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetDigitalLensControlALMALENCE(session, digitalLensControl);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -60,11 +72,14 @@ void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
     XrBodyTrackerBD* bodyTracker{};
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerBD(session, createInfo, bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -80,11 +95,14 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
     XrBodyTrackerBD bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerBD(bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -101,11 +119,14 @@ void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
     XrBodyJointLocationsBD* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateBodyJointsBD(bodyTracker, locateInfo, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -127,11 +148,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in)
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -151,11 +175,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_
     XrSpatialAnchorCreateCompletionBD* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -175,11 +202,14 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -199,11 +229,14 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -223,11 +256,14 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -247,11 +283,14 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn m
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -273,11 +312,14 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDownloadSharedSpatialAnchorAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -297,11 +339,14 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLoc
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDownloadSharedSpatialAnchorCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -321,11 +366,14 @@ void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) 
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrShareSpatialAnchorAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -345,11 +393,14 @@ void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_i
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrShareSpatialAnchorCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -371,11 +422,14 @@ void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCaptureSceneAsyncBD(provider, info, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -395,11 +449,14 @@ void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCaptureSceneCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -421,11 +478,14 @@ void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateAnchorSpaceBD(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -445,11 +505,14 @@ void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) 
     XrSenseDataProviderBD* provider{};
     deserialize_ptr(&provider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSenseDataProviderBD(session, createInfo, provider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(provider, 1, s_ctx);
     msg_out.flush();
 
@@ -469,11 +532,14 @@ void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in
     XrAnchorBD* anchor{};
     deserialize_ptr(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialEntityAnchorBD(provider, createInfo, anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
@@ -489,11 +555,14 @@ void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
     XrAnchorBD anchor{};
     deserialize(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyAnchorBD(anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -506,11 +575,14 @@ void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in)
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySenseDataProviderBD(provider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -523,11 +595,14 @@ void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in)
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySenseDataSnapshotBD(snapshot);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&snapshot);
@@ -548,11 +623,14 @@ void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLo
     XrSpatialEntityComponentTypeBD* componentTypes{};
     deserialize_ptr(&componentTypes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD(snapshot, entityId, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(componentTypeCountOutput, 1, s_ctx);
     serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
     msg_out.flush();
@@ -573,11 +651,14 @@ void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
     XrUuidEXT* uuid{};
     deserialize_ptr(&uuid, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetAnchorUuidBD(anchor, uuid);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
@@ -596,11 +677,14 @@ void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
     XrQueriedSenseDataBD* queriedSenseData{};
     deserialize_ptr(&queriedSenseData, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetQueriedSenseDataBD(snapshot, getInfo, queriedSenseData);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(getInfo, 1, s_ctx);
     serialize_ptr(queriedSenseData, 1, s_ctx);
     msg_out.flush();
@@ -619,11 +703,14 @@ void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in
     XrSenseDataProviderStateBD* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSenseDataProviderStateBD(provider, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -642,11 +729,14 @@ void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn ms
     XrSpatialEntityComponentDataBaseHeaderBD* componentData{};
     deserialize_xr(&componentData, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpatialEntityComponentDataBD(snapshot, getInfo, componentData);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(componentData, s_ctx);
     msg_out.flush();
 
@@ -666,11 +756,14 @@ void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
     XrUuidEXT* uuid{};
     deserialize_ptr(&uuid, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpatialEntityUuidBD(snapshot, entityId, uuid);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
@@ -690,11 +783,14 @@ void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySenseDataAsyncBD(provider, queryInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -714,11 +810,14 @@ void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
     XrSenseDataQueryCompletionBD* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySenseDataCompleteBD(provider, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -738,11 +837,14 @@ void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStartSenseDataProviderAsyncBD(provider, startInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -762,11 +864,14 @@ void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn m
     XrFutureCompletionEXT* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStartSenseDataProviderCompleteBD(session, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -782,11 +887,14 @@ void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStopSenseDataProviderBD(provider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&provider);
@@ -807,11 +915,14 @@ void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
     XrBool32 isActive{};
     deserialize(&isActive, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetInputDeviceActiveEXT(session, interactionProfile, topLevelPath, isActive);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -835,11 +946,14 @@ void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) 
     XrPosef pose{};
     deserialize(&pose, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetInputDeviceLocationEXT(session, topLevelPath, inputSourcePath, space, pose);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -862,11 +976,14 @@ void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in)
     XrBool32 state{};
     deserialize(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateBoolEXT(session, topLevelPath, inputSourcePath, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -888,11 +1005,14 @@ void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in
     float state{};
     deserialize(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateFloatEXT(session, topLevelPath, inputSourcePath, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -914,11 +1034,14 @@ void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg
     XrVector2f state{};
     deserialize(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetInputDeviceStateVector2fEXT(session, topLevelPath, inputSourcePath, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -940,11 +1063,14 @@ void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_i
     XrDebugUtilsMessengerEXT* messenger{};
     deserialize_ptr(&messenger, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateDebugUtilsMessengerEXT(instance, createInfo, messenger);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(createInfo->userData, 1, s_ctx);
     serialize_ptr(messenger, 1, s_ctx);
     msg_out.flush();
@@ -961,11 +1087,14 @@ void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_
     XrDebugUtilsMessengerEXT messenger{};
     deserialize(&messenger, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyDebugUtilsMessengerEXT(messenger);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&messenger);
@@ -980,11 +1109,14 @@ void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLock
     XrDebugUtilsLabelEXT* labelInfo{};
     deserialize_ptr(&labelInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT(session, labelInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -998,11 +1130,14 @@ void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn
     XrSession session{};
     deserialize(&session, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT(session);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1017,11 +1152,14 @@ void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn ms
     XrDebugUtilsLabelEXT* labelInfo{};
     deserialize_ptr(&labelInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT(session, labelInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1037,11 +1175,14 @@ void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in)
     XrDebugUtilsObjectNameInfoEXT* nameInfo{};
     deserialize_ptr(&nameInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetDebugUtilsObjectNameEXT(instance, nameInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1061,11 +1202,14 @@ void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in)
     XrDebugUtilsMessengerCallbackDataEXT* callbackData{};
     deserialize_ptr(&callbackData, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, callbackData);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(callbackData->objects, callbackData->objectCount, s_ctx);
     serialize_ptr(callbackData->sessionLabels, callbackData->sessionLabelCount, s_ctx);
     msg_out.flush();
@@ -1087,11 +1231,14 @@ void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
     XrFutureCancelInfoEXT* cancelInfo{};
     deserialize_ptr(&cancelInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCancelFutureEXT(instance, cancelInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -1109,11 +1256,14 @@ void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
     XrFuturePollResultEXT* pollResult{};
     deserialize_ptr(&pollResult, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPollFutureEXT(instance, pollInfo, pollResult);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(pollResult, 1, s_ctx);
     msg_out.flush();
 
@@ -1135,11 +1285,14 @@ void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
     XrHandTrackerEXT* handTracker{};
     deserialize_ptr(&handTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateHandTrackerEXT(session, createInfo, handTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(handTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -1155,11 +1308,14 @@ void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyHandTrackerEXT(handTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&handTracker);
@@ -1176,11 +1332,14 @@ void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
     XrHandJointLocationsEXT* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateHandJointsEXT(handTracker, locateInfo, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -1202,11 +1361,14 @@ void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn
     XrPerfSettingsLevelEXT level{};
     deserialize(&level, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT(session, domain, level);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1225,11 +1387,14 @@ void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
     XrPlaneDetectorBeginInfoEXT* beginInfo{};
     deserialize_ptr(&beginInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrBeginPlaneDetectionEXT(planeDetector, beginInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1247,11 +1412,14 @@ void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
     XrPlaneDetectorEXT* planeDetector{};
     deserialize_ptr(&planeDetector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreatePlaneDetectorEXT(session, createInfo, planeDetector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(planeDetector, 1, s_ctx);
     msg_out.flush();
 
@@ -1267,11 +1435,14 @@ void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyPlaneDetectorEXT(planeDetector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&planeDetector);
@@ -1286,11 +1457,14 @@ void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) 
     XrPlaneDetectionStateEXT* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetPlaneDetectionStateEXT(planeDetector, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -1309,11 +1483,14 @@ void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
     XrPlaneDetectorLocationsEXT* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetPlaneDetectionsEXT(planeDetector, info, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -1335,11 +1512,14 @@ void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
     XrPlaneDetectorPolygonBufferEXT* polygonBuffer{};
     deserialize_ptr(&polygonBuffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetPlanePolygonBufferEXT(planeDetector, planeId, polygonBufferIndex, polygonBuffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(polygonBuffer, 1, s_ctx);
     msg_out.flush();
 
@@ -1366,11 +1546,14 @@ void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_
     float* tempSlope{};
     deserialize_ptr(&tempSlope, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrThermalGetTemperatureTrendEXT(session, domain, notificationLevel, tempHeadroom, tempSlope);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(notificationLevel, 1, s_ctx);
     serialize_ptr(tempHeadroom, 1, s_ctx);
     serialize_ptr(tempSlope, 1, s_ctx);
@@ -1396,11 +1579,14 @@ void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
     XrBodyTrackerFB* bodyTracker{};
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerFB(session, createInfo, bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -1416,11 +1602,14 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
     XrBodyTrackerFB bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerFB(bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -1435,11 +1624,14 @@ void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
     XrBodySkeletonFB* skeleton{};
     deserialize_ptr(&skeleton, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetBodySkeletonFB(bodyTracker, skeleton);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(skeleton, 1, s_ctx);
     msg_out.flush();
 
@@ -1458,11 +1650,14 @@ void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
     XrBodyJointLocationsFB* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateBodyJointsFB(bodyTracker, locateInfo, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -1486,11 +1681,14 @@ void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
     XrColorSpaceFB* colorSpaces{};
     deserialize_ptr(&colorSpaces, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateColorSpacesFB(session, colorSpaceCapacityInput, colorSpaceCountOutput, colorSpaces);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(colorSpaceCountOutput, 1, s_ctx);
     serialize_ptr(colorSpaces, colorSpaceCapacityInput, s_ctx);
     msg_out.flush();
@@ -1510,11 +1708,14 @@ void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
     XrColorSpaceFB colorSpace{};
     deserialize(&colorSpace, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetColorSpaceFB(session, colorSpace);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1536,11 +1737,14 @@ void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg
     float* displayRefreshRates{};
     deserialize_ptr(&displayRefreshRates, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateDisplayRefreshRatesFB(session, displayRefreshRateCapacityInput, displayRefreshRateCountOutput, displayRefreshRates);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(displayRefreshRateCountOutput, 1, s_ctx);
     serialize_ptr(displayRefreshRates, displayRefreshRateCapacityInput, s_ctx);
     msg_out.flush();
@@ -1560,11 +1764,14 @@ void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
     float* displayRefreshRate{};
     deserialize_ptr(&displayRefreshRate, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetDisplayRefreshRateFB(session, displayRefreshRate);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(displayRefreshRate, 1, s_ctx);
     msg_out.flush();
 
@@ -1581,11 +1788,14 @@ void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in
     float displayRefreshRate{};
     deserialize(&displayRefreshRate, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestDisplayRefreshRateFB(session, displayRefreshRate);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -1605,11 +1815,14 @@ void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
     XrEyeTrackerFB* eyeTracker{};
     deserialize_ptr(&eyeTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateEyeTrackerFB(session, createInfo, eyeTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(eyeTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -1625,11 +1838,14 @@ void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
     XrEyeTrackerFB eyeTracker{};
     deserialize(&eyeTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyEyeTrackerFB(eyeTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&eyeTracker);
@@ -1646,11 +1862,14 @@ void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
     XrEyeGazesFB* eyeGazes{};
     deserialize_ptr(&eyeGazes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetEyeGazesFB(eyeTracker, gazeInfo, eyeGazes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(eyeGazes, 1, s_ctx);
     msg_out.flush();
 
@@ -1672,11 +1891,14 @@ void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
     XrFaceTrackerFB* faceTracker{};
     deserialize_ptr(&faceTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateFaceTrackerFB(session, createInfo, faceTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(faceTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -1692,11 +1914,14 @@ void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
     XrFaceTrackerFB faceTracker{};
     deserialize(&faceTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyFaceTrackerFB(faceTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1713,11 +1938,14 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in)
     XrFaceExpressionWeightsFB* expressionWeights{};
     deserialize_ptr(&expressionWeights, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetFaceExpressionWeightsFB(faceTracker, expressionInfo, expressionWeights);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(expressionWeights, 1, s_ctx);
     msg_out.flush();
 
@@ -1739,11 +1967,14 @@ void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
     XrFaceTracker2FB* faceTracker{};
     deserialize_ptr(&faceTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateFaceTracker2FB(session, createInfo, faceTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(createInfo->requestedDataSources, createInfo->requestedDataSourceCount, s_ctx);
     serialize_ptr(faceTracker, 1, s_ctx);
     msg_out.flush();
@@ -1760,11 +1991,14 @@ void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
     XrFaceTracker2FB faceTracker{};
     deserialize(&faceTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyFaceTracker2FB(faceTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&faceTracker);
@@ -1781,11 +2015,14 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in
     XrFaceExpressionWeights2FB* expressionWeights{};
     deserialize_ptr(&expressionWeights, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetFaceExpressionWeights2FB(faceTracker, expressionInfo, expressionWeights);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(expressionWeights, 1, s_ctx);
     msg_out.flush();
 
@@ -1807,11 +2044,14 @@ void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
     XrFoveationProfileFB* profile{};
     deserialize_ptr(&profile, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateFoveationProfileFB(session, createInfo, profile);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(createInfo->next, s_ctx);
     serialize_ptr(profile, 1, s_ctx);
     msg_out.flush();
@@ -1828,11 +2068,14 @@ void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) 
     XrFoveationProfileFB profile{};
     deserialize(&profile, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyFoveationProfileFB(profile);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&profile);
@@ -1849,11 +2092,14 @@ void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
     XrHandTrackingMeshFB* mesh{};
     deserialize_ptr(&mesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetHandMeshFB(handTracker, mesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(mesh, 1, s_ctx);
     msg_out.flush();
 
@@ -1874,11 +2120,14 @@ void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
     XrDevicePcmSampleRateGetInfoFB* deviceSampleRate{};
     deserialize_ptr(&deviceSampleRate, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetDeviceSampleRateFB(session, hapticActionInfo, deviceSampleRate);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(deviceSampleRate, 1, s_ctx);
     msg_out.flush();
 
@@ -1900,11 +2149,14 @@ void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
     XrSpace* keyboardSpace{};
     deserialize_ptr(&keyboardSpace, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateKeyboardSpaceFB(session, createInfo, keyboardSpace);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(createInfo->next, s_ctx);
     serialize_ptr(keyboardSpace, 1, s_ctx);
     msg_out.flush();
@@ -1925,11 +2177,14 @@ void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_i
     XrKeyboardTrackingDescriptionFB* keyboard{};
     deserialize_ptr(&keyboard, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySystemTrackedKeyboardFB(session, queryInfo, keyboard);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(queryInfo->next, s_ctx);
     serialize_ptr(keyboard, 1, s_ctx);
     msg_out.flush();
@@ -1952,11 +2207,14 @@ void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
     XrGeometryInstanceFB* outGeometryInstance{};
     deserialize_ptr(&outGeometryInstance, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateGeometryInstanceFB(session, createInfo, outGeometryInstance);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outGeometryInstance, 1, s_ctx);
     msg_out.flush();
 
@@ -1976,11 +2234,14 @@ void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
     XrPassthroughFB* outPassthrough{};
     deserialize_ptr(&outPassthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreatePassthroughFB(session, createInfo, outPassthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outPassthrough, 1, s_ctx);
     msg_out.flush();
 
@@ -2000,11 +2261,14 @@ void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
     XrPassthroughLayerFB* outLayer{};
     deserialize_ptr(&outLayer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreatePassthroughLayerFB(session, createInfo, outLayer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outLayer, 1, s_ctx);
     msg_out.flush();
 
@@ -2020,11 +2284,14 @@ void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) 
     XrGeometryInstanceFB instance{};
     deserialize(&instance, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyGeometryInstanceFB(instance);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -2037,11 +2304,14 @@ void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyPassthroughFB(passthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -2054,11 +2324,14 @@ void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) 
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyPassthroughLayerFB(layer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2073,11 +2346,14 @@ void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg
     XrGeometryInstanceTransformFB* transformation{};
     deserialize_ptr(&transformation, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGeometryInstanceSetTransformFB(instance, transformation);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -2091,11 +2367,14 @@ void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughLayerPauseFB(layer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2108,11 +2387,14 @@ void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughLayerResumeFB(layer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2127,11 +2409,14 @@ void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in)
     XrPassthroughStyleFB* style{};
     deserialize_ptr(&style, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughLayerSetStyleFB(layer, style);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2145,11 +2430,14 @@ void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughPauseFB(passthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -2162,11 +2450,14 @@ void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughStartFB(passthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -2183,11 +2474,14 @@ void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(Mess
     XrPassthroughKeyboardHandsIntensityFB* intensity{};
     deserialize_ptr(&intensity, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB(layer, intensity);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&layer);
@@ -2209,11 +2503,14 @@ void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in
     XrRenderModelPathInfoFB* paths{};
     deserialize_ptr(&paths, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateRenderModelPathsFB(session, pathCapacityInput, pathCountOutput, paths);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(pathCountOutput, 1, s_ctx);
     serialize_ptr(paths, pathCapacityInput, s_ctx);
     msg_out.flush();
@@ -2235,11 +2532,14 @@ void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in)
     XrRenderModelPropertiesFB* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetRenderModelPropertiesFB(session, path, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
@@ -2259,11 +2559,14 @@ void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
     XrRenderModelBufferFB* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLoadRenderModelFB(session, info, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(info->next, s_ctx);
     serialize_ptr(buffer, 1, s_ctx);
     msg_out.flush();
@@ -2286,11 +2589,14 @@ void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
     XrBoundary2DFB* boundary2DOutput{};
     deserialize_ptr(&boundary2DOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceBoundary2DFB(session, space, boundary2DOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(boundary2DOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2310,11 +2616,14 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
     XrRect2Df* boundingBox2DOutput{};
     deserialize_ptr(&boundingBox2DOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox2DFB(session, space, boundingBox2DOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(boundingBox2DOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2334,11 +2643,14 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
     XrRect3DfFB* boundingBox3DOutput{};
     deserialize_ptr(&boundingBox3DOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceBoundingBox3DFB(session, space, boundingBox3DOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(boundingBox3DOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2358,11 +2670,14 @@ void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
     XrRoomLayoutFB* roomLayoutOutput{};
     deserialize_ptr(&roomLayoutOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceRoomLayoutFB(session, space, roomLayoutOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(roomLayoutOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2382,11 +2697,14 @@ void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
     XrSemanticLabelsFB* semanticLabelsOutput{};
     deserialize_ptr(&semanticLabelsOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceSemanticLabelsFB(session, space, semanticLabelsOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(semanticLabelsOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2408,11 +2726,14 @@ void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestSceneCaptureFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2434,11 +2755,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2460,11 +2784,14 @@ void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockI
     XrSpaceComponentTypeFB* componentTypes{};
     deserialize_ptr(&componentTypes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB(space, componentTypeCapacityInput, componentTypeCountOutput, componentTypes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(componentTypeCountOutput, 1, s_ctx);
     serialize_ptr(componentTypes, componentTypeCapacityInput, s_ctx);
     msg_out.flush();
@@ -2486,11 +2813,14 @@ void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) 
     XrSpaceComponentStatusFB* status{};
     deserialize_ptr(&status, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceComponentStatusFB(space, componentType, status);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(status, 1, s_ctx);
     msg_out.flush();
 
@@ -2508,11 +2838,14 @@ void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
     XrUuidEXT* uuid{};
     deserialize_ptr(&uuid, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceUuidFB(space, uuid);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(uuid, 1, s_ctx);
     msg_out.flush();
 
@@ -2531,11 +2864,14 @@ void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) 
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetSpaceComponentStatusFB(space, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2557,11 +2893,14 @@ void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
     XrSpaceContainerFB* spaceContainerOutput{};
     deserialize_ptr(&spaceContainerOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceContainerFB(session, space, spaceContainerOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spaceContainerOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -2583,11 +2922,14 @@ void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySpacesFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2607,11 +2949,14 @@ void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in
     XrSpaceQueryResultsFB* results{};
     deserialize_ptr(&results, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRetrieveSpaceQueryResultsFB(session, requestId, results);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(results, 1, s_ctx);
     msg_out.flush();
 
@@ -2633,11 +2978,14 @@ void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrShareSpacesFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(info->spaces, info->spaceCount, s_ctx);
     serialize_ptr(info->users, info->userCount, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
@@ -2661,11 +3009,14 @@ void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEraseSpaceFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2685,11 +3036,14 @@ void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSaveSpaceFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -2711,11 +3065,14 @@ void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSaveSpaceListFB(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(info->spaces, info->spaceCount, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
@@ -2738,11 +3095,14 @@ void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
     XrSpaceUserFB* user{};
     deserialize_ptr(&user, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpaceUserFB(session, info, user);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(user, 1, s_ctx);
     msg_out.flush();
 
@@ -2758,11 +3118,14 @@ void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
     XrSpaceUserFB user{};
     deserialize(&user, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpaceUserFB(user);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&user);
@@ -2777,11 +3140,14 @@ void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
     XrSpaceUserIdFB* userId{};
     deserialize_ptr(&userId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceUserIdFB(user, userId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(userId, 1, s_ctx);
     msg_out.flush();
 
@@ -2800,11 +3166,14 @@ void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
     XrSwapchainStateBaseHeaderFB* state{};
     deserialize_xr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSwapchainStateFB(swapchain, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(state, s_ctx);
     msg_out.flush();
 
@@ -2821,11 +3190,14 @@ void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
     XrSwapchainStateBaseHeaderFB* state{};
     deserialize_xr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUpdateSwapchainFB(swapchain, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -2845,11 +3217,14 @@ void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
     XrTriangleMeshFB* outTriangleMesh{};
     deserialize_ptr(&outTriangleMesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateTriangleMeshFB(session, createInfo, outTriangleMesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outTriangleMesh, 1, s_ctx);
     msg_out.flush();
 
@@ -2865,11 +3240,14 @@ void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyTriangleMeshFB(mesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2882,11 +3260,14 @@ void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) 
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshBeginUpdateFB(mesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2901,11 +3282,14 @@ void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLoc
     uint32_t* outVertexCount{};
     deserialize_ptr(&outVertexCount, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB(mesh, outVertexCount);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outVertexCount, 1, s_ctx);
     msg_out.flush();
 
@@ -2924,11 +3308,14 @@ void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
     uint32_t triangleCount{};
     deserialize(&triangleCount, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshEndUpdateFB(mesh, vertexCount, triangleCount);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2943,11 +3330,14 @@ void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockI
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB(mesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&mesh);
@@ -2962,11 +3352,14 @@ void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_i
     uint32_t** outIndexBuffer{};
     #error "auto-generator doesn't support double pointers (outIndexBuffer)"None
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshGetIndexBufferFB(mesh, outIndexBuffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outIndexBuffer, 1, s_ctx);
     msg_out.flush();
 
@@ -2983,11 +3376,14 @@ void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_
     XrVector3f** outVertexBuffer{};
     #error "auto-generator doesn't support double pointers (outVertexBuffer)"None
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTriangleMeshGetVertexBufferFB(mesh, outVertexBuffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(outVertexBuffer, 1, s_ctx);
     msg_out.flush();
 
@@ -3010,11 +3406,14 @@ void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_
     XrViveTrackerPathsHTCX* paths{};
     deserialize_ptr(&paths, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateViveTrackerPathsHTCX(instance, pathCapacityInput, pathCountOutput, paths);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(pathCountOutput, 1, s_ctx);
     serialize_ptr(paths, pathCapacityInput, s_ctx);
     msg_out.flush();
@@ -3038,11 +3437,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
     XrSpace* anchor{};
     deserialize_ptr(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorHTC(session, createInfo, anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
@@ -3060,11 +3462,14 @@ void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
     XrSpatialAnchorNameHTC* name{};
     deserialize_ptr(&name, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpatialAnchorNameHTC(anchor, name);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(name, 1, s_ctx);
     msg_out.flush();
 
@@ -3085,11 +3490,14 @@ void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
     XrBodyTrackerHTC* bodyTracker{};
     deserialize_ptr(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateBodyTrackerHTC(session, createInfo, bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bodyTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -3105,11 +3513,14 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
     XrBodyTrackerHTC bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyBodyTrackerHTC(bodyTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&bodyTracker);
@@ -3128,11 +3539,14 @@ void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
     XrBodySkeletonHTC* skeleton{};
     deserialize_ptr(&skeleton, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetBodySkeletonHTC(bodyTracker, baseSpace, skeletonGenerationId, skeleton);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(skeleton, 1, s_ctx);
     msg_out.flush();
 
@@ -3153,11 +3567,14 @@ void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
     XrBodyJointLocationsHTC* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateBodyJointsHTC(bodyTracker, locateInfo, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -3179,11 +3596,14 @@ void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
     XrFacialTrackerHTC* facialTracker{};
     deserialize_ptr(&facialTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateFacialTrackerHTC(session, createInfo, facialTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(facialTracker, 1, s_ctx);
     msg_out.flush();
 
@@ -3199,11 +3619,14 @@ void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
     XrFacialTrackerHTC facialTracker{};
     deserialize(&facialTracker, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyFacialTrackerHTC(facialTracker);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&facialTracker);
@@ -3218,11 +3641,14 @@ void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
     XrFacialExpressionsHTC* facialExpressions{};
     deserialize_ptr(&facialExpressions, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetFacialExpressionsHTC(facialTracker, facialExpressions);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(facialExpressions, 1, s_ctx);
     msg_out.flush();
 
@@ -3241,11 +3667,14 @@ void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
     XrFoveationApplyInfoHTC* applyInfo{};
     deserialize_ptr(&applyInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrApplyFoveationHTC(session, applyInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(applyInfo->subImages, applyInfo->subImageCount, s_ctx);
     msg_out.flush();
 
@@ -3266,11 +3695,14 @@ void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
     XrPassthroughHTC* passthrough{};
     deserialize_ptr(&passthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreatePassthroughHTC(session, createInfo, passthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(passthrough, 1, s_ctx);
     msg_out.flush();
 
@@ -3286,11 +3718,14 @@ void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
     XrPassthroughHTC passthrough{};
     deserialize(&passthrough, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyPassthroughHTC(passthrough);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&passthrough);
@@ -3309,11 +3744,14 @@ void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn ms
     XrGraphicsRequirementsD3D11KHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3335,11 +3773,14 @@ void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn ms
     XrGraphicsRequirementsD3D12KHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3363,11 +3804,14 @@ void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn m
     jobject* surface{};
     deserialize_ptr(&surface, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR(session, info, swapchain, surface);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(swapchain, 1, s_ctx);
     serialize_ptr(surface, 1, s_ctx);
     msg_out.flush();
@@ -3391,11 +3835,14 @@ void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg
     uint32_t threadId{};
     deserialize(&threadId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetAndroidApplicationThreadKHR(session, threadType, threadId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -3416,11 +3863,14 @@ void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_i
     timespec* timespecTime{};
     deserialize_ptr(&timespecTime, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrConvertTimeToTimespecTimeKHR(instance, time, timespecTime);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(timespecTime, 1, s_ctx);
     msg_out.flush();
 
@@ -3440,11 +3890,14 @@ void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_i
     XrTime* time{};
     deserialize_ptr(&time, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrConvertTimespecTimeToTimeKHR(instance, timespecTime, time);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(timespecTime, 1, s_ctx);
     serialize_ptr(time, 1, s_ctx);
     msg_out.flush();
@@ -3467,11 +3920,14 @@ void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) 
     char buffer[XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR]{};
     deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStructureTypeToString2KHR(instance, value, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE_EXTENDED_KHR, s_ctx);
     msg_out.flush();
 
@@ -3489,11 +3945,14 @@ void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
     XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo{};
     deserialize_xr(&loaderInitInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrInitializeLoaderKHR(loaderInitInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup_xr(loaderInitInfo);
@@ -3512,11 +3971,14 @@ void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn ms
     XrGraphicsRequirementsMetalKHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMetalGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3538,11 +4000,14 @@ void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn m
     XrGraphicsRequirementsOpenGLKHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3564,11 +4029,14 @@ void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn
     XrGraphicsRequirementsOpenGLESKHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3594,11 +4062,14 @@ void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
     XrVisibilityMaskKHR* visibilityMask{};
     deserialize_ptr(&visibilityMask, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVisibilityMaskKHR(session, viewConfigurationType, viewIndex, visibilityMaskType, visibilityMask);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(visibilityMask, 1, s_ctx);
     msg_out.flush();
 
@@ -3626,11 +4097,14 @@ void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_i
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVulkanDeviceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -3655,11 +4129,14 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in)
     VkPhysicalDevice* vkPhysicalDevice{};
     deserialize_ptr(&vkPhysicalDevice, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDeviceKHR(instance, systemId, vkInstance, vkPhysicalDevice);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(vkPhysicalDevice, 1, s_ctx);
     msg_out.flush();
 
@@ -3680,11 +4157,14 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn m
     XrGraphicsRequirementsVulkanKHR* graphicsRequirements{};
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR(instance, systemId, graphicsRequirements);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(graphicsRequirements, 1, s_ctx);
     msg_out.flush();
 
@@ -3708,11 +4188,14 @@ void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVulkanInstanceExtensionsKHR(instance, systemId, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -3739,11 +4222,14 @@ void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
     VkResult* vulkanResult{};
     deserialize_ptr(&vulkanResult, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateVulkanDeviceKHR(instance, createInfo, vulkanDevice, vulkanResult);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(vulkanDevice, 1, s_ctx);
     serialize_ptr(vulkanResult, 1, s_ctx);
     msg_out.flush();
@@ -3767,11 +4253,14 @@ void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
     VkResult* vulkanResult{};
     deserialize_ptr(&vulkanResult, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateVulkanInstanceKHR(instance, createInfo, vulkanInstance, vulkanResult);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(vulkanInstance, 1, s_ctx);
     serialize_ptr(vulkanResult, 1, s_ctx);
     msg_out.flush();
@@ -3793,11 +4282,14 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in
     VkPhysicalDevice* vulkanPhysicalDevice{};
     deserialize_ptr(&vulkanPhysicalDevice, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVulkanGraphicsDevice2KHR(instance, getInfo, vulkanPhysicalDevice);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(vulkanPhysicalDevice, 1, s_ctx);
     msg_out.flush();
 
@@ -3819,11 +4311,14 @@ void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageL
     LARGE_INTEGER* performanceCounter{};
     deserialize_ptr(&performanceCounter, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR(instance, time, performanceCounter);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(performanceCounter, 1, s_ctx);
     msg_out.flush();
 
@@ -3843,11 +4338,14 @@ void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageL
     XrTime* time{};
     deserialize_ptr(&time, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR(instance, performanceCounter, time);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(time, 1, s_ctx);
     msg_out.flush();
 
@@ -3869,11 +4367,14 @@ void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn m
     XrAsyncRequestIdFB* advertisementRequestId{};
     deserialize_ptr(&advertisementRequestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStartColocationAdvertisementMETA(session, info, advertisementRequestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(info->buffer, info->bufferSize, s_ctx);
     serialize_ptr(advertisementRequestId, 1, s_ctx);
     msg_out.flush();
@@ -3894,11 +4395,14 @@ void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_i
     XrAsyncRequestIdFB* discoveryRequestId{};
     deserialize_ptr(&discoveryRequestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStartColocationDiscoveryMETA(session, info, discoveryRequestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(discoveryRequestId, 1, s_ctx);
     msg_out.flush();
 
@@ -3918,11 +4422,14 @@ void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn ms
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStopColocationAdvertisementMETA(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -3942,11 +4449,14 @@ void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStopColocationDiscoveryMETA(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
 
@@ -3968,11 +4478,14 @@ void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn m
     XrEnvironmentDepthImageMETA* environmentDepthImage{};
     deserialize_ptr(&environmentDepthImage, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrAcquireEnvironmentDepthImageMETA(environmentDepthProvider, acquireInfo, environmentDepthImage);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(environmentDepthImage, 1, s_ctx);
     msg_out.flush();
 
@@ -3992,11 +4505,14 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn
     XrEnvironmentDepthProviderMETA* environmentDepthProvider{};
     deserialize_ptr(&environmentDepthProvider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthProviderMETA(session, createInfo, environmentDepthProvider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(environmentDepthProvider, 1, s_ctx);
     msg_out.flush();
 
@@ -4016,11 +4532,14 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockI
     XrEnvironmentDepthSwapchainMETA* swapchain{};
     deserialize_ptr(&swapchain, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA(environmentDepthProvider, createInfo, swapchain);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(swapchain, 1, s_ctx);
     msg_out.flush();
 
@@ -4036,11 +4555,14 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockI
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA(environmentDepthProvider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -4053,11 +4575,14 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLock
     XrEnvironmentDepthSwapchainMETA swapchain{};
     deserialize(&swapchain, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA(swapchain);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -4076,11 +4601,14 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(Mes
     XrSwapchainImageBaseHeader* images{};
     deserialize_xr_array(&images, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA(swapchain, imageCapacityInput, imageCountOutput, images);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(imageCountOutput, 1, s_ctx);
     serialize_xr_array(images, imageCapacityInput, s_ctx);
     msg_out.flush();
@@ -4100,11 +4628,14 @@ void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLoc
     XrEnvironmentDepthSwapchainStateMETA* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA(swapchain, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -4121,11 +4652,14 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn
     XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo{};
     deserialize_ptr(&setInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA(environmentDepthProvider, setInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -4139,11 +4673,14 @@ void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn 
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStartEnvironmentDepthProviderMETA(environmentDepthProvider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -4156,11 +4693,14 @@ void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn m
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStopEnvironmentDepthProviderMETA(environmentDepthProvider);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&environmentDepthProvider);
@@ -4177,11 +4717,14 @@ void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn ms
     XrFoveationEyeTrackedStateMETA* foveationState{};
     deserialize_ptr(&foveationState, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetFoveationEyeTrackedStateMETA(session, foveationState);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(foveationState, 1, s_ctx);
     msg_out.flush();
 
@@ -4202,11 +4745,14 @@ void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_
     XrPassthroughColorLutMETA* colorLut{};
     deserialize_ptr(&colorLut, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreatePassthroughColorLutMETA(passthrough, createInfo, colorLut);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(colorLut, 1, s_ctx);
     msg_out.flush();
 
@@ -4222,11 +4768,14 @@ void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg
     XrPassthroughColorLutMETA colorLut{};
     deserialize(&colorLut, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyPassthroughColorLutMETA(colorLut);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&colorLut);
@@ -4241,11 +4790,14 @@ void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_
     XrPassthroughColorLutUpdateInfoMETA* updateInfo{};
     deserialize_ptr(&updateInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUpdatePassthroughColorLutMETA(colorLut, updateInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&colorLut);
@@ -4263,11 +4815,14 @@ void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_
     XrPassthroughPreferencesMETA* preferences{};
     deserialize_ptr(&preferences, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetPassthroughPreferencesMETA(session, preferences);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(preferences, 1, s_ctx);
     msg_out.flush();
 
@@ -4290,11 +4845,14 @@ void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(Mess
     XrPath* counterPaths{};
     deserialize_ptr(&counterPaths, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA(instance, counterPathCapacityInput, counterPathCountOutput, counterPaths);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(counterPathCountOutput, 1, s_ctx);
     serialize_ptr(counterPaths, counterPathCapacityInput, s_ctx);
     msg_out.flush();
@@ -4314,11 +4872,14 @@ void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg
     XrPerformanceMetricsStateMETA* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetPerformanceMetricsStateMETA(session, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -4337,11 +4898,14 @@ void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn
     XrPerformanceMetricsCounterMETA* counter{};
     deserialize_ptr(&counter, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQueryPerformanceMetricsCounterMETA(session, counterPath, counter);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(counter, 1, s_ctx);
     msg_out.flush();
 
@@ -4359,11 +4923,14 @@ void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg
     XrPerformanceMetricsStateMETA* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetPerformanceMetricsStateMETA(session, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4383,11 +4950,14 @@ void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn 
     XrRecommendedLayerResolutionMETA* resolution{};
     deserialize_ptr(&resolution, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetRecommendedLayerResolutionMETA(session, info, resolution);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(resolution, 1, s_ctx);
     msg_out.flush();
 
@@ -4407,11 +4977,14 @@ void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA
     XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo{};
     deserialize_ptr(&pauseInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA(session, pauseInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4427,11 +5000,14 @@ void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMET
     XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo{};
     deserialize_ptr(&resumeInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA(session, resumeInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4451,11 +5027,14 @@ void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
     XrSpaceTriangleMeshMETA* triangleMeshOutput{};
     deserialize_ptr(&triangleMeshOutput, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpaceTriangleMeshMETA(space, getInfo, triangleMeshOutput);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(triangleMeshOutput, 1, s_ctx);
     msg_out.flush();
 
@@ -4477,11 +5056,14 @@ void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
     XrAsyncRequestIdFB* requestId{};
     deserialize_ptr(&requestId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrShareSpacesMETA(session, info, requestId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(info->spaces, info->spaceCount, s_ctx);
     serialize_ptr(requestId, 1, s_ctx);
     msg_out.flush();
@@ -4502,11 +5084,14 @@ void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLock
     XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo{};
     deserialize_ptr(&changeInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA(keyboard, changeInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4524,11 +5109,14 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) 
     XrVirtualKeyboardMETA* keyboard{};
     deserialize_ptr(&keyboard, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardMETA(session, createInfo, keyboard);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(keyboard, 1, s_ctx);
     msg_out.flush();
 
@@ -4550,11 +5138,14 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg
     XrSpace* keyboardSpace{};
     deserialize_ptr(&keyboardSpace, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA(session, keyboard, createInfo, keyboardSpace);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(keyboardSpace, 1, s_ctx);
     msg_out.flush();
 
@@ -4571,11 +5162,14 @@ void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in)
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyVirtualKeyboardMETA(keyboard);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4594,11 +5188,14 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockI
     uint64_t* textureIds{};
     deserialize_ptr(&textureIds, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA(keyboard, textureIdCapacityInput, textureIdCountOutput, textureIds);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(textureIdCountOutput, 1, s_ctx);
     serialize_ptr(textureIds, textureIdCapacityInput, s_ctx);
     msg_out.flush();
@@ -4618,11 +5215,14 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(Messa
     XrVirtualKeyboardModelAnimationStatesMETA* animationStates{};
     deserialize_ptr(&animationStates, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA(keyboard, animationStates);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(animationStates, 1, s_ctx);
     msg_out.flush();
 
@@ -4639,11 +5239,14 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in
     float* scale{};
     deserialize_ptr(&scale, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardScaleMETA(keyboard, scale);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(scale, 1, s_ctx);
     msg_out.flush();
 
@@ -4662,11 +5265,14 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn 
     XrVirtualKeyboardTextureDataMETA* textureData{};
     deserialize_ptr(&textureData, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA(keyboard, textureId, textureData);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(textureData, 1, s_ctx);
     msg_out.flush();
 
@@ -4686,11 +5292,14 @@ void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_i
     XrPosef* interactorRootPose{};
     deserialize_ptr(&interactorRootPose, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSendVirtualKeyboardInputMETA(keyboard, info, interactorRootPose);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(interactorRootPose, 1, s_ctx);
     msg_out.flush();
 
@@ -4708,11 +5317,14 @@ void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLoc
     XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility{};
     deserialize_ptr(&modelVisibility, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA(keyboard, modelVisibility);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4728,11 +5340,14 @@ void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn
     XrVirtualKeyboardLocationInfoMETA* locationInfo{};
     deserialize_ptr(&locationInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA(keyboard, locationInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&keyboard);
@@ -4752,11 +5367,14 @@ void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockI
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -4778,11 +5396,14 @@ void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg
     XrFacialExpressionClientML* facialExpressionClient{};
     deserialize_ptr(&facialExpressionClient, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateFacialExpressionClientML(session, createInfo, facialExpressionClient);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(facialExpressionClient, 1, s_ctx);
     msg_out.flush();
 
@@ -4798,11 +5419,14 @@ void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn ms
     XrFacialExpressionClientML facialExpressionClient{};
     deserialize(&facialExpressionClient, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyFacialExpressionClientML(facialExpressionClient);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&facialExpressionClient);
@@ -4821,11 +5445,14 @@ void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(Messag
     XrFacialExpressionBlendShapePropertiesML* blendShapes{};
     deserialize_ptr(&blendShapes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetFacialExpressionBlendShapePropertiesML(facialExpressionClient, blendShapeGetInfo, blendShapeCount, blendShapes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(blendShapes, blendShapeCount, s_ctx);
     msg_out.flush();
 
@@ -4848,11 +5475,14 @@ void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn ms
     XrExportedLocalizationMapML* map{};
     deserialize_ptr(&map, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateExportedLocalizationMapML(session, mapUuid, map);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(map, 1, s_ctx);
     msg_out.flush();
 
@@ -4868,11 +5498,14 @@ void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn m
     XrExportedLocalizationMapML map{};
     deserialize(&map, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyExportedLocalizationMapML(map);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&map);
@@ -4887,11 +5520,14 @@ void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in)
     XrLocalizationEnableEventsInfoML* info{};
     deserialize_ptr(&info, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnableLocalizationEventsML(session, info);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -4911,11 +5547,14 @@ void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn m
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetExportedLocalizationMapDataML(map, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -4937,11 +5576,14 @@ void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
     XrUuidEXT* mapUuid{};
     deserialize_ptr(&mapUuid, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrImportLocalizationMapML(session, importInfo, mapUuid);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(importInfo->data, importInfo->size, s_ctx);
     serialize_ptr(mapUuid, 1, s_ctx);
     msg_out.flush();
@@ -4966,11 +5608,14 @@ void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
     XrLocalizationMapML* maps{};
     deserialize_ptr(&maps, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQueryLocalizationMapsML(session, queryInfo, mapCapacityInput, mapCountOutput, maps);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(mapCountOutput, 1, s_ctx);
     serialize_ptr(maps, mapCapacityInput, s_ctx);
     msg_out.flush();
@@ -4991,11 +5636,14 @@ void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
     XrMapLocalizationRequestInfoML* requestInfo{};
     deserialize_ptr(&requestInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestMapLocalizationML(session, requestInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -5015,11 +5663,14 @@ void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
     XrMarkerDetectorML* markerDetector{};
     deserialize_ptr(&markerDetector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateMarkerDetectorML(session, createInfo, markerDetector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(markerDetector, 1, s_ctx);
     msg_out.flush();
 
@@ -5039,11 +5690,14 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateMarkerSpaceML(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -5059,11 +5713,14 @@ void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyMarkerDetectorML(markerDetector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&markerDetector);
@@ -5078,11 +5735,14 @@ void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
     XrMarkerDetectorStateML* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerDetectorStateML(markerDetector, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -5101,11 +5761,14 @@ void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
     float* meters{};
     deserialize_ptr(&meters, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerLengthML(markerDetector, marker, meters);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(meters, 1, s_ctx);
     msg_out.flush();
 
@@ -5125,11 +5788,14 @@ void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
     uint64_t* number{};
     deserialize_ptr(&number, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerNumberML(markerDetector, marker, number);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(number, 1, s_ctx);
     msg_out.flush();
 
@@ -5149,11 +5815,14 @@ void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_i
     float* reprojectionErrorMeters{};
     deserialize_ptr(&reprojectionErrorMeters, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerReprojectionErrorML(markerDetector, marker, reprojectionErrorMeters);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(reprojectionErrorMeters, 1, s_ctx);
     msg_out.flush();
 
@@ -5177,11 +5846,14 @@ void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerStringML(markerDetector, marker, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -5206,11 +5878,14 @@ void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
     XrMarkerML* markers{};
     deserialize_ptr(&markers, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkersML(markerDetector, markerCapacityInput, markerCountOutput, markers);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(markerCountOutput, 1, s_ctx);
     serialize_ptr(markers, markerCapacityInput, s_ctx);
     msg_out.flush();
@@ -5230,11 +5905,14 @@ void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
     XrMarkerDetectorSnapshotInfoML* snapshotInfo{};
     deserialize_ptr(&snapshotInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSnapshotMarkerDetectorML(markerDetector, snapshotInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(snapshotInfo, 1, s_ctx);
     msg_out.flush();
 
@@ -5255,11 +5933,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsAsyncML(session, createInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5279,11 +5960,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg
     XrCreateSpatialAnchorsCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsCompleteML(session, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5301,11 +5985,14 @@ void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
     XrSpatialAnchorStateML* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpatialAnchorStateML(anchor, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -5326,11 +6013,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_
     XrSpatialAnchorsStorageML* storage{};
     deserialize_ptr(&storage, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorsStorageML(session, createInfo, storage);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(storage, 1, s_ctx);
     msg_out.flush();
 
@@ -5350,11 +6040,14 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsAsyncML(storage, deleteInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5374,11 +6067,14 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg
     XrSpatialAnchorsDeleteCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDeleteSpatialAnchorsCompleteML(storage, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5394,11 +6090,14 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorsStorageML(storage);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&storage);
@@ -5415,11 +6114,14 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_i
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsAsyncML(storage, publishInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5439,11 +6141,14 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn ms
     XrSpatialAnchorsPublishCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPublishSpatialAnchorsCompleteML(storage, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5463,11 +6168,14 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in)
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsAsyncML(storage, queryInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5487,11 +6195,14 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_
     XrSpatialAnchorsQueryCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrQuerySpatialAnchorsCompleteML(storage, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5511,11 +6222,14 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLoc
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML(storage, updateInfo, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5535,11 +6249,14 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(Message
     XrSpatialAnchorsUpdateExpirationCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML(storage, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5559,11 +6276,14 @@ void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
     XrSystemNotificationsSetInfoML* info{};
     deserialize_ptr(&info, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetSystemNotificationsML(instance, info);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5581,11 +6301,14 @@ void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_
     XrUserCalibrationEnableEventsInfoML* enableInfo{};
     deserialize_ptr(&enableInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnableUserCalibrationEventsML(instance, enableInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -5605,11 +6328,14 @@ void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) 
     XrWorldMeshBufferML* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrAllocateWorldMeshBufferML(detector, size, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(size->next, s_ctx);
     serialize_ptr(buffer, 1, s_ctx);
     msg_out.flush();
@@ -5630,11 +6356,14 @@ void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) 
     XrWorldMeshDetectorML* detector{};
     deserialize_ptr(&detector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateWorldMeshDetectorML(session, createInfo, detector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(detector, 1, s_ctx);
     msg_out.flush();
 
@@ -5650,11 +6379,14 @@ void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in)
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyWorldMeshDetectorML(detector);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&detector);
@@ -5669,11 +6401,14 @@ void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
     XrWorldMeshBufferML* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrFreeWorldMeshBufferML(detector, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_xr(buffer->next, s_ctx);
     serialize_ptr(buffer->buffer, buffer->bufferSize, s_ctx);
     msg_out.flush();
@@ -5693,11 +6428,14 @@ void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn 
     XrWorldMeshBufferSizeML* size{};
     deserialize_ptr(&size, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML(detector, sizeInfo, size);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(size, 1, s_ctx);
     msg_out.flush();
 
@@ -5719,11 +6457,14 @@ void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestWorldMeshAsyncML(detector, getInfo, buffer, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(getInfo->blocks, getInfo->blockCount, s_ctx);
     serialize_ptr(buffer, 1, s_ctx);
     serialize_ptr(future, 1, s_ctx);
@@ -5748,11 +6489,14 @@ void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in)
     XrWorldMeshRequestCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestWorldMeshCompleteML(detector, completionInfo, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5773,11 +6517,14 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_i
     XrFutureEXT* future{};
     deserialize_ptr(&future, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestWorldMeshStateAsyncML(detector, stateRequest, future);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(future, 1, s_ctx);
     msg_out.flush();
 
@@ -5797,11 +6544,14 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn ms
     XrWorldMeshStateRequestCompletionML* completion{};
     deserialize_ptr(&completion, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestWorldMeshStateCompleteML(detector, future, completion);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(completion, 1, s_ctx);
     msg_out.flush();
 
@@ -5821,11 +6571,14 @@ void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in)
     XrForceFeedbackCurlApplyLocationsMNDX* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrApplyForceFeedbackCurlMNDX(handTracker, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations->locations, locations->locationCount, s_ctx);
     msg_out.flush();
 
@@ -5852,11 +6605,14 @@ void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg
     XrReprojectionModeMSFT* modes{};
     deserialize_ptr(&modes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateReprojectionModesMSFT(instance, systemId, viewConfigurationType, modeCapacityInput, modeCountOutput, modes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(modeCountOutput, 1, s_ctx);
     serialize_ptr(modes, modeCapacityInput, s_ctx);
     msg_out.flush();
@@ -5882,11 +6638,14 @@ void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) 
     XrControllerModelKeyStateMSFT* controllerModelKeyState{};
     deserialize_ptr(&controllerModelKeyState, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetControllerModelKeyMSFT(session, topLevelUserPath, controllerModelKeyState);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(controllerModelKeyState, 1, s_ctx);
     msg_out.flush();
 
@@ -5906,11 +6665,14 @@ void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn m
     XrControllerModelPropertiesMSFT* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetControllerModelPropertiesMSFT(session, modelKey, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
@@ -5930,11 +6692,14 @@ void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in
     XrControllerModelStateMSFT* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetControllerModelStateMSFT(session, modelKey, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -5958,11 +6723,14 @@ void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
     uint8_t* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLoadControllerModelMSFT(session, modelKey, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -5987,11 +6755,14 @@ void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateHandMeshSpaceMSFT(handTracker, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -6011,11 +6782,14 @@ void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
     XrHandMeshMSFT* handMesh{};
     deserialize_ptr(&handMesh, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUpdateHandMeshMSFT(handTracker, updateInfo, handMesh);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(handMesh, 1, s_ctx);
     msg_out.flush();
 
@@ -6037,11 +6811,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(Mess
     XrSpatialAnchorMSFT* anchor{};
     deserialize_ptr(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(session, perceptionAnchor, anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(perceptionAnchor, 1, s_ctx);
     serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
@@ -6062,11 +6839,14 @@ void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(Mess
     IUnknown** perceptionAnchor{};
     #error "auto-generator doesn't support double pointers (perceptionAnchor)"None
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(session, anchor, perceptionAnchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(perceptionAnchor, 1, s_ctx);
     msg_out.flush();
 
@@ -6092,11 +6872,14 @@ void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn ms
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -6123,11 +6906,14 @@ void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) 
     uint8_t* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSceneMarkerRawDataMSFT(scene, markerId, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -6150,11 +6936,14 @@ void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
     XrNewSceneComputeInfoMSFT* computeInfo{};
     deserialize_ptr(&computeInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrComputeNewSceneMSFT(sceneObserver, computeInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -6172,11 +6961,14 @@ void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
     XrSceneMSFT* scene{};
     deserialize_ptr(&scene, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSceneMSFT(sceneObserver, createInfo, scene);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(scene, 1, s_ctx);
     msg_out.flush();
 
@@ -6196,11 +6988,14 @@ void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
     XrSceneObserverMSFT* sceneObserver{};
     deserialize_ptr(&sceneObserver, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSceneObserverMSFT(session, createInfo, sceneObserver);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(sceneObserver, 1, s_ctx);
     msg_out.flush();
 
@@ -6216,11 +7011,14 @@ void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySceneMSFT(scene);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&scene);
@@ -6233,11 +7031,14 @@ void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySceneObserverMSFT(sceneObserver);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -6258,11 +7059,14 @@ void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn 
     XrSceneComputeFeatureMSFT* features{};
     deserialize_ptr(&features, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT(instance, systemId, featureCapacityInput, featureCountOutput, features);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(featureCountOutput, 1, s_ctx);
     serialize_ptr(features, featureCapacityInput, s_ctx);
     msg_out.flush();
@@ -6285,11 +7089,14 @@ void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
     XrSceneComponentsMSFT* components{};
     deserialize_ptr(&components, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSceneComponentsMSFT(scene, getInfo, components);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(components, 1, s_ctx);
     msg_out.flush();
 
@@ -6307,11 +7114,14 @@ void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
     XrSceneComputeStateMSFT* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSceneComputeStateMSFT(sceneObserver, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -6330,11 +7140,14 @@ void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
     XrSceneMeshBuffersMSFT* buffers{};
     deserialize_ptr(&buffers, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSceneMeshBuffersMSFT(scene, getInfo, buffers);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffers, 1, s_ctx);
     msg_out.flush();
 
@@ -6354,11 +7167,14 @@ void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) 
     XrSceneComponentLocationsMSFT* locations{};
     deserialize_ptr(&locations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateSceneComponentsMSFT(scene, locateInfo, locations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(locations, 1, s_ctx);
     msg_out.flush();
 
@@ -6378,11 +7194,14 @@ void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
     XrSceneDeserializeInfoMSFT* deserializeInfo{};
     deserialize_ptr(&deserializeInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDeserializeSceneMSFT(sceneObserver, deserializeInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&sceneObserver);
@@ -6404,11 +7223,14 @@ void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn
     uint8_t* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT(scene, getInfo, countInput, readOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(readOutput, 1, s_ctx);
     serialize_ptr(buffer, countInput, s_ctx);
     msg_out.flush();
@@ -6433,11 +7255,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
     XrSpatialAnchorMSFT* anchor{};
     deserialize_ptr(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorMSFT(session, createInfo, anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(anchor, 1, s_ctx);
     msg_out.flush();
 
@@ -6457,11 +7282,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_i
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -6477,11 +7305,14 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
     XrSpatialAnchorMSFT anchor{};
     deserialize(&anchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorMSFT(anchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&anchor);
@@ -6496,11 +7327,14 @@ void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrClearSpatialAnchorStoreMSFT(spatialAnchorStore);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6517,11 +7351,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(Message
     XrSpatialAnchorMSFT* spatialAnchor{};
     deserialize_ptr(&spatialAnchor, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT(session, spatialAnchorCreateInfo, spatialAnchor);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spatialAnchor, 1, s_ctx);
     msg_out.flush();
 
@@ -6539,11 +7376,14 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLo
     XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore{};
     deserialize_ptr(&spatialAnchorStore, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT(session, spatialAnchorStore);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spatialAnchorStore, 1, s_ctx);
     msg_out.flush();
 
@@ -6558,11 +7398,14 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageL
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT(spatialAnchorStore);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6581,11 +7424,14 @@ void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(Message
     XrSpatialAnchorPersistenceNameMSFT* spatialAnchorNames{};
     deserialize_ptr(&spatialAnchorNames, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT(spatialAnchorStore, spatialAnchorNameCapacityInput, spatialAnchorNameCountOutput, spatialAnchorNames);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spatialAnchorNameCountOutput, 1, s_ctx);
     serialize_ptr(spatialAnchorNames, spatialAnchorNameCapacityInput, s_ctx);
     msg_out.flush();
@@ -6605,11 +7451,14 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo{};
     deserialize_ptr(&spatialAnchorPersistenceInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6625,11 +7474,14 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in)
     XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName{};
     deserialize_ptr(&spatialAnchorPersistenceName, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrUnpersistSpatialAnchorMSFT(spatialAnchorStore, spatialAnchorPersistenceName);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&spatialAnchorStore);
@@ -6649,11 +7501,14 @@ void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn ms
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -6669,11 +7524,14 @@ void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn
     XrSpatialGraphNodeBindingMSFT nodeBinding{};
     deserialize(&nodeBinding, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT(nodeBinding);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&nodeBinding);
@@ -6690,11 +7548,14 @@ void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(Message
     XrSpatialGraphNodeBindingPropertiesMSFT* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT(nodeBinding, getInfo, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
@@ -6714,11 +7575,14 @@ void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(Messa
     XrSpatialGraphNodeBindingMSFT* nodeBinding{};
     deserialize_ptr(&nodeBinding, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT(session, createInfo, nodeBinding);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(nodeBinding, 1, s_ctx);
     msg_out.flush();
 
@@ -6738,11 +7602,14 @@ void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
     deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetAudioInputDeviceGuidOculus(instance, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
     msg_out.flush();
 
@@ -6759,11 +7626,14 @@ void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
     deserialize_array(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetAudioOutputDeviceGuidOculus(instance, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffer, XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS, s_ctx);
     msg_out.flush();
 
@@ -6786,11 +7656,14 @@ void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg
     XrExternalCameraOCULUS* cameras{};
     deserialize_ptr(&cameras, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateExternalCamerasOCULUS(session, cameraCapacityInput, cameraCountOutput, cameras);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(cameraCountOutput, 1, s_ctx);
     serialize_ptr(cameras, cameraCapacityInput, s_ctx);
     msg_out.flush();
@@ -6814,11 +7687,14 @@ void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageL
     XrTrackingOptimizationSettingsHintQCOM hint{};
     deserialize(&hint, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM(session, domain, hint);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6837,11 +7713,14 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn
     XrBool32 enabled{};
     deserialize(&enabled, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO(session, enabled);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6861,11 +7740,14 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateMarkerSpaceVARJO(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -6885,11 +7767,14 @@ void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
     XrExtent2Df* size{};
     deserialize_ptr(&size, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetMarkerSizeVARJO(session, markerId, size);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(size, 1, s_ctx);
     msg_out.flush();
 
@@ -6909,11 +7794,14 @@ void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn m
     XrBool32 enable{};
     deserialize(&enable, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingPredictionVARJO(session, markerId, enable);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6932,11 +7820,14 @@ void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_
     XrDuration timeout{};
     deserialize(&timeout, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO(session, markerId, timeout);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6953,11 +7844,14 @@ void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
     XrBool32 enabled{};
     deserialize(&enabled, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetMarkerTrackingVARJO(session, enabled);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6975,11 +7869,14 @@ void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
     float offset{};
     deserialize(&offset, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSetViewOffsetVARJO(session, offset);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -6998,11 +7895,14 @@ void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
     uint32_t* index{};
     deserialize_ptr(&index, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrAcquireSwapchainImage(swapchain, acquireInfo, index);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(index, 1, s_ctx);
     msg_out.flush();
 
@@ -7022,11 +7922,14 @@ void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
     XrHapticBaseHeader* hapticFeedback{};
     deserialize_xr(&hapticFeedback, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrApplyHapticFeedback(session, hapticActionInfo, hapticFeedback);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7043,11 +7946,14 @@ void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
     XrSessionActionSetsAttachInfo* attachInfo{};
     deserialize_ptr(&attachInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrAttachSessionActionSets(session, attachInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7063,11 +7969,14 @@ void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
     XrFrameBeginInfo* frameBeginInfo{};
     deserialize_ptr(&frameBeginInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrBeginFrame(session, frameBeginInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7083,11 +7992,14 @@ void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
     XrSessionBeginInfo* beginInfo{};
     deserialize_ptr(&beginInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrBeginSession(session, beginInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7105,11 +8017,14 @@ void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
     XrAction* action{};
     deserialize_ptr(&action, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateAction(actionSet, createInfo, action);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(action, 1, s_ctx);
     msg_out.flush();
 
@@ -7129,11 +8044,14 @@ void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
     XrActionSet* actionSet{};
     deserialize_ptr(&actionSet, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateActionSet(instance, createInfo, actionSet);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(actionSet, 1, s_ctx);
     msg_out.flush();
 
@@ -7153,11 +8071,14 @@ void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateActionSpace(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -7182,11 +8103,14 @@ void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
     XrSpace* space{};
     deserialize_ptr(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateReferenceSpace(session, createInfo, space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(space, 1, s_ctx);
     msg_out.flush();
 
@@ -7206,11 +8130,14 @@ void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
     XrSession* session{};
     deserialize_ptr(&session, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSession(instance, createInfo, session);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(session, 1, s_ctx);
     msg_out.flush();
 
@@ -7230,11 +8157,14 @@ void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
     XrSwapchain* swapchain{};
     deserialize_ptr(&swapchain, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrCreateSwapchain(session, createInfo, swapchain);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(swapchain, 1, s_ctx);
     msg_out.flush();
 
@@ -7250,11 +8180,14 @@ void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
     XrAction action{};
     deserialize(&action, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyAction(action);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&action);
@@ -7267,11 +8200,14 @@ void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
     XrActionSet actionSet{};
     deserialize(&actionSet, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyActionSet(actionSet);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&actionSet);
@@ -7284,11 +8220,14 @@ void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
     XrInstance instance{};
     deserialize(&instance, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroyInstance(instance);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -7301,11 +8240,14 @@ void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
     XrSession session{};
     deserialize(&session, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySession(session);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7318,11 +8260,14 @@ void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
     XrSpace space{};
     deserialize(&space, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySpace(space);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&space);
@@ -7335,11 +8280,14 @@ void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrDestroySwapchain(swapchain);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -7354,11 +8302,14 @@ void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
     XrFrameEndInfo* frameEndInfo{};
     deserialize_ptr(&frameEndInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEndFrame(session, frameEndInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7372,11 +8323,14 @@ void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
     XrSession session{};
     deserialize(&session, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEndSession(session);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -7393,11 +8347,14 @@ void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in
     XrApiLayerProperties* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateApiLayerProperties(propertyCapacityInput, propertyCountOutput, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(propertyCountOutput, 1, s_ctx);
     serialize_ptr(properties, propertyCapacityInput, s_ctx);
     msg_out.flush();
@@ -7422,11 +8379,14 @@ void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg
     XrPath* sources{};
     deserialize_ptr(&sources, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateBoundSourcesForAction(session, enumerateInfo, sourceCapacityInput, sourceCountOutput, sources);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(sourceCountOutput, 1, s_ctx);
     serialize_ptr(sources, sourceCapacityInput, s_ctx);
     msg_out.flush();
@@ -7455,11 +8415,14 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg
     XrEnvironmentBlendMode* environmentBlendModes{};
     deserialize_ptr(&environmentBlendModes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateEnvironmentBlendModes(instance, systemId, viewConfigurationType, environmentBlendModeCapacityInput, environmentBlendModeCountOutput, environmentBlendModes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(environmentBlendModeCountOutput, 1, s_ctx);
     serialize_ptr(environmentBlendModes, environmentBlendModeCapacityInput, s_ctx);
     msg_out.flush();
@@ -7485,11 +8448,14 @@ void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLock
     XrExtensionProperties* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateInstanceExtensionProperties(layerName, propertyCapacityInput, propertyCountOutput, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(propertyCountOutput, 1, s_ctx);
     serialize_ptr(properties, propertyCapacityInput, s_ctx);
     msg_out.flush();
@@ -7513,11 +8479,14 @@ void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
     XrReferenceSpaceType* spaces{};
     deserialize_ptr(&spaces, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateReferenceSpaces(session, spaceCapacityInput, spaceCountOutput, spaces);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spaceCountOutput, 1, s_ctx);
     serialize_ptr(spaces, spaceCapacityInput, s_ctx);
     msg_out.flush();
@@ -7541,11 +8510,14 @@ void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) 
     int64_t* formats{};
     deserialize_ptr(&formats, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateSwapchainFormats(session, formatCapacityInput, formatCountOutput, formats);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(formatCountOutput, 1, s_ctx);
     serialize_ptr(formats, formatCapacityInput, s_ctx);
     msg_out.flush();
@@ -7569,11 +8541,14 @@ void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
     XrSwapchainImageBaseHeader* images{};
     deserialize_xr_array(&images, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateSwapchainImages(swapchain, imageCapacityInput, imageCountOutput, images);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(imageCountOutput, 1, s_ctx);
     serialize_xr_array(images, imageCapacityInput, s_ctx);
     msg_out.flush();
@@ -7601,11 +8576,14 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn ms
     XrViewConfigurationView* views{};
     deserialize_ptr(&views, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateViewConfigurationViews(instance, systemId, viewConfigurationType, viewCapacityInput, viewCountOutput, views);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(viewCountOutput, 1, s_ctx);
     serialize_ptr(views, viewCapacityInput, s_ctx);
     msg_out.flush();
@@ -7633,11 +8611,14 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in
     XrViewConfigurationType* viewConfigurationTypes{};
     deserialize_ptr(&viewConfigurationTypes, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrEnumerateViewConfigurations(instance, systemId, viewConfigurationTypeCapacityInput, viewConfigurationTypeCountOutput, viewConfigurationTypes);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(viewConfigurationTypeCountOutput, 1, s_ctx);
     serialize_ptr(viewConfigurationTypes, viewConfigurationTypeCapacityInput, s_ctx);
     msg_out.flush();
@@ -7660,11 +8641,14 @@ void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
     XrActionStateBoolean* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetActionStateBoolean(session, getInfo, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -7684,11 +8668,14 @@ void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
     XrActionStateFloat* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetActionStateFloat(session, getInfo, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -7708,11 +8695,14 @@ void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
     XrActionStatePose* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetActionStatePose(session, getInfo, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -7732,11 +8722,14 @@ void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
     XrActionStateVector2f* state{};
     deserialize_ptr(&state, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetActionStateVector2f(session, getInfo, state);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(state, 1, s_ctx);
     msg_out.flush();
 
@@ -7756,11 +8749,14 @@ void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_i
     XrInteractionProfileState* interactionProfile{};
     deserialize_ptr(&interactionProfile, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetCurrentInteractionProfile(session, topLevelUserPath, interactionProfile);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(interactionProfile, 1, s_ctx);
     msg_out.flush();
 
@@ -7784,11 +8780,14 @@ void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetInputSourceLocalizedName(session, getInfo, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -7809,11 +8808,14 @@ void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
     XrInstanceProperties* instanceProperties{};
     deserialize_ptr(&instanceProperties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetInstanceProperties(instance, instanceProperties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(instanceProperties, 1, s_ctx);
     msg_out.flush();
 
@@ -7832,11 +8834,14 @@ void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in
     XrExtent2Df* bounds{};
     deserialize_ptr(&bounds, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetReferenceSpaceBoundsRect(session, referenceSpaceType, bounds);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bounds, 1, s_ctx);
     msg_out.flush();
 
@@ -7856,11 +8861,14 @@ void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
     XrSystemId* systemId{};
     deserialize_ptr(&systemId, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSystem(instance, getInfo, systemId);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(systemId, 1, s_ctx);
     msg_out.flush();
 
@@ -7880,11 +8888,14 @@ void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
     XrSystemProperties* properties{};
     deserialize_ptr(&properties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetSystemProperties(instance, systemId, properties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(properties, 1, s_ctx);
     msg_out.flush();
 
@@ -7906,11 +8917,14 @@ void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg
     XrViewConfigurationProperties* configurationProperties{};
     deserialize_ptr(&configurationProperties, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrGetViewConfigurationProperties(instance, systemId, viewConfigurationType, configurationProperties);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(configurationProperties, 1, s_ctx);
     msg_out.flush();
 
@@ -7933,11 +8947,14 @@ void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
     XrSpaceLocation* location{};
     deserialize_ptr(&location, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateSpace(space, baseSpace, time, location);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(location, 1, s_ctx);
     msg_out.flush();
 
@@ -7958,11 +8975,14 @@ void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
     XrSpaceLocations* spaceLocations{};
     deserialize_ptr(&spaceLocations, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateSpaces(session, locateInfo, spaceLocations);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(spaceLocations, 1, s_ctx);
     msg_out.flush();
 
@@ -7988,11 +9008,14 @@ void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
     XrView* views{};
     deserialize_ptr(&views, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrLocateViews(session, viewLocateInfo, viewState, viewCapacityInput, viewCountOutput, views);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(viewState, 1, s_ctx);
     serialize_ptr(viewCountOutput, 1, s_ctx);
     serialize_ptr(views, viewCapacityInput, s_ctx);
@@ -8021,11 +9044,14 @@ void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
     char* buffer{};
     deserialize_ptr(&buffer, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPathToString(instance, path, bufferCapacityInput, bufferCountOutput, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(bufferCountOutput, 1, s_ctx);
     serialize_ptr(buffer, bufferCapacityInput, s_ctx);
     msg_out.flush();
@@ -8046,11 +9072,14 @@ void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
     XrEventDataBuffer* eventData{};
     deserialize_ptr(&eventData, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrPollEvent(instance, eventData);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(eventData, 1, s_ctx);
     msg_out.flush();
 
@@ -8067,11 +9096,14 @@ void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
     XrSwapchainImageReleaseInfo* releaseInfo{};
     deserialize_ptr(&releaseInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrReleaseSwapchainImage(swapchain, releaseInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);
@@ -8085,11 +9117,14 @@ void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
     XrSession session{};
     deserialize(&session, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrRequestExitSession(session);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -8106,11 +9141,14 @@ void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
     char buffer[XR_MAX_RESULT_STRING_SIZE]{};
     deserialize_array(buffer, XR_MAX_RESULT_STRING_SIZE, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrResultToString(instance, value, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffer, XR_MAX_RESULT_STRING_SIZE, s_ctx);
     msg_out.flush();
 
@@ -8128,11 +9166,14 @@ void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
     XrHapticActionInfo* hapticActionInfo{};
     deserialize_ptr(&hapticActionInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStopHapticFeedback(session, hapticActionInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -8150,11 +9191,14 @@ void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
     XrPath* path{};
     deserialize_ptr(&path, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStringToPath(instance, pathString, path);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(path, 1, s_ctx);
     msg_out.flush();
 
@@ -8174,11 +9218,14 @@ void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
     char buffer[XR_MAX_STRUCTURE_NAME_SIZE]{};
     deserialize_array(buffer, XR_MAX_STRUCTURE_NAME_SIZE, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrStructureTypeToString(instance, value, buffer);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(buffer, XR_MAX_STRUCTURE_NAME_SIZE, s_ctx);
     msg_out.flush();
 
@@ -8196,11 +9243,14 @@ void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn 
     XrInteractionProfileSuggestedBinding* suggestedBindings{};
     deserialize_ptr(&suggestedBindings, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSuggestInteractionProfileBindings(instance, suggestedBindings);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&instance);
@@ -8216,11 +9266,14 @@ void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
     XrActionsSyncInfo* syncInfo{};
     deserialize_ptr(&syncInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrSyncActions(session, syncInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&session);
@@ -8238,11 +9291,14 @@ void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
     XrFrameState* frameState{};
     deserialize_ptr(&frameState, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrWaitFrame(session, frameWaitInfo, frameState);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(frameState, 1, s_ctx);
     msg_out.flush();
 
@@ -8260,11 +9316,14 @@ void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
     XrSwapchainImageWaitInfo* waitInfo{};
     deserialize_ptr(&waitInfo, d_ctx);
 
+    XrTime start_time = start_runtime_timer();
     XrResult _result = function_loader.pfn_xrWaitSwapchainImage(swapchain, waitInfo);
+    XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     msg_out.flush();
 
     cleanup(&swapchain);

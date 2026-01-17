@@ -20,7 +20,7 @@
 #include <openxr/openxr.h>
 #include <spdlog/spdlog.h>
 
-#include <string>
+#include <string_view>
 #include <stdexcept>
 
 namespace xrtransport {
@@ -31,9 +31,11 @@ static XrTime start_rpc_timer() {
     return get_time();
 }
 
-static void end_rpc_timer(XrTime start_time, std::string tag) {
+static void end_rpc_timer(XrTime start_time, XrDuration runtime_duration, std::string_view tag) {
     XrTime end_time = get_time();
-    float duration_ms = (float)(end_time - start_time) / 1000000;
+    XrDuration total_duration = end_time - start_time;
+    XrDuration rpc_duration = total_duration - runtime_duration;
+    float duration_ms = (float)(rpc_duration) / 1000000;
     if (duration_ms > 1) {
         spdlog::warn("RPC call {} took too long: {:.3f} ms", tag, duration_ms);
     }
@@ -61,8 +63,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetDigitalLensControlALMALENCE");
+    end_rpc_timer(start_time, runtime_duration, "xrSetDigitalLensControlALMALENCE");
 
     return result;
 }
@@ -95,9 +99,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateBodyTrackerBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateBodyTrackerBD");
 
     return result;
 }
@@ -126,8 +132,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyBodyTrackerBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyBodyTrackerBD");
 
     return result;
 }
@@ -158,9 +166,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateBodyJointsBD");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateBodyJointsBD");
 
     return result;
 }
@@ -193,9 +203,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorAsyncBD");
 
     return result;
 }
@@ -226,9 +238,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorCompleteBD");
 
     return result;
 }
@@ -259,9 +273,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrPersistSpatialAnchorAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrPersistSpatialAnchorAsyncBD");
 
     return result;
 }
@@ -292,9 +308,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrPersistSpatialAnchorCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrPersistSpatialAnchorCompleteBD");
 
     return result;
 }
@@ -325,9 +343,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrUnpersistSpatialAnchorAsyncBD");
 
     return result;
 }
@@ -358,9 +378,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrUnpersistSpatialAnchorCompleteBD");
 
     return result;
 }
@@ -393,9 +415,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrDownloadSharedSpatialAnchorAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDownloadSharedSpatialAnchorAsyncBD");
 
     return result;
 }
@@ -426,9 +450,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrDownloadSharedSpatialAnchorCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDownloadSharedSpatialAnchorCompleteBD");
 
     return result;
 }
@@ -459,9 +485,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrShareSpatialAnchorAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrShareSpatialAnchorAsyncBD");
 
     return result;
 }
@@ -492,9 +520,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrShareSpatialAnchorCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrShareSpatialAnchorCompleteBD");
 
     return result;
 }
@@ -527,9 +557,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrCaptureSceneAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCaptureSceneAsyncBD");
 
     return result;
 }
@@ -560,9 +592,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrCaptureSceneCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCaptureSceneCompleteBD");
 
     return result;
 }
@@ -595,9 +629,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateAnchorSpaceBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateAnchorSpaceBD");
 
     return result;
 }
@@ -628,9 +664,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&provider, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSenseDataProviderBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSenseDataProviderBD");
 
     return result;
 }
@@ -661,9 +699,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialEntityAnchorBD");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialEntityAnchorBD");
 
     return result;
 }
@@ -692,8 +732,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyAnchorBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyAnchorBD");
 
     return result;
 }
@@ -722,8 +764,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySenseDataProviderBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySenseDataProviderBD");
 
     return result;
 }
@@ -752,8 +796,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySenseDataSnapshotBD");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySenseDataSnapshotBD");
 
     return result;
 }
@@ -786,10 +832,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&componentTypeCountOutput, d_ctx);
     deserialize_ptr(&componentTypes, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateSpatialEntityComponentTypesBD");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateSpatialEntityComponentTypesBD");
 
     return result;
 }
@@ -819,9 +867,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetAnchorUuidBD");
+    end_rpc_timer(start_time, runtime_duration, "xrGetAnchorUuidBD");
 
     return result;
 }
@@ -852,10 +902,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&getInfo, d_ctx);
     deserialize_ptr(&queriedSenseData, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetQueriedSenseDataBD");
+    end_rpc_timer(start_time, runtime_duration, "xrGetQueriedSenseDataBD");
 
     return result;
 }
@@ -885,9 +937,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSenseDataProviderStateBD");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSenseDataProviderStateBD");
 
     return result;
 }
@@ -918,9 +972,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&componentData, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpatialEntityComponentDataBD");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpatialEntityComponentDataBD");
 
     return result;
 }
@@ -951,9 +1007,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpatialEntityUuidBD");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpatialEntityUuidBD");
 
     return result;
 }
@@ -984,9 +1042,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySenseDataAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySenseDataAsyncBD");
 
     return result;
 }
@@ -1017,9 +1077,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySenseDataCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySenseDataCompleteBD");
 
     return result;
 }
@@ -1050,9 +1112,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrStartSenseDataProviderAsyncBD");
+    end_rpc_timer(start_time, runtime_duration, "xrStartSenseDataProviderAsyncBD");
 
     return result;
 }
@@ -1083,9 +1147,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrStartSenseDataProviderCompleteBD");
+    end_rpc_timer(start_time, runtime_duration, "xrStartSenseDataProviderCompleteBD");
 
     return result;
 }
@@ -1114,8 +1180,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrStopSenseDataProviderBD");
+    end_rpc_timer(start_time, runtime_duration, "xrStopSenseDataProviderBD");
 
     return result;
 }
@@ -1149,8 +1217,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetInputDeviceActiveEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetInputDeviceActiveEXT");
 
     return result;
 }
@@ -1183,8 +1253,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetInputDeviceLocationEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetInputDeviceLocationEXT");
 
     return result;
 }
@@ -1216,8 +1288,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetInputDeviceStateBoolEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetInputDeviceStateBoolEXT");
 
     return result;
 }
@@ -1249,8 +1323,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetInputDeviceStateFloatEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetInputDeviceStateFloatEXT");
 
     return result;
 }
@@ -1282,8 +1358,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetInputDeviceStateVector2fEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetInputDeviceStateVector2fEXT");
 
     return result;
 }
@@ -1316,10 +1394,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&createInfo->userData, d_ctx);
     deserialize_ptr(&messenger, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateDebugUtilsMessengerEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateDebugUtilsMessengerEXT");
 
     return result;
 }
@@ -1348,8 +1428,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyDebugUtilsMessengerEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyDebugUtilsMessengerEXT");
 
     return result;
 }
@@ -1379,8 +1461,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSessionBeginDebugUtilsLabelRegionEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSessionBeginDebugUtilsLabelRegionEXT");
 
     return result;
 }
@@ -1409,8 +1493,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSessionEndDebugUtilsLabelRegionEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSessionEndDebugUtilsLabelRegionEXT");
 
     return result;
 }
@@ -1440,8 +1526,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSessionInsertDebugUtilsLabelEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSessionInsertDebugUtilsLabelEXT");
 
     return result;
 }
@@ -1471,8 +1559,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetDebugUtilsObjectNameEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSetDebugUtilsObjectNameEXT");
 
     return result;
 }
@@ -1504,10 +1594,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&callbackData->objects, d_ctx);
     deserialize_ptr(&callbackData->sessionLabels, d_ctx);
 
-    end_rpc_timer(start_time, "xrSubmitDebugUtilsMessageEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrSubmitDebugUtilsMessageEXT");
 
     return result;
 }
@@ -1539,8 +1631,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrCancelFutureEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrCancelFutureEXT");
 
     return result;
 }
@@ -1571,9 +1665,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&pollResult, d_ctx);
 
-    end_rpc_timer(start_time, "xrPollFutureEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrPollFutureEXT");
 
     return result;
 }
@@ -1606,9 +1702,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&handTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateHandTrackerEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateHandTrackerEXT");
 
     return result;
 }
@@ -1637,8 +1735,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyHandTrackerEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyHandTrackerEXT");
 
     return result;
 }
@@ -1669,9 +1769,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateHandJointsEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateHandJointsEXT");
 
     return result;
 }
@@ -1704,8 +1806,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPerfSettingsSetPerformanceLevelEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrPerfSettingsSetPerformanceLevelEXT");
 
     return result;
 }
@@ -1737,8 +1841,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrBeginPlaneDetectionEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrBeginPlaneDetectionEXT");
 
     return result;
 }
@@ -1769,9 +1875,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&planeDetector, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreatePlaneDetectorEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreatePlaneDetectorEXT");
 
     return result;
 }
@@ -1800,8 +1908,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyPlaneDetectorEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyPlaneDetectorEXT");
 
     return result;
 }
@@ -1831,9 +1941,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetPlaneDetectionStateEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetPlaneDetectionStateEXT");
 
     return result;
 }
@@ -1864,9 +1976,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetPlaneDetectionsEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetPlaneDetectionsEXT");
 
     return result;
 }
@@ -1898,9 +2012,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&polygonBuffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetPlanePolygonBufferEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetPlanePolygonBufferEXT");
 
     return result;
 }
@@ -1935,11 +2051,13 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&notificationLevel, d_ctx);
     deserialize_ptr(&tempHeadroom, d_ctx);
     deserialize_ptr(&tempSlope, d_ctx);
 
-    end_rpc_timer(start_time, "xrThermalGetTemperatureTrendEXT");
+    end_rpc_timer(start_time, runtime_duration, "xrThermalGetTemperatureTrendEXT");
 
     return result;
 }
@@ -1972,9 +2090,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateBodyTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateBodyTrackerFB");
 
     return result;
 }
@@ -2003,8 +2123,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyBodyTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyBodyTrackerFB");
 
     return result;
 }
@@ -2034,9 +2156,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&skeleton, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetBodySkeletonFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetBodySkeletonFB");
 
     return result;
 }
@@ -2067,9 +2191,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateBodyJointsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateBodyJointsFB");
 
     return result;
 }
@@ -2103,10 +2229,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&colorSpaceCountOutput, d_ctx);
     deserialize_ptr(&colorSpaces, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateColorSpacesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateColorSpacesFB");
 
     return result;
 }
@@ -2136,8 +2264,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetColorSpaceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrSetColorSpaceFB");
 
     return result;
 }
@@ -2171,10 +2301,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&displayRefreshRateCountOutput, d_ctx);
     deserialize_ptr(&displayRefreshRates, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateDisplayRefreshRatesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateDisplayRefreshRatesFB");
 
     return result;
 }
@@ -2204,9 +2336,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&displayRefreshRate, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetDisplayRefreshRateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetDisplayRefreshRateFB");
 
     return result;
 }
@@ -2236,8 +2370,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestDisplayRefreshRateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestDisplayRefreshRateFB");
 
     return result;
 }
@@ -2270,9 +2406,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&eyeTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateEyeTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateEyeTrackerFB");
 
     return result;
 }
@@ -2301,8 +2439,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyEyeTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyEyeTrackerFB");
 
     return result;
 }
@@ -2333,9 +2473,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&eyeGazes, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetEyeGazesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetEyeGazesFB");
 
     return result;
 }
@@ -2368,9 +2510,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&faceTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateFaceTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateFaceTrackerFB");
 
     return result;
 }
@@ -2399,8 +2543,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyFaceTrackerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyFaceTrackerFB");
 
     return result;
 }
@@ -2431,9 +2577,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&expressionWeights, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetFaceExpressionWeightsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetFaceExpressionWeightsFB");
 
     return result;
 }
@@ -2466,10 +2614,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&createInfo->requestedDataSources, d_ctx);
     deserialize_ptr(&faceTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateFaceTracker2FB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateFaceTracker2FB");
 
     return result;
 }
@@ -2498,8 +2648,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyFaceTracker2FB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyFaceTracker2FB");
 
     return result;
 }
@@ -2530,9 +2682,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&expressionWeights, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetFaceExpressionWeights2FB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetFaceExpressionWeights2FB");
 
     return result;
 }
@@ -2565,10 +2719,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&createInfo->next, d_ctx);
     deserialize_ptr(&profile, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateFoveationProfileFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateFoveationProfileFB");
 
     return result;
 }
@@ -2597,8 +2753,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyFoveationProfileFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyFoveationProfileFB");
 
     return result;
 }
@@ -2630,9 +2788,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&mesh, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetHandMeshFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetHandMeshFB");
 
     return result;
 }
@@ -2665,9 +2825,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&deviceSampleRate, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetDeviceSampleRateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetDeviceSampleRateFB");
 
     return result;
 }
@@ -2700,10 +2862,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&createInfo->next, d_ctx);
     deserialize_ptr(&keyboardSpace, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateKeyboardSpaceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateKeyboardSpaceFB");
 
     return result;
 }
@@ -2734,10 +2898,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&queryInfo->next, d_ctx);
     deserialize_ptr(&keyboard, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySystemTrackedKeyboardFB");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySystemTrackedKeyboardFB");
 
     return result;
 }
@@ -2770,9 +2936,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outGeometryInstance, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateGeometryInstanceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateGeometryInstanceFB");
 
     return result;
 }
@@ -2803,9 +2971,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outPassthrough, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreatePassthroughFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreatePassthroughFB");
 
     return result;
 }
@@ -2836,9 +3006,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outLayer, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreatePassthroughLayerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreatePassthroughLayerFB");
 
     return result;
 }
@@ -2867,8 +3039,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyGeometryInstanceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyGeometryInstanceFB");
 
     return result;
 }
@@ -2897,8 +3071,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyPassthroughFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyPassthroughFB");
 
     return result;
 }
@@ -2927,8 +3103,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyPassthroughLayerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyPassthroughLayerFB");
 
     return result;
 }
@@ -2958,8 +3136,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrGeometryInstanceSetTransformFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGeometryInstanceSetTransformFB");
 
     return result;
 }
@@ -2988,8 +3168,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughLayerPauseFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughLayerPauseFB");
 
     return result;
 }
@@ -3018,8 +3200,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughLayerResumeFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughLayerResumeFB");
 
     return result;
 }
@@ -3049,8 +3233,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughLayerSetStyleFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughLayerSetStyleFB");
 
     return result;
 }
@@ -3079,8 +3265,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughPauseFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughPauseFB");
 
     return result;
 }
@@ -3109,8 +3297,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughStartFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughStartFB");
 
     return result;
 }
@@ -3142,8 +3332,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPassthroughLayerSetKeyboardHandsIntensityFB");
+    end_rpc_timer(start_time, runtime_duration, "xrPassthroughLayerSetKeyboardHandsIntensityFB");
 
     return result;
 }
@@ -3177,10 +3369,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&pathCountOutput, d_ctx);
     deserialize_ptr(&paths, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateRenderModelPathsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateRenderModelPathsFB");
 
     return result;
 }
@@ -3211,9 +3405,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetRenderModelPropertiesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetRenderModelPropertiesFB");
 
     return result;
 }
@@ -3244,10 +3440,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&info->next, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrLoadRenderModelFB");
+    end_rpc_timer(start_time, runtime_duration, "xrLoadRenderModelFB");
 
     return result;
 }
@@ -3280,9 +3478,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&boundary2DOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceBoundary2DFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceBoundary2DFB");
 
     return result;
 }
@@ -3313,9 +3513,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&boundingBox2DOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceBoundingBox2DFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceBoundingBox2DFB");
 
     return result;
 }
@@ -3346,9 +3548,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&boundingBox3DOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceBoundingBox3DFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceBoundingBox3DFB");
 
     return result;
 }
@@ -3379,9 +3583,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&roomLayoutOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceRoomLayoutFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceRoomLayoutFB");
 
     return result;
 }
@@ -3412,9 +3618,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&semanticLabelsOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceSemanticLabelsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceSemanticLabelsFB");
 
     return result;
 }
@@ -3447,9 +3655,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestSceneCaptureFB");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestSceneCaptureFB");
 
     return result;
 }
@@ -3482,9 +3692,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorFB");
 
     return result;
 }
@@ -3516,10 +3728,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&componentTypeCountOutput, d_ctx);
     deserialize_ptr(&componentTypes, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateSpaceSupportedComponentsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateSpaceSupportedComponentsFB");
 
     return result;
 }
@@ -3550,9 +3764,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&status, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceComponentStatusFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceComponentStatusFB");
 
     return result;
 }
@@ -3582,9 +3798,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&uuid, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceUuidFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceUuidFB");
 
     return result;
 }
@@ -3615,9 +3833,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetSpaceComponentStatusFB");
+    end_rpc_timer(start_time, runtime_duration, "xrSetSpaceComponentStatusFB");
 
     return result;
 }
@@ -3650,9 +3870,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spaceContainerOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceContainerFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceContainerFB");
 
     return result;
 }
@@ -3685,9 +3907,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySpacesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySpacesFB");
 
     return result;
 }
@@ -3718,9 +3942,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&results, d_ctx);
 
-    end_rpc_timer(start_time, "xrRetrieveSpaceQueryResultsFB");
+    end_rpc_timer(start_time, runtime_duration, "xrRetrieveSpaceQueryResultsFB");
 
     return result;
 }
@@ -3753,11 +3979,13 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&info->spaces, d_ctx);
     deserialize_ptr(&info->users, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrShareSpacesFB");
+    end_rpc_timer(start_time, runtime_duration, "xrShareSpacesFB");
 
     return result;
 }
@@ -3790,9 +4018,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrEraseSpaceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrEraseSpaceFB");
 
     return result;
 }
@@ -3823,9 +4053,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrSaveSpaceFB");
+    end_rpc_timer(start_time, runtime_duration, "xrSaveSpaceFB");
 
     return result;
 }
@@ -3858,10 +4090,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&info->spaces, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrSaveSpaceListFB");
+    end_rpc_timer(start_time, runtime_duration, "xrSaveSpaceListFB");
 
     return result;
 }
@@ -3894,9 +4128,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&user, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpaceUserFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpaceUserFB");
 
     return result;
 }
@@ -3925,8 +4161,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpaceUserFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpaceUserFB");
 
     return result;
 }
@@ -3956,9 +4194,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&userId, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceUserIdFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceUserIdFB");
 
     return result;
 }
@@ -3990,9 +4230,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSwapchainStateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSwapchainStateFB");
 
     return result;
 }
@@ -4022,8 +4264,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrUpdateSwapchainFB");
+    end_rpc_timer(start_time, runtime_duration, "xrUpdateSwapchainFB");
 
     return result;
 }
@@ -4056,9 +4300,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outTriangleMesh, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateTriangleMeshFB");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateTriangleMeshFB");
 
     return result;
 }
@@ -4087,8 +4333,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) tr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyTriangleMeshFB");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyTriangleMeshFB");
 
     return result;
 }
@@ -4117,8 +4365,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshBeginUpdateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshBeginUpdateFB");
 
     return result;
 }
@@ -4148,9 +4398,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outVertexCount, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshBeginVertexBufferUpdateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshBeginVertexBufferUpdateFB");
 
     return result;
 }
@@ -4181,8 +4433,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshEndUpdateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshEndUpdateFB");
 
     return result;
 }
@@ -4211,8 +4465,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshEndVertexBufferUpdateFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshEndVertexBufferUpdateFB");
 
     return result;
 }
@@ -4242,9 +4498,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outIndexBuffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshGetIndexBufferFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshGetIndexBufferFB");
 
     return result;
 }
@@ -4274,9 +4532,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&outVertexBuffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrTriangleMeshGetVertexBufferFB");
+    end_rpc_timer(start_time, runtime_duration, "xrTriangleMeshGetVertexBufferFB");
 
     return result;
 }
@@ -4310,10 +4570,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&pathCountOutput, d_ctx);
     deserialize_ptr(&paths, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateViveTrackerPathsHTCX");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateViveTrackerPathsHTCX");
 
     return result;
 }
@@ -4346,9 +4608,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorHTC");
 
     return result;
 }
@@ -4378,9 +4642,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&name, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpatialAnchorNameHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpatialAnchorNameHTC");
 
     return result;
 }
@@ -4413,9 +4679,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bodyTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateBodyTrackerHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateBodyTrackerHTC");
 
     return result;
 }
@@ -4444,8 +4712,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyBodyTrackerHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyBodyTrackerHTC");
 
     return result;
 }
@@ -4477,9 +4747,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&skeleton, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetBodySkeletonHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrGetBodySkeletonHTC");
 
     return result;
 }
@@ -4510,9 +4782,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateBodyJointsHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateBodyJointsHTC");
 
     return result;
 }
@@ -4545,9 +4819,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&facialTracker, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateFacialTrackerHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateFacialTrackerHTC");
 
     return result;
 }
@@ -4576,8 +4852,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyFacialTrackerHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyFacialTrackerHTC");
 
     return result;
 }
@@ -4607,9 +4885,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&facialExpressions, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetFacialExpressionsHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrGetFacialExpressionsHTC");
 
     return result;
 }
@@ -4641,9 +4921,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&applyInfo->subImages, d_ctx);
 
-    end_rpc_timer(start_time, "xrApplyFoveationHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrApplyFoveationHTC");
 
     return result;
 }
@@ -4676,9 +4958,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&passthrough, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreatePassthroughHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrCreatePassthroughHTC");
 
     return result;
 }
@@ -4707,8 +4991,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyPassthroughHTC");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyPassthroughHTC");
 
     return result;
 }
@@ -4741,9 +5027,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetD3D11GraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetD3D11GraphicsRequirementsKHR");
 
     return result;
 }
@@ -4776,9 +5064,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetD3D12GraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetD3D12GraphicsRequirementsKHR");
 
     return result;
 }
@@ -4812,10 +5102,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&swapchain, d_ctx);
     deserialize_ptr(&surface, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSwapchainAndroidSurfaceKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSwapchainAndroidSurfaceKHR");
 
     return result;
 }
@@ -4848,8 +5140,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetAndroidApplicationThreadKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrSetAndroidApplicationThreadKHR");
 
     return result;
 }
@@ -4882,9 +5176,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&timespecTime, d_ctx);
 
-    end_rpc_timer(start_time, "xrConvertTimeToTimespecTimeKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrConvertTimeToTimespecTimeKHR");
 
     return result;
 }
@@ -4915,10 +5211,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&timespecTime, d_ctx);
     deserialize_ptr(&time, d_ctx);
 
-    end_rpc_timer(start_time, "xrConvertTimespecTimeToTimeKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrConvertTimespecTimeToTimeKHR");
 
     return result;
 }
@@ -4951,9 +5249,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrStructureTypeToString2KHR");
+    end_rpc_timer(start_time, runtime_duration, "xrStructureTypeToString2KHR");
 
     return result;
 }
@@ -4984,8 +5284,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrInitializeLoaderKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrInitializeLoaderKHR");
 
     return result;
 }
@@ -5018,9 +5320,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMetalGraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMetalGraphicsRequirementsKHR");
 
     return result;
 }
@@ -5053,9 +5357,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetOpenGLGraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetOpenGLGraphicsRequirementsKHR");
 
     return result;
 }
@@ -5088,9 +5394,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetOpenGLESGraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetOpenGLESGraphicsRequirementsKHR");
 
     return result;
 }
@@ -5125,9 +5433,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&visibilityMask, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVisibilityMaskKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVisibilityMaskKHR");
 
     return result;
 }
@@ -5162,10 +5472,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVulkanDeviceExtensionsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVulkanDeviceExtensionsKHR");
 
     return result;
 }
@@ -5197,9 +5509,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&vkPhysicalDevice, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVulkanGraphicsDeviceKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVulkanGraphicsDeviceKHR");
 
     return result;
 }
@@ -5230,9 +5544,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&graphicsRequirements, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVulkanGraphicsRequirementsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVulkanGraphicsRequirementsKHR");
 
     return result;
 }
@@ -5265,10 +5581,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVulkanInstanceExtensionsKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVulkanInstanceExtensionsKHR");
 
     return result;
 }
@@ -5302,10 +5620,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&vulkanDevice, d_ctx);
     deserialize_ptr(&vulkanResult, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateVulkanDeviceKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateVulkanDeviceKHR");
 
     return result;
 }
@@ -5337,10 +5657,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&vulkanInstance, d_ctx);
     deserialize_ptr(&vulkanResult, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateVulkanInstanceKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateVulkanInstanceKHR");
 
     return result;
 }
@@ -5371,9 +5693,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&vulkanPhysicalDevice, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVulkanGraphicsDevice2KHR");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVulkanGraphicsDevice2KHR");
 
     return result;
 }
@@ -5406,9 +5730,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&performanceCounter, d_ctx);
 
-    end_rpc_timer(start_time, "xrConvertTimeToWin32PerformanceCounterKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrConvertTimeToWin32PerformanceCounterKHR");
 
     return result;
 }
@@ -5439,9 +5765,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&time, d_ctx);
 
-    end_rpc_timer(start_time, "xrConvertWin32PerformanceCounterToTimeKHR");
+    end_rpc_timer(start_time, runtime_duration, "xrConvertWin32PerformanceCounterToTimeKHR");
 
     return result;
 }
@@ -5474,10 +5802,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&info->buffer, d_ctx);
     deserialize_ptr(&advertisementRequestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrStartColocationAdvertisementMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStartColocationAdvertisementMETA");
 
     return result;
 }
@@ -5508,9 +5838,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&discoveryRequestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrStartColocationDiscoveryMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStartColocationDiscoveryMETA");
 
     return result;
 }
@@ -5541,9 +5873,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrStopColocationAdvertisementMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStopColocationAdvertisementMETA");
 
     return result;
 }
@@ -5574,9 +5908,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrStopColocationDiscoveryMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStopColocationDiscoveryMETA");
 
     return result;
 }
@@ -5609,9 +5945,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&environmentDepthImage, d_ctx);
 
-    end_rpc_timer(start_time, "xrAcquireEnvironmentDepthImageMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrAcquireEnvironmentDepthImageMETA");
 
     return result;
 }
@@ -5642,9 +5980,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&environmentDepthProvider, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateEnvironmentDepthProviderMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateEnvironmentDepthProviderMETA");
 
     return result;
 }
@@ -5675,9 +6015,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&swapchain, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateEnvironmentDepthSwapchainMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateEnvironmentDepthSwapchainMETA");
 
     return result;
 }
@@ -5706,8 +6048,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyEnvironmentDepthProviderMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyEnvironmentDepthProviderMETA");
 
     return result;
 }
@@ -5736,8 +6080,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyEnvironmentDepthSwapchainMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyEnvironmentDepthSwapchainMETA");
 
     return result;
 }
@@ -5769,10 +6115,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&imageCountOutput, d_ctx);
     deserialize_xr_array(&images, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateEnvironmentDepthSwapchainImagesMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateEnvironmentDepthSwapchainImagesMETA");
 
     return result;
 }
@@ -5802,9 +6150,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetEnvironmentDepthSwapchainStateMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetEnvironmentDepthSwapchainStateMETA");
 
     return result;
 }
@@ -5834,8 +6184,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetEnvironmentDepthHandRemovalMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrSetEnvironmentDepthHandRemovalMETA");
 
     return result;
 }
@@ -5864,8 +6216,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrStartEnvironmentDepthProviderMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStartEnvironmentDepthProviderMETA");
 
     return result;
 }
@@ -5894,8 +6248,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrStopEnvironmentDepthProviderMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrStopEnvironmentDepthProviderMETA");
 
     return result;
 }
@@ -5927,9 +6283,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&foveationState, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetFoveationEyeTrackedStateMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetFoveationEyeTrackedStateMETA");
 
     return result;
 }
@@ -5962,9 +6320,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&colorLut, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreatePassthroughColorLutMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrCreatePassthroughColorLutMETA");
 
     return result;
 }
@@ -5993,8 +6353,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyPassthroughColorLutMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyPassthroughColorLutMETA");
 
     return result;
 }
@@ -6024,8 +6386,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrUpdatePassthroughColorLutMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrUpdatePassthroughColorLutMETA");
 
     return result;
 }
@@ -6057,9 +6421,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&preferences, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetPassthroughPreferencesMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetPassthroughPreferencesMETA");
 
     return result;
 }
@@ -6093,10 +6459,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&counterPathCountOutput, d_ctx);
     deserialize_ptr(&counterPaths, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumeratePerformanceMetricsCounterPathsMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumeratePerformanceMetricsCounterPathsMETA");
 
     return result;
 }
@@ -6126,9 +6494,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetPerformanceMetricsStateMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetPerformanceMetricsStateMETA");
 
     return result;
 }
@@ -6159,9 +6529,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&counter, d_ctx);
 
-    end_rpc_timer(start_time, "xrQueryPerformanceMetricsCounterMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrQueryPerformanceMetricsCounterMETA");
 
     return result;
 }
@@ -6191,8 +6563,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetPerformanceMetricsStateMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrSetPerformanceMetricsStateMETA");
 
     return result;
 }
@@ -6225,9 +6599,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&resolution, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetRecommendedLayerResolutionMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetRecommendedLayerResolutionMETA");
 
     return result;
 }
@@ -6259,8 +6635,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPauseSimultaneousHandsAndControllersTrackingMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrPauseSimultaneousHandsAndControllersTrackingMETA");
 
     return result;
 }
@@ -6290,8 +6668,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrResumeSimultaneousHandsAndControllersTrackingMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrResumeSimultaneousHandsAndControllersTrackingMETA");
 
     return result;
 }
@@ -6324,9 +6704,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&triangleMeshOutput, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpaceTriangleMeshMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpaceTriangleMeshMETA");
 
     return result;
 }
@@ -6359,10 +6741,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&info->spaces, d_ctx);
     deserialize_ptr(&requestId, d_ctx);
 
-    end_rpc_timer(start_time, "xrShareSpacesMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrShareSpacesMETA");
 
     return result;
 }
@@ -6394,8 +6778,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrChangeVirtualKeyboardTextContextMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrChangeVirtualKeyboardTextContextMETA");
 
     return result;
 }
@@ -6426,9 +6812,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&keyboard, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateVirtualKeyboardMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateVirtualKeyboardMETA");
 
     return result;
 }
@@ -6460,9 +6848,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&keyboardSpace, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateVirtualKeyboardSpaceMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateVirtualKeyboardSpaceMETA");
 
     return result;
 }
@@ -6491,8 +6881,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyVirtualKeyboardMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyVirtualKeyboardMETA");
 
     return result;
 }
@@ -6524,10 +6916,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&textureIdCountOutput, d_ctx);
     deserialize_ptr(&textureIds, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVirtualKeyboardDirtyTexturesMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVirtualKeyboardDirtyTexturesMETA");
 
     return result;
 }
@@ -6557,9 +6951,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&animationStates, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVirtualKeyboardModelAnimationStatesMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVirtualKeyboardModelAnimationStatesMETA");
 
     return result;
 }
@@ -6589,9 +6985,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&scale, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVirtualKeyboardScaleMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVirtualKeyboardScaleMETA");
 
     return result;
 }
@@ -6622,9 +7020,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&textureData, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetVirtualKeyboardTextureDataMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrGetVirtualKeyboardTextureDataMETA");
 
     return result;
 }
@@ -6655,9 +7055,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&interactorRootPose, d_ctx);
 
-    end_rpc_timer(start_time, "xrSendVirtualKeyboardInputMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrSendVirtualKeyboardInputMETA");
 
     return result;
 }
@@ -6687,8 +7089,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetVirtualKeyboardModelVisibilityMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrSetVirtualKeyboardModelVisibilityMETA");
 
     return result;
 }
@@ -6718,8 +7122,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSuggestVirtualKeyboardLocationMETA");
+    end_rpc_timer(start_time, runtime_duration, "xrSuggestVirtualKeyboardLocationMETA");
 
     return result;
 }
@@ -6752,9 +7158,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpaceFromCoordinateFrameUIDML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpaceFromCoordinateFrameUIDML");
 
     return result;
 }
@@ -6787,9 +7195,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&facialExpressionClient, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateFacialExpressionClientML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateFacialExpressionClientML");
 
     return result;
 }
@@ -6818,8 +7228,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyFacialExpressionClientML");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyFacialExpressionClientML");
 
     return result;
 }
@@ -6851,9 +7263,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&blendShapes, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetFacialExpressionBlendShapePropertiesML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetFacialExpressionBlendShapePropertiesML");
 
     return result;
 }
@@ -6886,9 +7300,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&map, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateExportedLocalizationMapML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateExportedLocalizationMapML");
 
     return result;
 }
@@ -6917,8 +7333,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyExportedLocalizationMapML");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyExportedLocalizationMapML");
 
     return result;
 }
@@ -6948,8 +7366,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnableLocalizationEventsML");
+    end_rpc_timer(start_time, runtime_duration, "xrEnableLocalizationEventsML");
 
     return result;
 }
@@ -6981,10 +7401,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetExportedLocalizationMapDataML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetExportedLocalizationMapDataML");
 
     return result;
 }
@@ -7015,10 +7437,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&importInfo->data, d_ctx);
     deserialize_ptr(&mapUuid, d_ctx);
 
-    end_rpc_timer(start_time, "xrImportLocalizationMapML");
+    end_rpc_timer(start_time, runtime_duration, "xrImportLocalizationMapML");
 
     return result;
 }
@@ -7051,10 +7475,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&mapCountOutput, d_ctx);
     deserialize_ptr(&maps, d_ctx);
 
-    end_rpc_timer(start_time, "xrQueryLocalizationMapsML");
+    end_rpc_timer(start_time, runtime_duration, "xrQueryLocalizationMapsML");
 
     return result;
 }
@@ -7084,8 +7510,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestMapLocalizationML");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestMapLocalizationML");
 
     return result;
 }
@@ -7118,9 +7546,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&markerDetector, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateMarkerDetectorML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateMarkerDetectorML");
 
     return result;
 }
@@ -7151,9 +7581,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateMarkerSpaceML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateMarkerSpaceML");
 
     return result;
 }
@@ -7182,8 +7614,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyMarkerDetectorML");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyMarkerDetectorML");
 
     return result;
 }
@@ -7213,9 +7647,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerDetectorStateML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerDetectorStateML");
 
     return result;
 }
@@ -7246,9 +7682,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&meters, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerLengthML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerLengthML");
 
     return result;
 }
@@ -7279,9 +7717,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&number, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerNumberML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerNumberML");
 
     return result;
 }
@@ -7312,9 +7752,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&reprojectionErrorMeters, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerReprojectionErrorML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerReprojectionErrorML");
 
     return result;
 }
@@ -7347,10 +7789,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerStringML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerStringML");
 
     return result;
 }
@@ -7382,10 +7826,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&markerCountOutput, d_ctx);
     deserialize_ptr(&markers, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkersML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkersML");
 
     return result;
 }
@@ -7415,9 +7861,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&snapshotInfo, d_ctx);
 
-    end_rpc_timer(start_time, "xrSnapshotMarkerDetectorML");
+    end_rpc_timer(start_time, runtime_duration, "xrSnapshotMarkerDetectorML");
 
     return result;
 }
@@ -7450,9 +7898,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorsAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorsAsyncML");
 
     return result;
 }
@@ -7483,9 +7933,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorsCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorsCompleteML");
 
     return result;
 }
@@ -7515,9 +7967,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpatialAnchorStateML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpatialAnchorStateML");
 
     return result;
 }
@@ -7550,9 +8004,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&storage, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorsStorageML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorsStorageML");
 
     return result;
 }
@@ -7583,9 +8039,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrDeleteSpatialAnchorsAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrDeleteSpatialAnchorsAsyncML");
 
     return result;
 }
@@ -7616,9 +8074,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrDeleteSpatialAnchorsCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrDeleteSpatialAnchorsCompleteML");
 
     return result;
 }
@@ -7647,8 +8107,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpatialAnchorsStorageML");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpatialAnchorsStorageML");
 
     return result;
 }
@@ -7679,9 +8141,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrPublishSpatialAnchorsAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrPublishSpatialAnchorsAsyncML");
 
     return result;
 }
@@ -7712,9 +8176,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrPublishSpatialAnchorsCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrPublishSpatialAnchorsCompleteML");
 
     return result;
 }
@@ -7745,9 +8211,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySpatialAnchorsAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySpatialAnchorsAsyncML");
 
     return result;
 }
@@ -7778,9 +8246,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrQuerySpatialAnchorsCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrQuerySpatialAnchorsCompleteML");
 
     return result;
 }
@@ -7811,9 +8281,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrUpdateSpatialAnchorsExpirationAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrUpdateSpatialAnchorsExpirationAsyncML");
 
     return result;
 }
@@ -7844,9 +8316,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrUpdateSpatialAnchorsExpirationCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrUpdateSpatialAnchorsExpirationCompleteML");
 
     return result;
 }
@@ -7878,8 +8352,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetSystemNotificationsML");
+    end_rpc_timer(start_time, runtime_duration, "xrSetSystemNotificationsML");
 
     return result;
 }
@@ -7911,8 +8387,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnableUserCalibrationEventsML");
+    end_rpc_timer(start_time, runtime_duration, "xrEnableUserCalibrationEventsML");
 
     return result;
 }
@@ -7945,10 +8423,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&size->next, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrAllocateWorldMeshBufferML");
+    end_rpc_timer(start_time, runtime_duration, "xrAllocateWorldMeshBufferML");
 
     return result;
 }
@@ -7979,9 +8459,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&detector, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateWorldMeshDetectorML");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateWorldMeshDetectorML");
 
     return result;
 }
@@ -8010,8 +8492,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyWorldMeshDetectorML");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyWorldMeshDetectorML");
 
     return result;
 }
@@ -8041,10 +8525,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_xr(&buffer->next, d_ctx);
     deserialize_ptr(&buffer->buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrFreeWorldMeshBufferML");
+    end_rpc_timer(start_time, runtime_duration, "xrFreeWorldMeshBufferML");
 
     return result;
 }
@@ -8075,9 +8561,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&size, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetWorldMeshBufferRecommendSizeML");
+    end_rpc_timer(start_time, runtime_duration, "xrGetWorldMeshBufferRecommendSizeML");
 
     return result;
 }
@@ -8109,11 +8597,13 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&getInfo->blocks, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestWorldMeshAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestWorldMeshAsyncML");
 
     return result;
 }
@@ -8145,9 +8635,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestWorldMeshCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestWorldMeshCompleteML");
 
     return result;
 }
@@ -8178,9 +8670,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&future, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestWorldMeshStateAsyncML");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestWorldMeshStateAsyncML");
 
     return result;
 }
@@ -8211,9 +8705,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&completion, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestWorldMeshStateCompleteML");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestWorldMeshStateCompleteML");
 
     return result;
 }
@@ -8245,9 +8741,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations->locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrApplyForceFeedbackCurlMNDX");
+    end_rpc_timer(start_time, runtime_duration, "xrApplyForceFeedbackCurlMNDX");
 
     return result;
 }
@@ -8283,10 +8781,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&modeCountOutput, d_ctx);
     deserialize_ptr(&modes, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateReprojectionModesMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateReprojectionModesMSFT");
 
     return result;
 }
@@ -8319,9 +8819,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&controllerModelKeyState, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetControllerModelKeyMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetControllerModelKeyMSFT");
 
     return result;
 }
@@ -8352,9 +8854,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetControllerModelPropertiesMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetControllerModelPropertiesMSFT");
 
     return result;
 }
@@ -8385,9 +8889,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetControllerModelStateMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetControllerModelStateMSFT");
 
     return result;
 }
@@ -8420,10 +8926,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrLoadControllerModelMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrLoadControllerModelMSFT");
 
     return result;
 }
@@ -8456,9 +8964,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateHandMeshSpaceMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateHandMeshSpaceMSFT");
 
     return result;
 }
@@ -8489,9 +8999,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&handMesh, d_ctx);
 
-    end_rpc_timer(start_time, "xrUpdateHandMeshMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrUpdateHandMeshMSFT");
 
     return result;
 }
@@ -8524,10 +9036,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&perceptionAnchor, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorFromPerceptionAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorFromPerceptionAnchorMSFT");
 
     return result;
 }
@@ -8558,9 +9072,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&perceptionAnchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrTryGetPerceptionAnchorFromSpatialAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrTryGetPerceptionAnchorFromSpatialAnchorMSFT");
 
     return result;
 }
@@ -8595,10 +9111,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSceneMarkerDecodedStringMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSceneMarkerDecodedStringMSFT");
 
     return result;
 }
@@ -8631,10 +9149,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSceneMarkerRawDataMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSceneMarkerRawDataMSFT");
 
     return result;
 }
@@ -8666,8 +9186,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrComputeNewSceneMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrComputeNewSceneMSFT");
 
     return result;
 }
@@ -8698,9 +9220,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&scene, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSceneMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSceneMSFT");
 
     return result;
 }
@@ -8731,9 +9255,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&sceneObserver, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSceneObserverMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSceneObserverMSFT");
 
     return result;
 }
@@ -8762,8 +9288,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySceneMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySceneMSFT");
 
     return result;
 }
@@ -8792,8 +9320,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySceneObserverMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySceneObserverMSFT");
 
     return result;
 }
@@ -8826,10 +9356,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&featureCountOutput, d_ctx);
     deserialize_ptr(&features, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateSceneComputeFeaturesMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateSceneComputeFeaturesMSFT");
 
     return result;
 }
@@ -8860,9 +9392,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&components, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSceneComponentsMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSceneComponentsMSFT");
 
     return result;
 }
@@ -8892,9 +9426,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSceneComputeStateMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSceneComputeStateMSFT");
 
     return result;
 }
@@ -8925,9 +9461,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffers, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSceneMeshBuffersMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSceneMeshBuffersMSFT");
 
     return result;
 }
@@ -8958,9 +9496,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&locations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateSceneComponentsMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateSceneComponentsMSFT");
 
     return result;
 }
@@ -8992,8 +9532,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDeserializeSceneMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDeserializeSceneMSFT");
 
     return result;
 }
@@ -9026,10 +9568,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&readOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSerializedSceneFragmentDataMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSerializedSceneFragmentDataMSFT");
 
     return result;
 }
@@ -9062,9 +9606,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&anchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorMSFT");
 
     return result;
 }
@@ -9095,9 +9641,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorSpaceMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorSpaceMSFT");
 
     return result;
 }
@@ -9126,8 +9674,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpatialAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpatialAnchorMSFT");
 
     return result;
 }
@@ -9158,8 +9708,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrClearSpatialAnchorStoreMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrClearSpatialAnchorStoreMSFT");
 
     return result;
 }
@@ -9190,9 +9742,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spatialAnchor, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorFromPersistedNameMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorFromPersistedNameMSFT");
 
     return result;
 }
@@ -9222,9 +9776,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spatialAnchorStore, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialAnchorStoreConnectionMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialAnchorStoreConnectionMSFT");
 
     return result;
 }
@@ -9253,8 +9809,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpatialAnchorStoreConnectionMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpatialAnchorStoreConnectionMSFT");
 
     return result;
 }
@@ -9286,10 +9844,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spatialAnchorNameCountOutput, d_ctx);
     deserialize_ptr(&spatialAnchorNames, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumeratePersistedSpatialAnchorNamesMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumeratePersistedSpatialAnchorNamesMSFT");
 
     return result;
 }
@@ -9319,8 +9879,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrPersistSpatialAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrPersistSpatialAnchorMSFT");
 
     return result;
 }
@@ -9350,8 +9912,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrUnpersistSpatialAnchorMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrUnpersistSpatialAnchorMSFT");
 
     return result;
 }
@@ -9384,9 +9948,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSpatialGraphNodeSpaceMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSpatialGraphNodeSpaceMSFT");
 
     return result;
 }
@@ -9415,8 +9981,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpatialGraphNodeBindingMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpatialGraphNodeBindingMSFT");
 
     return result;
 }
@@ -9447,9 +10015,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSpatialGraphNodeBindingPropertiesMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSpatialGraphNodeBindingPropertiesMSFT");
 
     return result;
 }
@@ -9480,9 +10050,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&nodeBinding, d_ctx);
 
-    end_rpc_timer(start_time, "xrTryCreateSpatialGraphStaticNodeBindingMSFT");
+    end_rpc_timer(start_time, runtime_duration, "xrTryCreateSpatialGraphStaticNodeBindingMSFT");
 
     return result;
 }
@@ -9514,9 +10086,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetAudioInputDeviceGuidOculus");
+    end_rpc_timer(start_time, runtime_duration, "xrGetAudioInputDeviceGuidOculus");
 
     return result;
 }
@@ -9546,9 +10120,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetAudioOutputDeviceGuidOculus");
+    end_rpc_timer(start_time, runtime_duration, "xrGetAudioOutputDeviceGuidOculus");
 
     return result;
 }
@@ -9582,10 +10158,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&cameraCountOutput, d_ctx);
     deserialize_ptr(&cameras, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateExternalCamerasOCULUS");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateExternalCamerasOCULUS");
 
     return result;
 }
@@ -9618,8 +10196,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetTrackingOptimizationSettingsHintQCOM");
+    end_rpc_timer(start_time, runtime_duration, "xrSetTrackingOptimizationSettingsHintQCOM");
 
     return result;
 }
@@ -9651,8 +10231,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetEnvironmentDepthEstimationVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrSetEnvironmentDepthEstimationVARJO");
 
     return result;
 }
@@ -9685,9 +10267,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateMarkerSpaceVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateMarkerSpaceVARJO");
 
     return result;
 }
@@ -9718,9 +10302,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&size, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetMarkerSizeVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrGetMarkerSizeVARJO");
 
     return result;
 }
@@ -9751,8 +10337,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetMarkerTrackingPredictionVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrSetMarkerTrackingPredictionVARJO");
 
     return result;
 }
@@ -9783,8 +10371,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetMarkerTrackingTimeoutVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrSetMarkerTrackingTimeoutVARJO");
 
     return result;
 }
@@ -9814,8 +10404,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetMarkerTrackingVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrSetMarkerTrackingVARJO");
 
     return result;
 }
@@ -9847,8 +10439,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSetViewOffsetVARJO");
+    end_rpc_timer(start_time, runtime_duration, "xrSetViewOffsetVARJO");
 
     return result;
 }
@@ -9880,9 +10474,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&index, d_ctx);
 
-    end_rpc_timer(start_time, "xrAcquireSwapchainImage");
+    end_rpc_timer(start_time, runtime_duration, "xrAcquireSwapchainImage");
 
     return result;
 }
@@ -9913,8 +10509,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrApplyHapticFeedback");
+    end_rpc_timer(start_time, runtime_duration, "xrApplyHapticFeedback");
 
     return result;
 }
@@ -9944,8 +10542,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrAttachSessionActionSets");
+    end_rpc_timer(start_time, runtime_duration, "xrAttachSessionActionSets");
 
     return result;
 }
@@ -9975,8 +10575,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrBeginFrame");
+    end_rpc_timer(start_time, runtime_duration, "xrBeginFrame");
 
     return result;
 }
@@ -10006,8 +10608,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrBeginSession");
+    end_rpc_timer(start_time, runtime_duration, "xrBeginSession");
 
     return result;
 }
@@ -10038,9 +10642,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&action, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateAction");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateAction");
 
     return result;
 }
@@ -10071,9 +10677,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&actionSet, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateActionSet");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateActionSet");
 
     return result;
 }
@@ -10104,9 +10712,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateActionSpace");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateActionSpace");
 
     return result;
 }
@@ -10136,9 +10746,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&instance, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateInstance");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateInstance");
 
     return result;
 }
@@ -10169,9 +10781,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&space, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateReferenceSpace");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateReferenceSpace");
 
     return result;
 }
@@ -10202,9 +10816,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&session, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSession");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSession");
 
     return result;
 }
@@ -10235,9 +10851,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&swapchain, d_ctx);
 
-    end_rpc_timer(start_time, "xrCreateSwapchain");
+    end_rpc_timer(start_time, runtime_duration, "xrCreateSwapchain");
 
     return result;
 }
@@ -10266,8 +10884,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyAction");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyAction");
 
     return result;
 }
@@ -10296,8 +10916,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyActionSet");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyActionSet");
 
     return result;
 }
@@ -10326,8 +10948,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroyInstance");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroyInstance");
 
     return result;
 }
@@ -10356,8 +10980,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySession");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySession");
 
     return result;
 }
@@ -10386,8 +11012,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySpace");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySpace");
 
     return result;
 }
@@ -10416,8 +11044,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrDestroySwapchain");
+    end_rpc_timer(start_time, runtime_duration, "xrDestroySwapchain");
 
     return result;
 }
@@ -10447,8 +11077,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrEndFrame");
+    end_rpc_timer(start_time, runtime_duration, "xrEndFrame");
 
     return result;
 }
@@ -10477,8 +11109,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrEndSession");
+    end_rpc_timer(start_time, runtime_duration, "xrEndSession");
 
     return result;
 }
@@ -10509,10 +11143,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&propertyCountOutput, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateApiLayerProperties");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateApiLayerProperties");
 
     return result;
 }
@@ -10545,10 +11181,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&sourceCountOutput, d_ctx);
     deserialize_ptr(&sources, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateBoundSourcesForAction");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateBoundSourcesForAction");
 
     return result;
 }
@@ -10582,10 +11220,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&environmentBlendModeCountOutput, d_ctx);
     deserialize_ptr(&environmentBlendModes, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateEnvironmentBlendModes");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateEnvironmentBlendModes");
 
     return result;
 }
@@ -10617,10 +11257,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&propertyCountOutput, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateInstanceExtensionProperties");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateInstanceExtensionProperties");
 
     return result;
 }
@@ -10652,10 +11294,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spaceCountOutput, d_ctx);
     deserialize_ptr(&spaces, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateReferenceSpaces");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateReferenceSpaces");
 
     return result;
 }
@@ -10687,10 +11331,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&formatCountOutput, d_ctx);
     deserialize_ptr(&formats, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateSwapchainFormats");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateSwapchainFormats");
 
     return result;
 }
@@ -10722,10 +11368,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&imageCountOutput, d_ctx);
     deserialize_xr_array(&images, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateSwapchainImages");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateSwapchainImages");
 
     return result;
 }
@@ -10759,10 +11407,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&viewCountOutput, d_ctx);
     deserialize_ptr(&views, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateViewConfigurationViews");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateViewConfigurationViews");
 
     return result;
 }
@@ -10795,10 +11445,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&viewConfigurationTypeCountOutput, d_ctx);
     deserialize_ptr(&viewConfigurationTypes, d_ctx);
 
-    end_rpc_timer(start_time, "xrEnumerateViewConfigurations");
+    end_rpc_timer(start_time, runtime_duration, "xrEnumerateViewConfigurations");
 
     return result;
 }
@@ -10829,9 +11481,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetActionStateBoolean");
+    end_rpc_timer(start_time, runtime_duration, "xrGetActionStateBoolean");
 
     return result;
 }
@@ -10862,9 +11516,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetActionStateFloat");
+    end_rpc_timer(start_time, runtime_duration, "xrGetActionStateFloat");
 
     return result;
 }
@@ -10895,9 +11551,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetActionStatePose");
+    end_rpc_timer(start_time, runtime_duration, "xrGetActionStatePose");
 
     return result;
 }
@@ -10928,9 +11586,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&state, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetActionStateVector2f");
+    end_rpc_timer(start_time, runtime_duration, "xrGetActionStateVector2f");
 
     return result;
 }
@@ -10961,9 +11621,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&interactionProfile, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetCurrentInteractionProfile");
+    end_rpc_timer(start_time, runtime_duration, "xrGetCurrentInteractionProfile");
 
     return result;
 }
@@ -10996,10 +11658,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetInputSourceLocalizedName");
+    end_rpc_timer(start_time, runtime_duration, "xrGetInputSourceLocalizedName");
 
     return result;
 }
@@ -11029,9 +11693,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&instanceProperties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetInstanceProperties");
+    end_rpc_timer(start_time, runtime_duration, "xrGetInstanceProperties");
 
     return result;
 }
@@ -11062,9 +11728,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bounds, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetReferenceSpaceBoundsRect");
+    end_rpc_timer(start_time, runtime_duration, "xrGetReferenceSpaceBoundsRect");
 
     return result;
 }
@@ -11095,9 +11763,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&systemId, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSystem");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSystem");
 
     return result;
 }
@@ -11128,9 +11798,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&properties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetSystemProperties");
+    end_rpc_timer(start_time, runtime_duration, "xrGetSystemProperties");
 
     return result;
 }
@@ -11162,9 +11834,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&configurationProperties, d_ctx);
 
-    end_rpc_timer(start_time, "xrGetViewConfigurationProperties");
+    end_rpc_timer(start_time, runtime_duration, "xrGetViewConfigurationProperties");
 
     return result;
 }
@@ -11196,9 +11870,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&location, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateSpace");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateSpace");
 
     return result;
 }
@@ -11229,9 +11905,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&spaceLocations, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateSpaces");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateSpaces");
 
     return result;
 }
@@ -11265,11 +11943,13 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&viewState, d_ctx);
     deserialize_ptr(&viewCountOutput, d_ctx);
     deserialize_ptr(&views, d_ctx);
 
-    end_rpc_timer(start_time, "xrLocateViews");
+    end_rpc_timer(start_time, runtime_duration, "xrLocateViews");
 
     return result;
 }
@@ -11302,10 +11982,12 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&bufferCountOutput, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrPathToString");
+    end_rpc_timer(start_time, runtime_duration, "xrPathToString");
 
     return result;
 }
@@ -11335,9 +12017,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&eventData, d_ctx);
 
-    end_rpc_timer(start_time, "xrPollEvent");
+    end_rpc_timer(start_time, runtime_duration, "xrPollEvent");
 
     return result;
 }
@@ -11367,8 +12051,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrReleaseSwapchainImage");
+    end_rpc_timer(start_time, runtime_duration, "xrReleaseSwapchainImage");
 
     return result;
 }
@@ -11397,8 +12083,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) try {
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrRequestExitSession");
+    end_rpc_timer(start_time, runtime_duration, "xrRequestExitSession");
 
     return result;
 }
@@ -11429,9 +12117,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrResultToString");
+    end_rpc_timer(start_time, runtime_duration, "xrResultToString");
 
     return result;
 }
@@ -11461,8 +12151,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrStopHapticFeedback");
+    end_rpc_timer(start_time, runtime_duration, "xrStopHapticFeedback");
 
     return result;
 }
@@ -11493,9 +12185,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&path, d_ctx);
 
-    end_rpc_timer(start_time, "xrStringToPath");
+    end_rpc_timer(start_time, runtime_duration, "xrStringToPath");
 
     return result;
 }
@@ -11526,9 +12220,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&buffer, d_ctx);
 
-    end_rpc_timer(start_time, "xrStructureTypeToString");
+    end_rpc_timer(start_time, runtime_duration, "xrStructureTypeToString");
 
     return result;
 }
@@ -11558,8 +12254,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSuggestInteractionProfileBindings");
+    end_rpc_timer(start_time, runtime_duration, "xrSuggestInteractionProfileBindings");
 
     return result;
 }
@@ -11589,8 +12287,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrSyncActions");
+    end_rpc_timer(start_time, runtime_duration, "xrSyncActions");
 
     return result;
 }
@@ -11621,9 +12321,11 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
     deserialize_ptr(&frameState, d_ctx);
 
-    end_rpc_timer(start_time, "xrWaitFrame");
+    end_rpc_timer(start_time, runtime_duration, "xrWaitFrame");
 
     return result;
 }
@@ -11653,8 +12355,10 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
 
     XrResult result;
     deserialize(&result, d_ctx);
+    XrDuration runtime_duration;
+    deserialize(&runtime_duration, d_ctx);
 
-    end_rpc_timer(start_time, "xrWaitSwapchainImage");
+    end_rpc_timer(start_time, runtime_duration, "xrWaitSwapchainImage");
 
     return result;
 }

@@ -185,7 +185,9 @@ void Server::instance_handler(MessageLockIn msg_in) {
     createInfo->enabledExtensionNames = enabled_extensions.data();
 
     // Call xrCreateInstance
+    XrTime start_time = get_time();
     XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
+    XrDuration runtime_duration = get_time() - start_time;
 
     if (XR_SUCCEEDED(_result)) {
         saved_instance = *instance;
@@ -203,6 +205,7 @@ void Server::instance_handler(MessageLockIn msg_in) {
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
     SerializeContext s_ctx(msg_out.buffer);
     serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
     serialize_ptr(instance, 1, s_ctx);
     msg_out.flush();
 
