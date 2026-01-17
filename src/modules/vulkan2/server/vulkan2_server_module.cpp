@@ -638,7 +638,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     xr_result = function_loader->pfn_xrAcquireSwapchainImage(swapchain_handle, nullptr, &dest_index);
 
     auto& shared_image = swapchain_state.shared_images.at(src_index);
-    auto& runtime_image = swapchain_state.shared_images.at(dest_index);
+    auto& runtime_image = swapchain_state.runtime_images.at(dest_index);
 
     VkImage src_image = shared_image.image;
     VkImage dest_image = runtime_image.image;
@@ -706,7 +706,6 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     src_acquire_barrier.subresourceRange = image_subresource_range;
 
     auto& dest_transition_barrier = image_barriers[1];
-    dest_transition_barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
     dest_transition_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     dest_transition_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
     dest_transition_barrier.image = dest_image;

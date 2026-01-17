@@ -221,6 +221,8 @@ XrResult SwapchainState::release(uint32_t& index_out) {
 
     SwapchainImage& swapchain_image = images[release_head];
 
+    // we reset this fence in release instead of acquire because it should stay signaled until the
+    // first release (shouldn't wait if we've never released).
     result = vk.ResetFences(device, 1, &swapchain_image.copying_done_fence);
     if (result != VK_SUCCESS) {
         spdlog::error("Failed to reset image fence: {}", (int)result);

@@ -527,7 +527,7 @@ VkCommandBuffer record_release_command_buffer(
     VkImageMemoryBarrier image_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
     // full flush and invalidate of image memory, probably not necessary but doesn't hurt.
     image_barrier.srcAccessMask = VK_ACCESS_MEMORY_WRITE_BIT;
-    image_barrier.dstAccessMask = VK_ACCESS_MEMORY_WRITE_BIT;
+    image_barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
     // transition to TRANSFER_SRC_OPTIMAL
     image_barrier.oldLayout = image_layout;
     image_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
