@@ -226,73 +226,6 @@ int32_t find_memory_type(
     return -1;
 }
 
-std::tuple<VkImage, VkDeviceMemory, xrtp_Handle, uint64_t, uint32_t> create_image(
-    const VkImageCreateInfo& image_create_info,
-    const VkPhysicalDeviceMemoryProperties& memory_properties,
-    VkMemoryPropertyFlags required_flags
-) {
-    VkResult vk_result{};
-
-    VkImage image{};
-    vk_result = vkCreateImage(saved_vk_device, &image_create_info, nullptr, &image);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to create VkImage: " + std::to_string(vk_result));
-    }
-
-    VkMemoryRequirements memory_requirements{};
-    vkGetImageMemoryRequirements(saved_vk_device, image, &memory_requirements);
-
-    int32_t memory_type = find_memory_type(memory_properties, memory_requirements.memoryTypeBits, required_flags);
-    if (memory_type == -1) {
-        throw std::runtime_error("Unable to find memory type with required bits: " + 
-            std::to_string(memory_requirements.memoryTypeBits));
-    }
-    uint32_t memory_type_index = static_cast<uint32_t>(memory_type);
-
-    VkExportMemoryAllocateInfo export_alloc_info{VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO};
-#ifdef _WIN32
-    export_alloc_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT;
-#else
-    export_alloc_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-#endif
-
-    VkMemoryAllocateInfo alloc_info{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    alloc_info.pNext = &export_alloc_info;
-    alloc_info.allocationSize = memory_requirements.size;
-    alloc_info.memoryTypeIndex = memory_type_index;
-
-    VkDeviceMemory memory{};
-    vk_result = vkAllocateMemory(saved_vk_device, &alloc_info, nullptr, &memory);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to allocate swapchain memory: " + std::to_string(vk_result));
-    }
-
-    vk_result = vkBindImageMemory(saved_vk_device, image, memory, 0);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to bind memory to image: " + std::to_string(vk_result));
-    }
-
-    xrtp_Handle handle{};
-
-#ifdef _WIN32
-    #error TODO
-#else
-    VkMemoryGetFdInfoKHR get_fd_info{VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR};
-    get_fd_info.memory = memory;
-    get_fd_info.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-
-    int fd{};
-    vk_result = pfn_vkGetMemoryFdKHR(saved_vk_device, &get_fd_info, &fd);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to get memory fd: " + std::to_string(vk_result));
-    }
-
-    handle = static_cast<xrtp_Handle>(fd);
-#endif
-
-    return {image, memory, handle, memory_requirements.size, memory_type_index};
-}
-
 std::tuple<VkSemaphore, xrtp_Handle> create_shared_semaphore() {
     VkResult result{};
 
@@ -361,6 +294,117 @@ VkFence create_signaled_fence() {
     return fence;
 }
 
+std::tuple<SharedImage, ImageHandles, uint64_t, uint32_t> create_image(
+    const XrSwapchainCreateInfo& create_info,
+    const VkPhysicalDeviceMemoryProperties& memory_properties,
+    VkMemoryPropertyFlags required_flags
+) {
+    VkResult vk_result{};
+
+    VkExternalMemoryImageCreateInfo external_image_create_info{VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO};
+#ifdef _WIN32
+    external_image_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT;
+#else
+    external_image_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+#endif
+
+    VkImageCreateInfo image_create_info = create_vk_image_create_info(create_info);
+    image_create_info.pNext = &external_image_create_info;
+    image_create_info.usage |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+
+    VkImageAspectFlags aspect = get_aspect_from_format(image_create_info.format);
+    uint32_t num_levels = image_create_info.mipLevels;
+    uint32_t num_layers = image_create_info.arrayLayers;
+
+    VkImage image{};
+    vk_result = vkCreateImage(saved_vk_device, &image_create_info, nullptr, &image);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Unable to create VkImage: " + std::to_string(vk_result));
+    }
+
+    VkMemoryRequirements memory_requirements{};
+    vkGetImageMemoryRequirements(saved_vk_device, image, &memory_requirements);
+
+    int32_t memory_type = find_memory_type(memory_properties, memory_requirements.memoryTypeBits, required_flags);
+    if (memory_type == -1) {
+        throw std::runtime_error("Unable to find memory type with required bits: " + 
+            std::to_string(memory_requirements.memoryTypeBits));
+    }
+    uint32_t memory_type_index = static_cast<uint32_t>(memory_type);
+
+    VkMemoryDedicatedAllocateInfo dedicated_alloc_info{VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO};
+    dedicated_alloc_info.image = image;
+
+    VkExportMemoryAllocateInfo export_alloc_info{VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO};
+    export_alloc_info.pNext = &dedicated_alloc_info;
+#ifdef _WIN32
+    export_alloc_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT;
+#else
+    export_alloc_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+#endif
+
+    VkMemoryAllocateInfo alloc_info{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
+    alloc_info.pNext = &export_alloc_info;
+    alloc_info.allocationSize = memory_requirements.size;
+    alloc_info.memoryTypeIndex = memory_type_index;
+
+    VkDeviceMemory memory{};
+    vk_result = vkAllocateMemory(saved_vk_device, &alloc_info, nullptr, &memory);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to allocate swapchain memory: " + std::to_string(vk_result));
+    }
+
+    vk_result = vkBindImageMemory(saved_vk_device, image, memory, 0);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to bind memory to image: " + std::to_string(vk_result));
+    }
+
+    xrtp_Handle image_handle{};
+
+#ifdef _WIN32
+    #error TODO
+#else
+    VkMemoryGetFdInfoKHR get_fd_info{VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR};
+    get_fd_info.memory = memory;
+    get_fd_info.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+
+    int fd{};
+    vk_result = pfn_vkGetMemoryFdKHR(saved_vk_device, &get_fd_info, &fd);
+    if (vk_result != VK_SUCCESS) {
+        throw std::runtime_error("Failed to get memory fd: " + std::to_string(vk_result));
+    }
+
+    image_handle = static_cast<xrtp_Handle>(fd);
+#endif
+
+    auto [rendering_done, rendering_done_handle] = create_shared_semaphore();
+    auto [copying_done, copying_done_handle] = create_shared_semaphore();
+
+    auto command_buffer = create_command_buffer();
+    auto command_buffer_fence = create_signaled_fence();
+
+    return {
+        SharedImage{
+            .image = image,
+            .shared_memory = memory,
+            .rendering_done = rendering_done,
+            .copying_done = copying_done,
+            .command_buffer = command_buffer,
+            .command_buffer_fence = command_buffer_fence,
+            .aspect = aspect,
+            .num_levels = num_levels,
+            .num_layers = num_layers
+        },
+        ImageHandles{
+            .memory_handle = image_handle,
+            .rendering_done_handle = rendering_done_handle,
+            .copying_done_handle = copying_done_handle
+        },
+        memory_requirements.size,
+        memory_type_index
+    };
+}
+
 // TODO: might need to select and format that allows export
 SwapchainState& create_swapchain_state(
     SessionState& session_state,
@@ -393,8 +437,6 @@ SwapchainState& create_swapchain_state(
 
     handles_out.reserve(num_images);
 
-    auto image_create_info = create_vk_image_create_info(create_info);
-
     VkPhysicalDeviceMemoryProperties memory_properties{};
     vkGetPhysicalDeviceMemoryProperties(saved_vk_physical_device, &memory_properties);
 
@@ -406,40 +448,20 @@ SwapchainState& create_swapchain_state(
     bool is_static = (create_info.createFlags & XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT) != 0;
 
     for (uint32_t i = 0; i < num_images; i++) {
-        auto [shared_image_handle, memory, memory_handle, memory_size, memory_type_index] = create_image(
-            image_create_info,
+        auto [shared_image, image_handles, memory_size, memory_type_index] = create_image(
+            create_info,
             memory_properties,
             required_flags
         );
-        
-        auto [rendering_done, rendering_done_handle] = create_shared_semaphore();
-        auto [copying_done, copying_done_handle] = create_shared_semaphore();
 
-        auto command_buffer = create_command_buffer();
-        auto command_buffer_fence = create_signaled_fence();
+        shared_images.emplace_back(std::move(shared_image));
 
-        auto runtime_image_handle = runtime_image_structs[i].image;
+        runtime_images.emplace_back(RuntimeImage{runtime_image_structs[i].image});
 
-        shared_images.emplace_back(SharedImage{
-            shared_image_handle,
-            memory,
-            rendering_done,
-            copying_done,
-            command_buffer,
-            command_buffer_fence
-        });
+        handles_out.emplace_back(std::move(image_handles));
 
-        runtime_images.emplace_back(RuntimeImage{
-            runtime_image_handle,
-        });
-
-        handles_out.emplace_back(ImageHandles{
-            memory_handle,
-            rendering_done_handle,
-            copying_done_handle
-        });
-
-        // just overwrite these values for each image because they should be the same 
+        // just overwrite these values for each image because they should be the same
+        assert(i == 0 || (memory_size_out == memory_size && memory_type_index_out == memory_type_index)); 
         memory_size_out = memory_size;
         memory_type_index_out = memory_type_index;
     }
@@ -485,9 +507,12 @@ void handle_create_swapchain(MessageLockIn msg_in) {
     deserialize(&session_handle, d_ctx);
     deserialize_ptr(&create_info, d_ctx);
 
+    // add transfer destination usage (only for runtime swapchain)
+    XrSwapchainUsageFlags old_flags = create_info->usageFlags;
+    create_info->usageFlags |= XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT;
+
     XrSwapchain swapchain_handle{};
     XrResult result = function_loader->pfn_xrCreateSwapchain(session_handle, create_info, &swapchain_handle);
-
     if (result != XR_SUCCESS) {
         spdlog::error("Failed to create native swapchain: {}", (int)result);
         auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN_RETURN);
@@ -496,6 +521,9 @@ void handle_create_swapchain(MessageLockIn msg_in) {
         msg_out.flush();
         return;
     }
+
+    // restore usage flags (we don't want to create shared images with TRANSFER_DST_BIT)
+    create_info->usageFlags = old_flags;
 
     // Create corresponding swapchain and send memory and semaphore handles over handle exchange
     
@@ -538,17 +566,19 @@ void destroy_swapchain(XrSwapchain swapchain_handle) {
     SwapchainState& swapchain_state = get_swapchain_state(swapchain_handle).value();
     SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
 
+    vkQueueWaitIdle(saved_vk_queue);
+
     for (auto& image : swapchain_state.shared_images) {
-        vkDestroyImage(saved_vk_device, image.image, nullptr);
-        vkFreeMemory(saved_vk_device, image.shared_memory, nullptr);
-        vkDestroySemaphore(saved_vk_device, image.rendering_done, nullptr);
-        vkDestroySemaphore(saved_vk_device, image.copying_done, nullptr);
         vkFreeCommandBuffers(
             saved_vk_device,
             saved_vk_command_pool,
             1,
             &image.command_buffer
         );
+        vkDestroyImage(saved_vk_device, image.image, nullptr);
+        vkFreeMemory(saved_vk_device, image.shared_memory, nullptr);
+        vkDestroySemaphore(saved_vk_device, image.rendering_done, nullptr);
+        vkDestroySemaphore(saved_vk_device, image.copying_done, nullptr);
     }
 
     destroy_swapchain_state(swapchain_handle);
@@ -646,6 +676,8 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     VkSemaphore copying_done = shared_image.copying_done;
     VkCommandBuffer command_buffer = shared_image.command_buffer;
     VkFence command_buffer_fence = shared_image.command_buffer_fence;
+    VkImageAspectFlags aspect = shared_image.aspect;
+    uint32_t num_layers = shared_image.num_layers;
 
     // wait on fence to make sure that the command buffer is not still being used
     // synchronization with the client should already guarantee this, but this is just for safety
@@ -670,27 +702,19 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     }
 
     // initialize these values that will be reused later. represents the first mip and all layers
-    // and the color/depth-stencil aspect for images.
-    VkImageAspectFlags image_aspect_flags;
-    if (swapchain_state.image_type == ImageType::COLOR) {
-        image_aspect_flags = VK_IMAGE_ASPECT_COLOR_BIT;
-    }
-    else if (swapchain_state.image_type == ImageType::DEPTH_STENCIL) {
-        image_aspect_flags = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
-    }
 
     VkImageSubresourceRange image_subresource_range{};
-    image_subresource_range.aspectMask = image_aspect_flags;
+    image_subresource_range.aspectMask = aspect;
     image_subresource_range.baseMipLevel = 0;
     image_subresource_range.levelCount = 1;
     image_subresource_range.baseArrayLayer = 0;
-    image_subresource_range.layerCount = VK_REMAINING_ARRAY_LAYERS;
+    image_subresource_range.layerCount = num_layers;
 
     VkImageSubresourceLayers image_subresource_layers{};
-    image_subresource_layers.aspectMask = image_aspect_flags;
+    image_subresource_layers.aspectMask = aspect;
     image_subresource_layers.mipLevel = 0;
     image_subresource_layers.baseArrayLayer = 0;
-    image_subresource_layers.layerCount = VK_REMAINING_ARRAY_LAYERS;
+    image_subresource_layers.layerCount = num_layers;
 
     std::array<VkImageMemoryBarrier, 2> image_barriers{{
         {VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER},

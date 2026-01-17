@@ -56,6 +56,10 @@ struct SwapchainImage {
     VkCommandBuffer acquire_command_buffer;
     VkCommandBuffer release_command_buffer;
     bool has_been_acquired = false;
+
+    VkImageAspectFlags aspect;
+    uint32_t num_levels;
+    uint32_t num_layers;
 };
 
 class SwapchainState {

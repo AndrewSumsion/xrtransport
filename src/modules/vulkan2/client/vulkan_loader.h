@@ -33,6 +33,7 @@ struct VulkanLoader {
     PFN_vkBeginCommandBuffer BeginCommandBuffer = nullptr;
     PFN_vkEndCommandBuffer EndCommandBuffer = nullptr;
     PFN_vkCmdPipelineBarrier CmdPipelineBarrier = nullptr;
+    PFN_vkQueueWaitIdle QueueWaitIdle = nullptr;
 #ifdef _WIN32
 
 #else
@@ -74,6 +75,7 @@ struct VulkanLoader {
         load_function("vkBeginCommandBuffer", BeginCommandBuffer);
         load_function("vkEndCommandBuffer", EndCommandBuffer);
         load_function("vkCmdPipelineBarrier", CmdPipelineBarrier);
+        load_function("vkQueueWaitIdle", QueueWaitIdle);
 #ifdef _WIN32
 
 #else

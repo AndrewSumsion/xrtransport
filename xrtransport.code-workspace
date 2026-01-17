@@ -56,7 +56,7 @@
 				"preLaunchTask": "Delete Monado Socket"
 			},
 			{
-				"name": "Launch xrtransport server",
+				"name": "Launch xrtransport server (Monado)",
 				"type": "cppdbg",
 				"request": "launch",
 				"program": "${workspaceFolder:xrtransport}/build/default/debug/install/server/xrtransport_server_main",
@@ -78,6 +78,25 @@
 				],
 				"args": ["unix", "/tmp/xrtransport/transport.sock"],
 				"preLaunchTask": "Delay"
+			},
+			{
+				"name": "Launch xrtransport server (Standalone)",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${workspaceFolder:xrtransport}/build/default/debug/install/server/xrtransport_server_main",
+				"cwd": "${workspaceFolder:xrtransport}/build/default/debug/install/server",
+				"externalConsole": false,
+				"environment": [
+					{
+						"name": "XRTP_SERVER_FD_EXCHANGE_PATH",
+						"value": "/tmp/xrtransport/fd_exchange.sock"
+					},
+					{
+						"name": "XRTP_CLIENT_FD_EXCHANGE_PATH",
+						"value": "/tmp/xrtransport/fd_exchange.sock"
+					}
+				],
+				"args": ["unix", "/tmp/xrtransport/transport.sock"],
 			},
 			{
 				"name": "Launch hello_xr on xrtransport",
@@ -102,7 +121,7 @@
 		"compounds": [
 			{
 				"name": "Launch Monado and xrtransport server",
-				"configurations": ["Launch Monado", "Launch xrtransport server"]
+				"configurations": ["Launch Monado", "Launch xrtransport server (Monado)"]
 			}
 		]
 	}

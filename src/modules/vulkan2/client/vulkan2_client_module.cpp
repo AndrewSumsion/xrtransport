@@ -1,12 +1,3 @@
-/**
- * TODO:
- * - move image creation to server, import images here
- * - also import one semaphore per image, for which a signal operation is queued up when xrReleaseSwapchainImage is called
- * - do ALL the due dilligence to make sure that exporting and importing images will work
- * - create fence executor on server that sends a swapchain image ready message to the client, which will signal a local fence (binary semaphore)
- *   - this is because sharing memory and semaphores is well-supported, but sharing fences is less well-supported, so we'll just wait on fences via IPC.
- */
-
 #include "vulkan2_common.h"
 #include "image_handles.h"
 #include "vulkan_loader.h"
@@ -426,7 +417,10 @@ VkCommandBuffer record_acquire_command_buffer(
     VkDevice device,
     VkCommandPool command_pool,
     VkImage image,
-    ImageType image_type
+    ImageType image_type,
+    VkImageAspectFlags aspect,
+    uint32_t num_levels,
+    uint32_t num_layers
 ) {
     VkResult result{};
 
@@ -447,27 +441,23 @@ VkCommandBuffer record_acquire_command_buffer(
         throw std::runtime_error("Unable to begin command buffer: " + std::to_string(result));
     }
 
-    VkImageAspectFlags image_aspect;
     VkImageLayout image_layout;
     if (image_type == ImageType::COLOR) {
-        image_aspect = VK_IMAGE_ASPECT_COLOR_BIT;
         image_layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
     }
     else {
-        image_aspect = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
         image_layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
     }
 
     VkImageMemoryBarrier image_transition_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-    image_transition_barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
     image_transition_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     image_transition_barrier.newLayout = image_layout;
     image_transition_barrier.image = image;
-    image_transition_barrier.subresourceRange.aspectMask = image_aspect;
+    image_transition_barrier.subresourceRange.aspectMask = aspect;
     image_transition_barrier.subresourceRange.baseMipLevel = 0;
-    image_transition_barrier.subresourceRange.levelCount = VK_REMAINING_MIP_LEVELS;
+    image_transition_barrier.subresourceRange.levelCount = num_levels;
     image_transition_barrier.subresourceRange.baseArrayLayer = 0;
-    image_transition_barrier.subresourceRange.layerCount = VK_REMAINING_ARRAY_LAYERS;
+    image_transition_barrier.subresourceRange.layerCount = num_layers;
 
     vk->CmdPipelineBarrier(
         command_buffer,
@@ -492,7 +482,10 @@ VkCommandBuffer record_release_command_buffer(
     VkCommandPool command_pool,
     VkImage image,
     ImageType image_type,
-    uint32_t queue_family_index
+    uint32_t queue_family_index,
+    VkImageAspectFlags aspect,
+    uint32_t num_levels,
+    uint32_t num_layers
 ) {
     VkResult result{};
 
@@ -513,21 +506,15 @@ VkCommandBuffer record_release_command_buffer(
         throw std::runtime_error("Unable to begin command buffer: " + std::to_string(result));
     }
 
-    VkImageAspectFlags image_aspect;
     VkImageLayout image_layout;
     if (image_type == ImageType::COLOR) {
-        image_aspect = VK_IMAGE_ASPECT_COLOR_BIT;
         image_layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
     }
     else {
-        image_aspect = VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
         image_layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
     }
 
     VkImageMemoryBarrier image_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-    // full flush and invalidate of image memory, probably not necessary but doesn't hurt.
-    image_barrier.srcAccessMask = VK_ACCESS_MEMORY_WRITE_BIT;
-    image_barrier.dstAccessMask = VK_ACCESS_MEMORY_READ_BIT;
     // transition to TRANSFER_SRC_OPTIMAL
     image_barrier.oldLayout = image_layout;
     image_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
@@ -536,11 +523,11 @@ VkCommandBuffer record_release_command_buffer(
     image_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL;
     // applies to all mips and layers, although only first mip is actually used
     image_barrier.image = image;
-    image_barrier.subresourceRange.aspectMask = image_aspect;
+    image_barrier.subresourceRange.aspectMask = aspect;
     image_barrier.subresourceRange.baseMipLevel = 0;
-    image_barrier.subresourceRange.levelCount = VK_REMAINING_MIP_LEVELS;
+    image_barrier.subresourceRange.levelCount = num_levels;
     image_barrier.subresourceRange.baseArrayLayer = 0;
-    image_barrier.subresourceRange.layerCount = VK_REMAINING_ARRAY_LAYERS;
+    image_barrier.subresourceRange.layerCount = num_layers;
 
     vk->CmdPipelineBarrier(
         command_buffer,
@@ -570,7 +557,20 @@ SwapchainImage create_image(
 ) {
     VkResult vk_result{};
 
+    VkExternalMemoryImageCreateInfo external_create_info{VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO};
+#ifdef _WIN32
+    external_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT;
+#else
+    external_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+#endif
+
     auto vk_create_info = create_vk_image_create_info(xr_create_info);
+    vk_create_info.pNext = &external_create_info;
+    vk_create_info.usage |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
+
+    VkImageAspectFlags aspect = get_aspect_from_format(vk_create_info.format);
+    uint32_t num_levels = vk_create_info.mipLevels;
+    uint32_t num_layers = vk_create_info.arrayLayers;
 
     VkImage image{};
     vk_result = vk->CreateImage(session_state.graphics_binding.device, &vk_create_info, nullptr, &image);
@@ -624,14 +624,20 @@ SwapchainImage create_image(
         session_state.graphics_binding.device,
         session_state.command_pool,
         image,
-        image_type
+        image_type,
+        aspect,
+        num_levels,
+        num_layers
     );
     VkCommandBuffer release_command_buffer = record_release_command_buffer(
         session_state.graphics_binding.device,
         session_state.command_pool,
         image,
         image_type,
-        session_state.graphics_binding.queueFamilyIndex
+        session_state.graphics_binding.queueFamilyIndex,
+        aspect,
+        num_levels,
+        num_layers
     );
 
     return SwapchainImage{
@@ -646,7 +652,10 @@ SwapchainImage create_image(
         .copying_done_fence = copying_done_fence,
         .acquire_command_buffer = acquire_command_buffer,
         .release_command_buffer = release_command_buffer,
-        .has_been_acquired = false
+        .has_been_acquired = false,
+        .aspect = aspect,
+        .num_levels = num_levels,
+        .num_layers = num_layers
     };
 }
 
@@ -775,15 +784,10 @@ try {
     SwapchainState& swapchain_state = opt_swapchain_state.value();
     SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
     
-    vk->DeviceWaitIdle(session_state.graphics_binding.device);
+    vk->QueueWaitIdle(session_state.queue);
 
     // destroy VkImages
     for (auto& swapchain_image : swapchain_state.get_images()) {
-        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image.image, nullptr);
-        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image.memory, nullptr);
-        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.rendering_done, nullptr);
-        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.copying_done, nullptr);
-        vk->DestroyFence(session_state.graphics_binding.device, swapchain_image.copying_done_fence, nullptr);
         vk->FreeCommandBuffers(
             session_state.graphics_binding.device,
             session_state.command_pool,
@@ -796,6 +800,11 @@ try {
             1,
             &swapchain_image.release_command_buffer
         );
+        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image.image, nullptr);
+        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image.memory, nullptr);
+        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.rendering_done, nullptr);
+        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.copying_done, nullptr);
+        vk->DestroyFence(session_state.graphics_binding.device, swapchain_image.copying_done_fence, nullptr);
     }
 
     session_state.swapchains.erase(swapchain);

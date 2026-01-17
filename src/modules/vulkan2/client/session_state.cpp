@@ -139,29 +139,29 @@ XrResult SwapchainState::acquire(uint32_t& index_out) {
         return XR_ERROR_CALL_ORDER_INVALID;
     }
 
-    // don't enqueue the semaphore wait on the first acquire
+    // enqueue command buffer to re-acquire image, transition layout, and signal fence
+
+    // make the pipeline barrier in the command buffer wait for the semaphore
+    VkPipelineStageFlags wait_flags = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
+
+    VkSubmitInfo submit_info{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+    submit_info.commandBufferCount = 1;
+    submit_info.pCommandBuffers = &swapchain_image.acquire_command_buffer;
     if (swapchain_image.has_been_acquired) {
-        // enqueue command buffer to re-acquire image, transition layout, and signal fence
-
-        // make the pipeline barrier in the command buffer wait for the semaphore
-        VkPipelineStageFlags wait_flags = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT;
-
-        VkSubmitInfo submit_info{VK_STRUCTURE_TYPE_SUBMIT_INFO};
+        // don't wait on the semaphore the first time
         submit_info.waitSemaphoreCount = 1;
         submit_info.pWaitSemaphores = &swapchain_image.copying_done;
         submit_info.pWaitDstStageMask = &wait_flags;
-        submit_info.commandBufferCount = 1;
-        submit_info.pCommandBuffers = &swapchain_image.acquire_command_buffer;
-
-        VkResult result = vk.QueueSubmit(queue, 1, &submit_info, swapchain_image.copying_done_fence);
-        if (result != VK_SUCCESS) {
-            spdlog::error("Failed to submit image acquire command buffer: {}", (int)result);
-            return XR_ERROR_RUNTIME_FAILURE;
-        }
     }
     else {
-        // make sure that the command buffer gets enqueued next time
+        // wait on the semaphore next time
         swapchain_image.has_been_acquired = true;
+    }
+
+    VkResult result = vk.QueueSubmit(queue, 1, &submit_info, swapchain_image.copying_done_fence);
+    if (result != VK_SUCCESS) {
+        spdlog::error("Failed to submit image acquire command buffer: {}", (int)result);
+        return XR_ERROR_RUNTIME_FAILURE;
     }
 
     index_out = acquire_head;

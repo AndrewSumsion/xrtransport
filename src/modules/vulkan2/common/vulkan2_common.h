@@ -31,17 +31,7 @@ static inline VkImageCreateInfo create_vk_image_create_info(const XrSwapchainCre
     // works as long as sampleCount is a power of 2 up to 64
     image_create_info.samples = static_cast<VkSampleCountFlagBits>(create_info.sampleCount);
     image_create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-
-    if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT) {
-        image_create_info.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-    }
-    else if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
-        image_create_info.initialLayout = VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL;
-    }
-    else {
-        // This should definitely never happen, maybe throw an exception here?
-        image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    }
+    image_create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
     if (create_info.usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT)
         image_create_info.usage |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
@@ -62,6 +52,26 @@ static inline VkImageCreateInfo create_vk_image_create_info(const XrSwapchainCre
         image_create_info.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
     
     return image_create_info;
+}
+
+static inline VkImageAspectFlags get_aspect_from_format(VkFormat format) {
+    switch (format) {
+        case VK_FORMAT_D16_UNORM:
+        case VK_FORMAT_D32_SFLOAT:
+        case VK_FORMAT_X8_D24_UNORM_PACK32:
+            return VK_IMAGE_ASPECT_DEPTH_BIT;
+
+        case VK_FORMAT_D16_UNORM_S8_UINT:
+        case VK_FORMAT_D24_UNORM_S8_UINT:
+        case VK_FORMAT_D32_SFLOAT_S8_UINT:
+            return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+        
+        case VK_FORMAT_S8_UINT:
+            return VK_IMAGE_ASPECT_STENCIL_BIT;
+        
+        default:
+            return VK_IMAGE_ASPECT_COLOR_BIT;
+    }
 }
 
 #endif // XRTRANSPORT_VULKAN2_COMMON_H

@@ -43,6 +43,10 @@ struct SharedImage {
     VkSemaphore copying_done;
     VkCommandBuffer command_buffer;
     VkFence command_buffer_fence;
+
+    VkImageAspectFlags aspect;
+    uint32_t num_levels;
+    uint32_t num_layers;
 };
 
 struct RuntimeImage {
