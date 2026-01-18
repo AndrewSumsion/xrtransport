@@ -141,7 +141,7 @@ void Server::run() {
             if (!size_lookup(event_buffer.type)) {
                 // The serializer was not built for this event. Skip it and try to get another event
                 // to send back to the client
-                spdlog::warn("Dropping event with unknown type: {}", event_buffer.type);
+                spdlog::warn("Dropping event with unknown type: {}", (int)event_buffer.type);
                 continue;
             }
 

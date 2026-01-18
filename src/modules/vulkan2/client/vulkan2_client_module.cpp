@@ -1022,7 +1022,11 @@ try {
     }
 
     SessionState& session_state = opt_session_state.value();
-    for (XrSwapchain swapchain : session_state.swapchains) {
+
+    // copy handles into separate container because xrDestroySwapchainImpl modifies
+    // session_state.swapchains
+    std::vector<XrSwapchain> swapchain_handles(session_state.swapchains.begin(), session_state.swapchains.end());
+    for (XrSwapchain swapchain : swapchain_handles) {
         xrDestroySwapchainImpl(swapchain);
     }
 

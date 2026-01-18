@@ -25,7 +25,6 @@ struct SerializeContext {
     SyncWriteStream& out;
     XrDuration time_offset;
     bool skip_unknown_structs;
-    bool in_xr_chain = false;
 
     explicit SerializeContext(SyncWriteStream& out)
         : out(out), time_offset(0), skip_unknown_structs(false)

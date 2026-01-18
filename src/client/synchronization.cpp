@@ -62,7 +62,13 @@ XrDuration get_time_offset(bool try_synchronize) {
             XrTime end_time = get_time();
             XrDuration took = end_time - start_time;
             XrDuration drift = old_offset - time_offset;
-            spdlog::info("Synchronization complete. Drift: {:.3f} microseconds, Took: {:.3f} microseconds", (float)drift / 1000, (float)took / 1000);
+            spdlog::debug(
+                "Synchronization complete. "
+                "Drift: {:.3f} milliseconds, "
+                "Took: {:.3f} milliseconds",
+                (float)drift / 1000000,
+                (float)took / 1000000
+            );
         }
     }
 
