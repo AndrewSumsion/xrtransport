@@ -9,8 +9,10 @@ void serialize(const ${struct.name}* s, SerializeContext& ctx);\
 #include "openxr/openxr.h"
 #include "xrtransport/asio_compat.h"
 #include "struct_size.h"
+#include "error.h"
 
 #include "asio/write.hpp"
+#include <spdlog/spdlog.h>
 
 #include <cstdint>
 #include <unordered_map>
@@ -22,13 +24,23 @@ namespace xrtransport {
 struct SerializeContext {
     SyncWriteStream& out;
     XrDuration time_offset;
+    bool skip_unknown_structs;
+    bool in_xr_chain = false;
 
     explicit SerializeContext(SyncWriteStream& out)
-        : out(out), time_offset(0)
+        : out(out), time_offset(0), skip_unknown_structs(false)
     {}
 
     explicit SerializeContext(SyncWriteStream& out, XrTime time_offset)
-        : out(out), time_offset(time_offset)
+        : out(out), time_offset(time_offset), skip_unknown_structs(false)
+    {}
+
+    explicit SerializeContext(SyncWriteStream& out, bool skip_unknown_structs)
+        : out(out), time_offset(0), skip_unknown_structs(skip_unknown_structs)
+    {}
+
+    explicit SerializeContext(SyncWriteStream& out, bool skip_unknown_structs, XrTime time_offset)
+        : out(out), time_offset(time_offset), skip_unknown_structs(skip_unknown_structs)
     {}
 };
 
@@ -76,28 +88,63 @@ void serialize_ptr(const T* x, std::size_t len, SerializeContext& ctx) {
 template <typename T>
 void serialize_xr(const T* untyped, SerializeContext& ctx) {
     const XrBaseInStructure* x = reinterpret_cast<const XrBaseInStructure*>(untyped);
-    XrStructureType type = x != nullptr ? x->type : XR_TYPE_UNKNOWN;
-    serialize(&type, ctx);
-    if (type != XR_TYPE_UNKNOWN) {
-        serializer_lookup(type)(x, ctx);
+    if (x) {
+        XrStructureType type = x->type;
+        StructSerializer serializer = serializer_lookup(type);
+        if (!serializer) {
+            if (ctx.skip_unknown_structs) {
+                spdlog::warn("Skipping serializing unknown XR struct: {}", (int)type);
+                // serialize the next item in the chain
+                serialize_xr(x->next, ctx);
+                return;
+            }
+            else {
+                throw UnknownXrStructureTypeException("Unknown XrStructureType in serialize: " + std::to_string(type));
+            }
+        }
+        serialize(&type, ctx);
+        serializer(x, ctx);
+    }
+    else {
+        // XR_TYPE_UNKNOWN signifies nullptr
+        XrStructureType type = XR_TYPE_UNKNOWN;
+        serialize(&type, ctx);
     }
 }
 
 template <typename T>
 void serialize_xr_array(const T* untyped, std::size_t len, SerializeContext& ctx) {
     const XrBaseInStructure* first = reinterpret_cast<const XrBaseInStructure*>(untyped);
-    std::uint32_t count = first != nullptr ? len : 0;
-    serialize(&count, ctx);
-    if (count) {
+    if (first) {
         XrStructureType type = first->type;
-        serialize(&type, ctx);
-        std::size_t struct_size = size_lookup(type);
         StructSerializer serializer = serializer_lookup(type);
+        if (!serializer) {
+            if (ctx.skip_unknown_structs) {
+                spdlog::warn("Skipping serializing unknown XR struct array: {}", (int)type);
+                // in this case, we should just serialize as if the array was null
+                std::uint32_t count = 0;
+                serialize(&count, ctx);
+                return;
+            }
+            else {
+                throw UnknownXrStructureTypeException("Unknown XrStructureType in serialize: " + std::to_string(type));
+            }
+        }
+
+        std::uint32_t count = static_cast<std::uint32_t>(len);
+        serialize(&count, ctx);
+        serialize(&type, ctx);
+        
+        std::size_t struct_size = size_lookup(type);
         const char* buffer = reinterpret_cast<const char*>(first);
         for(std::uint32_t i = 0; i < count; i++) {
             serializer(reinterpret_cast<const XrBaseInStructure*>(buffer), ctx);
             buffer += struct_size;
         }
+    }
+    else {
+        std::uint32_t count = 0;
+        serialize(&count, ctx);
     }
 }
 

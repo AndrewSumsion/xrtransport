@@ -117,26 +117,44 @@ void Server::run() {
     transport.register_handler(XRTP_MSG_POLL_EVENT, [this](MessageLockIn msg_in){
         function_loader.ensure_function_loaded("xrPollEvent", function_loader.pfn_xrPollEvent);
 
-        XrEventDataBuffer event_buffer{XR_TYPE_EVENT_DATA_BUFFER};
-        XrResult result = function_loader.pfn_xrPollEvent(saved_instance, &event_buffer);
+        while (true) {
+            XrEventDataBuffer event_buffer{XR_TYPE_EVENT_DATA_BUFFER};
+            XrResult result = function_loader.pfn_xrPollEvent(saved_instance, &event_buffer);
 
-        auto msg_out = transport.start_message(XRTP_MSG_POLL_EVENT_RETURN);
-        SerializeContext s_ctx(msg_out.buffer);
-        serialize(&result, s_ctx);
+            if (result != XR_SUCCESS) {
+                // result is either XR_EVENT_UNAVAILABLE or an error, in either case don't send the
+                // data buffer back.
+                auto msg_out = transport.start_message(XRTP_MSG_POLL_EVENT_RETURN);
+                SerializeContext s_ctx(msg_out.buffer);
+                serialize(&result, s_ctx);
+                msg_out.flush();
+                return;
+            }
 
-        if (result != XR_SUCCESS) {
-            // result is either XR_EVENT_UNAVAILABLE or an error, in either case don't send the
-            // data buffer back.
+            // Whether spec compliant or not, it appears that OpenXR runtimes may return events from
+            // extensions that are not enabled by the application. We cannot serialize these if the
+            // serializer was not compiled for them. The expected behavior for an application
+            // receiving an event that the developer wasn't expecting is that it will just be
+            // ignored. So, if the serializer was not built for a certain event, we will do the best
+            // we can to silently ignore it and not pass it back to the client.
+
+            if (!size_lookup(event_buffer.type)) {
+                // The serializer was not built for this event. Skip it and try to get another event
+                // to send back to the client
+                spdlog::warn("Dropping event with unknown type: {}", event_buffer.type);
+                continue;
+            }
+
+            auto msg_out = transport.start_message(XRTP_MSG_POLL_EVENT_RETURN);
+
+            // skip_unknown_structs = true to skip any unknown structs in the next chain with a
+            // warning instead of throwing an error
+            SerializeContext s_ctx(msg_out.buffer, true);
+            serialize(&result, s_ctx);
+            serialize_xr(&event_buffer, s_ctx);
             msg_out.flush();
             return;
         }
-
-        // xrPollEvent will have changed the type, and may have created a chain, and this will
-        // handle all of that.
-        // Note: this will throw an exception if an event struct is returned that xrtransport was
-        // not compiled to be able to serialize
-        serialize_xr(&event_buffer, s_ctx);
-        msg_out.flush();
     });
 
     // gather supported extensions so modules can decide whether to enable

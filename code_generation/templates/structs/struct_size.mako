@@ -15,10 +15,13 @@ std::unordered_map<XrStructureType, std::size_t> size_lookup_table = {
 };
 
 std::size_t size_lookup(XrStructureType struct_type) {
-    if (size_lookup_table.find(struct_type) == size_lookup_table.end()) {
-        throw UnknownXrStructureTypeException("Unknown XrStructureType in size_lookup: " + std::to_string(struct_type));
+    auto it = size_lookup_table.find(struct_type);
+    if (it == size_lookup_table.end()) {
+        return 0;
     }
-    return size_lookup_table[struct_type];
+    else {
+        return it->second;
+    }
 }
 
 } // namespace xrtransport

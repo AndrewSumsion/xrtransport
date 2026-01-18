@@ -2632,6 +2632,9 @@ void deserialize_xr_array(T** p_s, DeserializeContext& ctx) {
             buffer += struct_size;
         }
     }
+    else {
+        *p_s = nullptr;
+    }
 }
 
 template <typename T>
@@ -2658,6 +2661,9 @@ void deserialize_xr_array(const T** p_s, DeserializeContext& ctx) {
             deserializer(s, ctx);
             buffer += struct_size;
         }
+    }
+    else {
+        *p_s = nullptr;
     }
 }
 

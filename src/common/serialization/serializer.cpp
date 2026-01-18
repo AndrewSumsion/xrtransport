@@ -1144,10 +1144,13 @@ std::unordered_map<XrStructureType, StructSerializer> serializer_lookup_table = 
 };
 
 StructSerializer serializer_lookup(XrStructureType struct_type) {
-    if (serializer_lookup_table.find(struct_type) == serializer_lookup_table.end()) {
-        throw UnknownXrStructureTypeException("Unknown XrStructureType in serializer_lookup: " + std::to_string(struct_type));
+    auto it = serializer_lookup_table.find(struct_type);
+    if (it == serializer_lookup_table.end()) {
+        return nullptr;
     }
-    return serializer_lookup_table[struct_type];
+    else {
+        return it->second;
+    }
 }
 
 // Serializers
