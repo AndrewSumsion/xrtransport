@@ -5,6 +5,7 @@
 #include "synchronization.h"
 #include "module_loader.h"
 
+#include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/extensions/extension_functions.h"
 #include "xrtransport/client/module_types.h"
 #include "xrtransport/time.h"
@@ -33,6 +34,7 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
+#include <cstddef>
 
 using namespace xrtransport;
 
@@ -81,6 +83,12 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
     XrTime                                      time,
     struct timespec*                            timespecTime);
 #endif
+
+// custom implementation of this to avoid expensive generated RPC call
+static PFN_xrPollEvent pfn_xrPollEvent_next;
+static XRAPI_ATTR XrResult XRAPI_CALL xrPollEventImpl(
+    XrInstance                                  instance,
+    XrEventDataBuffer*                          eventData);
 
 // custom xrtransport functions for API layers
 static XRAPI_ATTR XrResult XRAPI_CALL xrtransportGetTransport(xrtp_Transport* transport_out);
@@ -271,6 +279,7 @@ static void layer_built_in_functions(FunctionTable& function_table) {
     function_table.add_function_layer("xrGetInstanceProcAddr", xrGetInstanceProcAddrImpl, pfn_xrGetInstanceProcAddr_next);
     function_table.add_function_layer("xrEnumerateInstanceExtensionProperties", xrEnumerateInstanceExtensionPropertiesImpl, pfn_xrEnumerateInstanceExtensionProperties_next);
     function_table.add_function_layer("xrCreateInstance", xrCreateInstanceImpl, pfn_xrCreateInstance_next);
+    function_table.add_function_layer("xrPollEvent", xrPollEventImpl, pfn_xrPollEvent_next);
 #ifdef _WIN32
     function_table.add_function_layer("xrConvertWin32PerformanceCounterToTimeKHR", xrConvertWin32PerformanceCounterToTimeKHRImpl, pfn_xrConvertWin32PerformanceCounterToTimeKHR_next);
     function_table.add_function_layer("xrConvertTimeToWin32PerformanceCounterKHR", xrConvertTimeToWin32PerformanceCounterKHRImpl, pfn_xrConvertTimeToWin32PerformanceCounterKHR_next);
@@ -382,3 +391,74 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHRImpl(
     return XR_SUCCESS;
 }
 #endif
+
+// Custom implementation to avoid the generated RPC call, which sends a lot of data back and
+// forth. This one sends nothing and only reads what the runtime returns.
+static XRAPI_ATTR XrResult XRAPI_CALL xrPollEventImpl(
+    XrInstance                                  instance,
+    XrEventDataBuffer*                          event_data_out)
+{
+    Transport& transport = get_runtime().get_transport();
+
+    auto msg_out = transport.start_message(XRTP_MSG_POLL_EVENT);
+    msg_out.flush();
+
+    XrResult result{};
+    XrBaseOutStructure* event_data_in{};
+
+    auto msg_in = transport.await_message(XRTP_MSG_POLL_EVENT_RETURN);
+    DeserializeContext d_ctx(msg_in.stream);
+    deserialize(&result, d_ctx);
+    if (result != XR_SUCCESS) {
+        // either XR_EVENT_UNAVAILABLE or an error
+        return result;
+    }
+
+    deserialize_xr(&event_data_in, d_ctx);
+
+    // copy first event struct onto event_data_out
+    size_t first_struct_size = size_lookup(event_data_in->type);
+    std::memcpy(event_data_out, event_data_in, first_struct_size);
+
+    // marks the point that we must not write past
+    uintptr_t end_of_buffer = reinterpret_cast<uintptr_t>(event_data_out) + sizeof(XrEventDataBuffer);
+
+    // reference to the last struct copied into the output
+    XrBaseOutStructure* last_struct_out = reinterpret_cast<XrBaseOutStructure*>(event_data_out);
+    size_t last_struct_size = first_struct_size;
+
+    while (last_struct_out->next) {
+        // this pointer still points to a dynamically allocated deserialized struct.
+        // we will find a spot for it in the output buffer and copy it in.
+        XrBaseOutStructure* struct_in = last_struct_out->next;
+        size_t struct_size = size_lookup(struct_in->type);
+
+        uintptr_t struct_out_location = reinterpret_cast<uintptr_t>(last_struct_out) + last_struct_size;
+        // align the location
+        struct_out_location =
+            (struct_out_location + alignof(std::max_align_t) - 1) &
+            ~(alignof(std::max_align_t) - 1);
+        
+        if (struct_out_location + struct_size > end_of_buffer) {
+            // we will not copy this one because it would overrun the provided XrEventDataBuffer
+            spdlog::warn("Server sent too many events from xrPollEvent. First event dropped: {}", (int)struct_in->type);
+            break;
+        }
+
+        // copy struct into buffer
+        XrBaseOutStructure* struct_out = reinterpret_cast<XrBaseOutStructure*>(struct_out_location);
+        std::memcpy(struct_out, struct_in, struct_size);
+
+        // make last struct's next pointer point to the copied struct within the buffer
+        last_struct_out->next = struct_out;
+
+        last_struct_out = struct_out;
+        last_struct_size = struct_size;
+    }
+
+    // now that everything is moved into the user-provided buffer, we can clean up the dynamically
+    // allocated struct(s)
+    cleanup_xr(event_data_in);
+
+    return XR_SUCCESS;
+}

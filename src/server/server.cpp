@@ -114,6 +114,31 @@ void Server::run() {
         msg_out.flush();
     });
 
+    transport.register_handler(XRTP_MSG_POLL_EVENT, [this](MessageLockIn msg_in){
+        function_loader.ensure_function_loaded("xrPollEvent", function_loader.pfn_xrPollEvent);
+
+        XrEventDataBuffer event_buffer{XR_TYPE_EVENT_DATA_BUFFER};
+        XrResult result = function_loader.pfn_xrPollEvent(saved_instance, &event_buffer);
+
+        auto msg_out = transport.start_message(XRTP_MSG_POLL_EVENT_RETURN);
+        SerializeContext s_ctx(msg_out.buffer);
+        serialize(&result, s_ctx);
+
+        if (result != XR_SUCCESS) {
+            // result is either XR_EVENT_UNAVAILABLE or an error, in either case don't send the
+            // data buffer back.
+            msg_out.flush();
+            return;
+        }
+
+        // xrPollEvent will have changed the type, and may have created a chain, and this will
+        // handle all of that.
+        // Note: this will throw an exception if an event struct is returned that xrtransport was
+        // not compiled to be able to serialize
+        serialize_xr(&event_buffer, s_ctx);
+        msg_out.flush();
+    });
+
     // gather supported extensions so modules can decide whether to enable
     function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", function_loader.pfn_xrEnumerateInstanceExtensionProperties);
     uint32_t num_extensions{};
