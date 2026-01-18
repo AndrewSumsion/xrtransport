@@ -8089,7 +8089,7 @@ void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
 
 void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
     // redirect to supplied xrCreateInstance handler
-    instance_handler(std::move(msg_in));
+    create_instance_handler(std::move(msg_in));
 }
 
 void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
@@ -8214,23 +8214,8 @@ void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
 }
 
 void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrDestroyInstance", function_loader.DestroyInstance);
-    // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.buffer);
-    XrInstance instance{};
-    deserialize(&instance, d_ctx);
-
-    XrTime start_time = start_runtime_timer();
-    XrResult _result = function_loader.DestroyInstance(instance);
-    XrDuration runtime_duration = end_runtime_timer(start_time);
-    
-    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&_result, s_ctx);
-    serialize(&runtime_duration, s_ctx);
-    msg_out.flush();
-
-    cleanup(&instance);
+    // redirect to supplied xrDestroyInstance handler
+    destroy_instance_handler(std::move(msg_in));
 }
 
 void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {

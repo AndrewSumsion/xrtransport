@@ -24,9 +24,9 @@ public:
 
 class FunctionLoader {
 public:
-    explicit FunctionLoader(PFN_xrGetInstanceProcAddr GetInstanceProcAddr) :
+    explicit FunctionLoader(PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr) :
         loader_instance(XR_NULL_HANDLE),
-        GetInstanceProcAddr(GetInstanceProcAddr)
+        GetInstanceProcAddr(pfn_xrGetInstanceProcAddr)
     {}
 
     // Used by ensure_function_loaded to load XR functions

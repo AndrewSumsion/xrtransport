@@ -819,7 +819,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
 
 } // namespace
 
-bool on_init(
+bool xrtp_on_init(
     xrtp_Transport _transport,
     FunctionLoader* _function_loader,
     uint32_t num_extensions,
@@ -851,7 +851,7 @@ bool on_init(
     return true;
 }
 
-void get_required_extensions(
+void xrtp_get_required_extensions(
     uint32_t* num_extensions_out,
     const char** extensions_out)
 {
@@ -861,7 +861,7 @@ void get_required_extensions(
     }
 }
 
-void on_instance(
+void xrtp_on_instance(
     xrtp_Transport transport,
     FunctionLoader* function_loader,
     XrInstance instance)
@@ -886,6 +886,18 @@ void on_instance(
     setup_vulkan_instance();
 }
 
-void on_shutdown() {
+void xrtp_on_instance_destroy() {
+    saved_xr_instance = XR_NULL_HANDLE;
+    saved_xr_system_id = 0;
+    
+    vkDeviceWaitIdle(saved_vk_device);
+
+    vkDestroyCommandPool(saved_vk_device, saved_vk_command_pool, nullptr);
+
+    // runtime's xrDestroyInstance is responsible for cleaning up the Vulkan instance and device
+    // that we created
+}
+
+void xrtp_on_shutdown() {
     // no-op
 }

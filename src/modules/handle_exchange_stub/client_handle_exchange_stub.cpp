@@ -11,7 +11,7 @@ static ModuleInfo module_info = {
     .instance_callback = nullptr
 };
 
-void module_get_info(
+void xrtp_get_module_info(
     xrtp_Transport transport,
     const ModuleInfo** info_out
 ) {

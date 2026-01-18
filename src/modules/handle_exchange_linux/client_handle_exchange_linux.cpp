@@ -65,7 +65,7 @@ void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn_xrGetI
 
 } // namespace 
 
-void module_get_info(
+void xrtp_get_module_info(
     xrtp_Transport transport_handle,
     const ModuleInfo** info_out
 ) {

@@ -24,7 +24,7 @@ namespace fs = std::filesystem;
 
 namespace xrtransport {
 
-typedef void (*PFN_module_get_info)(xrtp_Transport transport, const ModuleInfo** info_out);
+typedef void (*PFN_get_module_info)(xrtp_Transport transport, const ModuleInfo** info_out);
 
 static std::optional<fs::path> get_runtime_folder() {
 #if defined(_WIN32)
@@ -66,7 +66,7 @@ static inline bool is_filename_module(std::string_view filename) {
     return prefix_matches && ext_matches;
 }
 
-static PFN_module_get_info load_module(fs::path module_path) {
+static PFN_get_module_info load_module(fs::path module_path) {
     // Note: this function intentionally doesn't provide any way to unload the modules.
     // they should be loaded for the duration of the program.
 
@@ -76,7 +76,7 @@ static PFN_module_get_info load_module(fs::path module_path) {
     #error TODO: implement
 #elif defined(__linux__)
     void* module = dlopen(module_path.c_str(), RTLD_LAZY);
-    auto result = reinterpret_cast<PFN_module_get_info>(dlsym(module, "module_get_info"));
+    auto result = reinterpret_cast<PFN_get_module_info>(dlsym(module, "xrtp_get_module_info"));
     return result;
 #endif
 }
@@ -103,10 +103,10 @@ std::vector<ModuleInfo> load_modules(xrtp_Transport transport) {
         if (!entry.is_regular_file()) continue;
         if (!is_filename_module(entry.path().filename().string())) continue;
 
-        auto pfn_module_get_info = load_module(entry.path());
+        auto pfn_get_module_info = load_module(entry.path());
 
         const ModuleInfo* p_module_info{};
-        pfn_module_get_info(transport, &p_module_info);
+        pfn_get_module_info(transport, &p_module_info);
         if (!p_module_info) {
             spdlog::error("Module at {} returned null ModuleInfo", entry.path().c_str());
         }

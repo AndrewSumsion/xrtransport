@@ -22,7 +22,12 @@ namespace xrtransport {
 Server::Server(std::unique_ptr<SyncDuplexStream> stream, asio::io_context& stream_io_context, std::vector<std::string> module_paths) :
     transport(std::move(stream)),
     function_loader(xrGetInstanceProcAddr),
-    function_dispatch(transport, function_loader, [this](MessageLockIn msg_in){instance_handler(std::move(msg_in));}),
+    function_dispatch(
+        transport,
+        function_loader,
+        [this](MessageLockIn msg_in){create_instance_handler(std::move(msg_in));},
+        [this](MessageLockIn msg_in){destroy_instance_handler(std::move(msg_in));}
+    ),
     transport_io_context(stream_io_context)
 {
     for (auto& module_path : module_paths) {
@@ -180,14 +185,15 @@ void Server::run() {
     transport.start();
     transport.join();
 
-    // Once handler loop terminates, destroy the instance in case the client didn't
-    // TODO: track whether the client deleted it so we don't delete it twice because that might work but it's not compliant.
-    xrDestroyInstance(saved_instance);
-    saved_instance = XR_NULL_HANDLE;
+    // Once handler loop terminates, destroy the instance if the client didn't
+    if (saved_instance) {
+        xrDestroyInstance(saved_instance);
+        saved_instance = XR_NULL_HANDLE;
+    }
     function_loader = FunctionLoader(xrGetInstanceProcAddr); // clear all saved functions
 }
 
-void Server::instance_handler(MessageLockIn msg_in) {
+void Server::create_instance_handler(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateInstance", function_loader.CreateInstance);
     
     // Read in args sent by client
@@ -259,6 +265,35 @@ void Server::instance_handler(MessageLockIn msg_in) {
     // Cleanup from deserializer
     cleanup_ptr(createInfo, 1);
     cleanup_ptr(instance, 1);
+}
+
+void Server::destroy_instance_handler(MessageLockIn msg_in) {
+    function_loader.ensure_function_loaded("xrDestroyInstance", function_loader.DestroyInstance);
+    DeserializeContext d_ctx(msg_in.buffer);
+    XrInstance instance{};
+    deserialize(&instance, d_ctx);
+
+    XrResult _result;
+    XrDuration runtime_duration;
+    if (instance == saved_instance) {
+        for (auto& module : modules) {
+            module.on_instance_destroy();
+        }
+        XrTime start_time = get_time();
+        _result = function_loader.DestroyInstance(instance);
+        runtime_duration = get_time() - start_time;
+        saved_instance = XR_NULL_HANDLE;
+    }
+    else {
+        _result = XR_ERROR_HANDLE_INVALID;
+        runtime_duration = 0;
+    }
+    
+    auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);
+    SerializeContext s_ctx(msg_out.buffer);
+    serialize(&_result, s_ctx);
+    serialize(&runtime_duration, s_ctx);
+    msg_out.flush();
 }
 
 }

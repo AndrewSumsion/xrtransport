@@ -1048,7 +1048,7 @@ catch (const std::exception& e) {
 } // namespace
 
 // Entry point
-XRTP_API_EXPORT void module_get_info(
+XRTP_API_EXPORT void xrtp_get_module_info(
     xrtp_Transport transport_handle,
     const ModuleInfo** info_out)
 {

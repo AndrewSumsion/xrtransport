@@ -25,7 +25,7 @@ extern "C" {
  * This function must return a pointer to a ModuleInfo struct that contains all of this. The ModuleInfo and
  * all data it references must have a static storage lifetime -- no attempt to clean it up will be made.
  */
-XRTP_API_EXPORT void module_get_info(
+XRTP_API_EXPORT void xrtp_get_module_info(
     xrtp_Transport transport,
     const ModuleInfo** info_out);
 

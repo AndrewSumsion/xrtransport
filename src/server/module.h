@@ -36,6 +36,7 @@ typedef void (*PFN_module_on_instance)(
     xrtp_Transport transport,
     xrtransport::FunctionLoader* function_loader,
     XrInstance instance);
+typedef void (*PFN_module_on_instance_destroy)();
 typedef void (*PFN_module_on_shutdown)();
 
 class Module {
@@ -44,15 +45,17 @@ private:
     PFN_module_on_init pfn_on_init;
     PFN_module_get_required_extensions pfn_get_required_extensions;
     PFN_module_on_instance pfn_on_instance;
+    PFN_module_on_instance_destroy pfn_on_instance_destroy;
     PFN_module_on_shutdown pfn_on_shutdown;
 
 public:
     explicit Module(std::string module_path) {
         handle = MODULE_LOAD(module_path.c_str());
-        pfn_on_init = reinterpret_cast<PFN_module_on_init>(MODULE_SYM(handle, "on_init"));
-        pfn_get_required_extensions = reinterpret_cast<PFN_module_get_required_extensions>(MODULE_SYM(handle, "get_required_extensions"));
-        pfn_on_instance = reinterpret_cast<PFN_module_on_instance>(MODULE_SYM(handle, "on_instance"));
-        pfn_on_shutdown = reinterpret_cast<PFN_module_on_shutdown>(MODULE_SYM(handle, "on_shutdown"));
+        pfn_on_init = reinterpret_cast<PFN_module_on_init>(MODULE_SYM(handle, "xrtp_on_init"));
+        pfn_get_required_extensions = reinterpret_cast<PFN_module_get_required_extensions>(MODULE_SYM(handle, "xrtp_get_required_extensions"));
+        pfn_on_instance = reinterpret_cast<PFN_module_on_instance>(MODULE_SYM(handle, "xrtp_on_instance"));
+        pfn_on_instance_destroy = reinterpret_cast<PFN_module_on_instance_destroy>(MODULE_SYM(handle, "xrtp_on_instance_destroy"));
+        pfn_on_shutdown = reinterpret_cast<PFN_module_on_shutdown>(MODULE_SYM(handle, "xrtp_on_shutdown"));
     }
 
     ~Module() {
@@ -71,11 +74,13 @@ public:
         pfn_on_init = other.pfn_on_init;
         pfn_get_required_extensions = other.pfn_get_required_extensions;
         pfn_on_instance = other.pfn_on_instance;
+        pfn_on_instance_destroy = other.pfn_on_instance_destroy;
         pfn_on_shutdown = other.pfn_on_shutdown;
         other.handle = nullptr;
         other.pfn_on_init = nullptr;
         other.pfn_get_required_extensions = nullptr;
         other.pfn_on_instance = nullptr;
+        other.pfn_on_instance_destroy = nullptr;
         other.pfn_on_shutdown = nullptr;
     }
 
@@ -88,11 +93,13 @@ public:
         pfn_on_init = other.pfn_on_init;
         pfn_get_required_extensions = other.pfn_get_required_extensions;
         pfn_on_instance = other.pfn_on_instance;
+        pfn_on_instance_destroy = other.pfn_on_instance_destroy;
         pfn_on_shutdown = other.pfn_on_shutdown;
         other.handle = nullptr;
         other.pfn_on_init = nullptr;
         other.pfn_get_required_extensions = nullptr;
         other.pfn_on_instance = nullptr;
+        other.pfn_on_instance_destroy = nullptr;
         other.pfn_on_shutdown = nullptr;
 
         return *this;
@@ -120,6 +127,10 @@ public:
         XrInstance instance)
     {
         return pfn_on_instance(transport, function_loader, instance);
+    }
+
+    inline void on_instance_destroy() {
+        return pfn_on_instance_destroy();
     }
 
     inline void on_shutdown()

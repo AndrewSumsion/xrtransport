@@ -15,7 +15,7 @@ extern "C" {
  * Can be used to register handlers on the transport or proactively load XR functions.
  * Return false to disable the module, usually if a necessary extension isn't present.
  */
-XRTP_API_EXPORT bool on_init(
+XRTP_API_EXPORT bool xrtp_on_init(
     xrtp_Transport transport,
     xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
@@ -28,7 +28,7 @@ XRTP_API_EXPORT bool on_init(
  * Call first will null extensions_out to know how much space to allocate via num_extensions_out.
  * Then call again to populate strings via extensions_out.
  */
-XRTP_API_EXPORT void get_required_extensions(
+XRTP_API_EXPORT void xrtp_get_required_extensions(
     std::uint32_t* num_extensions_out,
     const char** extensions_out);
 
@@ -36,15 +36,22 @@ XRTP_API_EXPORT void get_required_extensions(
  * Called immediately after the xrCreateInstance call completes.
  * Can be used to load functions that require an XrInstance to be loaded.
  */
-XRTP_API_EXPORT void on_instance(
+XRTP_API_EXPORT void xrtp_on_instance(
     xrtp_Transport transport,
     xrtransport::FunctionLoader* function_loader,
     XrInstance instance);
 
 /**
+ * Called immediately before the xrDestroyInstance call completes.
+ * Should be used to clean up any instance-specific state, as many instances could be created and
+ * destroyed over the lifetime of the server.
+ */
+XRTP_API_EXPORT void xrtp_on_instance_destroy();
+
+/**
  * Called immediately before module is unloaded.
  */
-XRTP_API_EXPORT void on_shutdown();
+XRTP_API_EXPORT void xrtp_on_shutdown();
 
 }
 

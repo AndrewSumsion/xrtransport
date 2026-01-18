@@ -29,7 +29,7 @@ static XrDuration end_runtime_timer(XrTime start_time) {
 
 <%utils:for_grouped_functions args="function">\
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
-% if function.name != "xrCreateInstance":
+% if not function.name in ["xrCreateInstance", "xrDestroyInstance"]:
     function_loader.ensure_function_loaded("${function.name}", function_loader.${function.name[2:]});
     // by this point, the function id has already been read, now read the params
     DeserializeContext d_ctx(msg_in.buffer);
@@ -54,9 +54,12 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     % for param in function.params:
     ${utils.cleanup_member(param, binding_prefix='')}
     % endfor
-% else:
+% elif function.name == "xrCreateInstance":
     // redirect to supplied xrCreateInstance handler
-    instance_handler(std::move(msg_in));
+    create_instance_handler(std::move(msg_in));
+% elif function.name == "xrDestroyInstance":
+    // redirect to supplied xrDestroyInstance handler
+    destroy_instance_handler(std::move(msg_in));
 % endif
 }
 

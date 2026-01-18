@@ -38,12 +38,21 @@ private:
     FunctionLoader& function_loader;
     // This particular handler for xrCreateInstance is supplied via dependency injection because
     // a lot of extra work needs to be done for module extension handling.
-    std::function<void(MessageLockIn)> instance_handler;
+    std::function<void(MessageLockIn)> create_instance_handler;
+    std::function<void(MessageLockIn)> destroy_instance_handler;
     static std::unordered_map<std::uint32_t, Handler> handlers;
 
 public:
-    explicit FunctionDispatch(Transport& transport, FunctionLoader& function_loader, std::function<void(MessageLockIn)> instance_handler)
-        : transport(transport), function_loader(function_loader), instance_handler(instance_handler)
+    explicit FunctionDispatch(
+        Transport& transport,
+        FunctionLoader& function_loader,
+        std::function<void(MessageLockIn)> create_instance_handler,
+        std::function<void(MessageLockIn)> destroy_instance_handler
+    )
+        : transport(transport),
+        function_loader(function_loader),
+        create_instance_handler(std::move(create_instance_handler)),
+        destroy_instance_handler(std::move(destroy_instance_handler))
     {}
 
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control

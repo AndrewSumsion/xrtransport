@@ -26,7 +26,9 @@ private:
     XrInstance saved_instance;
 
     // Custom handler of xrCreateInstance provided to FunctionDispatch via dependency injection
-    void instance_handler(MessageLockIn msg_in);
+    void create_instance_handler(MessageLockIn msg_in);
+
+    void destroy_instance_handler(MessageLockIn msg_in);
 
     // function pointers to runtime's timer functions
     // this works because the functions have the same signature on both platforms

@@ -3,7 +3,7 @@
 
 #include <spdlog/spdlog.h>
 
-bool on_init(
+bool xrtp_on_init(
     xrtp_Transport transport,
     xrtransport::FunctionLoader* function_loader,
     std::uint32_t num_extensions,
@@ -12,14 +12,14 @@ bool on_init(
     return true;
 }
 
-void get_required_extensions(
+void xrtp_get_required_extensions(
     std::uint32_t* num_extensions_out,
     const char** extensions_out
 ) {
     *num_extensions_out = 0;
 }
 
-void on_instance(
+void xrtp_on_instance(
     xrtp_Transport transport,
     xrtransport::FunctionLoader* function_loader,
     XrInstance instance
@@ -27,7 +27,11 @@ void on_instance(
 
 }
 
-void on_shutdown() {
+void xrtp_on_instance_destroy() {
+    
+}
+
+void xrtp_on_shutdown() {
 
 }
 
