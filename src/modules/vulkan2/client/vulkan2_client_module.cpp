@@ -329,7 +329,7 @@ try {
     msg_out.flush();
 
     auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_RETURN_PHYSICAL_DEVICE);
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     uint8_t target_uuid[VK_UUID_SIZE]{};
     deserialize_array(target_uuid, VK_UUID_SIZE, d_ctx);
 
@@ -699,7 +699,7 @@ try {
     uint32_t memory_type_index{};
 
     auto msg_in1 = transport->await_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN_RETURN);
-    DeserializeContext d_ctx(msg_in1.stream);
+    DeserializeContext d_ctx(msg_in1.buffer);
     deserialize(&server_result, d_ctx);
     if (server_result != XR_SUCCESS) {
         // message ends here if result was not success
@@ -983,7 +983,7 @@ try {
     XrSession handle{};
 
     auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_CREATE_SESSION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&handle, d_ctx);
 
     // get VkQueue from provided family index and index

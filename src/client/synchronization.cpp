@@ -34,7 +34,7 @@ static void do_synchronize() {
 
         auto msg_in = transport.await_message(XRTP_MSG_SYNCHRONIZATION_RESPONSE);
         XrTime t2{};
-        asio::read(msg_in.stream, asio::buffer(&t2, sizeof(XrTime)));
+        asio::read(msg_in.buffer, asio::buffer(&t2, sizeof(XrTime)));
 
         XrTime t3 = get_time();
 

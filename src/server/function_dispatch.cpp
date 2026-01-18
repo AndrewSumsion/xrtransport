@@ -39,7 +39,7 @@ static XrDuration end_runtime_timer(XrTime start_time) {
 void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDigitalLensControlALMALENCE", function_loader.pfn_xrSetDigitalLensControlALMALENCE);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrDigitalLensControlALMALENCE* digitalLensControl{};
@@ -64,7 +64,7 @@ void FunctionDispatch::handle_xrSetDigitalLensControlALMALENCE(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerBD", function_loader.pfn_xrCreateBodyTrackerBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoBD* createInfo{};
@@ -91,7 +91,7 @@ void FunctionDispatch::handle_xrCreateBodyTrackerBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerBD", function_loader.pfn_xrDestroyBodyTrackerBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerBD bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
@@ -111,7 +111,7 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsBD", function_loader.pfn_xrLocateBodyJointsBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerBD bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoBD* locateInfo{};
@@ -140,7 +140,7 @@ void FunctionDispatch::handle_xrLocateBodyJointsBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorAsyncBD", function_loader.pfn_xrCreateSpatialAnchorAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSpatialAnchorCreateInfoBD* info{};
@@ -167,7 +167,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorAsyncBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorCompleteBD", function_loader.pfn_xrCreateSpatialAnchorCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -194,7 +194,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorCompleteBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorAsyncBD", function_loader.pfn_xrPersistSpatialAnchorAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSpatialAnchorPersistInfoBD* info{};
@@ -221,7 +221,7 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorAsyncBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorCompleteBD", function_loader.pfn_xrPersistSpatialAnchorCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -248,7 +248,7 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorCompleteBD(MessageLockIn msg
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorAsyncBD", function_loader.pfn_xrUnpersistSpatialAnchorAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSpatialAnchorUnpersistInfoBD* info{};
@@ -275,7 +275,7 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorAsyncBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorCompleteBD", function_loader.pfn_xrUnpersistSpatialAnchorCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -304,7 +304,7 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorCompleteBD(MessageLockIn m
 void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDownloadSharedSpatialAnchorAsyncBD", function_loader.pfn_xrDownloadSharedSpatialAnchorAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSharedSpatialAnchorDownloadInfoBD* info{};
@@ -331,7 +331,7 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorAsyncBD(MessageLockIn
 void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDownloadSharedSpatialAnchorCompleteBD", function_loader.pfn_xrDownloadSharedSpatialAnchorCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -358,7 +358,7 @@ void FunctionDispatch::handle_xrDownloadSharedSpatialAnchorCompleteBD(MessageLoc
 void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpatialAnchorAsyncBD", function_loader.pfn_xrShareSpatialAnchorAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSpatialAnchorShareInfoBD* info{};
@@ -385,7 +385,7 @@ void FunctionDispatch::handle_xrShareSpatialAnchorAsyncBD(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpatialAnchorCompleteBD", function_loader.pfn_xrShareSpatialAnchorCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -414,7 +414,7 @@ void FunctionDispatch::handle_xrShareSpatialAnchorCompleteBD(MessageLockIn msg_i
 void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCaptureSceneAsyncBD", function_loader.pfn_xrCaptureSceneAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSceneCaptureInfoBD* info{};
@@ -441,7 +441,7 @@ void FunctionDispatch::handle_xrCaptureSceneAsyncBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCaptureSceneCompleteBD", function_loader.pfn_xrCaptureSceneCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -470,7 +470,7 @@ void FunctionDispatch::handle_xrCaptureSceneCompleteBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateAnchorSpaceBD", function_loader.pfn_xrCreateAnchorSpaceBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrAnchorSpaceCreateInfoBD* createInfo{};
@@ -497,7 +497,7 @@ void FunctionDispatch::handle_xrCreateAnchorSpaceBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSenseDataProviderBD", function_loader.pfn_xrCreateSenseDataProviderBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSenseDataProviderCreateInfoBD* createInfo{};
@@ -524,7 +524,7 @@ void FunctionDispatch::handle_xrCreateSenseDataProviderBD(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialEntityAnchorBD", function_loader.pfn_xrCreateSpatialEntityAnchorBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSpatialEntityAnchorCreateInfoBD* createInfo{};
@@ -551,7 +551,7 @@ void FunctionDispatch::handle_xrCreateSpatialEntityAnchorBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyAnchorBD", function_loader.pfn_xrDestroyAnchorBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrAnchorBD anchor{};
     deserialize(&anchor, d_ctx);
 
@@ -571,7 +571,7 @@ void FunctionDispatch::handle_xrDestroyAnchorBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySenseDataProviderBD", function_loader.pfn_xrDestroySenseDataProviderBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
 
@@ -591,7 +591,7 @@ void FunctionDispatch::handle_xrDestroySenseDataProviderBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySenseDataSnapshotBD", function_loader.pfn_xrDestroySenseDataSnapshotBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
 
@@ -611,7 +611,7 @@ void FunctionDispatch::handle_xrDestroySenseDataSnapshotBD(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSpatialEntityComponentTypesBD", function_loader.pfn_xrEnumerateSpatialEntityComponentTypesBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
     XrSpatialEntityIdBD entityId{};
@@ -645,7 +645,7 @@ void FunctionDispatch::handle_xrEnumerateSpatialEntityComponentTypesBD(MessageLo
 void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAnchorUuidBD", function_loader.pfn_xrGetAnchorUuidBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrAnchorBD anchor{};
     deserialize(&anchor, d_ctx);
     XrUuidEXT* uuid{};
@@ -669,7 +669,7 @@ void FunctionDispatch::handle_xrGetAnchorUuidBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetQueriedSenseDataBD", function_loader.pfn_xrGetQueriedSenseDataBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
     XrQueriedSenseDataGetInfoBD* getInfo{};
@@ -697,7 +697,7 @@ void FunctionDispatch::handle_xrGetQueriedSenseDataBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSenseDataProviderStateBD", function_loader.pfn_xrGetSenseDataProviderStateBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSenseDataProviderStateBD* state{};
@@ -721,7 +721,7 @@ void FunctionDispatch::handle_xrGetSenseDataProviderStateBD(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialEntityComponentDataBD", function_loader.pfn_xrGetSpatialEntityComponentDataBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
     XrSpatialEntityComponentGetInfoBD* getInfo{};
@@ -748,7 +748,7 @@ void FunctionDispatch::handle_xrGetSpatialEntityComponentDataBD(MessageLockIn ms
 void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialEntityUuidBD", function_loader.pfn_xrGetSpatialEntityUuidBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataSnapshotBD snapshot{};
     deserialize(&snapshot, d_ctx);
     XrSpatialEntityIdBD entityId{};
@@ -775,7 +775,7 @@ void FunctionDispatch::handle_xrGetSpatialEntityUuidBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySenseDataAsyncBD", function_loader.pfn_xrQuerySenseDataAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSenseDataQueryInfoBD* queryInfo{};
@@ -802,7 +802,7 @@ void FunctionDispatch::handle_xrQuerySenseDataAsyncBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySenseDataCompleteBD", function_loader.pfn_xrQuerySenseDataCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrFutureEXT future{};
@@ -829,7 +829,7 @@ void FunctionDispatch::handle_xrQuerySenseDataCompleteBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartSenseDataProviderAsyncBD", function_loader.pfn_xrStartSenseDataProviderAsyncBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
     XrSenseDataProviderStartInfoBD* startInfo{};
@@ -856,7 +856,7 @@ void FunctionDispatch::handle_xrStartSenseDataProviderAsyncBD(MessageLockIn msg_
 void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartSenseDataProviderCompleteBD", function_loader.pfn_xrStartSenseDataProviderCompleteBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFutureEXT future{};
@@ -883,7 +883,7 @@ void FunctionDispatch::handle_xrStartSenseDataProviderCompleteBD(MessageLockIn m
 void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopSenseDataProviderBD", function_loader.pfn_xrStopSenseDataProviderBD);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSenseDataProviderBD provider{};
     deserialize(&provider, d_ctx);
 
@@ -905,7 +905,7 @@ void FunctionDispatch::handle_xrStopSenseDataProviderBD(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceActiveEXT", function_loader.pfn_xrSetInputDeviceActiveEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath interactionProfile{};
@@ -934,7 +934,7 @@ void FunctionDispatch::handle_xrSetInputDeviceActiveEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceLocationEXT", function_loader.pfn_xrSetInputDeviceLocationEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelPath{};
@@ -966,7 +966,7 @@ void FunctionDispatch::handle_xrSetInputDeviceLocationEXT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateBoolEXT", function_loader.pfn_xrSetInputDeviceStateBoolEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelPath{};
@@ -995,7 +995,7 @@ void FunctionDispatch::handle_xrSetInputDeviceStateBoolEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateFloatEXT", function_loader.pfn_xrSetInputDeviceStateFloatEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelPath{};
@@ -1024,7 +1024,7 @@ void FunctionDispatch::handle_xrSetInputDeviceStateFloatEXT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetInputDeviceStateVector2fEXT", function_loader.pfn_xrSetInputDeviceStateVector2fEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelPath{};
@@ -1055,7 +1055,7 @@ void FunctionDispatch::handle_xrSetInputDeviceStateVector2fEXT(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateDebugUtilsMessengerEXT", function_loader.pfn_xrCreateDebugUtilsMessengerEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrDebugUtilsMessengerCreateInfoEXT* createInfo{};
@@ -1083,7 +1083,7 @@ void FunctionDispatch::handle_xrCreateDebugUtilsMessengerEXT(MessageLockIn msg_i
 void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyDebugUtilsMessengerEXT", function_loader.pfn_xrDestroyDebugUtilsMessengerEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrDebugUtilsMessengerEXT messenger{};
     deserialize(&messenger, d_ctx);
 
@@ -1103,7 +1103,7 @@ void FunctionDispatch::handle_xrDestroyDebugUtilsMessengerEXT(MessageLockIn msg_
 void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionBeginDebugUtilsLabelRegionEXT", function_loader.pfn_xrSessionBeginDebugUtilsLabelRegionEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrDebugUtilsLabelEXT* labelInfo{};
@@ -1126,7 +1126,7 @@ void FunctionDispatch::handle_xrSessionBeginDebugUtilsLabelRegionEXT(MessageLock
 void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionEndDebugUtilsLabelRegionEXT", function_loader.pfn_xrSessionEndDebugUtilsLabelRegionEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
 
@@ -1146,7 +1146,7 @@ void FunctionDispatch::handle_xrSessionEndDebugUtilsLabelRegionEXT(MessageLockIn
 void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSessionInsertDebugUtilsLabelEXT", function_loader.pfn_xrSessionInsertDebugUtilsLabelEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrDebugUtilsLabelEXT* labelInfo{};
@@ -1169,7 +1169,7 @@ void FunctionDispatch::handle_xrSessionInsertDebugUtilsLabelEXT(MessageLockIn ms
 void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetDebugUtilsObjectNameEXT", function_loader.pfn_xrSetDebugUtilsObjectNameEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrDebugUtilsObjectNameInfoEXT* nameInfo{};
@@ -1192,7 +1192,7 @@ void FunctionDispatch::handle_xrSetDebugUtilsObjectNameEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSubmitDebugUtilsMessageEXT", function_loader.pfn_xrSubmitDebugUtilsMessageEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrDebugUtilsMessageSeverityFlagsEXT messageSeverity{};
@@ -1225,7 +1225,7 @@ void FunctionDispatch::handle_xrSubmitDebugUtilsMessageEXT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCancelFutureEXT", function_loader.pfn_xrCancelFutureEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrFutureCancelInfoEXT* cancelInfo{};
@@ -1248,7 +1248,7 @@ void FunctionDispatch::handle_xrCancelFutureEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPollFutureEXT", function_loader.pfn_xrPollFutureEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrFuturePollInfoEXT* pollInfo{};
@@ -1277,7 +1277,7 @@ void FunctionDispatch::handle_xrPollFutureEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateHandTrackerEXT", function_loader.pfn_xrCreateHandTrackerEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrHandTrackerCreateInfoEXT* createInfo{};
@@ -1304,7 +1304,7 @@ void FunctionDispatch::handle_xrCreateHandTrackerEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyHandTrackerEXT", function_loader.pfn_xrDestroyHandTrackerEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
 
@@ -1324,7 +1324,7 @@ void FunctionDispatch::handle_xrDestroyHandTrackerEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateHandJointsEXT", function_loader.pfn_xrLocateHandJointsEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
     XrHandJointsLocateInfoEXT* locateInfo{};
@@ -1353,7 +1353,7 @@ void FunctionDispatch::handle_xrLocateHandJointsEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPerfSettingsSetPerformanceLevelEXT", function_loader.pfn_xrPerfSettingsSetPerformanceLevelEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPerfSettingsDomainEXT domain{};
@@ -1381,7 +1381,7 @@ void FunctionDispatch::handle_xrPerfSettingsSetPerformanceLevelEXT(MessageLockIn
 void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginPlaneDetectionEXT", function_loader.pfn_xrBeginPlaneDetectionEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
     XrPlaneDetectorBeginInfoEXT* beginInfo{};
@@ -1404,7 +1404,7 @@ void FunctionDispatch::handle_xrBeginPlaneDetectionEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePlaneDetectorEXT", function_loader.pfn_xrCreatePlaneDetectorEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPlaneDetectorCreateInfoEXT* createInfo{};
@@ -1431,7 +1431,7 @@ void FunctionDispatch::handle_xrCreatePlaneDetectorEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPlaneDetectorEXT", function_loader.pfn_xrDestroyPlaneDetectorEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
 
@@ -1451,7 +1451,7 @@ void FunctionDispatch::handle_xrDestroyPlaneDetectorEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlaneDetectionStateEXT", function_loader.pfn_xrGetPlaneDetectionStateEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
     XrPlaneDetectionStateEXT* state{};
@@ -1475,7 +1475,7 @@ void FunctionDispatch::handle_xrGetPlaneDetectionStateEXT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlaneDetectionsEXT", function_loader.pfn_xrGetPlaneDetectionsEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
     XrPlaneDetectorGetInfoEXT* info{};
@@ -1502,7 +1502,7 @@ void FunctionDispatch::handle_xrGetPlaneDetectionsEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPlanePolygonBufferEXT", function_loader.pfn_xrGetPlanePolygonBufferEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPlaneDetectorEXT planeDetector{};
     deserialize(&planeDetector, d_ctx);
     uint64_t planeId{};
@@ -1534,7 +1534,7 @@ void FunctionDispatch::handle_xrGetPlanePolygonBufferEXT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrThermalGetTemperatureTrendEXT", function_loader.pfn_xrThermalGetTemperatureTrendEXT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPerfSettingsDomainEXT domain{};
@@ -1571,7 +1571,7 @@ void FunctionDispatch::handle_xrThermalGetTemperatureTrendEXT(MessageLockIn msg_
 void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerFB", function_loader.pfn_xrCreateBodyTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoFB* createInfo{};
@@ -1598,7 +1598,7 @@ void FunctionDispatch::handle_xrCreateBodyTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerFB", function_loader.pfn_xrDestroyBodyTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerFB bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
@@ -1618,7 +1618,7 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetBodySkeletonFB", function_loader.pfn_xrGetBodySkeletonFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerFB bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
     XrBodySkeletonFB* skeleton{};
@@ -1642,7 +1642,7 @@ void FunctionDispatch::handle_xrGetBodySkeletonFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsFB", function_loader.pfn_xrLocateBodyJointsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerFB bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoFB* locateInfo{};
@@ -1671,7 +1671,7 @@ void FunctionDispatch::handle_xrLocateBodyJointsFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateColorSpacesFB", function_loader.pfn_xrEnumerateColorSpacesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t colorSpaceCapacityInput{};
@@ -1702,7 +1702,7 @@ void FunctionDispatch::handle_xrEnumerateColorSpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetColorSpaceFB", function_loader.pfn_xrSetColorSpaceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrColorSpaceFB colorSpace{};
@@ -1727,7 +1727,7 @@ void FunctionDispatch::handle_xrSetColorSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateDisplayRefreshRatesFB", function_loader.pfn_xrEnumerateDisplayRefreshRatesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t displayRefreshRateCapacityInput{};
@@ -1758,7 +1758,7 @@ void FunctionDispatch::handle_xrEnumerateDisplayRefreshRatesFB(MessageLockIn msg
 void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetDisplayRefreshRateFB", function_loader.pfn_xrGetDisplayRefreshRateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     float* displayRefreshRate{};
@@ -1782,7 +1782,7 @@ void FunctionDispatch::handle_xrGetDisplayRefreshRateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestDisplayRefreshRateFB", function_loader.pfn_xrRequestDisplayRefreshRateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     float displayRefreshRate{};
@@ -1807,7 +1807,7 @@ void FunctionDispatch::handle_xrRequestDisplayRefreshRateFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEyeTrackerFB", function_loader.pfn_xrCreateEyeTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrEyeTrackerCreateInfoFB* createInfo{};
@@ -1834,7 +1834,7 @@ void FunctionDispatch::handle_xrCreateEyeTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEyeTrackerFB", function_loader.pfn_xrDestroyEyeTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEyeTrackerFB eyeTracker{};
     deserialize(&eyeTracker, d_ctx);
 
@@ -1854,7 +1854,7 @@ void FunctionDispatch::handle_xrDestroyEyeTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetEyeGazesFB", function_loader.pfn_xrGetEyeGazesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEyeTrackerFB eyeTracker{};
     deserialize(&eyeTracker, d_ctx);
     XrEyeGazesInfoFB* gazeInfo{};
@@ -1883,7 +1883,7 @@ void FunctionDispatch::handle_xrGetEyeGazesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFaceTrackerFB", function_loader.pfn_xrCreateFaceTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFaceTrackerCreateInfoFB* createInfo{};
@@ -1910,7 +1910,7 @@ void FunctionDispatch::handle_xrCreateFaceTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFaceTrackerFB", function_loader.pfn_xrDestroyFaceTrackerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFaceTrackerFB faceTracker{};
     deserialize(&faceTracker, d_ctx);
 
@@ -1930,7 +1930,7 @@ void FunctionDispatch::handle_xrDestroyFaceTrackerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFaceExpressionWeightsFB", function_loader.pfn_xrGetFaceExpressionWeightsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFaceTrackerFB faceTracker{};
     deserialize(&faceTracker, d_ctx);
     XrFaceExpressionInfoFB* expressionInfo{};
@@ -1959,7 +1959,7 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeightsFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFaceTracker2FB", function_loader.pfn_xrCreateFaceTracker2FB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFaceTrackerCreateInfo2FB* createInfo{};
@@ -1987,7 +1987,7 @@ void FunctionDispatch::handle_xrCreateFaceTracker2FB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFaceTracker2FB", function_loader.pfn_xrDestroyFaceTracker2FB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFaceTracker2FB faceTracker{};
     deserialize(&faceTracker, d_ctx);
 
@@ -2007,7 +2007,7 @@ void FunctionDispatch::handle_xrDestroyFaceTracker2FB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFaceExpressionWeights2FB", function_loader.pfn_xrGetFaceExpressionWeights2FB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFaceTracker2FB faceTracker{};
     deserialize(&faceTracker, d_ctx);
     XrFaceExpressionInfo2FB* expressionInfo{};
@@ -2036,7 +2036,7 @@ void FunctionDispatch::handle_xrGetFaceExpressionWeights2FB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFoveationProfileFB", function_loader.pfn_xrCreateFoveationProfileFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFoveationProfileCreateInfoFB* createInfo{};
@@ -2064,7 +2064,7 @@ void FunctionDispatch::handle_xrCreateFoveationProfileFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFoveationProfileFB", function_loader.pfn_xrDestroyFoveationProfileFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFoveationProfileFB profile{};
     deserialize(&profile, d_ctx);
 
@@ -2086,7 +2086,7 @@ void FunctionDispatch::handle_xrDestroyFoveationProfileFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetHandMeshFB", function_loader.pfn_xrGetHandMeshFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
     XrHandTrackingMeshFB* mesh{};
@@ -2112,7 +2112,7 @@ void FunctionDispatch::handle_xrGetHandMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetDeviceSampleRateFB", function_loader.pfn_xrGetDeviceSampleRateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
@@ -2141,7 +2141,7 @@ void FunctionDispatch::handle_xrGetDeviceSampleRateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateKeyboardSpaceFB", function_loader.pfn_xrCreateKeyboardSpaceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrKeyboardSpaceCreateInfoFB* createInfo{};
@@ -2169,7 +2169,7 @@ void FunctionDispatch::handle_xrCreateKeyboardSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySystemTrackedKeyboardFB", function_loader.pfn_xrQuerySystemTrackedKeyboardFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrKeyboardTrackingQueryFB* queryInfo{};
@@ -2199,7 +2199,7 @@ void FunctionDispatch::handle_xrQuerySystemTrackedKeyboardFB(MessageLockIn msg_i
 void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateGeometryInstanceFB", function_loader.pfn_xrCreateGeometryInstanceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrGeometryInstanceCreateInfoFB* createInfo{};
@@ -2226,7 +2226,7 @@ void FunctionDispatch::handle_xrCreateGeometryInstanceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughFB", function_loader.pfn_xrCreatePassthroughFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPassthroughCreateInfoFB* createInfo{};
@@ -2253,7 +2253,7 @@ void FunctionDispatch::handle_xrCreatePassthroughFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughLayerFB", function_loader.pfn_xrCreatePassthroughLayerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPassthroughLayerCreateInfoFB* createInfo{};
@@ -2280,7 +2280,7 @@ void FunctionDispatch::handle_xrCreatePassthroughLayerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyGeometryInstanceFB", function_loader.pfn_xrDestroyGeometryInstanceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrGeometryInstanceFB instance{};
     deserialize(&instance, d_ctx);
 
@@ -2300,7 +2300,7 @@ void FunctionDispatch::handle_xrDestroyGeometryInstanceFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughFB", function_loader.pfn_xrDestroyPassthroughFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
@@ -2320,7 +2320,7 @@ void FunctionDispatch::handle_xrDestroyPassthroughFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughLayerFB", function_loader.pfn_xrDestroyPassthroughLayerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
@@ -2340,7 +2340,7 @@ void FunctionDispatch::handle_xrDestroyPassthroughLayerFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGeometryInstanceSetTransformFB", function_loader.pfn_xrGeometryInstanceSetTransformFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrGeometryInstanceFB instance{};
     deserialize(&instance, d_ctx);
     XrGeometryInstanceTransformFB* transformation{};
@@ -2363,7 +2363,7 @@ void FunctionDispatch::handle_xrGeometryInstanceSetTransformFB(MessageLockIn msg
 void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerPauseFB", function_loader.pfn_xrPassthroughLayerPauseFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
@@ -2383,7 +2383,7 @@ void FunctionDispatch::handle_xrPassthroughLayerPauseFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerResumeFB", function_loader.pfn_xrPassthroughLayerResumeFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
 
@@ -2403,7 +2403,7 @@ void FunctionDispatch::handle_xrPassthroughLayerResumeFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerSetStyleFB", function_loader.pfn_xrPassthroughLayerSetStyleFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
     XrPassthroughStyleFB* style{};
@@ -2426,7 +2426,7 @@ void FunctionDispatch::handle_xrPassthroughLayerSetStyleFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughPauseFB", function_loader.pfn_xrPassthroughPauseFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
@@ -2446,7 +2446,7 @@ void FunctionDispatch::handle_xrPassthroughPauseFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughStartFB", function_loader.pfn_xrPassthroughStartFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
 
@@ -2468,7 +2468,7 @@ void FunctionDispatch::handle_xrPassthroughStartFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPassthroughLayerSetKeyboardHandsIntensityFB", function_loader.pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughLayerFB layer{};
     deserialize(&layer, d_ctx);
     XrPassthroughKeyboardHandsIntensityFB* intensity{};
@@ -2493,7 +2493,7 @@ void FunctionDispatch::handle_xrPassthroughLayerSetKeyboardHandsIntensityFB(Mess
 void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateRenderModelPathsFB", function_loader.pfn_xrEnumerateRenderModelPathsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t pathCapacityInput{};
@@ -2524,7 +2524,7 @@ void FunctionDispatch::handle_xrEnumerateRenderModelPathsFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetRenderModelPropertiesFB", function_loader.pfn_xrGetRenderModelPropertiesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath path{};
@@ -2551,7 +2551,7 @@ void FunctionDispatch::handle_xrGetRenderModelPropertiesFB(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLoadRenderModelFB", function_loader.pfn_xrLoadRenderModelFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrRenderModelLoadInfoFB* info{};
@@ -2581,7 +2581,7 @@ void FunctionDispatch::handle_xrLoadRenderModelFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundary2DFB", function_loader.pfn_xrGetSpaceBoundary2DFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2608,7 +2608,7 @@ void FunctionDispatch::handle_xrGetSpaceBoundary2DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundingBox2DFB", function_loader.pfn_xrGetSpaceBoundingBox2DFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2635,7 +2635,7 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox2DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceBoundingBox3DFB", function_loader.pfn_xrGetSpaceBoundingBox3DFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2662,7 +2662,7 @@ void FunctionDispatch::handle_xrGetSpaceBoundingBox3DFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceRoomLayoutFB", function_loader.pfn_xrGetSpaceRoomLayoutFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2689,7 +2689,7 @@ void FunctionDispatch::handle_xrGetSpaceRoomLayoutFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceSemanticLabelsFB", function_loader.pfn_xrGetSpaceSemanticLabelsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2718,7 +2718,7 @@ void FunctionDispatch::handle_xrGetSpaceSemanticLabelsFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestSceneCaptureFB", function_loader.pfn_xrRequestSceneCaptureFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSceneCaptureRequestInfoFB* info{};
@@ -2747,7 +2747,7 @@ void FunctionDispatch::handle_xrRequestSceneCaptureFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFB", function_loader.pfn_xrCreateSpatialAnchorFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoFB* info{};
@@ -2774,7 +2774,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSpaceSupportedComponentsFB", function_loader.pfn_xrEnumerateSpaceSupportedComponentsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     uint32_t componentTypeCapacityInput{};
@@ -2805,7 +2805,7 @@ void FunctionDispatch::handle_xrEnumerateSpaceSupportedComponentsFB(MessageLockI
 void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceComponentStatusFB", function_loader.pfn_xrGetSpaceComponentStatusFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     XrSpaceComponentTypeFB componentType{};
@@ -2832,7 +2832,7 @@ void FunctionDispatch::handle_xrGetSpaceComponentStatusFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceUuidFB", function_loader.pfn_xrGetSpaceUuidFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     XrUuidEXT* uuid{};
@@ -2856,7 +2856,7 @@ void FunctionDispatch::handle_xrGetSpaceUuidFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetSpaceComponentStatusFB", function_loader.pfn_xrSetSpaceComponentStatusFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     XrSpaceComponentStatusSetInfoFB* info{};
@@ -2885,7 +2885,7 @@ void FunctionDispatch::handle_xrSetSpaceComponentStatusFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceContainerFB", function_loader.pfn_xrGetSpaceContainerFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpace space{};
@@ -2914,7 +2914,7 @@ void FunctionDispatch::handle_xrGetSpaceContainerFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpacesFB", function_loader.pfn_xrQuerySpacesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceQueryInfoBaseHeaderFB* info{};
@@ -2941,7 +2941,7 @@ void FunctionDispatch::handle_xrQuerySpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRetrieveSpaceQueryResultsFB", function_loader.pfn_xrRetrieveSpaceQueryResultsFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrAsyncRequestIdFB requestId{};
@@ -2970,7 +2970,7 @@ void FunctionDispatch::handle_xrRetrieveSpaceQueryResultsFB(MessageLockIn msg_in
 void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpacesFB", function_loader.pfn_xrShareSpacesFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceShareInfoFB* info{};
@@ -3001,7 +3001,7 @@ void FunctionDispatch::handle_xrShareSpacesFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEraseSpaceFB", function_loader.pfn_xrEraseSpaceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceEraseInfoFB* info{};
@@ -3028,7 +3028,7 @@ void FunctionDispatch::handle_xrEraseSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSaveSpaceFB", function_loader.pfn_xrSaveSpaceFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceSaveInfoFB* info{};
@@ -3057,7 +3057,7 @@ void FunctionDispatch::handle_xrSaveSpaceFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSaveSpaceListFB", function_loader.pfn_xrSaveSpaceListFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceListSaveInfoFB* info{};
@@ -3087,7 +3087,7 @@ void FunctionDispatch::handle_xrSaveSpaceListFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpaceUserFB", function_loader.pfn_xrCreateSpaceUserFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpaceUserCreateInfoFB* info{};
@@ -3114,7 +3114,7 @@ void FunctionDispatch::handle_xrCreateSpaceUserFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpaceUserFB", function_loader.pfn_xrDestroySpaceUserFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpaceUserFB user{};
     deserialize(&user, d_ctx);
 
@@ -3134,7 +3134,7 @@ void FunctionDispatch::handle_xrDestroySpaceUserFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceUserIdFB", function_loader.pfn_xrGetSpaceUserIdFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpaceUserFB user{};
     deserialize(&user, d_ctx);
     XrSpaceUserIdFB* userId{};
@@ -3160,7 +3160,7 @@ void FunctionDispatch::handle_xrGetSpaceUserIdFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSwapchainStateFB", function_loader.pfn_xrGetSwapchainStateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     XrSwapchainStateBaseHeaderFB* state{};
@@ -3184,7 +3184,7 @@ void FunctionDispatch::handle_xrGetSwapchainStateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSwapchainFB", function_loader.pfn_xrUpdateSwapchainFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     XrSwapchainStateBaseHeaderFB* state{};
@@ -3209,7 +3209,7 @@ void FunctionDispatch::handle_xrUpdateSwapchainFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateTriangleMeshFB", function_loader.pfn_xrCreateTriangleMeshFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrTriangleMeshCreateInfoFB* createInfo{};
@@ -3236,7 +3236,7 @@ void FunctionDispatch::handle_xrCreateTriangleMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyTriangleMeshFB", function_loader.pfn_xrDestroyTriangleMeshFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
@@ -3256,7 +3256,7 @@ void FunctionDispatch::handle_xrDestroyTriangleMeshFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshBeginUpdateFB", function_loader.pfn_xrTriangleMeshBeginUpdateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
@@ -3276,7 +3276,7 @@ void FunctionDispatch::handle_xrTriangleMeshBeginUpdateFB(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshBeginVertexBufferUpdateFB", function_loader.pfn_xrTriangleMeshBeginVertexBufferUpdateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
     uint32_t* outVertexCount{};
@@ -3300,7 +3300,7 @@ void FunctionDispatch::handle_xrTriangleMeshBeginVertexBufferUpdateFB(MessageLoc
 void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshEndUpdateFB", function_loader.pfn_xrTriangleMeshEndUpdateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
     uint32_t vertexCount{};
@@ -3326,7 +3326,7 @@ void FunctionDispatch::handle_xrTriangleMeshEndUpdateFB(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshEndVertexBufferUpdateFB", function_loader.pfn_xrTriangleMeshEndVertexBufferUpdateFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
 
@@ -3346,7 +3346,7 @@ void FunctionDispatch::handle_xrTriangleMeshEndVertexBufferUpdateFB(MessageLockI
 void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshGetIndexBufferFB", function_loader.pfn_xrTriangleMeshGetIndexBufferFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
     uint32_t** outIndexBuffer{};
@@ -3370,7 +3370,7 @@ void FunctionDispatch::handle_xrTriangleMeshGetIndexBufferFB(MessageLockIn msg_i
 void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTriangleMeshGetVertexBufferFB", function_loader.pfn_xrTriangleMeshGetVertexBufferFB);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrTriangleMeshFB mesh{};
     deserialize(&mesh, d_ctx);
     XrVector3f** outVertexBuffer{};
@@ -3396,7 +3396,7 @@ void FunctionDispatch::handle_xrTriangleMeshGetVertexBufferFB(MessageLockIn msg_
 void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViveTrackerPathsHTCX", function_loader.pfn_xrEnumerateViveTrackerPathsHTCX);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     uint32_t pathCapacityInput{};
@@ -3429,7 +3429,7 @@ void FunctionDispatch::handle_xrEnumerateViveTrackerPathsHTCX(MessageLockIn msg_
 void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorHTC", function_loader.pfn_xrCreateSpatialAnchorHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoHTC* createInfo{};
@@ -3456,7 +3456,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialAnchorNameHTC", function_loader.pfn_xrGetSpatialAnchorNameHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace anchor{};
     deserialize(&anchor, d_ctx);
     XrSpatialAnchorNameHTC* name{};
@@ -3482,7 +3482,7 @@ void FunctionDispatch::handle_xrGetSpatialAnchorNameHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateBodyTrackerHTC", function_loader.pfn_xrCreateBodyTrackerHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBodyTrackerCreateInfoHTC* createInfo{};
@@ -3509,7 +3509,7 @@ void FunctionDispatch::handle_xrCreateBodyTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyBodyTrackerHTC", function_loader.pfn_xrDestroyBodyTrackerHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerHTC bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
 
@@ -3529,7 +3529,7 @@ void FunctionDispatch::handle_xrDestroyBodyTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetBodySkeletonHTC", function_loader.pfn_xrGetBodySkeletonHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerHTC bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
     XrSpace baseSpace{};
@@ -3559,7 +3559,7 @@ void FunctionDispatch::handle_xrGetBodySkeletonHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateBodyJointsHTC", function_loader.pfn_xrLocateBodyJointsHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrBodyTrackerHTC bodyTracker{};
     deserialize(&bodyTracker, d_ctx);
     XrBodyJointsLocateInfoHTC* locateInfo{};
@@ -3588,7 +3588,7 @@ void FunctionDispatch::handle_xrLocateBodyJointsHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFacialTrackerHTC", function_loader.pfn_xrCreateFacialTrackerHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFacialTrackerCreateInfoHTC* createInfo{};
@@ -3615,7 +3615,7 @@ void FunctionDispatch::handle_xrCreateFacialTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFacialTrackerHTC", function_loader.pfn_xrDestroyFacialTrackerHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFacialTrackerHTC facialTracker{};
     deserialize(&facialTracker, d_ctx);
 
@@ -3635,7 +3635,7 @@ void FunctionDispatch::handle_xrDestroyFacialTrackerHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFacialExpressionsHTC", function_loader.pfn_xrGetFacialExpressionsHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFacialTrackerHTC facialTracker{};
     deserialize(&facialTracker, d_ctx);
     XrFacialExpressionsHTC* facialExpressions{};
@@ -3661,7 +3661,7 @@ void FunctionDispatch::handle_xrGetFacialExpressionsHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyFoveationHTC", function_loader.pfn_xrApplyFoveationHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFoveationApplyInfoHTC* applyInfo{};
@@ -3687,7 +3687,7 @@ void FunctionDispatch::handle_xrApplyFoveationHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughHTC", function_loader.pfn_xrCreatePassthroughHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPassthroughCreateInfoHTC* createInfo{};
@@ -3714,7 +3714,7 @@ void FunctionDispatch::handle_xrCreatePassthroughHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughHTC", function_loader.pfn_xrDestroyPassthroughHTC);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughHTC passthrough{};
     deserialize(&passthrough, d_ctx);
 
@@ -3736,7 +3736,7 @@ void FunctionDispatch::handle_xrDestroyPassthroughHTC(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetD3D11GraphicsRequirementsKHR", function_loader.pfn_xrGetD3D11GraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -3765,7 +3765,7 @@ void FunctionDispatch::handle_xrGetD3D11GraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetD3D12GraphicsRequirementsKHR", function_loader.pfn_xrGetD3D12GraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -3794,7 +3794,7 @@ void FunctionDispatch::handle_xrGetD3D12GraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSwapchainAndroidSurfaceKHR", function_loader.pfn_xrCreateSwapchainAndroidSurfaceKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSwapchainCreateInfo* info{};
@@ -3827,7 +3827,7 @@ void FunctionDispatch::handle_xrCreateSwapchainAndroidSurfaceKHR(MessageLockIn m
 void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetAndroidApplicationThreadKHR", function_loader.pfn_xrSetAndroidApplicationThreadKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrAndroidThreadTypeKHR threadType{};
@@ -3855,7 +3855,7 @@ void FunctionDispatch::handle_xrSetAndroidApplicationThreadKHR(MessageLockIn msg
 void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimeToTimespecTimeKHR", function_loader.pfn_xrConvertTimeToTimespecTimeKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrTime time{};
@@ -3882,7 +3882,7 @@ void FunctionDispatch::handle_xrConvertTimeToTimespecTimeKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimespecTimeToTimeKHR", function_loader.pfn_xrConvertTimespecTimeToTimeKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     timespec* timespecTime{};
@@ -3912,7 +3912,7 @@ void FunctionDispatch::handle_xrConvertTimespecTimeToTimeKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStructureTypeToString2KHR", function_loader.pfn_xrStructureTypeToString2KHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrStructureType value{};
@@ -3941,7 +3941,7 @@ void FunctionDispatch::handle_xrStructureTypeToString2KHR(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrInitializeLoaderKHR", function_loader.pfn_xrInitializeLoaderKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrLoaderInitInfoBaseHeaderKHR* loaderInitInfo{};
     deserialize_xr(&loaderInitInfo, d_ctx);
 
@@ -3963,7 +3963,7 @@ void FunctionDispatch::handle_xrInitializeLoaderKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMetalGraphicsRequirementsKHR", function_loader.pfn_xrGetMetalGraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -3992,7 +3992,7 @@ void FunctionDispatch::handle_xrGetMetalGraphicsRequirementsKHR(MessageLockIn ms
 void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetOpenGLGraphicsRequirementsKHR", function_loader.pfn_xrGetOpenGLGraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4021,7 +4021,7 @@ void FunctionDispatch::handle_xrGetOpenGLGraphicsRequirementsKHR(MessageLockIn m
 void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetOpenGLESGraphicsRequirementsKHR", function_loader.pfn_xrGetOpenGLESGraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4050,7 +4050,7 @@ void FunctionDispatch::handle_xrGetOpenGLESGraphicsRequirementsKHR(MessageLockIn
 void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVisibilityMaskKHR", function_loader.pfn_xrGetVisibilityMaskKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrViewConfigurationType viewConfigurationType{};
@@ -4085,7 +4085,7 @@ void FunctionDispatch::handle_xrGetVisibilityMaskKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanDeviceExtensionsKHR", function_loader.pfn_xrGetVulkanDeviceExtensionsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4119,7 +4119,7 @@ void FunctionDispatch::handle_xrGetVulkanDeviceExtensionsKHR(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsDeviceKHR", function_loader.pfn_xrGetVulkanGraphicsDeviceKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4149,7 +4149,7 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDeviceKHR(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsRequirementsKHR", function_loader.pfn_xrGetVulkanGraphicsRequirementsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4176,7 +4176,7 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsRequirementsKHR(MessageLockIn m
 void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanInstanceExtensionsKHR", function_loader.pfn_xrGetVulkanInstanceExtensionsKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -4212,7 +4212,7 @@ void FunctionDispatch::handle_xrGetVulkanInstanceExtensionsKHR(MessageLockIn msg
 void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVulkanDeviceKHR", function_loader.pfn_xrCreateVulkanDeviceKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrVulkanDeviceCreateInfoKHR* createInfo{};
@@ -4243,7 +4243,7 @@ void FunctionDispatch::handle_xrCreateVulkanDeviceKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVulkanInstanceKHR", function_loader.pfn_xrCreateVulkanInstanceKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrVulkanInstanceCreateInfoKHR* createInfo{};
@@ -4274,7 +4274,7 @@ void FunctionDispatch::handle_xrCreateVulkanInstanceKHR(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVulkanGraphicsDevice2KHR", function_loader.pfn_xrGetVulkanGraphicsDevice2KHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrVulkanGraphicsDeviceGetInfoKHR* getInfo{};
@@ -4303,7 +4303,7 @@ void FunctionDispatch::handle_xrGetVulkanGraphicsDevice2KHR(MessageLockIn msg_in
 void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertTimeToWin32PerformanceCounterKHR", function_loader.pfn_xrConvertTimeToWin32PerformanceCounterKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrTime time{};
@@ -4330,7 +4330,7 @@ void FunctionDispatch::handle_xrConvertTimeToWin32PerformanceCounterKHR(MessageL
 void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrConvertWin32PerformanceCounterToTimeKHR", function_loader.pfn_xrConvertWin32PerformanceCounterToTimeKHR);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     LARGE_INTEGER* performanceCounter{};
@@ -4359,7 +4359,7 @@ void FunctionDispatch::handle_xrConvertWin32PerformanceCounterToTimeKHR(MessageL
 void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartColocationAdvertisementMETA", function_loader.pfn_xrStartColocationAdvertisementMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrColocationAdvertisementStartInfoMETA* info{};
@@ -4387,7 +4387,7 @@ void FunctionDispatch::handle_xrStartColocationAdvertisementMETA(MessageLockIn m
 void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartColocationDiscoveryMETA", function_loader.pfn_xrStartColocationDiscoveryMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrColocationDiscoveryStartInfoMETA* info{};
@@ -4414,7 +4414,7 @@ void FunctionDispatch::handle_xrStartColocationDiscoveryMETA(MessageLockIn msg_i
 void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopColocationAdvertisementMETA", function_loader.pfn_xrStopColocationAdvertisementMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrColocationAdvertisementStopInfoMETA* info{};
@@ -4441,7 +4441,7 @@ void FunctionDispatch::handle_xrStopColocationAdvertisementMETA(MessageLockIn ms
 void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopColocationDiscoveryMETA", function_loader.pfn_xrStopColocationDiscoveryMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrColocationDiscoveryStopInfoMETA* info{};
@@ -4470,7 +4470,7 @@ void FunctionDispatch::handle_xrStopColocationDiscoveryMETA(MessageLockIn msg_in
 void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAcquireEnvironmentDepthImageMETA", function_loader.pfn_xrAcquireEnvironmentDepthImageMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthImageAcquireInfoMETA* acquireInfo{};
@@ -4497,7 +4497,7 @@ void FunctionDispatch::handle_xrAcquireEnvironmentDepthImageMETA(MessageLockIn m
 void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEnvironmentDepthProviderMETA", function_loader.pfn_xrCreateEnvironmentDepthProviderMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrEnvironmentDepthProviderCreateInfoMETA* createInfo{};
@@ -4524,7 +4524,7 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthProviderMETA(MessageLockIn
 void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateEnvironmentDepthSwapchainMETA", function_loader.pfn_xrCreateEnvironmentDepthSwapchainMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthSwapchainCreateInfoMETA* createInfo{};
@@ -4551,7 +4551,7 @@ void FunctionDispatch::handle_xrCreateEnvironmentDepthSwapchainMETA(MessageLockI
 void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthProviderMETA", function_loader.pfn_xrDestroyEnvironmentDepthProviderMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
@@ -4571,7 +4571,7 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthProviderMETA(MessageLockI
 void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyEnvironmentDepthSwapchainMETA", function_loader.pfn_xrDestroyEnvironmentDepthSwapchainMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthSwapchainMETA swapchain{};
     deserialize(&swapchain, d_ctx);
 
@@ -4591,7 +4591,7 @@ void FunctionDispatch::handle_xrDestroyEnvironmentDepthSwapchainMETA(MessageLock
 void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateEnvironmentDepthSwapchainImagesMETA", function_loader.pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthSwapchainMETA swapchain{};
     deserialize(&swapchain, d_ctx);
     uint32_t imageCapacityInput{};
@@ -4622,7 +4622,7 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentDepthSwapchainImagesMETA(Mes
 void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetEnvironmentDepthSwapchainStateMETA", function_loader.pfn_xrGetEnvironmentDepthSwapchainStateMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthSwapchainMETA swapchain{};
     deserialize(&swapchain, d_ctx);
     XrEnvironmentDepthSwapchainStateMETA* state{};
@@ -4646,7 +4646,7 @@ void FunctionDispatch::handle_xrGetEnvironmentDepthSwapchainStateMETA(MessageLoc
 void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetEnvironmentDepthHandRemovalMETA", function_loader.pfn_xrSetEnvironmentDepthHandRemovalMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
     XrEnvironmentDepthHandRemovalSetInfoMETA* setInfo{};
@@ -4669,7 +4669,7 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthHandRemovalMETA(MessageLockIn
 void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStartEnvironmentDepthProviderMETA", function_loader.pfn_xrStartEnvironmentDepthProviderMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
@@ -4689,7 +4689,7 @@ void FunctionDispatch::handle_xrStartEnvironmentDepthProviderMETA(MessageLockIn 
 void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopEnvironmentDepthProviderMETA", function_loader.pfn_xrStopEnvironmentDepthProviderMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrEnvironmentDepthProviderMETA environmentDepthProvider{};
     deserialize(&environmentDepthProvider, d_ctx);
 
@@ -4711,7 +4711,7 @@ void FunctionDispatch::handle_xrStopEnvironmentDepthProviderMETA(MessageLockIn m
 void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFoveationEyeTrackedStateMETA", function_loader.pfn_xrGetFoveationEyeTrackedStateMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFoveationEyeTrackedStateMETA* foveationState{};
@@ -4737,7 +4737,7 @@ void FunctionDispatch::handle_xrGetFoveationEyeTrackedStateMETA(MessageLockIn ms
 void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreatePassthroughColorLutMETA", function_loader.pfn_xrCreatePassthroughColorLutMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughFB passthrough{};
     deserialize(&passthrough, d_ctx);
     XrPassthroughColorLutCreateInfoMETA* createInfo{};
@@ -4764,7 +4764,7 @@ void FunctionDispatch::handle_xrCreatePassthroughColorLutMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyPassthroughColorLutMETA", function_loader.pfn_xrDestroyPassthroughColorLutMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughColorLutMETA colorLut{};
     deserialize(&colorLut, d_ctx);
 
@@ -4784,7 +4784,7 @@ void FunctionDispatch::handle_xrDestroyPassthroughColorLutMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdatePassthroughColorLutMETA", function_loader.pfn_xrUpdatePassthroughColorLutMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrPassthroughColorLutMETA colorLut{};
     deserialize(&colorLut, d_ctx);
     XrPassthroughColorLutUpdateInfoMETA* updateInfo{};
@@ -4809,7 +4809,7 @@ void FunctionDispatch::handle_xrUpdatePassthroughColorLutMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPassthroughPreferencesMETA", function_loader.pfn_xrGetPassthroughPreferencesMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPassthroughPreferencesMETA* preferences{};
@@ -4835,7 +4835,7 @@ void FunctionDispatch::handle_xrGetPassthroughPreferencesMETA(MessageLockIn msg_
 void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumeratePerformanceMetricsCounterPathsMETA", function_loader.pfn_xrEnumeratePerformanceMetricsCounterPathsMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     uint32_t counterPathCapacityInput{};
@@ -4866,7 +4866,7 @@ void FunctionDispatch::handle_xrEnumeratePerformanceMetricsCounterPathsMETA(Mess
 void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetPerformanceMetricsStateMETA", function_loader.pfn_xrGetPerformanceMetricsStateMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPerformanceMetricsStateMETA* state{};
@@ -4890,7 +4890,7 @@ void FunctionDispatch::handle_xrGetPerformanceMetricsStateMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQueryPerformanceMetricsCounterMETA", function_loader.pfn_xrQueryPerformanceMetricsCounterMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath counterPath{};
@@ -4917,7 +4917,7 @@ void FunctionDispatch::handle_xrQueryPerformanceMetricsCounterMETA(MessageLockIn
 void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetPerformanceMetricsStateMETA", function_loader.pfn_xrSetPerformanceMetricsStateMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPerformanceMetricsStateMETA* state{};
@@ -4942,7 +4942,7 @@ void FunctionDispatch::handle_xrSetPerformanceMetricsStateMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetRecommendedLayerResolutionMETA", function_loader.pfn_xrGetRecommendedLayerResolutionMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrRecommendedLayerResolutionGetInfoMETA* info{};
@@ -4971,7 +4971,7 @@ void FunctionDispatch::handle_xrGetRecommendedLayerResolutionMETA(MessageLockIn 
 void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPauseSimultaneousHandsAndControllersTrackingMETA", function_loader.pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSimultaneousHandsAndControllersTrackingPauseInfoMETA* pauseInfo{};
@@ -4994,7 +4994,7 @@ void FunctionDispatch::handle_xrPauseSimultaneousHandsAndControllersTrackingMETA
 void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrResumeSimultaneousHandsAndControllersTrackingMETA", function_loader.pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSimultaneousHandsAndControllersTrackingResumeInfoMETA* resumeInfo{};
@@ -5019,7 +5019,7 @@ void FunctionDispatch::handle_xrResumeSimultaneousHandsAndControllersTrackingMET
 void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpaceTriangleMeshMETA", function_loader.pfn_xrGetSpaceTriangleMeshMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     XrSpaceTriangleMeshGetInfoMETA* getInfo{};
@@ -5048,7 +5048,7 @@ void FunctionDispatch::handle_xrGetSpaceTriangleMeshMETA(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrShareSpacesMETA", function_loader.pfn_xrShareSpacesMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrShareSpacesInfoMETA* info{};
@@ -5078,7 +5078,7 @@ void FunctionDispatch::handle_xrShareSpacesMETA(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrChangeVirtualKeyboardTextContextMETA", function_loader.pfn_xrChangeVirtualKeyboardTextContextMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardTextContextChangeInfoMETA* changeInfo{};
@@ -5101,7 +5101,7 @@ void FunctionDispatch::handle_xrChangeVirtualKeyboardTextContextMETA(MessageLock
 void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVirtualKeyboardMETA", function_loader.pfn_xrCreateVirtualKeyboardMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrVirtualKeyboardCreateInfoMETA* createInfo{};
@@ -5128,7 +5128,7 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardMETA(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateVirtualKeyboardSpaceMETA", function_loader.pfn_xrCreateVirtualKeyboardSpaceMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrVirtualKeyboardMETA keyboard{};
@@ -5158,7 +5158,7 @@ void FunctionDispatch::handle_xrCreateVirtualKeyboardSpaceMETA(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyVirtualKeyboardMETA", function_loader.pfn_xrDestroyVirtualKeyboardMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
 
@@ -5178,7 +5178,7 @@ void FunctionDispatch::handle_xrDestroyVirtualKeyboardMETA(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardDirtyTexturesMETA", function_loader.pfn_xrGetVirtualKeyboardDirtyTexturesMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     uint32_t textureIdCapacityInput{};
@@ -5209,7 +5209,7 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardDirtyTexturesMETA(MessageLockI
 void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardModelAnimationStatesMETA", function_loader.pfn_xrGetVirtualKeyboardModelAnimationStatesMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardModelAnimationStatesMETA* animationStates{};
@@ -5233,7 +5233,7 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardModelAnimationStatesMETA(Messa
 void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardScaleMETA", function_loader.pfn_xrGetVirtualKeyboardScaleMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     float* scale{};
@@ -5257,7 +5257,7 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardScaleMETA(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetVirtualKeyboardTextureDataMETA", function_loader.pfn_xrGetVirtualKeyboardTextureDataMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     uint64_t textureId{};
@@ -5284,7 +5284,7 @@ void FunctionDispatch::handle_xrGetVirtualKeyboardTextureDataMETA(MessageLockIn 
 void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSendVirtualKeyboardInputMETA", function_loader.pfn_xrSendVirtualKeyboardInputMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardInputInfoMETA* info{};
@@ -5311,7 +5311,7 @@ void FunctionDispatch::handle_xrSendVirtualKeyboardInputMETA(MessageLockIn msg_i
 void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetVirtualKeyboardModelVisibilityMETA", function_loader.pfn_xrSetVirtualKeyboardModelVisibilityMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardModelVisibilitySetInfoMETA* modelVisibility{};
@@ -5334,7 +5334,7 @@ void FunctionDispatch::handle_xrSetVirtualKeyboardModelVisibilityMETA(MessageLoc
 void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSuggestVirtualKeyboardLocationMETA", function_loader.pfn_xrSuggestVirtualKeyboardLocationMETA);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrVirtualKeyboardMETA keyboard{};
     deserialize(&keyboard, d_ctx);
     XrVirtualKeyboardLocationInfoMETA* locationInfo{};
@@ -5359,7 +5359,7 @@ void FunctionDispatch::handle_xrSuggestVirtualKeyboardLocationMETA(MessageLockIn
 void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpaceFromCoordinateFrameUIDML", function_loader.pfn_xrCreateSpaceFromCoordinateFrameUIDML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrCoordinateSpaceCreateInfoML* createInfo{};
@@ -5388,7 +5388,7 @@ void FunctionDispatch::handle_xrCreateSpaceFromCoordinateFrameUIDML(MessageLockI
 void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateFacialExpressionClientML", function_loader.pfn_xrCreateFacialExpressionClientML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFacialExpressionClientCreateInfoML* createInfo{};
@@ -5415,7 +5415,7 @@ void FunctionDispatch::handle_xrCreateFacialExpressionClientML(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyFacialExpressionClientML", function_loader.pfn_xrDestroyFacialExpressionClientML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFacialExpressionClientML facialExpressionClient{};
     deserialize(&facialExpressionClient, d_ctx);
 
@@ -5435,7 +5435,7 @@ void FunctionDispatch::handle_xrDestroyFacialExpressionClientML(MessageLockIn ms
 void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetFacialExpressionBlendShapePropertiesML", function_loader.pfn_xrGetFacialExpressionBlendShapePropertiesML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrFacialExpressionClientML facialExpressionClient{};
     deserialize(&facialExpressionClient, d_ctx);
     XrFacialExpressionBlendShapeGetInfoML* blendShapeGetInfo{};
@@ -5467,7 +5467,7 @@ void FunctionDispatch::handle_xrGetFacialExpressionBlendShapePropertiesML(Messag
 void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateExportedLocalizationMapML", function_loader.pfn_xrCreateExportedLocalizationMapML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrUuidEXT* mapUuid{};
@@ -5494,7 +5494,7 @@ void FunctionDispatch::handle_xrCreateExportedLocalizationMapML(MessageLockIn ms
 void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyExportedLocalizationMapML", function_loader.pfn_xrDestroyExportedLocalizationMapML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrExportedLocalizationMapML map{};
     deserialize(&map, d_ctx);
 
@@ -5514,7 +5514,7 @@ void FunctionDispatch::handle_xrDestroyExportedLocalizationMapML(MessageLockIn m
 void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnableLocalizationEventsML", function_loader.pfn_xrEnableLocalizationEventsML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrLocalizationEnableEventsInfoML* info{};
@@ -5537,7 +5537,7 @@ void FunctionDispatch::handle_xrEnableLocalizationEventsML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetExportedLocalizationMapDataML", function_loader.pfn_xrGetExportedLocalizationMapDataML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrExportedLocalizationMapML map{};
     deserialize(&map, d_ctx);
     uint32_t bufferCapacityInput{};
@@ -5568,7 +5568,7 @@ void FunctionDispatch::handle_xrGetExportedLocalizationMapDataML(MessageLockIn m
 void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrImportLocalizationMapML", function_loader.pfn_xrImportLocalizationMapML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrLocalizationMapImportInfoML* importInfo{};
@@ -5596,7 +5596,7 @@ void FunctionDispatch::handle_xrImportLocalizationMapML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQueryLocalizationMapsML", function_loader.pfn_xrQueryLocalizationMapsML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrLocalizationMapQueryInfoBaseHeaderML* queryInfo{};
@@ -5630,7 +5630,7 @@ void FunctionDispatch::handle_xrQueryLocalizationMapsML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestMapLocalizationML", function_loader.pfn_xrRequestMapLocalizationML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrMapLocalizationRequestInfoML* requestInfo{};
@@ -5655,7 +5655,7 @@ void FunctionDispatch::handle_xrRequestMapLocalizationML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerDetectorML", function_loader.pfn_xrCreateMarkerDetectorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrMarkerDetectorCreateInfoML* createInfo{};
@@ -5682,7 +5682,7 @@ void FunctionDispatch::handle_xrCreateMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerSpaceML", function_loader.pfn_xrCreateMarkerSpaceML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrMarkerSpaceCreateInfoML* createInfo{};
@@ -5709,7 +5709,7 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyMarkerDetectorML", function_loader.pfn_xrDestroyMarkerDetectorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
 
@@ -5729,7 +5729,7 @@ void FunctionDispatch::handle_xrDestroyMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerDetectorStateML", function_loader.pfn_xrGetMarkerDetectorStateML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerDetectorStateML* state{};
@@ -5753,7 +5753,7 @@ void FunctionDispatch::handle_xrGetMarkerDetectorStateML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerLengthML", function_loader.pfn_xrGetMarkerLengthML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
@@ -5780,7 +5780,7 @@ void FunctionDispatch::handle_xrGetMarkerLengthML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerNumberML", function_loader.pfn_xrGetMarkerNumberML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
@@ -5807,7 +5807,7 @@ void FunctionDispatch::handle_xrGetMarkerNumberML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerReprojectionErrorML", function_loader.pfn_xrGetMarkerReprojectionErrorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
@@ -5834,7 +5834,7 @@ void FunctionDispatch::handle_xrGetMarkerReprojectionErrorML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerStringML", function_loader.pfn_xrGetMarkerStringML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerML marker{};
@@ -5868,7 +5868,7 @@ void FunctionDispatch::handle_xrGetMarkerStringML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkersML", function_loader.pfn_xrGetMarkersML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     uint32_t markerCapacityInput{};
@@ -5899,7 +5899,7 @@ void FunctionDispatch::handle_xrGetMarkersML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSnapshotMarkerDetectorML", function_loader.pfn_xrSnapshotMarkerDetectorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrMarkerDetectorML markerDetector{};
     deserialize(&markerDetector, d_ctx);
     XrMarkerDetectorSnapshotInfoML* snapshotInfo{};
@@ -5925,7 +5925,7 @@ void FunctionDispatch::handle_xrSnapshotMarkerDetectorML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsAsyncML", function_loader.pfn_xrCreateSpatialAnchorsAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorsCreateInfoBaseHeaderML* createInfo{};
@@ -5952,7 +5952,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsAsyncML(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsCompleteML", function_loader.pfn_xrCreateSpatialAnchorsCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFutureEXT future{};
@@ -5979,7 +5979,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsCompleteML(MessageLockIn msg
 void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialAnchorStateML", function_loader.pfn_xrGetSpatialAnchorStateML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace anchor{};
     deserialize(&anchor, d_ctx);
     XrSpatialAnchorStateML* state{};
@@ -6005,7 +6005,7 @@ void FunctionDispatch::handle_xrGetSpatialAnchorStateML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorsStorageML", function_loader.pfn_xrCreateSpatialAnchorsStorageML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorsCreateStorageInfoML* createInfo{};
@@ -6032,7 +6032,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorsStorageML(MessageLockIn msg_
 void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsAsyncML", function_loader.pfn_xrDeleteSpatialAnchorsAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrSpatialAnchorsDeleteInfoML* deleteInfo{};
@@ -6059,7 +6059,7 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsAsyncML(MessageLockIn msg_in
 void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeleteSpatialAnchorsCompleteML", function_loader.pfn_xrDeleteSpatialAnchorsCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrFutureEXT future{};
@@ -6086,7 +6086,7 @@ void FunctionDispatch::handle_xrDeleteSpatialAnchorsCompleteML(MessageLockIn msg
 void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorsStorageML", function_loader.pfn_xrDestroySpatialAnchorsStorageML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
 
@@ -6106,7 +6106,7 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorsStorageML(MessageLockIn msg
 void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPublishSpatialAnchorsAsyncML", function_loader.pfn_xrPublishSpatialAnchorsAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrSpatialAnchorsPublishInfoML* publishInfo{};
@@ -6133,7 +6133,7 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsAsyncML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPublishSpatialAnchorsCompleteML", function_loader.pfn_xrPublishSpatialAnchorsCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrFutureEXT future{};
@@ -6160,7 +6160,7 @@ void FunctionDispatch::handle_xrPublishSpatialAnchorsCompleteML(MessageLockIn ms
 void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpatialAnchorsAsyncML", function_loader.pfn_xrQuerySpatialAnchorsAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrSpatialAnchorsQueryInfoBaseHeaderML* queryInfo{};
@@ -6187,7 +6187,7 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsAsyncML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrQuerySpatialAnchorsCompleteML", function_loader.pfn_xrQuerySpatialAnchorsCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrFutureEXT future{};
@@ -6214,7 +6214,7 @@ void FunctionDispatch::handle_xrQuerySpatialAnchorsCompleteML(MessageLockIn msg_
 void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationAsyncML", function_loader.pfn_xrUpdateSpatialAnchorsExpirationAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrSpatialAnchorsUpdateExpirationInfoML* updateInfo{};
@@ -6241,7 +6241,7 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationAsyncML(MessageLoc
 void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateSpatialAnchorsExpirationCompleteML", function_loader.pfn_xrUpdateSpatialAnchorsExpirationCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorsStorageML storage{};
     deserialize(&storage, d_ctx);
     XrFutureEXT future{};
@@ -6270,7 +6270,7 @@ void FunctionDispatch::handle_xrUpdateSpatialAnchorsExpirationCompleteML(Message
 void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetSystemNotificationsML", function_loader.pfn_xrSetSystemNotificationsML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemNotificationsSetInfoML* info{};
@@ -6295,7 +6295,7 @@ void FunctionDispatch::handle_xrSetSystemNotificationsML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnableUserCalibrationEventsML", function_loader.pfn_xrEnableUserCalibrationEventsML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrUserCalibrationEnableEventsInfoML* enableInfo{};
@@ -6320,7 +6320,7 @@ void FunctionDispatch::handle_xrEnableUserCalibrationEventsML(MessageLockIn msg_
 void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAllocateWorldMeshBufferML", function_loader.pfn_xrAllocateWorldMeshBufferML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshBufferSizeML* size{};
@@ -6348,7 +6348,7 @@ void FunctionDispatch::handle_xrAllocateWorldMeshBufferML(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateWorldMeshDetectorML", function_loader.pfn_xrCreateWorldMeshDetectorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrWorldMeshDetectorCreateInfoML* createInfo{};
@@ -6375,7 +6375,7 @@ void FunctionDispatch::handle_xrCreateWorldMeshDetectorML(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyWorldMeshDetectorML", function_loader.pfn_xrDestroyWorldMeshDetectorML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
 
@@ -6395,7 +6395,7 @@ void FunctionDispatch::handle_xrDestroyWorldMeshDetectorML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrFreeWorldMeshBufferML", function_loader.pfn_xrFreeWorldMeshBufferML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshBufferML* buffer{};
@@ -6420,7 +6420,7 @@ void FunctionDispatch::handle_xrFreeWorldMeshBufferML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetWorldMeshBufferRecommendSizeML", function_loader.pfn_xrGetWorldMeshBufferRecommendSizeML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshBufferRecommendedSizeInfoML* sizeInfo{};
@@ -6447,7 +6447,7 @@ void FunctionDispatch::handle_xrGetWorldMeshBufferRecommendSizeML(MessageLockIn 
 void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshAsyncML", function_loader.pfn_xrRequestWorldMeshAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshGetInfoML* getInfo{};
@@ -6479,7 +6479,7 @@ void FunctionDispatch::handle_xrRequestWorldMeshAsyncML(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshCompleteML", function_loader.pfn_xrRequestWorldMeshCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshRequestCompletionInfoML* completionInfo{};
@@ -6509,7 +6509,7 @@ void FunctionDispatch::handle_xrRequestWorldMeshCompleteML(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshStateAsyncML", function_loader.pfn_xrRequestWorldMeshStateAsyncML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrWorldMeshStateRequestInfoML* stateRequest{};
@@ -6536,7 +6536,7 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateAsyncML(MessageLockIn msg_i
 void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestWorldMeshStateCompleteML", function_loader.pfn_xrRequestWorldMeshStateCompleteML);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrWorldMeshDetectorML detector{};
     deserialize(&detector, d_ctx);
     XrFutureEXT future{};
@@ -6565,7 +6565,7 @@ void FunctionDispatch::handle_xrRequestWorldMeshStateCompleteML(MessageLockIn ms
 void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyForceFeedbackCurlMNDX", function_loader.pfn_xrApplyForceFeedbackCurlMNDX);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
     XrForceFeedbackCurlApplyLocationsMNDX* locations{};
@@ -6591,7 +6591,7 @@ void FunctionDispatch::handle_xrApplyForceFeedbackCurlMNDX(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateReprojectionModesMSFT", function_loader.pfn_xrEnumerateReprojectionModesMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -6630,7 +6630,7 @@ void FunctionDispatch::handle_xrEnumerateReprojectionModesMSFT(MessageLockIn msg
 void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelKeyMSFT", function_loader.pfn_xrGetControllerModelKeyMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelUserPath{};
@@ -6657,7 +6657,7 @@ void FunctionDispatch::handle_xrGetControllerModelKeyMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelPropertiesMSFT", function_loader.pfn_xrGetControllerModelPropertiesMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
@@ -6684,7 +6684,7 @@ void FunctionDispatch::handle_xrGetControllerModelPropertiesMSFT(MessageLockIn m
 void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetControllerModelStateMSFT", function_loader.pfn_xrGetControllerModelStateMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
@@ -6711,7 +6711,7 @@ void FunctionDispatch::handle_xrGetControllerModelStateMSFT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLoadControllerModelMSFT", function_loader.pfn_xrLoadControllerModelMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrControllerModelKeyMSFT modelKey{};
@@ -6747,7 +6747,7 @@ void FunctionDispatch::handle_xrLoadControllerModelMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateHandMeshSpaceMSFT", function_loader.pfn_xrCreateHandMeshSpaceMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
     XrHandMeshSpaceCreateInfoMSFT* createInfo{};
@@ -6774,7 +6774,7 @@ void FunctionDispatch::handle_xrCreateHandMeshSpaceMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUpdateHandMeshMSFT", function_loader.pfn_xrUpdateHandMeshMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrHandTrackerEXT handTracker{};
     deserialize(&handTracker, d_ctx);
     XrHandMeshUpdateInfoMSFT* updateInfo{};
@@ -6803,7 +6803,7 @@ void FunctionDispatch::handle_xrUpdateHandMeshMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPerceptionAnchorMSFT", function_loader.pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     IUnknown* perceptionAnchor{};
@@ -6831,7 +6831,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPerceptionAnchorMSFT(Mess
 void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTryGetPerceptionAnchorFromSpatialAnchorMSFT", function_loader.pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorMSFT anchor{};
@@ -6860,7 +6860,7 @@ void FunctionDispatch::handle_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(Mess
 void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMarkerDecodedStringMSFT", function_loader.pfn_xrGetSceneMarkerDecodedStringMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrUuidMSFT* markerId{};
@@ -6894,7 +6894,7 @@ void FunctionDispatch::handle_xrGetSceneMarkerDecodedStringMSFT(MessageLockIn ms
 void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMarkerRawDataMSFT", function_loader.pfn_xrGetSceneMarkerRawDataMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrUuidMSFT* markerId{};
@@ -6930,7 +6930,7 @@ void FunctionDispatch::handle_xrGetSceneMarkerRawDataMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrComputeNewSceneMSFT", function_loader.pfn_xrComputeNewSceneMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
     XrNewSceneComputeInfoMSFT* computeInfo{};
@@ -6953,7 +6953,7 @@ void FunctionDispatch::handle_xrComputeNewSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSceneMSFT", function_loader.pfn_xrCreateSceneMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
     XrSceneCreateInfoMSFT* createInfo{};
@@ -6980,7 +6980,7 @@ void FunctionDispatch::handle_xrCreateSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSceneObserverMSFT", function_loader.pfn_xrCreateSceneObserverMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSceneObserverCreateInfoMSFT* createInfo{};
@@ -7007,7 +7007,7 @@ void FunctionDispatch::handle_xrCreateSceneObserverMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySceneMSFT", function_loader.pfn_xrDestroySceneMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
 
@@ -7027,7 +7027,7 @@ void FunctionDispatch::handle_xrDestroySceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySceneObserverMSFT", function_loader.pfn_xrDestroySceneObserverMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
 
@@ -7047,7 +7047,7 @@ void FunctionDispatch::handle_xrDestroySceneObserverMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSceneComputeFeaturesMSFT", function_loader.pfn_xrEnumerateSceneComputeFeaturesMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -7081,7 +7081,7 @@ void FunctionDispatch::handle_xrEnumerateSceneComputeFeaturesMSFT(MessageLockIn 
 void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneComponentsMSFT", function_loader.pfn_xrGetSceneComponentsMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrSceneComponentsGetInfoMSFT* getInfo{};
@@ -7108,7 +7108,7 @@ void FunctionDispatch::handle_xrGetSceneComponentsMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneComputeStateMSFT", function_loader.pfn_xrGetSceneComputeStateMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
     XrSceneComputeStateMSFT* state{};
@@ -7132,7 +7132,7 @@ void FunctionDispatch::handle_xrGetSceneComputeStateMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSceneMeshBuffersMSFT", function_loader.pfn_xrGetSceneMeshBuffersMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrSceneMeshBuffersGetInfoMSFT* getInfo{};
@@ -7159,7 +7159,7 @@ void FunctionDispatch::handle_xrGetSceneMeshBuffersMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSceneComponentsMSFT", function_loader.pfn_xrLocateSceneComponentsMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrSceneComponentsLocateInfoMSFT* locateInfo{};
@@ -7188,7 +7188,7 @@ void FunctionDispatch::handle_xrLocateSceneComponentsMSFT(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDeserializeSceneMSFT", function_loader.pfn_xrDeserializeSceneMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneObserverMSFT sceneObserver{};
     deserialize(&sceneObserver, d_ctx);
     XrSceneDeserializeInfoMSFT* deserializeInfo{};
@@ -7211,7 +7211,7 @@ void FunctionDispatch::handle_xrDeserializeSceneMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSerializedSceneFragmentDataMSFT", function_loader.pfn_xrGetSerializedSceneFragmentDataMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSceneMSFT scene{};
     deserialize(&scene, d_ctx);
     XrSerializedSceneFragmentDataGetInfoMSFT* getInfo{};
@@ -7247,7 +7247,7 @@ void FunctionDispatch::handle_xrGetSerializedSceneFragmentDataMSFT(MessageLockIn
 void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorMSFT", function_loader.pfn_xrCreateSpatialAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorCreateInfoMSFT* createInfo{};
@@ -7274,7 +7274,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorSpaceMSFT", function_loader.pfn_xrCreateSpatialAnchorSpaceMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorSpaceCreateInfoMSFT* createInfo{};
@@ -7301,7 +7301,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorSpaceMSFT(MessageLockIn msg_i
 void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorMSFT", function_loader.pfn_xrDestroySpatialAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorMSFT anchor{};
     deserialize(&anchor, d_ctx);
 
@@ -7323,7 +7323,7 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrClearSpatialAnchorStoreMSFT", function_loader.pfn_xrClearSpatialAnchorStoreMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
 
@@ -7343,7 +7343,7 @@ void FunctionDispatch::handle_xrClearSpatialAnchorStoreMSFT(MessageLockIn msg_in
 void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorFromPersistedNameMSFT", function_loader.pfn_xrCreateSpatialAnchorFromPersistedNameMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorFromPersistedAnchorCreateInfoMSFT* spatialAnchorCreateInfo{};
@@ -7370,7 +7370,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorFromPersistedNameMSFT(Message
 void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialAnchorStoreConnectionMSFT", function_loader.pfn_xrCreateSpatialAnchorStoreConnectionMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialAnchorStoreConnectionMSFT* spatialAnchorStore{};
@@ -7394,7 +7394,7 @@ void FunctionDispatch::handle_xrCreateSpatialAnchorStoreConnectionMSFT(MessageLo
 void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialAnchorStoreConnectionMSFT", function_loader.pfn_xrDestroySpatialAnchorStoreConnectionMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
 
@@ -7414,7 +7414,7 @@ void FunctionDispatch::handle_xrDestroySpatialAnchorStoreConnectionMSFT(MessageL
 void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumeratePersistedSpatialAnchorNamesMSFT", function_loader.pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
     uint32_t spatialAnchorNameCapacityInput{};
@@ -7445,7 +7445,7 @@ void FunctionDispatch::handle_xrEnumeratePersistedSpatialAnchorNamesMSFT(Message
 void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPersistSpatialAnchorMSFT", function_loader.pfn_xrPersistSpatialAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
     XrSpatialAnchorPersistenceInfoMSFT* spatialAnchorPersistenceInfo{};
@@ -7468,7 +7468,7 @@ void FunctionDispatch::handle_xrPersistSpatialAnchorMSFT(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrUnpersistSpatialAnchorMSFT", function_loader.pfn_xrUnpersistSpatialAnchorMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialAnchorStoreConnectionMSFT spatialAnchorStore{};
     deserialize(&spatialAnchorStore, d_ctx);
     XrSpatialAnchorPersistenceNameMSFT* spatialAnchorPersistenceName{};
@@ -7493,7 +7493,7 @@ void FunctionDispatch::handle_xrUnpersistSpatialAnchorMSFT(MessageLockIn msg_in)
 void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSpatialGraphNodeSpaceMSFT", function_loader.pfn_xrCreateSpatialGraphNodeSpaceMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialGraphNodeSpaceCreateInfoMSFT* createInfo{};
@@ -7520,7 +7520,7 @@ void FunctionDispatch::handle_xrCreateSpatialGraphNodeSpaceMSFT(MessageLockIn ms
 void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpatialGraphNodeBindingMSFT", function_loader.pfn_xrDestroySpatialGraphNodeBindingMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialGraphNodeBindingMSFT nodeBinding{};
     deserialize(&nodeBinding, d_ctx);
 
@@ -7540,7 +7540,7 @@ void FunctionDispatch::handle_xrDestroySpatialGraphNodeBindingMSFT(MessageLockIn
 void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSpatialGraphNodeBindingPropertiesMSFT", function_loader.pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpatialGraphNodeBindingMSFT nodeBinding{};
     deserialize(&nodeBinding, d_ctx);
     XrSpatialGraphNodeBindingPropertiesGetInfoMSFT* getInfo{};
@@ -7567,7 +7567,7 @@ void FunctionDispatch::handle_xrGetSpatialGraphNodeBindingPropertiesMSFT(Message
 void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrTryCreateSpatialGraphStaticNodeBindingMSFT", function_loader.pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpatialGraphStaticNodeBindingCreateInfoMSFT* createInfo{};
@@ -7596,7 +7596,7 @@ void FunctionDispatch::handle_xrTryCreateSpatialGraphStaticNodeBindingMSFT(Messa
 void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAudioInputDeviceGuidOculus", function_loader.pfn_xrGetAudioInputDeviceGuidOculus);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
@@ -7620,7 +7620,7 @@ void FunctionDispatch::handle_xrGetAudioInputDeviceGuidOculus(MessageLockIn msg_
 void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetAudioOutputDeviceGuidOculus", function_loader.pfn_xrGetAudioOutputDeviceGuidOculus);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     wchar_t buffer[XR_MAX_AUDIO_DEVICE_STR_SIZE_OCULUS]{};
@@ -7646,7 +7646,7 @@ void FunctionDispatch::handle_xrGetAudioOutputDeviceGuidOculus(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateExternalCamerasOCULUS", function_loader.pfn_xrEnumerateExternalCamerasOCULUS);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t cameraCapacityInput{};
@@ -7679,7 +7679,7 @@ void FunctionDispatch::handle_xrEnumerateExternalCamerasOCULUS(MessageLockIn msg
 void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetTrackingOptimizationSettingsHintQCOM", function_loader.pfn_xrSetTrackingOptimizationSettingsHintQCOM);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrTrackingOptimizationSettingsDomainQCOM domain{};
@@ -7707,7 +7707,7 @@ void FunctionDispatch::handle_xrSetTrackingOptimizationSettingsHintQCOM(MessageL
 void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetEnvironmentDepthEstimationVARJO", function_loader.pfn_xrSetEnvironmentDepthEstimationVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBool32 enabled{};
@@ -7732,7 +7732,7 @@ void FunctionDispatch::handle_xrSetEnvironmentDepthEstimationVARJO(MessageLockIn
 void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateMarkerSpaceVARJO", function_loader.pfn_xrCreateMarkerSpaceVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrMarkerSpaceCreateInfoVARJO* createInfo{};
@@ -7759,7 +7759,7 @@ void FunctionDispatch::handle_xrCreateMarkerSpaceVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetMarkerSizeVARJO", function_loader.pfn_xrGetMarkerSizeVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint64_t markerId{};
@@ -7786,7 +7786,7 @@ void FunctionDispatch::handle_xrGetMarkerSizeVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingPredictionVARJO", function_loader.pfn_xrSetMarkerTrackingPredictionVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint64_t markerId{};
@@ -7812,7 +7812,7 @@ void FunctionDispatch::handle_xrSetMarkerTrackingPredictionVARJO(MessageLockIn m
 void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingTimeoutVARJO", function_loader.pfn_xrSetMarkerTrackingTimeoutVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint64_t markerId{};
@@ -7838,7 +7838,7 @@ void FunctionDispatch::handle_xrSetMarkerTrackingTimeoutVARJO(MessageLockIn msg_
 void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetMarkerTrackingVARJO", function_loader.pfn_xrSetMarkerTrackingVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBool32 enabled{};
@@ -7863,7 +7863,7 @@ void FunctionDispatch::handle_xrSetMarkerTrackingVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSetViewOffsetVARJO", function_loader.pfn_xrSetViewOffsetVARJO);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     float offset{};
@@ -7887,7 +7887,7 @@ void FunctionDispatch::handle_xrSetViewOffsetVARJO(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAcquireSwapchainImage", function_loader.pfn_xrAcquireSwapchainImage);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     XrSwapchainImageAcquireInfo* acquireInfo{};
@@ -7914,7 +7914,7 @@ void FunctionDispatch::handle_xrAcquireSwapchainImage(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrApplyHapticFeedback", function_loader.pfn_xrApplyHapticFeedback);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
@@ -7940,7 +7940,7 @@ void FunctionDispatch::handle_xrApplyHapticFeedback(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrAttachSessionActionSets", function_loader.pfn_xrAttachSessionActionSets);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSessionActionSetsAttachInfo* attachInfo{};
@@ -7963,7 +7963,7 @@ void FunctionDispatch::handle_xrAttachSessionActionSets(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginFrame", function_loader.pfn_xrBeginFrame);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFrameBeginInfo* frameBeginInfo{};
@@ -7986,7 +7986,7 @@ void FunctionDispatch::handle_xrBeginFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrBeginSession", function_loader.pfn_xrBeginSession);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSessionBeginInfo* beginInfo{};
@@ -8009,7 +8009,7 @@ void FunctionDispatch::handle_xrBeginSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateAction", function_loader.pfn_xrCreateAction);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrActionSet actionSet{};
     deserialize(&actionSet, d_ctx);
     XrActionCreateInfo* createInfo{};
@@ -8036,7 +8036,7 @@ void FunctionDispatch::handle_xrCreateAction(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateActionSet", function_loader.pfn_xrCreateActionSet);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrActionSetCreateInfo* createInfo{};
@@ -8063,7 +8063,7 @@ void FunctionDispatch::handle_xrCreateActionSet(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateActionSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateActionSpace", function_loader.pfn_xrCreateActionSpace);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionSpaceCreateInfo* createInfo{};
@@ -8095,7 +8095,7 @@ void FunctionDispatch::handle_xrCreateInstance(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateReferenceSpace", function_loader.pfn_xrCreateReferenceSpace);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrReferenceSpaceCreateInfo* createInfo{};
@@ -8122,7 +8122,7 @@ void FunctionDispatch::handle_xrCreateReferenceSpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSession", function_loader.pfn_xrCreateSession);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSessionCreateInfo* createInfo{};
@@ -8149,7 +8149,7 @@ void FunctionDispatch::handle_xrCreateSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateSwapchain", function_loader.pfn_xrCreateSwapchain);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSwapchainCreateInfo* createInfo{};
@@ -8176,7 +8176,7 @@ void FunctionDispatch::handle_xrCreateSwapchain(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyAction", function_loader.pfn_xrDestroyAction);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrAction action{};
     deserialize(&action, d_ctx);
 
@@ -8196,7 +8196,7 @@ void FunctionDispatch::handle_xrDestroyAction(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyActionSet", function_loader.pfn_xrDestroyActionSet);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrActionSet actionSet{};
     deserialize(&actionSet, d_ctx);
 
@@ -8216,7 +8216,7 @@ void FunctionDispatch::handle_xrDestroyActionSet(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroyInstance", function_loader.pfn_xrDestroyInstance);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
 
@@ -8236,7 +8236,7 @@ void FunctionDispatch::handle_xrDestroyInstance(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySession", function_loader.pfn_xrDestroySession);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
 
@@ -8256,7 +8256,7 @@ void FunctionDispatch::handle_xrDestroySession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySpace", function_loader.pfn_xrDestroySpace);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
 
@@ -8276,7 +8276,7 @@ void FunctionDispatch::handle_xrDestroySpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrDestroySwapchain", function_loader.pfn_xrDestroySwapchain);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
 
@@ -8296,7 +8296,7 @@ void FunctionDispatch::handle_xrDestroySwapchain(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEndFrame", function_loader.pfn_xrEndFrame);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFrameEndInfo* frameEndInfo{};
@@ -8319,7 +8319,7 @@ void FunctionDispatch::handle_xrEndFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEndSession", function_loader.pfn_xrEndSession);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
 
@@ -8339,7 +8339,7 @@ void FunctionDispatch::handle_xrEndSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateApiLayerProperties", function_loader.pfn_xrEnumerateApiLayerProperties);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     uint32_t propertyCapacityInput{};
     deserialize(&propertyCapacityInput, d_ctx);
     uint32_t* propertyCountOutput{};
@@ -8367,7 +8367,7 @@ void FunctionDispatch::handle_xrEnumerateApiLayerProperties(MessageLockIn msg_in
 void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateBoundSourcesForAction", function_loader.pfn_xrEnumerateBoundSourcesForAction);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrBoundSourcesForActionEnumerateInfo* enumerateInfo{};
@@ -8401,7 +8401,7 @@ void FunctionDispatch::handle_xrEnumerateBoundSourcesForAction(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateEnvironmentBlendModes", function_loader.pfn_xrEnumerateEnvironmentBlendModes);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -8438,7 +8438,7 @@ void FunctionDispatch::handle_xrEnumerateEnvironmentBlendModes(MessageLockIn msg
 void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", function_loader.pfn_xrEnumerateInstanceExtensionProperties);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     char* layerName{};
     deserialize_ptr(&layerName, d_ctx);
     uint32_t propertyCapacityInput{};
@@ -8469,7 +8469,7 @@ void FunctionDispatch::handle_xrEnumerateInstanceExtensionProperties(MessageLock
 void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateReferenceSpaces", function_loader.pfn_xrEnumerateReferenceSpaces);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t spaceCapacityInput{};
@@ -8500,7 +8500,7 @@ void FunctionDispatch::handle_xrEnumerateReferenceSpaces(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSwapchainFormats", function_loader.pfn_xrEnumerateSwapchainFormats);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     uint32_t formatCapacityInput{};
@@ -8531,7 +8531,7 @@ void FunctionDispatch::handle_xrEnumerateSwapchainFormats(MessageLockIn msg_in) 
 void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateSwapchainImages", function_loader.pfn_xrEnumerateSwapchainImages);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     uint32_t imageCapacityInput{};
@@ -8562,7 +8562,7 @@ void FunctionDispatch::handle_xrEnumerateSwapchainImages(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViewConfigurationViews", function_loader.pfn_xrEnumerateViewConfigurationViews);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -8599,7 +8599,7 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurationViews(MessageLockIn ms
 void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrEnumerateViewConfigurations", function_loader.pfn_xrEnumerateViewConfigurations);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -8633,7 +8633,7 @@ void FunctionDispatch::handle_xrEnumerateViewConfigurations(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateBoolean", function_loader.pfn_xrGetActionStateBoolean);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
@@ -8660,7 +8660,7 @@ void FunctionDispatch::handle_xrGetActionStateBoolean(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateFloat", function_loader.pfn_xrGetActionStateFloat);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
@@ -8687,7 +8687,7 @@ void FunctionDispatch::handle_xrGetActionStateFloat(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStatePose", function_loader.pfn_xrGetActionStatePose);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
@@ -8714,7 +8714,7 @@ void FunctionDispatch::handle_xrGetActionStatePose(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetActionStateVector2f", function_loader.pfn_xrGetActionStateVector2f);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionStateGetInfo* getInfo{};
@@ -8741,7 +8741,7 @@ void FunctionDispatch::handle_xrGetActionStateVector2f(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetCurrentInteractionProfile", function_loader.pfn_xrGetCurrentInteractionProfile);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrPath topLevelUserPath{};
@@ -8768,7 +8768,7 @@ void FunctionDispatch::handle_xrGetCurrentInteractionProfile(MessageLockIn msg_i
 void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetInputSourceLocalizedName", function_loader.pfn_xrGetInputSourceLocalizedName);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrInputSourceLocalizedNameGetInfo* getInfo{};
@@ -8802,7 +8802,7 @@ void FunctionDispatch::handle_xrGetInputSourceLocalizedName(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetInstanceProperties", function_loader.pfn_xrGetInstanceProperties);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrInstanceProperties* instanceProperties{};
@@ -8826,7 +8826,7 @@ void FunctionDispatch::handle_xrGetInstanceProperties(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetReferenceSpaceBoundsRect", function_loader.pfn_xrGetReferenceSpaceBoundsRect);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrReferenceSpaceType referenceSpaceType{};
@@ -8853,7 +8853,7 @@ void FunctionDispatch::handle_xrGetReferenceSpaceBoundsRect(MessageLockIn msg_in
 void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSystem", function_loader.pfn_xrGetSystem);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemGetInfo* getInfo{};
@@ -8880,7 +8880,7 @@ void FunctionDispatch::handle_xrGetSystem(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetSystemProperties", function_loader.pfn_xrGetSystemProperties);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -8907,7 +8907,7 @@ void FunctionDispatch::handle_xrGetSystemProperties(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrGetViewConfigurationProperties", function_loader.pfn_xrGetViewConfigurationProperties);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrSystemId systemId{};
@@ -8937,7 +8937,7 @@ void FunctionDispatch::handle_xrGetViewConfigurationProperties(MessageLockIn msg
 void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSpace", function_loader.pfn_xrLocateSpace);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSpace space{};
     deserialize(&space, d_ctx);
     XrSpace baseSpace{};
@@ -8967,7 +8967,7 @@ void FunctionDispatch::handle_xrLocateSpace(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateSpaces", function_loader.pfn_xrLocateSpaces);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrSpacesLocateInfo* locateInfo{};
@@ -8994,7 +8994,7 @@ void FunctionDispatch::handle_xrLocateSpaces(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrLocateViews", function_loader.pfn_xrLocateViews);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrViewLocateInfo* viewLocateInfo{};
@@ -9032,7 +9032,7 @@ void FunctionDispatch::handle_xrLocateViews(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPathToString", function_loader.pfn_xrPathToString);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrPath path{};
@@ -9066,7 +9066,7 @@ void FunctionDispatch::handle_xrPathToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrPollEvent", function_loader.pfn_xrPollEvent);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrEventDataBuffer* eventData{};
@@ -9090,7 +9090,7 @@ void FunctionDispatch::handle_xrPollEvent(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrReleaseSwapchainImage", function_loader.pfn_xrReleaseSwapchainImage);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     XrSwapchainImageReleaseInfo* releaseInfo{};
@@ -9113,7 +9113,7 @@ void FunctionDispatch::handle_xrReleaseSwapchainImage(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrRequestExitSession", function_loader.pfn_xrRequestExitSession);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
 
@@ -9133,7 +9133,7 @@ void FunctionDispatch::handle_xrRequestExitSession(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrResultToString", function_loader.pfn_xrResultToString);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrResult value{};
@@ -9160,7 +9160,7 @@ void FunctionDispatch::handle_xrResultToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStopHapticFeedback", function_loader.pfn_xrStopHapticFeedback);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrHapticActionInfo* hapticActionInfo{};
@@ -9183,7 +9183,7 @@ void FunctionDispatch::handle_xrStopHapticFeedback(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStringToPath", function_loader.pfn_xrStringToPath);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     char* pathString{};
@@ -9210,7 +9210,7 @@ void FunctionDispatch::handle_xrStringToPath(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrStructureTypeToString", function_loader.pfn_xrStructureTypeToString);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrStructureType value{};
@@ -9237,7 +9237,7 @@ void FunctionDispatch::handle_xrStructureTypeToString(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSuggestInteractionProfileBindings", function_loader.pfn_xrSuggestInteractionProfileBindings);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstance instance{};
     deserialize(&instance, d_ctx);
     XrInteractionProfileSuggestedBinding* suggestedBindings{};
@@ -9260,7 +9260,7 @@ void FunctionDispatch::handle_xrSuggestInteractionProfileBindings(MessageLockIn 
 void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrSyncActions", function_loader.pfn_xrSyncActions);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrActionsSyncInfo* syncInfo{};
@@ -9283,7 +9283,7 @@ void FunctionDispatch::handle_xrSyncActions(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrWaitFrame", function_loader.pfn_xrWaitFrame);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSession session{};
     deserialize(&session, d_ctx);
     XrFrameWaitInfo* frameWaitInfo{};
@@ -9310,7 +9310,7 @@ void FunctionDispatch::handle_xrWaitFrame(MessageLockIn msg_in) {
 void FunctionDispatch::handle_xrWaitSwapchainImage(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrWaitSwapchainImage", function_loader.pfn_xrWaitSwapchainImage);
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrSwapchain swapchain{};
     deserialize(&swapchain, d_ctx);
     XrSwapchainImageWaitInfo* waitInfo{};

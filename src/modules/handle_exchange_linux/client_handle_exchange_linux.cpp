@@ -38,7 +38,7 @@ void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn_xrGetI
     msg_out.flush();
 
     auto msg_in = transport->await_message(XRTP_MSG_HANDLE_EXCHANGE_LINUX_RETURN_PATH);
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     const char* socket_path{};
     deserialize_ptr(&socket_path, d_ctx);
 

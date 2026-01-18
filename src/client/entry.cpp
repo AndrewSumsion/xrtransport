@@ -407,7 +407,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrPollEventImpl(
     XrBaseOutStructure* event_data_in{};
 
     auto msg_in = transport.await_message(XRTP_MSG_POLL_EVENT_RETURN);
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&result, d_ctx);
     if (result != XR_SUCCESS) {
         // either XR_EVENT_UNAVAILABLE or an error

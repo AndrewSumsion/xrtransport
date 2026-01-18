@@ -87,7 +87,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 1: Simple Echo", "[integratio
 
     // Receive response message 101
     auto msg_in = transport.await_message(101);
-    asio::read(msg_in.stream, asio::buffer(&received_data, sizeof(received_data)));
+    asio::read(msg_in.buffer, asio::buffer(&received_data, sizeof(received_data)));
 
     REQUIRE(received_data == test_data);
 }
@@ -105,14 +105,14 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 2: Variable Length Data", "[i
 
     // Read N
     uint32_t n;
-    asio::read(msg_in.stream, asio::buffer(&n, sizeof(n)));
+    asio::read(msg_in.buffer, asio::buffer(&n, sizeof(n)));
 
     REQUIRE(n >= 1);
     REQUIRE(n <= 20);
 
     // Read N zero bytes
     std::vector<uint8_t> received_data(n);
-    asio::read(msg_in.stream, asio::buffer(received_data));
+    asio::read(msg_in.buffer, asio::buffer(received_data));
 
     // Verify all bytes are zero
     for (size_t i = 0; i < n; ++i) {
@@ -128,7 +128,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
     uint32_t echoed_result = 0;
 
     transport.register_handler(105, [&](MessageLockIn msg_in){
-        asio::read(msg_in.stream, asio::buffer(&doubled_result, sizeof(doubled_result)));
+        asio::read(msg_in.buffer, asio::buffer(&doubled_result, sizeof(doubled_result)));
     });
 
     // Send message 104 with test input
@@ -139,7 +139,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Protocol 3: Intermediate Packets", "[i
     // Receive message 106 (echoed value)
     // 105 packet should be received and handled while waiting
     auto msg_in = transport.await_message(106);
-    asio::read(msg_in.stream, asio::buffer(&echoed_result, sizeof(echoed_result)));
+    asio::read(msg_in.buffer, asio::buffer(&echoed_result, sizeof(echoed_result)));
 
     transport.unregister_handler(105);
 
@@ -160,7 +160,7 @@ TEST_CASE_METHOD(IntegrationTestFixture, "Multiple Sequential Requests", "[integ
         msg_out.flush();
 
         auto msg_in = transport.await_message(101);
-        asio::read(msg_in.stream, asio::buffer(&received_data, sizeof(received_data)));
+        asio::read(msg_in.buffer, asio::buffer(&received_data, sizeof(received_data)));
 
         REQUIRE(received_data == test_data);
     }

@@ -77,7 +77,7 @@ bool Server::do_handshake(SyncDuplexStream& stream) {
 void Server::run() {
     transport.register_handler(XRTP_MSG_FUNCTION_CALL, [this](MessageLockIn msg_in){
         uint32_t function_id{};
-        asio::read(msg_in.stream, asio::buffer(&function_id, sizeof(uint32_t)));
+        asio::read(msg_in.buffer, asio::buffer(&function_id, sizeof(uint32_t)));
         function_dispatch.handle_function(function_id, std::move(msg_in));
     });
 
@@ -101,7 +101,7 @@ void Server::run() {
 
         // read incoming time
         XrTime client_time{};
-        asio::read(msg_in.stream, asio::buffer(&client_time, sizeof(XrTime)));
+        asio::read(msg_in.buffer, asio::buffer(&client_time, sizeof(XrTime)));
 
         // get server time
         XRTRANSPORT_PLATFORM_TIME server_platform_time{};
@@ -191,7 +191,7 @@ void Server::instance_handler(MessageLockIn msg_in) {
     function_loader.ensure_function_loaded("xrCreateInstance", function_loader.pfn_xrCreateInstance);
     
     // Read in args sent by client
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     XrInstanceCreateInfo* createInfo{};
     deserialize_ptr(&createInfo, d_ctx);
     XrInstance* instance{};

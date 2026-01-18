@@ -44,7 +44,7 @@ TEST_CASE("Basic sync sending and awaiting", "[transport][sync]") {
 
     {
         auto msg_in = transport_b.await_message(100);
-        asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
+        asio::read(msg_in.buffer, asio::buffer(&message_received, sizeof(message_received)));
     }
 
     transport_a.shutdown();
@@ -71,7 +71,7 @@ TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
     std::thread b_thread([&](){
         auto msg_in = transport_b.await_message(100);
         uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
         asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
     });
@@ -91,7 +91,7 @@ TEST_CASE("Round trip sync sending and awaiting", "[transport][sync]") {
         b_lock.reset();
 
         auto msg_in = transport_a.await_message(101);
-        asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
+        asio::read(msg_in.buffer, asio::buffer(&message_received, sizeof(message_received)));
 
         // release lock so that shutdown handler can run
     }
@@ -118,7 +118,7 @@ TEST_CASE("Basic async handler", "[transport][async]") {
 
     transport_b.register_handler(100, [&](MessageLockIn msg_in){
         uint32_t tmp{};
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         message_received = tmp;
     });
 
@@ -151,7 +151,7 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
 
     transport_b.register_handler(100, [&](MessageLockIn msg_in){
         uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
         asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
         msg_out.flush();
@@ -160,7 +160,7 @@ TEST_CASE("Round trip async handler", "[transport][async]") {
 
     transport_a.register_handler(101, [&](MessageLockIn msg_in){
         uint32_t tmp{};
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         message_received = tmp;
     });
 
@@ -271,7 +271,7 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
         intermediate_msg_out.flush();
 
         uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         auto msg_out = transport_b.start_message(101);
         asio::write(msg_out.buffer, asio::buffer(&tmp, sizeof(tmp)));
         msg_out.flush();
@@ -281,7 +281,7 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
 
     transport_a.register_handler(102, [&](MessageLockIn msg_in){
         uint32_t tmp;
-        asio::read(msg_in.stream, asio::buffer(&tmp, sizeof(tmp)));
+        asio::read(msg_in.buffer, asio::buffer(&tmp, sizeof(tmp)));
         intermediate_received = true;
     });
 
@@ -296,7 +296,7 @@ TEST_CASE("await_message handler takeover", "[transport][async]") {
         auto msg_in = transport_a.await_message(101);
         REQUIRE(intermediate_received); // handler should have processed intermediate
         uint32_t message_received{};
-        asio::read(msg_in.stream, asio::buffer(&message_received, sizeof(message_received)));
+        asio::read(msg_in.buffer, asio::buffer(&message_received, sizeof(message_received)));
 
         REQUIRE(message_received == message_sent);
     }

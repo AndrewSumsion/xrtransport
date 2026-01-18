@@ -503,7 +503,7 @@ void handle_create_swapchain(MessageLockIn msg_in) {
     XrSession session_handle{};
     XrSwapchainCreateInfo* create_info{};
 
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&session_handle, d_ctx);
     deserialize_ptr(&create_info, d_ctx);
 
@@ -590,7 +590,7 @@ void destroy_swapchain(XrSwapchain swapchain_handle) {
 void handle_destroy_swapchain(MessageLockIn msg_in) {
     XrSwapchain swapchain_handle{};
 
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&swapchain_handle, d_ctx);
 
     destroy_swapchain(swapchain_handle);
@@ -603,7 +603,7 @@ void handle_create_session(MessageLockIn msg_in) {
     // We don't need the client's graphics binding, and we're only using the HMD system id, so
     // we only need to get the create flags from the client.
     XrSessionCreateFlags flags{};
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&flags, d_ctx);
 
     XrGraphicsBindingVulkan2KHR graphics_binding{XR_TYPE_GRAPHICS_BINDING_VULKAN2_KHR};
@@ -635,7 +635,7 @@ void handle_create_session(MessageLockIn msg_in) {
 void handle_destroy_session(MessageLockIn msg_in) {
     XrSession session_handle{};
 
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&session_handle, d_ctx);
 
     SessionState& session_state = get_session_state(session_handle).value();
@@ -658,7 +658,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     XrSwapchain swapchain_handle{};
     uint32_t src_index{};
 
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     deserialize(&swapchain_handle, d_ctx);
     deserialize(&src_index, d_ctx);
 

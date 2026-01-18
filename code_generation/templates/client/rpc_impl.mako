@@ -54,7 +54,7 @@ XRAPI_ATTR XrResult XRAPI_CALL ${function.signature()} try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);

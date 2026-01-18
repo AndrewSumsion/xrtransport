@@ -32,7 +32,7 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
     function_loader.ensure_function_loaded("${function.name}", function_loader.pfn_${function.name});
     // by this point, the function id has already been read, now read the params
-    DeserializeContext d_ctx(msg_in.stream);
+    DeserializeContext d_ctx(msg_in.buffer);
     % for param in function.params:
     ${param.declaration(with_qualifier=False, value_initialize=True)};
     ${utils.deserialize_member(param, binding_prefix='', ctx_var='d_ctx')}

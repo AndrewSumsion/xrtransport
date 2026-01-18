@@ -76,10 +76,10 @@ private:
     xrtp_MessageLockIn wrapped;
 
 public:
-    MessageLockInStream stream;
+    MessageLockInStream buffer;
 
     MessageLockIn(xrtp_MessageLockIn wrapped)
-        : wrapped(wrapped), stream(wrapped)
+        : wrapped(wrapped), buffer(wrapped)
     {}
 
     // delete copy constructors
@@ -88,10 +88,10 @@ public:
 
     // move constructors
     MessageLockIn(MessageLockIn&& other)
-        : wrapped(other.wrapped), stream(other.wrapped)
+        : wrapped(other.wrapped), buffer(other.wrapped)
     {
         other.wrapped = nullptr;
-        other.stream.wrapped = nullptr;
+        other.buffer.wrapped = nullptr;
     };
 
     MessageLockIn& operator=(MessageLockIn&& other) {
@@ -100,9 +100,9 @@ public:
                 CHK_XRTP(xrtp_msg_in_release(wrapped));
             }
             wrapped = other.wrapped;
-            stream.wrapped = other.wrapped;
+            buffer.wrapped = other.wrapped;
             other.wrapped = nullptr;
-            other.stream.wrapped = nullptr;
+            other.buffer.wrapped = nullptr;
         }
 
         return *this;

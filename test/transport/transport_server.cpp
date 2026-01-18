@@ -75,7 +75,7 @@ private:
 
             // Read 4 bytes
             uint32_t data;
-            asio::read(msg_in.stream, asio::buffer(&data, sizeof(data)));
+            asio::read(msg_in.buffer, asio::buffer(&data, sizeof(data)));
 
             // Echo back with message 101
             auto msg_out = transport.start_message(101);
@@ -109,7 +109,7 @@ private:
 
             // Read input integer
             uint32_t input;
-            asio::read(msg_in.stream, asio::buffer(&input, sizeof(input)));
+            asio::read(msg_in.buffer, asio::buffer(&input, sizeof(input)));
 
             // Send message 105 with input * 2
             uint32_t doubled = input * 2;

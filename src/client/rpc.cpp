@@ -61,7 +61,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDigitalLensControlALMALENCE(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -99,7 +99,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerBD(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -134,7 +134,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerBD(XrBodyTrackerBD bodyTracke
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -170,7 +170,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsBD(XrBodyTrackerBD bodyTracker,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -209,7 +209,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorAsyncBD(XrSenseDataProviderB
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -246,7 +246,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorCompleteBD(XrSenseDataProvid
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -283,7 +283,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorAsyncBD(XrSenseDataProvider
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -320,7 +320,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorCompleteBD(XrSenseDataProvi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -357,7 +357,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorAsyncBD(XrSenseDataProvid
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -394,7 +394,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorCompleteBD(XrSenseDataPro
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -433,7 +433,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorAsyncBD(XrSenseDataP
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -470,7 +470,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDownloadSharedSpatialAnchorCompleteBD(XrSenseDa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -507,7 +507,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorAsyncBD(XrSenseDataProviderBD
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -544,7 +544,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpatialAnchorCompleteBD(XrSenseDataProvide
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -583,7 +583,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneAsyncBD(XrSenseDataProviderBD provi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -620,7 +620,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCaptureSceneCompleteBD(XrSenseDataProviderBD pr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -659,7 +659,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAnchorSpaceBD(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -696,7 +696,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSenseDataProviderBD(XrSession session, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -733,7 +733,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialEntityAnchorBD(XrSenseDataProvider
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -768,7 +768,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAnchorBD(XrAnchorBD anchor) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -802,7 +802,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataProviderBD(XrSenseDataProviderB
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -836,7 +836,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySenseDataSnapshotBD(XrSenseDataSnapshotB
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -874,7 +874,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpatialEntityComponentTypesBD(XrSenseD
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -911,7 +911,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAnchorUuidBD(XrAnchorBD anchor, XrUuidEXT* u
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -948,7 +948,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetQueriedSenseDataBD(XrSenseDataSnapshotBD sna
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -985,7 +985,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSenseDataProviderStateBD(XrSenseDataProvider
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1022,7 +1022,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityComponentDataBD(XrSenseDataSnap
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1059,7 +1059,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialEntityUuidBD(XrSenseDataSnapshotBD sn
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1096,7 +1096,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataAsyncBD(XrSenseDataProviderBD pro
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1133,7 +1133,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySenseDataCompleteBD(XrSenseDataProviderBD 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1170,7 +1170,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderAsyncBD(XrSenseDataProvid
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1207,7 +1207,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartSenseDataProviderCompleteBD(XrSession sess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1242,7 +1242,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopSenseDataProviderBD(XrSenseDataProviderBD p
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1281,7 +1281,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceActiveEXT(XrSession session, XrPa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1319,7 +1319,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceLocationEXT(XrSession session, Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1356,7 +1356,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateBoolEXT(XrSession session, X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1393,7 +1393,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateFloatEXT(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1430,7 +1430,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetInputDeviceStateVector2fEXT(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1468,7 +1468,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateDebugUtilsMessengerEXT(XrInstance instanc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1504,7 +1504,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyDebugUtilsMessengerEXT(XrDebugUtilsMesse
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1539,7 +1539,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionBeginDebugUtilsLabelRegionEXT(XrSession 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1573,7 +1573,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionEndDebugUtilsLabelRegionEXT(XrSession se
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1608,7 +1608,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSessionInsertDebugUtilsLabelEXT(XrSession sessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1643,7 +1643,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetDebugUtilsObjectNameEXT(XrInstance instance,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1680,7 +1680,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSubmitDebugUtilsMessageEXT(XrInstance instance,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1719,7 +1719,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCancelFutureEXT(XrInstance instance, const XrFu
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1755,7 +1755,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollFutureEXT(XrInstance instance, const XrFutu
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1794,7 +1794,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandTrackerEXT(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1829,7 +1829,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyHandTrackerEXT(XrHandTrackerEXT handTrac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1865,7 +1865,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateHandJointsEXT(XrHandTrackerEXT handTracke
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1904,7 +1904,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPerfSettingsSetPerformanceLevelEXT(XrSession se
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1941,7 +1941,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginPlaneDetectionEXT(XrPlaneDetectorEXT plane
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -1977,7 +1977,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePlaneDetectorEXT(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2012,7 +2012,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPlaneDetectorEXT(XrPlaneDetectorEXT plan
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2047,7 +2047,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionStateEXT(XrPlaneDetectorEXT pl
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2084,7 +2084,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlaneDetectionsEXT(XrPlaneDetectorEXT planeD
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2122,7 +2122,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPlanePolygonBufferEXT(XrPlaneDetectorEXT pla
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2163,7 +2163,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrThermalGetTemperatureTrendEXT(XrSession session
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2204,7 +2204,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerFB(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2239,7 +2239,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerFB(XrBodyTrackerFB bodyTracke
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2274,7 +2274,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonFB(XrBodyTrackerFB bodyTracker, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2311,7 +2311,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsFB(XrBodyTrackerFB bodyTracker,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2351,7 +2351,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateColorSpacesFB(XrSession session, uint3
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2388,7 +2388,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetColorSpaceFB(XrSession session, const XrColo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2427,7 +2427,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateDisplayRefreshRatesFB(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2464,7 +2464,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDisplayRefreshRateFB(XrSession session, floa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2500,7 +2500,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestDisplayRefreshRateFB(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2538,7 +2538,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEyeTrackerFB(XrSession session, const XrE
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2573,7 +2573,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEyeTrackerFB(XrEyeTrackerFB eyeTracker) 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2609,7 +2609,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEyeGazesFB(XrEyeTrackerFB eyeTracker, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2648,7 +2648,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTrackerFB(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2683,7 +2683,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTrackerFB(XrFaceTrackerFB faceTracke
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2719,7 +2719,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeightsFB(XrFaceTrackerFB face
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2758,7 +2758,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFaceTracker2FB(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2794,7 +2794,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFaceTracker2FB(XrFaceTracker2FB faceTrac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2830,7 +2830,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFaceExpressionWeights2FB(XrFaceTracker2FB fa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2869,7 +2869,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFoveationProfileFB(XrSession session, con
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2905,7 +2905,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFoveationProfileFB(XrFoveationProfileFB 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2942,7 +2942,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetHandMeshFB(XrHandTrackerEXT handTracker, XrH
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -2981,7 +2981,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetDeviceSampleRateFB(XrSession session, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3020,7 +3020,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateKeyboardSpaceFB(XrSession session, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3058,7 +3058,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySystemTrackedKeyboardFB(XrSession session,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3098,7 +3098,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateGeometryInstanceFB(XrSession session, con
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3135,7 +3135,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughFB(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3172,7 +3172,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughLayerFB(XrSession session, con
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3207,7 +3207,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyGeometryInstanceFB(XrGeometryInstanceFB 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3241,7 +3241,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughFB(XrPassthroughFB passthroug
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3275,7 +3275,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughLayerFB(XrPassthroughLayerFB 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3310,7 +3310,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGeometryInstanceSetTransformFB(XrGeometryInstan
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3344,7 +3344,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerPauseFB(XrPassthroughLayerFB la
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3378,7 +3378,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerResumeFB(XrPassthroughLayerFB l
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3413,7 +3413,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetStyleFB(XrPassthroughLayerFB
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3447,7 +3447,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughPauseFB(XrPassthroughFB passthrough)
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3481,7 +3481,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughStartFB(XrPassthroughFB passthrough)
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3518,7 +3518,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPassthroughLayerSetKeyboardHandsIntensityFB(XrP
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3557,7 +3557,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateRenderModelPathsFB(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3595,7 +3595,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRenderModelPropertiesFB(XrSession session, X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3632,7 +3632,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadRenderModelFB(XrSession session, const XrRe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3672,7 +3672,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundary2DFB(XrSession session, XrSpace
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3709,7 +3709,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox2DFB(XrSession session, XrSp
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3746,7 +3746,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceBoundingBox3DFB(XrSession session, XrSp
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3783,7 +3783,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceRoomLayoutFB(XrSession session, XrSpace
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3820,7 +3820,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceSemanticLabelsFB(XrSession session, XrS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3859,7 +3859,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestSceneCaptureFB(XrSession session, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3898,7 +3898,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFB(XrSession session, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3936,7 +3936,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSpaceSupportedComponentsFB(XrSpace spa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -3974,7 +3974,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceComponentStatusFB(XrSpace space, XrSpac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4010,7 +4010,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUuidFB(XrSpace space, XrUuidEXT* uuid) 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4047,7 +4047,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSpaceComponentStatusFB(XrSpace space, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4086,7 +4086,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceContainerFB(XrSession session, XrSpace 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4125,7 +4125,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpacesFB(XrSession session, const XrSpaceQ
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4162,7 +4162,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRetrieveSpaceQueryResultsFB(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4201,7 +4201,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesFB(XrSession session, const XrSpaceS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4242,7 +4242,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEraseSpaceFB(XrSession session, const XrSpaceEr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4279,7 +4279,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceFB(XrSession session, const XrSpaceSav
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4318,7 +4318,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSaveSpaceListFB(XrSession session, const XrSpac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4358,7 +4358,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceUserFB(XrSession session, const XrSp
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4393,7 +4393,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpaceUserFB(XrSpaceUserFB user) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4428,7 +4428,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceUserIdFB(XrSpaceUserFB user, XrSpaceUse
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4466,7 +4466,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSwapchainStateFB(XrSwapchain swapchain, XrSw
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4502,7 +4502,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSwapchainFB(XrSwapchain swapchain, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4540,7 +4540,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateTriangleMeshFB(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4575,7 +4575,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyTriangleMeshFB(XrTriangleMeshFB mesh) tr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4609,7 +4609,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginUpdateFB(XrTriangleMeshFB mesh
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4644,7 +4644,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshBeginVertexBufferUpdateFB(XrTriangl
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4681,7 +4681,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndUpdateFB(XrTriangleMeshFB mesh, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4715,7 +4715,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshEndVertexBufferUpdateFB(XrTriangleM
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4750,7 +4750,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetIndexBufferFB(XrTriangleMeshFB m
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4786,7 +4786,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTriangleMeshGetVertexBufferFB(XrTriangleMeshFB 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4826,7 +4826,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViveTrackerPathsHTCX(XrInstance instan
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4866,7 +4866,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorHTC(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4902,7 +4902,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorNameHTC(XrSpace anchor, XrSpati
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4941,7 +4941,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateBodyTrackerHTC(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -4976,7 +4976,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyBodyTrackerHTC(XrBodyTrackerHTC bodyTrac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5013,7 +5013,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetBodySkeletonHTC(XrBodyTrackerHTC bodyTracker
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5050,7 +5050,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateBodyJointsHTC(XrBodyTrackerHTC bodyTracke
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5089,7 +5089,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialTrackerHTC(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5124,7 +5124,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialTrackerHTC(XrFacialTrackerHTC faci
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5159,7 +5159,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionsHTC(XrFacialTrackerHTC faci
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5197,7 +5197,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyFoveationHTC(XrSession session, const XrFo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5236,7 +5236,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughHTC(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5271,7 +5271,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughHTC(XrPassthroughHTC passthro
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5309,7 +5309,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D11GraphicsRequirementsKHR(XrInstance inst
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5348,7 +5348,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetD3D12GraphicsRequirementsKHR(XrInstance inst
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5388,7 +5388,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainAndroidSurfaceKHR(XrSession sess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5428,7 +5428,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetAndroidApplicationThreadKHR(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5466,7 +5466,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToTimespecTimeKHR(XrInstance instanc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5503,7 +5503,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimespecTimeToTimeKHR(XrInstance instanc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5543,7 +5543,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString2KHR(XrInstance instance, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5580,7 +5580,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrInitializeLoaderKHR(const XrLoaderInitInfoBaseH
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5618,7 +5618,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMetalGraphicsRequirementsKHR(XrInstance inst
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5657,7 +5657,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLGraphicsRequirementsKHR(XrInstance ins
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5696,7 +5696,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetOpenGLESGraphicsRequirementsKHR(XrInstance i
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5737,7 +5737,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVisibilityMaskKHR(XrSession session, XrViewC
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5778,7 +5778,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanDeviceExtensionsKHR(XrInstance instanc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5817,7 +5817,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDeviceKHR(XrInstance instance,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5854,7 +5854,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirementsKHR(XrInstance ins
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5893,7 +5893,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanInstanceExtensionsKHR(XrInstance insta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5934,7 +5934,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanDeviceKHR(XrInstance instance, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -5973,7 +5973,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVulkanInstanceKHR(XrInstance instance, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6011,7 +6011,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsDevice2KHR(XrInstance instance
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6050,7 +6050,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertTimeToWin32PerformanceCounterKHR(XrInsta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6087,7 +6087,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrConvertWin32PerformanceCounterToTimeKHR(XrInsta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6126,7 +6126,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationAdvertisementMETA(XrSession sess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6164,7 +6164,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartColocationDiscoveryMETA(XrSession session,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6201,7 +6201,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationAdvertisementMETA(XrSession sessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6238,7 +6238,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopColocationDiscoveryMETA(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6277,7 +6277,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireEnvironmentDepthImageMETA(XrEnvironmentD
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6314,7 +6314,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthProviderMETA(XrSession se
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6351,7 +6351,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateEnvironmentDepthSwapchainMETA(XrEnvironme
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6386,7 +6386,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthProviderMETA(XrEnvironme
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6420,7 +6420,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyEnvironmentDepthSwapchainMETA(XrEnvironm
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6457,7 +6457,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentDepthSwapchainImagesMETA(Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6494,7 +6494,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetEnvironmentDepthSwapchainStateMETA(XrEnviron
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6530,7 +6530,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthHandRemovalMETA(XrEnvironmen
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6564,7 +6564,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStartEnvironmentDepthProviderMETA(XrEnvironment
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6598,7 +6598,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopEnvironmentDepthProviderMETA(XrEnvironmentD
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6635,7 +6635,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFoveationEyeTrackedStateMETA(XrSession sessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6674,7 +6674,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreatePassthroughColorLutMETA(XrPassthroughFB p
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6709,7 +6709,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyPassthroughColorLutMETA(XrPassthroughCol
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6744,7 +6744,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdatePassthroughColorLutMETA(XrPassthroughColo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6781,7 +6781,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPassthroughPreferencesMETA(XrSession session
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6821,7 +6821,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePerformanceMetricsCounterPathsMETA(XrI
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6858,7 +6858,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetPerformanceMetricsStateMETA(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6895,7 +6895,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryPerformanceMetricsCounterMETA(XrSession se
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6931,7 +6931,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetPerformanceMetricsStateMETA(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -6969,7 +6969,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetRecommendedLayerResolutionMETA(XrSession ses
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7007,7 +7007,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPauseSimultaneousHandsAndControllersTrackingMET
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7042,7 +7042,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResumeSimultaneousHandsAndControllersTrackingME
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7080,7 +7080,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpaceTriangleMeshMETA(XrSpace space, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7119,7 +7119,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrShareSpacesMETA(XrSession session, const XrShar
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7158,7 +7158,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrChangeVirtualKeyboardTextContextMETA(XrVirtualK
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7194,7 +7194,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardMETA(XrSession session, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7232,7 +7232,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateVirtualKeyboardSpaceMETA(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7267,7 +7267,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyVirtualKeyboardMETA(XrVirtualKeyboardMET
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7304,7 +7304,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardDirtyTexturesMETA(XrVirtualKe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7341,7 +7341,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardModelAnimationStatesMETA(XrVi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7377,7 +7377,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardScaleMETA(XrVirtualKeyboardME
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7414,7 +7414,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVirtualKeyboardTextureDataMETA(XrVirtualKeyb
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7451,7 +7451,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSendVirtualKeyboardInputMETA(XrVirtualKeyboardM
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7487,7 +7487,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetVirtualKeyboardModelVisibilityMETA(XrVirtual
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7522,7 +7522,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestVirtualKeyboardLocationMETA(XrVirtualKey
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7560,7 +7560,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpaceFromCoordinateFrameUIDML(XrSession s
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7599,7 +7599,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateFacialExpressionClientML(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7634,7 +7634,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyFacialExpressionClientML(XrFacialExpress
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7671,7 +7671,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetFacialExpressionBlendShapePropertiesML(XrFac
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7710,7 +7710,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateExportedLocalizationMapML(XrSession sessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7745,7 +7745,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyExportedLocalizationMapML(XrExportedLoca
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7780,7 +7780,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableLocalizationEventsML(XrSession session, c
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7817,7 +7817,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetExportedLocalizationMapDataML(XrExportedLoca
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7855,7 +7855,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrImportLocalizationMapML(XrSession session, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7895,7 +7895,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQueryLocalizationMapsML(XrSession session, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7932,7 +7932,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestMapLocalizationML(XrSession session, con
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -7970,7 +7970,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerDetectorML(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8007,7 +8007,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceML(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8042,7 +8042,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyMarkerDetectorML(XrMarkerDetectorML mark
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8077,7 +8077,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerDetectorStateML(XrMarkerDetectorML mar
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8114,7 +8114,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerLengthML(XrMarkerDetectorML markerDete
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8151,7 +8151,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerNumberML(XrMarkerDetectorML markerDete
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8188,7 +8188,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerReprojectionErrorML(XrMarkerDetectorML
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8227,7 +8227,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerStringML(XrMarkerDetectorML markerDete
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8266,7 +8266,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkersML(XrMarkerDetectorML markerDetector,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8303,7 +8303,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSnapshotMarkerDetectorML(XrMarkerDetectorML mar
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8342,7 +8342,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsAsyncML(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8379,7 +8379,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsCompleteML(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8415,7 +8415,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialAnchorStateML(XrSpace anchor, XrSpati
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8454,7 +8454,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorsStorageML(XrSession session
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8491,7 +8491,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsAsyncML(XrSpatialAnchorsSto
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8528,7 +8528,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeleteSpatialAnchorsCompleteML(XrSpatialAnchors
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8563,7 +8563,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorsStorageML(XrSpatialAnchors
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8599,7 +8599,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsAsyncML(XrSpatialAnchorsSt
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8636,7 +8636,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPublishSpatialAnchorsCompleteML(XrSpatialAnchor
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8673,7 +8673,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsAsyncML(XrSpatialAnchorsStor
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8710,7 +8710,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrQuerySpatialAnchorsCompleteML(XrSpatialAnchorsS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8747,7 +8747,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationAsyncML(XrSpatial
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8784,7 +8784,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateSpatialAnchorsExpirationCompleteML(XrSpat
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8822,7 +8822,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetSystemNotificationsML(XrInstance instance, c
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8859,7 +8859,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnableUserCalibrationEventsML(XrInstance instan
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8897,7 +8897,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAllocateWorldMeshBufferML(XrWorldMeshDetectorML
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8935,7 +8935,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateWorldMeshDetectorML(XrSession session, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -8970,7 +8970,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyWorldMeshDetectorML(XrWorldMeshDetectorM
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9005,7 +9005,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrFreeWorldMeshBufferML(XrWorldMeshDetectorML det
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9043,7 +9043,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetWorldMeshBufferRecommendSizeML(XrWorldMeshDe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9081,7 +9081,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshAsyncML(XrWorldMeshDetectorML d
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9121,7 +9121,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshCompleteML(XrWorldMeshDetectorM
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9158,7 +9158,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateAsyncML(XrWorldMeshDetecto
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9195,7 +9195,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestWorldMeshStateCompleteML(XrWorldMeshDete
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9233,7 +9233,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyForceFeedbackCurlMNDX(XrHandTrackerEXT han
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9275,7 +9275,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReprojectionModesMSFT(XrInstance insta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9315,7 +9315,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelKeyMSFT(XrSession session, Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9352,7 +9352,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelPropertiesMSFT(XrSession sess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9389,7 +9389,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetControllerModelStateMSFT(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9428,7 +9428,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLoadControllerModelMSFT(XrSession session, XrCo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9468,7 +9468,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateHandMeshSpaceMSFT(XrHandTrackerEXT handTr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9505,7 +9505,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUpdateHandMeshMSFT(XrHandTrackerEXT handTracker
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9544,7 +9544,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPerceptionAnchorMSFT(XrS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9582,7 +9582,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryGetPerceptionAnchorFromSpatialAnchorMSFT(XrS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9623,7 +9623,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerDecodedStringMSFT(XrSceneMSFT sce
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9663,7 +9663,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMarkerRawDataMSFT(XrSceneMSFT scene, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9702,7 +9702,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrComputeNewSceneMSFT(XrSceneObserverMSFT sceneOb
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9738,7 +9738,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneMSFT(XrSceneObserverMSFT sceneObserv
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9775,7 +9775,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSceneObserverMSFT(XrSession session, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9810,7 +9810,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneMSFT(XrSceneMSFT scene) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9844,7 +9844,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySceneObserverMSFT(XrSceneObserverMSFT sc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9882,7 +9882,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSceneComputeFeaturesMSFT(XrInstance in
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9920,7 +9920,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComponentsMSFT(XrSceneMSFT scene, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9956,7 +9956,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneComputeStateMSFT(XrSceneObserverMSFT sc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -9993,7 +9993,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSceneMeshBuffersMSFT(XrSceneMSFT scene, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10030,7 +10030,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSceneComponentsMSFT(XrSceneMSFT scene, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10068,7 +10068,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDeserializeSceneMSFT(XrSceneObserverMSFT sceneO
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10106,7 +10106,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSerializedSceneFragmentDataMSFT(XrSceneMSFT 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10146,7 +10146,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorMSFT(XrSession session, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10183,7 +10183,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorSpaceMSFT(XrSession session,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10218,7 +10218,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorMSFT(XrSpatialAnchorMSFT an
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10254,7 +10254,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrClearSpatialAnchorStoreMSFT(XrSpatialAnchorStor
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10290,7 +10290,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorFromPersistedNameMSFT(XrSess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10326,7 +10326,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialAnchorStoreConnectionMSFT(XrSessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10361,7 +10361,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialAnchorStoreConnectionMSFT(XrSpati
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10398,7 +10398,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumeratePersistedSpatialAnchorNamesMSFT(XrSpat
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10435,7 +10435,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPersistSpatialAnchorMSFT(XrSpatialAnchorStoreCo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10470,7 +10470,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrUnpersistSpatialAnchorMSFT(XrSpatialAnchorStore
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10508,7 +10508,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSpatialGraphNodeSpaceMSFT(XrSession sessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10543,7 +10543,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpatialGraphNodeBindingMSFT(XrSpatialGra
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10579,7 +10579,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSpatialGraphNodeBindingPropertiesMSFT(XrSpat
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10616,7 +10616,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrTryCreateSpatialGraphStaticNodeBindingMSFT(XrSe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10654,7 +10654,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioInputDeviceGuidOculus(XrInstance instan
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10690,7 +10690,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetAudioOutputDeviceGuidOculus(XrInstance insta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10730,7 +10730,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateExternalCamerasOCULUS(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10770,7 +10770,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetTrackingOptimizationSettingsHintQCOM(XrSessi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10807,7 +10807,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetEnvironmentDepthEstimationVARJO(XrSession se
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10845,7 +10845,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateMarkerSpaceVARJO(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10882,7 +10882,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetMarkerSizeVARJO(XrSession session, uint64_t 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10919,7 +10919,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingPredictionVARJO(XrSession sess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10955,7 +10955,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingTimeoutVARJO(XrSession session
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -10990,7 +10990,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetMarkerTrackingVARJO(XrSession session, XrBoo
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11027,7 +11027,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSetViewOffsetVARJO(XrSession session, float off
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11064,7 +11064,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImage(XrSwapchain swapchain, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11101,7 +11101,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrApplyHapticFeedback(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11136,7 +11136,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrAttachSessionActionSets(XrSession session, cons
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11171,7 +11171,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginFrame(XrSession session, const XrFrameBegi
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11206,7 +11206,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrBeginSession(XrSession session, const XrSession
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11242,7 +11242,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateAction(XrActionSet actionSet, const XrAct
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11279,7 +11279,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSet(XrInstance instance, const XrAc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11316,7 +11316,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateActionSpace(XrSession session, const XrAc
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11352,7 +11352,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstance(const XrInstanceCreateInfo* crea
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11389,7 +11389,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateReferenceSpace(XrSession session, const X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11426,7 +11426,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSession(XrInstance instance, const XrSess
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11463,7 +11463,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchain(XrSession session, const XrSwap
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11498,7 +11498,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyAction(XrAction action) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11532,7 +11532,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyActionSet(XrActionSet actionSet) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11566,7 +11566,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroyInstance(XrInstance instance) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11600,7 +11600,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySession(XrSession session) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11634,7 +11634,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySpace(XrSpace space) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11668,7 +11668,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchain(XrSwapchain swapchain) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11703,7 +11703,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndFrame(XrSession session, const XrFrameEndInf
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11737,7 +11737,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEndSession(XrSession session) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11773,7 +11773,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateApiLayerProperties(uint32_t propertyCa
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11813,7 +11813,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateBoundSourcesForAction(XrSession sessio
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11854,7 +11854,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateEnvironmentBlendModes(XrInstance insta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11893,7 +11893,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateInstanceExtensionProperties(const char
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11932,7 +11932,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateReferenceSpaces(XrSession session, uin
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -11971,7 +11971,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainFormats(XrSession session, ui
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12010,7 +12010,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImages(XrSwapchain swapchain,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12051,7 +12051,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurationViews(XrInstance inst
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12091,7 +12091,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateViewConfigurations(XrInstance instance
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12129,7 +12129,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateBoolean(XrSession session, const 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12166,7 +12166,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateFloat(XrSession session, const Xr
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12203,7 +12203,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStatePose(XrSession session, const XrA
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12240,7 +12240,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetActionStateVector2f(XrSession session, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12277,7 +12277,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetCurrentInteractionProfile(XrSession session,
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12316,7 +12316,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInputSourceLocalizedName(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12353,7 +12353,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetInstanceProperties(XrInstance instance, XrIn
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12390,7 +12390,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetReferenceSpaceBoundsRect(XrSession session, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12427,7 +12427,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystem(XrInstance instance, const XrSystemGe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12464,7 +12464,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetSystemProperties(XrInstance instance, XrSyst
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12502,7 +12502,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetViewConfigurationProperties(XrInstance insta
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12540,7 +12540,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpace(XrSpace space, XrSpace baseSpace, X
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12577,7 +12577,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateSpaces(XrSession session, const XrSpacesL
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12617,7 +12617,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrLocateViews(XrSession session, const XrViewLoca
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12658,7 +12658,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPathToString(XrInstance instance, XrPath path, 
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12695,7 +12695,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrPollEvent(XrInstance instance, XrEventDataBuffe
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12731,7 +12731,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImage(XrSwapchain swapchain, co
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12765,7 +12765,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrRequestExitSession(XrSession session) try {
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12801,7 +12801,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrResultToString(XrInstance instance, XrResult va
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12837,7 +12837,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStopHapticFeedback(XrSession session, const XrH
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12873,7 +12873,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStringToPath(XrInstance instance, const char* p
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12910,7 +12910,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrStructureTypeToString(XrInstance instance, XrSt
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12946,7 +12946,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSuggestInteractionProfileBindings(XrInstance in
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -12981,7 +12981,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrSyncActions(XrSession session, const XrActionsS
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -13017,7 +13017,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitFrame(XrSession session, const XrFrameWaitI
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
@@ -13053,7 +13053,7 @@ XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImage(XrSwapchain swapchain, const
     msg_out.flush();
 
     auto msg_in = transport.await_message(XRTP_MSG_FUNCTION_RETURN);
-    DeserializeContext d_ctx(msg_in.stream, true, time_offset);
+    DeserializeContext d_ctx(msg_in.buffer, true, time_offset);
 
     XrResult result;
     deserialize(&result, d_ctx);
