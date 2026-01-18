@@ -254,8 +254,38 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     }
 #endif
 
+    // Remove any extensions requested by the application that are provided by modules.
+    // The server should not be able to see these
+
+    std::unordered_set<std::string> module_provided_extensions;
+    for (auto& module_info : modules_info) {
+        for (uint32_t i = 0; i < module_info.num_extensions; i++) {
+            auto& extension = module_info.extensions[i];
+            module_provided_extensions.emplace(extension.extension_name);
+        }
+    }
+
+    std::vector<const char*> requested_extensions(
+        create_info->enabledExtensionNames,
+        create_info->enabledExtensionNames + create_info->enabledExtensionCount
+    );
+
+    for (auto it = requested_extensions.begin(); it != requested_extensions.end();) {
+        if (module_provided_extensions.find(std::string(*it)) != module_provided_extensions.end()) {
+            it = requested_extensions.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+
+    XrInstanceCreateInfo modified_create_info;
+    std::memcpy(&modified_create_info, create_info, sizeof(XrInstanceCreateInfo));
+    modified_create_info.enabledExtensionCount = static_cast<uint32_t>(requested_extensions.size());
+    modified_create_info.enabledExtensionNames = requested_extensions.data();
+
     // Do the instance creation
-    XrResult result = rpc::xrCreateInstance(create_info, instance);
+    XrResult result = rpc::xrCreateInstance(&modified_create_info, instance);
     if (XR_SUCCEEDED(result)) {
         saved_instance = *instance;
 
