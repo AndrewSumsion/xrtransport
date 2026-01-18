@@ -30,7 +30,7 @@ static XrDuration end_runtime_timer(XrTime start_time) {
 <%utils:for_grouped_functions args="function">\
 void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
 % if function.name != "xrCreateInstance":
-    function_loader.ensure_function_loaded("${function.name}", function_loader.pfn_${function.name});
+    function_loader.ensure_function_loaded("${function.name}", function_loader.${function.name[2:]});
     // by this point, the function id has already been read, now read the params
     DeserializeContext d_ctx(msg_in.buffer);
     % for param in function.params:
@@ -39,7 +39,7 @@ void FunctionDispatch::handle_${function.name}(MessageLockIn msg_in) {
     % endfor
 
     XrTime start_time = start_runtime_timer();
-    XrResult _result = function_loader.pfn_${function.name}(${', '.join(param.name for param in function.params)});
+    XrResult _result = function_loader.${function.name[2:]}(${', '.join(param.name for param in function.params)});
     XrDuration runtime_duration = end_runtime_timer(start_time);
     
     auto msg_out = transport.start_message(XRTP_MSG_FUNCTION_RETURN);

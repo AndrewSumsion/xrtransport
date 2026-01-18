@@ -18,7 +18,7 @@ class FunctionLoader {
 public:
     explicit FunctionLoader(PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr) :
         loader_instance(XR_NULL_HANDLE),
-        pfn_xrGetInstanceProcAddr(pfn_xrGetInstanceProcAddr)
+        GetInstanceProcAddr(pfn_xrGetInstanceProcAddr)
     {}
 
     // Used by ensure_function_loaded to load XR functions
@@ -27,10 +27,10 @@ public:
     XrInstance loader_instance;
 
     // used to load functions
-    PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
+    PFN_xrGetInstanceProcAddr GetInstanceProcAddr;
 
 <%utils:for_grouped_functions args="function">\
-    PFN_${function.name} pfn_${function.name} = nullptr;
+    PFN_${function.name} ${function.name[2:]} = nullptr;
 </%utils:for_grouped_functions>
 
     // defined inline in header so that it can be used by server modules
@@ -45,7 +45,7 @@ public:
             return;
         }
 
-        XrResult result = pfn_xrGetInstanceProcAddr(loader_instance, name, reinterpret_cast<PFN_xrVoidFunction*>(&function));
+        XrResult result = GetInstanceProcAddr(loader_instance, name, reinterpret_cast<PFN_xrVoidFunction*>(&function));
 
         if (!XR_SUCCEEDED(result)) {
             throw FunctionLoaderException("xrGetInstanceProcAddr for " + std::string(name) + " returned an error: " + std::to_string(result));

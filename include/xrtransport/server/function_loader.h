@@ -24,9 +24,9 @@ public:
 
 class FunctionLoader {
 public:
-    explicit FunctionLoader(PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr) :
+    explicit FunctionLoader(PFN_xrGetInstanceProcAddr GetInstanceProcAddr) :
         loader_instance(XR_NULL_HANDLE),
-        pfn_xrGetInstanceProcAddr(pfn_xrGetInstanceProcAddr)
+        GetInstanceProcAddr(GetInstanceProcAddr)
     {}
 
     // Used by ensure_function_loaded to load XR functions
@@ -35,547 +35,547 @@ public:
     XrInstance loader_instance;
 
     // used to load functions
-    PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
+    PFN_xrGetInstanceProcAddr GetInstanceProcAddr;
 
 #ifdef XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
-    PFN_xrSetDigitalLensControlALMALENCE pfn_xrSetDigitalLensControlALMALENCE = nullptr;
+    PFN_xrSetDigitalLensControlALMALENCE SetDigitalLensControlALMALENCE = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ALMALENCE_digital_lens_control
 #ifdef XRTRANSPORT_EXT_XR_BD_body_tracking
-    PFN_xrCreateBodyTrackerBD pfn_xrCreateBodyTrackerBD = nullptr;
-    PFN_xrDestroyBodyTrackerBD pfn_xrDestroyBodyTrackerBD = nullptr;
-    PFN_xrLocateBodyJointsBD pfn_xrLocateBodyJointsBD = nullptr;
+    PFN_xrCreateBodyTrackerBD CreateBodyTrackerBD = nullptr;
+    PFN_xrDestroyBodyTrackerBD DestroyBodyTrackerBD = nullptr;
+    PFN_xrLocateBodyJointsBD LocateBodyJointsBD = nullptr;
 #endif // XRTRANSPORT_EXT_XR_BD_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor
-    PFN_xrCreateSpatialAnchorAsyncBD pfn_xrCreateSpatialAnchorAsyncBD = nullptr;
-    PFN_xrCreateSpatialAnchorCompleteBD pfn_xrCreateSpatialAnchorCompleteBD = nullptr;
-    PFN_xrPersistSpatialAnchorAsyncBD pfn_xrPersistSpatialAnchorAsyncBD = nullptr;
-    PFN_xrPersistSpatialAnchorCompleteBD pfn_xrPersistSpatialAnchorCompleteBD = nullptr;
-    PFN_xrUnpersistSpatialAnchorAsyncBD pfn_xrUnpersistSpatialAnchorAsyncBD = nullptr;
-    PFN_xrUnpersistSpatialAnchorCompleteBD pfn_xrUnpersistSpatialAnchorCompleteBD = nullptr;
+    PFN_xrCreateSpatialAnchorAsyncBD CreateSpatialAnchorAsyncBD = nullptr;
+    PFN_xrCreateSpatialAnchorCompleteBD CreateSpatialAnchorCompleteBD = nullptr;
+    PFN_xrPersistSpatialAnchorAsyncBD PersistSpatialAnchorAsyncBD = nullptr;
+    PFN_xrPersistSpatialAnchorCompleteBD PersistSpatialAnchorCompleteBD = nullptr;
+    PFN_xrUnpersistSpatialAnchorAsyncBD UnpersistSpatialAnchorAsyncBD = nullptr;
+    PFN_xrUnpersistSpatialAnchorCompleteBD UnpersistSpatialAnchorCompleteBD = nullptr;
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
-    PFN_xrDownloadSharedSpatialAnchorAsyncBD pfn_xrDownloadSharedSpatialAnchorAsyncBD = nullptr;
-    PFN_xrDownloadSharedSpatialAnchorCompleteBD pfn_xrDownloadSharedSpatialAnchorCompleteBD = nullptr;
-    PFN_xrShareSpatialAnchorAsyncBD pfn_xrShareSpatialAnchorAsyncBD = nullptr;
-    PFN_xrShareSpatialAnchorCompleteBD pfn_xrShareSpatialAnchorCompleteBD = nullptr;
+    PFN_xrDownloadSharedSpatialAnchorAsyncBD DownloadSharedSpatialAnchorAsyncBD = nullptr;
+    PFN_xrDownloadSharedSpatialAnchorCompleteBD DownloadSharedSpatialAnchorCompleteBD = nullptr;
+    PFN_xrShareSpatialAnchorAsyncBD ShareSpatialAnchorAsyncBD = nullptr;
+    PFN_xrShareSpatialAnchorCompleteBD ShareSpatialAnchorCompleteBD = nullptr;
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_anchor_sharing
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_scene
-    PFN_xrCaptureSceneAsyncBD pfn_xrCaptureSceneAsyncBD = nullptr;
-    PFN_xrCaptureSceneCompleteBD pfn_xrCaptureSceneCompleteBD = nullptr;
+    PFN_xrCaptureSceneAsyncBD CaptureSceneAsyncBD = nullptr;
+    PFN_xrCaptureSceneCompleteBD CaptureSceneCompleteBD = nullptr;
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_scene
 #ifdef XRTRANSPORT_EXT_XR_BD_spatial_sensing
-    PFN_xrCreateAnchorSpaceBD pfn_xrCreateAnchorSpaceBD = nullptr;
-    PFN_xrCreateSenseDataProviderBD pfn_xrCreateSenseDataProviderBD = nullptr;
-    PFN_xrCreateSpatialEntityAnchorBD pfn_xrCreateSpatialEntityAnchorBD = nullptr;
-    PFN_xrDestroyAnchorBD pfn_xrDestroyAnchorBD = nullptr;
-    PFN_xrDestroySenseDataProviderBD pfn_xrDestroySenseDataProviderBD = nullptr;
-    PFN_xrDestroySenseDataSnapshotBD pfn_xrDestroySenseDataSnapshotBD = nullptr;
-    PFN_xrEnumerateSpatialEntityComponentTypesBD pfn_xrEnumerateSpatialEntityComponentTypesBD = nullptr;
-    PFN_xrGetAnchorUuidBD pfn_xrGetAnchorUuidBD = nullptr;
-    PFN_xrGetQueriedSenseDataBD pfn_xrGetQueriedSenseDataBD = nullptr;
-    PFN_xrGetSenseDataProviderStateBD pfn_xrGetSenseDataProviderStateBD = nullptr;
-    PFN_xrGetSpatialEntityComponentDataBD pfn_xrGetSpatialEntityComponentDataBD = nullptr;
-    PFN_xrGetSpatialEntityUuidBD pfn_xrGetSpatialEntityUuidBD = nullptr;
-    PFN_xrQuerySenseDataAsyncBD pfn_xrQuerySenseDataAsyncBD = nullptr;
-    PFN_xrQuerySenseDataCompleteBD pfn_xrQuerySenseDataCompleteBD = nullptr;
-    PFN_xrStartSenseDataProviderAsyncBD pfn_xrStartSenseDataProviderAsyncBD = nullptr;
-    PFN_xrStartSenseDataProviderCompleteBD pfn_xrStartSenseDataProviderCompleteBD = nullptr;
-    PFN_xrStopSenseDataProviderBD pfn_xrStopSenseDataProviderBD = nullptr;
+    PFN_xrCreateAnchorSpaceBD CreateAnchorSpaceBD = nullptr;
+    PFN_xrCreateSenseDataProviderBD CreateSenseDataProviderBD = nullptr;
+    PFN_xrCreateSpatialEntityAnchorBD CreateSpatialEntityAnchorBD = nullptr;
+    PFN_xrDestroyAnchorBD DestroyAnchorBD = nullptr;
+    PFN_xrDestroySenseDataProviderBD DestroySenseDataProviderBD = nullptr;
+    PFN_xrDestroySenseDataSnapshotBD DestroySenseDataSnapshotBD = nullptr;
+    PFN_xrEnumerateSpatialEntityComponentTypesBD EnumerateSpatialEntityComponentTypesBD = nullptr;
+    PFN_xrGetAnchorUuidBD GetAnchorUuidBD = nullptr;
+    PFN_xrGetQueriedSenseDataBD GetQueriedSenseDataBD = nullptr;
+    PFN_xrGetSenseDataProviderStateBD GetSenseDataProviderStateBD = nullptr;
+    PFN_xrGetSpatialEntityComponentDataBD GetSpatialEntityComponentDataBD = nullptr;
+    PFN_xrGetSpatialEntityUuidBD GetSpatialEntityUuidBD = nullptr;
+    PFN_xrQuerySenseDataAsyncBD QuerySenseDataAsyncBD = nullptr;
+    PFN_xrQuerySenseDataCompleteBD QuerySenseDataCompleteBD = nullptr;
+    PFN_xrStartSenseDataProviderAsyncBD StartSenseDataProviderAsyncBD = nullptr;
+    PFN_xrStartSenseDataProviderCompleteBD StartSenseDataProviderCompleteBD = nullptr;
+    PFN_xrStopSenseDataProviderBD StopSenseDataProviderBD = nullptr;
 #endif // XRTRANSPORT_EXT_XR_BD_spatial_sensing
 #ifdef XRTRANSPORT_EXT_XR_EXT_conformance_automation
-    PFN_xrSetInputDeviceActiveEXT pfn_xrSetInputDeviceActiveEXT = nullptr;
-    PFN_xrSetInputDeviceLocationEXT pfn_xrSetInputDeviceLocationEXT = nullptr;
-    PFN_xrSetInputDeviceStateBoolEXT pfn_xrSetInputDeviceStateBoolEXT = nullptr;
-    PFN_xrSetInputDeviceStateFloatEXT pfn_xrSetInputDeviceStateFloatEXT = nullptr;
-    PFN_xrSetInputDeviceStateVector2fEXT pfn_xrSetInputDeviceStateVector2fEXT = nullptr;
+    PFN_xrSetInputDeviceActiveEXT SetInputDeviceActiveEXT = nullptr;
+    PFN_xrSetInputDeviceLocationEXT SetInputDeviceLocationEXT = nullptr;
+    PFN_xrSetInputDeviceStateBoolEXT SetInputDeviceStateBoolEXT = nullptr;
+    PFN_xrSetInputDeviceStateFloatEXT SetInputDeviceStateFloatEXT = nullptr;
+    PFN_xrSetInputDeviceStateVector2fEXT SetInputDeviceStateVector2fEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_conformance_automation
 #ifdef XRTRANSPORT_EXT_XR_EXT_debug_utils
-    PFN_xrCreateDebugUtilsMessengerEXT pfn_xrCreateDebugUtilsMessengerEXT = nullptr;
-    PFN_xrDestroyDebugUtilsMessengerEXT pfn_xrDestroyDebugUtilsMessengerEXT = nullptr;
-    PFN_xrSessionBeginDebugUtilsLabelRegionEXT pfn_xrSessionBeginDebugUtilsLabelRegionEXT = nullptr;
-    PFN_xrSessionEndDebugUtilsLabelRegionEXT pfn_xrSessionEndDebugUtilsLabelRegionEXT = nullptr;
-    PFN_xrSessionInsertDebugUtilsLabelEXT pfn_xrSessionInsertDebugUtilsLabelEXT = nullptr;
-    PFN_xrSetDebugUtilsObjectNameEXT pfn_xrSetDebugUtilsObjectNameEXT = nullptr;
-    PFN_xrSubmitDebugUtilsMessageEXT pfn_xrSubmitDebugUtilsMessageEXT = nullptr;
+    PFN_xrCreateDebugUtilsMessengerEXT CreateDebugUtilsMessengerEXT = nullptr;
+    PFN_xrDestroyDebugUtilsMessengerEXT DestroyDebugUtilsMessengerEXT = nullptr;
+    PFN_xrSessionBeginDebugUtilsLabelRegionEXT SessionBeginDebugUtilsLabelRegionEXT = nullptr;
+    PFN_xrSessionEndDebugUtilsLabelRegionEXT SessionEndDebugUtilsLabelRegionEXT = nullptr;
+    PFN_xrSessionInsertDebugUtilsLabelEXT SessionInsertDebugUtilsLabelEXT = nullptr;
+    PFN_xrSetDebugUtilsObjectNameEXT SetDebugUtilsObjectNameEXT = nullptr;
+    PFN_xrSubmitDebugUtilsMessageEXT SubmitDebugUtilsMessageEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_debug_utils
 #ifdef XRTRANSPORT_EXT_XR_EXT_future
-    PFN_xrCancelFutureEXT pfn_xrCancelFutureEXT = nullptr;
-    PFN_xrPollFutureEXT pfn_xrPollFutureEXT = nullptr;
+    PFN_xrCancelFutureEXT CancelFutureEXT = nullptr;
+    PFN_xrPollFutureEXT PollFutureEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_future
 #ifdef XRTRANSPORT_EXT_XR_EXT_hand_tracking
-    PFN_xrCreateHandTrackerEXT pfn_xrCreateHandTrackerEXT = nullptr;
-    PFN_xrDestroyHandTrackerEXT pfn_xrDestroyHandTrackerEXT = nullptr;
-    PFN_xrLocateHandJointsEXT pfn_xrLocateHandJointsEXT = nullptr;
+    PFN_xrCreateHandTrackerEXT CreateHandTrackerEXT = nullptr;
+    PFN_xrDestroyHandTrackerEXT DestroyHandTrackerEXT = nullptr;
+    PFN_xrLocateHandJointsEXT LocateHandJointsEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_hand_tracking
 #ifdef XRTRANSPORT_EXT_XR_EXT_performance_settings
-    PFN_xrPerfSettingsSetPerformanceLevelEXT pfn_xrPerfSettingsSetPerformanceLevelEXT = nullptr;
+    PFN_xrPerfSettingsSetPerformanceLevelEXT PerfSettingsSetPerformanceLevelEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_performance_settings
 #ifdef XRTRANSPORT_EXT_XR_EXT_plane_detection
-    PFN_xrBeginPlaneDetectionEXT pfn_xrBeginPlaneDetectionEXT = nullptr;
-    PFN_xrCreatePlaneDetectorEXT pfn_xrCreatePlaneDetectorEXT = nullptr;
-    PFN_xrDestroyPlaneDetectorEXT pfn_xrDestroyPlaneDetectorEXT = nullptr;
-    PFN_xrGetPlaneDetectionStateEXT pfn_xrGetPlaneDetectionStateEXT = nullptr;
-    PFN_xrGetPlaneDetectionsEXT pfn_xrGetPlaneDetectionsEXT = nullptr;
-    PFN_xrGetPlanePolygonBufferEXT pfn_xrGetPlanePolygonBufferEXT = nullptr;
+    PFN_xrBeginPlaneDetectionEXT BeginPlaneDetectionEXT = nullptr;
+    PFN_xrCreatePlaneDetectorEXT CreatePlaneDetectorEXT = nullptr;
+    PFN_xrDestroyPlaneDetectorEXT DestroyPlaneDetectorEXT = nullptr;
+    PFN_xrGetPlaneDetectionStateEXT GetPlaneDetectionStateEXT = nullptr;
+    PFN_xrGetPlaneDetectionsEXT GetPlaneDetectionsEXT = nullptr;
+    PFN_xrGetPlanePolygonBufferEXT GetPlanePolygonBufferEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_plane_detection
 #ifdef XRTRANSPORT_EXT_XR_EXT_thermal_query
-    PFN_xrThermalGetTemperatureTrendEXT pfn_xrThermalGetTemperatureTrendEXT = nullptr;
+    PFN_xrThermalGetTemperatureTrendEXT ThermalGetTemperatureTrendEXT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_EXT_thermal_query
 #ifdef XRTRANSPORT_EXT_XR_FB_body_tracking
-    PFN_xrCreateBodyTrackerFB pfn_xrCreateBodyTrackerFB = nullptr;
-    PFN_xrDestroyBodyTrackerFB pfn_xrDestroyBodyTrackerFB = nullptr;
-    PFN_xrGetBodySkeletonFB pfn_xrGetBodySkeletonFB = nullptr;
-    PFN_xrLocateBodyJointsFB pfn_xrLocateBodyJointsFB = nullptr;
+    PFN_xrCreateBodyTrackerFB CreateBodyTrackerFB = nullptr;
+    PFN_xrDestroyBodyTrackerFB DestroyBodyTrackerFB = nullptr;
+    PFN_xrGetBodySkeletonFB GetBodySkeletonFB = nullptr;
+    PFN_xrLocateBodyJointsFB LocateBodyJointsFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_color_space
-    PFN_xrEnumerateColorSpacesFB pfn_xrEnumerateColorSpacesFB = nullptr;
-    PFN_xrSetColorSpaceFB pfn_xrSetColorSpaceFB = nullptr;
+    PFN_xrEnumerateColorSpacesFB EnumerateColorSpacesFB = nullptr;
+    PFN_xrSetColorSpaceFB SetColorSpaceFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_color_space
 #ifdef XRTRANSPORT_EXT_XR_FB_display_refresh_rate
-    PFN_xrEnumerateDisplayRefreshRatesFB pfn_xrEnumerateDisplayRefreshRatesFB = nullptr;
-    PFN_xrGetDisplayRefreshRateFB pfn_xrGetDisplayRefreshRateFB = nullptr;
-    PFN_xrRequestDisplayRefreshRateFB pfn_xrRequestDisplayRefreshRateFB = nullptr;
+    PFN_xrEnumerateDisplayRefreshRatesFB EnumerateDisplayRefreshRatesFB = nullptr;
+    PFN_xrGetDisplayRefreshRateFB GetDisplayRefreshRateFB = nullptr;
+    PFN_xrRequestDisplayRefreshRateFB RequestDisplayRefreshRateFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_display_refresh_rate
 #ifdef XRTRANSPORT_EXT_XR_FB_eye_tracking_social
-    PFN_xrCreateEyeTrackerFB pfn_xrCreateEyeTrackerFB = nullptr;
-    PFN_xrDestroyEyeTrackerFB pfn_xrDestroyEyeTrackerFB = nullptr;
-    PFN_xrGetEyeGazesFB pfn_xrGetEyeGazesFB = nullptr;
+    PFN_xrCreateEyeTrackerFB CreateEyeTrackerFB = nullptr;
+    PFN_xrDestroyEyeTrackerFB DestroyEyeTrackerFB = nullptr;
+    PFN_xrGetEyeGazesFB GetEyeGazesFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_eye_tracking_social
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking
-    PFN_xrCreateFaceTrackerFB pfn_xrCreateFaceTrackerFB = nullptr;
-    PFN_xrDestroyFaceTrackerFB pfn_xrDestroyFaceTrackerFB = nullptr;
-    PFN_xrGetFaceExpressionWeightsFB pfn_xrGetFaceExpressionWeightsFB = nullptr;
+    PFN_xrCreateFaceTrackerFB CreateFaceTrackerFB = nullptr;
+    PFN_xrDestroyFaceTrackerFB DestroyFaceTrackerFB = nullptr;
+    PFN_xrGetFaceExpressionWeightsFB GetFaceExpressionWeightsFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_face_tracking2
-    PFN_xrCreateFaceTracker2FB pfn_xrCreateFaceTracker2FB = nullptr;
-    PFN_xrDestroyFaceTracker2FB pfn_xrDestroyFaceTracker2FB = nullptr;
-    PFN_xrGetFaceExpressionWeights2FB pfn_xrGetFaceExpressionWeights2FB = nullptr;
+    PFN_xrCreateFaceTracker2FB CreateFaceTracker2FB = nullptr;
+    PFN_xrDestroyFaceTracker2FB DestroyFaceTracker2FB = nullptr;
+    PFN_xrGetFaceExpressionWeights2FB GetFaceExpressionWeights2FB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_face_tracking2
 #ifdef XRTRANSPORT_EXT_XR_FB_foveation
-    PFN_xrCreateFoveationProfileFB pfn_xrCreateFoveationProfileFB = nullptr;
-    PFN_xrDestroyFoveationProfileFB pfn_xrDestroyFoveationProfileFB = nullptr;
+    PFN_xrCreateFoveationProfileFB CreateFoveationProfileFB = nullptr;
+    PFN_xrDestroyFoveationProfileFB DestroyFoveationProfileFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_foveation
 #ifdef XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
-    PFN_xrGetHandMeshFB pfn_xrGetHandMeshFB = nullptr;
+    PFN_xrGetHandMeshFB GetHandMeshFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_FB_haptic_pcm
-    PFN_xrGetDeviceSampleRateFB pfn_xrGetDeviceSampleRateFB = nullptr;
+    PFN_xrGetDeviceSampleRateFB GetDeviceSampleRateFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_haptic_pcm
 #ifdef XRTRANSPORT_EXT_XR_FB_keyboard_tracking
-    PFN_xrCreateKeyboardSpaceFB pfn_xrCreateKeyboardSpaceFB = nullptr;
-    PFN_xrQuerySystemTrackedKeyboardFB pfn_xrQuerySystemTrackedKeyboardFB = nullptr;
+    PFN_xrCreateKeyboardSpaceFB CreateKeyboardSpaceFB = nullptr;
+    PFN_xrQuerySystemTrackedKeyboardFB QuerySystemTrackedKeyboardFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_keyboard_tracking
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough
-    PFN_xrCreateGeometryInstanceFB pfn_xrCreateGeometryInstanceFB = nullptr;
-    PFN_xrCreatePassthroughFB pfn_xrCreatePassthroughFB = nullptr;
-    PFN_xrCreatePassthroughLayerFB pfn_xrCreatePassthroughLayerFB = nullptr;
-    PFN_xrDestroyGeometryInstanceFB pfn_xrDestroyGeometryInstanceFB = nullptr;
-    PFN_xrDestroyPassthroughFB pfn_xrDestroyPassthroughFB = nullptr;
-    PFN_xrDestroyPassthroughLayerFB pfn_xrDestroyPassthroughLayerFB = nullptr;
-    PFN_xrGeometryInstanceSetTransformFB pfn_xrGeometryInstanceSetTransformFB = nullptr;
-    PFN_xrPassthroughLayerPauseFB pfn_xrPassthroughLayerPauseFB = nullptr;
-    PFN_xrPassthroughLayerResumeFB pfn_xrPassthroughLayerResumeFB = nullptr;
-    PFN_xrPassthroughLayerSetStyleFB pfn_xrPassthroughLayerSetStyleFB = nullptr;
-    PFN_xrPassthroughPauseFB pfn_xrPassthroughPauseFB = nullptr;
-    PFN_xrPassthroughStartFB pfn_xrPassthroughStartFB = nullptr;
+    PFN_xrCreateGeometryInstanceFB CreateGeometryInstanceFB = nullptr;
+    PFN_xrCreatePassthroughFB CreatePassthroughFB = nullptr;
+    PFN_xrCreatePassthroughLayerFB CreatePassthroughLayerFB = nullptr;
+    PFN_xrDestroyGeometryInstanceFB DestroyGeometryInstanceFB = nullptr;
+    PFN_xrDestroyPassthroughFB DestroyPassthroughFB = nullptr;
+    PFN_xrDestroyPassthroughLayerFB DestroyPassthroughLayerFB = nullptr;
+    PFN_xrGeometryInstanceSetTransformFB GeometryInstanceSetTransformFB = nullptr;
+    PFN_xrPassthroughLayerPauseFB PassthroughLayerPauseFB = nullptr;
+    PFN_xrPassthroughLayerResumeFB PassthroughLayerResumeFB = nullptr;
+    PFN_xrPassthroughLayerSetStyleFB PassthroughLayerSetStyleFB = nullptr;
+    PFN_xrPassthroughPauseFB PassthroughPauseFB = nullptr;
+    PFN_xrPassthroughStartFB PassthroughStartFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough
 #ifdef XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
-    PFN_xrPassthroughLayerSetKeyboardHandsIntensityFB pfn_xrPassthroughLayerSetKeyboardHandsIntensityFB = nullptr;
+    PFN_xrPassthroughLayerSetKeyboardHandsIntensityFB PassthroughLayerSetKeyboardHandsIntensityFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_passthrough_keyboard_hands
 #ifdef XRTRANSPORT_EXT_XR_FB_render_model
-    PFN_xrEnumerateRenderModelPathsFB pfn_xrEnumerateRenderModelPathsFB = nullptr;
-    PFN_xrGetRenderModelPropertiesFB pfn_xrGetRenderModelPropertiesFB = nullptr;
-    PFN_xrLoadRenderModelFB pfn_xrLoadRenderModelFB = nullptr;
+    PFN_xrEnumerateRenderModelPathsFB EnumerateRenderModelPathsFB = nullptr;
+    PFN_xrGetRenderModelPropertiesFB GetRenderModelPropertiesFB = nullptr;
+    PFN_xrLoadRenderModelFB LoadRenderModelFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_render_model
 #ifdef XRTRANSPORT_EXT_XR_FB_scene
-    PFN_xrGetSpaceBoundary2DFB pfn_xrGetSpaceBoundary2DFB = nullptr;
-    PFN_xrGetSpaceBoundingBox2DFB pfn_xrGetSpaceBoundingBox2DFB = nullptr;
-    PFN_xrGetSpaceBoundingBox3DFB pfn_xrGetSpaceBoundingBox3DFB = nullptr;
-    PFN_xrGetSpaceRoomLayoutFB pfn_xrGetSpaceRoomLayoutFB = nullptr;
-    PFN_xrGetSpaceSemanticLabelsFB pfn_xrGetSpaceSemanticLabelsFB = nullptr;
+    PFN_xrGetSpaceBoundary2DFB GetSpaceBoundary2DFB = nullptr;
+    PFN_xrGetSpaceBoundingBox2DFB GetSpaceBoundingBox2DFB = nullptr;
+    PFN_xrGetSpaceBoundingBox3DFB GetSpaceBoundingBox3DFB = nullptr;
+    PFN_xrGetSpaceRoomLayoutFB GetSpaceRoomLayoutFB = nullptr;
+    PFN_xrGetSpaceSemanticLabelsFB GetSpaceSemanticLabelsFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_scene
 #ifdef XRTRANSPORT_EXT_XR_FB_scene_capture
-    PFN_xrRequestSceneCaptureFB pfn_xrRequestSceneCaptureFB = nullptr;
+    PFN_xrRequestSceneCaptureFB RequestSceneCaptureFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_scene_capture
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity
-    PFN_xrCreateSpatialAnchorFB pfn_xrCreateSpatialAnchorFB = nullptr;
-    PFN_xrEnumerateSpaceSupportedComponentsFB pfn_xrEnumerateSpaceSupportedComponentsFB = nullptr;
-    PFN_xrGetSpaceComponentStatusFB pfn_xrGetSpaceComponentStatusFB = nullptr;
-    PFN_xrGetSpaceUuidFB pfn_xrGetSpaceUuidFB = nullptr;
-    PFN_xrSetSpaceComponentStatusFB pfn_xrSetSpaceComponentStatusFB = nullptr;
+    PFN_xrCreateSpatialAnchorFB CreateSpatialAnchorFB = nullptr;
+    PFN_xrEnumerateSpaceSupportedComponentsFB EnumerateSpaceSupportedComponentsFB = nullptr;
+    PFN_xrGetSpaceComponentStatusFB GetSpaceComponentStatusFB = nullptr;
+    PFN_xrGetSpaceUuidFB GetSpaceUuidFB = nullptr;
+    PFN_xrSetSpaceComponentStatusFB SetSpaceComponentStatusFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_container
-    PFN_xrGetSpaceContainerFB pfn_xrGetSpaceContainerFB = nullptr;
+    PFN_xrGetSpaceContainerFB GetSpaceContainerFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_container
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_query
-    PFN_xrQuerySpacesFB pfn_xrQuerySpacesFB = nullptr;
-    PFN_xrRetrieveSpaceQueryResultsFB pfn_xrRetrieveSpaceQueryResultsFB = nullptr;
+    PFN_xrQuerySpacesFB QuerySpacesFB = nullptr;
+    PFN_xrRetrieveSpaceQueryResultsFB RetrieveSpaceQueryResultsFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_query
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
-    PFN_xrShareSpacesFB pfn_xrShareSpacesFB = nullptr;
+    PFN_xrShareSpacesFB ShareSpacesFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
-    PFN_xrEraseSpaceFB pfn_xrEraseSpaceFB = nullptr;
-    PFN_xrSaveSpaceFB pfn_xrSaveSpaceFB = nullptr;
+    PFN_xrEraseSpaceFB EraseSpaceFB = nullptr;
+    PFN_xrSaveSpaceFB SaveSpaceFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
-    PFN_xrSaveSpaceListFB pfn_xrSaveSpaceListFB = nullptr;
+    PFN_xrSaveSpaceListFB SaveSpaceListFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_storage_batch
 #ifdef XRTRANSPORT_EXT_XR_FB_spatial_entity_user
-    PFN_xrCreateSpaceUserFB pfn_xrCreateSpaceUserFB = nullptr;
-    PFN_xrDestroySpaceUserFB pfn_xrDestroySpaceUserFB = nullptr;
-    PFN_xrGetSpaceUserIdFB pfn_xrGetSpaceUserIdFB = nullptr;
+    PFN_xrCreateSpaceUserFB CreateSpaceUserFB = nullptr;
+    PFN_xrDestroySpaceUserFB DestroySpaceUserFB = nullptr;
+    PFN_xrGetSpaceUserIdFB GetSpaceUserIdFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_spatial_entity_user
 #ifdef XRTRANSPORT_EXT_XR_FB_swapchain_update_state
-    PFN_xrGetSwapchainStateFB pfn_xrGetSwapchainStateFB = nullptr;
-    PFN_xrUpdateSwapchainFB pfn_xrUpdateSwapchainFB = nullptr;
+    PFN_xrGetSwapchainStateFB GetSwapchainStateFB = nullptr;
+    PFN_xrUpdateSwapchainFB UpdateSwapchainFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_swapchain_update_state
 #ifdef XRTRANSPORT_EXT_XR_FB_triangle_mesh
-    PFN_xrCreateTriangleMeshFB pfn_xrCreateTriangleMeshFB = nullptr;
-    PFN_xrDestroyTriangleMeshFB pfn_xrDestroyTriangleMeshFB = nullptr;
-    PFN_xrTriangleMeshBeginUpdateFB pfn_xrTriangleMeshBeginUpdateFB = nullptr;
-    PFN_xrTriangleMeshBeginVertexBufferUpdateFB pfn_xrTriangleMeshBeginVertexBufferUpdateFB = nullptr;
-    PFN_xrTriangleMeshEndUpdateFB pfn_xrTriangleMeshEndUpdateFB = nullptr;
-    PFN_xrTriangleMeshEndVertexBufferUpdateFB pfn_xrTriangleMeshEndVertexBufferUpdateFB = nullptr;
-    PFN_xrTriangleMeshGetIndexBufferFB pfn_xrTriangleMeshGetIndexBufferFB = nullptr;
-    PFN_xrTriangleMeshGetVertexBufferFB pfn_xrTriangleMeshGetVertexBufferFB = nullptr;
+    PFN_xrCreateTriangleMeshFB CreateTriangleMeshFB = nullptr;
+    PFN_xrDestroyTriangleMeshFB DestroyTriangleMeshFB = nullptr;
+    PFN_xrTriangleMeshBeginUpdateFB TriangleMeshBeginUpdateFB = nullptr;
+    PFN_xrTriangleMeshBeginVertexBufferUpdateFB TriangleMeshBeginVertexBufferUpdateFB = nullptr;
+    PFN_xrTriangleMeshEndUpdateFB TriangleMeshEndUpdateFB = nullptr;
+    PFN_xrTriangleMeshEndVertexBufferUpdateFB TriangleMeshEndVertexBufferUpdateFB = nullptr;
+    PFN_xrTriangleMeshGetIndexBufferFB TriangleMeshGetIndexBufferFB = nullptr;
+    PFN_xrTriangleMeshGetVertexBufferFB TriangleMeshGetVertexBufferFB = nullptr;
 #endif // XRTRANSPORT_EXT_XR_FB_triangle_mesh
 #ifdef XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
-    PFN_xrEnumerateViveTrackerPathsHTCX pfn_xrEnumerateViveTrackerPathsHTCX = nullptr;
+    PFN_xrEnumerateViveTrackerPathsHTCX EnumerateViveTrackerPathsHTCX = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTCX_vive_tracker_interaction
 #ifdef XRTRANSPORT_EXT_XR_HTC_anchor
-    PFN_xrCreateSpatialAnchorHTC pfn_xrCreateSpatialAnchorHTC = nullptr;
-    PFN_xrGetSpatialAnchorNameHTC pfn_xrGetSpatialAnchorNameHTC = nullptr;
+    PFN_xrCreateSpatialAnchorHTC CreateSpatialAnchorHTC = nullptr;
+    PFN_xrGetSpatialAnchorNameHTC GetSpatialAnchorNameHTC = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTC_anchor
 #ifdef XRTRANSPORT_EXT_XR_HTC_body_tracking
-    PFN_xrCreateBodyTrackerHTC pfn_xrCreateBodyTrackerHTC = nullptr;
-    PFN_xrDestroyBodyTrackerHTC pfn_xrDestroyBodyTrackerHTC = nullptr;
-    PFN_xrGetBodySkeletonHTC pfn_xrGetBodySkeletonHTC = nullptr;
-    PFN_xrLocateBodyJointsHTC pfn_xrLocateBodyJointsHTC = nullptr;
+    PFN_xrCreateBodyTrackerHTC CreateBodyTrackerHTC = nullptr;
+    PFN_xrDestroyBodyTrackerHTC DestroyBodyTrackerHTC = nullptr;
+    PFN_xrGetBodySkeletonHTC GetBodySkeletonHTC = nullptr;
+    PFN_xrLocateBodyJointsHTC LocateBodyJointsHTC = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTC_body_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_facial_tracking
-    PFN_xrCreateFacialTrackerHTC pfn_xrCreateFacialTrackerHTC = nullptr;
-    PFN_xrDestroyFacialTrackerHTC pfn_xrDestroyFacialTrackerHTC = nullptr;
-    PFN_xrGetFacialExpressionsHTC pfn_xrGetFacialExpressionsHTC = nullptr;
+    PFN_xrCreateFacialTrackerHTC CreateFacialTrackerHTC = nullptr;
+    PFN_xrDestroyFacialTrackerHTC DestroyFacialTrackerHTC = nullptr;
+    PFN_xrGetFacialExpressionsHTC GetFacialExpressionsHTC = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTC_facial_tracking
 #ifdef XRTRANSPORT_EXT_XR_HTC_foveation
-    PFN_xrApplyFoveationHTC pfn_xrApplyFoveationHTC = nullptr;
+    PFN_xrApplyFoveationHTC ApplyFoveationHTC = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTC_foveation
 #ifdef XRTRANSPORT_EXT_XR_HTC_passthrough
-    PFN_xrCreatePassthroughHTC pfn_xrCreatePassthroughHTC = nullptr;
-    PFN_xrDestroyPassthroughHTC pfn_xrDestroyPassthroughHTC = nullptr;
+    PFN_xrCreatePassthroughHTC CreatePassthroughHTC = nullptr;
+    PFN_xrDestroyPassthroughHTC DestroyPassthroughHTC = nullptr;
 #endif // XRTRANSPORT_EXT_XR_HTC_passthrough
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D11_enable
-    PFN_xrGetD3D11GraphicsRequirementsKHR pfn_xrGetD3D11GraphicsRequirementsKHR = nullptr;
+    PFN_xrGetD3D11GraphicsRequirementsKHR GetD3D11GraphicsRequirementsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D11_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_D3D12_enable
-    PFN_xrGetD3D12GraphicsRequirementsKHR pfn_xrGetD3D12GraphicsRequirementsKHR = nullptr;
+    PFN_xrGetD3D12GraphicsRequirementsKHR GetD3D12GraphicsRequirementsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_D3D12_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
-    PFN_xrCreateSwapchainAndroidSurfaceKHR pfn_xrCreateSwapchainAndroidSurfaceKHR = nullptr;
+    PFN_xrCreateSwapchainAndroidSurfaceKHR CreateSwapchainAndroidSurfaceKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_android_surface_swapchain
 #ifdef XRTRANSPORT_EXT_XR_KHR_android_thread_settings
-    PFN_xrSetAndroidApplicationThreadKHR pfn_xrSetAndroidApplicationThreadKHR = nullptr;
+    PFN_xrSetAndroidApplicationThreadKHR SetAndroidApplicationThreadKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_android_thread_settings
 #ifdef XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
-    PFN_xrConvertTimeToTimespecTimeKHR pfn_xrConvertTimeToTimespecTimeKHR = nullptr;
-    PFN_xrConvertTimespecTimeToTimeKHR pfn_xrConvertTimespecTimeToTimeKHR = nullptr;
+    PFN_xrConvertTimeToTimespecTimeKHR ConvertTimeToTimespecTimeKHR = nullptr;
+    PFN_xrConvertTimespecTimeToTimeKHR ConvertTimespecTimeToTimeKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_convert_timespec_time
 #ifdef XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
-    PFN_xrStructureTypeToString2KHR pfn_xrStructureTypeToString2KHR = nullptr;
+    PFN_xrStructureTypeToString2KHR StructureTypeToString2KHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_extended_struct_name_lengths
 #ifdef XRTRANSPORT_EXT_XR_KHR_loader_init
-    PFN_xrInitializeLoaderKHR pfn_xrInitializeLoaderKHR = nullptr;
+    PFN_xrInitializeLoaderKHR InitializeLoaderKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_loader_init
 #ifdef XRTRANSPORT_EXT_XR_KHR_metal_enable
-    PFN_xrGetMetalGraphicsRequirementsKHR pfn_xrGetMetalGraphicsRequirementsKHR = nullptr;
+    PFN_xrGetMetalGraphicsRequirementsKHR GetMetalGraphicsRequirementsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_metal_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_enable
-    PFN_xrGetOpenGLGraphicsRequirementsKHR pfn_xrGetOpenGLGraphicsRequirementsKHR = nullptr;
+    PFN_xrGetOpenGLGraphicsRequirementsKHR GetOpenGLGraphicsRequirementsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
-    PFN_xrGetOpenGLESGraphicsRequirementsKHR pfn_xrGetOpenGLESGraphicsRequirementsKHR = nullptr;
+    PFN_xrGetOpenGLESGraphicsRequirementsKHR GetOpenGLESGraphicsRequirementsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_opengl_es_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_visibility_mask
-    PFN_xrGetVisibilityMaskKHR pfn_xrGetVisibilityMaskKHR = nullptr;
+    PFN_xrGetVisibilityMaskKHR GetVisibilityMaskKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_visibility_mask
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable
-    PFN_xrGetVulkanDeviceExtensionsKHR pfn_xrGetVulkanDeviceExtensionsKHR = nullptr;
-    PFN_xrGetVulkanGraphicsDeviceKHR pfn_xrGetVulkanGraphicsDeviceKHR = nullptr;
-    PFN_xrGetVulkanGraphicsRequirementsKHR pfn_xrGetVulkanGraphicsRequirementsKHR = nullptr;
-    PFN_xrGetVulkanInstanceExtensionsKHR pfn_xrGetVulkanInstanceExtensionsKHR = nullptr;
+    PFN_xrGetVulkanDeviceExtensionsKHR GetVulkanDeviceExtensionsKHR = nullptr;
+    PFN_xrGetVulkanGraphicsDeviceKHR GetVulkanGraphicsDeviceKHR = nullptr;
+    PFN_xrGetVulkanGraphicsRequirementsKHR GetVulkanGraphicsRequirementsKHR = nullptr;
+    PFN_xrGetVulkanInstanceExtensionsKHR GetVulkanInstanceExtensionsKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable
 #ifdef XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
-    PFN_xrCreateVulkanDeviceKHR pfn_xrCreateVulkanDeviceKHR = nullptr;
-    PFN_xrCreateVulkanInstanceKHR pfn_xrCreateVulkanInstanceKHR = nullptr;
-    PFN_xrGetVulkanGraphicsDevice2KHR pfn_xrGetVulkanGraphicsDevice2KHR = nullptr;
+    PFN_xrCreateVulkanDeviceKHR CreateVulkanDeviceKHR = nullptr;
+    PFN_xrCreateVulkanInstanceKHR CreateVulkanInstanceKHR = nullptr;
+    PFN_xrGetVulkanGraphicsDevice2KHR GetVulkanGraphicsDevice2KHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_vulkan_enable2
 #ifdef XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
-    PFN_xrConvertTimeToWin32PerformanceCounterKHR pfn_xrConvertTimeToWin32PerformanceCounterKHR = nullptr;
-    PFN_xrConvertWin32PerformanceCounterToTimeKHR pfn_xrConvertWin32PerformanceCounterToTimeKHR = nullptr;
+    PFN_xrConvertTimeToWin32PerformanceCounterKHR ConvertTimeToWin32PerformanceCounterKHR = nullptr;
+    PFN_xrConvertWin32PerformanceCounterToTimeKHR ConvertWin32PerformanceCounterToTimeKHR = nullptr;
 #endif // XRTRANSPORT_EXT_XR_KHR_win32_convert_performance_counter_time
 #ifdef XRTRANSPORT_EXT_XR_META_colocation_discovery
-    PFN_xrStartColocationAdvertisementMETA pfn_xrStartColocationAdvertisementMETA = nullptr;
-    PFN_xrStartColocationDiscoveryMETA pfn_xrStartColocationDiscoveryMETA = nullptr;
-    PFN_xrStopColocationAdvertisementMETA pfn_xrStopColocationAdvertisementMETA = nullptr;
-    PFN_xrStopColocationDiscoveryMETA pfn_xrStopColocationDiscoveryMETA = nullptr;
+    PFN_xrStartColocationAdvertisementMETA StartColocationAdvertisementMETA = nullptr;
+    PFN_xrStartColocationDiscoveryMETA StartColocationDiscoveryMETA = nullptr;
+    PFN_xrStopColocationAdvertisementMETA StopColocationAdvertisementMETA = nullptr;
+    PFN_xrStopColocationDiscoveryMETA StopColocationDiscoveryMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_colocation_discovery
 #ifdef XRTRANSPORT_EXT_XR_META_environment_depth
-    PFN_xrAcquireEnvironmentDepthImageMETA pfn_xrAcquireEnvironmentDepthImageMETA = nullptr;
-    PFN_xrCreateEnvironmentDepthProviderMETA pfn_xrCreateEnvironmentDepthProviderMETA = nullptr;
-    PFN_xrCreateEnvironmentDepthSwapchainMETA pfn_xrCreateEnvironmentDepthSwapchainMETA = nullptr;
-    PFN_xrDestroyEnvironmentDepthProviderMETA pfn_xrDestroyEnvironmentDepthProviderMETA = nullptr;
-    PFN_xrDestroyEnvironmentDepthSwapchainMETA pfn_xrDestroyEnvironmentDepthSwapchainMETA = nullptr;
-    PFN_xrEnumerateEnvironmentDepthSwapchainImagesMETA pfn_xrEnumerateEnvironmentDepthSwapchainImagesMETA = nullptr;
-    PFN_xrGetEnvironmentDepthSwapchainStateMETA pfn_xrGetEnvironmentDepthSwapchainStateMETA = nullptr;
-    PFN_xrSetEnvironmentDepthHandRemovalMETA pfn_xrSetEnvironmentDepthHandRemovalMETA = nullptr;
-    PFN_xrStartEnvironmentDepthProviderMETA pfn_xrStartEnvironmentDepthProviderMETA = nullptr;
-    PFN_xrStopEnvironmentDepthProviderMETA pfn_xrStopEnvironmentDepthProviderMETA = nullptr;
+    PFN_xrAcquireEnvironmentDepthImageMETA AcquireEnvironmentDepthImageMETA = nullptr;
+    PFN_xrCreateEnvironmentDepthProviderMETA CreateEnvironmentDepthProviderMETA = nullptr;
+    PFN_xrCreateEnvironmentDepthSwapchainMETA CreateEnvironmentDepthSwapchainMETA = nullptr;
+    PFN_xrDestroyEnvironmentDepthProviderMETA DestroyEnvironmentDepthProviderMETA = nullptr;
+    PFN_xrDestroyEnvironmentDepthSwapchainMETA DestroyEnvironmentDepthSwapchainMETA = nullptr;
+    PFN_xrEnumerateEnvironmentDepthSwapchainImagesMETA EnumerateEnvironmentDepthSwapchainImagesMETA = nullptr;
+    PFN_xrGetEnvironmentDepthSwapchainStateMETA GetEnvironmentDepthSwapchainStateMETA = nullptr;
+    PFN_xrSetEnvironmentDepthHandRemovalMETA SetEnvironmentDepthHandRemovalMETA = nullptr;
+    PFN_xrStartEnvironmentDepthProviderMETA StartEnvironmentDepthProviderMETA = nullptr;
+    PFN_xrStopEnvironmentDepthProviderMETA StopEnvironmentDepthProviderMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_environment_depth
 #ifdef XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
-    PFN_xrGetFoveationEyeTrackedStateMETA pfn_xrGetFoveationEyeTrackedStateMETA = nullptr;
+    PFN_xrGetFoveationEyeTrackedStateMETA GetFoveationEyeTrackedStateMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_foveation_eye_tracked
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_color_lut
-    PFN_xrCreatePassthroughColorLutMETA pfn_xrCreatePassthroughColorLutMETA = nullptr;
-    PFN_xrDestroyPassthroughColorLutMETA pfn_xrDestroyPassthroughColorLutMETA = nullptr;
-    PFN_xrUpdatePassthroughColorLutMETA pfn_xrUpdatePassthroughColorLutMETA = nullptr;
+    PFN_xrCreatePassthroughColorLutMETA CreatePassthroughColorLutMETA = nullptr;
+    PFN_xrDestroyPassthroughColorLutMETA DestroyPassthroughColorLutMETA = nullptr;
+    PFN_xrUpdatePassthroughColorLutMETA UpdatePassthroughColorLutMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_color_lut
 #ifdef XRTRANSPORT_EXT_XR_META_passthrough_preferences
-    PFN_xrGetPassthroughPreferencesMETA pfn_xrGetPassthroughPreferencesMETA = nullptr;
+    PFN_xrGetPassthroughPreferencesMETA GetPassthroughPreferencesMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_passthrough_preferences
 #ifdef XRTRANSPORT_EXT_XR_META_performance_metrics
-    PFN_xrEnumeratePerformanceMetricsCounterPathsMETA pfn_xrEnumeratePerformanceMetricsCounterPathsMETA = nullptr;
-    PFN_xrGetPerformanceMetricsStateMETA pfn_xrGetPerformanceMetricsStateMETA = nullptr;
-    PFN_xrQueryPerformanceMetricsCounterMETA pfn_xrQueryPerformanceMetricsCounterMETA = nullptr;
-    PFN_xrSetPerformanceMetricsStateMETA pfn_xrSetPerformanceMetricsStateMETA = nullptr;
+    PFN_xrEnumeratePerformanceMetricsCounterPathsMETA EnumeratePerformanceMetricsCounterPathsMETA = nullptr;
+    PFN_xrGetPerformanceMetricsStateMETA GetPerformanceMetricsStateMETA = nullptr;
+    PFN_xrQueryPerformanceMetricsCounterMETA QueryPerformanceMetricsCounterMETA = nullptr;
+    PFN_xrSetPerformanceMetricsStateMETA SetPerformanceMetricsStateMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_performance_metrics
 #ifdef XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
-    PFN_xrGetRecommendedLayerResolutionMETA pfn_xrGetRecommendedLayerResolutionMETA = nullptr;
+    PFN_xrGetRecommendedLayerResolutionMETA GetRecommendedLayerResolutionMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_recommended_layer_resolution
 #ifdef XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
-    PFN_xrPauseSimultaneousHandsAndControllersTrackingMETA pfn_xrPauseSimultaneousHandsAndControllersTrackingMETA = nullptr;
-    PFN_xrResumeSimultaneousHandsAndControllersTrackingMETA pfn_xrResumeSimultaneousHandsAndControllersTrackingMETA = nullptr;
+    PFN_xrPauseSimultaneousHandsAndControllersTrackingMETA PauseSimultaneousHandsAndControllersTrackingMETA = nullptr;
+    PFN_xrResumeSimultaneousHandsAndControllersTrackingMETA ResumeSimultaneousHandsAndControllersTrackingMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_simultaneous_hands_and_controllers
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
-    PFN_xrGetSpaceTriangleMeshMETA pfn_xrGetSpaceTriangleMeshMETA = nullptr;
+    PFN_xrGetSpaceTriangleMeshMETA GetSpaceTriangleMeshMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_mesh
 #ifdef XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
-    PFN_xrShareSpacesMETA pfn_xrShareSpacesMETA = nullptr;
+    PFN_xrShareSpacesMETA ShareSpacesMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_spatial_entity_sharing
 #ifdef XRTRANSPORT_EXT_XR_META_virtual_keyboard
-    PFN_xrChangeVirtualKeyboardTextContextMETA pfn_xrChangeVirtualKeyboardTextContextMETA = nullptr;
-    PFN_xrCreateVirtualKeyboardMETA pfn_xrCreateVirtualKeyboardMETA = nullptr;
-    PFN_xrCreateVirtualKeyboardSpaceMETA pfn_xrCreateVirtualKeyboardSpaceMETA = nullptr;
-    PFN_xrDestroyVirtualKeyboardMETA pfn_xrDestroyVirtualKeyboardMETA = nullptr;
-    PFN_xrGetVirtualKeyboardDirtyTexturesMETA pfn_xrGetVirtualKeyboardDirtyTexturesMETA = nullptr;
-    PFN_xrGetVirtualKeyboardModelAnimationStatesMETA pfn_xrGetVirtualKeyboardModelAnimationStatesMETA = nullptr;
-    PFN_xrGetVirtualKeyboardScaleMETA pfn_xrGetVirtualKeyboardScaleMETA = nullptr;
-    PFN_xrGetVirtualKeyboardTextureDataMETA pfn_xrGetVirtualKeyboardTextureDataMETA = nullptr;
-    PFN_xrSendVirtualKeyboardInputMETA pfn_xrSendVirtualKeyboardInputMETA = nullptr;
-    PFN_xrSetVirtualKeyboardModelVisibilityMETA pfn_xrSetVirtualKeyboardModelVisibilityMETA = nullptr;
-    PFN_xrSuggestVirtualKeyboardLocationMETA pfn_xrSuggestVirtualKeyboardLocationMETA = nullptr;
+    PFN_xrChangeVirtualKeyboardTextContextMETA ChangeVirtualKeyboardTextContextMETA = nullptr;
+    PFN_xrCreateVirtualKeyboardMETA CreateVirtualKeyboardMETA = nullptr;
+    PFN_xrCreateVirtualKeyboardSpaceMETA CreateVirtualKeyboardSpaceMETA = nullptr;
+    PFN_xrDestroyVirtualKeyboardMETA DestroyVirtualKeyboardMETA = nullptr;
+    PFN_xrGetVirtualKeyboardDirtyTexturesMETA GetVirtualKeyboardDirtyTexturesMETA = nullptr;
+    PFN_xrGetVirtualKeyboardModelAnimationStatesMETA GetVirtualKeyboardModelAnimationStatesMETA = nullptr;
+    PFN_xrGetVirtualKeyboardScaleMETA GetVirtualKeyboardScaleMETA = nullptr;
+    PFN_xrGetVirtualKeyboardTextureDataMETA GetVirtualKeyboardTextureDataMETA = nullptr;
+    PFN_xrSendVirtualKeyboardInputMETA SendVirtualKeyboardInputMETA = nullptr;
+    PFN_xrSetVirtualKeyboardModelVisibilityMETA SetVirtualKeyboardModelVisibilityMETA = nullptr;
+    PFN_xrSuggestVirtualKeyboardLocationMETA SuggestVirtualKeyboardLocationMETA = nullptr;
 #endif // XRTRANSPORT_EXT_XR_META_virtual_keyboard
 #ifdef XRTRANSPORT_EXT_XR_ML_compat
-    PFN_xrCreateSpaceFromCoordinateFrameUIDML pfn_xrCreateSpaceFromCoordinateFrameUIDML = nullptr;
+    PFN_xrCreateSpaceFromCoordinateFrameUIDML CreateSpaceFromCoordinateFrameUIDML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_compat
 #ifdef XRTRANSPORT_EXT_XR_ML_facial_expression
-    PFN_xrCreateFacialExpressionClientML pfn_xrCreateFacialExpressionClientML = nullptr;
-    PFN_xrDestroyFacialExpressionClientML pfn_xrDestroyFacialExpressionClientML = nullptr;
-    PFN_xrGetFacialExpressionBlendShapePropertiesML pfn_xrGetFacialExpressionBlendShapePropertiesML = nullptr;
+    PFN_xrCreateFacialExpressionClientML CreateFacialExpressionClientML = nullptr;
+    PFN_xrDestroyFacialExpressionClientML DestroyFacialExpressionClientML = nullptr;
+    PFN_xrGetFacialExpressionBlendShapePropertiesML GetFacialExpressionBlendShapePropertiesML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_facial_expression
 #ifdef XRTRANSPORT_EXT_XR_ML_localization_map
-    PFN_xrCreateExportedLocalizationMapML pfn_xrCreateExportedLocalizationMapML = nullptr;
-    PFN_xrDestroyExportedLocalizationMapML pfn_xrDestroyExportedLocalizationMapML = nullptr;
-    PFN_xrEnableLocalizationEventsML pfn_xrEnableLocalizationEventsML = nullptr;
-    PFN_xrGetExportedLocalizationMapDataML pfn_xrGetExportedLocalizationMapDataML = nullptr;
-    PFN_xrImportLocalizationMapML pfn_xrImportLocalizationMapML = nullptr;
-    PFN_xrQueryLocalizationMapsML pfn_xrQueryLocalizationMapsML = nullptr;
-    PFN_xrRequestMapLocalizationML pfn_xrRequestMapLocalizationML = nullptr;
+    PFN_xrCreateExportedLocalizationMapML CreateExportedLocalizationMapML = nullptr;
+    PFN_xrDestroyExportedLocalizationMapML DestroyExportedLocalizationMapML = nullptr;
+    PFN_xrEnableLocalizationEventsML EnableLocalizationEventsML = nullptr;
+    PFN_xrGetExportedLocalizationMapDataML GetExportedLocalizationMapDataML = nullptr;
+    PFN_xrImportLocalizationMapML ImportLocalizationMapML = nullptr;
+    PFN_xrQueryLocalizationMapsML QueryLocalizationMapsML = nullptr;
+    PFN_xrRequestMapLocalizationML RequestMapLocalizationML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_localization_map
 #ifdef XRTRANSPORT_EXT_XR_ML_marker_understanding
-    PFN_xrCreateMarkerDetectorML pfn_xrCreateMarkerDetectorML = nullptr;
-    PFN_xrCreateMarkerSpaceML pfn_xrCreateMarkerSpaceML = nullptr;
-    PFN_xrDestroyMarkerDetectorML pfn_xrDestroyMarkerDetectorML = nullptr;
-    PFN_xrGetMarkerDetectorStateML pfn_xrGetMarkerDetectorStateML = nullptr;
-    PFN_xrGetMarkerLengthML pfn_xrGetMarkerLengthML = nullptr;
-    PFN_xrGetMarkerNumberML pfn_xrGetMarkerNumberML = nullptr;
-    PFN_xrGetMarkerReprojectionErrorML pfn_xrGetMarkerReprojectionErrorML = nullptr;
-    PFN_xrGetMarkerStringML pfn_xrGetMarkerStringML = nullptr;
-    PFN_xrGetMarkersML pfn_xrGetMarkersML = nullptr;
-    PFN_xrSnapshotMarkerDetectorML pfn_xrSnapshotMarkerDetectorML = nullptr;
+    PFN_xrCreateMarkerDetectorML CreateMarkerDetectorML = nullptr;
+    PFN_xrCreateMarkerSpaceML CreateMarkerSpaceML = nullptr;
+    PFN_xrDestroyMarkerDetectorML DestroyMarkerDetectorML = nullptr;
+    PFN_xrGetMarkerDetectorStateML GetMarkerDetectorStateML = nullptr;
+    PFN_xrGetMarkerLengthML GetMarkerLengthML = nullptr;
+    PFN_xrGetMarkerNumberML GetMarkerNumberML = nullptr;
+    PFN_xrGetMarkerReprojectionErrorML GetMarkerReprojectionErrorML = nullptr;
+    PFN_xrGetMarkerStringML GetMarkerStringML = nullptr;
+    PFN_xrGetMarkersML GetMarkersML = nullptr;
+    PFN_xrSnapshotMarkerDetectorML SnapshotMarkerDetectorML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_marker_understanding
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors
-    PFN_xrCreateSpatialAnchorsAsyncML pfn_xrCreateSpatialAnchorsAsyncML = nullptr;
-    PFN_xrCreateSpatialAnchorsCompleteML pfn_xrCreateSpatialAnchorsCompleteML = nullptr;
-    PFN_xrGetSpatialAnchorStateML pfn_xrGetSpatialAnchorStateML = nullptr;
+    PFN_xrCreateSpatialAnchorsAsyncML CreateSpatialAnchorsAsyncML = nullptr;
+    PFN_xrCreateSpatialAnchorsCompleteML CreateSpatialAnchorsCompleteML = nullptr;
+    PFN_xrGetSpatialAnchorStateML GetSpatialAnchorStateML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors
 #ifdef XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
-    PFN_xrCreateSpatialAnchorsStorageML pfn_xrCreateSpatialAnchorsStorageML = nullptr;
-    PFN_xrDeleteSpatialAnchorsAsyncML pfn_xrDeleteSpatialAnchorsAsyncML = nullptr;
-    PFN_xrDeleteSpatialAnchorsCompleteML pfn_xrDeleteSpatialAnchorsCompleteML = nullptr;
-    PFN_xrDestroySpatialAnchorsStorageML pfn_xrDestroySpatialAnchorsStorageML = nullptr;
-    PFN_xrPublishSpatialAnchorsAsyncML pfn_xrPublishSpatialAnchorsAsyncML = nullptr;
-    PFN_xrPublishSpatialAnchorsCompleteML pfn_xrPublishSpatialAnchorsCompleteML = nullptr;
-    PFN_xrQuerySpatialAnchorsAsyncML pfn_xrQuerySpatialAnchorsAsyncML = nullptr;
-    PFN_xrQuerySpatialAnchorsCompleteML pfn_xrQuerySpatialAnchorsCompleteML = nullptr;
-    PFN_xrUpdateSpatialAnchorsExpirationAsyncML pfn_xrUpdateSpatialAnchorsExpirationAsyncML = nullptr;
-    PFN_xrUpdateSpatialAnchorsExpirationCompleteML pfn_xrUpdateSpatialAnchorsExpirationCompleteML = nullptr;
+    PFN_xrCreateSpatialAnchorsStorageML CreateSpatialAnchorsStorageML = nullptr;
+    PFN_xrDeleteSpatialAnchorsAsyncML DeleteSpatialAnchorsAsyncML = nullptr;
+    PFN_xrDeleteSpatialAnchorsCompleteML DeleteSpatialAnchorsCompleteML = nullptr;
+    PFN_xrDestroySpatialAnchorsStorageML DestroySpatialAnchorsStorageML = nullptr;
+    PFN_xrPublishSpatialAnchorsAsyncML PublishSpatialAnchorsAsyncML = nullptr;
+    PFN_xrPublishSpatialAnchorsCompleteML PublishSpatialAnchorsCompleteML = nullptr;
+    PFN_xrQuerySpatialAnchorsAsyncML QuerySpatialAnchorsAsyncML = nullptr;
+    PFN_xrQuerySpatialAnchorsCompleteML QuerySpatialAnchorsCompleteML = nullptr;
+    PFN_xrUpdateSpatialAnchorsExpirationAsyncML UpdateSpatialAnchorsExpirationAsyncML = nullptr;
+    PFN_xrUpdateSpatialAnchorsExpirationCompleteML UpdateSpatialAnchorsExpirationCompleteML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_spatial_anchors_storage
 #ifdef XRTRANSPORT_EXT_XR_ML_system_notifications
-    PFN_xrSetSystemNotificationsML pfn_xrSetSystemNotificationsML = nullptr;
+    PFN_xrSetSystemNotificationsML SetSystemNotificationsML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_system_notifications
 #ifdef XRTRANSPORT_EXT_XR_ML_user_calibration
-    PFN_xrEnableUserCalibrationEventsML pfn_xrEnableUserCalibrationEventsML = nullptr;
+    PFN_xrEnableUserCalibrationEventsML EnableUserCalibrationEventsML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_user_calibration
 #ifdef XRTRANSPORT_EXT_XR_ML_world_mesh_detection
-    PFN_xrAllocateWorldMeshBufferML pfn_xrAllocateWorldMeshBufferML = nullptr;
-    PFN_xrCreateWorldMeshDetectorML pfn_xrCreateWorldMeshDetectorML = nullptr;
-    PFN_xrDestroyWorldMeshDetectorML pfn_xrDestroyWorldMeshDetectorML = nullptr;
-    PFN_xrFreeWorldMeshBufferML pfn_xrFreeWorldMeshBufferML = nullptr;
-    PFN_xrGetWorldMeshBufferRecommendSizeML pfn_xrGetWorldMeshBufferRecommendSizeML = nullptr;
-    PFN_xrRequestWorldMeshAsyncML pfn_xrRequestWorldMeshAsyncML = nullptr;
-    PFN_xrRequestWorldMeshCompleteML pfn_xrRequestWorldMeshCompleteML = nullptr;
-    PFN_xrRequestWorldMeshStateAsyncML pfn_xrRequestWorldMeshStateAsyncML = nullptr;
-    PFN_xrRequestWorldMeshStateCompleteML pfn_xrRequestWorldMeshStateCompleteML = nullptr;
+    PFN_xrAllocateWorldMeshBufferML AllocateWorldMeshBufferML = nullptr;
+    PFN_xrCreateWorldMeshDetectorML CreateWorldMeshDetectorML = nullptr;
+    PFN_xrDestroyWorldMeshDetectorML DestroyWorldMeshDetectorML = nullptr;
+    PFN_xrFreeWorldMeshBufferML FreeWorldMeshBufferML = nullptr;
+    PFN_xrGetWorldMeshBufferRecommendSizeML GetWorldMeshBufferRecommendSizeML = nullptr;
+    PFN_xrRequestWorldMeshAsyncML RequestWorldMeshAsyncML = nullptr;
+    PFN_xrRequestWorldMeshCompleteML RequestWorldMeshCompleteML = nullptr;
+    PFN_xrRequestWorldMeshStateAsyncML RequestWorldMeshStateAsyncML = nullptr;
+    PFN_xrRequestWorldMeshStateCompleteML RequestWorldMeshStateCompleteML = nullptr;
 #endif // XRTRANSPORT_EXT_XR_ML_world_mesh_detection
 #ifdef XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
-    PFN_xrApplyForceFeedbackCurlMNDX pfn_xrApplyForceFeedbackCurlMNDX = nullptr;
+    PFN_xrApplyForceFeedbackCurlMNDX ApplyForceFeedbackCurlMNDX = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MNDX_force_feedback_curl
 #ifdef XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
-    PFN_xrEnumerateReprojectionModesMSFT pfn_xrEnumerateReprojectionModesMSFT = nullptr;
+    PFN_xrEnumerateReprojectionModesMSFT EnumerateReprojectionModesMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_composition_layer_reprojection
 #ifdef XRTRANSPORT_EXT_XR_MSFT_controller_model
-    PFN_xrGetControllerModelKeyMSFT pfn_xrGetControllerModelKeyMSFT = nullptr;
-    PFN_xrGetControllerModelPropertiesMSFT pfn_xrGetControllerModelPropertiesMSFT = nullptr;
-    PFN_xrGetControllerModelStateMSFT pfn_xrGetControllerModelStateMSFT = nullptr;
-    PFN_xrLoadControllerModelMSFT pfn_xrLoadControllerModelMSFT = nullptr;
+    PFN_xrGetControllerModelKeyMSFT GetControllerModelKeyMSFT = nullptr;
+    PFN_xrGetControllerModelPropertiesMSFT GetControllerModelPropertiesMSFT = nullptr;
+    PFN_xrGetControllerModelStateMSFT GetControllerModelStateMSFT = nullptr;
+    PFN_xrLoadControllerModelMSFT LoadControllerModelMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_controller_model
 #ifdef XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
-    PFN_xrCreateHandMeshSpaceMSFT pfn_xrCreateHandMeshSpaceMSFT = nullptr;
-    PFN_xrUpdateHandMeshMSFT pfn_xrUpdateHandMeshMSFT = nullptr;
+    PFN_xrCreateHandMeshSpaceMSFT CreateHandMeshSpaceMSFT = nullptr;
+    PFN_xrUpdateHandMeshMSFT UpdateHandMeshMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_hand_tracking_mesh
 #ifdef XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
-    PFN_xrCreateSpatialAnchorFromPerceptionAnchorMSFT pfn_xrCreateSpatialAnchorFromPerceptionAnchorMSFT = nullptr;
-    PFN_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT pfn_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT = nullptr;
+    PFN_xrCreateSpatialAnchorFromPerceptionAnchorMSFT CreateSpatialAnchorFromPerceptionAnchorMSFT = nullptr;
+    PFN_xrTryGetPerceptionAnchorFromSpatialAnchorMSFT TryGetPerceptionAnchorFromSpatialAnchorMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_perception_anchor_interop
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_marker
-    PFN_xrGetSceneMarkerDecodedStringMSFT pfn_xrGetSceneMarkerDecodedStringMSFT = nullptr;
-    PFN_xrGetSceneMarkerRawDataMSFT pfn_xrGetSceneMarkerRawDataMSFT = nullptr;
+    PFN_xrGetSceneMarkerDecodedStringMSFT GetSceneMarkerDecodedStringMSFT = nullptr;
+    PFN_xrGetSceneMarkerRawDataMSFT GetSceneMarkerRawDataMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_marker
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding
-    PFN_xrComputeNewSceneMSFT pfn_xrComputeNewSceneMSFT = nullptr;
-    PFN_xrCreateSceneMSFT pfn_xrCreateSceneMSFT = nullptr;
-    PFN_xrCreateSceneObserverMSFT pfn_xrCreateSceneObserverMSFT = nullptr;
-    PFN_xrDestroySceneMSFT pfn_xrDestroySceneMSFT = nullptr;
-    PFN_xrDestroySceneObserverMSFT pfn_xrDestroySceneObserverMSFT = nullptr;
-    PFN_xrEnumerateSceneComputeFeaturesMSFT pfn_xrEnumerateSceneComputeFeaturesMSFT = nullptr;
-    PFN_xrGetSceneComponentsMSFT pfn_xrGetSceneComponentsMSFT = nullptr;
-    PFN_xrGetSceneComputeStateMSFT pfn_xrGetSceneComputeStateMSFT = nullptr;
-    PFN_xrGetSceneMeshBuffersMSFT pfn_xrGetSceneMeshBuffersMSFT = nullptr;
-    PFN_xrLocateSceneComponentsMSFT pfn_xrLocateSceneComponentsMSFT = nullptr;
+    PFN_xrComputeNewSceneMSFT ComputeNewSceneMSFT = nullptr;
+    PFN_xrCreateSceneMSFT CreateSceneMSFT = nullptr;
+    PFN_xrCreateSceneObserverMSFT CreateSceneObserverMSFT = nullptr;
+    PFN_xrDestroySceneMSFT DestroySceneMSFT = nullptr;
+    PFN_xrDestroySceneObserverMSFT DestroySceneObserverMSFT = nullptr;
+    PFN_xrEnumerateSceneComputeFeaturesMSFT EnumerateSceneComputeFeaturesMSFT = nullptr;
+    PFN_xrGetSceneComponentsMSFT GetSceneComponentsMSFT = nullptr;
+    PFN_xrGetSceneComputeStateMSFT GetSceneComputeStateMSFT = nullptr;
+    PFN_xrGetSceneMeshBuffersMSFT GetSceneMeshBuffersMSFT = nullptr;
+    PFN_xrLocateSceneComponentsMSFT LocateSceneComponentsMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding
 #ifdef XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
-    PFN_xrDeserializeSceneMSFT pfn_xrDeserializeSceneMSFT = nullptr;
-    PFN_xrGetSerializedSceneFragmentDataMSFT pfn_xrGetSerializedSceneFragmentDataMSFT = nullptr;
+    PFN_xrDeserializeSceneMSFT DeserializeSceneMSFT = nullptr;
+    PFN_xrGetSerializedSceneFragmentDataMSFT GetSerializedSceneFragmentDataMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_scene_understanding_serialization
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
-    PFN_xrCreateSpatialAnchorMSFT pfn_xrCreateSpatialAnchorMSFT = nullptr;
-    PFN_xrCreateSpatialAnchorSpaceMSFT pfn_xrCreateSpatialAnchorSpaceMSFT = nullptr;
-    PFN_xrDestroySpatialAnchorMSFT pfn_xrDestroySpatialAnchorMSFT = nullptr;
+    PFN_xrCreateSpatialAnchorMSFT CreateSpatialAnchorMSFT = nullptr;
+    PFN_xrCreateSpatialAnchorSpaceMSFT CreateSpatialAnchorSpaceMSFT = nullptr;
+    PFN_xrDestroySpatialAnchorMSFT DestroySpatialAnchorMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
-    PFN_xrClearSpatialAnchorStoreMSFT pfn_xrClearSpatialAnchorStoreMSFT = nullptr;
-    PFN_xrCreateSpatialAnchorFromPersistedNameMSFT pfn_xrCreateSpatialAnchorFromPersistedNameMSFT = nullptr;
-    PFN_xrCreateSpatialAnchorStoreConnectionMSFT pfn_xrCreateSpatialAnchorStoreConnectionMSFT = nullptr;
-    PFN_xrDestroySpatialAnchorStoreConnectionMSFT pfn_xrDestroySpatialAnchorStoreConnectionMSFT = nullptr;
-    PFN_xrEnumeratePersistedSpatialAnchorNamesMSFT pfn_xrEnumeratePersistedSpatialAnchorNamesMSFT = nullptr;
-    PFN_xrPersistSpatialAnchorMSFT pfn_xrPersistSpatialAnchorMSFT = nullptr;
-    PFN_xrUnpersistSpatialAnchorMSFT pfn_xrUnpersistSpatialAnchorMSFT = nullptr;
+    PFN_xrClearSpatialAnchorStoreMSFT ClearSpatialAnchorStoreMSFT = nullptr;
+    PFN_xrCreateSpatialAnchorFromPersistedNameMSFT CreateSpatialAnchorFromPersistedNameMSFT = nullptr;
+    PFN_xrCreateSpatialAnchorStoreConnectionMSFT CreateSpatialAnchorStoreConnectionMSFT = nullptr;
+    PFN_xrDestroySpatialAnchorStoreConnectionMSFT DestroySpatialAnchorStoreConnectionMSFT = nullptr;
+    PFN_xrEnumeratePersistedSpatialAnchorNamesMSFT EnumeratePersistedSpatialAnchorNamesMSFT = nullptr;
+    PFN_xrPersistSpatialAnchorMSFT PersistSpatialAnchorMSFT = nullptr;
+    PFN_xrUnpersistSpatialAnchorMSFT UnpersistSpatialAnchorMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_anchor_persistence
 #ifdef XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
-    PFN_xrCreateSpatialGraphNodeSpaceMSFT pfn_xrCreateSpatialGraphNodeSpaceMSFT = nullptr;
-    PFN_xrDestroySpatialGraphNodeBindingMSFT pfn_xrDestroySpatialGraphNodeBindingMSFT = nullptr;
-    PFN_xrGetSpatialGraphNodeBindingPropertiesMSFT pfn_xrGetSpatialGraphNodeBindingPropertiesMSFT = nullptr;
-    PFN_xrTryCreateSpatialGraphStaticNodeBindingMSFT pfn_xrTryCreateSpatialGraphStaticNodeBindingMSFT = nullptr;
+    PFN_xrCreateSpatialGraphNodeSpaceMSFT CreateSpatialGraphNodeSpaceMSFT = nullptr;
+    PFN_xrDestroySpatialGraphNodeBindingMSFT DestroySpatialGraphNodeBindingMSFT = nullptr;
+    PFN_xrGetSpatialGraphNodeBindingPropertiesMSFT GetSpatialGraphNodeBindingPropertiesMSFT = nullptr;
+    PFN_xrTryCreateSpatialGraphStaticNodeBindingMSFT TryCreateSpatialGraphStaticNodeBindingMSFT = nullptr;
 #endif // XRTRANSPORT_EXT_XR_MSFT_spatial_graph_bridge
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
-    PFN_xrGetAudioInputDeviceGuidOculus pfn_xrGetAudioInputDeviceGuidOculus = nullptr;
-    PFN_xrGetAudioOutputDeviceGuidOculus pfn_xrGetAudioOutputDeviceGuidOculus = nullptr;
+    PFN_xrGetAudioInputDeviceGuidOculus GetAudioInputDeviceGuidOculus = nullptr;
+    PFN_xrGetAudioOutputDeviceGuidOculus GetAudioOutputDeviceGuidOculus = nullptr;
 #endif // XRTRANSPORT_EXT_XR_OCULUS_audio_device_guid
 #ifdef XRTRANSPORT_EXT_XR_OCULUS_external_camera
-    PFN_xrEnumerateExternalCamerasOCULUS pfn_xrEnumerateExternalCamerasOCULUS = nullptr;
+    PFN_xrEnumerateExternalCamerasOCULUS EnumerateExternalCamerasOCULUS = nullptr;
 #endif // XRTRANSPORT_EXT_XR_OCULUS_external_camera
 #ifdef XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
-    PFN_xrSetTrackingOptimizationSettingsHintQCOM pfn_xrSetTrackingOptimizationSettingsHintQCOM = nullptr;
+    PFN_xrSetTrackingOptimizationSettingsHintQCOM SetTrackingOptimizationSettingsHintQCOM = nullptr;
 #endif // XRTRANSPORT_EXT_XR_QCOM_tracking_optimization_settings
 #ifdef XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
-    PFN_xrSetEnvironmentDepthEstimationVARJO pfn_xrSetEnvironmentDepthEstimationVARJO = nullptr;
+    PFN_xrSetEnvironmentDepthEstimationVARJO SetEnvironmentDepthEstimationVARJO = nullptr;
 #endif // XRTRANSPORT_EXT_XR_VARJO_environment_depth_estimation
 #ifdef XRTRANSPORT_EXT_XR_VARJO_marker_tracking
-    PFN_xrCreateMarkerSpaceVARJO pfn_xrCreateMarkerSpaceVARJO = nullptr;
-    PFN_xrGetMarkerSizeVARJO pfn_xrGetMarkerSizeVARJO = nullptr;
-    PFN_xrSetMarkerTrackingPredictionVARJO pfn_xrSetMarkerTrackingPredictionVARJO = nullptr;
-    PFN_xrSetMarkerTrackingTimeoutVARJO pfn_xrSetMarkerTrackingTimeoutVARJO = nullptr;
-    PFN_xrSetMarkerTrackingVARJO pfn_xrSetMarkerTrackingVARJO = nullptr;
+    PFN_xrCreateMarkerSpaceVARJO CreateMarkerSpaceVARJO = nullptr;
+    PFN_xrGetMarkerSizeVARJO GetMarkerSizeVARJO = nullptr;
+    PFN_xrSetMarkerTrackingPredictionVARJO SetMarkerTrackingPredictionVARJO = nullptr;
+    PFN_xrSetMarkerTrackingTimeoutVARJO SetMarkerTrackingTimeoutVARJO = nullptr;
+    PFN_xrSetMarkerTrackingVARJO SetMarkerTrackingVARJO = nullptr;
 #endif // XRTRANSPORT_EXT_XR_VARJO_marker_tracking
 #ifdef XRTRANSPORT_EXT_XR_VARJO_view_offset
-    PFN_xrSetViewOffsetVARJO pfn_xrSetViewOffsetVARJO = nullptr;
+    PFN_xrSetViewOffsetVARJO SetViewOffsetVARJO = nullptr;
 #endif // XRTRANSPORT_EXT_XR_VARJO_view_offset
-    PFN_xrAcquireSwapchainImage pfn_xrAcquireSwapchainImage = nullptr;
-    PFN_xrApplyHapticFeedback pfn_xrApplyHapticFeedback = nullptr;
-    PFN_xrAttachSessionActionSets pfn_xrAttachSessionActionSets = nullptr;
-    PFN_xrBeginFrame pfn_xrBeginFrame = nullptr;
-    PFN_xrBeginSession pfn_xrBeginSession = nullptr;
-    PFN_xrCreateAction pfn_xrCreateAction = nullptr;
-    PFN_xrCreateActionSet pfn_xrCreateActionSet = nullptr;
-    PFN_xrCreateActionSpace pfn_xrCreateActionSpace = nullptr;
-    PFN_xrCreateInstance pfn_xrCreateInstance = nullptr;
-    PFN_xrCreateReferenceSpace pfn_xrCreateReferenceSpace = nullptr;
-    PFN_xrCreateSession pfn_xrCreateSession = nullptr;
-    PFN_xrCreateSwapchain pfn_xrCreateSwapchain = nullptr;
-    PFN_xrDestroyAction pfn_xrDestroyAction = nullptr;
-    PFN_xrDestroyActionSet pfn_xrDestroyActionSet = nullptr;
-    PFN_xrDestroyInstance pfn_xrDestroyInstance = nullptr;
-    PFN_xrDestroySession pfn_xrDestroySession = nullptr;
-    PFN_xrDestroySpace pfn_xrDestroySpace = nullptr;
-    PFN_xrDestroySwapchain pfn_xrDestroySwapchain = nullptr;
-    PFN_xrEndFrame pfn_xrEndFrame = nullptr;
-    PFN_xrEndSession pfn_xrEndSession = nullptr;
-    PFN_xrEnumerateApiLayerProperties pfn_xrEnumerateApiLayerProperties = nullptr;
-    PFN_xrEnumerateBoundSourcesForAction pfn_xrEnumerateBoundSourcesForAction = nullptr;
-    PFN_xrEnumerateEnvironmentBlendModes pfn_xrEnumerateEnvironmentBlendModes = nullptr;
-    PFN_xrEnumerateInstanceExtensionProperties pfn_xrEnumerateInstanceExtensionProperties = nullptr;
-    PFN_xrEnumerateReferenceSpaces pfn_xrEnumerateReferenceSpaces = nullptr;
-    PFN_xrEnumerateSwapchainFormats pfn_xrEnumerateSwapchainFormats = nullptr;
-    PFN_xrEnumerateSwapchainImages pfn_xrEnumerateSwapchainImages = nullptr;
-    PFN_xrEnumerateViewConfigurationViews pfn_xrEnumerateViewConfigurationViews = nullptr;
-    PFN_xrEnumerateViewConfigurations pfn_xrEnumerateViewConfigurations = nullptr;
-    PFN_xrGetActionStateBoolean pfn_xrGetActionStateBoolean = nullptr;
-    PFN_xrGetActionStateFloat pfn_xrGetActionStateFloat = nullptr;
-    PFN_xrGetActionStatePose pfn_xrGetActionStatePose = nullptr;
-    PFN_xrGetActionStateVector2f pfn_xrGetActionStateVector2f = nullptr;
-    PFN_xrGetCurrentInteractionProfile pfn_xrGetCurrentInteractionProfile = nullptr;
-    PFN_xrGetInputSourceLocalizedName pfn_xrGetInputSourceLocalizedName = nullptr;
-    PFN_xrGetInstanceProperties pfn_xrGetInstanceProperties = nullptr;
-    PFN_xrGetReferenceSpaceBoundsRect pfn_xrGetReferenceSpaceBoundsRect = nullptr;
-    PFN_xrGetSystem pfn_xrGetSystem = nullptr;
-    PFN_xrGetSystemProperties pfn_xrGetSystemProperties = nullptr;
-    PFN_xrGetViewConfigurationProperties pfn_xrGetViewConfigurationProperties = nullptr;
-    PFN_xrLocateSpace pfn_xrLocateSpace = nullptr;
-    PFN_xrLocateSpaces pfn_xrLocateSpaces = nullptr;
-    PFN_xrLocateViews pfn_xrLocateViews = nullptr;
-    PFN_xrPathToString pfn_xrPathToString = nullptr;
-    PFN_xrPollEvent pfn_xrPollEvent = nullptr;
-    PFN_xrReleaseSwapchainImage pfn_xrReleaseSwapchainImage = nullptr;
-    PFN_xrRequestExitSession pfn_xrRequestExitSession = nullptr;
-    PFN_xrResultToString pfn_xrResultToString = nullptr;
-    PFN_xrStopHapticFeedback pfn_xrStopHapticFeedback = nullptr;
-    PFN_xrStringToPath pfn_xrStringToPath = nullptr;
-    PFN_xrStructureTypeToString pfn_xrStructureTypeToString = nullptr;
-    PFN_xrSuggestInteractionProfileBindings pfn_xrSuggestInteractionProfileBindings = nullptr;
-    PFN_xrSyncActions pfn_xrSyncActions = nullptr;
-    PFN_xrWaitFrame pfn_xrWaitFrame = nullptr;
-    PFN_xrWaitSwapchainImage pfn_xrWaitSwapchainImage = nullptr;
+    PFN_xrAcquireSwapchainImage AcquireSwapchainImage = nullptr;
+    PFN_xrApplyHapticFeedback ApplyHapticFeedback = nullptr;
+    PFN_xrAttachSessionActionSets AttachSessionActionSets = nullptr;
+    PFN_xrBeginFrame BeginFrame = nullptr;
+    PFN_xrBeginSession BeginSession = nullptr;
+    PFN_xrCreateAction CreateAction = nullptr;
+    PFN_xrCreateActionSet CreateActionSet = nullptr;
+    PFN_xrCreateActionSpace CreateActionSpace = nullptr;
+    PFN_xrCreateInstance CreateInstance = nullptr;
+    PFN_xrCreateReferenceSpace CreateReferenceSpace = nullptr;
+    PFN_xrCreateSession CreateSession = nullptr;
+    PFN_xrCreateSwapchain CreateSwapchain = nullptr;
+    PFN_xrDestroyAction DestroyAction = nullptr;
+    PFN_xrDestroyActionSet DestroyActionSet = nullptr;
+    PFN_xrDestroyInstance DestroyInstance = nullptr;
+    PFN_xrDestroySession DestroySession = nullptr;
+    PFN_xrDestroySpace DestroySpace = nullptr;
+    PFN_xrDestroySwapchain DestroySwapchain = nullptr;
+    PFN_xrEndFrame EndFrame = nullptr;
+    PFN_xrEndSession EndSession = nullptr;
+    PFN_xrEnumerateApiLayerProperties EnumerateApiLayerProperties = nullptr;
+    PFN_xrEnumerateBoundSourcesForAction EnumerateBoundSourcesForAction = nullptr;
+    PFN_xrEnumerateEnvironmentBlendModes EnumerateEnvironmentBlendModes = nullptr;
+    PFN_xrEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties = nullptr;
+    PFN_xrEnumerateReferenceSpaces EnumerateReferenceSpaces = nullptr;
+    PFN_xrEnumerateSwapchainFormats EnumerateSwapchainFormats = nullptr;
+    PFN_xrEnumerateSwapchainImages EnumerateSwapchainImages = nullptr;
+    PFN_xrEnumerateViewConfigurationViews EnumerateViewConfigurationViews = nullptr;
+    PFN_xrEnumerateViewConfigurations EnumerateViewConfigurations = nullptr;
+    PFN_xrGetActionStateBoolean GetActionStateBoolean = nullptr;
+    PFN_xrGetActionStateFloat GetActionStateFloat = nullptr;
+    PFN_xrGetActionStatePose GetActionStatePose = nullptr;
+    PFN_xrGetActionStateVector2f GetActionStateVector2f = nullptr;
+    PFN_xrGetCurrentInteractionProfile GetCurrentInteractionProfile = nullptr;
+    PFN_xrGetInputSourceLocalizedName GetInputSourceLocalizedName = nullptr;
+    PFN_xrGetInstanceProperties GetInstanceProperties = nullptr;
+    PFN_xrGetReferenceSpaceBoundsRect GetReferenceSpaceBoundsRect = nullptr;
+    PFN_xrGetSystem GetSystem = nullptr;
+    PFN_xrGetSystemProperties GetSystemProperties = nullptr;
+    PFN_xrGetViewConfigurationProperties GetViewConfigurationProperties = nullptr;
+    PFN_xrLocateSpace LocateSpace = nullptr;
+    PFN_xrLocateSpaces LocateSpaces = nullptr;
+    PFN_xrLocateViews LocateViews = nullptr;
+    PFN_xrPathToString PathToString = nullptr;
+    PFN_xrPollEvent PollEvent = nullptr;
+    PFN_xrReleaseSwapchainImage ReleaseSwapchainImage = nullptr;
+    PFN_xrRequestExitSession RequestExitSession = nullptr;
+    PFN_xrResultToString ResultToString = nullptr;
+    PFN_xrStopHapticFeedback StopHapticFeedback = nullptr;
+    PFN_xrStringToPath StringToPath = nullptr;
+    PFN_xrStructureTypeToString StructureTypeToString = nullptr;
+    PFN_xrSuggestInteractionProfileBindings SuggestInteractionProfileBindings = nullptr;
+    PFN_xrSyncActions SyncActions = nullptr;
+    PFN_xrWaitFrame WaitFrame = nullptr;
+    PFN_xrWaitSwapchainImage WaitSwapchainImage = nullptr;
 
 
     // defined inline in header so that it can be used by server modules
@@ -590,7 +590,7 @@ public:
             return;
         }
 
-        XrResult result = pfn_xrGetInstanceProcAddr(loader_instance, name, reinterpret_cast<PFN_xrVoidFunction*>(&function));
+        XrResult result = GetInstanceProcAddr(loader_instance, name, reinterpret_cast<PFN_xrVoidFunction*>(&function));
 
         if (!XR_SUCCEEDED(result)) {
             throw FunctionLoaderException("xrGetInstanceProcAddr for " + std::string(name) + " returned an error: " + std::to_string(result));

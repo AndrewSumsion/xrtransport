@@ -115,11 +115,11 @@ void Server::run() {
     });
 
     transport.register_handler(XRTP_MSG_POLL_EVENT, [this](MessageLockIn msg_in){
-        function_loader.ensure_function_loaded("xrPollEvent", function_loader.pfn_xrPollEvent);
+        function_loader.ensure_function_loaded("xrPollEvent", function_loader.PollEvent);
 
         while (true) {
             XrEventDataBuffer event_buffer{XR_TYPE_EVENT_DATA_BUFFER};
-            XrResult result = function_loader.pfn_xrPollEvent(saved_instance, &event_buffer);
+            XrResult result = function_loader.PollEvent(saved_instance, &event_buffer);
 
             if (result != XR_SUCCESS) {
                 // result is either XR_EVENT_UNAVAILABLE or an error, in either case don't send the
@@ -158,11 +158,11 @@ void Server::run() {
     });
 
     // gather supported extensions so modules can decide whether to enable
-    function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", function_loader.pfn_xrEnumerateInstanceExtensionProperties);
+    function_loader.ensure_function_loaded("xrEnumerateInstanceExtensionProperties", function_loader.EnumerateInstanceExtensionProperties);
     uint32_t num_extensions{};
-    function_loader.pfn_xrEnumerateInstanceExtensionProperties(nullptr, 0, &num_extensions, nullptr);
+    function_loader.EnumerateInstanceExtensionProperties(nullptr, 0, &num_extensions, nullptr);
     std::vector<XrExtensionProperties> extensions(num_extensions, {XR_TYPE_EXTENSION_PROPERTIES});
-    function_loader.pfn_xrEnumerateInstanceExtensionProperties(nullptr, num_extensions, &num_extensions, extensions.data());
+    function_loader.EnumerateInstanceExtensionProperties(nullptr, num_extensions, &num_extensions, extensions.data());
 
     // initialize all modules (which may add handlers)
     std::vector<Module> enabled_modules;
@@ -188,7 +188,7 @@ void Server::run() {
 }
 
 void Server::instance_handler(MessageLockIn msg_in) {
-    function_loader.ensure_function_loaded("xrCreateInstance", function_loader.pfn_xrCreateInstance);
+    function_loader.ensure_function_loaded("xrCreateInstance", function_loader.CreateInstance);
     
     // Read in args sent by client
     DeserializeContext d_ctx(msg_in.buffer);
@@ -229,7 +229,7 @@ void Server::instance_handler(MessageLockIn msg_in) {
 
     // Call xrCreateInstance
     XrTime start_time = get_time();
-    XrResult _result = function_loader.pfn_xrCreateInstance(createInfo, instance);
+    XrResult _result = function_loader.CreateInstance(createInfo, instance);
     XrDuration runtime_duration = get_time() - start_time;
 
     if (XR_SUCCEEDED(_result)) {

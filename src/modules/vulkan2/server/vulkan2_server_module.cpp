@@ -44,7 +44,6 @@ VkCommandPool saved_vk_command_pool;
 
 uint8_t physical_device_uuid[VK_UUID_SIZE];
 
-PFN_xrGetSystem pfn_xrGetSystem;
 PFN_xrGetVulkanGraphicsRequirements2KHR pfn_xrGetVulkanGraphicsRequirements2KHR;
 PFN_xrCreateVulkanInstanceKHR pfn_xrCreateVulkanInstanceKHR;
 PFN_xrGetVulkanGraphicsDevice2KHR pfn_xrGetVulkanGraphicsDevice2KHR;
@@ -89,7 +88,7 @@ void setup_vulkan_instance() {
     XrSystemGetInfo system_get_info{XR_TYPE_SYSTEM_GET_INFO};
     system_get_info.formFactor = XR_FORM_FACTOR_HEAD_MOUNTED_DISPLAY;
 
-    xr_result = pfn_xrGetSystem(saved_xr_instance, &system_get_info, &saved_xr_system_id);
+    xr_result = function_loader->GetSystem(saved_xr_instance, &system_get_info, &saved_xr_system_id);
     if (!XR_SUCCEEDED(xr_result)) {
         throw std::runtime_error("Failed to get HMD system id: " + std::to_string(xr_result));
     }
@@ -418,14 +417,14 @@ SwapchainState& create_swapchain_state(
     XrResult xr_result{};
 
     uint32_t num_images{};
-    xr_result = function_loader->pfn_xrEnumerateSwapchainImages(handle, 0, &num_images, nullptr);
+    xr_result = function_loader->EnumerateSwapchainImages(handle, 0, &num_images, nullptr);
     if (!XR_SUCCEEDED(xr_result)) {
         throw std::runtime_error("Unable to get swapchain images: " + std::to_string(xr_result));
     }
 
     std::vector<XrSwapchainImageVulkan2KHR> runtime_image_structs(num_images, {XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR});
     auto p_runtime_image_structs = reinterpret_cast<XrSwapchainImageBaseHeader*>(runtime_image_structs.data());
-    xr_result = function_loader->pfn_xrEnumerateSwapchainImages(handle, num_images, &num_images, p_runtime_image_structs);
+    xr_result = function_loader->EnumerateSwapchainImages(handle, num_images, &num_images, p_runtime_image_structs);
     if (!XR_SUCCEEDED(xr_result)) {
         throw std::runtime_error("Unable to get swapchain images: " + std::to_string(xr_result));
     }
@@ -512,7 +511,7 @@ void handle_create_swapchain(MessageLockIn msg_in) {
     create_info->usageFlags |= XR_SWAPCHAIN_USAGE_TRANSFER_DST_BIT;
 
     XrSwapchain swapchain_handle{};
-    XrResult result = function_loader->pfn_xrCreateSwapchain(session_handle, create_info, &swapchain_handle);
+    XrResult result = function_loader->CreateSwapchain(session_handle, create_info, &swapchain_handle);
     if (result != XR_SUCCESS) {
         spdlog::error("Failed to create native swapchain: {}", (int)result);
         auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN_RETURN);
@@ -584,7 +583,7 @@ void destroy_swapchain(XrSwapchain swapchain_handle) {
     destroy_swapchain_state(swapchain_handle);
     session_state.swapchains.erase(swapchain_handle);
 
-    function_loader->pfn_xrDestroySwapchain(swapchain_handle);
+    function_loader->DestroySwapchain(swapchain_handle);
 }
 
 void handle_destroy_swapchain(MessageLockIn msg_in) {
@@ -619,7 +618,7 @@ void handle_create_session(MessageLockIn msg_in) {
     create_info.systemId = saved_xr_system_id;
 
     XrSession session_handle{};
-    XrResult result = function_loader->pfn_xrCreateSession(saved_xr_instance, &create_info, &session_handle);
+    XrResult result = function_loader->CreateSession(saved_xr_instance, &create_info, &session_handle);
     if (!XR_SUCCEEDED(result)) {
         throw std::runtime_error("Failed to create XR session: " + std::to_string(result));
     }
@@ -645,7 +644,7 @@ void handle_destroy_session(MessageLockIn msg_in) {
         destroy_swapchain(swapchain_handle);
     }
 
-    function_loader->pfn_xrDestroySession(session_handle);
+    function_loader->DestroySession(session_handle);
 
     auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_DESTROY_SESSION_RETURN);
     msg_out.flush();
@@ -665,7 +664,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
     SwapchainState& swapchain_state = get_swapchain_state(swapchain_handle).value();
 
     uint32_t dest_index{};
-    xr_result = function_loader->pfn_xrAcquireSwapchainImage(swapchain_handle, nullptr, &dest_index);
+    xr_result = function_loader->AcquireSwapchainImage(swapchain_handle, nullptr, &dest_index);
 
     auto& shared_image = swapchain_state.shared_images.at(src_index);
     auto& runtime_image = swapchain_state.runtime_images.at(dest_index);
@@ -789,7 +788,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
 
     XrSwapchainImageWaitInfo wait_info{XR_TYPE_SWAPCHAIN_IMAGE_WAIT_INFO};
     wait_info.timeout = XR_INFINITE_DURATION;
-    xr_result = function_loader->pfn_xrWaitSwapchainImage(swapchain_handle, &wait_info);
+    xr_result = function_loader->WaitSwapchainImage(swapchain_handle, &wait_info);
     if (xr_result != XR_SUCCESS) {
         throw std::runtime_error("Failed to wait for swapchain image: " + std::to_string(xr_result));
     }
@@ -809,7 +808,7 @@ void handle_release_swapchain_image(MessageLockIn msg_in) {
         throw std::runtime_error("Failed to submit copy operation to queue: " + std::to_string(vk_result));
     }
 
-    xr_result = function_loader->pfn_xrReleaseSwapchainImage(swapchain_handle, nullptr);
+    xr_result = function_loader->ReleaseSwapchainImage(swapchain_handle, nullptr);
     if (!XR_SUCCEEDED(xr_result)) {
         throw std::runtime_error("Failed to release swapchain image: " + std::to_string(xr_result));
     }
@@ -869,20 +868,20 @@ void on_instance(
 {
     saved_xr_instance = instance;
 
-    function_loader->ensure_function_loaded("xrGetSystem", pfn_xrGetSystem);
     function_loader->ensure_function_loaded("xrGetVulkanGraphicsRequirements2KHR", pfn_xrGetVulkanGraphicsRequirements2KHR);
     function_loader->ensure_function_loaded("xrCreateVulkanInstanceKHR", pfn_xrCreateVulkanInstanceKHR);
     function_loader->ensure_function_loaded("xrGetVulkanGraphicsDevice2KHR", pfn_xrGetVulkanGraphicsDevice2KHR);
     function_loader->ensure_function_loaded("xrCreateVulkanDeviceKHR", pfn_xrCreateVulkanDeviceKHR);
 
-    function_loader->ensure_function_loaded("xrCreateSwapchain", function_loader->pfn_xrCreateSwapchain);
-    function_loader->ensure_function_loaded("xrEnumerateSwapchainImages", function_loader->pfn_xrEnumerateSwapchainImages);
-    function_loader->ensure_function_loaded("xrDestroySwapchain", function_loader->pfn_xrDestroySwapchain);
-    function_loader->ensure_function_loaded("xrCreateSession", function_loader->pfn_xrCreateSession);
-    function_loader->ensure_function_loaded("xrDestroySession", function_loader->pfn_xrDestroySession);
-    function_loader->ensure_function_loaded("xrAcquireSwapchainImage", function_loader->pfn_xrAcquireSwapchainImage);
-    function_loader->ensure_function_loaded("xrWaitSwapchainImage", function_loader->pfn_xrWaitSwapchainImage);
-    function_loader->ensure_function_loaded("xrReleaseSwapchainImage", function_loader->pfn_xrReleaseSwapchainImage);
+    function_loader->ensure_function_loaded("xrGetSystem", function_loader->GetSystem);
+    function_loader->ensure_function_loaded("xrCreateSwapchain", function_loader->CreateSwapchain);
+    function_loader->ensure_function_loaded("xrEnumerateSwapchainImages", function_loader->EnumerateSwapchainImages);
+    function_loader->ensure_function_loaded("xrDestroySwapchain", function_loader->DestroySwapchain);
+    function_loader->ensure_function_loaded("xrCreateSession", function_loader->CreateSession);
+    function_loader->ensure_function_loaded("xrDestroySession", function_loader->DestroySession);
+    function_loader->ensure_function_loaded("xrAcquireSwapchainImage", function_loader->AcquireSwapchainImage);
+    function_loader->ensure_function_loaded("xrWaitSwapchainImage", function_loader->WaitSwapchainImage);
+    function_loader->ensure_function_loaded("xrReleaseSwapchainImage", function_loader->ReleaseSwapchainImage);
 
     setup_vulkan_instance();
 }
