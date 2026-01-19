@@ -16,7 +16,7 @@ target_include_directories(module_client_vulkan2 PRIVATE
 
 target_link_libraries(module_client_vulkan2 PRIVATE
     module_common_vulkan2
-    module_client_handle_exchange_stub
+    module_client_handle_exchange
     xrtransport_transport
     xrtransport_serialization
     Vulkan::Vulkan
