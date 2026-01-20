@@ -331,6 +331,8 @@ static void layer_module_functions(FunctionTable& function_table, const std::vec
 }
 
 extern "C" XRTP_API_EXPORT XrResult XRAPI_CALL xrNegotiateLoaderRuntimeInterface(const XrNegotiateLoaderInfo* loaderInfo, XrNegotiateRuntimeRequest* runtimeRequest) {
+    spdlog::info("xrtransport client loaded");
+
     if (!loaderInfo ||
         !runtimeRequest ||
         loaderInfo->structType != XR_LOADER_INTERFACE_STRUCT_LOADER_INFO ||

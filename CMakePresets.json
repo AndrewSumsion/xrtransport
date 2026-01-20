@@ -15,112 +15,137 @@
             "name": "waydroid-x86_64-debug",
             "displayName": "Waydroid x86_64 (Debug)",
             "binaryDir": "build/waydroid/x86_64/debug",
-            "installDir": "build/waydroid/x86_64/debug/install",
+            "installDir": "src/client/android/src/main/jniLibs/debug/x86_64",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "x86_64",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": ".",
+                "XRTRANSPORT_CREATE_MANIFEST": "OFF"
             }
         },
         {
             "name": "waydroid-x86-debug",
             "displayName": "Waydroid x86 (Debug)",
             "binaryDir": "build/waydroid/x86/debug",
-            "installDir": "build/waydroid/x86/debug/install",
+            "installDir": "src/client/android/src/main/jniLibs/debug/x86",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "x86",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
         {
             "name": "waydroid-arm64-v8a-debug",
             "displayName": "Waydroid arm64-v8a (Debug)",
             "binaryDir": "build/waydroid/arm64-v8a/debug",
-            "installDir": "build/waydroid/arm64-v8a/debug/install",
+            "installDir": "src/client/android/src/main/jniLibs/debug/arm64-v8a",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "arm64-v8a",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
         {
             "name": "waydroid-armeabi-v7a-debug",
             "displayName": "Waydroid armeabi-v7a (Debug)",
             "binaryDir": "build/waydroid/armeabi-v7a/debug",
-            "installDir": "build/waydroid/armeabi-v7a/debug/install",
+            "installDir": "src/client/android/src/main/jniLibs/debug/armeabi-v7a",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "armeabi-v7a",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
-        {
+                {
             "name": "waydroid-x86_64-release",
             "displayName": "Waydroid x86_64 (Release)",
             "binaryDir": "build/waydroid/x86_64/release",
-            "installDir": "build/waydroid/x86_64/release/install",
+            "installDir": "src/client/android/src/main/jniLibs/release/x86_64",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "x86_64",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
         {
             "name": "waydroid-x86-release",
             "displayName": "Waydroid x86 (Release)",
             "binaryDir": "build/waydroid/x86/release",
-            "installDir": "build/waydroid/x86/release/install",
+            "installDir": "src/client/android/src/main/jniLibs/release/x86",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "x86",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
         {
             "name": "waydroid-arm64-v8a-release",
             "displayName": "Waydroid arm64-v8a (Release)",
             "binaryDir": "build/waydroid/arm64-v8a/release",
-            "installDir": "build/waydroid/arm64-v8a/release/install",
+            "installDir": "src/client/android/src/main/jniLibs/release/arm64-v8a",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "arm64-v8a",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         },
         {
             "name": "waydroid-armeabi-v7a-release",
             "displayName": "Waydroid armeabi-v7a (Release)",
             "binaryDir": "build/waydroid/armeabi-v7a/release",
-            "installDir": "build/waydroid/armeabi-v7a/release/install",
+            "installDir": "src/client/android/src/main/jniLibs/release/armeabi-v7a",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
                 "CMAKE_TOOLCHAIN_FILE": "~/Android/Sdk/ndk/29.0.14206865/build/cmake/android.toolchain.cmake",
                 "ANDROID_ABI": "armeabi-v7a",
-                "ANDROID_PLATFORM": "android-33",
+                "ANDROID_PLATFORM": "android-26",
+                "XRTRANSPORT_BUILD_CLIENT": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
-                "XRTRANSPORT_BUILD_TESTS": "OFF"
+                "XRTRANSPORT_BUILD_TESTS": "OFF",
+                "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
             }
         }
     ],

@@ -1,0 +1,52 @@
+plugins {
+    id 'com.android.application' version '9.0.0'
+}
+
+android {
+    compileSdk 36
+    ndkVersion "29.0.14206865"
+    buildToolsVersion "36.1.0"
+    namespace "com.xrtransport.client"
+
+    defaultConfig {
+        applicationId "com.xrtransport.client"
+        minSdkVersion 26 // for __system_property_read_callback
+        targetSdkVersion 36
+
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    sourceSets {
+        debug {
+            jniLibs.srcDirs = ['src/main/jniLibs/debug']
+        }
+        release {
+            jniLibs.srcDirs = ['src/main/jniLibs/release']
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            // replacement for android:extractNativeLibs="true"
+            useLegacyPackaging = true
+            doNotStrip "**/*.so"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            jniDebuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}

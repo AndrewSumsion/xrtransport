@@ -23,11 +23,15 @@ target_link_libraries(module_client_vulkan2 PRIVATE
 )
 
 install(TARGETS module_client_vulkan2
-    LIBRARY DESTINATION client
-    RUNTIME DESTINATION client
+    LIBRARY DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
+    RUNTIME DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
 )
 
-if(UNIX)
+if(ANDROID)
+    target_link_options(module_client_vulkan2 PRIVATE
+        "-Wl,-rpath,$ORIGIN"
+    )
+elseif(UNIX)
     set_target_properties(module_client_vulkan2 PROPERTIES
         INSTALL_RPATH "$ORIGIN"
     )

@@ -102,7 +102,7 @@ xrtp_Handle xrtp_read_handle() {
     if (cmsg == nullptr ||
         cmsg->cmsg_level != SOL_SOCKET ||
         cmsg->cmsg_type != SCM_RIGHTS) {
-        spdlog::error("Invalid control message: " + errno);
+        spdlog::error("Invalid control message: {}", errno);
         return 0;
     }
 

@@ -28,20 +28,26 @@ target_include_directories(xrtransport_client PUBLIC
     ${CMAKE_SOURCE_DIR}/external/asio/asio/include
 )
 
-add_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client>)
-install_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client> client)
+if(XRTRANSPORT_CREATE_MANIFEST)
+    add_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client>)
+    install_openxr_manifest(xrtransport_client_manifest.json $<TARGET_FILE:xrtransport_client> ${XRTRANSPORT_CLIENT_INSTALL_PATH})
+endif()
 
 # setup install directory
 install(TARGETS xrtransport_client
-    LIBRARY DESTINATION client
-    RUNTIME DESTINATION client # needed for Windows, for some reason it's not considered a LIBRARY target on Windows
+    LIBRARY DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
+    RUNTIME DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH} # needed for Windows, for some reason it's not considered a LIBRARY target on Windows
 )
 install(TARGETS xrtransport_transport
-    LIBRARY DESTINATION client
-    RUNTIME DESTINATION client
+    LIBRARY DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
+    RUNTIME DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
 )
 
-if(UNIX)
+if(ANDROID)
+    target_link_options(xrtransport_client PRIVATE
+        "-Wl,-rpath,$ORIGIN"
+    )
+elseif(UNIX)
     set_target_properties(xrtransport_client PROPERTIES
         INSTALL_RPATH "$ORIGIN"
     )

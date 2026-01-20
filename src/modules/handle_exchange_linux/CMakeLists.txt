@@ -10,12 +10,18 @@ if(XRTRANSPORT_BUILD_CLIENT)
         xrtransport_serialization
     )
     install(TARGETS module_client_handle_exchange
-        LIBRARY DESTINATION client
-        RUNTIME DESTINATION client
+        LIBRARY DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
+        RUNTIME DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
     )
-    set_target_properties(module_client_handle_exchange PROPERTIES
-        INSTALL_RPATH "$ORIGIN"
-    )
+    if (ANDROID)
+        target_link_options(module_client_handle_exchange PRIVATE
+            "-Wl,-rpath,$ORIGIN"
+        )
+    else()
+        set_target_properties(module_client_handle_exchange PROPERTIES
+            INSTALL_RPATH "$ORIGIN"
+        )
+    endif()
 endif()
 if(XRTRANSPORT_BUILD_SERVER)
     add_library(module_server_handle_exchange SHARED
@@ -29,8 +35,8 @@ if(XRTRANSPORT_BUILD_SERVER)
         xrtransport_serialization
     )
     install(TARGETS module_server_handle_exchange
-        LIBRARY DESTINATION server
-        RUNTIME DESTINATION server
+        LIBRARY DESTINATION ${XRTRANSPORT_SERVER_INSTALL_PATH}
+        RUNTIME DESTINATION ${XRTRANSPORT_SERVER_INSTALL_PATH}
     )
     set_target_properties(module_server_handle_exchange PROPERTIES
         INSTALL_RPATH "$ORIGIN"

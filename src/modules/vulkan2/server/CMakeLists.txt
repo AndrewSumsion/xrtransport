@@ -23,8 +23,8 @@ target_link_libraries(module_server_vulkan2 PRIVATE
 )
 
 install(TARGETS module_server_vulkan2
-    LIBRARY DESTINATION server
-    RUNTIME DESTINATION server
+    LIBRARY DESTINATION ${XRTRANSPORT_SERVER_INSTALL_PATH}
+    RUNTIME DESTINATION ${XRTRANSPORT_SERVER_INSTALL_PATH}
 )
 
 if(UNIX)

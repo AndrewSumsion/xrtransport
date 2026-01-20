@@ -6,6 +6,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 option(XRTRANSPORT_BUILD_CLIENT "Build client" ON)
 option(XRTRANSPORT_BUILD_SERVER "Build server" ON)
 option(XRTRANSPORT_BUILD_TESTS "Build tests" ON)
+option(XRTRANSPORT_CREATE_MANIFEST "Create OpenXR Manifest" ON)
+
+set(XRTRANSPORT_CLIENT_INSTALL_PATH client CACHE STRING
+    "Folder within the install prefix to put client libraries"
+)
+set(XRTRANSPORT_SERVER_INSTALL_PATH server CACHE STRING
+    "Folder within the install prefix to put server libraries"
+)
 
 if (XRTRANSPORT_BUILD_SERVER)
     # Server needs OpenXR loader to be built

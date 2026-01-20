@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:hasCode="false"
+        android:label="@string/app_name">
+
+        <service
+            android:name="com.xrtransport.client.RuntimeService"
+            android:label="@string/service_name"
+            android:exported="true">
+            <meta-data
+                android:name="org.khronos.openxr.OpenXRRuntime.SoFilename"
+                android:value="libxrtransport_client.so" />
+            <meta-data
+                android:name="org.khronos.openxr.OpenXRRuntime.MajorVersion"
+                android:value="1" />
+
+            <intent-filter>
+                <action android:name="org.khronos.openxr.OpenXRRuntimeService" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>
