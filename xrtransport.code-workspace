@@ -115,7 +115,7 @@
 						"value": "${workspaceFolder:xrtransport}/example_client_config.json"
 					}
 				],
-				"args": ["-g", "Vulkan2"]
+				"args": ["-g", "Vulkan"]
 			}
 		],
 		"compounds": [

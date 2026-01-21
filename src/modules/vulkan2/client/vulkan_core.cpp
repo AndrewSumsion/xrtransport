@@ -53,7 +53,9 @@ void set_transport(xrtp_Transport handle) {
 }
 
 void initialize_vulkan(PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr) {
-    vk = std::make_unique<VulkanLoader>(pfn_vkGetInstanceProcAddr);
+    if (!vk) {
+        vk = std::make_unique<VulkanLoader>(pfn_vkGetInstanceProcAddr);
+    }
 }
 
 void set_xr_instance(XrInstance instance) {

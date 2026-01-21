@@ -2,38 +2,38 @@ cmake_minimum_required(VERSION 3.15)
 
 find_package(Vulkan REQUIRED)
 
-add_library(module_client_vulkan2 SHARED
-    vulkan2_client_module.cpp
+add_library(module_client_vulkan SHARED
+    vulkan_client_module.cpp
     vulkan_core.cpp
     session_state.cpp
 )
 
-target_include_directories(module_client_vulkan2 PRIVATE
+target_include_directories(module_client_vulkan PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
     ${CMAKE_SOURCE_DIR}/external/spdlog/include
-    ${Vulkan_INCLUDE_DIRS}
 )
 
-target_link_libraries(module_client_vulkan2 PRIVATE
+target_link_libraries(module_client_vulkan PRIVATE
     module_common_vulkan2
     module_client_handle_exchange
     xrtransport_transport
     xrtransport_serialization
+    Vulkan::Vulkan
 )
 
-install(TARGETS module_client_vulkan2
+install(TARGETS module_client_vulkan
     LIBRARY DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
     RUNTIME DESTINATION ${XRTRANSPORT_CLIENT_INSTALL_PATH}
 )
 
 if(ANDROID)
-    target_link_options(module_client_vulkan2 PRIVATE
+    target_link_options(module_client_vulkan PRIVATE
         "-Wl,-rpath,$ORIGIN"
     )
 elseif(UNIX)
-    set_target_properties(module_client_vulkan2 PROPERTIES
+    set_target_properties(module_client_vulkan PROPERTIES
         INSTALL_RPATH "$ORIGIN"
     )
 endif()
