@@ -106,6 +106,9 @@ void xrtp_on_instance(
         return;
     }
 
+    // make it readable and writeable by anyone
+    chmod(server_path, 0666);
+
     if (listen(server_fd, 1) < 0) {
         spdlog::error("Error listening on handler exchange server socket: {}", errno);
         close(server_fd);

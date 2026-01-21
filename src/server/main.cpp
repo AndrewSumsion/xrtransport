@@ -117,13 +117,18 @@ static AcceptorImpl<tcp::acceptor, tcp::socket> create_tcp_acceptor(asio::io_con
 }
 
 static AcceptorImpl<stream_protocol::acceptor, stream_protocol::socket> create_unix_acceptor(asio::io_context& io_context, std::string path) {
-    return AcceptorImpl<stream_protocol::acceptor, stream_protocol::socket>(
+    auto result = AcceptorImpl<stream_protocol::acceptor, stream_protocol::socket>(
         io_context,
         stream_protocol::acceptor(
             io_context,
             stream_protocol::endpoint(path)
         )
     );
+    // make it readable by anyone
+    if (chmod(path.c_str(), 0666) == -1) {
+        throw std::runtime_error("Unable to expand permissions of Unix socket: " + std::to_string(errno));
+    }
+    return std::move(result);
 }
 
 static inline void prepare_socket_file(std::string path_str) {
