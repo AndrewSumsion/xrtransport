@@ -4,6 +4,7 @@ find_package(Vulkan REQUIRED)
 
 add_library(module_client_vulkan2 SHARED
     vulkan2_client_module.cpp
+    vulkan_core.cpp
     session_state.cpp
 )
 
@@ -12,6 +13,7 @@ target_include_directories(module_client_vulkan2 PRIVATE
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/external/OpenXR-SDK/include
     ${CMAKE_SOURCE_DIR}/external/spdlog/include
+    ${Vulkan_INCLUDE_DIRS}
 )
 
 target_link_libraries(module_client_vulkan2 PRIVATE
@@ -19,7 +21,6 @@ target_link_libraries(module_client_vulkan2 PRIVATE
     module_client_handle_exchange
     xrtransport_transport
     xrtransport_serialization
-    Vulkan::Vulkan
 )
 
 install(TARGETS module_client_vulkan2

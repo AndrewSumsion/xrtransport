@@ -1,11 +1,8 @@
-#include "vulkan2_common.h"
-#include "image_handles.h"
-#include "vulkan_loader.h"
-#include "session_state.h"
+#include "vulkan_common.h"
+#include "vulkan_core.h"
 
 #include "xrtransport/client/module_interface.h"
 
-#include "xrtransport/handle_exchange.h"
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
 #include "xrtransport/serialization/deserializer.h"
@@ -31,7 +28,7 @@
 
 using namespace xrtransport;
 
-namespace {
+namespace vulkan2 {
 
 // Instance handler forward declaration
 void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr);
@@ -63,50 +60,8 @@ XRAPI_ATTR XrResult XRAPI_CALL xrGetVulkanGraphicsRequirements2KHRImpl(
     XrSystemId                                  systemId,
     XrGraphicsRequirementsVulkanKHR*            graphicsRequirements);
 
-PFN_xrCreateSwapchain pfn_xrCreateSwapchain_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSwapchainImpl(
-    XrSession                                   session,
-    const XrSwapchainCreateInfo*                createInfo,
-    XrSwapchain*                                swapchain);
-
-PFN_xrDestroySwapchain pfn_xrDestroySwapchain_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySwapchainImpl(
-    XrSwapchain                                 swapchain);
-
-PFN_xrEnumerateSwapchainImages pfn_xrEnumerateSwapchainImages_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrEnumerateSwapchainImagesImpl(
-    XrSwapchain                                 swapchain,
-    uint32_t                                    imageCapacityInput,
-    uint32_t*                                   imageCountOutput,
-    XrSwapchainImageBaseHeader*                 images);
-
-PFN_xrAcquireSwapchainImage pfn_xrAcquireSwapchainImage_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrAcquireSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageAcquireInfo*          acquireInfo,
-    uint32_t*                                   index);
-
-PFN_xrWaitSwapchainImage pfn_xrWaitSwapchainImage_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrWaitSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageWaitInfo*             waitInfo);
-
-PFN_xrReleaseSwapchainImage pfn_xrReleaseSwapchainImage_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrReleaseSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageReleaseInfo*          releaseInfo);
-
-PFN_xrCreateSession pfn_xrCreateSession_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrCreateSessionImpl(
-    XrInstance                                  instance,
-    const XrSessionCreateInfo*                  createInfo,
-    XrSession*                                  session);
-
-PFN_xrDestroySession pfn_xrDestroySession_next;
-XRAPI_ATTR XrResult XRAPI_CALL xrDestroySessionImpl(
-    XrSession                                   session);
-
 // Module metadata
+
 const char* vulkan2_function_names[] {
     "xrCreateVulkanInstanceKHR",
     "xrCreateVulkanDeviceKHR",
@@ -146,43 +101,43 @@ ModuleLayerFunction functions[] {
     },
     {
         .function_name = "xrCreateSwapchain",
-        .new_function = (PFN_xrVoidFunction)xrCreateSwapchainImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrCreateSwapchain_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrCreateSwapchainImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrCreateSwapchain_next
     },
     {
         .function_name = "xrDestroySwapchain",
-        .new_function = (PFN_xrVoidFunction)xrDestroySwapchainImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrDestroySwapchain_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrDestroySwapchainImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrDestroySwapchain_next
     },
     {
         .function_name = "xrEnumerateSwapchainImages",
-        .new_function = (PFN_xrVoidFunction)xrEnumerateSwapchainImagesImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrEnumerateSwapchainImages_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrEnumerateSwapchainImagesImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrEnumerateSwapchainImages_next
     },
     {
         .function_name = "xrAcquireSwapchainImage",
-        .new_function = (PFN_xrVoidFunction)xrAcquireSwapchainImageImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrAcquireSwapchainImage_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrAcquireSwapchainImageImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrAcquireSwapchainImage_next
     },
     {
         .function_name = "xrWaitSwapchainImage",
-        .new_function = (PFN_xrVoidFunction)xrWaitSwapchainImageImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrWaitSwapchainImage_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrWaitSwapchainImageImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrWaitSwapchainImage_next
     },
     {
         .function_name = "xrReleaseSwapchainImage",
-        .new_function = (PFN_xrVoidFunction)xrReleaseSwapchainImageImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrReleaseSwapchainImage_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrReleaseSwapchainImageImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrReleaseSwapchainImage_next
     },
     {
         .function_name = "xrCreateSession",
-        .new_function = (PFN_xrVoidFunction)xrCreateSessionImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrCreateSession_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrCreateSessionImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrCreateSession_next
     },
     {
         .function_name = "xrDestroySession",
-        .new_function = (PFN_xrVoidFunction)xrDestroySessionImpl,
-        .old_function = (PFN_xrVoidFunction*)&pfn_xrDestroySession_next
+        .new_function = (PFN_xrVoidFunction)vulkan_core::xrDestroySessionImpl,
+        .old_function = (PFN_xrVoidFunction*)&vulkan_core::pfn_xrDestroySession_next
     }
 };
 
@@ -196,21 +151,16 @@ ModuleInfo module_info {
 
 // Static data
 
-std::unique_ptr<xrtransport::Transport> transport;
-
-XrInstance saved_xr_instance;
-PFN_xrGetInstanceProcAddr pfn_xrGetInstanceProcAddr;
-
-std::unique_ptr<VulkanLoader> vk;
-
-bool graphics_requirements_called = false;
+std::unique_ptr<Transport> transport;
+XrInstance saved_xr_instance = XR_NULL_HANDLE;
+VkInstance saved_vk_instance = VK_NULL_HANDLE;
+PFN_vkGetInstanceProcAddr pfn_vkGetInstanceProcAddr;
 
 // Function implementations
 
 void instance_callback(XrInstance instance, PFN_xrGetInstanceProcAddr pfn) {
-    spdlog::info("Instance callback in Vulkan2 client module called");
+    vulkan_core::set_xr_instance(instance);
     saved_xr_instance = instance;
-    pfn_xrGetInstanceProcAddr = pfn;
 }
 
 void add_string_if_not_present(std::vector<const char*>& strings, const char* string) {
@@ -233,7 +183,24 @@ XrResult xrCreateVulkanInstanceKHRImpl(
         return XR_ERROR_HANDLE_INVALID;
     }
 
-    vk = std::make_unique<VulkanLoader>(createInfo->pfnGetInstanceProcAddr);
+    pfn_vkGetInstanceProcAddr = createInfo->pfnGetInstanceProcAddr;
+    vulkan_core::initialize_vulkan(pfn_vkGetInstanceProcAddr);
+
+    auto pfn_vkCreateInstance = 
+        reinterpret_cast<PFN_vkCreateInstance>(pfn_vkGetInstanceProcAddr(
+            VK_NULL_HANDLE,
+            "vkCreateInstance"
+        ));
+    auto pfn_vkDestroyInstance =
+        reinterpret_cast<PFN_vkDestroyInstance>(pfn_vkGetInstanceProcAddr(
+            VK_NULL_HANDLE,
+            "vkDestroyInstance"
+        ));
+
+    if (saved_vk_instance) {
+        vkDestroyInstance(saved_vk_instance, nullptr);
+        saved_vk_instance = VK_NULL_HANDLE;
+    }
 
     // copy create info so that it can be edited
     VkInstanceCreateInfo vulkan_create_info{};
@@ -266,12 +233,12 @@ XrResult xrCreateVulkanInstanceKHRImpl(
     vulkan_create_info.enabledLayerCount = requested_layers.size();
     vulkan_create_info.ppEnabledLayerNames = requested_layers.data();
 
-    *vulkanResult = vk->CreateInstance(&vulkan_create_info, createInfo->vulkanAllocator, vulkanInstance);
+    *vulkanResult = pfn_vkCreateInstance(&vulkan_create_info, createInfo->vulkanAllocator, vulkanInstance);
     if (*vulkanResult != VK_SUCCESS) {
         return XR_ERROR_VALIDATION_FAILURE; // not obvious from the spec which error I should return here
     }
 
-    vk->load_post_instance(*vulkanInstance);
+    saved_vk_instance = *vulkanInstance;
 
     return XR_SUCCESS;
 }
@@ -285,7 +252,7 @@ XrResult xrCreateVulkanDeviceKHRImpl(
     if (instance != saved_xr_instance) {
         return XR_ERROR_HANDLE_INVALID;
     }
-    assert(vk->GetInstanceProcAddr == createInfo->pfnGetInstanceProcAddr);
+    assert(pfn_vkGetInstanceProcAddr == createInfo->pfnGetInstanceProcAddr);
 
     // it's odd that this function doesn't get passed a VkInstance, or at least it's not expliclty
     // stated that a runtime should hold onto its VkInstance handle for later use.
@@ -307,7 +274,13 @@ XrResult xrCreateVulkanDeviceKHRImpl(
     vulkan_create_info.enabledExtensionCount = requested_extensions.size();
     vulkan_create_info.ppEnabledExtensionNames = requested_extensions.data();
 
-    *vulkanResult = vk->CreateDevice(createInfo->vulkanPhysicalDevice, &vulkan_create_info, createInfo->vulkanAllocator, vulkanDevice);
+    auto pfn_vkCreateDevice =
+        reinterpret_cast<PFN_vkCreateDevice>(createInfo->pfnGetInstanceProcAddr(
+            saved_vk_instance,
+            "vkCreateDevice"
+        ));
+
+    *vulkanResult = pfn_vkCreateDevice(createInfo->vulkanPhysicalDevice, &vulkan_create_info, createInfo->vulkanAllocator, vulkanDevice);
     if (*vulkanResult != VK_SUCCESS) {
         return XR_ERROR_VALIDATION_FAILURE;
     }
@@ -323,7 +296,7 @@ try {
     if (instance != saved_xr_instance) {
         return XR_ERROR_HANDLE_INVALID;
     }
-    assert(getInfo->vulkanInstance == vk->instance);
+    assert(getInfo->vulkanInstance == saved_vk_instance);
 
     auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_GET_PHYSICAL_DEVICE);
     msg_out.flush();
@@ -333,10 +306,21 @@ try {
     uint8_t target_uuid[VK_UUID_SIZE]{};
     deserialize_array(target_uuid, VK_UUID_SIZE, d_ctx);
 
+    auto pfn_vkEnumeratePhysicalDevices =
+        reinterpret_cast<PFN_vkEnumeratePhysicalDevices>(pfn_vkGetInstanceProcAddr(
+            saved_vk_instance,
+            "vkEnumeratePhysicalDevices"
+        ));
+    auto pfn_vkGetPhysicalDeviceProperties2 =
+        reinterpret_cast<PFN_vkGetPhysicalDeviceProperties2>(pfn_vkGetInstanceProcAddr(
+            saved_vk_instance,
+            "vkGetPhysicalDeviceProperties2"
+        ));
+
     uint32_t device_count{};
-    vk->EnumeratePhysicalDevices(vk->instance, &device_count, nullptr);
+    pfn_vkEnumeratePhysicalDevices(saved_vk_instance, &device_count, nullptr);
     std::vector<VkPhysicalDevice> devices(device_count);
-    vk->EnumeratePhysicalDevices(vk->instance, &device_count, devices.data());
+    pfn_vkEnumeratePhysicalDevices(saved_vk_instance, &device_count, devices.data());
 
     VkPhysicalDevice found_device = VK_NULL_HANDLE;
 
@@ -348,7 +332,7 @@ try {
         props2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
         props2.pNext = &id_props;
 
-        vk->GetPhysicalDeviceProperties2(phys, &props2);
+        pfn_vkGetPhysicalDeviceProperties2(phys, &props2);
 
         if (std::memcmp(id_props.deviceUUID, target_uuid, VK_UUID_SIZE) == 0) {
             found_device = phys;
@@ -378,680 +362,21 @@ XrResult xrGetVulkanGraphicsRequirements2KHRImpl(
     if (instance != saved_xr_instance) {
         return XR_ERROR_HANDLE_INVALID;
     }
-    graphics_requirements_called = true;
+    vulkan_core::on_graphics_requirements_called();
     graphicsRequirements->minApiVersionSupported = XR_MAKE_VERSION(1, 1, 0);
     graphicsRequirements->maxApiVersionSupported = XR_MAKE_VERSION(1, 4, 0);
 
     return XR_SUCCESS;
 }
 
-VkSemaphore import_semaphore(VkDevice device, xrtp_Handle handle) {
-    VkResult result{};
-
-    VkSemaphoreCreateInfo create_info{VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO};
-
-    VkSemaphore semaphore{};
-    result = vk->CreateSemaphore(device, &create_info, nullptr, &semaphore);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to create semaphore: " + std::to_string(result));
-    }
-
-#ifdef _WIN32
-    #error TODO
-#else
-    VkImportSemaphoreFdInfoKHR import_info{VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR};
-    import_info.semaphore = semaphore;
-    import_info.handleType = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT;
-    import_info.fd = static_cast<int>(handle);
-
-    result = vk->ImportSemaphoreFdKHR(device, &import_info);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to import semaphore: " + std::to_string(result));
-    }
-#endif
-
-    return semaphore;
-}
-
-VkCommandBuffer record_acquire_command_buffer(
-    VkDevice device,
-    VkCommandPool command_pool,
-    VkImage image,
-    ImageType image_type,
-    VkImageAspectFlags aspect,
-    uint32_t num_levels,
-    uint32_t num_layers
-) {
-    VkResult result{};
-
-    VkCommandBufferAllocateInfo alloc_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
-    alloc_info.commandPool = command_pool;
-    alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    alloc_info.commandBufferCount = 1;
-
-    VkCommandBuffer command_buffer{};
-    result = vk->AllocateCommandBuffers(device, &alloc_info, &command_buffer);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to allocate command buffer: " + std::to_string(result));
-    }
-
-    VkCommandBufferBeginInfo begin_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
-    result = vk->BeginCommandBuffer(command_buffer, &begin_info);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to begin command buffer: " + std::to_string(result));
-    }
-
-    VkImageLayout image_layout;
-    if (image_type == ImageType::COLOR) {
-        image_layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-    }
-    else {
-        image_layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-    }
-
-    VkImageMemoryBarrier image_transition_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-    image_transition_barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-    image_transition_barrier.newLayout = image_layout;
-    image_transition_barrier.image = image;
-    image_transition_barrier.subresourceRange.aspectMask = aspect;
-    image_transition_barrier.subresourceRange.baseMipLevel = 0;
-    image_transition_barrier.subresourceRange.levelCount = num_levels;
-    image_transition_barrier.subresourceRange.baseArrayLayer = 0;
-    image_transition_barrier.subresourceRange.layerCount = num_layers;
-
-    vk->CmdPipelineBarrier(
-        command_buffer,
-        VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-        VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-        0,
-        0, nullptr,
-        0, nullptr,
-        1, &image_transition_barrier
-    );
-
-    result = vk->EndCommandBuffer(command_buffer);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to record command buffer: " + std::to_string(result));
-    }
-
-    return command_buffer;
-}
-
-VkCommandBuffer record_release_command_buffer(
-    VkDevice device,
-    VkCommandPool command_pool,
-    VkImage image,
-    ImageType image_type,
-    uint32_t queue_family_index,
-    VkImageAspectFlags aspect,
-    uint32_t num_levels,
-    uint32_t num_layers
-) {
-    VkResult result{};
-
-    VkCommandBufferAllocateInfo alloc_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO};
-    alloc_info.commandPool = command_pool;
-    alloc_info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-    alloc_info.commandBufferCount = 1;
-
-    VkCommandBuffer command_buffer{};
-    result = vk->AllocateCommandBuffers(device, &alloc_info, &command_buffer);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to allocate command buffer: " + std::to_string(result));
-    }
-
-    VkCommandBufferBeginInfo begin_info{VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO};
-    result = vk->BeginCommandBuffer(command_buffer, &begin_info);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to begin command buffer: " + std::to_string(result));
-    }
-
-    VkImageLayout image_layout;
-    if (image_type == ImageType::COLOR) {
-        image_layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-    }
-    else {
-        image_layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-    }
-
-    VkImageMemoryBarrier image_barrier{VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER};
-    // transition to TRANSFER_SRC_OPTIMAL
-    image_barrier.oldLayout = image_layout;
-    image_barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
-    // release to QUEUE_FAMILY_EXTERNAL
-    image_barrier.srcQueueFamilyIndex = queue_family_index;
-    image_barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_EXTERNAL;
-    // applies to all mips and layers, although only first mip is actually used
-    image_barrier.image = image;
-    image_barrier.subresourceRange.aspectMask = aspect;
-    image_barrier.subresourceRange.baseMipLevel = 0;
-    image_barrier.subresourceRange.levelCount = num_levels;
-    image_barrier.subresourceRange.baseArrayLayer = 0;
-    image_barrier.subresourceRange.layerCount = num_layers;
-
-    vk->CmdPipelineBarrier(
-        command_buffer,
-        VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-        VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-        0,
-        0, nullptr,
-        0, nullptr,
-        1, &image_barrier
-    );
-
-    result = vk->EndCommandBuffer(command_buffer);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to record command buffer: " + std::to_string(result));
-    }
-
-    return command_buffer;
-}
-
-SwapchainImage create_image(
-    const SessionState& session_state,
-    const XrSwapchainCreateInfo& xr_create_info,
-    const ImageHandles& image_handles,
-    uint64_t memory_size,
-    uint32_t memory_type_index,
-    ImageType image_type
-) {
-    VkResult vk_result{};
-
-    VkExternalMemoryImageCreateInfo external_create_info{VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO};
-#ifdef _WIN32
-    external_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT;
-#else
-    external_create_info.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-#endif
-
-    auto vk_create_info = create_vk_image_create_info(xr_create_info);
-    vk_create_info.pNext = &external_create_info;
-    vk_create_info.usage |= VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
-
-    VkImageAspectFlags aspect = get_aspect_from_format(vk_create_info.format);
-    uint32_t num_levels = vk_create_info.mipLevels;
-    uint32_t num_layers = vk_create_info.arrayLayers;
-
-    VkImage image{};
-    vk_result = vk->CreateImage(session_state.graphics_binding.device, &vk_create_info, nullptr, &image);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to create VkImage: " + std::to_string(vk_result));
-    }
-
-#ifdef _WIN32
-    #error TODO
-#else
-    VkImportMemoryFdInfoKHR import_info{VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR};
-    import_info.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-    import_info.fd = image_handles.memory_handle;
-#endif
-
-    VkMemoryAllocateInfo alloc_info{VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO};
-    alloc_info.pNext = &import_info;
-    alloc_info.allocationSize = memory_size;
-    alloc_info.memoryTypeIndex = memory_type_index;
-
-    VkDeviceMemory image_memory{};
-    vk_result = vk->AllocateMemory(session_state.graphics_binding.device, &alloc_info, nullptr, &image_memory);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to import memory from FD: " + std::to_string(vk_result));
-    }
-
-    vk_result = vk->BindImageMemory(session_state.graphics_binding.device, image, image_memory, 0);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to bind memory to image: " + std::to_string(vk_result));
-    }
-
-#ifdef _WIN32
-    #error Close handle if needed
-#else
-    // No need to close the FD, the driver closes it upon successful import.
-#endif
-
-    VkSemaphore rendering_done = import_semaphore(session_state.graphics_binding.device, image_handles.rendering_done_handle);
-    VkSemaphore copying_done = import_semaphore(session_state.graphics_binding.device, image_handles.copying_done_handle);
-
-    VkFenceCreateInfo fence_info{VK_STRUCTURE_TYPE_FENCE_CREATE_INFO};
-    // signaled so that the first wait returns immediately
-    fence_info.flags = VK_FENCE_CREATE_SIGNALED_BIT;
-    VkFence copying_done_fence{};
-    vk_result = vk->CreateFence(session_state.graphics_binding.device, &fence_info, nullptr, &copying_done_fence);
-    if (vk_result != VK_SUCCESS) {
-        throw std::runtime_error("Unable to create fence: " + std::to_string(vk_result));
-    }
-
-    VkCommandBuffer acquire_command_buffer = record_acquire_command_buffer(
-        session_state.graphics_binding.device,
-        session_state.command_pool,
-        image,
-        image_type,
-        aspect,
-        num_levels,
-        num_layers
-    );
-    VkCommandBuffer release_command_buffer = record_release_command_buffer(
-        session_state.graphics_binding.device,
-        session_state.command_pool,
-        image,
-        image_type,
-        session_state.graphics_binding.queueFamilyIndex,
-        aspect,
-        num_levels,
-        num_layers
-    );
-
-    return SwapchainImage{
-        .image = XrSwapchainImageVulkan2KHR{
-            .type = XR_TYPE_SWAPCHAIN_IMAGE_VULKAN2_KHR,
-            .next = nullptr,
-            .image = image
-        },
-        .memory = image_memory,
-        .rendering_done = rendering_done,
-        .copying_done = copying_done,
-        .copying_done_fence = copying_done_fence,
-        .acquire_command_buffer = acquire_command_buffer,
-        .release_command_buffer = release_command_buffer,
-        .has_been_acquired = false,
-        .aspect = aspect,
-        .num_levels = num_levels,
-        .num_layers = num_layers
-    };
-}
-
-/**
- * Swapchain creation flow:
- * - client tells server to create swapchain
- * - server creates swapchain with real runtime
- * - server creates buffer images for each swapchain image
- * - server writes a memory handle and two semaphore handles to the handle exchange for each image
- * - server sends back number of images
- * - client imports memory and semaphores from the handles
- * 
- * See synchronization_model.md for how these swapchains are kept in sync and how the semaphores
- * are used.
- */
-XrResult xrCreateSwapchainImpl(
-    XrSession                                   session,
-    const XrSwapchainCreateInfo*                createInfo,
-    XrSwapchain*                                swapchain)
-try {
-    auto opt_session_state = get_session_state(session);
-    if (!opt_session_state.has_value()) {
-        if (pfn_xrCreateSwapchain_next)
-            return pfn_xrCreateSwapchain_next(session, createInfo, swapchain);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SessionState& session_state = opt_session_state.value();
-
-    auto msg_out1 = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN);
-    SerializeContext s_ctx(msg_out1.buffer);
-    serialize(&session, s_ctx);
-    serialize_ptr(createInfo, 1, s_ctx);
-    msg_out1.flush();
-
-    XrResult server_result{};
-    XrSwapchain handle{};
-    uint32_t num_images{};
-    uint64_t memory_size{};
-    uint32_t memory_type_index{};
-
-    auto msg_in1 = transport->await_message(XRTP_MSG_VULKAN2_CREATE_SWAPCHAIN_RETURN);
-    DeserializeContext d_ctx(msg_in1.buffer);
-    deserialize(&server_result, d_ctx);
-    if (server_result != XR_SUCCESS) {
-        // message ends here if result was not success
-        // server will not send shared swapchain handles
-        return server_result;
-    }
-    deserialize(&handle, d_ctx);
-    deserialize(&num_images, d_ctx);
-    deserialize(&memory_size, d_ctx);
-    deserialize(&memory_type_index, d_ctx);
-
-    ImageType image_type;
-    XrSwapchainUsageFlags both_mask =
-        XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT |
-        XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
-    if ((createInfo->usageFlags & both_mask) == both_mask) {
-        // can't have a swapchain be both depth/stencil and color
-        return XR_ERROR_VALIDATION_FAILURE;
-    }
-    else if (createInfo->usageFlags & XR_SWAPCHAIN_USAGE_COLOR_ATTACHMENT_BIT) {
-        image_type = ImageType::COLOR;
-    }
-    else if (createInfo->usageFlags & XR_SWAPCHAIN_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) {
-        image_type = ImageType::DEPTH_STENCIL;
-    }
-    else {
-        // must be either depth/stencil or color images
-        return XR_ERROR_VALIDATION_FAILURE;
-    }
-
-    std::vector<SwapchainImage> images;
-    images.reserve(num_images);
-
-    for (uint32_t i = 0; i < num_images; i++) {
-        ImageHandles image_handles = read_image_handles();
-        images.emplace_back(create_image(
-            session_state,
-            *createInfo,
-            image_handles,
-            memory_size,
-            memory_type_index,
-            image_type
-        ));
-    }
-
-    uint32_t width = createInfo->width;
-    uint32_t height = createInfo->height;
-    bool is_static = (createInfo->createFlags & XR_SWAPCHAIN_CREATE_STATIC_IMAGE_BIT) != 0;
-
-    store_swapchain_state(
-        handle,
-        session,
-        std::move(images),
-        width,
-        height,
-        is_static,
-        image_type,
-        *vk
-    );
-
-    session_state.swapchains.emplace(handle);
-
-    *swapchain = handle;
-    return XR_SUCCESS;
-}
-catch (const std::exception& e) {
-    spdlog::error("Exception thrown in xrCreateSwapchainImpl: {}", e.what());
-    return XR_ERROR_RUNTIME_FAILURE;
-}
-
-XrResult xrDestroySwapchainImpl(
-    XrSwapchain                                 swapchain)
-try {
-    auto opt_swapchain_state = get_swapchain_state(swapchain);
-    if (!opt_swapchain_state.has_value()) {
-        if (pfn_xrDestroySwapchain_next)
-            return pfn_xrDestroySwapchain_next(swapchain);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SwapchainState& swapchain_state = opt_swapchain_state.value();
-    SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
-    
-    vk->QueueWaitIdle(session_state.queue);
-
-    // destroy VkImages
-    for (auto& swapchain_image : swapchain_state.get_images()) {
-        vk->FreeCommandBuffers(
-            session_state.graphics_binding.device,
-            session_state.command_pool,
-            1,
-            &swapchain_image.acquire_command_buffer
-        );
-        vk->FreeCommandBuffers(
-            session_state.graphics_binding.device,
-            session_state.command_pool,
-            1,
-            &swapchain_image.release_command_buffer
-        );
-        vk->DestroyImage(session_state.graphics_binding.device, swapchain_image.image.image, nullptr);
-        vk->FreeMemory(session_state.graphics_binding.device, swapchain_image.memory, nullptr);
-        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.rendering_done, nullptr);
-        vk->DestroySemaphore(session_state.graphics_binding.device, swapchain_image.copying_done, nullptr);
-        vk->DestroyFence(session_state.graphics_binding.device, swapchain_image.copying_done_fence, nullptr);
-    }
-
-    session_state.swapchains.erase(swapchain);
-    destroy_swapchain_state(swapchain);
-
-    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_DESTROY_SWAPCHAIN);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&swapchain, s_ctx);
-    msg_out.flush();
-
-    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_DESTROY_SWAPCHAIN_RETURN);
-
-    return XR_SUCCESS;
-}
-catch (const std::exception& e) {
-    spdlog::error("Exception thrown in xrDestroySwapchainImpl: {}", e.what());
-    return XR_ERROR_RUNTIME_FAILURE;
-}
-
-XrResult xrEnumerateSwapchainImagesImpl(
-    XrSwapchain                                 swapchain,
-    uint32_t                                    imageCapacityInput,
-    uint32_t*                                   imageCountOutput,
-    XrSwapchainImageBaseHeader*                 images)
-{
-    auto opt_swapchain_state = get_swapchain_state(swapchain);
-    if (!opt_swapchain_state.has_value()) {
-        // forward to next layer in case there's another layer that implements this
-        if (pfn_xrEnumerateSwapchainImages_next)
-            return pfn_xrEnumerateSwapchainImages_next(swapchain, imageCapacityInput, imageCountOutput, images);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SwapchainState& swapchain_state = opt_swapchain_state.value();
-    auto& swapchain_images = swapchain_state.get_images();
-    uint32_t num_images = static_cast<uint32_t>(swapchain_images.size());
-
-    if (imageCapacityInput == 0) {
-        *imageCountOutput = num_images;
-        return XR_SUCCESS;
-    }
-
-    if (imageCapacityInput < num_images) {
-        return XR_ERROR_SIZE_INSUFFICIENT;
-    }
-
-    *imageCountOutput = num_images;
-    auto images_out = reinterpret_cast<XrSwapchainImageVulkan2KHR*>(images);
-    for (uint32_t i = 0; i < num_images; i++) {
-        std::memcpy(&images_out[i], &swapchain_images[i].image, sizeof(XrSwapchainImageVulkan2KHR));
-    }
-
-    return XR_SUCCESS;
-}
-
-XrResult xrAcquireSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageAcquireInfo*          acquireInfo,
-    uint32_t*                                   index)
-{
-    auto opt_swapchain_state = get_swapchain_state(swapchain);
-    if (!opt_swapchain_state.has_value()) {
-        // forward to next layer in case there's another layer that implements this
-        if (pfn_xrAcquireSwapchainImage_next)
-            return pfn_xrAcquireSwapchainImage_next(swapchain, acquireInfo, index);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SwapchainState& swapchain_state = opt_swapchain_state.value();
-    return swapchain_state.acquire(*index);
-}
-
-XrResult xrWaitSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageWaitInfo*             waitInfo)
-{
-    auto opt_swapchain_state = get_swapchain_state(swapchain);
-    if (!opt_swapchain_state.has_value()) {
-        // forward to next layer in case there's another layer that implements this
-        if (pfn_xrWaitSwapchainImage_next)
-            return pfn_xrWaitSwapchainImage_next(swapchain, waitInfo);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SwapchainState& swapchain_state = opt_swapchain_state.value();
-
-    return swapchain_state.wait(waitInfo->timeout);
-}
-
-XrResult xrReleaseSwapchainImageImpl(
-    XrSwapchain                                 swapchain,
-    const XrSwapchainImageReleaseInfo*          releaseInfo)
-try {
-    auto opt_swapchain_state = get_swapchain_state(swapchain);
-    if (!opt_swapchain_state.has_value()) {
-        // forward to next layer in case there's another layer that implements this
-        if (pfn_xrReleaseSwapchainImage_next)
-            return pfn_xrReleaseSwapchainImage_next(swapchain, releaseInfo);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SwapchainState& swapchain_state = opt_swapchain_state.value();
-    SessionState& session_state = get_session_state(swapchain_state.parent_handle).value();
-
-    // Release an image and get its index
-    uint32_t released_index{};
-    XrResult result = swapchain_state.release(released_index);
-    if (result != XR_SUCCESS) {
-        return result;
-    }
-
-    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&swapchain, s_ctx);
-    serialize(&released_index, s_ctx);
-    msg_out.flush();
-
-    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_RELEASE_SWAPCHAIN_IMAGE_RETURN);
-
-    return XR_SUCCESS;
-}
-catch (const std::exception& e) {
-    spdlog::error("Exception thrown in xrReleaseSwapchainImageImpl: {}", e.what());
-    return XR_ERROR_RUNTIME_FAILURE;
-}
-
-const XrGraphicsBindingVulkan2KHR* find_graphics_binding(const XrSessionCreateInfo* create_info) {
-    const XrBaseInStructure* chain = reinterpret_cast<const XrBaseInStructure*>(create_info);
-
-    while (chain != nullptr && chain->type != XR_TYPE_GRAPHICS_BINDING_VULKAN2_KHR) {
-        chain = chain->next;
-    }
-
-    return reinterpret_cast<const XrGraphicsBindingVulkan2KHR*>(chain);
-}
-
-/**
- * session creation flow:
- * - mostly ignore the XrGraphicsBindingVulkan2KHR on the client side, just store it in SessionState
- * - tell the server to create a session, server returns handle which is used on the client
- * - server already stored VkInstance, VkPhysicalDevice, VkDevice, but it needs to pick queue family and
- *   queue for its own XrGraphicsBindingVulkanKHR. Do this here when creating the session.
- */
-XrResult xrCreateSessionImpl(
-    XrInstance                                  instance,
-    const XrSessionCreateInfo*                  createInfo,
-    XrSession*                                  session)
-try {
-    const XrGraphicsBindingVulkan2KHR* p_graphics_binding = find_graphics_binding(createInfo);
-    if (!p_graphics_binding) {
-        if (pfn_xrCreateSession_next)
-            return pfn_xrCreateSession_next(instance, createInfo, session);
-        else
-            return XR_ERROR_GRAPHICS_DEVICE_INVALID;
-    }
-
-    if (instance != saved_xr_instance) {
-        return XR_ERROR_HANDLE_INVALID;
-    }
-
-    if (!graphics_requirements_called) {
-        return XR_ERROR_GRAPHICS_REQUIREMENTS_CALL_MISSING;
-    }
-
-    const XrGraphicsBindingVulkan2KHR& graphics_binding = *p_graphics_binding;
-
-    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_CREATE_SESSION);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&createInfo->createFlags, s_ctx);
-    msg_out.flush();
-
-    XrSession handle{};
-
-    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_CREATE_SESSION_RETURN);
-    DeserializeContext d_ctx(msg_in.buffer);
-    deserialize(&handle, d_ctx);
-
-    // get VkQueue from provided family index and index
-    VkQueue queue{};
-    vk->GetDeviceQueue(graphics_binding.device, graphics_binding.queueFamilyIndex, graphics_binding.queueIndex, &queue);
-
-    // Create a CommandPool for this session
-    VkCommandPoolCreateInfo pool_info{VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO};
-    pool_info.queueFamilyIndex = graphics_binding.queueFamilyIndex;
-
-    VkCommandPool command_pool{};
-    VkResult result = vk->CreateCommandPool(graphics_binding.device, &pool_info, nullptr, &command_pool);
-    if (result != VK_SUCCESS) {
-        throw std::runtime_error("Failed to create command pool: " + std::to_string(result));
-    }
-
-    store_session_state(handle, std::move(graphics_binding), queue, command_pool);
-
-    *session = handle;
-    return XR_SUCCESS;
-}
-catch (const std::exception& e) {
-    spdlog::error("Exception thrown in xrCreateSessionImpl: {}", e.what());
-    return XR_ERROR_RUNTIME_FAILURE;
-}
-
-XrResult xrDestroySessionImpl(
-    XrSession                                   session)
-try {
-    auto opt_session_state = get_session_state(session);
-    if (!opt_session_state.has_value()) {
-        if (pfn_xrDestroySession_next)
-            return pfn_xrDestroySession_next(session);
-        else
-            return XR_ERROR_HANDLE_INVALID;
-    }
-
-    SessionState& session_state = opt_session_state.value();
-
-    // copy handles into separate container because xrDestroySwapchainImpl modifies
-    // session_state.swapchains
-    std::vector<XrSwapchain> swapchain_handles(session_state.swapchains.begin(), session_state.swapchains.end());
-    for (XrSwapchain swapchain : swapchain_handles) {
-        xrDestroySwapchainImpl(swapchain);
-    }
-
-    vk->DestroyCommandPool(session_state.graphics_binding.device, session_state.command_pool, nullptr);
-
-    auto msg_out = transport->start_message(XRTP_MSG_VULKAN2_DESTROY_SESSION);
-    SerializeContext s_ctx(msg_out.buffer);
-    serialize(&session, s_ctx);
-    msg_out.flush();
-    auto msg_in = transport->await_message(XRTP_MSG_VULKAN2_DESTROY_SESSION_RETURN);
-
-    return XR_SUCCESS;
-}
-catch (const std::exception& e) {
-    spdlog::error("Exception thrown in xrDestroySessionImpl: {}", e.what());
-    return XR_ERROR_RUNTIME_FAILURE;
-}
-
-} // namespace
+} // namespace vulkan2
 
 // Entry point
 XRTP_API_EXPORT void xrtp_get_module_info(
     xrtp_Transport transport_handle,
     const ModuleInfo** info_out)
 {
-    transport = std::make_unique<xrtransport::Transport>(transport_handle);
-    *info_out = &module_info;
+    vulkan2::transport = std::make_unique<Transport>(transport_handle);
+    vulkan_core::set_transport(transport_handle);
+    *info_out = &vulkan2::module_info;
 }

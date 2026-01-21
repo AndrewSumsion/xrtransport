@@ -1,4 +1,4 @@
-#include "vulkan2_common.h"
+#include "vulkan_common.h"
 #include "image_handles.h"
 #include "session_state.h"
 

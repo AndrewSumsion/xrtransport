@@ -1,6 +1,6 @@
 #include "session_state.h"
 
-#include "vulkan2_common.h"
+#include "vulkan_common.h"
 
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/serialization/serializer.h"
