@@ -8,7 +8,7 @@ CMake presets are specified to build the client's libraries for Android (e.g. `w
 
 ```bash
 cmake --preset waydroid-x86_64-debug
-cmake --build waydroid-x86_64-debug-build --target install
+cmake --build --preset waydroid-x86_64-debug-build --target install
 ```
 
 ## Building the client runtime APK

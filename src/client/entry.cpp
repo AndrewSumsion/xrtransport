@@ -254,16 +254,19 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     }
 #endif
 
-    // Remove any extensions requested by the application that are provided by modules.
-    // The server should not be able to see these
+    // Remove any extensions requested by the application that are provided locally.
+    // The server should not be able to see these.
 
-    std::unordered_set<std::string> module_provided_extensions;
+    std::unordered_set<std::string> provided_extensions;
     for (auto& module_info : modules_info) {
         for (uint32_t i = 0; i < module_info.num_extensions; i++) {
             auto& extension = module_info.extensions[i];
-            module_provided_extensions.emplace(extension.extension_name);
+            provided_extensions.emplace(extension.extension_name);
         }
     }
+#ifdef __ANDROID__
+    provided_extensions.emplace(XR_KHR_ANDROID_CREATE_INSTANCE_EXTENSION_NAME);
+#endif
 
     std::vector<const char*> requested_extensions(
         create_info->enabledExtensionNames,
@@ -271,7 +274,7 @@ static XRAPI_ATTR XrResult XRAPI_CALL xrCreateInstanceImpl(const XrInstanceCreat
     );
 
     for (auto it = requested_extensions.begin(); it != requested_extensions.end();) {
-        if (module_provided_extensions.find(std::string(*it)) != module_provided_extensions.end()) {
+        if (provided_extensions.find(std::string(*it)) != provided_extensions.end()) {
             it = requested_extensions.erase(it);
         }
         else {
