@@ -12,6 +12,7 @@ namespace xrtransport {
 // TransportImpl implementation
 TransportImpl::TransportImpl(std::unique_ptr<SyncDuplexStream> stream)
     : stream(std::move(stream)),
+    num_waiting(0),
     status(XRTP_STATUS_CREATED)
 {}
 

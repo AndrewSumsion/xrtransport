@@ -8,7 +8,7 @@
             "installDir": "build/default/debug/install",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON"
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON"
             }
         },
         {
@@ -22,7 +22,7 @@
                 "ANDROID_ABI": "x86_64",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": ".",
@@ -40,7 +40,7 @@
                 "ANDROID_ABI": "x86",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -57,7 +57,7 @@
                 "ANDROID_ABI": "arm64-v8a",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -74,7 +74,7 @@
                 "ANDROID_ABI": "armeabi-v7a",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -91,7 +91,7 @@
                 "ANDROID_ABI": "x86_64",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -108,7 +108,7 @@
                 "ANDROID_ABI": "x86",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -125,7 +125,7 @@
                 "ANDROID_ABI": "arm64-v8a",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."
@@ -142,7 +142,7 @@
                 "ANDROID_ABI": "armeabi-v7a",
                 "ANDROID_PLATFORM": "android-26",
                 "XRTRANSPORT_BUILD_CLIENT": "ON",
-                "XRTRANSPORT_BUILD_MODULE_VULKAN2": "ON",
+                "XRTRANSPORT_BUILD_MODULE_VULKAN": "ON",
                 "XRTRANSPORT_BUILD_SERVER": "OFF",
                 "XRTRANSPORT_BUILD_TESTS": "OFF",
                 "XRTRANSPORT_CLIENT_INSTALL_PATH": "."

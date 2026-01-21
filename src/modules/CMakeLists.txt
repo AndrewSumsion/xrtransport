@@ -6,8 +6,8 @@ elseif(UNIX)
     add_subdirectory(handle_exchange_linux)
 endif()
 
-option(XRTRANSPORT_BUILD_MODULE_VULKAN2 "Build Vulkan2 Module" ON)
+option(XRTRANSPORT_BUILD_MODULE_VULKAN "Build Vulkan Module" ON)
 
-if(XRTRANSPORT_BUILD_MODULE_VULKAN2)
-    add_subdirectory(vulkan2)
+if(XRTRANSPORT_BUILD_MODULE_VULKAN)
+    add_subdirectory(vulkan)
 endif()
