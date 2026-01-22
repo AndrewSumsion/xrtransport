@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_CLIENT_MODULE_LOADER_H
 #define XRTRANSPORT_CLIENT_MODULE_LOADER_H
 

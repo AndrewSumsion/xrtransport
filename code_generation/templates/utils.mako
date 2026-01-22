@@ -1,3 +1,5 @@
+## SPDX-License-Identifier: LGPL-3.0-or-later
+
 <%def name="serialize_member(member, binding_prefix='s->', ctx_var='ctx')">\
 <% member_struct = spec.find_struct(member.type) %>\
 ## First, check for cases that must be manually implemented

@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/test/serialization_tests.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include <catch2/catch_test_macros.hpp>
 
 #include "xrtransport/serialization/serializer.h"

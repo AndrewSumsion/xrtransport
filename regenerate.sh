@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: LGPL-3.0-or-later
 
 # Script to regenerate serialization/deserialization code from OpenXR specification
 # This script must be run whenever:

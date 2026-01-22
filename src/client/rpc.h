@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/client/rpc_header.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_CLIENT_RPC_H
 #define XRTRANSPORT_CLIENT_RPC_H
 

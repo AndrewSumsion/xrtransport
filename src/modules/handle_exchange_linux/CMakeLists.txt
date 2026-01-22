@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 if(XRTRANSPORT_BUILD_CLIENT)
     add_library(module_client_handle_exchange SHARED
         client_handle_exchange_linux.cpp

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "xrtransport/transport/transport_c_api.h"
 
 #include "xrtransport/transport/error.h"

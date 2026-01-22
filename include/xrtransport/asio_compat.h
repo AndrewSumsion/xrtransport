@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_ASIO_COMPAT_H
 #define XRTRANSPORT_ASIO_COMPAT_H
 

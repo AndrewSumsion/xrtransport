@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/server/function_dispatch_header.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_FUNCTION_DISPATCH_H
 #define XRTRANSPORT_FUNCTION_DISPATCH_H
 

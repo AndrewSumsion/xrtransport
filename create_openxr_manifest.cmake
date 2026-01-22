@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 # Input: INPUT_PATH, OUTPUT_PATH, LIBRARY_PATH
 if(WIN32)
 # Necessary because LoadLibraryEx, which the OpenXR loader uses, doesn't play nice with forward slashes

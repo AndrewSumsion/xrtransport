@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "xrtransport/client/module_interface.h"
 #include "xrtransport/handle_exchange.h"
 #include "messages.h"

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 <%namespace name="utils" file="utils.mako"/>\
 <%def name="forward_serializer(struct)">\
 void serialize(const ${struct.name}* s, SerializeContext& ctx);\

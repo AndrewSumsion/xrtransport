@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_CLIENT_FUNCTION_TABLE
 #define XRTRANSPORT_CLIENT_FUNCTION_TABLE
 

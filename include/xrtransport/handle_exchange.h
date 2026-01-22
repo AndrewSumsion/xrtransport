@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_HANDLE_EXCHANGE_H
 #define XRTRANSPORT_HANDLE_EXCHANGE_H
 

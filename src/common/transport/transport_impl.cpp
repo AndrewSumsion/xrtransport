@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "transport_impl.h"
 
 #include "xrtransport/transport/transport_c_api.h" // for message headers and status

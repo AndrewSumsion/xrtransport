@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/structs/serializer_header.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 
 
 #ifndef XRTRANSPORT_SERIALIZER_GENERATED_H

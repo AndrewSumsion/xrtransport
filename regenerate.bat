@@ -1,4 +1,5 @@
 @echo off
+REM SPDX-License-Identifier: LGPL-3.0-or-later
 
 REM Script to regenerate serialization/deserialization code from OpenXR specification
 REM This script must be run whenever:

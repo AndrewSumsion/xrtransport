@@ -1,4 +1,4 @@
-# Serialization module CMakeLists.txt
+# SPDX-License-Identifier: LGPL-3.0-or-later
 
 # Create static library for xrtransport serialization
 add_library(xrtransport_serialization STATIC

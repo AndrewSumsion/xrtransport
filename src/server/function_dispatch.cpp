@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/server/function_dispatch_impl.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "function_dispatch.h"
 
 #include "xrtransport/server/function_loader.h"

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "rpc.h"
 #include "function_table.h"
 #include "available_extensions.h"

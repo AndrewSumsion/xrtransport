@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/client/rpc_impl.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "rpc.h"
 #include "runtime.h"
 #include "synchronization.h"

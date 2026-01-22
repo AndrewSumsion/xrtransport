@@ -1,4 +1,4 @@
-# Transport module CMakeLists.txt
+# SPDX-License-Identifier: LGPL-3.0-or-later
 
 # Create static library for xrtransport transport
 add_library(xrtransport_transport SHARED

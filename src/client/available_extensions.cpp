@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "available_extensions.h"
 
 #include "xrtransport/extensions/enabled_extensions.h"

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "vulkan_common.h"
 #include "image_handles.h"
 #include "session_state.h"

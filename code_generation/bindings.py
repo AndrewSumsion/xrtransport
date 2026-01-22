@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 class Binding:
     def __init__(self, type, binding_str, param, loops=(), len=None):
         self.type = type

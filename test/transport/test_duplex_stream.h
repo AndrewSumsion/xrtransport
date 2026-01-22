@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_TEST_DUPLEX_STREAM_H
 #define XRTRANSPORT_TEST_DUPLEX_STREAM_H
 

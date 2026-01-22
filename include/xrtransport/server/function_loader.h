@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/server/function_loader.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_FUNCTION_LOADER_H
 #define XRTRANSPORT_FUNCTION_LOADER_H
 

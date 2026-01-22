@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 <%namespace name="utils" file="utils.mako"/>\
 #ifndef XRTRANSPORT_FUNCTION_LOADER_H
 #define XRTRANSPORT_FUNCTION_LOADER_H

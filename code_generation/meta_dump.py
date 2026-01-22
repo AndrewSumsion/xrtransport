@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
 import sys
 from spec_parser import get_xml_root, parse_spec, XrStruct, XrFunction, XrParam
 import json

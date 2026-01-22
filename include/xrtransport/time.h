@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_TIME_H
 #define XRTRANSPORT_TIME_H
 

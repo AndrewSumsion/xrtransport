@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "xrtransport/serialization/deserializer.h"
 #include "xrtransport/util.h"
 

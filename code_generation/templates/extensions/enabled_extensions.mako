@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_ENABLED_EXTENSIONS_H
 #define XRTRANSPORT_ENABLED_EXTENSIONS_H
 

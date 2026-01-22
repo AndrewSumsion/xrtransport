@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/client/function_table_impl.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "function_table.h"
 #include "rpc.h"
 

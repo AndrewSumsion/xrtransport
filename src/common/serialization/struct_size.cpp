@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/structs/struct_size.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "xrtransport/serialization/struct_size.h"
 #include "xrtransport/serialization/error.h"
 

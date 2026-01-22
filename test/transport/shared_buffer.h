@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_TEST_SHARED_BUFFER_H
 #define XRTRANSPORT_TEST_SHARED_BUFFER_H
 

@@ -7,6 +7,8 @@
  * To modify this file, edit the corresponding template in:
  * code_generation/templates/extensions/extension_functions.mako
  */
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_EXTENSION_FUNCTIONS_H
 #define XRTRANSPORT_EXTENSION_FUNCTIONS_H
 

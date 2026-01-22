@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #include "xrtransport/transport/transport.h"
 #include "xrtransport/asio_compat.h"
 

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_SERIALIZATION_ERROR_H
 #define XRTRANSPORT_SERIALIZATION_ERROR_H
 

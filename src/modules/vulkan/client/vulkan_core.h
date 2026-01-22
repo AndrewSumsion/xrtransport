@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: LGPL-3.0-or-later
+
 #ifndef XRTRANSPORT_VULKAN_CLIENT_CORE_H
 #define XRTRANSPORT_VULKAN_CLIENT_CORE_H
 
