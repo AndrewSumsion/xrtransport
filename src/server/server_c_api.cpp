@@ -31,6 +31,9 @@ public:
         ec.clear();
         int error = 0;
         size_t result = read_some_delegate(cookie, buffer.data(), buffer.size(), &error);
+        if (result == 0) {
+            ec = asio::error::eof;
+        }
         if (error) {
             ec = asio::error_code(error, std::generic_category());
         }
